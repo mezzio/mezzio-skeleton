@@ -20,6 +20,7 @@
         }
     },
     "scripts": {
+        "pre-update-cmd": "Zend\\Expressive\\Composer\\Installer::setup",
         "pre-install-cmd": "Zend\\Expressive\\Composer\\Installer::setup"
     }
 }
