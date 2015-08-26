@@ -33,40 +33,46 @@ class Installer
      */
     public static function setup(Event $event)
     {
-        $eventName = $event->getName();
         $io = $event->getIO();
         $composer = $event->getComposer();
-        $packages = $composer->getRepositoryManager()->getLocalRepository()->getPackages();
+        //$packages = $composer->getRepositoryManager()->getLocalRepository()->getPackages();
 
         $installationManager = $composer->getInstallationManager();
 
-        $io->write(sprintf('<info>Running Zend\Expressive\Composer\Installer::setup()</info>'));
+        $io->write(sprintf('<info>Set up Zend Expressive installer</info>'));
 
+        // Get root package
         $rootPackage = $composer->getPackage();
         while ($rootPackage instanceof AliasPackage) {
             $rootPackage = $rootPackage->getAliasOf();
         }
 
+        // Get required packages
         $requires = $rootPackage->getRequires();
 
-        $answer = $io->ask([
+        $routerAnswer = $io->ask([
             'Which router you want to use? ',
             '[1] aura/router ',
             '[2] nikic/fast-route ',
             ': '
         ], 1);
-        $io->write(sprintf('<info>You answered: %s</info>', $answer));
 
-        switch ($answer) {
+        switch ($routerAnswer) {
             case '2':
-                $requires['nikic/fast-route'] = new Link('__root__', 'nikic/fast-route', null, 'requires', '^0.6.0');
+                $routerPackage = 'nikic/fast-route';
+                $routerVersion = '^0.6.0';
                 break;
             case '1':
             default:
-                $requires['aura/router'] = new Link('__root__', 'aura/router', null, 'requires', '^2.3');
+                $routerPackage = 'aura/router';
+                $routerVersion = '^2.3';
                 break;
         }
 
+        $io->write(sprintf('<info>You selected: %s</info>', $routerPackage));
+        $requires[$routerPackage] = new Link('__root__', $routerPackage, null, 'requires', $routerVersion);
+
+        // Set required packages
         $rootPackage->setRequires($requires);
 
         $io->write('<info>Job\'s done!</info>');
