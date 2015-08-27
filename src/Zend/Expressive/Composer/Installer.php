@@ -100,7 +100,7 @@ class Installer
         $rootPackage->setRequires($requires);
 
         // Save user selected options
-        file_put_contents($userSelectionsFile, json_encode($userSelections));
+        file_put_contents($userSelectionsFile, json_encode($userSelections, JSON_PRETTY_PRINT));
 
         if ($io->isVerbose()) {
             $io->write('<info>Job\'s done!</info>');
