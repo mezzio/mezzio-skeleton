@@ -2,6 +2,8 @@
 
 namespace Zend\Expressive\Composer;
 
+use Composer\Factory;
+use Composer\Json\JsonFile;
 use Composer\Package\AliasPackage;
 use Composer\Package\Link;
 use Composer\Script\Event;
@@ -32,8 +34,14 @@ class Installer
         //$packages = $composer->getRepositoryManager()->getLocalRepository()->getPackages();
         //$installationManager = $composer->getInstallationManager();
 
+        // Get composer.json
+        $composerFile = Factory::getComposerFile();
+        $json = new JsonFile($composerFile);
+        $composerDefinition = $json->read();
+        $composerLockFile = dirname($composerFile) . '/composer.lock';
+
         // This script only works during update or during install if there is no lock file
-        if ($event->getName() == 'pre-install-cmd') {
+        if ($event->getName() == 'pre-install-cmd' && is_file($composerLockFile)) {
             $io->write('<warning>To set up optional packages either delete the composer.lock file or run \'composer update\'</warning>');
             return;
         }
@@ -93,6 +101,10 @@ class Installer
                 $packageVersion = $config['packages'][$packageName];
                 $io->write(sprintf("  - Adding package <info>%s</info> (<comment>%s</comment>)", $packageName, $packageVersion));
                 $requires[$packageName] = new Link('__root__', $packageName, null, 'requires', $packageVersion);
+
+                // Save package to composer.json
+                $composerDefinition['require'][$packageName] = $packageVersion;
+                $json->write($composerDefinition);
             }
         }
 

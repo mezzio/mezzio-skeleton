@@ -1,13 +1,15 @@
 {
-    "name"        : "xtreamwayz/expressive-composer-installer",
-    "type"        : "project",
-    "homepage"    : "https://github.com/xtreamwayz/expressive-composer-installer",
-    "license"     : "MIT",
-    "authors": [{
-        "name"    : "Geert Eltink",
-        "homepage": "https://xtreamwayz.github.io/",
-        "role"    : "Lead Developer"
-    }],
+    "name": "xtreamwayz/expressive-composer-installer",
+    "type": "project",
+    "homepage": "https://github.com/xtreamwayz/expressive-composer-installer",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Geert Eltink",
+            "homepage": "https://xtreamwayz.github.io/",
+            "role": "Lead Developer"
+        }
+    ],
     "require": {
         "zendframework/zend-expressive": "^0.1.0"
     },
