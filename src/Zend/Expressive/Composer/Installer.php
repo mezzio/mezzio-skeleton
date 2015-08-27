@@ -82,7 +82,7 @@ class Installer
                 $default = ($key == $defaultOption) ? ' <comment>(default)</comment>' : '';
                 $ask[] = sprintf("  [<comment>%d</comment>] %s%s\n", $key, $option['name'], $default);
             }
-            $ask[] = '   ';
+            $ask[] = '  Make your selection or press return to select the default: ';
 
             // Ask for user input
             $answer = (int) $io->ask($ask, $defaultOption);
