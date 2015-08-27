@@ -1,4 +1,4 @@
-# Expressive Composer Optional Packages Installer
+# Zend Expressive Skeleton
 
 This is a proof of concept for installing optional composer packages based on user input. It kicks in under the following conditions:
 

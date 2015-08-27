@@ -14,11 +14,9 @@ use Composer\Script\Event;
  * Add this script to composer.json:
  *
  *  "scripts": {
- *      "pre-update-cmd": "TwentyFirstHall\\PhpbbInstaller\\ScriptHandler::install",
- *      "pre-install-cmd": "TwentyFirstHall\\PhpbbInstaller\\ScriptHandler::install"
+ *      "pre-update-cmd": "Zend\\Expressive\\Composer\\Installer::setup",
+ *      "pre-install-cmd": "Zend\\Expressive\\Composer\\Installer::setup"
  *  },
- *
- * Test this script by running ``composer run-script pre-install-cmd`` or ``composer update``.
  *
  * @package Zend\Expressive\Composer
  */
@@ -31,8 +29,6 @@ class Installer
     {
         $io = $event->getIO();
         $composer = $event->getComposer();
-        //$packages = $composer->getRepositoryManager()->getLocalRepository()->getPackages();
-        //$installationManager = $composer->getInstallationManager();
 
         // Get composer.json
         $composerFile = Factory::getComposerFile();
