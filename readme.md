@@ -20,3 +20,4 @@ To try it out:
 - User config is saved in the same dir as the installer script. Not sure if this is good practice.
 - Should the ``filp/whoops`` error handler an option? I think it's for development only right?
 - Look into / try ``composer update --lock`` to fix the lock file is not up to date issue.
+- Use while (true) loop until a valid option is given.
