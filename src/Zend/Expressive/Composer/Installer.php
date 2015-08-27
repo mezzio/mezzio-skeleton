@@ -51,26 +51,42 @@ class Installer
 
         $config = require __DIR__ . '/config.php';
 
-        foreach ($config['questions'] as $question) {
+        $userSelectionsFile = __DIR__ . '/data.json';
+        $userSelections = new \stdClass();
+        if (is_file($userSelectionsFile)) {
+            $userSelections = json_decode(file_get_contents($userSelectionsFile));
+        }
+
+        foreach ($config['questions'] as $questionName => $question) {
+            $defaultOption = 1;
+            if (isset($userSelections->$questionName)
+                && isset($question['options'][$userSelections->$questionName])
+            ) {
+                $defaultOption = $userSelections->$questionName;
+            }
+
             // Construct question
             $ask = [
                 "\n" . $question['question'] . "\n"
             ];
 
             foreach ($question['options'] as $key => $option) {
-                $default = ($key == 1) ? ' (default)' : '';
+                $default = ($key == $defaultOption) ? ' (default)' : '';
                 $ask[] = sprintf(" [%d] %s%s\n", $key, $option['name'], $default);
             }
             $ask[] = ': ';
 
             // Ask for user input
-            $answer = $io->ask($ask);
+            $answer = $io->ask($ask, $defaultOption);
 
             // Fallback to default
             if (!isset($question['options'][$answer])) {
-                $io->write('<error>Invalid answer, falling back to default</error>');
+                $io->write('<error>Invalid answer, falling back to option 1</error>');
                 $answer = 1;
             }
+
+            // Save user selected option
+            $userSelections->$questionName = $answer;
 
             // Add packages to install
             foreach ($question['options'][$answer]['packages'] as $packageName) {
@@ -82,6 +98,9 @@ class Installer
 
         // Set required packages
         $rootPackage->setRequires($requires);
+
+        // Save user selected options
+        file_put_contents($userSelectionsFile, json_encode($userSelections));
 
         if ($io->isVerbose()) {
             $io->write('<info>Job\'s done!</info>');
