@@ -14,14 +14,9 @@ To try it out:
 
 ## TODO:
 - Test how this works out with packages in require-dev.
-- Test if a package is manually added in composer.json.
 - Copy config files to ``/config/autoload/``.
 - Add option to add packages to ``require-dev``.
-- For some reason this works as expected for ``composer update``, but not ``composer install``. Probably because install uses the composer.lock file and update ignores it.
 - Add a ``--configure`` parameter to run the installer. The installer should only run its configuration if this parameter is detected or on the first run, otherwise it should use previous user selections.
 - User config is saved in the same dir as the installer script. Not sure if this is good practice.
 - Should the ``filp/whoops`` error handler an option? I think it's for development only right?
-- Add ability to write in a package name (in the "composer require" format) to use.
-
 - Look into / try ``composer update --lock`` to fix the lock file is not up to date issue.
-- Figure out a way to search for a package without a version.
