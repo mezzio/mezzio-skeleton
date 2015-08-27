@@ -32,7 +32,13 @@ class Installer
         //$packages = $composer->getRepositoryManager()->getLocalRepository()->getPackages();
         //$installationManager = $composer->getInstallationManager();
 
-        $io->write(sprintf('<info>Set up Zend Expressive installer</info>'));
+        // This script only works during update or during install if there is no lock file
+        if ($event->getName() == 'pre-install-cmd') {
+            $io->write('<warning>To set up Zend Expressive either delete the composer.lock file or run \'composer update\'</warning>');
+            return;
+        }
+
+        $io->write('<info>Set up Zend Expressive installer</info>');
 
         // Get root package
         $rootPackage = $composer->getPackage();
@@ -58,7 +64,7 @@ class Installer
             $ask[] = ': ';
 
             // Ask for user input
-            $answer = $io->ask($ask, 1);
+            $answer = $io->ask($ask);
 
             // Fallback to default
             if (!isset($question['options'][$answer])) {
