@@ -1,10 +1,12 @@
 # Expressive Composer Optional Packages Installer
 
 This is a proof of concept for installing optional composer packages based on user input. It kicks in under the following conditions:
+
 - If ``composer install`` is run and there is no ``composer.lock`` file.
 - If ``composer update`` is run it should ask which packages to install.
 
 To try it out:
+
 1. Download this package.
 2. Run ``composer update`` to install the packages.
 3. Answer question.
