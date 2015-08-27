@@ -22,3 +22,6 @@ To try it out:
 - User config is saved in the same dir as the installer script. Not sure if this is good practice.
 - Should the ``filp/whoops`` error handler an option? I think it's for development only right?
 - Add ability to write in a package name (in the "composer require" format) to use.
+
+- Look into / try ``composer update --lock`` to fix the lock file is not up to date issue.
+- Figure out a way to search for a package without a version.

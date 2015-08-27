@@ -88,13 +88,48 @@ class Installer
             // Ask for user input
             $answer = $io->ask($ask, $defaultOption);
 
+            // Handle none of the options
             if ('n' == $answer) {
                 $io->write('  <info>Install none of the given packages</info>');
                 continue;
             }
 
+            // Search for package
+            if (!is_numeric($answer)) {
+                if (!preg_match('/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/', $answer, $match)) {
+                    $io->write('<error>Invalid package required</error>');
+                    continue;
+                }
+
+                $packageName = $match['name'];
+                $packageVersion = $match['version'];
+
+                if (!$packageVersion) {
+                    $io->write('<error>No package version specified</error>');
+                    continue;
+                }
+
+                $io->write(sprintf('  <info>Searching for package %s:%s</info>', $packageName, $packageVersion));
+
+                $optionalPackage = $composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
+                if (!$optionalPackage) {
+                    $io->write(sprintf('  <error>Package not found %s:%s</error>', $packageName, $packageVersion));
+                    continue;
+                }
+
+                // Add package
+                $io->write(sprintf(
+                    "  - Adding package <info>%s</info> (<comment>%s</comment>)",
+                    $optionalPackage->getName(),
+                    $optionalPackage->getPrettyVersion()
+                ));
+                $composerDefinition['require'][$packageName] = $packageVersion;
+
+                continue;
+            }
+
             // Fallback to default
-            if (!isset($question['options'][$answer])) {
+            if (!isset($question['options'][(int) $answer])) {
                 $io->write('<error>Invalid answer, falling back to option 1</error>');
                 $answer = 1;
             }
