@@ -50,27 +50,36 @@ class Installer
         // Get required packages
         $requires = $rootPackage->getRequires();
 
-        $routerAnswer = $io->ask([
-            'Which router you want to use? ',
-            '[1] aura/router ',
-            '[2] nikic/fast-route ',
-            ': '
-        ], 1);
+        $config = require __DIR__ . '/config.php';
 
-        switch ($routerAnswer) {
-            case '2':
-                $routerPackage = 'nikic/fast-route';
-                $routerVersion = '^0.6.0';
-                break;
-            case '1':
-            default:
-                $routerPackage = 'aura/router';
-                $routerVersion = '^2.3';
-                break;
+        foreach ($config['questions'] as $question) {
+            // Construct question
+            $ask = [
+                $question['question'] . "\n"
+            ];
+
+            foreach ($question['options'] as $key => $option) {
+                $default = ($key == 1) ? ' (default)' : '';
+                $ask[] = sprintf(" [%d] %s%s\n", $key, $option['name'], $default);
+            }
+            $ask[] = ': ';
+
+            // Ask for user input
+            $answer = $io->ask($ask, 1);
+
+            // Fallback to default
+            if (!isset($question['options'][$answer])) {
+                $io->write('<error>Invalid answer, falling back to default</error>');
+                $answer = 1;
+            }
+
+            // Add packages to install
+            foreach ($question['options'][$answer]['packages'] as $packageName) {
+                $packageVersion = $config['packages'][$packageName];
+                $io->write(sprintf("<info>Adding package '%s': '%s'</info>", $packageName, $packageVersion));
+                $requires[$packageName] = new Link('__root__', $packageName, null, 'requires', $packageVersion);
+            }
         }
-
-        $io->write(sprintf('<info>You selected: %s</info>', $routerPackage));
-        $requires[$routerPackage] = new Link('__root__', $routerPackage, null, 'requires', $routerVersion);
 
         // Set required packages
         $rootPackage->setRequires($requires);
