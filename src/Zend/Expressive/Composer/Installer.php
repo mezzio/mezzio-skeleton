@@ -34,11 +34,11 @@ class Installer
 
         // This script only works during update or during install if there is no lock file
         if ($event->getName() == 'pre-install-cmd') {
-            $io->write('<warning>To set up Zend Expressive either delete the composer.lock file or run \'composer update\'</warning>');
+            $io->write('<warning>To set up optional packages either delete the composer.lock file or run \'composer update\'</warning>');
             return;
         }
 
-        $io->write('<info>Set up Zend Expressive installer</info>');
+        $io->write('<info>Set up optional packages</info>');
 
         // Get root package
         $rootPackage = $composer->getPackage();
@@ -67,17 +67,17 @@ class Installer
 
             // Construct question
             $ask = [
-                "\n" . $question['question'] . "\n"
+                "\n<question>" . $question['question'] . "</question>\n"
             ];
 
             foreach ($question['options'] as $key => $option) {
-                $default = ($key == $defaultOption) ? ' (default)' : '';
-                $ask[] = sprintf(" [%d] %s%s\n", $key, $option['name'], $default);
+                $default = ($key == $defaultOption) ? ' <comment>(default)</comment>' : '';
+                $ask[] = sprintf("  [<comment>%d</comment>] %s%s\n", $key, $option['name'], $default);
             }
-            $ask[] = ': ';
+            $ask[] = '   ';
 
             // Ask for user input
-            $answer = $io->ask($ask, $defaultOption);
+            $answer = (int) $io->ask($ask, $defaultOption);
 
             // Fallback to default
             if (!isset($question['options'][$answer])) {
@@ -91,7 +91,7 @@ class Installer
             // Add packages to install
             foreach ($question['options'][$answer]['packages'] as $packageName) {
                 $packageVersion = $config['packages'][$packageName];
-                $io->write(sprintf("<info>Adding package '%s':'%s'</info>", $packageName, $packageVersion));
+                $io->write(sprintf("  - Adding package <info>%s</info> (<comment>%s</comment>)", $packageName, $packageVersion));
                 $requires[$packageName] = new Link('__root__', $packageName, null, 'requires', $packageVersion);
             }
         }
@@ -102,8 +102,6 @@ class Installer
         // Save user selected options
         file_put_contents($userSelectionsFile, json_encode($userSelections, JSON_PRETTY_PRINT));
 
-        if ($io->isVerbose()) {
-            $io->write('<info>Job\'s done!</info>');
-        }
+        $io->write("\n<info>Finished setting up optional packages</info>");
     }
 }
