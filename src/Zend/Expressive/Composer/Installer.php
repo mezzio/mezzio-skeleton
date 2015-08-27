@@ -4,8 +4,6 @@ namespace Zend\Expressive\Composer;
 
 use Composer\Package\AliasPackage;
 use Composer\Package\Link;
-use Composer\Package\Package;
-use Composer\Repository\PackageRepository;
 use Composer\Script\Event;
 
 /**
@@ -18,17 +16,13 @@ use Composer\Script\Event;
  *      "pre-install-cmd": "TwentyFirstHall\\PhpbbInstaller\\ScriptHandler::install"
  *  },
  *
- * Test this script by running ``composer run-script pre-install-cmd``.
+ * Test this script by running ``composer run-script pre-install-cmd`` or ``composer update``.
  *
  * @package Zend\Expressive\Composer
  */
 class Installer
 {
     /**
-     * Composer setup script
-     *
-     * Run ``composer run-script post-install-cmd`` to test the script.
-     *
      * @param Event $event
      */
     public static function setup(Event $event)
@@ -36,8 +30,7 @@ class Installer
         $io = $event->getIO();
         $composer = $event->getComposer();
         //$packages = $composer->getRepositoryManager()->getLocalRepository()->getPackages();
-
-        $installationManager = $composer->getInstallationManager();
+        //$installationManager = $composer->getInstallationManager();
 
         $io->write(sprintf('<info>Set up Zend Expressive installer</info>'));
 
@@ -55,7 +48,7 @@ class Installer
         foreach ($config['questions'] as $question) {
             // Construct question
             $ask = [
-                $question['question'] . "\n"
+                "\n" . $question['question'] . "\n"
             ];
 
             foreach ($question['options'] as $key => $option) {
@@ -76,7 +69,7 @@ class Installer
             // Add packages to install
             foreach ($question['options'][$answer]['packages'] as $packageName) {
                 $packageVersion = $config['packages'][$packageName];
-                $io->write(sprintf("<info>Adding package '%s': '%s'</info>", $packageName, $packageVersion));
+                $io->write(sprintf("<info>Adding package '%s':'%s'</info>", $packageName, $packageVersion));
                 $requires[$packageName] = new Link('__root__', $packageName, null, 'requires', $packageVersion);
             }
         }
@@ -84,6 +77,8 @@ class Installer
         // Set required packages
         $rootPackage->setRequires($requires);
 
-        $io->write('<info>Job\'s done!</info>');
+        if ($io->isVerbose()) {
+            $io->write('<info>Job\'s done!</info>');
+        }
     }
 }

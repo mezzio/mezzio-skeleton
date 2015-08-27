@@ -81,7 +81,5 @@ return [
                 ]
             ]
         ]
-
-        //"filp/whoops": "^1.1 to use the Whoops error handler",
     ]
 ];
