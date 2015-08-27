@@ -82,10 +82,16 @@ class Installer
                 $default = ($key == $defaultOption) ? ' <comment>(default)</comment>' : '';
                 $ask[] = sprintf("  [<comment>%d</comment>] %s%s\n", $key, $option['name'], $default);
             }
-            $ask[] = '  Make your selection or press return to select the default: ';
+            $ask[] = "  [<comment>n</comment>] None of the above\n";
+            $ask[] = "  <comment>Make your selection or press return to select the default:</comment> ";
 
             // Ask for user input
-            $answer = (int) $io->ask($ask, $defaultOption);
+            $answer = $io->ask($ask, $defaultOption);
+
+            if ('n' == $answer) {
+                $io->write('  <info>Install none of the given packages</info>');
+                continue;
+            }
 
             // Fallback to default
             if (!isset($question['options'][$answer])) {
