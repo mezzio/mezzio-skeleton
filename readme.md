@@ -1,4 +1,4 @@
-# Zend Expressive Skeleton
+# Expressive Optional Packages Installer
 
 This is a proof of concept for installing optional composer packages based on user input. It kicks in under the following conditions:
 
@@ -13,11 +13,13 @@ To try it out:
 4. The chosen packages and dependencies should install and the other one should uninstall, if there are any.
 
 ## TODO:
-- Test how this works out with packages in require-dev.
-- Copy config files to ``/config/autoload/``.
-- Add option to add packages to ``require-dev``.
-- Add a ``--configure`` parameter to run the installer. The installer should only run its configuration if this parameter is detected or on the first run, otherwise it should use previous user selections.
-- User config is saved in the same dir as the installer script. Not sure if this is good practice.
-- Should the ``filp/whoops`` error handler an option? I think it's for development only right?
-- Look into / try ``composer update --lock`` to fix the lock file is not up to date issue.
-- Use while (true) loop until a valid option is given.
+
+- [ ] Test how this works when running ``composer create-project``.
+- [ ] Copy config files from Resources to other destinations, based on selected packages.
+- [ ] Add option to add packages to ``require-dev``.
+- [ ] Use while (true) loop until a valid option is given.
+- [x] Remember user selected options.
+- [x] Add option to install none of the suggested options.
+- [x] Add option to install an other package in stead of the proposed options. Basically you type the composer require package syntax and it searches and adds valid packages.
+- [x] Look into / try ``composer update --lock`` to fix the lock file is not up to date issue.
+- [x] Use while (true) loop until a valid option is given.
