@@ -15,9 +15,9 @@ To try it out:
 ## TODO:
 
 - [ ] Test how this works when running ``composer create-project``.
-- [ ] Copy config files from Resources to other destinations, based on selected packages.
+- [ ] Copy files from Resources dir to other destinations, based on selected packages. This could be usefull to copy basic configuration files for each package.
 - [ ] Add option to add packages to ``require-dev``.
-- [ ] Use while (true) loop until a valid option is given.
+- [x] Use while (true) loop until a valid option is given.
 - [x] Remember user selected options.
 - [x] Add option to install none of the suggested options.
 - [x] Add option to install an other package in stead of the proposed options. Basically you type the composer require package syntax and it searches and adds valid packages.
