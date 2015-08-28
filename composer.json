@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "zendframework/zend-expressive": "^0.1.0"
+        "zendframework/zend-expressive": "^0.1"
     },
     "require-dev": {
         "composer/composer": "dev-master"
