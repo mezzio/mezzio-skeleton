@@ -14,9 +14,14 @@ To try it out:
 
 ## TODO:
 
-- [ ] Test how this works when running ``composer create-project``.
+- [ ] Get rid of storing user selections. These can be detected from the packages listed in composer.json->require.
+- [ ] Save boolean optional-packages setting in composer to know if it should run or not.
+- [ ] Only ask question on first run or if none of the proposed packages are listed in require.
+- [ ] Move none-of-the-above option to the config so packages can be forced. This is useful when at least one needs to be installed for the application to function. (Custom packages can be installed by typing in the package name and version in require format.)
+- [ ] Add debug info when in verbose mode.
 - [ ] Copy files from Resources dir to other destinations, based on selected packages. This could be usefull to copy basic configuration files for each package.
 - [ ] Add option to add packages to ``require-dev``.
+- [x] Test how this works when running ``composer create-project``.
 - [x] Use while (true) loop until a valid option is given.
 - [x] Remember user selected options.
 - [x] Add option to install none of the suggested options.
