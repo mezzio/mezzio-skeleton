@@ -14,7 +14,7 @@ To try it out:
 
 ## TODO:
 
-- [ ] Get rid of storing user selections. These can be detected from the packages listed in composer.json->require.
+- [ ] Store user selections in composer.json. We need to store this in case a custom package was given.
 - [ ] Save boolean optional-packages setting in composer to know if it should run or not.
 - [ ] Only ask question on first run or if none of the proposed packages are listed in require.
 - [ ] Move none-of-the-above option to the config so packages can be forced. This is useful when at least one needs to be installed for the application to function. (Custom packages can be installed by typing in the package name and version in require format.)
