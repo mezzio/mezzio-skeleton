@@ -2,7 +2,9 @@
 
 namespace Zend\Expressive\Composer;
 
+use Composer\Composer;
 use Composer\Factory;
+use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Composer\Package\AliasPackage;
 use Composer\Package\Link;
@@ -22,6 +24,12 @@ use Composer\Script\Event;
  */
 class Installer
 {
+    const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
+
+    static $composerDefinition;
+
+    static $composerRequires;
+
     /**
      * @param Event $event
      */
@@ -33,7 +41,7 @@ class Installer
         // Get composer.json
         $composerFile = Factory::getComposerFile();
         $json = new JsonFile($composerFile);
-        $composerDefinition = $json->read();
+        self::$composerDefinition = $json->read();
         $composerLockFile = dirname($composerFile) . '/composer.lock';
 
         // This script only works during update or during install if there is no lock file
@@ -51,7 +59,7 @@ class Installer
         }
 
         // Get required packages
-        $requires = $rootPackage->getRequires();
+        self::$composerRequires = $rootPackage->getRequires();
 
         $config = require __DIR__ . '/config.php';
 
@@ -69,98 +77,96 @@ class Installer
                 $defaultOption = $userSelections->$questionName;
             }
 
-            // Construct question
-            $ask = [
-                "\n<question>" . $question['question'] . "</question>\n"
-            ];
-
-            foreach ($question['options'] as $key => $option) {
-                $default = ($key == $defaultOption) ? ' <comment>(default)</comment>' : '';
-                $ask[] = sprintf("  [<comment>%d</comment>] %s%s\n", $key, $option['name'], $default);
-            }
-            $ask[] = "  [<comment>n</comment>] None of the above\n";
-            $ask[] = "  <comment>Make your selection or press return to select the default:</comment> ";
-
-            // @TODO:  Use while (true) loop until a valid option is given.
-            while (true) {
-                // Ask for user input
-                $answer = $io->ask($ask, $defaultOption);
-
-                // Handle none of the options
-                if ('n' == $answer) {
-                    $io->write('  <info>Install none of the given packages</info>');
-                    $answer = false;
-                    break;
-                }
-
-                // Search for package
-                if (!is_numeric($answer)) {
-                    if (!preg_match('/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/', $answer, $match)) {
-                        $io->write('<error>Invalid package required</error>');
-                        continue;
-                    }
-
-                    $packageName = $match['name'];
-                    $packageVersion = $match['version'];
-
-                    if (!$packageVersion) {
-                        $io->write('<error>No package version specified</error>');
-                        continue;
-                    }
-
-                    $io->write(sprintf('  <info>Searching for package %s:%s</info>', $packageName, $packageVersion));
-
-                    $optionalPackage = $composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
-                    if (!$optionalPackage) {
-                        $io->write(sprintf('  <error>Package not found %s:%s</error>', $packageName, $packageVersion));
-                        continue;
-                    }
-
-                    // Add package
-                    $io->write(sprintf(
-                        "  - Adding package <info>%s</info> (<comment>%s</comment>)",
-                        $optionalPackage->getName(),
-                        $optionalPackage->getPrettyVersion()
-                    ));
-                    $composerDefinition['require'][$packageName] = $packageVersion;
-
-                    break;
-                }
-
-                // Fallback to default
-                if (!isset($question['options'][(int) $answer])) {
-                    $io->write('<error>Invalid answer, falling back to option 1</error>');
-                    $answer = 1;
-                }
-
-                break;
-            }
-
-            if (!is_numeric($answer)) {
-                continue;
-            }
+            // Get answer
+            $answer = self::askQuestion($composer, $io, $question, $defaultOption);
 
             // Save user selected option
-            $userSelections->$questionName = $answer;
+            self::$composerDefinition['extra']['optional-packages'][$questionName] = $answer;
 
-            // Add packages to install
-            foreach ($question['options'][$answer]['packages'] as $packageName) {
-                $packageVersion = $config['packages'][$packageName];
-                $io->write(sprintf("  - Adding package <info>%s</info> (<comment>%s</comment>)", $packageName, $packageVersion));
-                $requires[$packageName] = new Link('__root__', $packageName, null, 'requires', $packageVersion);
-
-                // Save package to composer.json
-                $composerDefinition['require'][$packageName] = $packageVersion;
-                $json->write($composerDefinition);
+            if (is_numeric($answer)) {
+                // Add packages to install
+                foreach ($question['options'][$answer]['packages'] as $packageName) {
+                    self::addPackage($io, $packageName, $config['packages'][$packageName]);
+                }
+            } elseif (preg_match(self::PACKAGE_REGEX, $answer, $match)) {
+                self::addPackage($io, $match['name'], $match['version']);
             }
+
+            // Update composer definition
+            $json->write(self::$composerDefinition);
         }
 
         // Set required packages
-        $rootPackage->setRequires($requires);
+        $rootPackage->setRequires(self::$composerRequires);
 
         // Save user selected options
         file_put_contents($userSelectionsFile, json_encode($userSelections, JSON_PRETTY_PRINT));
 
         $io->write("\n<info>Finished setting up optional packages</info>");
+    }
+
+    private static function askQuestion(Composer $composer, IOInterface $io, $question, $defaultOption)
+    {
+        // Construct question
+        $ask = [
+            "\n<question>" . $question['question'] . "</question>\n"
+        ];
+
+        foreach ($question['options'] as $key => $option) {
+            $default = ($key == $defaultOption) ? ' <comment>(default)</comment>' : '';
+            $ask[] = sprintf("  [<comment>%d</comment>] %s%s\n", $key, $option['name'], $default);
+        }
+        $ask[] = "  [<comment>n</comment>] None of the above\n";
+        $ask[] = "  <comment>Make your selection or press return to select the default:</comment> ";
+
+        while (true) {
+            // Ask for user input
+            $answer = $io->ask($ask, $defaultOption);
+
+            // Handle none of the options
+            if ($answer == 'n') {
+                return 'n';
+            }
+
+            // Handle numeric options
+            if (is_numeric($answer) && isset($question['options'][(int) $answer])) {
+                return (int) $answer;
+            }
+
+            // Search for package
+            if (preg_match(self::PACKAGE_REGEX, $answer, $match)) {
+                $packageName = $match['name'];
+                $packageVersion = $match['version'];
+
+                if (!$packageVersion) {
+                    $io->write('<error>No package version specified</error>');
+                    continue;
+                }
+
+                $io->write(sprintf('  <info>Searching for package %s:%s</info>', $packageName, $packageVersion));
+
+                $optionalPackage = $composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
+                if (!$optionalPackage) {
+                    $io->write(sprintf('<error>Package not found %s:%s</error>', $packageName, $packageVersion));
+                    continue;
+                }
+
+                return sprintf('%s:%s', $packageName, $packageVersion);
+            }
+
+            $io->write('<error>Invalid answer</error>');
+            continue;
+        }
+
+        return false;
+    }
+
+    private static function addPackage(IOInterface $io, $packageName, $packageVersion)
+    {
+        $io->write(sprintf("  - Adding package <info>%s</info> (<comment>%s</comment>)", $packageName, $packageVersion));
+        self::$composerRequires[$packageName] = new Link('__root__', $packageName, null, 'requires', $packageVersion);
+
+        // Save package to composer.json
+        self::$composerDefinition['require'][$packageName] = $packageVersion;
     }
 }
