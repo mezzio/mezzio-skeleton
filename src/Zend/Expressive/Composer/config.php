@@ -56,12 +56,18 @@ return [
                     'name' => 'zendframework/zend-servicemanager',
                     'packages' => [
                         'zendframework/zend-servicemanager'
+                    ],
+                    'copy-files' => [
+                        '/Resources/public/zend-index.php' => '/public/index.php'
                     ]
                 ],
                 2 => [
                     'name' => 'mouf/pimple-interop',
                     'packages' => [
                         'mouf/pimple-interop'
+                    ],
+                    'copy-files' => [
+                        '/Resources/public/pimple-index.php' => '/public/index.php'
                     ]
                 ]
             ]

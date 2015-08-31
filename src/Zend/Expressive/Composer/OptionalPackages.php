@@ -22,7 +22,7 @@ use Composer\Script\Event;
  *
  * @package Zend\Expressive\Composer
  *
- * @author Geert Eltink <@xtreamwayz>
+ * @author Geert Eltink <https://xtreamwayz.github.io/>
  */
 class OptionalPackages
 {
