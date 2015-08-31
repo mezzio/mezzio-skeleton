@@ -45,7 +45,9 @@ class OptionalPackages
         $json = new JsonFile($composerFile);
         self::$composerDefinition = $json->read();
 
-        $io->write('<info>Setting up optional packages</info>');
+        $projectRoot = realpath(dirname($composerFile));
+
+        $io->write("<info>Setting up optional packages</info>");
 
         // Get root package
         $rootPackage = $composer->getPackage();
@@ -76,10 +78,13 @@ class OptionalPackages
                 foreach ($question['options'][$answer]['packages'] as $packageName) {
                     self::addPackage($io, $packageName, $config['packages'][$packageName]);
                 }
+                foreach ($question['options'][$answer]['copy-files'] as $source => $target) {
+                    self::copyFile($io, $projectRoot, $source, $target);
+                }
             } elseif ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
                 self::addPackage($io, $match['name'], $match['version']);
                 if (isset($question['custom-package-warning'])) {
-                    $io->write(sprintf('  <warning>%s</warning>', $question['custom-package-warning']));
+                    $io->write(sprintf("  <warning>%s</warning>", $question['custom-package-warning']));
                 }
             }
 
@@ -145,22 +150,22 @@ class OptionalPackages
                 $packageVersion = $match['version'];
 
                 if (!$packageVersion) {
-                    $io->write('<error>No package version specified</error>');
+                    $io->write("<error>No package version specified</error>");
                     continue;
                 }
 
-                $io->write(sprintf('  - Searching for <info>%s:%s</info>', $packageName, $packageVersion));
+                $io->write(sprintf("  - Searching for <info>%s:%s</info>", $packageName, $packageVersion));
 
                 $optionalPackage = $composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
                 if (!$optionalPackage) {
-                    $io->write(sprintf('<error>Package not found %s:%s</error>', $packageName, $packageVersion));
+                    $io->write(sprintf("<error>Package not found %s:%s</error>", $packageName, $packageVersion));
                     continue;
                 }
 
                 return sprintf('%s:%s', $packageName, $packageVersion);
             }
 
-            $io->write('<error>Invalid answer</error>');
+            $io->write("<error>Invalid answer</error>");
             continue;
         }
 
@@ -181,5 +186,21 @@ class OptionalPackages
 
         // Save package to composer.json
         self::$composerDefinition['require'][$packageName] = $packageVersion;
+    }
+
+    private static function copyFile(IOInterface $io, $projectRoot, $source, $target, $force = false)
+    {
+        // Copy file
+        if ($force === false && is_file($projectRoot . $target)) {
+            return;
+        }
+
+        $destinationPath = dirname($projectRoot . $target);
+        if (!is_dir($destinationPath)) {
+            mkdir($destinationPath, 644);
+        }
+
+        $io->write(sprintf("  - Copying <info>%s</info>", $target));
+        copy(__DIR__ . $source, $projectRoot . $target);
     }
 }

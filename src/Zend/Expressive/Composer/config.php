@@ -26,9 +26,8 @@ return [
                     'packages' => [
                         'aura/router'
                     ],
-                    'files' => [
-                        'source' => 'target', // Copy source file to target
-                        'aura-router/config.php' => 'config/autoload/router.php'
+                    'copy-files' => [
+                        '/Resources/config/aura-router.php' => '/config/autoload/router.global.php' // Copy source file to target
                     ]
                 ],
                 2 => [

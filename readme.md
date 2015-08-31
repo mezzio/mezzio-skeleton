@@ -15,8 +15,8 @@ If you want to submit a pull request, make sure you **commit the original compos
 
 ## TODO:
 
-- [ ] Copy files from Resources dir to other destinations, based on selected packages. This could be useful to copy basic configuration files for each package.
 - [ ] Add option to add packages to ``require-dev``.
+- [x] Copy files from Resources dir to other destinations, based on selected packages. This could be useful to copy basic configuration files for each package.
 - [x] Store user selections in composer.json. We need to store this in case a custom package was given.
 - [x] Only ask question on first run.
 - [x] Move none-of-the-above option to the config so packages can be forced. This is useful when at least one needs to be installed for the application to function. (Custom packages can be installed by typing in the package name and version in require format.)
