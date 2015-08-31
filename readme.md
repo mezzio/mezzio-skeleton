@@ -14,9 +14,9 @@ To try it out:
 
 ## TODO:
 
-- [ ] Store user selections in composer.json. We need to store this in case a custom package was given.
+- [x] Store user selections in composer.json. We need to store this in case a custom package was given.
 - [ ] Save boolean optional-packages setting in composer to know if it should run or not.
-- [ ] Only ask question on first run or if none of the proposed packages are listed in require.
+- [x] Only ask question on first run or if none of the proposed packages are listed in require.
 - [ ] Move none-of-the-above option to the config so packages can be forced. This is useful when at least one needs to be installed for the application to function. (Custom packages can be installed by typing in the package name and version in require format.)
 - [ ] Add debug info when in verbose mode.
 - [ ] Copy files from Resources dir to other destinations, based on selected packages. This could be usefull to copy basic configuration files for each package.

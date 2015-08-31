@@ -66,7 +66,8 @@ class Installer
         foreach ($config['questions'] as $questionName => $question) {
             $defaultOption = 1;
             if (isset(self::$composerDefinition['extra']['optional-packages'][$questionName])) {
-                $defaultOption = self::$composerDefinition['extra']['optional-packages'][$questionName];
+                // Skip question, it's already answered
+                continue;
             }
 
             // Get answer
