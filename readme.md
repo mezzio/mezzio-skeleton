@@ -11,15 +11,15 @@ This is a proof of concept for installing optional composer packages based on us
 
 ## Development
 
-If you are testing this and want to submit a pull request, make sure you **commit the original composer.json** and not the one update by the installer!
+If you want to submit a pull request, make sure you **commit the original composer.json** and not the one updated by the installer!!!
 
 ## TODO:
 
+- [ ] Copy files from Resources dir to other destinations, based on selected packages. This could be useful to copy basic configuration files for each package.
+- [ ] Add option to add packages to ``require-dev``.
 - [x] Store user selections in composer.json. We need to store this in case a custom package was given.
 - [x] Only ask question on first run.
 - [x] Move none-of-the-above option to the config so packages can be forced. This is useful when at least one needs to be installed for the application to function. (Custom packages can be installed by typing in the package name and version in require format.)
-- [ ] Copy files from Resources dir to other destinations, based on selected packages. This could be useful to copy basic configuration files for each package.
-- [ ] Add option to add packages to ``require-dev``.
 - [x] Test how this works when running ``composer create-project``.
 - [x] Use while (true) loop until a valid option is given.
 - [x] Remember user selected options.
