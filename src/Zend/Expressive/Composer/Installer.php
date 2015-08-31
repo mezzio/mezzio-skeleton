@@ -109,7 +109,11 @@ class Installer
             }
             $ask[] = sprintf("  [<comment>%d</comment>] %s\n", $key, $option['name']);
         }
-        $ask[] = "  [<comment>n</comment>] None of the above\n";
+
+        if ($question['required'] !== true) {
+            $ask[] = "  [<comment>n</comment>] None of the above\n";
+        }
+
         $ask[] = sprintf("  Make your selection <comment>(%s)</comment>: ", $defaultText);
 
         while (true) {
@@ -117,7 +121,7 @@ class Installer
             $answer = $io->ask($ask, $defaultOption);
 
             // Handle none of the options
-            if ($answer == 'n') {
+            if ($answer == 'n' && $question['required'] !== true) {
                 return 'n';
             }
 

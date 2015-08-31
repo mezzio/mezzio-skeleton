@@ -12,13 +12,16 @@ To try it out:
 3. Answer question.
 4. The chosen packages and dependencies should install and the other one should uninstall, if there are any.
 
+## Development
+
+If you are testing this and want to submit a pull request, make sure you **commit the original composer.json** and not the one update by the installer!
+
 ## TODO:
 
 - [x] Store user selections in composer.json. We need to store this in case a custom package was given.
-- [ ] Save boolean optional-packages setting in composer to know if it should run or not.
-- [x] Only ask question on first run or if none of the proposed packages are listed in require.
-- [ ] Move none-of-the-above option to the config so packages can be forced. This is useful when at least one needs to be installed for the application to function. (Custom packages can be installed by typing in the package name and version in require format.)
-- [ ] Add debug info when in verbose mode.
+- [x] Only ask question on first run.
+- [x] Move none-of-the-above option to the config so packages can be forced. This is useful when at least one needs to be installed for the application to function. (Custom packages can be installed by typing in the package name and version in require format.)
+- [ ] Show debug info when in verbose mode only.
 - [ ] Copy files from Resources dir to other destinations, based on selected packages. This could be usefull to copy basic configuration files for each package.
 - [ ] Add option to add packages to ``require-dev``.
 - [x] Test how this works when running ``composer create-project``.
