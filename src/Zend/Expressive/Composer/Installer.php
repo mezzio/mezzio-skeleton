@@ -63,18 +63,10 @@ class Installer
 
         $config = require __DIR__ . '/config.php';
 
-        $userSelectionsFile = __DIR__ . '/data.json';
-        $userSelections = new \stdClass();
-        if (is_file($userSelectionsFile)) {
-            $userSelections = json_decode(file_get_contents($userSelectionsFile));
-        }
-
         foreach ($config['questions'] as $questionName => $question) {
             $defaultOption = 1;
-            if (isset($userSelections->$questionName)
-                && isset($question['options'][$userSelections->$questionName])
-            ) {
-                $defaultOption = $userSelections->$questionName;
+            if (isset(self::$composerDefinition['extra']['optional-packages'][$questionName])) {
+                $defaultOption = self::$composerDefinition['extra']['optional-packages'][$questionName];
             }
 
             // Get answer
@@ -99,9 +91,6 @@ class Installer
         // Set required packages
         $rootPackage->setRequires(self::$composerRequires);
 
-        // Save user selected options
-        file_put_contents($userSelectionsFile, json_encode($userSelections, JSON_PRETTY_PRINT));
-
         $io->write("\n<info>Finished setting up optional packages</info>");
     }
 
@@ -109,15 +98,18 @@ class Installer
     {
         // Construct question
         $ask = [
-            "\n<question>" . $question['question'] . "</question>\n"
+            "\n  <question>" . $question['question'] . "</question>\n"
         ];
 
+        $defaultText = $defaultOption;
         foreach ($question['options'] as $key => $option) {
-            $default = ($key == $defaultOption) ? ' <comment>(default)</comment>' : '';
-            $ask[] = sprintf("  [<comment>%d</comment>] %s%s\n", $key, $option['name'], $default);
+            if ($key == $defaultOption) {
+                $defaultText = $option['name'];
+            }
+            $ask[] = sprintf("  [<comment>%d</comment>] %s\n", $key, $option['name']);
         }
         $ask[] = "  [<comment>n</comment>] None of the above\n";
-        $ask[] = "  <comment>Make your selection or press return to select the default:</comment> ";
+        $ask[] = sprintf("  Make your selection <comment>(%s)</comment>: ", $defaultText);
 
         while (true) {
             // Ask for user input
@@ -143,7 +135,7 @@ class Installer
                     continue;
                 }
 
-                $io->write(sprintf('  <info>Searching for package %s:%s</info>', $packageName, $packageVersion));
+                $io->write(sprintf('  - Searching for <info>%s:%s</info>', $packageName, $packageVersion));
 
                 $optionalPackage = $composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
                 if (!$optionalPackage) {
