@@ -16,13 +16,15 @@ use Composer\Script\Event;
  * Add this script to composer.json:
  *
  *  "scripts": {
- *      "pre-update-cmd": "Zend\\Expressive\\Composer\\Installer::setup",
- *      "pre-install-cmd": "Zend\\Expressive\\Composer\\Installer::setup"
+ *      "pre-update-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
+ *      "pre-install-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install"
  *  },
  *
  * @package Zend\Expressive\Composer
+ *
+ * @author Geert Eltink <@xtreamwayz>
  */
-class Installer
+class OptionalPackages
 {
     const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
@@ -33,7 +35,7 @@ class Installer
     /**
      * @param Event $event
      */
-    public static function setup(Event $event)
+    public static function install(Event $event)
     {
         $io = $event->getIO();
         $composer = $event->getComposer();
@@ -42,15 +44,8 @@ class Installer
         $composerFile = Factory::getComposerFile();
         $json = new JsonFile($composerFile);
         self::$composerDefinition = $json->read();
-        $composerLockFile = dirname($composerFile) . '/composer.lock';
 
-        // This script only works during update or during install if there is no lock file
-        if ($event->getName() == 'pre-install-cmd' && is_file($composerLockFile)) {
-            $io->write('<warning>To set up optional packages either delete the composer.lock file or run \'composer update\'</warning>');
-            return;
-        }
-
-        $io->write('<info>Set up optional packages</info>');
+        $io->write('<info>Setting up optional packages</info>');
 
         // Get root package
         $rootPackage = $composer->getPackage();
@@ -91,10 +86,17 @@ class Installer
 
         // Set required packages
         $rootPackage->setRequires(self::$composerRequires);
-
-        $io->write("\n<info>Finished setting up optional packages</info>");
     }
 
+    /**
+     * Prepare and ask questions and return the answer
+     *
+     * @param Composer $composer
+     * @param IOInterface $io
+     * @param $question
+     * @param $defaultOption
+     * @return bool|int|string
+     */
     private static function askQuestion(Composer $composer, IOInterface $io, $question, $defaultOption)
     {
         // Construct question
@@ -158,6 +160,13 @@ class Installer
         return false;
     }
 
+    /**
+     * Add a package
+     *
+     * @param IOInterface $io
+     * @param $packageName
+     * @param $packageVersion
+     */
     private static function addPackage(IOInterface $io, $packageName, $packageVersion)
     {
         $io->write(sprintf("  - Adding package <info>%s</info> (<comment>%s</comment>)", $packageName, $packageVersion));

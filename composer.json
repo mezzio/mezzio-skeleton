@@ -6,8 +6,7 @@
     "authors": [
         {
             "name": "Geert Eltink",
-            "homepage": "https://xtreamwayz.github.io/",
-            "role": "Lead Developer"
+            "homepage": "https://xtreamwayz.github.io/"
         }
     ],
     "require": {
@@ -22,7 +21,7 @@
         }
     },
     "scripts": {
-        "pre-update-cmd": "Zend\\Expressive\\Composer\\Installer::setup",
-        "pre-install-cmd": "Zend\\Expressive\\Composer\\Installer::setup"
+        "pre-update-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
+        "pre-install-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install"
     }
 }
