@@ -51,7 +51,7 @@ return [
             'question' => 'Which container you want to use for dependency injection?',
             'required' => true,
             'custom-package' => true,
-            'custom-package-warning' => 'You need to edit public/index.php and change the code to start the container.',
+            'custom-package-warning' => 'You need to edit public/index.php to start the custom container.',
             'options' => [
                 1 => [
                     'name' => 'zendframework/zend-servicemanager',
@@ -71,8 +71,7 @@ return [
         'template-engine' => [
             'question' => 'Which template engine you want to use?',
             'required' => false,
-            'custom-package' => true,
-            'custom-package-warning' => 'You need to write your own template adapter.',
+            'custom-package' => false,
             'options' => [
                 1 => [
                     'name' => 'zendframework/zend-view',

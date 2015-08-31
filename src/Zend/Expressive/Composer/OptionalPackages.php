@@ -76,8 +76,11 @@ class OptionalPackages
                 foreach ($question['options'][$answer]['packages'] as $packageName) {
                     self::addPackage($io, $packageName, $config['packages'][$packageName]);
                 }
-            } elseif (preg_match(self::PACKAGE_REGEX, $answer, $match)) {
+            } elseif ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
                 self::addPackage($io, $match['name'], $match['version']);
+                if (isset($question['custom-package-warning'])) {
+                    $io->write(sprintf('  <warning>%s</warning>', $question['custom-package-warning']));
+                }
             }
 
             // Update composer definition
@@ -116,7 +119,11 @@ class OptionalPackages
             $ask[] = "  [<comment>n</comment>] None of the above\n";
         }
 
-        $ask[] = sprintf("  Make your selection <comment>(%s)</comment>: ", $defaultText);
+        if ($question['custom-package'] === true) {
+            $ask[] = sprintf("  Make your selection or type a composer package name and version <comment>(%s)</comment>: ", $defaultText);
+        } else {
+            $ask[] = sprintf("  Make your selection <comment>(%s)</comment>: ", $defaultText);
+        }
 
         while (true) {
             // Ask for user input
@@ -133,7 +140,7 @@ class OptionalPackages
             }
 
             // Search for package
-            if (preg_match(self::PACKAGE_REGEX, $answer, $match)) {
+            if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
                 $packageName = $match['name'];
                 $packageVersion = $match['version'];
 
