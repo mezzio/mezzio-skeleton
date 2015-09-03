@@ -7,7 +7,7 @@ return [
         'mouf/pimple-interop'               => '^1.0',
         'nikic/fast-route'                  => '^0.6.0',
         'ocramius/proxy-manager'            => '^1.0',
-        'twig/twig'                         => '^1.19',
+        'twig/twig'                         => '^1.21',
         'zendframework/zend-mvc'            => '^2.5',
         'zendframework/zend-psr7bridge'     => '^0.1.0',
         'zendframework/zend-servicemanager' => '^2.5',
