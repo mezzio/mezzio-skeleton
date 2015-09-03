@@ -17,6 +17,7 @@ return [
     'questions' => [
         'router' => [
             'question'               => 'Which router you want to use?',
+            'default'                => 1,
             'required'               => true, // TRUE: Must choose one / FALSE: May choose one or none of the above
             'custom-package'         => true, // Enable custom package input
             'custom-package-warning' => 'You need to write your own router adapter.', // Display warning when choosing a custom package
@@ -48,6 +49,7 @@ return [
 
         'container' => [
             'question'               => 'Which container you want to use for dependency injection?',
+            'default'                => 1,
             'required'               => true,
             'custom-package'         => true,
             'custom-package-warning' => 'You need to edit public/index.php to start the custom container.',
@@ -74,6 +76,7 @@ return [
 
         'template-engine' => [
             'question'       => 'Which template engine you want to use?',
+            'default'        => 3,
             'required'       => false,
             'custom-package' => true,
             'options'        => [

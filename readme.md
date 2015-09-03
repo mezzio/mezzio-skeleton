@@ -16,9 +16,10 @@ If you want to submit a pull request, make sure you **commit the original compos
 
 ## TODO:
 
-- [ ] Add working configuration for aura-router, zend-service-manager and twig. *in progress*
-- [ ] Add option to set default answer: Default option for templating should be "none".
+- [ ] Default option for templating should be "none".
 - [ ] Add option to add packages to ``require-dev``.
+- [x] Add working configuration for aura-router, zend-service-manager and twig.
+- [x] Add option to set default answer.
 - [x] Copy files from Resources dir to other destinations, based on selected packages. This could be useful to copy basic configuration files for each package.
 - [x] Store user selections in composer.json. We need to store this in case a custom package was given.
 - [x] Only ask question on first run.

@@ -61,7 +61,7 @@ class OptionalPackages
         $config = require __DIR__ . '/config.php';
 
         foreach ($config['questions'] as $questionName => $question) {
-            $defaultOption = 1;
+            $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
             if (isset(self::$composerDefinition['extra']['optional-packages'][$questionName])) {
                 // Skip question, it's already answered
                 continue;
