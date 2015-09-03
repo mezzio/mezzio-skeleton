@@ -1,13 +1,12 @@
 # Expressive Optional Packages Installer
 
-This is a proof of concept for installing optional composer packages based on user input. The user selected packages are saved into ``composer.json`` so everyone else working on the project have the same packages installed. Configuration files and the index.php file are prepared for first use. To not annoy users only missing answers are asked for. 
+This is a proof of concept for installing optional composer packages based on user input. The user selected packages are saved into ``composer.json`` so everyone else working on the project have the same packages installed. Configuration files and the index.php file are prepared for first use. To not annoy users only missing answers are asked for.
 
 ## Testing
 
-1. Download this package.
-2. Run ``composer update`` to install the packages.
-3. Answer question.
-4. The chosen packages and dependencies should install and the other one should uninstall, if there are any.
+1. Run ``composer create-project xtreamwayz/expressive-composer-installer test --stability="dev"``.
+2. Answer question.
+3. The chosen packages and dependencies should install and the other one should uninstall, if there are any.
 
 ## Development
 
