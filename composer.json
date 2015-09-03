@@ -11,7 +11,8 @@
     ],
     "require": {
         "roave/security-advisories": "dev-master",
-        "zendframework/zend-expressive": "^0.1"
+        "zendframework/zend-expressive": "^0.1",
+        "zendframework/zend-config": "^2.5"
     },
     "require-dev": {
         "composer/composer": "dev-master"

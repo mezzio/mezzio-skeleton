@@ -7,6 +7,8 @@ This is a proof of concept for installing optional composer packages based on us
 1. Run ``composer create-project xtreamwayz/expressive-composer-installer test --stability="dev"``.
 2. Answer question.
 3. The chosen packages and dependencies should install and the other one should uninstall, if there are any.
+4. Run ``php -S localhost:8000 -t public/``.
+5. Open you browser at ``localhost:8000`` and there should be a default home page.
 
 ## Development
 
