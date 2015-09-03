@@ -28,9 +28,9 @@ class OptionalPackages
 {
     const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
-    static $composerDefinition;
+    private static $composerDefinition;
 
-    static $composerRequires;
+    private static $composerRequires;
 
     /**
      * @param Event $event
@@ -109,26 +109,23 @@ class OptionalPackages
     {
         // Construct question
         $ask = [
-            "\n  <question>" . $question['question'] . "</question>\n"
+            sprintf("\n  <question>%s</question>\n", $question['question']),
         ];
 
         $defaultText = $defaultOption;
+
         foreach ($question['options'] as $key => $option) {
-            if ($key == $defaultOption) {
-                $defaultText = $option['name'];
-            }
-            $ask[] = sprintf("  [<comment>%d</comment>] %s\n", $key, $option['name']);
+            $defaultText = ($key === $defaultOption) ? $option['name'] : $defaultText;
+            $ask[]       = sprintf("  [<comment>%d</comment>] %s\n", $key, $option['name']);
         }
 
         if ($question['required'] !== true) {
             $ask[] = "  [<comment>n</comment>] None of the above\n";
         }
 
-        if ($question['custom-package'] === true) {
-            $ask[] = sprintf("  Make your selection or type a composer package name and version <comment>(%s)</comment>: ", $defaultText);
-        } else {
-            $ask[] = sprintf("  Make your selection <comment>(%s)</comment>: ", $defaultText);
-        }
+        $ask[] = ($question['custom-package'] === true)
+            ? sprintf("  Make your selection or type a composer package name and version <comment>(%s)</comment>: ", $defaultText)
+            : sprintf("  Make your selection <comment>(%s)</comment>: ", $defaultText);
 
         while (true) {
             // Ask for user input
@@ -146,10 +143,10 @@ class OptionalPackages
 
             // Search for package
             if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
-                $packageName = $match['name'];
+                $packageName    = $match['name'];
                 $packageVersion = $match['version'];
 
-                if (!$packageVersion) {
+                if (! $packageVersion) {
                     $io->write("<error>No package version specified</error>");
                     continue;
                 }
@@ -157,7 +154,7 @@ class OptionalPackages
                 $io->write(sprintf("  - Searching for <info>%s:%s</info>", $packageName, $packageVersion));
 
                 $optionalPackage = $composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
-                if (!$optionalPackage) {
+                if (! $optionalPackage) {
                     $io->write(sprintf("<error>Package not found %s:%s</error>", $packageName, $packageVersion));
                     continue;
                 }
@@ -166,7 +163,6 @@ class OptionalPackages
             }
 
             $io->write("<error>Invalid answer</error>");
-            continue;
         }
 
         return false;
@@ -197,7 +193,7 @@ class OptionalPackages
 
         $destinationPath = dirname($projectRoot . $target);
         if (!is_dir($destinationPath)) {
-            mkdir($destinationPath, 644);
+            mkdir($destinationPath, 644, true);
         }
 
         $io->write(sprintf("  - Copying <info>%s</info>", $target));
