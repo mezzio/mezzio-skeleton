@@ -192,8 +192,8 @@ class OptionalPackages
         }
 
         $destinationPath = dirname($projectRoot . $target);
-        if (!is_dir($destinationPath)) {
-            mkdir($destinationPath, 644, true);
+        if (! is_dir($destinationPath)) {
+            mkdir($destinationPath, 0775, true);
         }
 
         $io->write(sprintf("  - Copying <info>%s</info>", $target));
