@@ -23,7 +23,7 @@
         }
     },
     "scripts": {
-        "pre-update-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
-        "pre-install-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install"
+        "pre-install-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
+        "pre-update-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install"
     }
 }

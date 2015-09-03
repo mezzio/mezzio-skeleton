@@ -94,6 +94,25 @@ class OptionalPackages
 
         // Set required packages
         $rootPackage->setRequires(self::$composerRequires);
+
+        // House keeping
+        $io->write("<info>Remove installer</info>");
+        unset(self::$composerDefinition['extra']['optional-packages']);
+        if (empty(self::$composerDefinition['extra'])) {
+            unset(self::$composerDefinition['extra']);
+        }
+
+        unset(self::$composerDefinition['scripts']['pre-update-cmd']);
+        unset(self::$composerDefinition['scripts']['pre-install-cmd']);
+        if (empty(self::$composerDefinition['scripts'])) {
+            unset(self::$composerDefinition['scripts']);
+        }
+
+        // Update composer definition
+        $json->write(self::$composerDefinition);
+
+        // @TODO: Remove installer - Not working, getting unlink(D:\projects\test/src/Zend): Permission denied
+        //array_map('unlink', glob($projectRoot . '/src/Zend'));
     }
 
     /**
