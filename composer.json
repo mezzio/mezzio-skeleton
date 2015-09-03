@@ -15,7 +15,7 @@
         "zendframework/zend-config": "^2.5"
     },
     "require-dev": {
-        "composer/composer": "dev-master"
+        "composer/composer": "1.0.0-alpha10"
     },
     "autoload": {
         "psr-4": {
