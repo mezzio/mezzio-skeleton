@@ -9,8 +9,6 @@ if (php_sapi_name() === 'cli-server'
     return false;
 }
 
-opcache_reset();
-
 chdir(dirname(__DIR__));
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -20,5 +18,3 @@ $container = require 'config/container.php';
 /** @var \Zend\Expressive\Application $app */
 $app = $container->get('Zend\Expressive\Application');
 $app->run();
-
-dump(number_format((float) (microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']), 4, '.', ''));
