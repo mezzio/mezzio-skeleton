@@ -1,0 +1,77 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1>Welcome to <span class="zf-green">zend-expressive</span></h1>
+        <p>
+            Congratulations! You have successfully installed the <a href="https://github.com/zendframework/zend-expressive-skeleton" target="_blank">zend-expressive Skeleton Application</a>.
+            This skeleton can serve as a simple starting point for you to begin building your application on ZF2.
+        </p>
+        <p>
+            zend-expressive builds on zend-stratigility to provide a minimalist PSR-7 middleware framework for PHP,
+            with Routing, container-interop DI Containers and optionally templating.
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Expand Your Microframework</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        There are tons of packages available on packagist.org. You can easily add the ones you need
+                        with composer require and start using them.
+                    </p>
+                    <p>
+                        <a class="btn btn-success pull-right" href="http://packagist.org/" target="_blank">
+                            Explore PHP Packages &raquo;
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Follow Development</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        zend-expressive is under active development. If you are interested in following the development,
+                        you can do so at GitHub. Use the issue tracker for reporting bugs. This is a great resource for staying
+                        up to date with the latest developments!
+                    </p>
+                    <p>
+                        <a class="btn btn-success pull-right" href="https://github.com/zendframework/zend-expressive" target="_blank">
+                            zend-expressive Development &raquo;
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Help &amp; Support</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        If you need any help or support while developing with ZF2 or Expressive, you may reach us via
+                        IRC: <a href="irc://irc.freenode.net/zftalk">#zftalk on Freenode</a>. We'd love to hear any
+                        questions or feedback you may have. Alternatively, you may subscribe and post questions to
+                        the <a href="http://framework.zend.com/wiki/display/ZFDEV/Mailing+Lists">mailing lists.</a>
+                    </p>
+                    <p>
+                        <a class="btn btn-success pull-right" href="http://webchat.freenode.net?channels=zftalk" target="_blank">
+                            Ping us on IRC &raquo;
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

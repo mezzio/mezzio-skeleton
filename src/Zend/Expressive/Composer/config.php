@@ -6,6 +6,7 @@ return [
         'league/plates'                     => '^3.1',
         'mouf/pimple-interop'               => '^1.0',
         'nikic/fast-route'                  => '^0.6.0',
+        'ocramius/proxy-manager'            => '^1.0',
         'twig/twig'                         => '^1.19',
         'zendframework/zend-mvc'            => '^2.5',
         'zendframework/zend-psr7bridge'     => '^0.1.0',
@@ -26,7 +27,7 @@ return [
                         'aura/router',
                     ],
                     'copy-files' => [
-                        '/Resources/config/aura-router.php' => '/config/autoload/router.global.php', // Copy source file to target
+                        '/Resources/config/aura-router-routes.php' => '/config/autoload/router.global.php', // Copy source file to target
                     ],
                 ],
                 2 => [
@@ -55,19 +56,18 @@ return [
                     'name'     => 'zendframework/zend-servicemanager',
                     'packages' => [
                         'zendframework/zend-servicemanager',
+                        'ocramius/proxy-manager',
                     ],
                     'copy-files' => [
-                        '/Resources/public/zend-index.php' => '/public/index.php',
+                        '/Resources/config/zend-servicemanager-container.php' => '/config/container.php',
+                        '/Resources/config/zend-servicemanager-dependencies..php' => '/config/autoload/dependencies.global.php',
                     ],
                 ],
                 2 => [
                     'name'     => 'mouf/pimple-interop',
                     'packages' => [
                         'mouf/pimple-interop',
-                    ],
-                    'copy-files' => [
-                        '/Resources/public/pimple-index.php' => '/public/index.php',
-                    ],
+                    ]
                 ],
             ],
         ],
@@ -93,6 +93,13 @@ return [
                     'name'     => 'twig/twig',
                     'packages' => [
                         'twig/twig',
+                    ],
+                    'copy-files' => [
+                        '/Resources/config/twig-templates.php' => '/config/autoload/templates.global.php',
+                        '/Resources/templates/twig-404.html.twig' => '/templates/error/404.html.twig',
+                        '/Resources/templates/twig-500.html.twig' => '/templates/error/500.html.twig',
+                        '/Resources/templates/twig-default.html.twig' => '/templates/layout/default.html.twig',
+                        '/Resources/templates/twig-home-page.html.twig' => '/templates/app/home-page.html.twig',
                     ],
                 ],
             ],
