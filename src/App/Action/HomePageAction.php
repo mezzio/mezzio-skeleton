@@ -6,7 +6,10 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
+use Zend\Expressive\Router\AuraRouter;
+use Zend\Expressive\Router\FastRouteRouter;
 use Zend\Expressive\Router\RouterInterface;
+use Zend\Expressive\Router\Zf2Router;
 use Zend\Expressive\Template\TemplateInterface;
 
 class HomePageAction extends AbstractAction
@@ -23,22 +26,20 @@ class HomePageAction extends AbstractAction
         $data = [];
 
         $router = $this->getContainer()->get(RouterInterface::class);
-        if ($router instanceof Zend\Expressive\Router\AuraRouter) {
+        if ($router instanceof AuraRouter) {
             $data['routerDocsUrl'] = 'https://zend-expressive.readthedocs.org/en/latest/router/aura/';
             $data['routerName'] = 'Aura.Router';
             $data['routerExtUrl'] = 'http://auraphp.com/packages/Aura.Router/';
-        } elseif ($router instanceof Zend\Expressive\Router\FastRouteRouter) {
+        } elseif ($router instanceof FastRouteRouter) {
             $data['routerDocsUrl'] = 'https://zend-expressive.readthedocs.org/en/latest/router/fast-route/';
             $data['routerName'] = 'FastRoute';
             $data['routerExtUrl'] = 'https://github.com/nikic/FastRoute';
-        } elseif ($router instanceof Zend\Expressive\Router\Zf2Router) {
+        } elseif ($router instanceof Zf2Router) {
             $data['routerDocsUrl'] = 'https://zend-expressive.readthedocs.org/en/latest/router/zf2/';
             $data['routerName'] = 'ZF2 Router';
             $data['routerExtUrl'] = 'http://framework.zend.com/manual/current/en/modules/zend.mvc.routing.html';
         }
 
-        return new HtmlResponse($this->getRenderer()->render('app::home-page', [
-            $data
-        ]));
+        return new HtmlResponse($this->getRenderer()->render('app::home-page', $data));
     }
 }
