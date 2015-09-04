@@ -104,6 +104,9 @@ return [
                     'packages' => [
                         'league/plates',
                     ],
+                    'copy-files' => [
+                        '/Resources/config/plates-templates.php' => '/config/autoload/templates.global.php',
+                    ],
                 ],
                 3 => [
                     'name'     => 'twig/twig',
