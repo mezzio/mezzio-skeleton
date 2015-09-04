@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'dependencies' => [
+        'invokables' => [
+            'Zend\Expressive\FinalHandler' => Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
+            Zend\Expressive\Template\TemplateInterface::class => App\Template\TwigFactory::class,
+        ],
+    ],
+
     'templates' => [
         'cache_dir' => 'data/cache/twig',
         'extension' => 'html.twig',
