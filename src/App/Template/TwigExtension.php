@@ -49,6 +49,7 @@ class TwigExtension extends \Twig_Extension
     }
 
     // {{ asset(path, packageName, absolute = false, version = null) }}
+    // @TODO: Add $assetsPaths to enable cdn etc.
     public function renderAssetUrl($path, $packageName = null, $absolute = false, $version = null)
     {
         $assetUrl = $path;
