@@ -2,7 +2,7 @@
 
 return [
     'dependencies' => [
-        'invokables' => [
+        'factories' => [
             'Zend\Expressive\FinalHandler' => Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
             Zend\Expressive\Template\TemplateInterface::class => App\Template\TwigFactory::class,
         ],

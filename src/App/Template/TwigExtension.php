@@ -55,7 +55,7 @@ class TwigExtension extends \Twig_Extension
      * @param $name
      * @param array $parameters
      * @param bool $relative
-     * @return
+     * @return string
      */
     public function renderUri($name, $parameters = [], $relative = false)
     {
