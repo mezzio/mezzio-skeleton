@@ -32,13 +32,13 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => 'nikic/fast-route',
+                    'name'     => 'nikic/fast-route *@TODO*',
                     'packages' => [
                         'nikic/fast-route',
                     ],
                 ],
                 3 => [
-                    'name'     => 'zend-mvc TreeRouteStack',
+                    'name'     => 'zend-mvc TreeRouteStack *@TODO*',
                     'packages' => [
                         'zendframework/zend-mvc',
                         'zendframework/zend-psr7bridge',
@@ -66,7 +66,7 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => 'mouf/pimple-interop',
+                    'name'     => 'mouf/pimple-interop *@TODO*',
                     'packages' => [
                         'mouf/pimple-interop',
                     ]
@@ -76,18 +76,18 @@ return [
 
         'template-engine' => [
             'question'       => 'Which template engine you want to use?',
-            'default'        => 3,
+            'default'        => 'n',
             'required'       => false,
             'custom-package' => true,
             'options'        => [
                 1 => [
-                    'name'     => 'zendframework/zend-view',
+                    'name'     => 'zendframework/zend-view *@TODO*',
                     'packages' => [
                         'zendframework/zend-view',
                     ],
                 ],
                 2 => [
-                    'name'     => 'league/plates',
+                    'name'     => 'league/plates *@TODO*',
                     'packages' => [
                         'league/plates',
                     ],
