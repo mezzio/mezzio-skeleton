@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">
+                    <a class="navbar-brand" href="{{ path('home') }}">
                         <img src="zf-logo.png" alt="Zend Expressive" />
                     </a>
                 </div>
@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/api/ping">
+                            <a href="{{ path('api.ping') }}">
                                 Ping Test
                             </a>
                         </li>
