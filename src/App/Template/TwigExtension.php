@@ -19,14 +19,21 @@ class TwigExtension extends \Twig_Extension
     /**
      * @var string
      */
-    private $assetsPath;
+    private $assetsUrl;
 
+    /**
+     * @var string
+     */
     private $assetsVersion;
 
-    public function __construct(RouterInterface $router, $assetsPath)
-    {
+    public function __construct(
+        RouterInterface $router,
+        $assetsUrl,
+        $assetsVersion
+    ) {
         $this->router = $router;
-        $this->assetsPath = $assetsPath;
+        $this->assetsUrl = $assetsUrl;
+        $this->assetsVersion = $assetsVersion;
     }
 
     public function getName()
@@ -42,20 +49,36 @@ class TwigExtension extends \Twig_Extension
         ];
     }
 
-    // {{ path(name, parameters, relative) }}
+    /**
+     * Usage: {{ path('name', parameters) }}
+     *
+     * @param $name
+     * @param array $parameters
+     * @param bool $relative
+     * @return
+     */
     public function renderUri($name, $parameters = [], $relative = false)
     {
         return $this->router->generateUri($name, $parameters);
     }
 
-    // {{ asset(path, packageName, absolute = false, version = null) }}
-    // @TODO: Add $assetsPaths to enable cdn etc.
+    /**
+     * Usage: {{ asset('path/to/asset/name.ext', version=3) }}
+     *
+     * @param $path
+     * @param null $packageName
+     * @param bool $absolute
+     * @param null $version
+     * @return string
+     */
     public function renderAssetUrl($path, $packageName = null, $absolute = false, $version = null)
     {
-        $assetUrl = $path;
+        $assetUrl = $this->assetsUrl . $path;
 
         if ($version) {
             $assetUrl .= '?v=' . $version;
+        } elseif ($this->assetsVersion) {
+            $assetUrl .= '?v=' . $this->assetsVersion;
         }
 
         return $assetUrl;
