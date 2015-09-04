@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Container;
+namespace App\Template;
 
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
