@@ -75,11 +75,16 @@ class OptionalPackages
 
             if (is_numeric($answer)) {
                 // Add packages to install
-                foreach ($question['options'][$answer]['packages'] as $packageName) {
-                    self::addPackage($io, $packageName, $config['packages'][$packageName]);
+                if (isset($question['options'][$answer]['packages'])) {
+                    foreach ($question['options'][$answer]['packages'] as $packageName) {
+                        self::addPackage($io, $packageName, $config['packages'][$packageName]);
+                    }
                 }
-                foreach ($question['options'][$answer]['copy-files'] as $source => $target) {
-                    self::copyFile($io, $projectRoot, $source, $target);
+                // Copy files
+                if (isset($question['options'][$answer]['copy-files'])) {
+                    foreach ($question['options'][$answer]['copy-files'] as $source => $target) {
+                        self::copyFile($io, $projectRoot, $source, $target);
+                    }
                 }
             } elseif ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
                 self::addPackage($io, $match['name'], $match['version']);
