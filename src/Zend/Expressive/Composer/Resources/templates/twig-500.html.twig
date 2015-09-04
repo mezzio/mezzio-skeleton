@@ -1,7 +1,10 @@
-<h1>500</h1>
-<p>
-    Internal server error!
-</p>
-<div>
-    <pre>{{error}}</pre>
-</div>
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}500{% endblock %}
+
+{% block content %}
+    <h1>500</h1>
+    <p>
+        Internal server error!
+    </p>
+{% endblock %}

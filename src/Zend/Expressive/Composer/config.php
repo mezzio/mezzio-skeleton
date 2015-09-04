@@ -100,7 +100,7 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => '<comment>league/plates @TODO</comment>',
+                    'name'     => 'league/plates',
                     'packages' => [
                         'league/plates',
                     ],
