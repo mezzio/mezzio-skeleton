@@ -106,6 +106,11 @@ return [
                     ],
                     'copy-files' => [
                         '/Resources/config/plates-templates.php' => '/config/autoload/templates.global.php',
+                        '/Resources/templates/plates-404.phtml' => '/templates/error/404.phtml',
+                        '/Resources/templates/plates-500.phtml' => '/templates/error/500.phtml',
+                        '/Resources/templates/plates-error.phtml' => '/templates/error/error.phtml',
+                        '/Resources/templates/plates-layout.phtml' => '/templates/layout/default.phtml',
+                        '/Resources/templates/plates-home-page.phtml' => '/templates/app/home-page.phtml',
                     ],
                 ],
                 3 => [

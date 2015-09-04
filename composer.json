@@ -15,7 +15,8 @@
         "zendframework/zend-config": "^2.5"
     },
     "require-dev": {
-        "composer/composer": "1.0.0-alpha10"
+        "composer/composer": "1.0.0-alpha10",
+        "league/plates": "^3.1"
     },
     "autoload": {
         "psr-4": {
