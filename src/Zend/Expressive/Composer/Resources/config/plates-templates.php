@@ -10,7 +10,7 @@ return [
 
     'templates' => [
         'cache_dir' => 'data/cache/twig',
-        'extension' => 'html.twig',
+        'extension' => 'php',
         'assets_url' => '/', // Path prefix or CDN url
         'assets_version' => null, // Version to place behind assets
         'paths' => [

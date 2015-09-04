@@ -13,7 +13,7 @@ class PlatesFactory
         $config = $container->get('config');
 
         // Create the engine instance:
-        $engine = new PlatesEngine();
+        $engine = new PlatesEngine('templates', $config['templates']['extension']);
 
         // Inject engine
         $plates = new Plates($engine);
