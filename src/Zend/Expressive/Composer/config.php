@@ -101,7 +101,7 @@ return [
                         '/Resources/config/twig-templates.php' => '/config/autoload/templates.global.php',
                         '/Resources/templates/twig-404.html.twig' => '/templates/error/404.html.twig',
                         '/Resources/templates/twig-500.html.twig' => '/templates/error/500.html.twig',
-                        '/Resources/templates/twig-default.html.twig' => '/templates/layout/default.html.twig',
+                        '/Resources/templates/twig-layout.html.twig' => '/templates/layout/default.html.twig',
                         '/Resources/templates/twig-home-page.html.twig' => '/templates/app/home-page.html.twig',
                     ],
                 ],
