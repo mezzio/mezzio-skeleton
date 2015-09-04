@@ -2,6 +2,7 @@
 
 return [
     'packages' => [
+        'aura/di'                           => '3.0.*@beta',
         'aura/router'                       => '^2.3',
         'league/plates'                     => '^3.1',
         'mouf/pimple-interop'               => '^1.0',
@@ -75,6 +76,12 @@ return [
                     'name'     => '<comment>mouf/pimple-interop @TODO</comment>',
                     'packages' => [
                         'mouf/pimple-interop',
+                    ]
+                ],
+                3 => [
+                    'name'     => '<comment>Aura.Di @TODO</comment>',
+                    'packages' => [
+                        'aura/di',
                     ]
                 ],
             ],
