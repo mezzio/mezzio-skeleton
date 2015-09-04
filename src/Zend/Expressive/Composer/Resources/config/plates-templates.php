@@ -2,11 +2,9 @@
 
 return [
     'dependencies' => [
-        'invokables' => [
-            Zend\Expressive\Template\TemplateInterface::class => Zend\Expressive\Template\Plates::class,
-        ],
         'factories' => [
             'Zend\Expressive\FinalHandler' => Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
+            Zend\Expressive\Template\TemplateInterface::class => App\Template\PlatesFactory::class,
         ],
     ],
 
@@ -17,7 +15,8 @@ return [
         'assets_version' => null, // Version to place behind assets
         'paths' => [
             'templates/app' => 'app',
-            'templates/layout' => 'layout'
+            'templates/layout' => 'layout',
+            'templates/error' => 'error',
         ]
     ]
 ];
