@@ -41,7 +41,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => '<comment>zend-mvc TreeRouteStack @TODO</comment>',
+                    'name'     => 'zend-mvc TreeRouteStack',
                     'packages' => [
                         'zendframework/zend-mvc',
                         'zendframework/zend-psr7bridge',
