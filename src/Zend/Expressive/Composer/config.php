@@ -46,6 +46,9 @@ return [
                         'zendframework/zend-mvc',
                         'zendframework/zend-psr7bridge',
                     ],
+                    'copy-files' => [
+                        '/Resources/config/zf2-router-routes.php' => '/config/autoload/router.global.php',
+                    ],
                 ],
             ],
         ],
