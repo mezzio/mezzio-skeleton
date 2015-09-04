@@ -26,8 +26,10 @@ class TwigFactory
 
         // Add extensions
         $environment->addExtension(new TwigExtension(
-            $container->get(RouterInterface::class), $config['assets_url'])
-        );
+            $container->get(RouterInterface::class),
+            $config['templates']['assets_url'],
+            $config['templates']['assets_version']
+        ));
 
         if ($config['debug']) {
             $environment->addExtension(new TwigExtensionDebug());
