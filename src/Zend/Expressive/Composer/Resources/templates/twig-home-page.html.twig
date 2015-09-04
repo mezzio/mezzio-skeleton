@@ -6,72 +6,92 @@
     <div class="jumbotron">
         <h1>Welcome to <span class="zf-green">zend-expressive</span></h1>
         <p>
-            Congratulations! You have successfully installed the <a href="https://github.com/zendframework/zend-expressive-skeleton" target="_blank">zend-expressive Skeleton Application</a>.
-            This skeleton can serve as a simple starting point for you to begin building your application on ZF2.
+            Congratulations! You have successfully installed the
+            <a href="https://github.com/zendframework/zend-expressive-skeleton" target="_blank">zend-expressive Skeleton Application</a>.
+            This skeleton can serve as a simple starting point for you to begin building your application.
         </p>
         <p>
-            zend-expressive builds on zend-stratigility to provide a minimalist PSR-7 middleware framework for PHP,
-            with Routing, container-interop DI Containers and optionally templating.
+            Expressive builds on zend-stratigility to provide a minimalist PSR-7 middleware framework for PHP.
         </p>
     </div>
 
     <div class="row">
         <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Expand Your Microframework</h3>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        There are tons of packages available on packagist.org. You can easily add the ones you need
-                        with composer require and start using them.
-                    </p>
-                    <p>
-                        <a class="btn btn-success pull-right" href="http://packagist.org/" target="_blank">
-                            Explore PHP Packages &raquo;
-                        </a>
-                    </p>
-                </div>
-            </div>
+            <h2>
+                <a href="https://zend-expressive.readthedocs.org/en/latest/usage-examples/#hybrid-container-and-programmatic-creation" target="_blank">
+                    <i class="fa fa-refresh"></i> Agile &amp; Lean
+                </a>
+            </h2>
+            <p>
+                Expressive is fast, small and perfect for rapid application development, prototyping and api's. You decide how you
+                extend it and choose the best packages from major framework or standalone projects.
+            </p>
         </div>
+
         <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Follow Development</h3>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        zend-expressive is under active development. If you are interested in following the development,
-                        you can do so at GitHub. Use the issue tracker for reporting bugs. This is a great resource for staying
-                        up to date with the latest developments!
-                    </p>
-                    <p>
-                        <a class="btn btn-success pull-right" href="https://github.com/zendframework/zend-expressive" target="_blank">
-                            zend-expressive Development &raquo;
-                        </a>
-                    </p>
-                </div>
-            </div>
+            <h2>
+                <a href="https://zend-expressive.readthedocs.org/en/latest/usage-examples/#hybrid-container-and-programmatic-creation" target="_blank">
+                    <i class="fa fa-exchange"></i> HTTP messages
+                </a>
+            </h2>
+            <p>
+                HTTP messages are the foundation of web development. Web browsers and HTTP clients such as cURL create
+                HTTP request messages that are sent to a web server, which provides an HTTP response message.
+                Server-side code receives an HTTP request message, and returns an HTTP response message.
+            </p>
         </div>
+
         <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Help &amp; Support</h3>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        If you need any help or support while developing with ZF2 or Expressive, you may reach us via
-                        IRC: <a href="irc://irc.freenode.net/zftalk">#zftalk on Freenode</a>. We'd love to hear any
-                        questions or feedback you may have. Alternatively, you may subscribe and post questions to
-                        the <a href="http://framework.zend.com/wiki/display/ZFDEV/Mailing+Lists">mailing lists.</a>
-                    </p>
-                    <p>
-                        <a class="btn btn-success pull-right" href="http://webchat.freenode.net?channels=zftalk" target="_blank">
-                            Ping us on IRC &raquo;
-                        </a>
-                    </p>
-                </div>
-            </div>
+            <h2>
+                <a href="https://zend-expressive.readthedocs.org/en/latest/usage-examples/#hybrid-container-and-programmatic-creation" target="_blank">
+                    <i class="fa fa-dot-circle-o"></i> Middleware
+                </a>
+            </h2>
+            <p>
+                Middleware change the HTTP messages. Your application is easily extended with custom middleware. You
+                can either create your own or <a href="https://packagist.org/search/?q=middleware" target="_blank">search packagist.org</a>
+                for existing middleware or new ideas.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>
+                <a href="https://zend-expressive.readthedocs.org/en/latest/container/intro/" target="_blank">
+                    <i class="fa fa-cube"></i> Containers
+                </a>
+            </h2>
+            <p>
+                Expressive promotes and advocates the usage of Dependency Injection/Inversion of Control containers
+                when writing your applications. Expressive supports multiple containers which typehints against
+                <a href="https://github.com/container-interop/container-interop" target="_blank">container-interop</a>.
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>
+                <a href="https://zend-expressive.readthedocs.org/en/latest/router/intro/" target="_blank">
+                    <i class="fa fa-plane"></i> Routing
+                </a>
+            </h2>
+            <p>
+                One fundamental feature of zend-expressive is that it provides mechanisms for implementing dynamic
+                routing, a feature required in most modern web applications. Expressive ships with multiple adapters.
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>
+                <a href="https://zend-expressive.readthedocs.org/en/latest/template/twig/" target="_blank">
+                    <i class="fa fa-files-o"></i> Twig Templating
+                </a>
+            </h2>
+            <p>
+                By default, no middleware in Expressive is templated. We do not even provide a default templating
+                engine, as the choice of templating engine is often very specific to the project and/or organization.
+                In this case expressive is setup with the <a href="http://twig.sensiolabs.org/" target="_blank">Twig template engine</a>.
+            </p>
         </div>
     </div>
 {% endblock %}
