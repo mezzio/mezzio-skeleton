@@ -9,6 +9,8 @@ return [
         'nikic/fast-route'                  => '^0.6.0',
         'ocramius/proxy-manager'            => '^1.0',
         'twig/twig'                         => '^1.21',
+        'zendframework/zend-filter'         => '^2.5',
+        'zendframework/zend-i18n'           => '^2.5',
         'zendframework/zend-mvc'            => '^2.5',
         'zendframework/zend-psr7bridge'     => '^0.1.0',
         'zendframework/zend-servicemanager' => '^2.5',
@@ -94,9 +96,19 @@ return [
             'custom-package' => true,
             'options'        => [
                 1 => [
-                    'name'     => '<comment>zendframework/zend-view @TODO</comment>',
+                    'name'     => 'zendframework/zend-view',
                     'packages' => [
                         'zendframework/zend-view',
+                        'zendframework/zend-filter',
+                        'zendframework/zend-i18n'
+                    ],
+                    'copy-files' => [
+                        '/Resources/config/zend-view-templates.php' => '/config/autoload/templates.global.php',
+                        '/Resources/templates/zend-view-404.phtml' => '/templates/error/404.phtml',
+                        '/Resources/templates/zend-view-500.phtml' => '/templates/error/500.phtml',
+                        '/Resources/templates/zend-view-error.phtml' => '/templates/error/error.phtml',
+                        '/Resources/templates/zend-view-layout.phtml' => '/templates/layout/default.phtml',
+                        '/Resources/templates/zend-view-home-page.phtml' => '/templates/app/home-page.phtml',
                     ],
                 ],
                 2 => [
