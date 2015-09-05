@@ -18,7 +18,8 @@
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "App\\": "src/App/",
+            "Zend\\": "src/Zend/"
         }
     },
     "scripts": {
