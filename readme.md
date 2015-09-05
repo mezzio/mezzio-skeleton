@@ -1,6 +1,6 @@
-# Expressive Optional Packages Installer
+# Expressive Composer Installer
 
-This is a proof of concept for installing optional composer packages based on user input. The user selected packages are saved into ``composer.json`` so everyone else working on the project have the same packages installed. Configuration files and the index.php file are prepared for first use. To not annoy users only missing answers are asked for.
+This is a proof of concept for setting up [zend-expressive](https://github.com/zendframework/zend-expressive) by choosing optional packages based on user input. The user selected packages are saved into ``composer.json`` so everyone else working on the project have the same packages installed. Configuration files and templates are prepared for first use. To not annoy users the installer is removed from ``composer.json`` after setup succeeded.
 
 ## Testing
 
