@@ -18,7 +18,7 @@ class HomePageAction extends AbstractAction
     {
         if (!$this->getContainer()->has(TemplateInterface::class)) {
             return new JsonResponse([
-                'welcome' => 'Congratulations! You have successfully installed the zend-expressive skeleton application',
+                'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application',
                 'docs' => 'https://zend-expressive.readthedocs.org/en/latest/'
             ]);
         }

@@ -75,7 +75,8 @@ return [
                     ],
                     'copy-files' => [
                         '/Resources/config/zend-servicemanager-container.php' => '/config/container.php',
-                        '/Resources/config/zend-servicemanager-dependencies.php' => '/config/autoload/dependencies.global.php',
+                        '/Resources/config/zend-servicemanager-dependencies.php' =>
+                            '/config/autoload/dependencies.global.php',
                     ],
                 ],
                 2 => [
