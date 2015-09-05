@@ -2,11 +2,11 @@
 
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
-use Zend\Config\Factory as ConfigFactory;
 
-$config = ConfigFactory::fromFiles(
-    glob('config/autoload/{{,*.}global,{,*.}local}.php', GLOB_BRACE)
-);
+$config = [];
+foreach (glob('config/autoload/{{,*.}global,{,*.}local}.php', GLOB_BRACE) as $file) {
+    $config = array_replace_recursive($config, include $file);
+}
 
 if (isset($config['strict_php'])) {
     StrictPhp\StrictPhpKernel::getInstance()->init($config['strict_php']);
