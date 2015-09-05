@@ -44,8 +44,8 @@ class TwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('path', array($this, 'renderUri')),
-            new \Twig_SimpleFunction('asset', array($this, 'renderAssetUrl')),
+            new \Twig_SimpleFunction('path', [$this, 'renderUri']),
+            new \Twig_SimpleFunction('asset', [$this, 'renderAssetUrl']),
         ];
     }
 

@@ -148,7 +148,10 @@ class OptionalPackages
         }
 
         $ask[] = ($question['custom-package'] === true)
-            ? sprintf("  Make your selection or type a composer package name and version <comment>(%s)</comment>: ", $defaultText)
+            ? sprintf(
+                "  Make your selection or type a composer package name and version <comment>(%s)</comment>: ",
+                $defaultText
+            )
             : sprintf("  Make your selection <comment>(%s)</comment>: ", $defaultText);
 
         while (true) {
@@ -201,7 +204,11 @@ class OptionalPackages
      */
     private static function addPackage(IOInterface $io, $packageName, $packageVersion)
     {
-        $io->write(sprintf("  - Adding package <info>%s</info> (<comment>%s</comment>)", $packageName, $packageVersion));
+        $io->write(sprintf(
+            "  - Adding package <info>%s</info> (<comment>%s</comment>)",
+            $packageName,
+            $packageVersion
+        ));
         self::$composerRequires[$packageName] = new Link('__root__', $packageName, null, 'requires', $packageVersion);
 
         // Save package to composer.json

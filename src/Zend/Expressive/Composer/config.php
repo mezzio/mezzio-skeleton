@@ -21,9 +21,12 @@ return [
         'router' => [
             'question'               => 'Which router you want to use?',
             'default'                => 1,
-            'required'               => true, // TRUE: Must choose one / FALSE: May choose one or none of the above
-            'custom-package'         => true, // Enable custom package input
-            'custom-package-warning' => 'You need to write your own router adapter.', // Display warning when choosing a custom package
+            // TRUE: Must choose one / FALSE: May choose one or none of the above
+            'required'               => true,
+            // Enable custom package input
+            'custom-package'         => true,
+            // Display warning when choosing a custom package
+            'custom-package-warning' => 'You need to write your own router adapter.',
             'options'                => [
                 1 => [
                     'name'     => 'aura/router',
@@ -31,7 +34,8 @@ return [
                         'aura/router',
                     ],
                     'copy-files' => [
-                        '/Resources/config/aura-router-routes.php' => '/config/autoload/router.global.php', // Copy source file to target
+                        // Copy source file to target: '<source>' => '<target>'
+                        '/Resources/config/aura-router-routes.php' => '/config/autoload/router.global.php',
                     ],
                 ],
                 2 => [
