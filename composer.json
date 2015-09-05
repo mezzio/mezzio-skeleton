@@ -14,7 +14,8 @@
         "zendframework/zend-expressive": "^0.2"
     },
     "require-dev": {
-        "composer/composer": "1.0.0-alpha10"
+        "composer/composer": "1.0.0-alpha10",
+        "squizlabs/php_codesniffer": "^2.3"
     },
     "autoload": {
         "psr-4": {
