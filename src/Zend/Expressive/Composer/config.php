@@ -85,7 +85,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'Aura.Di',
+                    'name'     => 'aura/di',
                     'packages' => [
                         'aura/di',
                     ],
