@@ -75,21 +75,24 @@ return [
                     ],
                     'copy-files' => [
                         '/Resources/config/zend-servicemanager-container.php' => '/config/container.php',
-                        '/Resources/config/zend-servicemanager-dependencies.php' =>
-                            '/config/autoload/dependencies.global.php',
+                        '/Resources/config/container-dependencies.php' => '/config/autoload/dependencies.global.php',
                     ],
                 ],
                 2 => [
                     'name'     => '<comment>mouf/pimple-interop @TODO</comment>',
                     'packages' => [
                         'mouf/pimple-interop',
-                    ]
+                    ],
                 ],
                 3 => [
-                    'name'     => '<comment>Aura.Di @TODO</comment>',
+                    'name'     => 'Aura.Di',
                     'packages' => [
                         'aura/di',
-                    ]
+                    ],
+                    'copy-files' => [
+                        '/Resources/config/aura-di-container.php' => '/config/container.php',
+                        '/Resources/config/container-dependencies.php' => '/config/autoload/dependencies.global.php',
+                    ],
                 ],
             ],
         ],
