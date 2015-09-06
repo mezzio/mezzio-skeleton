@@ -2,17 +2,17 @@
 
 return [
     'packages' => [
-        'aura/di'                           => '3.0.*@beta',
+        'aura/di'                           => '^3.0@beta',
         'aura/router'                       => '^2.3',
         'league/plates'                     => '^3.1',
         'mouf/pimple-interop'               => '^1.0',
-        'nikic/fast-route'                  => '^0.6.0',
+        'nikic/fast-route'                  => '^0.6',
         'ocramius/proxy-manager'            => '^1.0',
         'twig/twig'                         => '^1.21',
         'zendframework/zend-filter'         => '^2.5',
         'zendframework/zend-i18n'           => '^2.5',
         'zendframework/zend-mvc'            => '^2.5',
-        'zendframework/zend-psr7bridge'     => '^0.1.0',
+        'zendframework/zend-psr7bridge'     => '^0.1',
         'zendframework/zend-servicemanager' => '^2.5',
         'zendframework/zend-view'           => '^2.5',
     ],
