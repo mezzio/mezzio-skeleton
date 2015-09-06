@@ -79,9 +79,13 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => '<comment>mouf/pimple-interop @TODO</comment>',
+                    'name'     => 'mouf/pimple-interop',
                     'packages' => [
                         'mouf/pimple-interop',
+                    ],
+                    'copy-files' => [
+                        '/Resources/config/pimple-interop-container.php' => '/config/container.php',
+                        '/Resources/config/container-dependencies.php' => '/config/autoload/dependencies.global.php',
                     ],
                 ],
                 3 => [
