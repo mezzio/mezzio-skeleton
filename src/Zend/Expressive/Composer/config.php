@@ -108,7 +108,8 @@ return [
                     'packages' => [
                         'zendframework/zend-view',
                         'zendframework/zend-filter',
-                        'zendframework/zend-i18n'
+                        'zendframework/zend-i18n',
+                        'zendframework/zend-servicemanager'
                     ],
                     'copy-files' => [
                         '/Resources/config/zend-view-templates.php' => '/config/autoload/templates.global.php',
