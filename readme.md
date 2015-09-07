@@ -6,8 +6,7 @@ This is a proof of concept for setting up [zend-expressive](https://github.com/z
 
 ## Known Issues
 
-- When choosing Aura.DI the 2.x branch is installed. Run ``composer update`` to update to the 3.x branch.
-- Zend View depends on Zend Servicemanager, so it will install regardless what container you choose when installing Zend View.     
+- Not all zend-view plugins are hooked up yet.     
 
 ## Testing
 
@@ -16,7 +15,3 @@ This is a proof of concept for setting up [zend-expressive](https://github.com/z
 3. The chosen packages and dependencies should install and the other one should uninstall, if there are any.
 4. CD to ``<project-path>`` and run ``php -S localhost:8000 -t public/``.
 5. Open you browser at ``http://localhost:8000`` and there should be a default home page.
-
-## Development
-
-If you want to submit a pull request, make sure you **commit the original composer.json** and not the one updated by the installer!!!
