@@ -8,7 +8,9 @@ use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Composer\Package\AliasPackage;
 use Composer\Package\Link;
+use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
+use Composer\Package\BasePackage;
 
 /**
  * Composer installer script
@@ -31,6 +33,8 @@ class OptionalPackages
     private static $composerDefinition;
 
     private static $composerRequires;
+
+    private static $stabilityFlags;
 
     /**
      * @param Event $event
@@ -57,6 +61,9 @@ class OptionalPackages
 
         // Get required packages
         self::$composerRequires = $rootPackage->getRequires();
+
+        // Get stability flags
+        self::$stabilityFlags = $rootPackage->getStabilityFlags();
 
         $config = require __DIR__ . '/config.php';
 
@@ -99,6 +106,9 @@ class OptionalPackages
 
         // Set required packages
         $rootPackage->setRequires(self::$composerRequires);
+
+        // Set stability flags
+        $rootPackage->setStabilityFlags(self::$stabilityFlags);
 
         // House keeping
         $io->write("<info>Remove installer</info>");
@@ -213,6 +223,22 @@ class OptionalPackages
 
         // Save package to composer.json
         self::$composerDefinition['require'][$packageName] = $packageVersion;
+
+        // Set package stability if needed
+        switch (VersionParser::parseStability($packageVersion)) {
+            case 'dev':
+                self::$stabilityFlags[$packageName] = BasePackage::STABILITY_DEV;
+                break;
+            case 'alpha':
+                self::$stabilityFlags[$packageName] = BasePackage::STABILITY_ALPHA;
+                break;
+            case 'beta':
+                self::$stabilityFlags[$packageName] = BasePackage::STABILITY_BETA;
+                break;
+            case 'RC':
+                self::$stabilityFlags[$packageName] = BasePackage::STABILITY_RC;
+                break;
+        }
     }
 
     private static function copyFile(IOInterface $io, $projectRoot, $source, $target, $force = false)
