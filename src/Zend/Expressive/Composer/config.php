@@ -8,6 +8,7 @@ return [
         'mouf/pimple-interop'               => '^1.0',
         'nikic/fast-route'                  => '^0.6.0',
         'ocramius/proxy-manager'            => '^1.0',
+        'pimple/pimple'                     => '^3.0',
         'twig/twig'                         => '^1.21',
         'zendframework/zend-filter'         => '^2.5',
         'zendframework/zend-i18n'           => '^2.5',
@@ -79,7 +80,7 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => 'mouf/pimple-interop',
+                    'name'     => 'mouf/pimple-interop <comment>Pimple 1.x</comment>',
                     'packages' => [
                         'mouf/pimple-interop',
                     ],
@@ -89,6 +90,16 @@ return [
                     ],
                 ],
                 3 => [
+                    'name'     => 'pimple/pimple <comment>Pimple 3.x</comment>',
+                    'packages' => [
+                        'pimple/pimple',
+                    ],
+                    'copy-files' => [
+                        '/Resources/config/pimple-container.php' => '/config/container.php',
+                        '/Resources/config/container-dependencies.php' => '/config/autoload/dependencies.global.php',
+                    ],
+                ],
+                4 => [
                     'name'     => 'aura/di',
                     'packages' => [
                         'aura/di',
