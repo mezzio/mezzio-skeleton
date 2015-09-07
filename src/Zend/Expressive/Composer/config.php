@@ -30,7 +30,7 @@ return [
             'custom-package-warning' => 'You need to write your own router adapter.',
             'options'                => [
                 1 => [
-                    'name'     => 'aura/router',
+                    'name'     => 'Aura.Router',
                     'packages' => [
                         'aura/router',
                     ],
@@ -40,7 +40,7 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => 'nikic/fast-route',
+                    'name'     => 'FastRoute',
                     'packages' => [
                         'nikic/fast-route',
                     ],
@@ -69,7 +69,7 @@ return [
             'custom-package-warning' => 'You need to edit public/index.php to start the custom container.',
             'options'                => [
                 1 => [
-                    'name'     => 'zendframework/zend-servicemanager',
+                    'name'     => 'zend-servicemanager',
                     'packages' => [
                         'zendframework/zend-servicemanager',
                         'ocramius/proxy-manager',
@@ -80,7 +80,7 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => 'mouf/pimple-interop <comment>Pimple 1.x</comment>',
+                    'name'     => 'Pimple-interop <comment>Pimple 1.x</comment>',
                     'packages' => [
                         'mouf/pimple-interop',
                     ],
@@ -90,7 +90,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'pimple/pimple <comment>Pimple 3.x</comment>',
+                    'name'     => 'Pimple <comment>Pimple 3.x / Needs testing!</comment>',
                     'packages' => [
                         'pimple/pimple',
                     ],
@@ -100,7 +100,7 @@ return [
                     ],
                 ],
                 4 => [
-                    'name'     => 'aura/di',
+                    'name'     => 'Aura.Di',
                     'packages' => [
                         'aura/di',
                     ],
@@ -119,7 +119,7 @@ return [
             'custom-package' => true,
             'options'        => [
                 1 => [
-                    'name'     => 'zendframework/zend-view',
+                    'name'     => 'zend-view <comment>installs zend-servicemanager</comment>',
                     'packages' => [
                         'zendframework/zend-view',
                         'zendframework/zend-filter',
@@ -136,7 +136,7 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => 'league/plates',
+                    'name'     => 'Plates',
                     'packages' => [
                         'league/plates',
                     ],
@@ -150,7 +150,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'twig/twig',
+                    'name'     => 'Twig',
                     'packages' => [
                         'twig/twig',
                     ],
