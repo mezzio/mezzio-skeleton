@@ -51,8 +51,6 @@ class HomePageAction
             return new JsonResponse([
                 'welcome'  => 'Congratulations! You have installed the zend-expressive skeleton application.',
                 'docs'     => 'https://zend-expressive.readthedocs.org/en/latest/',
-                'router'   => sprintf('You installed %s', $data['routerName']),
-                'template' => sprintf('You installed %s template engine.', $data['templateName'])
             ]);
         }
 
