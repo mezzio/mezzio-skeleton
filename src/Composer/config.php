@@ -4,6 +4,7 @@ return [
     'packages' => [
         'aura/di'                           => '3.0.*@beta',
         'aura/router'                       => '^2.3',
+        'filp/whoops'                       => '^1.1',
         'league/plates'                     => '^3.1',
         'mouf/pimple-interop'               => '^1.0',
         'nikic/fast-route'                  => '^0.6.0',
@@ -163,6 +164,24 @@ return [
                         '/Resources/templates/zend-view-error.phtml' => '/templates/error/error.phtml',
                         '/Resources/templates/zend-view-layout.phtml' => '/templates/layout/default.phtml',
                         '/Resources/templates/zend-view-home-page.phtml' => '/templates/app/home-page.phtml',
+                    ],
+                ],
+            ],
+        ],
+
+        'error-handler' => [
+            'question'       => 'Which error handler do you want to use during development?',
+            'default'        => 1,
+            'required'       => false,
+            'custom-package' => true,
+            'options'        => [
+                1 => [
+                    'name'     => 'Whoops',
+                    'packages' => [
+                        'filp/whoops',
+                    ],
+                    'copy-files' => [
+                        '/Resources/config/whoops-error-handler.local.php' => '/config/autoload/errorhandler.local.php',
                     ],
                 ],
             ],
