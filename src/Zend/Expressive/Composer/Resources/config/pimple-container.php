@@ -1,7 +1,6 @@
 <?php
 
-use App\Container\PimpleContainer as Container;
-use Zend\Config\Config;
+use App\Container\PimpleContainer;
 
 // Load configuration
 $config = [];
@@ -10,7 +9,7 @@ foreach (glob('config/autoload/{{,*.}global,{,*.}local}.php', GLOB_BRACE) as $fi
 }
 
 // Build container
-$container = new Container();
+$container = new PimpleContainer();
 
 // Inject config as a service
 $container['config'] = $config;

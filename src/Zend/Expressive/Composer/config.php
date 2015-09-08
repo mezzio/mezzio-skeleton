@@ -10,6 +10,7 @@ return [
         'ocramius/proxy-manager'            => '^1.0',
         'pimple/pimple'                     => '^3.0',
         'twig/twig'                         => '^1.21',
+        'zendframework/zend-config'         => '^2.5',
         'zendframework/zend-filter'         => '^2.5',
         'zendframework/zend-i18n'           => '^2.5',
         'zendframework/zend-mvc'            => '^2.5',
@@ -72,6 +73,7 @@ return [
                     'name'     => 'Aura.Di',
                     'packages' => [
                         'aura/di',
+                        'zendframework/zend-config',
                     ],
                     'copy-files' => [
                         '/Resources/config/aura-di-container.php' => '/config/container.php',

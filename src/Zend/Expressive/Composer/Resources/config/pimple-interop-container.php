@@ -1,7 +1,6 @@
 <?php
 
-use Interop\Container\Pimple\PimpleInterop as Container;
-use Zend\Config\Config;
+use Interop\Container\Pimple\PimpleInterop;
 
 // Load configuration
 $config = [];
@@ -10,7 +9,7 @@ foreach (glob('config/autoload/{{,*.}global,{,*.}local}.php', GLOB_BRACE) as $fi
 }
 
 // Build container
-$container = new Container();
+$container = new PimpleInterop();
 
 // Inject config as a service
 $container['config'] = $config;
