@@ -20,6 +20,10 @@ return [
         'zendframework/zend-view'           => '^2.5',
     ],
 
+    'require-dev' [
+        'filp/whoops'
+    ],
+
     'questions' => [
         'router' => [
             'question'               => 'Which router you want to use?',

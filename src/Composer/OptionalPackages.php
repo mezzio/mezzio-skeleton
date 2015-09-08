@@ -30,9 +30,13 @@ class OptionalPackages
 {
     const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
+    private static $config;
+
     private static $composerDefinition;
 
     private static $composerRequires;
+
+    private static $composerDevRequires;
 
     private static $stabilityFlags;
 
@@ -61,13 +65,14 @@ class OptionalPackages
 
         // Get required packages
         self::$composerRequires = $rootPackage->getRequires();
+        self::$composerDevRequires = $rootPackage->getDevRequires();
 
         // Get stability flags
         self::$stabilityFlags = $rootPackage->getStabilityFlags();
 
-        $config = require __DIR__ . '/config.php';
+        self::$config = require __DIR__ . '/config.php';
 
-        foreach ($config['questions'] as $questionName => $question) {
+        foreach (self::$config['questions'] as $questionName => $question) {
             $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
             if (isset(self::$composerDefinition['extra']['optional-packages'][$questionName])) {
                 // Skip question, it's already answered
@@ -84,7 +89,7 @@ class OptionalPackages
                 // Add packages to install
                 if (isset($question['options'][$answer]['packages'])) {
                     foreach ($question['options'][$answer]['packages'] as $packageName) {
-                        self::addPackage($io, $packageName, $config['packages'][$packageName]);
+                        self::addPackage($io, $packageName, self::$config['packages'][$packageName]);
                     }
                 }
                 // Copy files
@@ -106,6 +111,7 @@ class OptionalPackages
 
         // Set required packages
         $rootPackage->setRequires(self::$composerRequires);
+        $rootPackage->setDevRequires(self::$composerDevRequires);
 
         // Set stability flags
         $rootPackage->setStabilityFlags(self::$stabilityFlags);
@@ -219,10 +225,24 @@ class OptionalPackages
             $packageName,
             $packageVersion
         ));
-        self::$composerRequires[$packageName] = new Link('__root__', $packageName, null, 'requires', $packageVersion);
 
-        // Save package to composer.json
-        self::$composerDefinition['require'][$packageName] = $packageVersion;
+        // Create package link
+        $link = new Link('__root__', $packageName, null, 'requires', $packageVersion);
+
+        // Add package to the root package and composer.json requirements
+        if (in_array($packageName, self::$config['require-dev'])) {
+            unset(self::$composerDefinition['require'][$packageName]);
+            unset(self::$composerRequires[$packageName]);
+
+            self::$composerDefinition['require-dev'][$packageName] = $packageVersion;
+            self::$composerDevRequires[$packageName] = $link;
+        } else {
+            unset(self::$composerDefinition['require-dev'][$packageName]);
+            unset(self::$composerDevRequires[$packageName]);
+
+            self::$composerDefinition['require'][$packageName] = $packageVersion;
+            self::$composerRequires[$packageName] = $link;
+        }
 
         // Set package stability if needed
         switch (VersionParser::parseStability($packageVersion)) {
