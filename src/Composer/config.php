@@ -20,7 +20,7 @@ return [
         'zendframework/zend-view'           => '^2.5',
     ],
 
-    'require-dev' [
+    'require-dev' => [
         'filp/whoops'
     ],
 
