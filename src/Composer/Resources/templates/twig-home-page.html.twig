@@ -72,29 +72,42 @@
 
         <div class="col-md-4">
             <h2>
-                <a href="{{ routerDocsUrl }}" target="_blank">
-                    <i class="fa fa-plane"></i> {{ routerName }}
+                <a href="https://zend-expressive.readthedocs.org/en/latest/router/intro/" target="_blank">
+                    <i class="fa fa-plane"></i> Routers
                 </a>
             </h2>
             <p>
                 One fundamental feature of zend-expressive is that it provides mechanisms for implementing dynamic
                 routing, a feature required in most modern web applications. Expressive ships with multiple adapters.
-                Learn more about <a href="{{ routerExtUrl }}" target="_blank">{{ routerName }}</a>.
             </p>
+            {% if routerName is defined %}
+                <p>
+                    <a href="{{ routerDocs }}" target="_blank">
+                        Get started with {{ routerName }}.
+                    </a>
+                </p>
+            {% endif %}
         </div>
 
         <div class="col-md-4">
             <h2>
                 <a href="https://zend-expressive.readthedocs.org/en/latest/template/twig/" target="_blank">
-                    <i class="fa fa-files-o"></i> Twig Template Engine
+                    <i class="fa fa-files-o"></i> Templating
                 </a>
             </h2>
             <p>
-                Twig is a modern template engine for PHP. It compiles templates down to plain optimized PHP code. It
-                has a secure sandbox mode to evaluate untrusted template code. And it is powered by a flexible lexer
-                and parser which allows the developer to define its own custom tags and filters.
-                Learn more about <a href="http://twig.sensiolabs.org/" target="_blank">Twig</a>.
+                By default, no middleware in Expressive is templated. We do not even provide a default templating
+                engine, as the choice of templating engine is often very specific to the project and/or organization.
+                However, Expressive does provide abstraction for templating, which allows you to write middleware that
+                is engine-agnostic.
             </p>
+            {% if templateName is defined %}
+                <p>
+                    <a href="{{ templateDocs }}" target="_blank">
+                        Get started with {{ templateName }}.
+                    </a>
+                </p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -69,27 +69,41 @@
 
     <div class="col-md-4">
         <h2>
-            <a href="<?php echo $this->routerDocsUrl ?>" target="_blank">
-                <i class="fa fa-plane"></i> <?php echo $this->routerName ?>
+            <a href="https://zend-expressive.readthedocs.org/en/latest/router/intro/" target="_blank">
+                <i class="fa fa-plane"></i> Routers
             </a>
         </h2>
         <p>
             One fundamental feature of zend-expressive is that it provides mechanisms for implementing dynamic
             routing, a feature required in most modern web applications. Expressive ships with multiple adapters.
-            Learn more about <a href="<?php echo $this->routerExtUrl ?>" target="_blank"><?php echo $this->routerName ?></a>.
         </p>
+        <?php if (isset($this->routerName)) : ?>
+            <p>
+                <a href="<?php echo $this->routerDocs ?>" target="_blank">
+                    Get started with <?php echo $this->routerName ?>.
+                </a>
+            </p>
+        <?php endif; ?>
     </div>
 
     <div class="col-md-4">
         <h2>
-            <a href="https://zend-expressive.readthedocs.org/en/latest/template/zend-view/" target="_blank">
-                <i class="fa fa-files-o"></i> Zend\View
+            <a href="https://zend-expressive.readthedocs.org/en/latest/template/twig/" target="_blank">
+                <i class="fa fa-files-o"></i> Templating
             </a>
         </h2>
         <p>
-            Zend\View provides the View layer of Zend Framework 2's MVC system. It is a multi-tiered system
-            allowing a variety of mechanisms for extension, substitution, and more.
-            Learn more about <a href="http://framework.zend.com/manual/current/en/modules/zend.view.quick-start.html" target="_blank">zend-view</a>.
+            By default, no middleware in Expressive is templated. We do not even provide a default templating
+            engine, as the choice of templating engine is often very specific to the project and/or organization.
+            However, Expressive does provide abstraction for templating, which allows you to write middleware that
+            is engine-agnostic.
         </p>
+        <?php if (isset($this->templateName)) : ?>
+            <p>
+                <a href="<?php echo $this->templateDocs ?>" target="_blank">
+                    Get started with <?php echo $this->templateName ?>.
+                </a>
+            </p>
+        <?php endif; ?>
     </div>
 </div>

@@ -69,28 +69,41 @@
 
     <div class="col-md-4">
         <h2>
-            <a href="<?=$this->e($routerDocsUrl)?>" target="_blank">
-                <i class="fa fa-plane"></i> <?=$this->e($routerName)?>
+            <a href="https://zend-expressive.readthedocs.org/en/latest/router/intro/" target="_blank">
+                <i class="fa fa-plane"></i> Routers
             </a>
         </h2>
         <p>
             One fundamental feature of zend-expressive is that it provides mechanisms for implementing dynamic
             routing, a feature required in most modern web applications. Expressive ships with multiple adapters.
-            Learn more about <a href="<?=$this->e($routerExtUrl)?>" target="_blank"><?=$this->e($routerName)?></a>.
         </p>
+        <?php if (isset($routerName)) : ?>
+            <p>
+                <a href="<?=$this->e($routerDocs)?>" target="_blank">
+                    Get started with <?=$this->e($routerName)?>.
+                </a>
+            </p>
+        <?php endif; ?>
     </div>
 
     <div class="col-md-4">
         <h2>
-            <a href="https://zend-expressive.readthedocs.org/en/latest/template/plates/" target="_blank">
-                <i class="fa fa-files-o"></i> Plates Template Engine
+            <a href="https://zend-expressive.readthedocs.org/en/latest/template/twig/" target="_blank">
+                <i class="fa fa-files-o"></i> Templating
             </a>
         </h2>
         <p>
-            Plates is a native PHP template system that's fast and easy to use and extend. It strives to bring modern
-            template language functionality to native PHP templates. Plates is designed for developers who prefer to
-            use native PHP templates over compiled template languages, such as Twig or Smarty.
-            Learn more about <a href="http://platesphp.com/" target="_blank">Plates</a>.
+            By default, no middleware in Expressive is templated. We do not even provide a default templating
+            engine, as the choice of templating engine is often very specific to the project and/or organization.
+            However, Expressive does provide abstraction for templating, which allows you to write middleware that
+            is engine-agnostic.
         </p>
+        <?php if (isset($templateName)) : ?>
+            <p>
+                <a href="<?=$this->e($templateDocs)?>" target="_blank">
+                    Get started with <?=$this->e($templateName)?>.
+                </a>
+            </p>
+        <?php endif; ?>
     </div>
 </div>
