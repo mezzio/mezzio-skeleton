@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Expressive\Composer;
+namespace App\Composer;
 
 use Composer\Composer;
 use Composer\Factory;
