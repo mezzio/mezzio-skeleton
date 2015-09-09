@@ -176,7 +176,7 @@ return [
                         'filp/whoops',
                     ],
                     'copy-files' => [
-                        '/Resources/config/error-handler.whoops.php' => '/config/autoload/errorhandler.local.php',
+                        '/Resources/config/error-handler-whoops.php' => '/config/autoload/errorhandler.local.php',
                     ],
                 ],
             ],
