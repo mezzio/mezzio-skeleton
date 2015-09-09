@@ -20,6 +20,7 @@ $config = Factory::fromFiles(
 // Cache config if in production
 if ($env === 'production') {
     $writer = new PhpArray();
+    $writer->setUseBracketArraySyntax(true);
     $writer->toFile($cachedConfigFile, $config);
 }
 
