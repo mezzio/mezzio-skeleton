@@ -16,7 +16,7 @@ setup succeeded.
 ## Known Issues
 
 - Not all zend-view plugins are hooked up yet.     
-- Whoops error handler does not display anything on errors. This is fixed with zendframework/zend-expressive#125.
+- Whoops error handler does not display anything on errors. This will be fixed with [zendframework/zend-expressive#125](https://github.com/zendframework/zend-expressive/pull/125).
 
 ## Testing
 
