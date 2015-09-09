@@ -1,20 +1,16 @@
 <?php
 
 use Aura\Di\ContainerBuilder;
-use Zend\Config\Config;
 
 // Load configuration
-$config = [];
-foreach (glob('config/autoload/{{,*.}global,{,*.}local}.php', GLOB_BRACE) as $file) {
-    $config = array_replace_recursive($config, include $file);
-}
+$config = require 'config.php';
 
 // Build container
 $builder = new ContainerBuilder();
 $container = $builder->newInstance();
 
-// Inject config as a service
-$container->set('config', new Config($config));
+// Inject config
+$container->set('config', $config);
 
 // Inject factories
 foreach ($config['dependencies']['factories'] as $name => $object) {

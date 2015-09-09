@@ -3,15 +3,12 @@
 use Interop\Container\Pimple\PimpleInterop;
 
 // Load configuration
-$config = [];
-foreach (glob('config/autoload/{{,*.}global,{,*.}local}.php', GLOB_BRACE) as $file) {
-    $config = array_replace_recursive($config, include $file);
-}
+$config = require 'config.php';
 
 // Build container
 $container = new PimpleInterop();
 
-// Inject config as a service
+// Inject config
 $container['config'] = $config;
 
 // Inject factories

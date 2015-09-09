@@ -11,7 +11,6 @@ return [
         'ocramius/proxy-manager'            => '^1.0',
         'pimple/pimple'                     => '^3.0',
         'twig/twig'                         => '^1.21',
-        'zendframework/zend-config'         => '^2.5',
         'zendframework/zend-filter'         => '^2.5',
         'zendframework/zend-i18n'           => '^2.5',
         'zendframework/zend-mvc'            => '^2.5',
@@ -42,7 +41,7 @@ return [
                     ],
                     'copy-files' => [
                         // Copy source file to target: '<source>' => '<target>'
-                        '/Resources/config/aura-router-routes.php' => '/config/autoload/router.global.php',
+                        '/Resources/config/routes-aura-router.php' => '/config/autoload/routes.global.php',
                     ],
                 ],
                 2 => [
@@ -51,7 +50,7 @@ return [
                         'nikic/fast-route',
                     ],
                     'copy-files' => [
-                        '/Resources/config/fast-route-routes.php' => '/config/autoload/router.global.php',
+                        '/Resources/config/routes-fast-route.php' => '/config/autoload/routes.global.php',
                     ],
                 ],
                 3 => [
@@ -61,7 +60,7 @@ return [
                         'zendframework/zend-psr7bridge',
                     ],
                     'copy-files' => [
-                        '/Resources/config/zf2-router-routes.php' => '/config/autoload/router.global.php',
+                        '/Resources/config/routes-zf2-router.php' => '/config/autoload/routes.global.php',
                     ],
                 ],
             ],
@@ -78,11 +77,9 @@ return [
                     'name'     => 'Aura.Di',
                     'packages' => [
                         'aura/di',
-                        'zendframework/zend-config',
                     ],
                     'copy-files' => [
-                        '/Resources/config/aura-di-container.php' => '/config/container.php',
-                        '/Resources/config/container-dependencies.php' => '/config/autoload/dependencies.global.php',
+                        '/Resources/config/container-aura-di.php' => '/config/container.php',
                     ],
                 ],
                 2 => [
@@ -91,8 +88,7 @@ return [
                         'pimple/pimple',
                     ],
                     'copy-files' => [
-                        '/Resources/config/pimple-container.php' => '/config/container.php',
-                        '/Resources/config/container-dependencies.php' => '/config/autoload/dependencies.global.php',
+                        '/Resources/config/container-pimple.php' => '/config/container.php',
                     ],
                 ],
                 3 => [
@@ -101,8 +97,7 @@ return [
                         'mouf/pimple-interop',
                     ],
                     'copy-files' => [
-                        '/Resources/config/pimple-interop-container.php' => '/config/container.php',
-                        '/Resources/config/container-dependencies.php' => '/config/autoload/dependencies.global.php',
+                        '/Resources/config/container-pimple-interop.php' => '/config/container.php',
                     ],
                 ],
                 4 => [
@@ -112,8 +107,7 @@ return [
                         'ocramius/proxy-manager',
                     ],
                     'copy-files' => [
-                        '/Resources/config/zend-servicemanager-container.php' => '/config/container.php',
-                        '/Resources/config/container-dependencies.php' => '/config/autoload/dependencies.global.php',
+                        '/Resources/config/container-zend-servicemanager.php' => '/config/container.php',
                     ],
                 ],
             ],
@@ -131,10 +125,9 @@ return [
                         'league/plates',
                     ],
                     'copy-files' => [
-                        '/Resources/config/plates-templates.php' => '/config/autoload/templates.global.php',
+                        '/Resources/config/templates-plates.php' => '/config/autoload/templates.global.php',
                         '/Resources/templates/plates-404.phtml' => '/templates/error/404.phtml',
                         '/Resources/templates/plates-500.phtml' => '/templates/error/500.phtml',
-                        '/Resources/templates/plates-error.phtml' => '/templates/error/error.phtml',
                         '/Resources/templates/plates-layout.phtml' => '/templates/layout/default.phtml',
                         '/Resources/templates/plates-home-page.phtml' => '/templates/app/home-page.phtml',
                     ],
@@ -145,10 +138,9 @@ return [
                         'twig/twig',
                     ],
                     'copy-files' => [
-                        '/Resources/config/twig-templates.php' => '/config/autoload/templates.global.php',
+                        '/Resources/config/templates-twig.php' => '/config/autoload/templates.global.php',
                         '/Resources/templates/twig-404.html.twig' => '/templates/error/404.html.twig',
                         '/Resources/templates/twig-500.html.twig' => '/templates/error/500.html.twig',
-                        '/Resources/templates/twig-error.html.twig' => '/templates/error/error.html.twig',
                         '/Resources/templates/twig-layout.html.twig' => '/templates/layout/default.html.twig',
                         '/Resources/templates/twig-home-page.html.twig' => '/templates/app/home-page.html.twig',
                     ],
@@ -162,10 +154,9 @@ return [
                         'zendframework/zend-servicemanager',
                     ],
                     'copy-files' => [
-                        '/Resources/config/zend-view-templates.php' => '/config/autoload/templates.global.php',
+                        '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
                         '/Resources/templates/zend-view-404.phtml' => '/templates/error/404.phtml',
                         '/Resources/templates/zend-view-500.phtml' => '/templates/error/500.phtml',
-                        '/Resources/templates/zend-view-error.phtml' => '/templates/error/error.phtml',
                         '/Resources/templates/zend-view-layout.phtml' => '/templates/layout/default.phtml',
                         '/Resources/templates/zend-view-home-page.phtml' => '/templates/app/home-page.phtml',
                     ],
@@ -185,7 +176,7 @@ return [
                         'filp/whoops',
                     ],
                     'copy-files' => [
-                        '/Resources/config/whoops-error-handler.local.php' => '/config/autoload/errorhandler.local.php',
+                        '/Resources/config/error-handler.whoops.php' => '/config/autoload/errorhandler.local.php',
                     ],
                 ],
             ],
