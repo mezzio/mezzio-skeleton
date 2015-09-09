@@ -49,8 +49,8 @@ class HomePageAction
 
         if (!$this->template) {
             return new JsonResponse([
-                'welcome'  => 'Congratulations! You have installed the zend-expressive skeleton application.',
-                'docs'     => 'https://zend-expressive.readthedocs.org/en/latest/',
+                'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
+                'docsUrl' => 'zend-expressive.readthedocs.org',
             ]);
         }
 
