@@ -55,10 +55,10 @@ class OptionalPackages
 
         $projectRoot = realpath(dirname($composerFile));
 
-        $io->write("<info>Creating cache dir</info>");
-        $cacheDir = dirname($projectRoot . '/data/cache');
-        if (! is_dir($cacheDir)) {
-            mkdir($cacheDir, 0775, true);
+        $io->write("<info>Setup data and cache dir</info>");
+        chmod($projectRoot . '/data/cache', 0775);
+        if (! is_dir($projectRoot . '/data/cache')) {
+            mkdir($projectRoot . '/data/cache', 0775, true);
         }
 
         $io->write("<info>Setting up optional packages</info>");
