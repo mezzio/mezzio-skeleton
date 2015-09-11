@@ -14,9 +14,9 @@ return [
     'templates' => [
         'extension' => 'phtml',
         'paths' => [
-            'templates/app' => 'app',
-            'templates/layout' => 'layout',
-            'templates/error' => 'error',
+            'app'    => 'templates/app',
+            'layout' => 'templates/layout',
+            'error'  => 'templates/error',
         ]
     ]
 ];

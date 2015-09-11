@@ -19,9 +19,9 @@ return [
             'error/404'      => 'templates/error/404.phtml',
         ],
         'paths' => [
-            'templates/app'    => 'app',
-            'templates/layout' => 'layout',
-            'templates/error'  => 'error',
+            'app'    => 'templates/app',
+            'layout' => 'templates/layout',
+            'error'  => 'templates/error',
         ]
     ]
 ];
