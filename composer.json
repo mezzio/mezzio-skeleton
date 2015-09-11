@@ -21,6 +21,7 @@
         "zendframework/zend-config": "^2.5"
     },
     "require-dev": {
+        "composer/composer": "1.0.0-alpha10",
         "phpunit/phpunit": "^4.8",
         "squizlabs/php_codesniffer": "^2.3"
     },
@@ -35,8 +36,8 @@
         }
     },
     "scripts": {
-        "pre-install-cmd": "App\\Composer\\OptionalPackages::install",
-        "pre-update-cmd": "App\\Composer\\OptionalPackages::install",
+        "-pre-install-cmd": "App\\Composer\\OptionalPackages::install",
+        "-pre-update-cmd": "App\\Composer\\OptionalPackages::install",
         "test": [
             "php vendor/squizlabs/php_codesniffer/scripts/phpcs",
             "php vendor/phpunit/phpunit/phpunit"

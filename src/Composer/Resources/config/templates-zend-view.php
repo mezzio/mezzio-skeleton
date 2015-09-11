@@ -3,14 +3,16 @@
 return [
     'dependencies' => [
         'factories' => [
-            'Zend\Expressive\FinalHandler' => Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
-            Zend\Expressive\Template\TemplateInterface::class => App\Template\ZendViewFactory::class,
+            'Zend\Expressive\FinalHandler' =>
+                Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
+
+            Zend\Expressive\Template\TemplateInterface::class =>
+                Zend\Expressive\Container\Template\ZendViewFactory::class,
         ],
     ],
 
     'templates' => [
-        'cache_dir'       => 'data/cache/zend-view',
-        'extension'       => 'php',
+        //'layout' => 'name of layout view to use, if any',
         'map' => [
             'layout/default' => 'templates/layout/default.phtml',
             'error/error'    => 'templates/error/error.phtml',
