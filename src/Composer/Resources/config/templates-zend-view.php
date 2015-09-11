@@ -12,7 +12,7 @@ return [
     ],
 
     'templates' => [
-        //'layout' => 'name of layout view to use, if any',
+        'layout' => 'layout/default',
         'map' => [
             'layout/default' => 'templates/layout/default.phtml',
             'error/error'    => 'templates/error/error.phtml',
