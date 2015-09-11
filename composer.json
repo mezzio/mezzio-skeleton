@@ -36,8 +36,8 @@
         }
     },
     "scripts": {
-        "-pre-install-cmd": "App\\Composer\\OptionalPackages::install",
-        "-pre-update-cmd": "App\\Composer\\OptionalPackages::install",
+        "pre-install-cmd": "App\\Composer\\OptionalPackages::install",
+        "pre-update-cmd": "App\\Composer\\OptionalPackages::install",
         "test": [
             "php vendor/squizlabs/php_codesniffer/scripts/phpcs",
             "php vendor/phpunit/phpunit/phpunit"
