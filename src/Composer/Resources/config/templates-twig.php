@@ -17,9 +17,9 @@ return [
         'assets_version' => null,
         'extension' => 'html.twig',
         'paths' => [
-            'app'    => 'templates/app',
-            'layout' => 'templates/layout',
-            'error'  => 'templates/error',
+            'app'    => ['templates/app'],
+            'layout' => ['templates/layout'],
+            'error'  => ['templates/error'],
         ]
     ]
 ];
