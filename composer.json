@@ -9,6 +9,17 @@
             "homepage": "https://xtreamwayz.github.io/"
         }
     ],
+    "repositories": [{
+        "type": "package",
+        "package": {
+            "name": "zendframework/zend-expressive",
+            "version": "0.2.5",
+            "dist": {
+                "type": "vcs",
+                "url": "https://github.com/weierophinney/zend-expressive/tree/feature/template-factories"
+            }
+        }
+    }],
     "require": {
         "roave/security-advisories": "dev-master",
         "zendframework/zend-expressive": "^0.2",
