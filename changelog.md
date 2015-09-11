@@ -2,13 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 0.2.0 - TBD
+## 0.3.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 0.2.0 - 2015-09-11
 
 ### Added
 
 - [#bbb2e60](https://github.com/xtreamwayz/expressive-composer-installer/commit/bbb2e607af23e3ae23f6a9c71eb97c3c651c0ca1) adds PHPUnit tests.
 - [#791c1c6](https://github.com/xtreamwayz/expressive-composer-installer/commit/791c1c63f324ca08d08e26375f3a356102bf2ad9) adds Whoops error handler.
 - [e1d8d7bf](https://github.com/xtreamwayz/expressive-composer-installer/commit/e1d8d7bf5d5e2f51863fa59a37d1963405743201) adds config caching in production mode.
+
 ### Deprecated
 
 - Nothing.
@@ -21,7 +36,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 0.1.1 - 2015-08-09
+## 0.1.1 - 2015-09-08
 
 ### Added
 
