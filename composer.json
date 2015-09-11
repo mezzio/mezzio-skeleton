@@ -15,7 +15,7 @@
             "name": "zendframework/zend-expressive",
             "version": "0.2.5",
             "dist": {
-                "type": "vcs",
+                "type": "git",
                 "url": "https://github.com/weierophinney/zend-expressive/tree/feature/template-factories"
             }
         }
