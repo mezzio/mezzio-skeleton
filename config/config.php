@@ -1,27 +1,35 @@
 <?php
 
-use Zend\Config\Config;
-use Zend\Config\Factory;
-use Zend\Config\Writer\PhpArray;
+/**
+ * Configuration files are loaded in a specific order. First ``global.php`` and afterwards ``local.php``. This way
+ * local settings overwrite global settings.
+ *
+ * The configuration can be cached. This can be done by setting ``config_cache_enabled`` to ``true``.
+ *
+ * The configuration is stored in json so it is not depended on 3rd party libraries. Feel free to use something else
+ * like Zend\Config\Writer to write PHP arrays.
+ *
+ * Obviously, if you use closures in your config you can't cache it.
+ */
 
-$env = getenv('APP_ENV') ?: 'development';
 $cachedConfigFile = 'data/cache/app_config.php';
 
-// Try to load the cached config
-if ($env === 'production' && is_file($cachedConfigFile)) {
-    return new Config(require $cachedConfigFile);
+$config = [];
+if (is_file($cachedConfigFile)) {
+    // Try to load the cached config
+    $config = json_decode(file_get_contents($cachedConfigFile), true);
+} else {
+    // Load configuration from autoload path
+    foreach (glob('config/autoload/{{,*.}global,{,*.}local}.php', GLOB_BRACE) as $file) {
+        $config = array_replace_recursive($config, include $file);
+    }
+
+    // Cache config if enabled
+    if (isset($config['config_cache_enabled']) && $config['config_cache_enabled'] === true) {
+        file_put_contents($cachedConfigFile, json_encode($config));
+    }
 }
 
-// Merge configuration files. Load *.global.php first so *.local.php can overwrite.
-$config = Factory::fromFiles(
-    glob('config/autoload/{{,*.}global,{,*.}local}.php', GLOB_BRACE)
-);
-
-// Cache config if in production
-if ($env === 'production') {
-    $writer = new PhpArray();
-    $writer->setUseBracketArraySyntax(true);
-    $writer->toFile($cachedConfigFile, $config);
-}
-
-return new Config($config);
+// Return an ArrayObject so we can inject the config as a service in Aura.Di
+// and still use array checks like ``is_array``.
+return new \ArrayObject($config, \ArrayObject::ARRAY_AS_PROPS);

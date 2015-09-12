@@ -9,7 +9,6 @@ return [
         'mouf/pimple-interop'               => '^1.0',
         'nikic/fast-route'                  => '^0.6.0',
         'ocramius/proxy-manager'            => '^1.0',
-        'pimple/pimple'                     => '^3.0',
         'twig/twig'                         => '^1.21',
         'zendframework/zend-filter'         => '^2.5',
         'zendframework/zend-i18n'           => '^2.5',
@@ -68,7 +67,7 @@ return [
 
         'container' => [
             'question'               => 'Which container you want to use for dependency injection?',
-            'default'                => 4,
+            'default'                => 3,
             'required'               => true,
             'custom-package'         => true,
             'custom-package-warning' => 'You need to edit public/index.php to start the custom container.',
@@ -83,16 +82,7 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => 'Pimple <comment>Pimple 3.x / Needs testing!</comment>',
-                    'packages' => [
-                        'pimple/pimple',
-                    ],
-                    'copy-files' => [
-                        '/Resources/config/container-pimple.php' => '/config/container.php',
-                    ],
-                ],
-                3 => [
-                    'name'     => 'Pimple-interop <comment>Pimple 1.x</comment>',
+                    'name'     => 'Pimple-interop',
                     'packages' => [
                         'mouf/pimple-interop',
                     ],
@@ -100,7 +90,7 @@ return [
                         '/Resources/config/container-pimple-interop.php' => '/config/container.php',
                     ],
                 ],
-                4 => [
+                3 => [
                     'name'     => 'zend-servicemanager',
                     'packages' => [
                         'zendframework/zend-servicemanager',
