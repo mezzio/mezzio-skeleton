@@ -15,10 +15,12 @@ This installer will setup zend-expressive by choosing optional packages based on
 The user selected packages are saved into ``composer.json`` so everyone else working on the project have the same packages installed. Configuration
 files and templates are prepared for first use. The installer is removed from ``composer.json`` after setup succeeded.
 
-## Testing
+## Getting Started
 
-1. Run ``composer create-project xtreamwayz/expressive-composer-installer <project-path> --stability="dev"``.
-2. Answer the questions.
-3. The chosen packages and dependencies should install.
-4. CD to ``<project-path>`` and run ``php -S localhost:8000 -t public/``.
-5. Open you browser at ``http://localhost:8000`` and there should be a welcome page waiting for you.
+Start your new expressive project with composer:
+
+    $ composer create-project xtreamwayz/expressive-composer-installer <project-path>
+
+After choosing and installing the packages you want, go to the ``<project-path>`` and start PHP's built-in web server: 
+
+    $ php -S localhost:8000 -t public/
