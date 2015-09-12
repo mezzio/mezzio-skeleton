@@ -12,10 +12,6 @@ This installer will setup zend-expressive by choosing optional packages based on
 are saved into ``composer.json`` so everyone else working on the project have the same packages installed. Configuration
 files and templates are prepared for first use. The installer is removed from ``composer.json`` after setup succeeded.
 
-## Known Issues
-
-- Not all zend-view plugins are hooked up yet.
-
 ## Testing
 
 1. Run ``composer create-project xtreamwayz/expressive-composer-installer <project-path> --stability="dev"``.
