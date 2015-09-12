@@ -2,12 +2,34 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 0.4.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 0.3.0 - 2015-09-12
 
 ### Added
 
 - Use zend-expressive template factories.
 - Use the zend view url helper in the layout template.
+
+### Deprecated
+
+- Nothing.
 
 ### Removed
 
