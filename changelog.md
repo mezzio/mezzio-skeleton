@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Use zend-expressive template factories
+- Use zend-expressive template factories.
+- Use the zend view url helper in the layout template.
 
 ### Removed
 
