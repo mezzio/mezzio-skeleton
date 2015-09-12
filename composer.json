@@ -9,15 +9,9 @@
             "homepage": "https://xtreamwayz.github.io/"
         }
     ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/weierophinney/zend-expressive"
-        }
-    ],
     "require": {
         "roave/security-advisories": "dev-master",
-        "zendframework/zend-expressive": "dev-feature/template-factories"
+        "zendframework/zend-expressive": "^0.3"
     },
     "require-dev": {
         "composer/composer": "1.0.0-alpha10",
