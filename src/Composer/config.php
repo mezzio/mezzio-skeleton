@@ -53,7 +53,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'zend-mvc TreeRouteStack',
+                    'name'     => 'Zend Router',
                     'packages' => [
                         'zendframework/zend-mvc',
                         'zendframework/zend-psr7bridge',
@@ -91,7 +91,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'zend-servicemanager',
+                    'name'     => 'Zend ServiceManager',
                     'packages' => [
                         'zendframework/zend-servicemanager',
                         'ocramius/proxy-manager',
@@ -136,7 +136,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'zend-view <comment>installs zend-servicemanager</comment>',
+                    'name'     => 'Zend View <comment>installs Zend ServiceManager</comment>',
                     'packages' => [
                         'zendframework/zend-view',
                         'zendframework/zend-filter',
