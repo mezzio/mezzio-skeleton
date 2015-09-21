@@ -117,7 +117,7 @@ return [
                     'copy-files' => [
                         '/Resources/config/templates-plates.php' => '/config/autoload/templates.global.php',
                         '/Resources/templates/plates-404.phtml' => '/templates/error/404.phtml',
-                        '/Resources/templates/plates-500.phtml' => '/templates/error/500.phtml',
+                        '/Resources/templates/plates-error.phtml' => '/templates/error/error.phtml',
                         '/Resources/templates/plates-layout.phtml' => '/templates/layout/default.phtml',
                         '/Resources/templates/plates-home-page.phtml' => '/templates/app/home-page.phtml',
                     ],
@@ -130,7 +130,7 @@ return [
                     'copy-files' => [
                         '/Resources/config/templates-twig.php' => '/config/autoload/templates.global.php',
                         '/Resources/templates/twig-404.html.twig' => '/templates/error/404.html.twig',
-                        '/Resources/templates/twig-500.html.twig' => '/templates/error/500.html.twig',
+                        '/Resources/templates/twig-error.html.twig' => '/templates/error/error.html.twig',
                         '/Resources/templates/twig-layout.html.twig' => '/templates/layout/default.html.twig',
                         '/Resources/templates/twig-home-page.html.twig' => '/templates/app/home-page.html.twig',
                     ],
@@ -146,7 +146,7 @@ return [
                     'copy-files' => [
                         '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
                         '/Resources/templates/zend-view-404.phtml' => '/templates/error/404.phtml',
-                        '/Resources/templates/zend-view-500.phtml' => '/templates/error/500.phtml',
+                        '/Resources/templates/zend-view-error.phtml' => '/templates/error/error.phtml',
                         '/Resources/templates/zend-view-layout.phtml' => '/templates/layout/default.phtml',
                         '/Resources/templates/zend-view-home-page.phtml' => '/templates/app/home-page.phtml',
                     ],
