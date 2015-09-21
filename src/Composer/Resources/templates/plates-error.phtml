@@ -1,6 +1,13 @@
-<?php $this->layout('layout::default', ['title' => 'Home']) ?>
+<?php $this->layout('layout::default', ['title' => sprintf('%d %s', $status, $reason)]) ?>
 
-<h1>500</h1>
-<p>
-    Internal server error!
-</p>
+<h1>Oops!</h1>
+<h2>This is awkward.</h2>
+<p>We encountered a <?=$this->e($status)?> <?=$this->e($reason)?> error.</p>
+<?php if ($status == 404) : ?>
+    <p>
+        You are looking for something that doesn't exist or may have moved. Check out one of the links on this page
+        or head back to <a href="/">Home</a>.
+    </p>
+<?php else : ?>
+    <pre><code><?=var_dump($this->e($error))?></code></pre>
+<?php endif; ?>
