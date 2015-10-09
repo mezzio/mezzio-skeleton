@@ -1,8 +1,8 @@
 {
-    "name": "xtreamwayz/expressive-composer-installer",
+    "name": "zendframework/zend-expressive-skeleton",
     "type": "project",
-    "homepage": "https://github.com/xtreamwayz/expressive-composer-installer",
-    "license": "MIT",
+    "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
+    "license": "BSD-3-CLAUSE",
     "authors": [
         {
             "name": "Geert Eltink",
@@ -14,7 +14,7 @@
         "zendframework/zend-expressive": "^0.3"
     },
     "require-dev": {
-        "composer/composer": "1.0.0-alpha10",
+        "composer/composer": ">=1.0.0-alpha10",
         "phpunit/phpunit": "^4.8",
         "squizlabs/php_codesniffer": "^2.3"
     },
