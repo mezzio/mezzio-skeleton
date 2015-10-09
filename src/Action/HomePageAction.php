@@ -31,8 +31,8 @@ class HomePageAction
         } elseif ($this->router instanceof Router\FastRouteRouter) {
             $data['routerName'] = 'FastRoute';
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
-        } elseif ($this->router instanceof Router\Zf2Router) {
-            $data['routerName'] = 'ZF2 Router';
+        } elseif ($this->router instanceof Router\ZendRouter) {
+            $data['routerName'] = 'Zend Router';
             $data['routerDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.mvc.routing.html';
         }
 
