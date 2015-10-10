@@ -6,7 +6,7 @@ use App\Action\HomePageAction;
 use App\Action\HomePageFactory;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateInterface;
+use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithoutTemplate()
     {
         $factory = new HomePageFactory();
-        $this->container->has(TemplateInterface::class)->willReturn(false);
+        $this->container->has(TemplateRendererInterface::class)->willReturn(false);
 
         $this->assertTrue($factory instanceof HomePageFactory);
 
@@ -36,8 +36,10 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithTemplate()
     {
         $factory = new HomePageFactory();
-        $this->container->has(TemplateInterface::class)->willReturn(true);
-        $this->container->get(TemplateInterface::class)->willReturn($this->prophesize(TemplateInterface::class));
+        $this->container->has(TemplateRendererInterface::class)->willReturn(true);
+        $this->container
+            ->get(TemplateRendererInterface::class)
+            ->willReturn($this->prophesize(TemplateRendererInterface::class));
 
         $this->assertTrue($factory instanceof HomePageFactory);
 
