@@ -2,7 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 0.4.0 - TBD
+## 0.5.0 - 2015-10-10
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#3](https://github.com/zendframework/zend-expressive-skeleton/pull/3) updates
+  the skeleton to use zendframework/zend-expressive 0.4.0.
+
+## 0.4.0 - 2015-10-09
+
+First release as zend-expressive-skeleton.
 
 ### Added
 

@@ -6,8 +6,8 @@ return [
             'Zend\Expressive\FinalHandler' =>
                 Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
 
-            Zend\Expressive\Template\TemplateInterface::class =>
-                Zend\Expressive\Container\Template\PlatesFactory::class,
+            Zend\Expressive\Template\TemplateRendererInterface::class =>
+                Zend\Expressive\Container\Template\PlatesRendererFactory::class,
         ],
     ],
 

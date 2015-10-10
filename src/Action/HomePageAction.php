@@ -15,7 +15,7 @@ class HomePageAction
 
     private $template;
 
-    public function __construct(Router\RouterInterface $router, Template\TemplateInterface $template = null)
+    public function __construct(Router\RouterInterface $router, Template\TemplateRendererInterface $template = null)
     {
         $this->router   = $router;
         $this->template = $template;
@@ -36,13 +36,13 @@ class HomePageAction
             $data['routerDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.mvc.routing.html';
         }
 
-        if ($this->template instanceof Template\Plates) {
+        if ($this->template instanceof Template\PlatesRenderer) {
             $data['templateName'] = 'Plates';
             $data['templateDocs'] = 'http://platesphp.com/';
-        } elseif ($this->template instanceof Template\Twig) {
+        } elseif ($this->template instanceof Template\TwigRenderer) {
             $data['templateName'] = 'Twig';
             $data['templateDocs'] = 'http://twig.sensiolabs.org/documentation';
-        } elseif ($this->template instanceof Template\ZendView) {
+        } elseif ($this->template instanceof Template\ZendViewRenderer) {
             $data['templateName'] = 'Zend View';
             $data['templateDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.view.quick-start.html';
         }

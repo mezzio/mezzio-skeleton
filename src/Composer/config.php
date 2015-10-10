@@ -25,7 +25,7 @@ return [
     'questions' => [
         'router' => [
             'question'               => 'Which router you want to use?',
-            'default'                => 1,
+            'default'                => 2,
             // TRUE: Must choose one / FALSE: May choose one or none of the above
             'required'               => true,
             // Enable custom package input
