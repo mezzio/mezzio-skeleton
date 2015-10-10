@@ -1,4 +1,4 @@
-# Zend Expressive Skeleton
+# zend-expressive-skeleton
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-expressive-skeleton.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-expressive-skeleton)
 
