@@ -2,20 +2,17 @@
 
 return [
     'packages' => [
-        'aura/di'                           => '3.0.*@beta',
-        'aura/router'                       => '^2.3',
-        'filp/whoops'                       => '^1.1',
-        'league/plates'                     => '^3.1',
-        'mouf/pimple-interop'               => '^1.0',
-        'nikic/fast-route'                  => '^0.6.0',
-        'ocramius/proxy-manager'            => '^1.0',
-        'twig/twig'                         => '^1.21',
-        'zendframework/zend-filter'         => '^2.5',
-        'zendframework/zend-i18n'           => '^2.5',
-        'zendframework/zend-mvc'            => '^2.5',
-        'zendframework/zend-psr7bridge'     => '^0.1.0',
-        'zendframework/zend-servicemanager' => '^2.5',
-        'zendframework/zend-view'           => '^2.5',
+        'aura/di'                                        => '3.0.*@beta',
+        'filp/whoops'                                    => '^1.1',
+        'mouf/pimple-interop'                            => '^1.0',
+        'ocramius/proxy-manager'                         => '^1.0',
+        'zendframework/zend-expressive-aurarouter'       => '^0.1',
+        'zendframework/zend-expressive-fastroute'        => '^0.1',
+        'zendframework/zend-expressive-platesrenderer'   => '^0.1',
+        'zendframework/zend-expressive-twigrenderer'     => '^0.1',
+        'zendframework/zend-expressive-zendrouter'       => '^0.1',
+        'zendframework/zend-expressive-zendviewrenderer' => '^0.1',
+        'zendframework/zend-servicemanager'              => '^2.5',
     ],
 
     'require-dev' => [
@@ -36,7 +33,7 @@ return [
                 1 => [
                     'name'     => 'Aura.Router',
                     'packages' => [
-                        'aura/router',
+                        'zendframework/zend-expressive-aurarouter',
                     ],
                     'copy-files' => [
                         // Copy source file to target: '<source>' => '<target>'
@@ -46,7 +43,7 @@ return [
                 2 => [
                     'name'     => 'FastRoute',
                     'packages' => [
-                        'nikic/fast-route',
+                        'zendframework/zend-expressive-fastroute',
                     ],
                     'copy-files' => [
                         '/Resources/config/routes-fast-route.php' => '/config/autoload/routes.global.php',
@@ -55,8 +52,7 @@ return [
                 3 => [
                     'name'     => 'Zend Router',
                     'packages' => [
-                        'zendframework/zend-mvc',
-                        'zendframework/zend-psr7bridge',
+                        'zendframework/zend-expressive-zendrouter',
                     ],
                     'copy-files' => [
                         '/Resources/config/routes-zf2-router.php' => '/config/autoload/routes.global.php',
@@ -112,7 +108,7 @@ return [
                 1 => [
                     'name'     => 'Plates',
                     'packages' => [
-                        'league/plates',
+                        'zendframework/zend-expressive-platesrenderer',
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-plates.php' => '/config/autoload/templates.global.php',
@@ -125,7 +121,7 @@ return [
                 2 => [
                     'name'     => 'Twig',
                     'packages' => [
-                        'twig/twig',
+                        'zendframework/zend-expressive-twigrenderer',
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-twig.php' => '/config/autoload/templates.global.php',
@@ -138,10 +134,8 @@ return [
                 3 => [
                     'name'     => 'Zend View <comment>installs Zend ServiceManager</comment>',
                     'packages' => [
-                        'zendframework/zend-view',
-                        'zendframework/zend-filter',
+                        'zendframework/zend-expressive-zendviewrenderer',
                         'zendframework/zend-i18n',
-                        'zendframework/zend-servicemanager',
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',

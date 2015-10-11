@@ -7,7 +7,7 @@ return [
                 Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
 
             Zend\Expressive\Template\TemplateRendererInterface::class =>
-                Zend\Expressive\Container\Template\TwigRendererFactory::class,
+                Zend\Expressive\Twig\TwigRendererFactory::class,
         ],
     ],
 
