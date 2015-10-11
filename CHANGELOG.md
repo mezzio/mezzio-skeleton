@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 0.5.1 - 2015-10-11
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#6](https://github.com/zendframework/zend-expressive-skeleton/pull/6) updates
+  the zendframework/zend-view package configuration to remove the dependency on
+  zendframework/zend-i18n, as it is now handled in the standalone
+  zend-expressive-zendviewrenderer package.
+
 ## 0.5.0 - 2015-10-10
 
 ### Added
