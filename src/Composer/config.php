@@ -135,7 +135,6 @@ return [
                     'name'     => 'Zend View <comment>installs Zend ServiceManager</comment>',
                     'packages' => [
                         'zendframework/zend-expressive-zendviewrenderer',
-                        'zendframework/zend-i18n',
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
