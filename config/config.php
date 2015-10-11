@@ -1,5 +1,8 @@
 <?php
 
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\Glob;
+
 /**
  * Configuration files are loaded in a specific order. First ``global.php`` and afterwards ``local.php``. This way
  * local settings overwrite global settings.
@@ -20,8 +23,8 @@ if (is_file($cachedConfigFile)) {
     $config = json_decode(file_get_contents($cachedConfigFile), true);
 } else {
     // Load configuration from autoload path
-    foreach (glob('config/autoload/{{,*.}global,{,*.}local}.php', GLOB_BRACE) as $file) {
-        $config = array_replace_recursive($config, include $file);
+    foreach (Glob::glob('config/autoload/{{,*.}global,{,*.}local}.php', Glob::GLOB_BRACE) as $file) {
+        $config = ArrayUtils::merge($config, include $file);
     }
 
     // Cache config if enabled
