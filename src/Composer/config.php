@@ -11,7 +11,7 @@ return [
         'zendframework/zend-expressive-platesrenderer'   => '^0.1',
         'zendframework/zend-expressive-twigrenderer'     => '^0.1',
         'zendframework/zend-expressive-zendrouter'       => '^0.1',
-        'zendframework/zend-expressive-zendviewrenderer' => '^0.1',
+        'zendframework/zend-expressive-zendviewrenderer' => '^0.1.2',
         'zendframework/zend-servicemanager'              => '^2.5',
     ],
 
@@ -135,7 +135,6 @@ return [
                     'name'     => 'Zend View <comment>installs Zend ServiceManager</comment>',
                     'packages' => [
                         'zendframework/zend-expressive-zendviewrenderer',
-                        'zendframework/zend-i18n',
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
