@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#7](https://github.com/zendframework/zend-expressive-skeleton/pull/7) adds a
+  dependency on zend-stdlib for the purposes of globbing and merging
+  configuration.
 
 ### Deprecated
 
