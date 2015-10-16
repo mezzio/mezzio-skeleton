@@ -1,4 +1,11 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
+ * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ */
 
 namespace App\Composer;
 
@@ -24,26 +31,48 @@ use RecursiveIteratorIterator;
  *      "pre-update-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
  *      "pre-install-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install"
  *  },
- *
- * @package Zend\Expressive\Composer
- *
- * @author Geert Eltink <https://xtreamwayz.github.io/>
  */
 class OptionalPackages
 {
+    /**
+     * @const string Regular expression for matching package name and version
+     */
     const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
+    /**
+     * @var array
+     */
     private static $config;
 
+    /**
+     * @var array
+     */
     private static $composerDefinition;
 
+    /**
+     * @var string[]
+     */
     private static $composerRequires;
 
+    /**
+     * @var string[]
+     */
     private static $composerDevRequires;
 
+    /**
+     * @var string[]
+     */
     private static $stabilityFlags;
 
     /**
+     * Install command: choose packages and provide configuration.
+     *
+     * Prompts users for package selections, and copies in package-specific
+     * configuration when known.
+     *
+     * Updates the composer.json with the package selections, and removes the
+     * install and update commands on completion.
+     *
      * @param Event $event
      */
     public static function install(Event $event)
@@ -142,6 +171,16 @@ class OptionalPackages
         $json->write(self::$composerDefinition);
     }
 
+    /**
+     * Post-Install command: clean up/remove installer classes and assets.
+     *
+     * On completion of install/update, removes the installer classes (including
+     * this one) and assets (including configuration and templates); on success,
+     * it also removes the post-install and post-update commands from the
+     * composer.json.
+     *
+     * @param Event $event
+     */
     public static function cleanUp(Event $event)
     {
         $io = $event->getIO();
@@ -165,8 +204,9 @@ class OptionalPackages
             unlink($filename);
         }
 
-        $io->write("<info>Removing post-installer command from composer.json</info>");
+        $io->write("<info>Removing post-installer commands from composer.json</info>");
         unset(self::$composerDefinition['scripts']['post-install-cmd']);
+        unset(self::$composerDefinition['scripts']['post-update-cmd']);
         $json->write(self::$composerDefinition);
     }
 
