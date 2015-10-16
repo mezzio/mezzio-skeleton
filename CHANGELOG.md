@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 0.5.3 - TBD
+## 0.5.3 - 2015-10-16
 
 ### Added
 
-- We've added a post-install-cmd that recursively removes the `src/Composer/`
+- [#8](https://github.com/zendframework/zend-expressive-skeleton/pull/8) adds a
+  routine to the installer that recursively removes the `src/Composer/`
   directory of the skeleton, ensuring you have a clean start when creating a
   project.
 
