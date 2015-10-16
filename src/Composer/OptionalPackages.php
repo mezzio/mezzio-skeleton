@@ -1,4 +1,11 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
+ * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ */
 
 namespace App\Composer;
 
@@ -11,6 +18,9 @@ use Composer\Package\Link;
 use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
 use Composer\Package\BasePackage;
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 /**
  * Composer installer script
@@ -21,26 +31,48 @@ use Composer\Package\BasePackage;
  *      "pre-update-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
  *      "pre-install-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install"
  *  },
- *
- * @package Zend\Expressive\Composer
- *
- * @author Geert Eltink <https://xtreamwayz.github.io/>
  */
 class OptionalPackages
 {
+    /**
+     * @const string Regular expression for matching package name and version
+     */
     const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
+    /**
+     * @var array
+     */
     private static $config;
 
+    /**
+     * @var array
+     */
     private static $composerDefinition;
 
+    /**
+     * @var string[]
+     */
     private static $composerRequires;
 
+    /**
+     * @var string[]
+     */
     private static $composerDevRequires;
 
+    /**
+     * @var string[]
+     */
     private static $stabilityFlags;
 
     /**
+     * Install command: choose packages and provide configuration.
+     *
+     * Prompts users for package selections, and copies in package-specific
+     * configuration when known.
+     *
+     * Updates the composer.json with the package selections, and removes the
+     * install and update commands on completion.
+     *
      * @param Event $event
      */
     public static function install(Event $event)
@@ -138,8 +170,31 @@ class OptionalPackages
         // Update composer definition
         $json->write(self::$composerDefinition);
 
-        // @TODO: Remove installer - Not working, getting unlink(D:\projects\test/src/Zend): Permission denied
-        //array_map('unlink', glob($projectRoot . '/src/Zend'));
+        self::cleanUp($io);
+    }
+
+    /**
+     * Clean up/remove installer classes and assets.
+     *
+     * On completion of install/update, removes the installer classes (including
+     * this one) and assets (including configuration and templates).
+     *
+     * @param IOInterface $io
+     */
+    private static function cleanUp(IOInterface $io)
+    {
+        $io->write("<info>Removing Expressive installer classes and configuration</info>");
+
+        $rdi = new RecursiveDirectoryIterator(__DIR__, FilesystemIterator::SKIP_DOTS);
+        $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($rii as $filename => $fileInfo) {
+            if ($fileInfo->isDir()) {
+                rmdir($filename);
+                continue;
+            }
+            unlink($filename);
+        }
+        rmdir(__DIR__);
     }
 
     /**
