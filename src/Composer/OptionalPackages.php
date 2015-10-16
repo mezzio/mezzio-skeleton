@@ -169,29 +169,20 @@ class OptionalPackages
 
         // Update composer definition
         $json->write(self::$composerDefinition);
+
+        self::cleanUp($io);
     }
 
     /**
-     * Post-Install command: clean up/remove installer classes and assets.
+     * Clean up/remove installer classes and assets.
      *
      * On completion of install/update, removes the installer classes (including
-     * this one) and assets (including configuration and templates); on success,
-     * it also removes the post-install and post-update commands from the
-     * composer.json.
+     * this one) and assets (including configuration and templates).
      *
-     * @param Event $event
+     * @param IOInterface $io
      */
-    public static function cleanUp(Event $event)
+    private static function cleanUp(IOInterface $io)
     {
-        $io = $event->getIO();
-
-        // Get composer.json
-        $composerFile = Factory::getComposerFile();
-        $json = new JsonFile($composerFile);
-        self::$composerDefinition = $json->read();
-
-        $projectRoot = realpath(dirname($composerFile));
-
         $io->write("<info>Removing Expressive installer classes and configuration</info>");
 
         $rdi = new RecursiveDirectoryIterator(__DIR__, FilesystemIterator::SKIP_DOTS);
@@ -204,11 +195,6 @@ class OptionalPackages
             unlink($filename);
         }
         rmdir(__DIR__);
-
-        $io->write("<info>Removing post-installer commands from composer.json</info>");
-        unset(self::$composerDefinition['scripts']['post-install-cmd']);
-        unset(self::$composerDefinition['scripts']['post-update-cmd']);
-        $json->write(self::$composerDefinition);
     }
 
     /**
