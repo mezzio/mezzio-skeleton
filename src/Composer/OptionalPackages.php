@@ -203,6 +203,7 @@ class OptionalPackages
             }
             unlink($filename);
         }
+        rmdir(__DIR__);
 
         $io->write("<info>Removing post-installer commands from composer.json</info>");
         unset(self::$composerDefinition['scripts']['post-install-cmd']);
