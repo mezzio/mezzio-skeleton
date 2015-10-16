@@ -11,6 +11,9 @@ use Composer\Package\Link;
 use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
 use Composer\Package\BasePackage;
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 /**
  * Composer installer script
@@ -137,9 +140,34 @@ class OptionalPackages
 
         // Update composer definition
         $json->write(self::$composerDefinition);
+    }
 
-        // @TODO: Remove installer - Not working, getting unlink(D:\projects\test/src/Zend): Permission denied
-        //array_map('unlink', glob($projectRoot . '/src/Zend'));
+    public static function cleanUp(Event $event)
+    {
+        $io = $event->getIO();
+
+        // Get composer.json
+        $composerFile = Factory::getComposerFile();
+        $json = new JsonFile($composerFile);
+        self::$composerDefinition = $json->read();
+
+        $projectRoot = realpath(dirname($composerFile));
+
+        $io->write("<info>Removing Expressive installer classes and configuration</info>");
+
+        $rdi = new RecursiveDirectoryIterator(__DIR__, FilesystemIterator::SKIP_DOTS);
+        $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($rii as $filename => $fileInfo) {
+            if ($fileInfo->isDir()) {
+                rmdir($filename);
+                continue;
+            }
+            unlink($filename);
+        }
+
+        $io->write("<info>Removing post-installer command from composer.json</info>");
+        unset(self::$composerDefinition['scripts']['post-install-cmd']);
+        $json->write(self::$composerDefinition);
     }
 
     /**
