@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- We've added a post-install-cmd that recursively removes the `src/Composer/`
+  directory of the skeleton, ensuring you have a clean start when creating a
+  project.
 
 ### Deprecated
 
