@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.0rc2 - 2015-10-20
+
+Second release candidate.
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Updated expressive to RC2.
+- Updated subcomponent versions in installer to `^0.2`
+
 ## 1.0.0rc1 - 2015-10-19
 
 First release candidate.
