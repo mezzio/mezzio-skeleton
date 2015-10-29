@@ -158,7 +158,7 @@ class OptionalPackages
         $io->write("<info>Remove installer</info>");
         // Remove composer source
         unset(self::$composerDefinition['require-dev']['composer/composer']);
-        // Remove our data
+        // Remove installer data
         unset(self::$composerDefinition['extra']['optional-packages']);
         if (empty(self::$composerDefinition['extra'])) {
             unset(self::$composerDefinition['extra']);
