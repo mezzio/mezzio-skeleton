@@ -1,17 +1,17 @@
 <?php
 
 return [
-    // Provides services for whole application
-    // It's recommend using fully-qualified class names whenever possible as
-    // service names
+    // Provides application-wide services.
+    // We recommend using fully-qualified class names whenever possible as
+    // service names.
     'dependencies' => [
-        // Use 'invokables' for constructor-less services
-        // It tells to the container what class to instantiate when a particular
-        // service is requested
+        // Use 'invokables' for constructor-less services, or services that do
+        // not require arguments to the constructor. Map a service name to the
+        // class name.
         'invokables' => [
-            //Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
+            // Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
         ],
-        // Use 'factories' for services provided by callbacks
+        // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [
             Zend\Expressive\Application::class => Zend\Expressive\Container\ApplicationFactory::class,
         ]
