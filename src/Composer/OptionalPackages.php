@@ -156,13 +156,16 @@ class OptionalPackages
 
         // House keeping
         $io->write("<info>Remove installer</info>");
+
         // Remove composer source
         unset(self::$composerDefinition['require-dev']['composer/composer']);
+
         // Remove installer data
         unset(self::$composerDefinition['extra']['optional-packages']);
         if (empty(self::$composerDefinition['extra'])) {
             unset(self::$composerDefinition['extra']);
         }
+
         // Remove installer scripts, only need to do this once
         unset(self::$composerDefinition['scripts']['pre-update-cmd']);
         unset(self::$composerDefinition['scripts']['pre-install-cmd']);
