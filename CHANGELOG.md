@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.0rc3 - TBD
+
+Third release candidate.
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#13](https://github.com/zendframework/zend-expressive-skeleton/pull/13)
+  updates the installer to also remove the dependency on composer/composer
+  on completion.
+- [#11](https://github.com/zendframework/zend-expressive-skeleton/pull/11)
+  moves the route middleware service definitions into the routes configuration
+  files.
+
 ## 1.0.0rc2 - 2015-10-20
 
 Second release candidate.
