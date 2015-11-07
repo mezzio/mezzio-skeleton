@@ -13,7 +13,7 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
     /** @var ContainerInterface */
     protected $container;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->container = $this->prophesize(ContainerInterface::class);
         $router = $this->prophesize(RouterInterface::class);
