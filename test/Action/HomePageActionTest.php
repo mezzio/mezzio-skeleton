@@ -12,7 +12,7 @@ class HomePageActionTest extends \PHPUnit_Framework_TestCase
     /** @var RouterInterface */
     protected $router;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->router = $this->prophesize(RouterInterface::class);
     }
