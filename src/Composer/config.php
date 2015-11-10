@@ -39,6 +39,10 @@ return [
                         // Copy source file to target: '<source>' => '<target>'
                         '/Resources/config/routes-aura-router.php' => '/config/autoload/routes.global.php',
                     ],
+                    'minimal-files' => [
+                        // Copy source file to target: '<source>' => '<target>'
+                        '/Resources/config/routes-minimal-aura-router.php' => '/config/autoload/routes.global.php',
+                    ],
                 ],
                 2 => [
                     'name'     => 'FastRoute',
@@ -48,6 +52,9 @@ return [
                     'copy-files' => [
                         '/Resources/config/routes-fast-route.php' => '/config/autoload/routes.global.php',
                     ],
+                    'minimal-files' => [
+                        '/Resources/config/routes-minimal-fast-route.php' => '/config/autoload/routes.global.php',
+                    ],
                 ],
                 3 => [
                     'name'     => 'Zend Router',
@@ -56,6 +63,9 @@ return [
                     ],
                     'copy-files' => [
                         '/Resources/config/routes-zf2-router.php' => '/config/autoload/routes.global.php',
+                    ],
+                    'minimal-files' => [
+                        '/Resources/config/routes-minimal-zf2-router.php' => '/config/autoload/routes.global.php',
                     ],
                 ],
             ],
@@ -76,6 +86,9 @@ return [
                     'copy-files' => [
                         '/Resources/config/container-aura-di.php' => '/config/container.php',
                     ],
+                    'minimal-files' => [
+                        '/Resources/config/container-aura-di.php' => '/config/container.php',
+                    ],
                 ],
                 2 => [
                     'name'     => 'Pimple-interop',
@@ -83,6 +96,9 @@ return [
                         'mouf/pimple-interop',
                     ],
                     'copy-files' => [
+                        '/Resources/config/container-pimple-interop.php' => '/config/container.php',
+                    ],
+                    'minimal-files' => [
                         '/Resources/config/container-pimple-interop.php' => '/config/container.php',
                     ],
                 ],
@@ -93,6 +109,9 @@ return [
                         'ocramius/proxy-manager',
                     ],
                     'copy-files' => [
+                        '/Resources/config/container-zend-servicemanager.php' => '/config/container.php',
+                    ],
+                    'minimal-files' => [
                         '/Resources/config/container-zend-servicemanager.php' => '/config/container.php',
                     ],
                 ],
@@ -117,6 +136,9 @@ return [
                         '/Resources/templates/plates-layout.phtml' => '/templates/layout/default.phtml',
                         '/Resources/templates/plates-home-page.phtml' => '/templates/app/home-page.phtml',
                     ],
+                    'minimal-files' => [
+                        '/Resources/config/templates-plates.php' => '/config/autoload/templates.global.php',
+                    ],
                 ],
                 2 => [
                     'name'     => 'Twig',
@@ -130,6 +152,9 @@ return [
                         '/Resources/templates/twig-layout.html.twig' => '/templates/layout/default.html.twig',
                         '/Resources/templates/twig-home-page.html.twig' => '/templates/app/home-page.html.twig',
                     ],
+                    'minimal-files' => [
+                        '/Resources/config/templates-twig.php' => '/config/autoload/templates.global.php',
+                    ],
                 ],
                 3 => [
                     'name'     => 'Zend View <comment>installs Zend ServiceManager</comment>',
@@ -142,6 +167,9 @@ return [
                         '/Resources/templates/zend-view-error.phtml' => '/templates/error/error.phtml',
                         '/Resources/templates/zend-view-layout.phtml' => '/templates/layout/default.phtml',
                         '/Resources/templates/zend-view-home-page.phtml' => '/templates/app/home-page.phtml',
+                    ],
+                    'minimal-files' => [
+                        '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
                     ],
                 ],
             ],
@@ -159,6 +187,9 @@ return [
                         'filp/whoops',
                     ],
                     'copy-files' => [
+                        '/Resources/config/error-handler-whoops.php' => '/config/autoload/errorhandler.local.php',
+                    ],
+                    'minimal-files' => [
                         '/Resources/config/error-handler-whoops.php' => '/config/autoload/errorhandler.local.php',
                     ],
                 ],

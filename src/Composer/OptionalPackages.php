@@ -108,6 +108,10 @@ class OptionalPackages
         // Get stability flags
         self::$stabilityFlags = $rootPackage->getStabilityFlags();
 
+        // Minimal?
+        $minimal      = self::requestMinimal($io);
+        $copyFilesKey = $minimal ? 'minimal-files' : 'copy-files';
+
         self::$config = require __DIR__ . '/config.php';
 
         foreach (self::$config['questions'] as $questionName => $question) {
@@ -130,9 +134,10 @@ class OptionalPackages
                         self::addPackage($io, $packageName, self::$config['packages'][$packageName]);
                     }
                 }
+
                 // Copy files
-                if (isset($question['options'][$answer]['copy-files'])) {
-                    foreach ($question['options'][$answer]['copy-files'] as $source => $target) {
+                if (isset($question['options'][$answer][$copyFilesKey])) {
+                    foreach ($question['options'][$answer][$copyFilesKey] as $source => $target) {
                         self::copyFile($io, $projectRoot, $source, $target);
                     }
                 }
@@ -176,6 +181,11 @@ class OptionalPackages
         // Update composer definition
         $json->write(self::$composerDefinition);
 
+        // Minimal install? Remove default middleware
+        if ($minimal) {
+            self::removeDefaultMiddleware($io, $projectRoot);
+        }
+
         self::cleanUp($io);
     }
 
@@ -190,17 +200,7 @@ class OptionalPackages
     private static function cleanUp(IOInterface $io)
     {
         $io->write("<info>Removing Expressive installer classes and configuration</info>");
-
-        $rdi = new RecursiveDirectoryIterator(__DIR__, FilesystemIterator::SKIP_DOTS);
-        $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST);
-        foreach ($rii as $filename => $fileInfo) {
-            if ($fileInfo->isDir()) {
-                rmdir($filename);
-                continue;
-            }
-            unlink($filename);
-        }
-        rmdir(__DIR__);
+        self::recursiveRmdir(__DIR__);
     }
 
     /**
@@ -342,5 +342,61 @@ class OptionalPackages
 
         $io->write(sprintf("  - Copying <info>%s</info>", $target));
         copy(__DIR__ . $source, $projectRoot . $target);
+    }
+
+    private static function requestMinimal(IOInterface $io)
+    {
+        $query = [
+            sprintf(
+                "\n  <question>%s</question>\n",
+                'Minimal skeleton? (no default middleware, templates, or assets; configuration only)'
+            ),
+            "  [<comment>y</comment>] Yes (minimal)\n",
+            "  [<comment>n</comment>] No (full; recommended)\n",
+            "  Make your selection <comment>(No)</comment>: ",
+        ];
+
+        $answer = $io->ask($query, 'n');
+        if ($answer == 'n') {
+            // Nothing else to do!
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * If a minimal install was requested, remove the default middleware and assets.
+     *
+     * @param IOInterface $io
+     * @param string $projectRoot Project root from which to derive the directory to remove
+     */
+    private static function removeDefaultMiddleware(IOInterface $io, $projectRoot)
+    {
+        $io->write("<info>Removing default middleware classes and factories</info>");
+        self::recursiveRmdir($projectRoot . '/src/Action');
+
+        $io->write("<info>Removing assets</info>");
+        unlink($projectRoot . '/public/favicon.ico');
+        unlink($projectRoot . '/public/zf-logo.png');
+    }
+
+    /**
+     * Recursively remove a directory.
+     *
+     * @param string $directory
+     */
+    private static function recursiveRmdir($directory)
+    {
+        $rdi = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
+        $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($rii as $filename => $fileInfo) {
+            if ($fileInfo->isDir()) {
+                rmdir($filename);
+                continue;
+            }
+            unlink($filename);
+        }
+        rmdir($directory);
     }
 }
