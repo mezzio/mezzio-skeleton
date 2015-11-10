@@ -328,6 +328,15 @@ class OptionalPackages
         }
     }
 
+    /**
+     * Copy a file to its final destination in the skeleton.
+     *
+     * @param IOInterface $io
+     * @param string $projectRoot
+     * @param string $source Source file.
+     * @param string $target Destination.
+     * @param bool $force whether or not to copy over an existing file.
+     */
     private static function copyFile(IOInterface $io, $projectRoot, $source, $target, $force = false)
     {
         // Copy file
@@ -344,6 +353,12 @@ class OptionalPackages
         copy(__DIR__ . $source, $projectRoot . $target);
     }
 
+    /**
+     * Ask if the user would like a minimal install.
+     *
+     * @param IOInterface $io
+     * @return bool
+     */
     private static function requestMinimal(IOInterface $io)
     {
         $query = [
