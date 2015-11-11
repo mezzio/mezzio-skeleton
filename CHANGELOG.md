@@ -8,7 +8,10 @@ Third release candidate.
 
 ### Added
 
-- Nothing.
+- [#20](https://github.com/zendframework/zend-expressive-skeleton/pull/20) adds
+  the ability to specify a "minimal" install; when selected, the installer will
+  install modified configuration, omit some files, and remove the default
+  middleware and public assets.
 
 ### Deprecated
 
