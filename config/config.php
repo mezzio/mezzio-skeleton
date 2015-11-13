@@ -1,6 +1,5 @@
 <?php
 
-use ArrayObject;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Glob;
 
