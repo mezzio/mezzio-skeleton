@@ -3,7 +3,7 @@
 use App\Container\PimpleContainer;
 
 // Load configuration
-$config = require 'config.php';
+$config = require __DIR__ . '/config.php';
 
 // Build container
 $container = new PimpleContainer();

@@ -3,7 +3,7 @@
 use Aura\Di\ContainerBuilder;
 
 // Load configuration
-$config = require 'config.php';
+$config = require __DIR__ . '/config.php';
 
 // Build container
 $builder = new ContainerBuilder();
