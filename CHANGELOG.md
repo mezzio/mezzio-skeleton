@@ -29,6 +29,9 @@ Third release candidate.
 - [#11](https://github.com/zendframework/zend-expressive-skeleton/pull/11)
   moves the route middleware service definitions into the routes configuration
   files.
+- [#21](https://github.com/zendframework/zend-expressive-skeleton/pull/21)
+  updates `require` statements in generated configuration files to use the
+  `__DIR__` constant to ensure files are located relative to the origin file.
 
 ## 1.0.0rc2 - 2015-10-20
 
