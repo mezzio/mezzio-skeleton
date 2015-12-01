@@ -11,7 +11,7 @@ return [
         'zendframework/zend-expressive-platesrenderer'   => '^0.2',
         'zendframework/zend-expressive-twigrenderer'     => '^0.2',
         'zendframework/zend-expressive-zendrouter'       => '^0.2',
-        'zendframework/zend-expressive-zendviewrenderer' => '^0.2',
+        'zendframework/zend-expressive-zendviewrenderer' => 'dev-master',
         'zendframework/zend-servicemanager'              => '^2.5',
     ],
 
