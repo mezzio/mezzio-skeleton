@@ -9,7 +9,7 @@ return [
         'zendframework/zend-expressive-aurarouter'       => '^0.3',
         'zendframework/zend-expressive-fastroute'        => '^0.3',
         'zendframework/zend-expressive-platesrenderer'   => '^0.3',
-        'zendframework/zend-expressive-twigrenderer'     => '^0.3',
+        'zendframework/zend-expressive-twigrenderer'     => '^0.3.1',
         'zendframework/zend-expressive-zendrouter'       => '^0.3',
         'zendframework/zend-expressive-zendviewrenderer' => '^0.3.1',
         'zendframework/zend-servicemanager'              => '^2.5',
