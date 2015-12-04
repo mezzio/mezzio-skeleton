@@ -12,11 +12,9 @@ Third release candidate.
   the ability to specify a "minimal" install; when selected, the installer will
   install modified configuration, omit some files, and remove the default
   middleware and public assets.
-- [#25](https://github.com/zendframework/zend-expressive-skeleton/pull/25)
-  updates the configuration for zend-view to include the `UrlHelperFactory` and
-  registration of the `ApplicationUrlDelegatorFactory` (as well as information
-  on how to configure Pimple to provide the same functionality as the delegator
-  factory).
+- [#27](https://github.com/zendframework/zend-expressive-skeleton/pull/27) adds
+  [zendframework/zend-expressive-helpers](https://github.com/zendframework/zend-expressive-helpers)
+  as a dependency, and integrates the helpers into the configuration.
 
 ### Deprecated
 
