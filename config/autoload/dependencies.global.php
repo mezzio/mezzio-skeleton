@@ -1,4 +1,7 @@
 <?php
+use Zend\Expressive\Application;
+use Zend\Expressive\Container\ApplicationFactory;
+use Zend\Expressive\Helper;
 
 return [
     // Provides application-wide services.
@@ -10,10 +13,12 @@ return [
         // class name.
         'invokables' => [
             // Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
+            Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [
-            Zend\Expressive\Application::class => Zend\Expressive\Container\ApplicationFactory::class,
-        ]
-    ]
+            Application::class => ApplicationFactory::class,
+            Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
+        ],
+    ],
 ];
