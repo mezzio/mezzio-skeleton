@@ -12,7 +12,6 @@ matrix:
     - php: 7
     - php: hhvm
   allow_failures:
-    - php: 7
     - php: hhvm
 
 before_install:
@@ -22,8 +21,8 @@ install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs --prefer-source --no-scripts
 
 script:
-  - ./vendor/bin/phpunit
-  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/phpcs ; fi
+  - composer test
+  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then composer cs ; fi
 
 notifications:
   email: true
