@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.0.0rc3 - TBD
+## 1.0.0rc3 - 2015-12-07
 
 Third release candidate.
 
@@ -35,8 +35,13 @@ Third release candidate.
 - [#21](https://github.com/zendframework/zend-expressive-skeleton/pull/21)
   updates `require` statements in generated configuration files to use the
   `__DIR__` constant to ensure files are located relative to the origin file.
-- [#25](https://github.com/zendframework/zend-expressive-skeleton/pull/25)
-  updates minimum versions for each router and template implementation.
+- [#25](https://github.com/zendframework/zend-expressive-skeleton/pull/25) and
+  [#29](https://github.com/zendframework/zend-expressive-skeleton/pull/29)
+  update minimum versions for each router and template implementation (final
+  versions for RC3 are all at `^1.0`).
+- [#29](https://github.com/zendframework/zend-expressive-skeleton/pull/29) sets
+  the zend-expressive required version to `~1.0.0@rc || ^1.0`, to ensure a
+  stable version is always installed.
 
 ## 1.0.0rc2 - 2015-10-20
 
