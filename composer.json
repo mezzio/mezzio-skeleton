@@ -9,10 +9,16 @@
             "homepage": "https://xtreamwayz.github.io/"
         }
     ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev",
+            "dev-develop": "1.1-dev"
+        }
+    },
     "require": {
         "php": "^5.5 || ^7.0",
         "roave/security-advisories": "dev-master",
-        "zendframework/zend-expressive": "~1.0.0-dev@dev",
+        "zendframework/zend-expressive": "~1.0.0@rc || ^1.0",
         "zendframework/zend-expressive-helpers": "^1.1",
         "zendframework/zend-stdlib": "~2.7"
     },
@@ -34,9 +40,12 @@
     "scripts": {
         "pre-install-cmd": "App\\Composer\\OptionalPackages::install",
         "pre-update-cmd": "App\\Composer\\OptionalPackages::install",
-        "test": [
-            "php vendor/squizlabs/php_codesniffer/scripts/phpcs",
-            "php vendor/phpunit/phpunit/phpunit"
-        ]
+        "check": [
+            "@cs",
+            "@test"
+        ],
+        "cs": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit"
     }
 }
