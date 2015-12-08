@@ -26,7 +26,7 @@ removed.
 Start your new Expressive project with composer:
 
 ```bash
-$ composer create-project zendframework/zend-expressive-skeleton <project-path>
+$ composer create-project zendframework/zend-expressive-skeleton:^1.0@rc <project-path>
 ```
 
 After choosing and installing the packages you want, go to the
