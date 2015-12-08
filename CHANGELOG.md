@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.0rc4 - TBD
+
+Fourth release candidate.
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Updates to zendframework/zend-expressive-helpers `^1.2`.
+- Adds configuration for auto-registering the new `Zend\Expressive\Helper\UrlHelperMiddleware`
+  as pipeline middleware; this fixes an issue when using the zend-view renderer
+  with the `url()` helper whereby the `UrlHelper` was being registered as a
+  route result observer too late to receive the `RouteResult`.
+
 ## 1.0.0rc3 - 2015-12-07
 
 Third release candidate.
