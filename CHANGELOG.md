@@ -23,6 +23,9 @@ Fourth release candidate.
 
 ### Fixed
 
+- [#23](https://github.com/zendframework/zend-expressive-skeleton/pull/23)
+  updates the comment for the glob statements to ensure all 4 (not just 2!)
+  possible matches are detailed.
 - [#33](https://github.com/zendframework/zend-expressive-skeleton/pull/33)
   updates to zendframework/zend-expressive-helpers `^1.2`.
 - [#33](https://github.com/zendframework/zend-expressive-skeleton/pull/33) adds
