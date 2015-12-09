@@ -26,6 +26,10 @@ Fourth release candidate.
 - [#23](https://github.com/zendframework/zend-expressive-skeleton/pull/23)
   updates the comment for the glob statements to ensure all 4 (not just 2!)
   possible matches are detailed.
+- [#24](https://github.com/zendframework/zend-expressive-skeleton/pull/24)
+  updates the `config/config.php` file to store cached configuration as a plain
+  PHP file, so that it can simply `include()`; this will be faster than using
+  JSON-serialized structures.
 - [#33](https://github.com/zendframework/zend-expressive-skeleton/pull/33)
   updates to zendframework/zend-expressive-helpers `^1.2`.
 - [#33](https://github.com/zendframework/zend-expressive-skeleton/pull/33) adds
