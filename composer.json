@@ -30,7 +30,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/App/",
-            "Zend\\Expressive\\Composer\\": "src/Composer/"
+            "ExpressiveInstaller\\": "src/ExpressiveInstaller/"
         }
     },
     "autoload-dev": {
@@ -39,8 +39,8 @@
         }
     },
     "scripts": {
-        "pre-install-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
-        "pre-update-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
+        "pre-install-cmd": "ExpressiveInstaller\\OptionalPackages::install",
+        "pre-update-cmd": "ExpressiveInstaller\\OptionalPackages::install",
         "check": [
             "@cs",
             "@test"

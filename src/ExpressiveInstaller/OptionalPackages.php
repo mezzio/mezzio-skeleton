@@ -7,7 +7,7 @@
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Composer;
+namespace ExpressiveInstaller;
 
 use Composer\Composer;
 use Composer\Factory;
@@ -28,8 +28,8 @@ use RecursiveIteratorIterator;
  * Add this script to composer.json:
  *
  *  "scripts": {
- *      "pre-update-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
- *      "pre-install-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install"
+ *      "pre-update-cmd": "ExpressiveInstaller\\OptionalPackages::install",
+ *      "pre-install-cmd": "ExpressiveInstaller\\OptionalPackages::install"
  *  },
  */
 class OptionalPackages
