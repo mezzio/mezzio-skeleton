@@ -8,7 +8,10 @@ Fourth release candidate.
 
 ### Added
 
-- Nothing.
+- [#34](https://github.com/zendframework/zend-expressive-skeleton/pull/34)
+  updates the zend-view configuration to register a factory for
+  `Zend\View\HelperPluginManager`, as well as a `view_helpers` sub-key for
+  registering custom view helpers.
 
 ### Deprecated
 
@@ -20,8 +23,10 @@ Fourth release candidate.
 
 ### Fixed
 
-- Updates to zendframework/zend-expressive-helpers `^1.2`.
-- Adds configuration for auto-registering the new `Zend\Expressive\Helper\UrlHelperMiddleware`
+- [#33](https://github.com/zendframework/zend-expressive-skeleton/pull/33)
+  updates to zendframework/zend-expressive-helpers `^1.2`.
+- [#33](https://github.com/zendframework/zend-expressive-skeleton/pull/33) adds
+  configuration for auto-registering the new `Zend\Expressive\Helper\UrlHelperMiddleware`
   as pipeline middleware; this fixes an issue when using the zend-view renderer
   with the `url()` helper whereby the `UrlHelper` was being registered as a
   route result observer too late to receive the `RouteResult`.
