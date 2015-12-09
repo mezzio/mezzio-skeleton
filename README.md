@@ -46,5 +46,7 @@ After choosing and installing the packages you want, go to the
 `<project-path>` and start PHP's built-in web server to verify installation:
 
 ```bash
-$ php -S 0.0.0.0:8000 -t public/
+$ composer serve
 ```
+
+You can then browse to http://localhost:8080.
