@@ -29,9 +29,22 @@ Start your new Expressive project with composer:
 $ composer create-project zendframework/zend-expressive-skeleton <project-path>
 ```
 
+> ### Release Candidates
+>
+> At this time, we are currently issuing release candidates. By default,
+> Composer only installs *stable* versions if no stability flag is provided,
+> which means that the above statement will pick up a 0.X version of the
+> skeleton and Expressive.
+>
+> To install a release candidate, use the following:
+>
+> ```bash
+> $ composer create-project zendframework/zend-expressive-skeleton:^1.0@rc <project-path>
+> ```
+
 After choosing and installing the packages you want, go to the
 `<project-path>` and start PHP's built-in web server to verify installation:
 
 ```bash
-$ php -S 0.0.0.0:8000 -t public/ public/index.php
+$ php -S 0.0.0.0:8000 -t public/
 ```
