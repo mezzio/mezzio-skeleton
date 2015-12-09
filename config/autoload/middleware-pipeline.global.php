@@ -15,13 +15,17 @@ return [
         'pre_routing' => [
             //[
             // Required:
-            //    'middleware' => 'Name of middleware service, or a callable',
+            //    'middleware' => 'Name or array of names of middleware services and/or callables',
             // Optional:
             //    'path'  => '/path/to/match',
             //    'error' => true,
             //],
-            [ 'middleware' => Helper\ServerUrlMiddleware::class ],
-            [ 'middleware' => Helper\UrlHelperMiddleware::class ],
+            [ 
+                'middleware' => [
+                    Helper\ServerUrlMiddleware::class,
+                    Helper\UrlHelperMiddleware::class
+                ],
+            ]
         ],
 
         // An array of middleware to register after registration of the
