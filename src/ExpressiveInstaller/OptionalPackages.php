@@ -179,7 +179,7 @@ class OptionalPackages
         }
 
         // Remove installer script autoloading rules
-        unset(self::$composerDefinition['autoload']['psr-4']['Zend\\Expressive\\Composer\\']);
+        unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
 
         // Update composer definition
         $json->write(self::$composerDefinition);
