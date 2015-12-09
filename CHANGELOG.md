@@ -17,6 +17,9 @@ Fourth release candidate.
   subdirectories of each under those, and updating the `composer.json`
   autoloading directives accordingly. This change will allow new projects to
   implement a "modular" structure if desired, with a subdirectory per namespace.
+- [#41](https://github.com/zendframework/zend-expressive-skeleton/pull/41) adds
+  the composer script "serve", which fires up the built-in PHP webserver on port
+  8080; invoke using `composer serve`.
 
 ### Deprecated
 
