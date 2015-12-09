@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.0.0rc4 - TBD
+## 1.0.0rc4 - 2015-12-09
 
 Fourth release candidate.
 
@@ -12,6 +12,11 @@ Fourth release candidate.
   updates the zend-view configuration to register a factory for
   `Zend\View\HelperPluginManager`, as well as a `view_helpers` sub-key for
   registering custom view helpers.
+- [#37](https://github.com/zendframework/zend-expressive-skeleton/pull/37)
+  creates the subdirectories `src/App/` and `test/AppTest/`, moving the
+  subdirectories of each under those, and updating the `composer.json`
+  autoloading directives accordingly. This change will allow new projects to
+  implement a "modular" structure if desired, with a subdirectory per namespace.
 
 ### Deprecated
 
