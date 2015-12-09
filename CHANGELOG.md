@@ -30,6 +30,12 @@ Fourth release candidate.
   updates the `config/config.php` file to store cached configuration as a plain
   PHP file, so that it can simply `include()`; this will be faster than using
   JSON-serialized structures.
+- [#30](https://github.com/zendframework/zend-expressive-skeleton/pull/30)
+  updates the Twig configuration to follow the changes made for
+  [zendframework/zend-expressive-twigrenderer 0.3.0](https://github.com/zendframework/zend-expressive-twigrenderer/releases/tag/0.3.0).
+  The old configuration format will still work, though users *should* update
+  their configuration to the new format. The change in this patch only affects
+  new installs.
 - [#33](https://github.com/zendframework/zend-expressive-skeleton/pull/33)
   updates to zendframework/zend-expressive-helpers `^1.2`.
 - [#33](https://github.com/zendframework/zend-expressive-skeleton/pull/33) adds
