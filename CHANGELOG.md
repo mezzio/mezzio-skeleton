@@ -48,6 +48,8 @@ Fourth release candidate.
   as pipeline middleware; this fixes an issue when using the zend-view renderer
   with the `url()` helper whereby the `UrlHelper` was being registered as a
   route result observer too late to receive the `RouteResult`.
+- [#40](https://github.com/zendframework/zend-expressive-skeleton/pull/40)
+  renames the namespace for the installer to `ExpressiveInstaller`.
 
 ## 1.0.0rc3 - 2015-12-07
 
