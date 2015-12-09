@@ -8,6 +8,9 @@ return [
 
             Zend\Expressive\Template\TemplateRendererInterface::class =>
                 Zend\Expressive\ZendView\ZendViewRendererFactory::class,
+
+            Zend\View\HelperPluginManager::class =>
+                Zend\Expressive\ZendView\HelperPluginManagerFactory::class,
         ],
     ],
 
@@ -22,6 +25,15 @@ return [
             'app'    => ['templates/app'],
             'layout' => ['templates/layout'],
             'error'  => ['templates/error'],
-        ]
-    ]
+        ],
+    ],
+
+    'view_helpers' => [
+        // zend-servicemanager-style configuration for adding view helpers:
+        // - 'aliases'
+        // - 'invokables'
+        // - 'factories'
+        // - 'abstract_factories'
+        // - etc.
+    ],
 ];
