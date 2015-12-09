@@ -6,7 +6,7 @@ return [
         'factories' => [
             Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
             Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
-        ]
+        ],
     ],
     // This can be used to seed pre- and/or post-routing middleware
     'middleware_pipeline' => [
@@ -15,13 +15,17 @@ return [
         'pre_routing' => [
             //[
             // Required:
-            //    'middleware' => 'Name of middleware service, or a callable',
+            //    'middleware' => 'Name or array of names of middleware services and/or callables',
             // Optional:
             //    'path'  => '/path/to/match',
             //    'error' => true,
             //],
-            [ 'middleware' => Helper\ServerUrlMiddleware::class ],
-            [ 'middleware' => Helper\UrlHelperMiddleware::class ],
+            [
+                'middleware' => [
+                    Helper\ServerUrlMiddleware::class,
+                    Helper\UrlHelperMiddleware::class,
+                ],
+            ],
         ],
 
         // An array of middleware to register after registration of the
