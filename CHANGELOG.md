@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#42](https://github.com/zendframework/zend-expressive-skeleton/pull/42)
+  fixes some grammatical issues in the questions presented by the installer.
+
 ## 1.0.0rc4 - 2015-12-09
 
 Fourth release candidate.
