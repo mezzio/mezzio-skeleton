@@ -21,7 +21,7 @@ return [
 
     'questions' => [
         'router' => [
-            'question'               => 'Which router you want to use?',
+            'question'               => 'Which router do you want to use?',
             'default'                => 2,
             // TRUE: Must choose one / FALSE: May choose one or none of the above
             'required'               => true,
@@ -72,7 +72,7 @@ return [
         ],
 
         'container' => [
-            'question'               => 'Which container you want to use for dependency injection?',
+            'question'               => 'Which container do you want to use for dependency injection?',
             'default'                => 3,
             'required'               => true,
             'custom-package'         => true,
@@ -119,7 +119,7 @@ return [
         ],
 
         'template-engine' => [
-            'question'       => 'Which template engine you want to use?',
+            'question'       => 'Which template engine do you want to use?',
             'default'        => 'n',
             'required'       => false,
             'custom-package' => true,
