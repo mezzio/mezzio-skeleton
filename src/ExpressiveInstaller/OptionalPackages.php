@@ -42,27 +42,27 @@ class OptionalPackages
     /**
      * @var array
      */
-    private static $config;
+    public static $config;
 
     /**
      * @var array
      */
-    private static $composerDefinition;
+    public static $composerDefinition;
 
     /**
      * @var string[]
      */
-    private static $composerRequires;
+    public static $composerRequires;
 
     /**
      * @var string[]
      */
-    private static $composerDevRequires;
+    public static $composerDevRequires;
 
     /**
      * @var string[]
      */
-    private static $stabilityFlags;
+    public static $stabilityFlags;
 
     /**
      * Install command: choose packages and provide configuration.
@@ -288,7 +288,7 @@ class OptionalPackages
      * @param $packageName
      * @param $packageVersion
      */
-    private static function addPackage(IOInterface $io, $packageName, $packageVersion)
+    public static function addPackage(IOInterface $io, $packageName, $packageVersion)
     {
         $io->write(sprintf(
             "  - Adding package <info>%s</info> (<comment>%s</comment>)",
@@ -340,7 +340,7 @@ class OptionalPackages
      * @param string $target Destination.
      * @param bool $force whether or not to copy over an existing file.
      */
-    private static function copyFile(IOInterface $io, $projectRoot, $source, $target, $force = false)
+    public static function copyFile(IOInterface $io, $projectRoot, $source, $target, $force = false)
     {
         // Copy file
         if ($force === false && is_file($projectRoot . $target)) {
