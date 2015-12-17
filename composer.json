@@ -23,7 +23,7 @@
         "zendframework/zend-stdlib": "~2.7"
     },
     "require-dev": {
-        "composer/composer": ">=1.0.0-alpha10",
+        "composer/composer": ">=1.0.0-alpha11",
         "phpunit/phpunit": "^4.8",
         "squizlabs/php_codesniffer": "^2.3"
     },
