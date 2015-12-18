@@ -8,7 +8,7 @@ use ExpressiveInstallerTest\InstallerTestCase;
 class AuraRouterTest extends InstallerTestCase
 {
 
-    public $testFiles = [
+    protected $teardownFiles = [
         '/config/container.php',
         '/config/autoload/routes.global.php',
     ];
@@ -49,10 +49,8 @@ class AuraRouterTest extends InstallerTestCase
         ];
         $this->assertEquals($routes, $config['routes']);
 
-        // Test composer.json
-
         // Test home page
-        $response = $this->getHomePageResponse();
+        $response = $this->getAppResponse();
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -74,10 +72,8 @@ class AuraRouterTest extends InstallerTestCase
         );
         $this->assertEquals([], $config['routes']);
 
-        // Test composer.json
-
         // Test home page
-        $response = $this->getHomePageResponse();
+        $response = $this->getAppResponse('/');
         $this->assertEquals(404, $response->getStatusCode());
     }
 }

@@ -10,7 +10,6 @@ use Interop\Container\ContainerInterface;
 use Prophecy\Argument;
 use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response;
-use Zend\Diactoros\Response\EmitterInterface;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
 
@@ -21,20 +20,16 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
      */
     private $io;
 
-    private $composerDefinition;
-
     private $projectRoot;
-
-    private $config;
 
     /**
      * @var ContainerInterface
      */
-    private $container;
+    protected $container;
 
-    private $response;
+    protected $response;
 
-    public $testFiles = [];
+    protected $teardownFiles = [];
 
     public function setup()
     {
@@ -81,31 +76,11 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
 
     public function cleanup()
     {
-        foreach ($this->testFiles as $file) {
+        foreach ($this->teardownFiles as $file) {
             if (is_file($this->projectRoot.$file)) {
                 unlink($this->projectRoot.$file);
             }
         }
-    }
-
-    public function getEmitter()
-    {
-        $self = $this;
-        $emitter = $this->prophesize(EmitterInterface::class);
-        $emitter
-            ->emit(Argument::type(ResponseInterface::class))
-            ->will(
-                function ($args) use ($self) {
-                    $response = array_shift($args);
-                    $self->response = $response;
-
-                    return null;
-                }
-            )
-            ->shouldBeCalled()
-        ;
-
-        return $emitter->reveal();
     }
 
     public function getContainer()
@@ -118,13 +93,13 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
         return $this->container;
     }
 
-    public function getHomePageResponse()
+    public function getAppResponse($path = '/')
     {
         $container = $this->getContainer();
 
         /** @var Application $app */
         $app = $container->get('Zend\Expressive\Application');
-        $request = new ServerRequest([], [], 'https://example.com/', 'GET');
+        $request = new ServerRequest([], [], 'https://example.com'.$path, 'GET');
 
         /** @var ResponseInterface $response */
         $response = $app($request, new Response());
