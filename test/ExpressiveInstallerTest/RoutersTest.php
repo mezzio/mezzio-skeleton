@@ -33,7 +33,7 @@ class RoutersTest extends InstallerTestCase
     /**
      * @dataProvider routerProvider
      */
-    public function testFullInstall(
+    public function testRouter(
         $containerOption,
         $routerOption,
         $copyFilesKey,

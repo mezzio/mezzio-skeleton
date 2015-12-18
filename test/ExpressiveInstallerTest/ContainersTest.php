@@ -20,7 +20,7 @@ class ContainersTest extends InstallerTestCase
     /**
      * @dataProvider containerProvider
      */
-    public function testFullInstall(
+    public function testContainer(
         $containerOption,
         $routerOption,
         $copyFilesKey,
