@@ -162,8 +162,19 @@ class OptionalPackages
         // House keeping
         $io->write("<info>Remove installer</info>");
 
-        // Remove composer source
+        // Remove test dependencies
         unset(self::$composerDefinition['require-dev']['composer/composer']);
+        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-aurarouter']);
+        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-fastroute']);
+        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-zendrouter']);
+        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-platesrenderer']);
+        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-twigrenderer']);
+        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-zendviewrenderer']);
+        unset(self::$composerDefinition['require-dev']['zendframework/zend-servicemanager']);
+        unset(self::$composerDefinition['require-dev']['ocramius/proxy-manager']);
+        unset(self::$composerDefinition['require-dev']['aura/di']);
+        unset(self::$composerDefinition['require-dev']['mouf/pimple-interop']);
+        unset(self::$composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
 
         // Remove installer data
         unset(self::$composerDefinition['extra']['optional-packages']);
@@ -189,7 +200,7 @@ class OptionalPackages
             self::removeDefaultMiddleware($io, $projectRoot);
         }
 
-        self::cleanUp($io);
+        self::cleanUp($io, $projectRoot);
     }
 
     /**
@@ -199,11 +210,13 @@ class OptionalPackages
      * this one) and assets (including configuration and templates).
      *
      * @param IOInterface $io
+     * @param string      $projectRoot
      */
-    private static function cleanUp(IOInterface $io)
+    private static function cleanUp(IOInterface $io, $projectRoot)
     {
-        $io->write("<info>Removing Expressive installer classes and configuration</info>");
+        $io->write("<info>Removing Expressive installer classes, configuration and tests</info>");
         self::recursiveRmdir(__DIR__);
+        self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
     }
 
     /**
