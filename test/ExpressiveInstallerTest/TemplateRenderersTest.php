@@ -7,7 +7,6 @@ use Zend\Expressive;
 
 class TemplateRenderersTest extends InstallerTestCase
 {
-
     protected $teardownFiles = [
         '/config/container.php',
         '/config/autoload/routes.global.php',
@@ -58,7 +57,6 @@ class TemplateRenderersTest extends InstallerTestCase
             Expressive\Container\TemplatedErrorHandlerFactory::class,
             $config['dependencies']['factories']['Zend\Expressive\FinalHandler']
         );
-
 
         // Test template renderer
         $templateRenderer = $container->get(Expressive\Template\TemplateRendererInterface::class);

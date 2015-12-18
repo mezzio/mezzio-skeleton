@@ -11,7 +11,6 @@ use Zend\ServiceManager\ServiceManager as ZendServiceManagerContainer;
 
 class ContainersTest extends InstallerTestCase
 {
-
     protected $teardownFiles = [
         '/config/container.php',
         '/config/autoload/routes.global.php',

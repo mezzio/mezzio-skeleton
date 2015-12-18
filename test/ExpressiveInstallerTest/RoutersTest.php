@@ -9,7 +9,6 @@ use Zend\Expressive\Router;
 
 class RoutersTest extends InstallerTestCase
 {
-
     protected $teardownFiles = [
         '/config/container.php',
         '/config/autoload/routes.global.php',
