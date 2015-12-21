@@ -1,3 +1,12 @@
+<?php
+$this->headLink()
+    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
+
+$this->inlineScript()
+    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+    ->prependFile('https://code.jquery.com/jquery-2.1.4.min.js');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +15,7 @@
     <?php echo $this->headTitle('zend-expressive')->setSeparator(' - ')->setAutoEscape(false) ?>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <?php echo $this->headMeta(); ?>
-    <?php echo $this->headLink()
-                    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
-                    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
-    ?>
+    <?php echo $this->headLink(); ?>
     <style>
         body { padding-top: 60px; }
         .app { display: flex; min-height: 100vh; flex-direction: column; }
@@ -70,11 +76,6 @@
         </div>
     </footer>
 
-    <?php echo $this->headScript()
-                    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
-                    ->prependFile('https://code.jquery.com/jquery-2.1.4.min.js');
-
-        echo $this->inlineScript();
-    ?>
+    <?php echo $this->inlineScript(); ?>
 </body>
 </html>

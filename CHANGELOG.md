@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.0.0 - TBD
+## 1.0.0rc5 - TBD
 
 ### Added
 
@@ -20,6 +20,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#42](https://github.com/zendframework/zend-expressive-skeleton/pull/42)
   fixes some grammatical issues in the questions presented by the installer.
+- [#45](https://github.com/zendframework/zend-expressive-skeleton/pull/45)
+  fixes how JS and CSS assets are added to zend-view templates.
 
 ## 1.0.0rc4 - 2015-12-09
 
