@@ -22,6 +22,9 @@ All notable changes to this project will be documented in this file, in reverse 
   fixes some grammatical issues in the questions presented by the installer.
 - [#45](https://github.com/zendframework/zend-expressive-skeleton/pull/45)
   fixes how JS and CSS assets are added to zend-view templates.
+- [#48](https://github.com/zendframework/zend-expressive-skeleton/pull/48)
+  adds unit tests for the `OptionalPackages` class (which provides the Composer
+  installer scripts).
 
 ## 1.0.0rc4 - 2015-12-09
 
