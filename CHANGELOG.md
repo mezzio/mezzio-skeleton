@@ -25,6 +25,9 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#48](https://github.com/zendframework/zend-expressive-skeleton/pull/48)
   adds unit tests for the `OptionalPackages` class (which provides the Composer
   installer scripts).
+- [#49](https://github.com/zendframework/zend-expressive-skeleton/pull/49)
+  updates the Pimple support to Pimple v3, ensuring Pimple users are using the
+  latest stable release.
 
 ## 1.0.0rc4 - 2015-12-09
 
