@@ -214,7 +214,7 @@ class OptionalPackages
      */
     private static function cleanUp(IOInterface $io, $projectRoot)
     {
-        $io->write("<info>Removing Expressive installer classes, configuration and tests</info>");
+        $io->write("<info>Removing Expressive installer classes, configuration, and tests</info>");
         self::recursiveRmdir(__DIR__);
         self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
     }
