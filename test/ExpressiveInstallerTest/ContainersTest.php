@@ -12,7 +12,7 @@ namespace ExpressiveInstallerTest;
 use Aura\Di\Container as AuraContainer;
 use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
-use Interop\Container\Pimple\PimpleInterop as PimpleInteropContainer;
+use Xtreamwayz\Pimple\Container as PimpleContainer;
 use ReflectionProperty;
 use Zend\Expressive;
 use Zend\ServiceManager\ServiceManager as ZendServiceManagerContainer;
@@ -68,8 +68,8 @@ class ContainersTest extends InstallerTestCase
         return [
             'aura-minimal'    => [1, 2, 'minimal-files', 404, AuraContainer::class],
             'aura-full'       => [1, 2, 'copy-files', 200, AuraContainer::class],
-            'pimple-minimal'  => [2, 2, 'minimal-files', 404, PimpleInteropContainer::class],
-            'pimple-full'     => [2, 2, 'copy-files', 200, PimpleInteropContainer::class],
+            'pimple-minimal'  => [2, 2, 'minimal-files', 404, PimpleContainer::class],
+            'pimple-full'     => [2, 2, 'copy-files', 200, PimpleContainer::class],
             'zend-sm-minimal' => [3, 2, 'minimal-files', 404, ZendServiceManagerContainer::class],
             'zend-sm-full'    => [3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
         ];
