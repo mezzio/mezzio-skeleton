@@ -48,11 +48,19 @@ To run tests:
 - Install dependencies via composer:
 
   ```console
-  $ curl -sS https://getcomposer.org/installer | php --
-  $ ./composer.phar install
+  $ composer install
   ```
 
-  If you don't have `curl` installed, you can also download `composer.phar` from https://getcomposer.org/
+  **NOTE:** If you are wanting to test the installer itself, add the
+  `--no-scripts` flag to the `composer install` command.
+
+  If you don't have `curl` installed, you can also download `composer.phar` from
+  https://getcomposer.org/:
+
+  ```console
+  $ curl -sS https://getcomposer.org/installer | php --
+  $ ln -s composer.phar composer
+  ```
 
 - Run the tests using the "test" command shipped in the `composer.json`:
 

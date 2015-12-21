@@ -6,7 +6,7 @@
     "authors": [
         {
             "name": "Geert Eltink",
-            "homepage": "https://xtreamwayz.github.io/"
+            "homepage": "https://xtreamwayz.com/"
         }
     ],
     "extra": {
@@ -23,9 +23,20 @@
         "zendframework/zend-stdlib": "~2.7"
     },
     "require-dev": {
-        "composer/composer": ">=1.0.0-alpha10",
         "phpunit/phpunit": "^4.8",
-        "squizlabs/php_codesniffer": "^2.3"
+        "squizlabs/php_codesniffer": "^2.3",
+        "filp/whoops": "^1.1",
+        "composer/composer": ">=1.0.0-alpha11",
+        "zendframework/zend-expressive-aurarouter": "^1.0",
+        "zendframework/zend-expressive-fastroute": "^1.0",
+        "zendframework/zend-expressive-zendrouter": "^1.0",
+        "zendframework/zend-expressive-platesrenderer": "^1.0",
+        "zendframework/zend-expressive-twigrenderer": "^1.0",
+        "zendframework/zend-expressive-zendviewrenderer": "^1.0",
+        "zendframework/zend-servicemanager": "^2.5",
+        "ocramius/proxy-manager": "^1.0",
+        "aura/di": "3.0.*@beta",
+        "mouf/pimple-interop": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -35,7 +46,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "AppTest\\": "test/AppTest/"
+            "AppTest\\": "test/AppTest/",
+            "ExpressiveInstallerTest\\": "test/ExpressiveInstallerTest/"
         }
     },
     "scripts": {
