@@ -37,7 +37,7 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
 
         $this->cleanup();
 
-        $this->io = $this->prophesize('Composer\IO\IOInterface')->reveal();
+        $this->io = $this->prophesize('Composer\IO\IOInterface');
 
         // Get composer.json
         $composerFile = Factory::getComposerFile();
@@ -69,7 +69,7 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
         // Copy files
         if (isset($config[$copyFilesKey])) {
             foreach ($config[$copyFilesKey] as $source => $target) {
-                OptionalPackages::copyFile($this->io, $this->projectRoot, $source, $target);
+                OptionalPackages::copyFile($this->io->reveal(), $this->projectRoot, $source, $target);
             }
         }
     }
