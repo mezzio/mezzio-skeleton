@@ -1,4 +1,11 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
+ * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ */
 
 namespace ExpressiveInstallerTest;
 
@@ -6,6 +13,7 @@ use Aura\Di\Container as AuraContainer;
 use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Pimple\PimpleInterop as PimpleInteropContainer;
+use ReflectionProperty;
 use Zend\Expressive;
 use Zend\ServiceManager\ServiceManager as ZendServiceManagerContainer;
 
@@ -26,13 +34,17 @@ class ContainersTest extends InstallerTestCase
         $expectedResponseStatusCode,
         $expectedContainer
     ) {
+        $r = new ReflectionProperty(OptionalPackages::class, 'config');
+        $r->setAccessible(true);
+        $config = $r->getValue();
+
         // Install packages
         $this->installPackage(
-            OptionalPackages::$config['questions']['container']['options'][$containerOption],
+            $config['questions']['container']['options'][$containerOption],
             $copyFilesKey
         );
         $this->installPackage(
-            OptionalPackages::$config['questions']['router']['options'][$routerOption],
+            $config['questions']['router']['options'][$routerOption],
             $copyFilesKey
         );
 

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
+ * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ */
 
 namespace ExpressiveInstallerTest;
 
@@ -9,6 +16,7 @@ use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
 use Prophecy\Argument;
 use Psr\Http\Message\ResponseInterface;
+use ReflectionProperty;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
@@ -39,14 +47,19 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
 
         $this->io = $this->prophesize('Composer\IO\IOInterface');
 
+        $composerDefinition = new ReflectionProperty(OptionalPackages::class, 'composerDefinition');
+        $composerDefinition->setAccessible(true);
+
         // Get composer.json
         $composerFile = Factory::getComposerFile();
         $json = new JsonFile($composerFile);
-        OptionalPackages::$composerDefinition = $json->read();
+        $composerDefinition->setValue($json->read());
 
         $this->projectRoot = realpath(dirname($composerFile));
 
-        OptionalPackages::$config = require 'src/ExpressiveInstaller/config.php';
+        $config = new ReflectionProperty(OptionalPackages::class, 'config');
+        $config->setAccessible(true);
+        $config->setValue(require 'src/ExpressiveInstaller/config.php');
     }
 
     public function tearDown()

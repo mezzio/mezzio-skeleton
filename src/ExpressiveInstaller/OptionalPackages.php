@@ -42,27 +42,27 @@ class OptionalPackages
     /**
      * @var array
      */
-    public static $config;
+    private static $config;
 
     /**
      * @var array
      */
-    public static $composerDefinition;
+    private static $composerDefinition;
 
     /**
      * @var string[]
      */
-    public static $composerRequires;
+    private static $composerRequires;
 
     /**
      * @var string[]
      */
-    public static $composerDevRequires;
+    private static $composerDevRequires;
 
     /**
      * @var string[]
      */
-    public static $stabilityFlags;
+    private static $stabilityFlags;
 
     /**
      * Install command: choose packages and provide configuration.
