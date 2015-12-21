@@ -71,13 +71,12 @@ class RoutersTest extends InstallerTestCase
     {
         // $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter
         return [
-            [3, 1, 'copy-files', 200, $this->expectedRoutes, Router\AuraRouter::class],
-            [3, 2, 'copy-files', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            [3, 3, 'copy-files', 200, $this->expectedRoutes, Router\ZendRouter::class],
-
-            [3, 1, 'minimal-files', 404, [], Router\AuraRouter::class],
-            [3, 2, 'minimal-files', 404, [], Router\FastRouteRouter::class],
-            [3, 3, 'minimal-files', 404, [], Router\ZendRouter::class],
+            'aura-minimal'        => [3, 1, 'minimal-files', 404, [], Router\AuraRouter::class],
+            'aura-full'           => [3, 1, 'copy-files', 200, $this->expectedRoutes, Router\AuraRouter::class],
+            'fastroute-minimal'   => [3, 2, 'minimal-files', 404, [], Router\FastRouteRouter::class],
+            'fastroute-full'      => [3, 2, 'copy-files', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
+            'zend-router-minimal' => [3, 3, 'minimal-files', 404, [], Router\ZendRouter::class],
+            'zend-router-full'    => [3, 3, 'copy-files', 200, $this->expectedRoutes, Router\ZendRouter::class],
         ];
     }
 }

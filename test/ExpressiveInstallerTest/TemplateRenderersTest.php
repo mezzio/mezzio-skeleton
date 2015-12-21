@@ -75,13 +75,12 @@ class TemplateRenderersTest extends InstallerTestCase
         // $containerOption, $routerOption, $templateRendererOption, $copyFilesKey, $expectedResponseStatusCode,
         // $expectedTemplateRenderer
         return [
-            [3, 2, 1, 'copy-files', 200, Expressive\Plates\PlatesRenderer::class],
-            [3, 2, 2, 'copy-files', 200, Expressive\Twig\TwigRenderer::class],
-            [3, 2, 3, 'copy-files', 200, Expressive\ZendView\ZendViewRenderer::class],
-
-            [3, 2, 1, 'minimal-files', 404, Expressive\Plates\PlatesRenderer::class],
-            [3, 2, 2, 'minimal-files', 404, Expressive\Twig\TwigRenderer::class],
-            [3, 2, 3, 'minimal-files', 404, Expressive\ZendView\ZendViewRenderer::class],
+            'plates-minimal'    => [3, 2, 1, 'minimal-files', 404, Expressive\Plates\PlatesRenderer::class],
+            'plates-full'       => [3, 2, 1, 'copy-files', 200, Expressive\Plates\PlatesRenderer::class],
+            'twig-minimal'      => [3, 2, 2, 'minimal-files', 404, Expressive\Twig\TwigRenderer::class],
+            'twig-full'         => [3, 2, 2, 'copy-files', 200, Expressive\Twig\TwigRenderer::class],
+            'zend-view-minimal' => [3, 2, 3, 'minimal-files', 404, Expressive\ZendView\ZendViewRenderer::class],
+            'zend-view-full'    => [3, 2, 3, 'copy-files', 200, Expressive\ZendView\ZendViewRenderer::class],
         ];
     }
 }

@@ -2,11 +2,11 @@
 
 namespace ExpressiveInstallerTest;
 
+use Aura\Di\Container as AuraContainer;
 use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
-use Zend\Expressive;
-use Aura\Di\Container as AuraContainer;
 use Interop\Container\Pimple\PimpleInterop as PimpleInteropContainer;
+use Zend\Expressive;
 use Zend\ServiceManager\ServiceManager as ZendServiceManagerContainer;
 
 class ContainersTest extends InstallerTestCase
@@ -54,13 +54,12 @@ class ContainersTest extends InstallerTestCase
     {
         // $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
         return [
-            [1, 2, 'copy-files', 200, AuraContainer::class],
-            [2, 2, 'copy-files', 200, PimpleInteropContainer::class],
-            [3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
-
-            [1, 2, 'minimal-files', 404, AuraContainer::class],
-            [2, 2, 'minimal-files', 404, PimpleInteropContainer::class],
-            [3, 2, 'minimal-files', 404, ZendServiceManagerContainer::class],
+            'aura-minimal'    => [1, 2, 'minimal-files', 404, AuraContainer::class],
+            'aura-full'       => [1, 2, 'copy-files', 200, AuraContainer::class],
+            'pimple-minimal'  => [2, 2, 'minimal-files', 404, PimpleInteropContainer::class],
+            'pimple-full'     => [2, 2, 'copy-files', 200, PimpleInteropContainer::class],
+            'zend-sm-minimal' => [3, 2, 'minimal-files', 404, ZendServiceManagerContainer::class],
+            'zend-sm-full'    => [3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
         ];
     }
 }
