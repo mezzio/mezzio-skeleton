@@ -8,6 +8,9 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router;
 use Zend\Expressive\Template;
+use Zend\Expressive\Plates\PlatesRenderer;
+use Zend\Expressive\Twig\TwigRenderer;
+use Zend\Expressive\ZendView\ZendViewRenderer;
 
 class HomePageAction
 {
@@ -36,13 +39,13 @@ class HomePageAction
             $data['routerDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.mvc.routing.html';
         }
 
-        if ($this->template instanceof Template\PlatesRenderer) {
+        if ($this->template instanceof PlatesRenderer) {
             $data['templateName'] = 'Plates';
             $data['templateDocs'] = 'http://platesphp.com/';
-        } elseif ($this->template instanceof Template\TwigRenderer) {
+        } elseif ($this->template instanceof TwigRenderer) {
             $data['templateName'] = 'Twig';
             $data['templateDocs'] = 'http://twig.sensiolabs.org/documentation';
-        } elseif ($this->template instanceof Template\ZendViewRenderer) {
+        } elseif ($this->template instanceof ZendViewRenderer) {
             $data['templateName'] = 'Zend View';
             $data['templateDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.view.quick-start.html';
         }
