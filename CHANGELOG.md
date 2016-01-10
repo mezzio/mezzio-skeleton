@@ -26,6 +26,10 @@ First stable release.
   intercept and serve will be passed to the application (previously, the
   built-in server would treat these as 404s, and never pass them to the
   application).
+- [#57](https://github.com/zendframework/zend-expressive-skeleton/pull/57)
+  updates the Apache configuration rules defined in `public/.htaccess` to omit
+  several that could prevent the application from intercepting requests for
+  assets.
 
 ## 1.0.0rc5 - 2015-12-22
 
