@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.0 - TBD
+
+First stable release.
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#56](https://github.com/zendframework/zend-expressive-skeleton/pull/56)
+  updates the `composer serve` command to include the `public/index.php` script
+  as an argument. This ensures that asset paths that the application could
+  intercept and serve will be passed to the application (previously, the
+  built-in server would treat these as 404s, and never pass them to the
+  application).
+
 ## 1.0.0rc5 - 2015-12-22
 
 Fifth release candidate.
