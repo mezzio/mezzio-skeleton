@@ -46,7 +46,7 @@ After choosing and installing the packages you want, go to the
 `<project-path>` and start PHP's built-in web server to verify installation:
 
 ```bash
-$ composer serve
+$ COMPOSER_PROCESS_TIMEOUT=86400 composer serve
 ```
 
 You can then browse to http://localhost:8080.
