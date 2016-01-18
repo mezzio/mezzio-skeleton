@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.0.0 - TBD
+## 1.0.0rc6 - TBD
 
-First stable release.
+Sixth release candidate.
 
 ### Added
 
@@ -30,6 +30,9 @@ First stable release.
   updates the Apache configuration rules defined in `public/.htaccess` to omit
   several that could prevent the application from intercepting requests for
   assets.
+- [#52](https://github.com/zendframework/zend-expressive-skeleton/pull/52)
+  fixes the switch statement in the `HomePageAction` class to ensure the
+  template name and documentation link are accurately found.
 
 ## 1.0.0rc5 - 2015-12-22
 
