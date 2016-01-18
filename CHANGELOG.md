@@ -33,6 +33,9 @@ Sixth release candidate.
 - [#52](https://github.com/zendframework/zend-expressive-skeleton/pull/52)
   fixes the switch statement in the `HomePageAction` class to ensure the
   template name and documentation link are accurately found.
+- [#59](https://github.com/zendframework/zend-expressive-skeleton/pull/59)
+  updates the `config/container.php` implementation for zend-servicemanager such
+  that it can work with either v2 or v3 of that library.
 
 ## 1.0.0rc5 - 2015-12-22
 
