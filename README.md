@@ -51,6 +51,21 @@ $ composer serve
 
 You can then browse to http://localhost:8080.
 
+> ### Setting a timeout
+>
+> Composer commands time out after 300 seconds (5 minutes). On Linux-based
+> systems, the `php -S` command that `composer server` spawns continues running
+> as a background process, but on other systems halts when the timeout occurs.
+>
+> If you want the server to live longer, you can use the
+> `COMPOSER_PROCESS_TIMEOUT` environment variable when executing `composer
+> serve` to extend the timeout. As an example, the following will extend it
+> to a full day:
+>
+> ```bash
+> $ COMPOSER_PROCESS_TIMEOUT=86400 composer serve
+> ```
+
 ## Skeleton Development
 
 This section applies only if you cloned this repo with `git clone`, not when you installed expressive with
