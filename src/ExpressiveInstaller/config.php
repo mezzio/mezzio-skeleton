@@ -12,7 +12,7 @@ return [
         'zendframework/zend-expressive-twigrenderer'     => '^1.0',
         'zendframework/zend-expressive-zendrouter'       => '^1.0',
         'zendframework/zend-expressive-zendviewrenderer' => '^1.0',
-        'zendframework/zend-servicemanager'              => '^2.5',
+        'zendframework/zend-servicemanager'              => '^2.7.3 || ^3.0',
     ],
 
     'require-dev' => [
