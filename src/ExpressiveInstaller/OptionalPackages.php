@@ -64,6 +64,20 @@ class OptionalPackages
      */
     private static $stabilityFlags;
 
+    private static $devDependencies = [
+        'composer/composer',
+        'zendframework/zend-expressive-aurarouter',
+        'zendframework/zend-expressive-fastroute',
+        'zendframework/zend-expressive-zendrouter',
+        'zendframework/zend-expressive-platesrenderer',
+        'zendframework/zend-expressive-twigrenderer',
+        'zendframework/zend-expressive-zendviewrenderer',
+        'zendframework/zend-servicemanager',
+        'ocramius/proxy-manager',
+        'aura/di',
+        'xtreamwayz/pimple-container-interop'
+    ];
+
     /**
      * Install command: choose packages and provide configuration.
      *
@@ -107,6 +121,13 @@ class OptionalPackages
 
         // Get stability flags
         self::$stabilityFlags = $rootPackage->getStabilityFlags();
+
+        // Cleanup development dependencies first from stability flags, dev requires and the definition file
+        foreach (self::$devDependencies as $devDependency) {
+            unset(self::$stabilityFlags[$devDependency]);
+            unset(self::$composerDevRequires[$devDependency]);
+            unset(self::$composerDefinition['require-dev'][$devDependency]);
+        }
 
         // Minimal?
         $minimal      = self::requestMinimal($io);
@@ -163,17 +184,6 @@ class OptionalPackages
         $io->write("<info>Remove installer</info>");
 
         // Remove test dependencies
-        unset(self::$composerDefinition['require-dev']['composer/composer']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-aurarouter']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-fastroute']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-zendrouter']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-platesrenderer']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-twigrenderer']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-zendviewrenderer']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-servicemanager']);
-        unset(self::$composerDefinition['require-dev']['ocramius/proxy-manager']);
-        unset(self::$composerDefinition['require-dev']['aura/di']);
-        unset(self::$composerDefinition['require-dev']['mouf/pimple-interop']);
         unset(self::$composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
 
         // Remove installer data
