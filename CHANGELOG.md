@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.0.0rc6 - TBD
+## 1.0.0rc6 - 2016-01-19
 
 Sixth release candidate.
 
@@ -36,6 +36,21 @@ Sixth release candidate.
 - [#59](https://github.com/zendframework/zend-expressive-skeleton/pull/59)
   updates the `config/container.php` implementation for zend-servicemanager such
   that it can work with either v2 or v3 of that library.
+- [#60](https://github.com/zendframework/zend-expressive-skeleton/pull/60)
+  updates the zend-expressive-helpers dependency to `^2.0`, and updates the
+  `config/autoload/middleware-pipeline.global.php` to follow the changes in
+  middleware configuration introduced in [zend-expressive #270](https://github.com/zendframework/zend-expressive/pull/270).
+  The change introduces convention-based keys for "always" (execute before
+  routing), "routing" (routing, listeners that act on the route result, and
+  dispatching), and "error", with reasonable priorities to ensure execution
+  order.
+- [#60](https://github.com/zendframework/zend-expressive-skeleton/pull/60)
+  fixes the documentation for `composer create-project` to include the
+  `--no-dev` flag; this is done as composer currently installs the development
+  dependencies listed before the installer script rewrites the `composer.json`
+  file. Running `composer update` or `composer install` within the project
+  directory after the initial installation will install the development
+  dependencies.
 
 ## 1.0.0rc5 - 2015-12-22
 
