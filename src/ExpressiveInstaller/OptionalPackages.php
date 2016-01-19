@@ -126,7 +126,7 @@ class OptionalPackages
         foreach (self::$devDependencies as $devDependency) {
             unset(self::$stabilityFlags[$devDependency]);
             unset(self::$composerDevRequires[$devDependency]);
-            unset(self::$composerDefinition[$devDependency]);
+            unset(self::$composerDefinition['require-dev'][$devDependency]);
         }
 
         // Minimal?
