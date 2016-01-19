@@ -26,7 +26,7 @@ removed.
 Start your new Expressive project with composer:
 
 ```bash
-$ composer create-project --no-dev zendframework/zend-expressive-skeleton <project-path>
+$ composer create-project zendframework/zend-expressive-skeleton <project-path>
 ```
 
 > ### Release Candidates
@@ -39,14 +39,8 @@ $ composer create-project --no-dev zendframework/zend-expressive-skeleton <proje
 > To install a release candidate, use the following:
 >
 > ```bash
-> $ composer create-project --no-dev "zendframework/zend-expressive-skeleton:^1.0@rc" <project-path>
+> $ composer create-project -s rc zendframework/zend-expressive-skeleton <project-path>
 > ```
-
-> ### Development requirements
->
-> If you want Composer to install the development requirements defined by the
-> skeleton — specifically PHPUnit and PHP_CodeSniffer — run a `composer update`
-> after installing the skeleton.
 
 After choosing and installing the packages you want, go to the
 `<project-path>` and start PHP's built-in web server to verify installation:

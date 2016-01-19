@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.0rc7 - 2016-01-19
+
+Seventh release candidate.
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#64](https://github.com/zendframework/zend-expressive-skeleton/pull/64)
+  fixes the installer script to correctly rewrite the `require-dev` section
+  and ensure only the development dependencies selected, as well as base 
+  requirements such as PHPUnit and PHP_CodeSniffer, are installed. As such,
+  the `--no-dev` flag is no longer required, and development dependencies
+  such as whoops are properly installed.
+
 ## 1.0.0rc6 - 2016-01-19
 
 Sixth release candidate.
