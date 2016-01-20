@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.0rc8 - TBD
+
+Eighth release candidate.
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#66](https://github.com/zendframework/zend-expressive-skeleton/pull/66)
+  adds the `'error' => true,` declaration to the `'error'` pipeline middleware
+  specification.
+
 ## 1.0.0rc7 - 2016-01-19
 
 Seventh release candidate.
