@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.0.0rc8 - TBD
+## 1.0.0rc8 - 2016-01-21
 
 Eighth release candidate.
 
