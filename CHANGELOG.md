@@ -23,6 +23,11 @@ Eighth release candidate.
 - [#66](https://github.com/zendframework/zend-expressive-skeleton/pull/66)
   adds the `'error' => true,` declaration to the `'error'` pipeline middleware
   specification.
+- [#67](https://github.com/zendframework/zend-expressive-skeleton/pull/67)
+  updates the `filp/whoops` dependency for installer development to `^1.1 || ^2.0`;
+  the two are compatible for our use cases, but we should prefer the latest
+  that can be installed. As 2.0 requires PHP 5.5.9, but our minimum PHP version
+  is 5.5.0, we must specify both.
 
 ## 1.0.0rc7 - 2016-01-19
 
