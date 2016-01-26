@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.0 - TBC
+
+First stable release.
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#69](https://github.com/zendframework/zend-expressive-skeleton/pull/69)
+  updates the links in templates to point to the new documentation site on
+  https://zendframework.github.io/zend-expressive/ instead of rtfd.org.
+
 ## 1.0.0rc8 - 2016-01-21
 
 Eighth release candidate.
