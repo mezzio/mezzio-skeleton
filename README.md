@@ -53,6 +53,19 @@ You can then browse to http://localhost:8080.
 > $ COMPOSER_PROCESS_TIMEOUT=86400 composer serve
 > ```
 
+## Troubleshooting
+
+If the installer fails during the ``composer create-project`` phase, please go through the following list before
+opening a new issue. Most issues we have seen so far can be solved by self-update and clear-cache.
+
+1. Be sure to work with the latest version of composer by running ``composer self-update``.
+2. Try clearing Composer's cache by running ``composer clear-cache``.
+
+If this didn't help, you might face more serious issues:
+- Info about the [zlib_decode error](https://github.com/composer/composer/issues/4121).
+- Info and solutions for
+[composer degraded mode](https://getcomposer.org/doc/articles/troubleshooting.md#degraded-mode).
+
 ## Skeleton Development
 
 This section applies only if you cloned this repo with `git clone`, not when you installed expressive with
