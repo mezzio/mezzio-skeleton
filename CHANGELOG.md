@@ -49,6 +49,10 @@ All notable changes to this project will be documented in this file, in reverse 
   fixes an issue in the installer whereby specified constraints were not being
   passed to Composer prior to dependency resolution/installation, resulting in
   stale dependencies.
+- [#78](https://github.com/zendframework/zend-expressive-skeleton/pull/78)
+  updates the shipped default error templates to remove error/exception display.
+  Users who really need this functionality can write their own templates; the
+  project aims to deliver a "safe by default" setting.
 
 ## 1.0.0 - 2016-01-28
 
