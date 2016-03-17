@@ -18,7 +18,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#53](https://github.com/zendframework/zend-expressive-skeleton/pull/53)
+  updates the default Pimple container script such that it now caches factory
+  instances for re-use.
 
 ## 1.0.0 - 2016-01-28
 
