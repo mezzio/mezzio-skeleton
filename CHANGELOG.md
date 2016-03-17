@@ -43,6 +43,8 @@ All notable changes to this project will be documented in this file, in reverse 
   updates the `composer.json` to remove the possibility of installing an
   Expressive RC version, updates zend-servicemanager to allow using 3.0
   versions, and updates whoops to allow either 1.1 or 2.0 versions.
+- [#80](https://github.com/zendframework/zend-expressive-skeleton/pull/80)
+  updates the default ProxyManager constraints to also allow v2 versions.
 
 ## 1.0.0 - 2016-01-28
 
