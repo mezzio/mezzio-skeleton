@@ -13,9 +13,15 @@ $container['config'] = $config;
 
 // Inject factories
 foreach ($config['dependencies']['factories'] as $name => $object) {
-    $container[$name] = function ($c) use ($object) {
-        $factory = new $object();
-        return $factory($c);
+    $container[$name] = function ($c) use ($object, $name) {
+        if ($c->has($object)) {
+            $factory = $c->get($object);
+        } else {
+            $factory = new $object();
+            $c[$object] = $factory;
+        }
+
+        return $factory($c, $name);
     };
 }
 // Inject invokables
