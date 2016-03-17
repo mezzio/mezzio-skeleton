@@ -55,31 +55,34 @@ You can then browse to http://localhost:8080.
 
 ## Troubleshooting
 
-If the installer fails during the ``composer create-project`` phase, please go through the following list before
-opening a new issue. Most issues we have seen so far can be solved by self-update and clear-cache.
+If the installer fails during the ``composer create-project`` phase, please go
+through the following list before opening a new issue. Most issues we have seen
+so far can be solved by `self-update` and `clear-cache`.
 
-1. Be sure to work with the latest version of composer by running ``composer self-update``.
-2. Try clearing Composer's cache by running ``composer clear-cache``.
+1. Be sure to work with the latest version of composer by running `composer self-update`.
+2. Try clearing Composer's cache by running `composer clear-cache`.
 
-If this didn't help, you might face more serious issues:
+If neither of the above help, you might face more serious issues:
+
 - Info about the [zlib_decode error](https://github.com/composer/composer/issues/4121).
-- Info and solutions for
-[composer degraded mode](https://getcomposer.org/doc/articles/troubleshooting.md#degraded-mode).
+- Info and solutions for [composer degraded mode](https://getcomposer.org/doc/articles/troubleshooting.md#degraded-mode).
 
 ## Skeleton Development
 
-This section applies only if you cloned this repo with `git clone`, not when you installed expressive with
-`composer create-project ...`.
+This section applies only if you cloned this repo with `git clone`, not when you
+installed expressive with `composer create-project ...`.
 
-If you want to run tests against the installer, you need to clone this repo and setup all dependencies with composer.
-Make sure you **prevent composer running scripts** with `--no-scripts`, otherwise it will remove the installer and
-all tests.
+If you want to run tests against the installer, you need to clone this repo and
+setup all dependencies with composer.  Make sure you **prevent composer running
+scripts** with `--no-scripts`, otherwise it will remove the installer and all
+tests.
 
 ```bash
 $ composer install --no-scripts
 $ composer test
 ```
 
-Please note that the installer tests remove installed config files and templates before and after running the tests.
+Please note that the installer tests remove installed config files and templates
+before and after running the tests.
 
 Before contributing read [the contributing guide](CONTRIBUTING.md).
