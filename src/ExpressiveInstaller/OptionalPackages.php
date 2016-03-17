@@ -319,8 +319,12 @@ class OptionalPackages
             $packageVersion
         ));
 
+        // Get the version constraint
+        $versionParser = new VersionParser();
+        $constraint = $versionParser->parseConstraints($packageVersion);
+
         // Create package link
-        $link = new Link('__root__', $packageName, null, 'requires', $packageVersion);
+        $link = new Link('__root__', $packageName, $constraint, 'requires', $packageVersion);
 
         // Add package to the root package and composer.json requirements
         if (in_array($packageName, self::$config['require-dev'])) {

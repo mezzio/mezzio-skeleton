@@ -45,6 +45,10 @@ All notable changes to this project will be documented in this file, in reverse 
   versions, and updates whoops to allow either 1.1 or 2.0 versions.
 - [#80](https://github.com/zendframework/zend-expressive-skeleton/pull/80)
   updates the default ProxyManager constraints to also allow v2 versions.
+- [#81](https://github.com/zendframework/zend-expressive-skeleton/pull/81)
+  fixes an issue in the installer whereby specified constraints were not being
+  passed to Composer prior to dependency resolution/installation, resulting in
+  stale dependencies.
 
 ## 1.0.0 - 2016-01-28
 
