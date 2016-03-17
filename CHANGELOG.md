@@ -39,6 +39,10 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#53](https://github.com/zendframework/zend-expressive-skeleton/pull/53)
   updates the default Pimple container script such that it now caches factory
   instances for re-use.
+- [#72](https://github.com/zendframework/zend-expressive-skeleton/pull/72)
+  updates the `composer.json` to remove the possibility of installing an
+  Expressive RC version, updates zend-servicemanager to allow using 3.0
+  versions, and updates whoops to allow either 1.1 or 2.0 versions.
 
 ## 1.0.0 - 2016-01-28
 
