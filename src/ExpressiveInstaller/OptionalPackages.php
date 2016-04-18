@@ -180,6 +180,8 @@ class OptionalPackages
         // Set stability flags
         $rootPackage->setStabilityFlags(self::$stabilityFlags);
 
+        $excludeLockFile = self::requestExcludeComposerLock($io);
+
         // House keeping
         $io->write("<info>Remove installer</info>");
 
@@ -208,6 +210,10 @@ class OptionalPackages
         // Minimal install? Remove default middleware
         if ($minimal) {
             self::removeDefaultMiddleware($io, $projectRoot);
+        }
+
+        if (!$excludeLockFile) {
+            self::clearComposerLockFile($io, $projectRoot);
         }
 
         self::cleanUp($io, $projectRoot);
@@ -384,6 +390,20 @@ class OptionalPackages
     }
 
     /**
+     * Remove line from content.
+     *
+     * @param string $entry Entry to remove.
+     * @param string $content String to remove entry from.
+     * @return string
+     */
+    public static function removeLine($entry, $content)
+    {
+        $entry = preg_quote($entry, '/');
+
+        return preg_replace("/$entry\\W*/", '', $content);
+    }
+
+    /**
      * Ask if the user would like a minimal install.
      *
      * @param IOInterface $io
@@ -446,5 +466,46 @@ class OptionalPackages
             unlink($filename);
         }
         rmdir($directory);
+    }
+
+    /**
+     * Ask if user would like to remove composer.lock entry from .gitignore file.
+     *
+     * @param IOInterface $io
+     * @return bool
+     */
+    private static function requestExcludeComposerLock(IOInterface $io)
+    {
+        $query = [
+            sprintf(
+                "\n  <question>%s</question>\n",
+                'Exclude composer.lock file from version control system?'
+            ),
+            "  [<comment>y</comment>] Yes\n",
+            "  [<comment>n</comment>] No\n",
+            "  Make your choice <comment>(No)</comment>: ",
+        ];
+
+        $answer = $io->ask($query, 'n');
+        if (strtolower($answer) == 'n') {
+            // Nothing else to do!
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param IOInterface $io
+     * @param string $projectRoot
+     */
+    private static function clearComposerLockFile($io, $projectRoot)
+    {
+        $io->write("<info>Removing composer.lock from .gitignore</info>");
+
+        $ignoreFile = "$projectRoot/.gitignore";
+
+        $content = self::removeLine('composer.lock', file_get_contents($ignoreFile));
+        file_put_contents($ignoreFile, $content);
     }
 }
