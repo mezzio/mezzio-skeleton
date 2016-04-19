@@ -180,8 +180,6 @@ class OptionalPackages
         // Set stability flags
         $rootPackage->setStabilityFlags(self::$stabilityFlags);
 
-        $excludeLockFile = self::requestExcludeComposerLock($io);
-
         // House keeping
         $io->write("<info>Remove installer</info>");
 
@@ -212,10 +210,7 @@ class OptionalPackages
             self::removeDefaultMiddleware($io, $projectRoot);
         }
 
-        if (!$excludeLockFile) {
-            self::clearComposerLockFile($io, $projectRoot);
-        }
-
+        self::clearComposerLockFile($io, $projectRoot);
         self::cleanUp($io, $projectRoot);
     }
 
@@ -466,33 +461,6 @@ class OptionalPackages
             unlink($filename);
         }
         rmdir($directory);
-    }
-
-    /**
-     * Ask if user would like to remove composer.lock entry from .gitignore file.
-     *
-     * @param IOInterface $io
-     * @return bool
-     */
-    private static function requestExcludeComposerLock(IOInterface $io)
-    {
-        $query = [
-            sprintf(
-                "\n  <question>%s</question>\n",
-                'Exclude composer.lock file from version control system?'
-            ),
-            "  [<comment>y</comment>] Yes\n",
-            "  [<comment>n</comment>] No\n",
-            "  Make your choice <comment>(No)</comment>: ",
-        ];
-
-        $answer = $io->ask($query, 'n');
-        if (strtolower($answer) == 'n') {
-            // Nothing else to do!
-            return false;
-        }
-
-        return true;
     }
 
     /**
