@@ -21,13 +21,13 @@
         "roave/security-advisories": "dev-master",
         "zendframework/zend-expressive": "^1.0",
         "zendframework/zend-expressive-helpers": "^2.0",
-        "zendframework/zend-stdlib": "~2.7"
+        "zendframework/zend-stdlib": "^2.7 || ^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
         "squizlabs/php_codesniffer": "^2.3",
         "filp/whoops": "^1.1 || ^2.0",
-        "composer/composer": ">=1.0.0-beta1",
+        "composer/composer": "^1.0",
         "zendframework/zend-expressive-aurarouter": "^1.0",
         "zendframework/zend-expressive-fastroute": "^1.0",
         "zendframework/zend-expressive-zendrouter": "^1.0",
