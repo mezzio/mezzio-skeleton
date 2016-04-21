@@ -10,14 +10,15 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
+use PHPUnit_Framework_TestCase as TestCase;
 
-class RemoveComposerLockTest extends \PHPUnit_Framework_TestCase
+class RemoveComposerLockTest extends TestCase
 {
-    public function testRemoveLine()
+    public function testRemoveLineFromString()
     {
         $string = "foo\nbar\nbaz";
 
-        $actual = OptionalPackages::removeLine('bar', $string);
+        $actual = OptionalPackages::removeLineFromString('bar', $string);
         $expected = "foo\nbaz";
 
         $this->assertEquals($expected, $actual);

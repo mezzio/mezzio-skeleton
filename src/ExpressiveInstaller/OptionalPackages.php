@@ -385,17 +385,19 @@ class OptionalPackages
     }
 
     /**
-     * Remove line from content.
+     * Remove line from string content.
      *
      * @param string $entry Entry to remove.
      * @param string $content String to remove entry from.
      * @return string
      */
-    public static function removeLine($entry, $content)
+    public static function removeLineFromString($entry, $content)
     {
-        $entry = preg_quote($entry, '/');
-
-        return preg_replace("/$entry\\W*/", '', $content);
+        return preg_replace(
+            sprintf("/(\r?\n)%s\r?\n/s", preg_quote($entry, '/')),
+            '$1',
+            $content
+        );
     }
 
     /**
@@ -473,7 +475,7 @@ class OptionalPackages
 
         $ignoreFile = "$projectRoot/.gitignore";
 
-        $content = self::removeLine('composer.lock', file_get_contents($ignoreFile));
+        $content = self::removeLineFromString('composer.lock', file_get_contents($ignoreFile));
         file_put_contents($ignoreFile, $content);
     }
 }
