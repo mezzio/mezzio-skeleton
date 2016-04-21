@@ -210,6 +210,7 @@ class OptionalPackages
             self::removeDefaultMiddleware($io, $projectRoot);
         }
 
+        self::clearComposerLockFile($io, $projectRoot);
         self::cleanUp($io, $projectRoot);
     }
 
@@ -384,6 +385,20 @@ class OptionalPackages
     }
 
     /**
+     * Remove line from content.
+     *
+     * @param string $entry Entry to remove.
+     * @param string $content String to remove entry from.
+     * @return string
+     */
+    public static function removeLine($entry, $content)
+    {
+        $entry = preg_quote($entry, '/');
+
+        return preg_replace("/$entry\\W*/", '', $content);
+    }
+
+    /**
      * Ask if the user would like a minimal install.
      *
      * @param IOInterface $io
@@ -446,5 +461,19 @@ class OptionalPackages
             unlink($filename);
         }
         rmdir($directory);
+    }
+
+    /**
+     * @param IOInterface $io
+     * @param string $projectRoot
+     */
+    private static function clearComposerLockFile($io, $projectRoot)
+    {
+        $io->write("<info>Removing composer.lock from .gitignore</info>");
+
+        $ignoreFile = "$projectRoot/.gitignore";
+
+        $content = self::removeLine('composer.lock', file_get_contents($ignoreFile));
+        file_put_contents($ignoreFile, $content);
     }
 }
