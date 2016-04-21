@@ -1,8 +1,9 @@
 {
     "name": "zendframework/zend-expressive-skeleton",
+    "description": "Zend expressive skelton. Begin developing PSR-7 middleware applications in seconds",
     "type": "project",
     "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
-    "license": "BSD-3-CLAUSE",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Geert Eltink",
@@ -35,7 +36,7 @@
         "zendframework/zend-expressive-zendviewrenderer": "^1.0",
         "zendframework/zend-servicemanager": "^2.7.3 || ^3.0",
         "ocramius/proxy-manager": "^1.0",
-        "aura/di": "3.0.*@beta",
+        "aura/di": "^3.0",
         "xtreamwayz/pimple-container-interop": "^1.0"
     },
     "autoload": {
