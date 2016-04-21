@@ -20,6 +20,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#85](https://github.com/zendframework/zend-expressive-skeleton/pull/85)
   updates the Aura.Di dependency to stable 3.X versions.
+- [#89](https://github.com/zendframework/zend-expressive-skeleton/pull/89)
+  updates the zend-stdlib dependency to allow usage of its v3 series.
 
 ## 1.0.1 - 2016-03-17
 
