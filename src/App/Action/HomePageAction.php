@@ -30,7 +30,7 @@ class HomePageAction
 
         if ($this->router instanceof Router\AuraRouter) {
             $data['routerName'] = 'Aura.Router';
-            $data['routerDocs'] = 'http://auraphp.com/packages/Aura.Router/';
+            $data['routerDocs'] = 'http://auraphp.com/packages/2.x/Router.html';
         } elseif ($this->router instanceof Router\FastRouteRouter) {
             $data['routerName'] = 'FastRoute';
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
