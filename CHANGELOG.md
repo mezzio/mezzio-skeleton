@@ -20,6 +20,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#85](https://github.com/zendframework/zend-expressive-skeleton/pull/85)
   updates the Aura.Di dependency to stable 3.X versions.
+- [#88](https://github.com/zendframework/zend-expressive-skeleton/pull/88)
+  modifies the installer to remove `composer.lock` from the `.gitignore` file
+  during initial installation.
 
 ## 1.0.1 - 2016-03-17
 
