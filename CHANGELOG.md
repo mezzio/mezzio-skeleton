@@ -18,7 +18,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#85](https://github.com/zendframework/zend-expressive-skeleton/pull/85)
+  updates the Aura.Di dependency to stable 3.X versions.
 
 ## 1.0.1 - 2016-03-17
 
