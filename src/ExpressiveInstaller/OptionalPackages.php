@@ -432,7 +432,8 @@ class OptionalPackages
             $io->write("<error>Invalid answer</error>");
         }
 
-        return true;
+        // This should never be reached, defaults to default answer
+        return false;
     }
 
     /**
