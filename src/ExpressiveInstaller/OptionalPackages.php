@@ -418,10 +418,21 @@ class OptionalPackages
             "  Make your selection <comment>(No)</comment>: ",
         ];
 
-        $answer = $io->ask($query, 'n');
+        while (true) {
+            $answer = $io->ask($query, 'n');
 
-        // Full install for `n`/`N`/`2`, anything else triggers a minimal install
-        return !(strtolower($answer) === 'n' || $answer === '2');
+            if (strtolower($answer) === 'n') {
+                return false;
+            }
+
+            if (strtolower($answer) === 'y') {
+                return true;
+            }
+
+            $io->write("<error>Invalid answer</error>");
+        }
+
+        return true;
     }
 
     /**
