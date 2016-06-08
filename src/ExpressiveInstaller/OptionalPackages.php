@@ -419,12 +419,13 @@ class OptionalPackages
         ];
 
         $answer = $io->ask($query, 'n');
-        if ($answer == 'n') {
-            // Nothing else to do!
+        if ($answer === 'n' || $answer === 'N' || $answer === 2) {
+            //
             return false;
         }
 
-        return true;
+        // Full install for `n`/`N`/`2`, anything else triggers a minimal install
+        return !($answer === 'n' || $answer === 'N' || $answer === '2');
     }
 
     /**
