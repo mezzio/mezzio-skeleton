@@ -425,7 +425,7 @@ class OptionalPackages
         }
 
         // Full install for `n`/`N`/`2`, anything else triggers a minimal install
-        return !($answer === 'n' || $answer === 'N' || $answer === '2');
+        return !(strtolower($answer) === 'n' || $answer === '2');
     }
 
     /**
