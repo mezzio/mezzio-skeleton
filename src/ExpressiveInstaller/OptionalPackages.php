@@ -66,6 +66,7 @@ class OptionalPackages
 
     private static $devDependencies = [
         'composer/composer',
+        'filp/whoops',
         'zendframework/zend-expressive-aurarouter',
         'zendframework/zend-expressive-fastroute',
         'zendframework/zend-expressive-zendrouter',
