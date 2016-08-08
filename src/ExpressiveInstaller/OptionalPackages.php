@@ -73,7 +73,6 @@ class OptionalPackages
         'zendframework/zend-expressive-twigrenderer',
         'zendframework/zend-expressive-zendviewrenderer',
         'zendframework/zend-servicemanager',
-        'ocramius/proxy-manager',
         'aura/di',
         'xtreamwayz/pimple-container-interop'
     ];
