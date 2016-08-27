@@ -30,8 +30,6 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
      */
     protected $container;
 
-    protected $response;
-
     protected $teardownFiles = [];
 
     /**
@@ -68,8 +66,6 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
 
     protected function setup()
     {
-        $this->response = null;
-
         $this->cleanup();
 
         // Set config
