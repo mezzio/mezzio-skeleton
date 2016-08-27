@@ -14,10 +14,10 @@ use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Composer\Package\AliasPackage;
+use Composer\Package\BasePackage;
 use Composer\Package\Link;
 use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
-use Composer\Package\BasePackage;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -65,17 +65,17 @@ class OptionalPackages
     private static $stabilityFlags;
 
     private static $devDependencies = [
+        'aura/di',
         'composer/composer',
         'filp/whoops',
+        'xtreamwayz/pimple-container-interop',
         'zendframework/zend-expressive-aurarouter',
         'zendframework/zend-expressive-fastroute',
-        'zendframework/zend-expressive-zendrouter',
         'zendframework/zend-expressive-platesrenderer',
         'zendframework/zend-expressive-twigrenderer',
+        'zendframework/zend-expressive-zendrouter',
         'zendframework/zend-expressive-zendviewrenderer',
         'zendframework/zend-servicemanager',
-        'aura/di',
-        'xtreamwayz/pimple-container-interop'
     ];
 
     /**
@@ -91,18 +91,18 @@ class OptionalPackages
      */
     public static function install(Event $event)
     {
-        $io = $event->getIO();
+        $io       = $event->getIO();
         $composer = $event->getComposer();
 
         // Get composer.json
-        $composerFile = Factory::getComposerFile();
-        $json = new JsonFile($composerFile);
+        $composerFile             = Factory::getComposerFile();
+        $json                     = new JsonFile($composerFile);
         self::$composerDefinition = $json->read();
 
         $projectRoot = realpath(dirname($composerFile));
 
         $io->write("<info>Setup data and cache dir</info>");
-        if (! is_dir($projectRoot . '/data/cache')) {
+        if (!is_dir($projectRoot . '/data/cache')) {
             mkdir($projectRoot . '/data/cache', 0775, true);
             chmod($projectRoot . '/data', 0775);
         }
@@ -116,18 +116,14 @@ class OptionalPackages
         }
 
         // Get required packages
-        self::$composerRequires = $rootPackage->getRequires();
+        self::$composerRequires    = $rootPackage->getRequires();
         self::$composerDevRequires = $rootPackage->getDevRequires();
 
         // Get stability flags
         self::$stabilityFlags = $rootPackage->getStabilityFlags();
 
-        // Cleanup development dependencies first from stability flags, dev requires and the definition file
-        foreach (self::$devDependencies as $devDependency) {
-            unset(self::$stabilityFlags[$devDependency]);
-            unset(self::$composerDevRequires[$devDependency]);
-            unset(self::$composerDefinition['require-dev'][$devDependency]);
-        }
+        // Cleanup development dependencies
+        self::removeDevDependencies();
 
         // Minimal?
         $minimal      = self::requestMinimal($io);
@@ -215,6 +211,21 @@ class OptionalPackages
     }
 
     /**
+     * Cleanup development dependencies.
+     *
+     * The dev dependencies should be removed from the stability flags,
+     * require-dev and the composer file.
+     */
+    private static function removeDevDependencies()
+    {
+        foreach (self::$devDependencies as $devDependency) {
+            unset(self::$stabilityFlags[$devDependency]);
+            unset(self::$composerDevRequires[$devDependency]);
+            unset(self::$composerDefinition['require-dev'][$devDependency]);
+        }
+    }
+
+    /**
      * Clean up/remove installer classes and assets.
      *
      * On completion of install/update, removes the installer classes (including
@@ -233,10 +244,11 @@ class OptionalPackages
     /**
      * Prepare and ask questions and return the answer
      *
-     * @param Composer $composer
+     * @param Composer    $composer
      * @param IOInterface $io
-     * @param $question
-     * @param $defaultOption
+     * @param             $question
+     * @param             $defaultOption
+     *
      * @return bool|int|string
      */
     private static function askQuestion(Composer $composer, IOInterface $io, $question, $defaultOption)
@@ -283,7 +295,7 @@ class OptionalPackages
                 $packageName    = $match['name'];
                 $packageVersion = $match['version'];
 
-                if (! $packageVersion) {
+                if (!$packageVersion) {
                     $io->write("<error>No package version specified</error>");
                     continue;
                 }
@@ -291,7 +303,7 @@ class OptionalPackages
                 $io->write(sprintf("  - Searching for <info>%s:%s</info>", $packageName, $packageVersion));
 
                 $optionalPackage = $composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
-                if (! $optionalPackage) {
+                if (!$optionalPackage) {
                     $io->write(sprintf("<error>Package not found %s:%s</error>", $packageName, $packageVersion));
                     continue;
                 }
@@ -309,8 +321,8 @@ class OptionalPackages
      * Add a package
      *
      * @param IOInterface $io
-     * @param $packageName
-     * @param $packageVersion
+     * @param             $packageName
+     * @param             $packageVersion
      */
     public static function addPackage(IOInterface $io, $packageName, $packageVersion)
     {
@@ -322,7 +334,7 @@ class OptionalPackages
 
         // Get the version constraint
         $versionParser = new VersionParser();
-        $constraint = $versionParser->parseConstraints($packageVersion);
+        $constraint    = $versionParser->parseConstraints($packageVersion);
 
         // Create package link
         $link = new Link('__root__', $packageName, $constraint, 'requires', $packageVersion);
@@ -333,13 +345,13 @@ class OptionalPackages
             unset(self::$composerRequires[$packageName]);
 
             self::$composerDefinition['require-dev'][$packageName] = $packageVersion;
-            self::$composerDevRequires[$packageName] = $link;
+            self::$composerDevRequires[$packageName]               = $link;
         } else {
             unset(self::$composerDefinition['require-dev'][$packageName]);
             unset(self::$composerDevRequires[$packageName]);
 
             self::$composerDefinition['require'][$packageName] = $packageVersion;
-            self::$composerRequires[$packageName] = $link;
+            self::$composerRequires[$packageName]              = $link;
         }
 
         // Set package stability if needed
@@ -363,10 +375,10 @@ class OptionalPackages
      * Copy a file to its final destination in the skeleton.
      *
      * @param IOInterface $io
-     * @param string $projectRoot
-     * @param string $source Source file.
-     * @param string $target Destination.
-     * @param bool $force whether or not to copy over an existing file.
+     * @param string      $projectRoot
+     * @param string      $source Source file.
+     * @param string      $target Destination.
+     * @param bool        $force  whether or not to copy over an existing file.
      */
     public static function copyFile(IOInterface $io, $projectRoot, $source, $target, $force = false)
     {
@@ -376,7 +388,7 @@ class OptionalPackages
         }
 
         $destinationPath = dirname($projectRoot . $target);
-        if (! is_dir($destinationPath)) {
+        if (!is_dir($destinationPath)) {
             mkdir($destinationPath, 0775, true);
         }
 
@@ -387,8 +399,9 @@ class OptionalPackages
     /**
      * Remove line from string content.
      *
-     * @param string $entry Entry to remove.
+     * @param string $entry   Entry to remove.
      * @param string $content String to remove entry from.
+     *
      * @return string
      */
     public static function removeLineFromString($entry, $content)
@@ -404,6 +417,7 @@ class OptionalPackages
      * Ask if the user would like a minimal install.
      *
      * @param IOInterface $io
+     *
      * @return bool
      */
     private static function requestMinimal(IOInterface $io)
@@ -440,7 +454,7 @@ class OptionalPackages
      * If a minimal install was requested, remove the default middleware and assets.
      *
      * @param IOInterface $io
-     * @param string $projectRoot Project root from which to derive the directory to remove
+     * @param string      $projectRoot Project root from which to derive the directory to remove
      */
     private static function removeDefaultMiddleware(IOInterface $io, $projectRoot)
     {
@@ -476,7 +490,7 @@ class OptionalPackages
 
     /**
      * @param IOInterface $io
-     * @param string $projectRoot
+     * @param string      $projectRoot
      */
     private static function clearComposerLockFile($io, $projectRoot)
     {
