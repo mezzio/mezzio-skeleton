@@ -178,25 +178,7 @@ class OptionalPackages
 
         // House keeping
         $io->write("<info>Remove installer</info>");
-
-        // Remove test dependencies
-        unset(self::$composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
-
-        // Remove installer data
-        unset(self::$composerDefinition['extra']['optional-packages']);
-        if (empty(self::$composerDefinition['extra'])) {
-            unset(self::$composerDefinition['extra']);
-        }
-
-        // Remove installer scripts, only need to do this once
-        unset(self::$composerDefinition['scripts']['pre-update-cmd']);
-        unset(self::$composerDefinition['scripts']['pre-install-cmd']);
-        if (empty(self::$composerDefinition['scripts'])) {
-            unset(self::$composerDefinition['scripts']);
-        }
-
-        // Remove installer script autoloading rules
-        unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
+        self::removeInstallerFromDefinition();
 
         // Update composer definition
         $json->write(self::$composerDefinition);
@@ -223,6 +205,28 @@ class OptionalPackages
             unset(self::$composerDevRequires[$devDependency]);
             unset(self::$composerDefinition['require-dev'][$devDependency]);
         }
+    }
+
+    private static function removeInstallerFromDefinition()
+    {
+        // Remove test dependencies
+        unset(self::$composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
+
+        // Remove installer data
+        unset(self::$composerDefinition['extra']['optional-packages']);
+        if (empty(self::$composerDefinition['extra'])) {
+            unset(self::$composerDefinition['extra']);
+        }
+
+        // Remove installer scripts, only need to do this once
+        unset(self::$composerDefinition['scripts']['pre-update-cmd']);
+        unset(self::$composerDefinition['scripts']['pre-install-cmd']);
+        if (empty(self::$composerDefinition['scripts'])) {
+            unset(self::$composerDefinition['scripts']);
+        }
+
+        // Remove installer script autoloading rules
+        unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
     }
 
     /**
