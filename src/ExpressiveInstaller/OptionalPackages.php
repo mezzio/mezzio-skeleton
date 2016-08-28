@@ -141,9 +141,6 @@ class OptionalPackages
             // Get answer
             $answer = self::askQuestion($composer, $io, $question, $defaultOption);
 
-            // Save user selected option
-            self::$composerDefinition['extra']['optional-packages'][$questionName] = $answer;
-
             if (is_numeric($answer)) {
                 // Add packages to install
                 if (isset($question['options'][$answer]['packages'])) {
@@ -164,6 +161,9 @@ class OptionalPackages
                     $io->write(sprintf("  <warning>%s</warning>", $question['custom-package-warning']));
                 }
             }
+
+            // Save user selected option
+            self::$composerDefinition['extra']['optional-packages'][$questionName] = $answer;
 
             // Update composer definition
             $json->write(self::$composerDefinition);
