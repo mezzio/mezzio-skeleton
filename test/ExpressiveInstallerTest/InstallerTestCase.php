@@ -190,7 +190,7 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
         return $this->refStabilityFlags->getValue();
     }
 
-    protected function composerRequires($package)
+    private function composerHasPackage($package)
     {
         if (array_key_exists($package, $this->getComposerRequires())) {
             return true;
@@ -201,5 +201,48 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
         }
 
         return false;
+    }
+
+    private function composerDefinitionHasPackage($package)
+    {
+        $definition = $this->getComposerDefinition();
+
+        if (array_key_exists($package, $definition['require'])) {
+            return true;
+        }
+
+        if (array_key_exists($package, $definition['require-dev'])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function assertComposerHasPackages(array $packages)
+    {
+        $list = [];
+        foreach ($packages as $package) {
+            if (false === $this->composerHasPackage($package)
+                || false === $this->composerDefinitionHasPackage($package)
+            ) {
+                $list[] = $package;
+            }
+        }
+
+        $this->assertCount(0, $list, sprintf('Several packages were not found "%s"', implode(', ', $list)));
+    }
+
+    public function assertComposerNotHasPackages(array $packages)
+    {
+        $list = [];
+        foreach ($packages as $package) {
+            if (true === $this->composerHasPackage($package)
+                || true === $this->composerDefinitionHasPackage($package)
+            ) {
+                $list[] = $package;
+            }
+        }
+
+        $this->assertCount(0, $list, sprintf('Several packages were found "%s"', implode(', ', $list)));
     }
 }

@@ -14,35 +14,43 @@ use ReflectionMethod;
 
 class RemoveDevDependenciesTest extends InstallerTestCase
 {
-    /**
-     * @dataProvider packageProvider
-     */
-    public function testDevDependenciesRemoval($package)
-    {
-        $this->assertTrue($this->composerRequires($package));
+    private $standardDependencies = [
+        'php',
+        'roave/security-advisories',
+        'zendframework/zend-expressive',
+        'zendframework/zend-expressive-helpers',
+        'zendframework/zend-stdlib',
+        'phpunit/phpunit',
+        'squizlabs/php_codesniffer',
+    ];
 
+    private $devDependencies      = [
+        'aura/di',
+        'composer/composer',
+        'filp/whoops',
+        'xtreamwayz/pimple-container-interop',
+        'zendframework/zend-expressive-aurarouter',
+        'zendframework/zend-expressive-fastroute',
+        'zendframework/zend-expressive-platesrenderer',
+        'zendframework/zend-expressive-twigrenderer',
+        'zendframework/zend-expressive-zendrouter',
+        'zendframework/zend-expressive-zendviewrenderer',
+        'zendframework/zend-servicemanager',
+    ];
+
+    public function testComposerHasAllDependencies()
+    {
+        $this->assertComposerHasPackages($this->standardDependencies);
+        $this->assertComposerHasPackages($this->devDependencies);
+    }
+
+    public function testDevDependenciesAreRemoved()
+    {
         $method = new ReflectionMethod(OptionalPackages::class, 'removeDevDependencies');
         $method->setAccessible(true);
         $method->invoke(OptionalPackages::class);
 
-        $this->assertFalse($this->composerRequires($package));
-    }
-
-    public function packageProvider()
-    {
-        // $package
-        return [
-            'aura-di'                          => ['aura/di'],
-            'composer'                         => ['composer/composer'],
-            'pimple-container-interop'         => ['xtreamwayz/pimple-container-interop'],
-            'whoops'                           => ['filp/whoops'],
-            'zend-expressive-aurarouter'       => ['zendframework/zend-expressive-aurarouter'],
-            'zend-expressive-fastroute'        => ['zendframework/zend-expressive-fastroute'],
-            'zend-expressive-platesrenderer'   => ['zendframework/zend-expressive-platesrenderer'],
-            'zend-expressive-twigrenderer'     => ['zendframework/zend-expressive-twigrenderer'],
-            'zend-expressive-zendrouter'       => ['zendframework/zend-expressive-zendrouter'],
-            'zend-expressive-zendviewrenderer' => ['zendframework/zend-expressive-zendviewrenderer'],
-            'zend-servicemanager'              => ['zendframework/zend-servicemanager'],
-        ];
+        $this->assertComposerHasPackages($this->standardDependencies);
+        $this->assertComposerNotHasPackages($this->devDependencies);
     }
 }
