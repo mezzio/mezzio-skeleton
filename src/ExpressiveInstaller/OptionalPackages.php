@@ -205,8 +205,13 @@ class OptionalPackages
         unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
         unset(self::$composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
 
+        // Remove branch-alias
+        unset(self::$composerDefinition['extra']['branch-alias']);
+
         // Remove installer data
         unset(self::$composerDefinition['extra']['optional-packages']);
+
+        // Remove left over
         if (empty(self::$composerDefinition['extra'])) {
             unset(self::$composerDefinition['extra']);
         }
