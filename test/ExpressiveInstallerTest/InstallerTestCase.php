@@ -121,24 +121,6 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
         $this->cleanup();
     }
 
-    protected function installPackage($config, $copyFilesKey)
-    {
-        /* TODO: First we need to set $composerDefinition, $composerRequires, $composerDevRequires and $stabilityFlags;
-        // Add packages to install
-        if (isset($config['packages'])) {
-            foreach ($config['packages'] as $packageName) {
-                OptionalPackages::addPackage($this->io, $packageName, $this->config['packages'][$packageName]);
-            }
-        }*/
-
-        // Copy files
-        if (isset($config[$copyFilesKey])) {
-            foreach ($config[$copyFilesKey] as $source => $target) {
-                OptionalPackages::copyFile($this->io->reveal(), $this->getProjectRoot(), $source, $target);
-            }
-        }
-    }
-
     protected function cleanup()
     {
         foreach ($this->teardownFiles as $file) {

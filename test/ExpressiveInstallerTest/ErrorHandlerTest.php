@@ -10,7 +10,6 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
-use ReflectionProperty;
 use Zend\Expressive\Container\WhoopsErrorHandlerFactory;
 
 class ErrorHandlerTest extends InstallerTestCase
@@ -22,12 +21,17 @@ class ErrorHandlerTest extends InstallerTestCase
 
     public function testErrorHandlerIsNotInstalled()
     {
-        $r = new ReflectionProperty(OptionalPackages::class, 'config');
-        $r->setAccessible(true);
-        $config = $r->getValue();
+        $io     = $this->prophesize('Composer\IO\IOInterface');
+        $config = $this->getConfig();
 
-        // Install packages
-        $this->installPackage($config['questions']['container']['options'][3], 'minimal-files');
+        // Install container
+        $containerResult = OptionalPackages::processAnswer(
+            $io->reveal(),
+            $config['questions']['container'],
+            3,
+            'minimal-files'
+        );
+        $this->assertTrue($containerResult);
 
         // Test container
         $container = $this->getContainer();
@@ -43,19 +47,26 @@ class ErrorHandlerTest extends InstallerTestCase
         $copyFilesKey,
         $expectedErrorHandler
     ) {
-        $r = new ReflectionProperty(OptionalPackages::class, 'config');
-        $r->setAccessible(true);
-        $config = $r->getValue();
+        $io     = $this->prophesize('Composer\IO\IOInterface');
+        $config = $this->getConfig();
 
-        // Install packages
-        $this->installPackage(
-            $config['questions']['container']['options'][$containerOption],
+        // Install container
+        $containerResult = OptionalPackages::processAnswer(
+            $io->reveal(),
+            $config['questions']['container'],
+            $containerOption,
             $copyFilesKey
         );
-        $this->installPackage(
-            $config['questions']['error-handler']['options'][$errorHandlerOption],
+        $this->assertTrue($containerResult);
+
+        // Install error handler
+        $containerResult = OptionalPackages::processAnswer(
+            $io->reveal(),
+            $config['questions']['error-handler'],
+            $errorHandlerOption,
             $copyFilesKey
         );
+        $this->assertTrue($containerResult);
 
         // Test container
         $container = $this->getContainer();
