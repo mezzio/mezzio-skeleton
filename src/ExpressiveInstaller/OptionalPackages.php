@@ -93,6 +93,8 @@ class OptionalPackages
      * install and update commands on completion.
      *
      * @param Event $event
+     *
+     * @codeCoverageIgnore
      */
     public static function install(Event $event)
     {
@@ -242,6 +244,7 @@ class OptionalPackages
      * @param string      $defaultOption
      *
      * @return bool|int|string
+     * @codeCoverageIgnore
      */
     private static function askQuestion(Composer $composer, IOInterface $io, $question, $defaultOption)
     {
@@ -491,6 +494,8 @@ class OptionalPackages
      *
      * @param IOInterface $io
      * @param string      $projectRoot Project root from which to derive the directory to remove
+     *
+     * @codeCoverageIgnore
      */
     private static function removeDefaultMiddleware(IOInterface $io, $projectRoot)
     {
@@ -509,6 +514,8 @@ class OptionalPackages
      * Recursively remove a directory.
      *
      * @param string $directory
+     *
+     * @codeCoverageIgnore
      */
     private static function recursiveRmdir($directory)
     {
@@ -527,6 +534,8 @@ class OptionalPackages
     /**
      * @param IOInterface $io
      * @param string      $projectRoot
+     *
+     * @codeCoverageIgnore
      */
     private static function clearComposerLockFile($io, $projectRoot)
     {
