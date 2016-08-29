@@ -36,14 +36,6 @@ matrix:
       env:
         - DEPS=latest
     - php: hhvm
-      env:
-        - DEPS=lowest
-    - php: hhvm
-      env:
-        - DEPS=locked
-    - php: hhvm
-      env:
-        - DEPS=latest
   allow_failures:
     - php: hhvm
 
@@ -59,9 +51,9 @@ install:
   - composer show --installed
 
 script:
-  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then composer test-coverage ; fi
-  - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then composer test ; fi
-  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then composer cs ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; fi
+  - if [[ $TEST_COVERAGE != 'true' ]]; then composer test ; fi
+  - if [[ $CHECK_CS == 'true' ]]; then composer cs ; fi
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer upload-coverage ; fi
