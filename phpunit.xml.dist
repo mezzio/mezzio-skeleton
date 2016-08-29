@@ -12,7 +12,9 @@
     <filter>
         <whitelist>
             <directory suffix=".php">./src</directory>
-            <exclude>./src/ExpressiveInstaller/Resources</exclude>
+            <exclude>
+                <directory suffix=".php">./src/ExpressiveInstaller/Resources</directory>
+            </exclude>
         </whitelist>
     </filter>
 </phpunit>
