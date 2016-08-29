@@ -207,9 +207,13 @@ class OptionalPackages
         }
     }
 
+    /**
+     * Remove the installer from the composer definition
+     */
     private static function removeInstallerFromDefinition()
     {
-        // Remove test dependencies
+        // Remove installer script autoloading rules
+        unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
         unset(self::$composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
 
         // Remove installer data
@@ -224,9 +228,6 @@ class OptionalPackages
         if (empty(self::$composerDefinition['scripts'])) {
             unset(self::$composerDefinition['scripts']);
         }
-
-        // Remove installer script autoloading rules
-        unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
     }
 
     /**
