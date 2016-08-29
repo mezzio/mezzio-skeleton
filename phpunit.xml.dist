@@ -11,7 +11,8 @@
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
+            <directory suffix=".php">./src</directory>
+            <exclude>./src/ExpressiveInstaller/Resources</exclude>
         </whitelist>
     </filter>
 </phpunit>
