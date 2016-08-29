@@ -229,6 +229,8 @@ class OptionalPackages
      *
      * @param IOInterface $io
      * @param string      $projectRoot
+     *
+     * @codeCoverageIgnore
      */
     private static function cleanUp(IOInterface $io, $projectRoot)
     {
