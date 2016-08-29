@@ -45,6 +45,11 @@ class OptionalPackages
     private static $config;
 
     /**
+     * @var string
+     */
+    private static $projectRoot;
+
+    /**
      * @var array
      */
     private static $composerDefinition;
@@ -99,12 +104,12 @@ class OptionalPackages
         $json                     = new JsonFile($composerFile);
         self::$composerDefinition = $json->read();
 
-        $projectRoot = realpath(dirname($composerFile));
+        self::$projectRoot = realpath(dirname($composerFile));
 
         $io->write("<info>Setup data and cache dir</info>");
-        if (!is_dir($projectRoot . '/data/cache')) {
-            mkdir($projectRoot . '/data/cache', 0775, true);
-            chmod($projectRoot . '/data', 0775);
+        if (!is_dir(self::$projectRoot . '/data/cache')) {
+            mkdir(self::$projectRoot . '/data/cache', 0775, true);
+            chmod(self::$projectRoot . '/data', 0775);
         }
 
         $io->write("<info>Setting up optional packages</info>");
@@ -141,26 +146,8 @@ class OptionalPackages
             // Get answer
             $answer = self::askQuestion($composer, $io, $question, $defaultOption);
 
-            if (is_numeric($answer)) {
-                // Add packages to install
-                if (isset($question['options'][$answer]['packages'])) {
-                    foreach ($question['options'][$answer]['packages'] as $packageName) {
-                        self::addPackage($io, $packageName, self::$config['packages'][$packageName]);
-                    }
-                }
-
-                // Copy files
-                if (isset($question['options'][$answer][$copyFilesKey])) {
-                    foreach ($question['options'][$answer][$copyFilesKey] as $source => $target) {
-                        self::copyFile($io, $projectRoot, $source, $target);
-                    }
-                }
-            } elseif ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
-                self::addPackage($io, $match['name'], $match['version']);
-                if (isset($question['custom-package-warning'])) {
-                    $io->write(sprintf("  <warning>%s</warning>", $question['custom-package-warning']));
-                }
-            }
+            // Process answer
+            self::processAnswer($io, $question, $answer, $copyFilesKey);
 
             // Save user selected option
             self::$composerDefinition['extra']['optional-packages'][$questionName] = $answer;
@@ -185,11 +172,11 @@ class OptionalPackages
 
         // Minimal install? Remove default middleware
         if ($minimal) {
-            self::removeDefaultMiddleware($io, $projectRoot);
+            self::removeDefaultMiddleware($io, self::$projectRoot);
         }
 
-        self::clearComposerLockFile($io, $projectRoot);
-        self::cleanUp($io, $projectRoot);
+        self::clearComposerLockFile($io, self::$projectRoot);
+        self::cleanUp($io, self::$projectRoot);
     }
 
     /**
@@ -198,7 +185,7 @@ class OptionalPackages
      * The dev dependencies should be removed from the stability flags,
      * require-dev and the composer file.
      */
-    private static function removeDevDependencies()
+    public static function removeDevDependencies()
     {
         foreach (self::$devDependencies as $devDependency) {
             unset(self::$stabilityFlags[$devDependency]);
@@ -210,7 +197,7 @@ class OptionalPackages
     /**
      * Remove the installer from the composer definition
      */
-    private static function removeInstallerFromDefinition()
+    public static function removeInstallerFromDefinition()
     {
         // Remove installer script autoloading rules
         unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
@@ -251,8 +238,8 @@ class OptionalPackages
      *
      * @param Composer    $composer
      * @param IOInterface $io
-     * @param             $question
-     * @param             $defaultOption
+     * @param string      $question
+     * @param string      $defaultOption
      *
      * @return bool|int|string
      */
@@ -323,11 +310,55 @@ class OptionalPackages
     }
 
     /**
+     * Process the answer of a question
+     *
+     * This process
+     *
+     * @param IOInterface $io
+     * @param array       $question
+     * @param string|int  $answer
+     * @param string      $copyFilesKey
+     *
+     * @return bool
+     */
+    public static function processAnswer(IOInterface $io, array $question, $answer, $copyFilesKey)
+    {
+        if (is_numeric($answer) && isset($question['options'][$answer])) {
+            // Add packages to install
+            if (isset($question['options'][$answer]['packages'])) {
+                foreach ($question['options'][$answer]['packages'] as $packageName) {
+                    self::addPackage($io, $packageName, self::$config['packages'][$packageName]);
+                }
+            }
+
+            // Copy files
+            if (isset($question['options'][$answer][$copyFilesKey])) {
+                foreach ($question['options'][$answer][$copyFilesKey] as $source => $target) {
+                    self::copyFile($io, self::$projectRoot, $source, $target);
+                }
+            }
+
+            return true;
+        }
+
+        if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
+            self::addPackage($io, $match['name'], $match['version']);
+            if (isset($question['custom-package-warning'])) {
+                $io->write(sprintf("  <warning>%s</warning>", $question['custom-package-warning']));
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Add a package
      *
      * @param IOInterface $io
-     * @param             $packageName
-     * @param             $packageVersion
+     * @param string      $packageName
+     * @param string      $packageVersion
      */
     public static function addPackage(IOInterface $io, $packageName, $packageVersion)
     {

@@ -37,12 +37,15 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
      */
     private $io;
 
-    private $projectRoot;
-
     /**
      * @var ReflectionProperty
      */
     private $refConfig;
+
+    /**
+     * @var ReflectionProperty
+     */
+    private $refProjectRoot;
 
     /**
      * @var ReflectionProperty
@@ -66,8 +69,6 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
 
     protected function setup()
     {
-        $this->cleanup();
-
         // Set config
         $this->refConfig = new ReflectionProperty(OptionalPackages::class, 'config');
         $this->refConfig->setAccessible(true);
@@ -104,7 +105,13 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
         $this->refStabilityFlags->setAccessible(true);
         $this->refStabilityFlags->setValue($package->getStabilityFlags());
 
-        $this->projectRoot = realpath(dirname($composerFile));
+        // Set project root
+        $this->refProjectRoot = new ReflectionProperty(OptionalPackages::class, 'projectRoot');
+        $this->refProjectRoot->setAccessible(true);
+        $this->refProjectRoot->setValue(realpath(dirname($composerFile)));
+
+        // Cleanup old install files
+        $this->cleanup();
     }
 
     protected function tearDown()
@@ -127,7 +134,7 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
         // Copy files
         if (isset($config[$copyFilesKey])) {
             foreach ($config[$copyFilesKey] as $source => $target) {
-                OptionalPackages::copyFile($this->io->reveal(), $this->projectRoot, $source, $target);
+                OptionalPackages::copyFile($this->io->reveal(), $this->getProjectRoot(), $source, $target);
             }
         }
     }
@@ -135,8 +142,8 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
     protected function cleanup()
     {
         foreach ($this->teardownFiles as $file) {
-            if (is_file($this->projectRoot . $file)) {
-                unlink($this->projectRoot . $file);
+            if (is_file($this->getProjectRoot() . $file)) {
+                unlink($this->getProjectRoot() . $file);
             }
         }
     }
@@ -168,6 +175,11 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
     protected function getConfig()
     {
         return $this->refConfig->getValue();
+    }
+
+    protected function getProjectRoot()
+    {
+        return $this->refProjectRoot->getValue();
     }
 
     protected function getComposerDefinition()

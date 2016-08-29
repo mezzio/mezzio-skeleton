@@ -10,7 +10,6 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
-use ReflectionMethod;
 
 class RemoveDevDependenciesTest extends InstallerTestCase
 {
@@ -46,9 +45,8 @@ class RemoveDevDependenciesTest extends InstallerTestCase
 
     public function testDevDependenciesAreRemoved()
     {
-        $method = new ReflectionMethod(OptionalPackages::class, 'removeDevDependencies');
-        $method->setAccessible(true);
-        $method->invoke(OptionalPackages::class);
+        // Prepare the installer
+        OptionalPackages::removeDevDependencies();
 
         $this->assertComposerHasPackages($this->standardDependencies);
         $this->assertComposerNotHasPackages($this->devDependencies);

@@ -10,7 +10,6 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
-use ReflectionMethod;
 
 class RemoveInstallerTest extends InstallerTestCase
 {
@@ -27,9 +26,8 @@ class RemoveInstallerTest extends InstallerTestCase
 
     public function testInstallerIsRemoved()
     {
-        $method = new ReflectionMethod(OptionalPackages::class, 'removeInstallerFromDefinition');
-        $method->setAccessible(true);
-        $method->invoke(OptionalPackages::class);
+        // Prepare the installer
+        OptionalPackages::removeInstallerFromDefinition();
 
         $config = $this->getComposerDefinition();
 
