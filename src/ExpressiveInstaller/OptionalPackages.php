@@ -463,7 +463,7 @@ class OptionalPackages
      *
      * @return bool
      */
-    private static function requestMinimal(IOInterface $io)
+    public static function requestMinimal(IOInterface $io)
     {
         $query = [
             sprintf(
