@@ -11,6 +11,10 @@ env:
   global:
     - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs --no-scripts"
 
+notifications:
+  irc: "irc.freenode.org#zftalk.dev"
+  email: false
+
 matrix:
   fast_finish: true
   include:
@@ -51,6 +55,3 @@ script:
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer upload-coverage ; fi
-
-notifications:
-  email: true
