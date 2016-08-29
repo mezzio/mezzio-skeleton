@@ -211,12 +211,9 @@ class OptionalPackages
             unset(self::$composerDefinition['extra']);
         }
 
-        // Remove installer scripts, only need to do this once
+        // Remove installer scripts
         unset(self::$composerDefinition['scripts']['pre-update-cmd']);
         unset(self::$composerDefinition['scripts']['pre-install-cmd']);
-        if (empty(self::$composerDefinition['scripts'])) {
-            unset(self::$composerDefinition['scripts']);
-        }
     }
 
     /**
