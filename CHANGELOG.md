@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.0.3 - TBD
+## 1.0.3 - 2016-09-01
 
 ### Added
 
@@ -44,6 +44,9 @@ All notable changes to this project will be documented in this file, in reverse 
   removes filp/whoops from the `composer.json` prior to prompting the user for
   packages to install, ensuring it does not remain if a user selects a minimal
   install or to not use whoops for development.
+- [#109](https://github.com/zendframework/zend-expressive-skeleton/pull/109)
+  adds comprehensive, granular tests covering all functionality of the
+  installer, raising coverage from 40% to 100%.
 
 ## 1.0.2 - 2016-04-21
 
