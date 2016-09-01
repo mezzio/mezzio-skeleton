@@ -49,7 +49,9 @@ All notable changes to this project will be documented in this file, in reverse 
   ```php
   return [
       'dependencies' => [
-          SomeClass::class => ExtendingFactory::class,
+          'extensions' => [
+              SomeClass::class => ExtendingFactory::class,
+          ],
       ],
   ];
   ```
