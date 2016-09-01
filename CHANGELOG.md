@@ -35,6 +35,9 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#91](https://github.com/zendframework/zend-expressive-skeleton/pull/91) fixes
   the Pimple factory caching to work correctly with invokable classes used as
   factories.
+- [#95](https://github.com/zendframework/zend-expressive-skeleton/pull/95) fixes
+  the prompt for a minimal install to ensure that only `n` and `y` (or uppercase
+  versions of each) are valid answers, looping until a valid answer is provided.
 
 ## 1.0.2 - 2016-04-21
 
