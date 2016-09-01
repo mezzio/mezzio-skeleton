@@ -18,7 +18,7 @@ foreach ($config['dependencies']['factories'] as $name => $object) {
             $factory = $c->get($object);
         } else {
             $factory = new $object();
-            $c[$object] = $factory;
+            $c[$object] = $c->protect($factory);
         }
 
         return $factory($c, $name);
