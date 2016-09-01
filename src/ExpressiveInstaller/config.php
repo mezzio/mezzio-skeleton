@@ -5,7 +5,6 @@ return [
         'aura/di'                                        => '^3.0',
         'filp/whoops'                                    => '^1.1 || ^2.0',
         'xtreamwayz/pimple-container-interop'            => '^1.0',
-        'ocramius/proxy-manager'                         => '^1.0 || ^2.0',
         'zendframework/zend-expressive-aurarouter'       => '^1.0',
         'zendframework/zend-expressive-fastroute'        => '^1.0',
         'zendframework/zend-expressive-platesrenderer'   => '^1.0',
@@ -106,7 +105,6 @@ return [
                     'name'     => 'Zend ServiceManager',
                     'packages' => [
                         'zendframework/zend-servicemanager',
-                        'ocramius/proxy-manager',
                     ],
                     'copy-files' => [
                         '/Resources/config/container-zend-servicemanager.php' => '/config/container.php',
