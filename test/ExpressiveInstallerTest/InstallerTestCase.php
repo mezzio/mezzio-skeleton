@@ -17,13 +17,14 @@ use Composer\Package\Loader\RootPackageLoader;
 use Composer\Repository\RepositoryManager;
 use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
+use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
 
-class InstallerTestCase extends \PHPUnit_Framework_TestCase
+abstract class InstallerTestCase extends TestCase
 {
     /**
      * @var ContainerInterface
