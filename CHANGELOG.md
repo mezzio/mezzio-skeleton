@@ -58,6 +58,10 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#95](https://github.com/zendframework/zend-expressive-skeleton/pull/95) fixes
   the prompt for a minimal install to ensure that only `n` and `y` (or uppercase
   versions of each) are valid answers, looping until a valid answer is provided.
+- [#101](https://github.com/zendframework/zend-expressive-skeleton/pull/101)
+  removes filp/whoops from the `composer.json` prior to prompting the user for
+  packages to install, ensuring it does not remain if a user selects a minimal
+  install or to not use whoops for development.
 
 ## 1.0.2 - 2016-04-21
 
