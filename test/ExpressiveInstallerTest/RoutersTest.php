@@ -12,17 +12,16 @@ namespace ExpressiveInstallerTest;
 use App\Action\HomePageAction;
 use App\Action\PingAction;
 use ExpressiveInstaller\OptionalPackages;
-use ReflectionProperty;
 use Zend\Expressive\Router;
 
 class RoutersTest extends InstallerTestCase
 {
-    protected $teardownFiles = [
+    protected $teardownFiles  = [
         '/config/container.php',
         '/config/autoload/routes.global.php',
     ];
 
-    private $expectedRoutes = [
+    private   $expectedRoutes = [
         [
             'name'            => 'home',
             'path'            => '/',
@@ -48,19 +47,26 @@ class RoutersTest extends InstallerTestCase
         $expectedRoutes,
         $expectedRouter
     ) {
-        $r = new ReflectionProperty(OptionalPackages::class, 'config');
-        $r->setAccessible(true);
-        $config = $r->getValue();
+        $io     = $this->prophesize('Composer\IO\IOInterface');
+        $config = $this->getConfig();
 
-        // Install packages
-        $this->installPackage(
-            $config['questions']['container']['options'][$containerOption],
+        // Install container
+        $containerResult = OptionalPackages::processAnswer(
+            $io->reveal(),
+            $config['questions']['container'],
+            $containerOption,
             $copyFilesKey
         );
-        $this->installPackage(
-            $config['questions']['router']['options'][$routerOption],
+        $this->assertTrue($containerResult);
+
+        // Install router
+        $routerResult = OptionalPackages::processAnswer(
+            $io->reveal(),
+            $config['questions']['router'],
+            $routerOption,
             $copyFilesKey
         );
+        $this->assertTrue($routerResult);
 
         // Test container
         $container = $this->getContainer();

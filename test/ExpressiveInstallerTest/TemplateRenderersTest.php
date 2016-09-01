@@ -10,7 +10,6 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
-use ReflectionProperty;
 use Zend\Expressive;
 
 class TemplateRenderersTest extends InstallerTestCase
@@ -40,23 +39,35 @@ class TemplateRenderersTest extends InstallerTestCase
         $expectedResponseStatusCode,
         $expectedTemplateRenderer
     ) {
-        $r = new ReflectionProperty(OptionalPackages::class, 'config');
-        $r->setAccessible(true);
-        $config = $r->getValue();
+        $io     = $this->prophesize('Composer\IO\IOInterface');
+        $config = $this->getConfig();
 
-        // Install packages
-        $this->installPackage(
-            $config['questions']['container']['options'][$containerOption],
+        // Install container
+        $containerResult = OptionalPackages::processAnswer(
+            $io->reveal(),
+            $config['questions']['container'],
+            $containerOption,
             $copyFilesKey
         );
-        $this->installPackage(
-            $config['questions']['router']['options'][$routerOption],
+        $this->assertTrue($containerResult);
+
+        // Install router
+        $routerResult = OptionalPackages::processAnswer(
+            $io->reveal(),
+            $config['questions']['router'],
+            $routerOption,
             $copyFilesKey
         );
-        $this->installPackage(
-            $config['questions']['template-engine']['options'][$templateRendererOption],
+        $this->assertTrue($routerResult);
+
+        // Install template engine
+        $templateEngineResult = OptionalPackages::processAnswer(
+            $io->reveal(),
+            $config['questions']['template-engine'],
+            $templateRendererOption,
             $copyFilesKey
         );
+        $this->assertTrue($templateEngineResult);
 
         // Test container
         $container = $this->getContainer();
