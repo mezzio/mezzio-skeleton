@@ -28,7 +28,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#102](https://github.com/zendframework/zend-expressive-skeleton/pull/102)
+  removes the development dependendy on ocramius/proxy-manager, as it is not
+  required.
 
 ### Fixed
 
