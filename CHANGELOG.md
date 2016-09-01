@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.1.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 1.0.4 - TBD
 
 ### Added
@@ -31,7 +49,9 @@ All notable changes to this project will be documented in this file, in reverse 
   ```php
   return [
       'dependencies' => [
-          SomeClass::class => ExtendingFactory::class,
+          'extensions' => [
+              SomeClass::class => ExtendingFactory::class,
+          ],
       ],
   ];
   ```
