@@ -18,7 +18,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#91](https://github.com/zendframework/zend-expressive-skeleton/pull/91) fixes
+  the Pimple factory caching to work correctly with invokable classes used as
+  factories.
 
 ## 1.0.2 - 2016-04-21
 
