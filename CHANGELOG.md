@@ -24,7 +24,21 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#93](https://github.com/zendframework/zend-expressive-skeleton/pull/93) adds
+  support for Pimple "extensions" (`$pimple->extend()`) via the `dependencies`
+  sub-key `extensions`, as follows:
+
+  ```php
+  return [
+      'dependencies' => [
+          SomeClass::class => ExtendingFactory::class,
+      ],
+  ];
+  ```
+
+- [#93](https://github.com/zendframework/zend-expressive-skeleton/pull/93) adds
+  support to the Pimple container script to allow wrapping `delegators`
+  (delegator factories from zend-servicemanager) as anonymous Pimple extensions.
 
 ### Deprecated
 

@@ -30,5 +30,35 @@ foreach ($config['dependencies']['invokables'] as $name => $object) {
         return new $object();
     };
 }
+// Inject "pimple extend-style" factories
+if (! empty($config['dependencies']['extensions'])
+    && is_array($config['dependencies']['extensions'])
+) {
+    foreach ($config['dependencies']['extensions'] as $name => $extensions) {
+        foreach ($extensions as $extension) {
+            $container->extend($name, function ($service, $c) use ($extension, $name) {
+                $factory = new $extension();
+                return $factory($service, $c, $name); // passing extra parameter $name
+            });
+        }
+    }
+}
+// Inject "zend-servicemanager3 style" delegators as Pimple anonymous "extend" functions
+if (! empty($config['dependencies']['delegators'])
+    && is_array($config['dependencies']['delegators'])
+) {
+    foreach ($config['dependencies']['delegators'] as $name => $delegators) {
+        foreach ($delegators as $delegator) {
+            $container->extend($name, function ($service, $c) use ($delegator, $name) {
+                $factory  = new $delegator();
+                $callback = function () use ($service) {
+                    return $service;
+                };
+
+                return $factory($c, $name, $callback);
+            });
+        }
+    }
+}
 
 return $container;
