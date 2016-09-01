@@ -418,13 +418,22 @@ class OptionalPackages
             "  Make your selection <comment>(No)</comment>: ",
         ];
 
-        $answer = $io->ask($query, 'n');
-        if ($answer == 'n') {
-            // Nothing else to do!
-            return false;
+        while (true) {
+            $answer = $io->ask($query, 'n');
+
+            if (strtolower($answer) === 'n') {
+                return false;
+            }
+
+            if (strtolower($answer) === 'y') {
+                return true;
+            }
+
+            $io->write("<error>Invalid answer</error>");
         }
 
-        return true;
+        // This should never be reached, defaults to default answer
+        return false;
     }
 
     /**
