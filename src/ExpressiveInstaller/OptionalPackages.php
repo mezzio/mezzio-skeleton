@@ -243,12 +243,7 @@ class OptionalPackages
         // Remove ExpressiveInstaller exclusion from phpunit config
         $phpunitConfigFile = $projectRoot . '/phpunit.xml.dist';
         $phpunitConfig     = file_get_contents($phpunitConfigFile);
-        $phpunitConfig     = self::removeLineFromString('<exclude>', $phpunitConfig);
-        $phpunitConfig     = self::removeLineFromString(
-            '<directory suffix=".php">./src/ExpressiveInstaller/Resources</directory>',
-            $phpunitConfig
-        );
-        $phpunitConfig     = self::removeLineFromString('</exclude>', $phpunitConfig);
+        $phpunitConfig     = self::removeLinesContainingStrings(['exclude', 'ExpressiveInstaller'], $phpunitConfig);
         file_put_contents($phpunitConfigFile, $phpunitConfig);
     }
 
@@ -467,6 +462,15 @@ class OptionalPackages
             '$1',
             $content
         );
+    }
+
+    public static function removeLinesContainingStrings(array $entries, $content)
+    {
+        $entries = join('|', array_map(function ($word) {
+            return preg_quote($word, '/');
+        }, $entries));
+
+        return preg_replace("/^.*(?:" . $entries . ").*$(?:\r?\n)?/m", '', $content);
     }
 
     /**
