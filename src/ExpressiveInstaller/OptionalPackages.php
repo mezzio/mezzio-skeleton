@@ -494,11 +494,15 @@ class OptionalPackages
                 return true;
             }
 
+            // @codeCoverageIgnoreStart
             $io->write("<error>Invalid answer</error>");
+            // @codeCoverageIgnoreEnd
         }
 
         // This should never be reached, defaults to default answer
+        // @codeCoverageIgnoreStart
         return false;
+        // @codeCoverageIgnoreEnd
     }
 
     /**
