@@ -14,16 +14,6 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class RemoveLineFromStringTest extends TestCase
 {
-    public function testRemoveLineFromString()
-    {
-        $string = "foo\nbar\nbaz";
-
-        $actual = OptionalPackages::removeLineFromString('bar', $string);
-        $expected = "foo\nbaz";
-
-        $this->assertEquals($expected, $actual);
-    }
-
     public function testRemoveFirstLine()
     {
         $string = "foo\nbar\nbaz\nqux\nquux";
