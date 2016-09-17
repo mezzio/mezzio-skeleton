@@ -239,6 +239,17 @@ class OptionalPackages
         unlink($projectRoot . '/.travis.yml');
         self::recursiveRmdir(__DIR__);
         self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
+
+        // Remove ExpressiveInstaller exclusion from phpunit config
+        $phpunitConfigFile = $projectRoot . '/phpunit.xml.dist';
+        $phpunitConfig     = file_get_contents($phpunitConfigFile);
+        $phpunitConfig     = self::removeLineFromString('<exclude>', $phpunitConfig);
+        $phpunitConfig     = self::removeLineFromString(
+            '<directory suffix=".php">./src/ExpressiveInstaller/Resources</directory>',
+            $phpunitConfig
+        );
+        $phpunitConfig     = self::removeLineFromString('</exclude>', $phpunitConfig);
+        file_put_contents($phpunitConfigFile, $phpunitConfig);
     }
 
     /**
