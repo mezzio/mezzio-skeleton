@@ -42,7 +42,7 @@ You can then browse to http://localhost:8080.
 > ### Setting a timeout
 >
 > Composer commands time out after 300 seconds (5 minutes). On Linux-based
-> systems, the `php -S` command that `composer server` spawns continues running
+> systems, the `php -S` command that `composer serve` spawns continues running
 > as a background process, but on other systems halts when the timeout occurs.
 >
 > If you want the server to live longer, you can use the
