@@ -235,8 +235,16 @@ class OptionalPackages
     private static function cleanUp(IOInterface $io, $projectRoot)
     {
         $io->write("<info>Removing Expressive installer classes, configuration, and tests</info>");
+        unlink($projectRoot . '/.coveralls.yml');
+        unlink($projectRoot . '/.travis.yml');
         self::recursiveRmdir(__DIR__);
         self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
+
+        // Remove ExpressiveInstaller exclusion from phpunit config
+        $phpunitConfigFile = $projectRoot . '/phpunit.xml.dist';
+        $phpunitConfig     = file_get_contents($phpunitConfigFile);
+        $phpunitConfig     = self::removeLinesContainingStrings(['exclude', 'ExpressiveInstaller'], $phpunitConfig);
+        file_put_contents($phpunitConfigFile, $phpunitConfig);
     }
 
     /**
@@ -440,20 +448,20 @@ class OptionalPackages
     }
 
     /**
-     * Remove line from string content.
+     * Remove lines from string content containing words in array.
      *
-     * @param string $entry   Entry to remove.
+     * @param array  $entries Entries to remove.
      * @param string $content String to remove entry from.
      *
      * @return string
      */
-    public static function removeLineFromString($entry, $content)
+    public static function removeLinesContainingStrings(array $entries, $content)
     {
-        return preg_replace(
-            sprintf("/(\r?\n)%s\r?\n/s", preg_quote($entry, '/')),
-            '$1',
-            $content
-        );
+        $entries = join('|', array_map(function ($word) {
+            return preg_quote($word, '/');
+        }, $entries));
+
+        return preg_replace("/^.*(?:" . $entries . ").*$(?:\r?\n)?/m", '', $content);
     }
 
     /**
@@ -486,11 +494,15 @@ class OptionalPackages
                 return true;
             }
 
+            // @codeCoverageIgnoreStart
             $io->write("<error>Invalid answer</error>");
+            // @codeCoverageIgnoreEnd
         }
 
         // This should never be reached, defaults to default answer
+        // @codeCoverageIgnoreStart
         return false;
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -547,7 +559,7 @@ class OptionalPackages
 
         $ignoreFile = "$projectRoot/.gitignore";
 
-        $content = self::removeLineFromString('composer.lock', file_get_contents($ignoreFile));
+        $content = self::removeLinesContainingStrings(['composer.lock'], file_get_contents($ignoreFile));
         file_put_contents($ignoreFile, $content);
     }
 }
