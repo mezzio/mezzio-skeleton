@@ -26,7 +26,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#113](https://github.com/zendframework/zend-expressive-skeleton/pull/113) 
   removes leftover skeleton files.
-
+- [#118](https://github.com/zendframework/zend-expressive-skeleton/pull/118) 
+  removes CHANGELOG.md, CONDUCT.md and CONTRIBUTING.md after setup.
+  
 ### Deprecated
 
 - Nothing.
