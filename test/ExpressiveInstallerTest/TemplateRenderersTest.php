@@ -16,6 +16,7 @@ class TemplateRenderersTest extends InstallerTestCase
 {
     protected $teardownFiles = [
         '/config/container.php',
+        '/config/routes.php',
         '/config/autoload/routes.global.php',
         '/config/autoload/templates.global.php',
         '/templates/error/404.phtml',

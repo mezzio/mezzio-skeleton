@@ -16,6 +16,7 @@ class ErrorHandlerTest extends InstallerTestCase
 {
     protected $teardownFiles = [
         '/config/container.php',
+        '/config/routes.php',
         '/config/autoload/errorhandler.local.php',
     ];
 

@@ -146,13 +146,28 @@ abstract class InstallerTestCase extends TestCase
         $container = $this->getContainer();
 
         /** @var Application $app */
-        $app     = $container->get('Zend\Expressive\Application');
-        $request = new ServerRequest([], [], 'https://example.com' . $path, 'GET');
+        $app = $container->get(Application::class);
 
-        /** @var ResponseInterface $response */
-        $response = $app($request, new Response());
+        // Import programmatic/declarative middleware pipeline and routing configuration statements
+        $app->pipe(\Zend\Stratigility\Middleware\ErrorHandler::class);
+        $app->pipe(\Zend\Expressive\Helper\ServerUrlMiddleware::class);
+        $app->pipeRoutingMiddleware();
+        $app->pipe(\Zend\Expressive\Helper\UrlHelperMiddleware::class);
+        $app->pipeDispatchMiddleware();
+        $app->pipe(\Zend\Expressive\Middleware\NotFoundHandler::class);
 
-        return $response;
+        if ($container->has(\App\Action\HomePageAction::class)) {
+            $app->get('/', \App\Action\HomePageAction::class, 'home');
+        }
+
+        if ($container->has(\App\Action\PingAction::class)) {
+            $app->get('/api/ping', \App\Action\PingAction::class, 'api.ping');
+        }
+
+        return $app(
+            new ServerRequest([], [], 'https://example.com' . $path, 'GET'),
+            new Response()
+        );
     }
 
     protected function getConfig()

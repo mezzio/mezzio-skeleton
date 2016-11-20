@@ -20,6 +20,7 @@ class ContainersTest extends InstallerTestCase
 {
     protected $teardownFiles = [
         '/config/container.php',
+        '/config/routes.php',
         '/config/autoload/routes.global.php',
     ];
 
