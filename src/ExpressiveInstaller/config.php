@@ -36,10 +36,12 @@ return [
                     ],
                     'copy-files' => [
                         // Copy source file to target: '<source>' => '<target>'
+                        '/Resources/config/routes-full.php' => '/config/routes.php',
                         '/Resources/config/routes-aura-router.php' => '/config/autoload/routes.global.php',
                     ],
                     'minimal-files' => [
                         // Copy source file to target: '<source>' => '<target>'
+                        '/Resources/config/routes-minimal.php' => '/config/routes.php',
                         '/Resources/config/routes-minimal-aura-router.php' => '/config/autoload/routes.global.php',
                     ],
                 ],
@@ -49,9 +51,11 @@ return [
                         'zendframework/zend-expressive-fastroute',
                     ],
                     'copy-files' => [
+                        '/Resources/config/routes-full.php' => '/config/routes.php',
                         '/Resources/config/routes-fast-route.php' => '/config/autoload/routes.global.php',
                     ],
                     'minimal-files' => [
+                        '/Resources/config/routes-minimal.php' => '/config/routes.php',
                         '/Resources/config/routes-minimal-fast-route.php' => '/config/autoload/routes.global.php',
                     ],
                 ],
@@ -61,9 +65,11 @@ return [
                         'zendframework/zend-expressive-zendrouter',
                     ],
                     'copy-files' => [
+                        '/Resources/config/routes-full.php' => '/config/routes.php',
                         '/Resources/config/routes-zf2-router.php' => '/config/autoload/routes.global.php',
                     ],
                     'minimal-files' => [
+                        '/Resources/config/routes-minimal.php' => '/config/routes.php',
                         '/Resources/config/routes-minimal-zf2-router.php' => '/config/autoload/routes.global.php',
                     ],
                 ],
