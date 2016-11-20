@@ -14,7 +14,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#110](https://github.com/organization/project/pull/110) removes the global
+  config array to ArrayObject conversion for all containers except Aura.Di.
 
 ### Fixed
 
