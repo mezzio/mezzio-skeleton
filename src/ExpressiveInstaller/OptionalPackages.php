@@ -234,9 +234,12 @@ class OptionalPackages
      */
     private static function cleanUp(IOInterface $io, $projectRoot)
     {
-        $io->write("<info>Removing Expressive installer classes, configuration, and tests</info>");
+        $io->write("<info>Removing Expressive installer classes, configuration, tests and docs</info>");
         unlink($projectRoot . '/.coveralls.yml');
         unlink($projectRoot . '/.travis.yml');
+        unlink($projectRoot . '/CHANGELOG.md');
+        unlink($projectRoot . '/CONDUCT.md');
+        unlink($projectRoot . '/CONTRIBUTING.md');
         self::recursiveRmdir(__DIR__);
         self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
 
