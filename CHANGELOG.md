@@ -24,7 +24,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#113](https://github.com/zendframework/zend-expressive-skeleton/pull/113) 
+  removes leftover skeleton files.
 
 ### Deprecated
 

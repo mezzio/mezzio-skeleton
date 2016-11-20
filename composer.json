@@ -1,15 +1,9 @@
 {
     "name": "zendframework/zend-expressive-skeleton",
-    "description": "Zend expressive skeleton. Begin developing PSR-7 middleware applications in seconds",
+    "description": "Zend expressive skeleton. Begin developing PSR-7 middleware applications in seconds!",
     "type": "project",
     "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
     "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "Geert Eltink",
-            "homepage": "https://xtreamwayz.com/"
-        }
-    ],
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev",
