@@ -42,6 +42,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#114](https://github.com/zendframework/zend-expressive-skeleton/pull/114) fixes
   composer check script.
+- [#121](https://github.com/zendframework/zend-expressive-skeleton/pull/121) fixes
+  composer serve script for Windows.
 
 ## 1.0.3 - 2016-09-01
 
