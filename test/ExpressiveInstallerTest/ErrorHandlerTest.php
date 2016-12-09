@@ -10,7 +10,8 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
-use Zend\Expressive\Container\WhoopsErrorHandlerFactory;
+use Zend\Expressive\Container\WhoopsErrorResponseGeneratorFactory;
+use Zend\Expressive\Middleware\ErrorResponseGenerator;
 
 class ErrorHandlerTest extends InstallerTestCase
 {
@@ -36,7 +37,9 @@ class ErrorHandlerTest extends InstallerTestCase
 
         // Test container
         $container = $this->getContainer();
-        $this->assertFalse($container->has('Zend\Expressive\FinalHandler'));
+        $this->assertTrue($container->has(ErrorResponseGenerator::class));
+        $this->assertFalse($container->has('Zend\Expressive\Whoops'));
+        $this->assertFalse($container->has('Zend\Expressive\WhoopsPageHandler'));
     }
 
     /**
@@ -71,12 +74,14 @@ class ErrorHandlerTest extends InstallerTestCase
 
         // Test container
         $container = $this->getContainer();
-        $this->assertTrue($container->has('Zend\Expressive\FinalHandler'));
+        $this->assertTrue($container->has(ErrorResponseGenerator::class));
+        $this->assertTrue($container->has('Zend\Expressive\Whoops'));
+        $this->assertTrue($container->has('Zend\Expressive\WhoopsPageHandler'));
 
         $config = $container->get('config');
         $this->assertEquals(
             $expectedErrorHandler,
-            $config['dependencies']['factories']['Zend\Expressive\FinalHandler']
+            $config['dependencies']['factories'][ErrorResponseGenerator::class]
         );
     }
 
@@ -84,8 +89,8 @@ class ErrorHandlerTest extends InstallerTestCase
     {
         // $containerOption, $errorHandlerOption, $copyFilesKey, $expectedErrorHandler
         return [
-            'whoops-minimal' => [3, 1, 'minimal-files', WhoopsErrorHandlerFactory::class],
-            'whoops-full'    => [3, 1, 'copy-files', WhoopsErrorHandlerFactory::class],
+            'whoops-minimal' => [3, 1, 'minimal-files', WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-full'    => [3, 1, 'copy-files', WhoopsErrorResponseGeneratorFactory::class],
         ];
     }
 }
