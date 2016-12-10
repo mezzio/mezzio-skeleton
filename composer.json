@@ -15,7 +15,8 @@
         "roave/security-advisories": "dev-master",
         "zendframework/zend-expressive": "^1.1 || ^1.1.x-dev@dev",
         "zendframework/zend-expressive-helpers": "^2.0",
-        "zendframework/zend-stdlib": "^2.7 || ^3.0"
+        "zendframework/zend-stdlib": "^2.7 || ^3.0",
+        "zendframework/zend-config-aggregator": "^0.1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.6",

@@ -3,9 +3,6 @@
 return [
     'debug' => false,
 
-    // Cache the configuration. Recommended for production.
-    'config_cache_enabled' => false,
-
     'zend-expressive' => [
         // Enable exception-based error handling via standard middleware.
         'raise_throwables' => true,
