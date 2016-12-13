@@ -12,15 +12,6 @@ $app->pipe(Zend\Expressive\Helper\ServerUrlMiddleware::class);
 // - bootstrapping
 // - pre-conditions
 // - modifications to outgoing responses
-
-// Register the routing middleware in the middleware pipeline
-$app->pipeRoutingMiddleware();
-$app->pipe(Zend\Expressive\Helper\UrlHelperMiddleware::class);
-
-// Add more middleware here that needs to introspect the routing results; this might include:
-// - route-based authentication
-// - route-based validation
-// - etc.
 //
 // Piped Middleware may be either callables or service names. Middleware may also be passed as an array; each item in
 // the array must resolve to middleware eventually (i.e., callable or service name).
@@ -31,9 +22,17 @@ $app->pipe(Zend\Expressive\Helper\UrlHelperMiddleware::class);
 // - $app->pipe('/docs', $apiDocMiddleware);
 // - $app->pipe('/files', $filesMiddleware);
 
+// Register the routing middleware in the middleware pipeline
+$app->pipeRoutingMiddleware();
+$app->pipe(Zend\Expressive\Helper\UrlHelperMiddleware::class);
+
+// Add more middleware here that needs to introspect the routing results; this might include:
+// - route-based authentication
+// - route-based validation
+// - etc.
+
 // Register the dispatch middleware in the middleware pipeline
 $app->pipeDispatchMiddleware();
 
-// At this point, if no Response is return by any middleware, the NotFoundHandler
-// kicks in
+// At this point, if no Response is return by any middleware, the NotFoundHandler kicks in
 $app->pipe(Zend\Expressive\Middleware\NotFoundHandler::class);
