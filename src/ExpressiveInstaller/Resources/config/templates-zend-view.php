@@ -17,9 +17,9 @@ return [
     'templates' => [
         'layout' => 'layout/default',
         'map' => [
-            'layout/default' => 'templates/layout/default.phtml',
-            'error/error'    => 'templates/error/error.phtml',
-            'error/404'      => 'templates/error/404.phtml',
+            'layout/default' => 'src/App/templates/layout/default.phtml',
+            'error/error'    => 'src/App/templates/error/error.phtml',
+            'error/404'      => 'src/App/templates/error/404.phtml',
         ],
     ],
 
