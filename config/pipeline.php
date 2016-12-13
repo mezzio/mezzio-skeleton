@@ -1,12 +1,17 @@
 <?php
 
+use Zend\Expressive\Helper\ServerUrlMiddleware;
+use Zend\Expressive\Helper\UrlHelperMiddleware;
+use Zend\Expressive\Middleware\NotFoundHandler;
+use Zend\Stratigility\Middleware\ErrorHandler;
+
 /**
  * Setup middleware pipeline:
  */
 
 // The error handler should be the first (most outer) middleware to catch all Exceptions.
-$app->pipe(Zend\Stratigility\Middleware\ErrorHandler::class);
-$app->pipe(Zend\Expressive\Helper\ServerUrlMiddleware::class);
+$app->pipe(ErrorHandler::class);
+$app->pipe(ServerUrlMiddleware::class);
 
 // Pipe more middleware here that you want to execute on every request:
 // - bootstrapping
@@ -24,7 +29,7 @@ $app->pipe(Zend\Expressive\Helper\ServerUrlMiddleware::class);
 
 // Register the routing middleware in the middleware pipeline
 $app->pipeRoutingMiddleware();
-$app->pipe(Zend\Expressive\Helper\UrlHelperMiddleware::class);
+$app->pipe(UrlHelperMiddleware::class);
 
 // Add more middleware here that needs to introspect the routing results; this might include:
 // - route-based authentication
@@ -35,4 +40,4 @@ $app->pipe(Zend\Expressive\Helper\UrlHelperMiddleware::class);
 $app->pipeDispatchMiddleware();
 
 // At this point, if no Response is return by any middleware, the NotFoundHandler kicks in
-$app->pipe(Zend\Expressive\Middleware\NotFoundHandler::class);
+$app->pipe(NotFoundHandler::class);
