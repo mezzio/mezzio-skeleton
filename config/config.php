@@ -24,6 +24,9 @@ $aggregator = new ConfigAggregator(
         //   - `local.php`
         //   - `*.local.php`
         new PhpFileProvider('config/autoload/{{,*.}global,{,*.}local}.php'),
+
+        // Load development config if it exists
+        new PhpFileProvider('config/development.config.php'),
     ],
     // Cached config file
     $cacheConfig['config_cache_path']
