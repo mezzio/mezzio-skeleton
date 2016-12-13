@@ -1,0 +1,11 @@
+<?php
+use Zend\ConfigAggregator\ConfigAggregator;
+use Zend\Expressive\Container;
+
+return [
+    'debug' => true,
+
+    // Cache the configuration: Recommended for production
+    // Closures used somewhere in the configuration make caching impossible
+    ConfigAggregator::ENABLE_CACHE => false,
+];
