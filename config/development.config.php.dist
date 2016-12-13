@@ -1,6 +1,6 @@
 <?php
+
 use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\Expressive\Container;
 
 return [
     'debug' => true,
