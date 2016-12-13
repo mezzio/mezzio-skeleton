@@ -16,7 +16,6 @@ use Composer\Repository\RepositoryManager;
 use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase as TestCase;
-use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;

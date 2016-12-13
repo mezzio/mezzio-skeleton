@@ -17,14 +17,14 @@ class TemplateRenderersTest extends InstallerTestCase
         '/config/routes.php',
         '/config/autoload/routes.global.php',
         '/config/autoload/templates.global.php',
-        '/templates/error/404.phtml',
-        '/templates/error/error.phtml',
-        '/templates/layout/default.phtml',
-        '/templates/app/home-page.phtml',
-        '/templates/error/404.html.twig',
-        '/templates/error/error.html.twig',
-        '/templates/layout/default.html.twig',
-        '/templates/app/home-page.html.twig',
+        '/src/App/templates/error/404.phtml',
+        '/src/App/templates/error/error.phtml',
+        '/src/App/templates/layout/default.phtml',
+        '/src/App/templates/app/home-page.phtml',
+        '/src/App/templates/error/404.html.twig',
+        '/src/App/templates/error/error.html.twig',
+        '/src/App/templates/layout/default.html.twig',
+        '/src/App/templates/app/home-page.html.twig',
     ];
 
     /**
