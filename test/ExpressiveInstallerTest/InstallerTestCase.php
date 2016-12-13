@@ -138,7 +138,7 @@ abstract class InstallerTestCase extends TestCase
         return $this->container;
     }
 
-    protected function getAppResponse($path = '/')
+    protected function getAppResponse($path = '/', $setupRoutes = true)
     {
         $container = $this->getContainer();
 
@@ -153,11 +153,11 @@ abstract class InstallerTestCase extends TestCase
         $app->pipeDispatchMiddleware();
         $app->pipe(\Zend\Expressive\Middleware\NotFoundHandler::class);
 
-        if ($container->has(\App\Action\HomePageAction::class)) {
+        if ($setupRoutes === true && $container->has(\App\Action\HomePageAction::class)) {
             $app->get('/', \App\Action\HomePageAction::class, 'home');
         }
 
-        if ($container->has(\App\Action\PingAction::class)) {
+        if ($setupRoutes === true && $container->has(\App\Action\PingAction::class)) {
             $app->get('/api/ping', \App\Action\PingAction::class, 'api.ping');
         }
 

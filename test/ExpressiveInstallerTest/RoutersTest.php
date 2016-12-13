@@ -79,7 +79,8 @@ class RoutersTest extends InstallerTestCase
         );
 
         // Test home page
-        $response = $this->getAppResponse();
+        $setupRoutes = (strpos($copyFilesKey, 'minimal') !== 0);
+        $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
