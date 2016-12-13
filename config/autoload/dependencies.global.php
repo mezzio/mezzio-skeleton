@@ -1,8 +1,9 @@
 <?php
 
 use Zend\Expressive\Application;
-use Zend\Expressive\Container\ApplicationFactory;
+use Zend\Expressive\Container;
 use Zend\Expressive\Helper;
+use Zend\Stratigility\Middleware;
 
 return [
     // Provides application-wide services.
@@ -18,19 +19,14 @@ return [
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories'  => [
-            Application::class                => ApplicationFactory::class,
+            Application::class                => Container\ApplicationFactory::class,
             Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
             Helper\UrlHelper::class           => Helper\UrlHelperFactory::class,
             Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
 
-            Zend\Stratigility\Middleware\ErrorHandler::class =>
-                Zend\Expressive\Container\ErrorHandlerFactory::class,
-
-            Zend\Expressive\Middleware\ErrorResponseGenerator::class =>
-                Zend\Expressive\Container\ErrorResponseGeneratorFactory::class,
-
-            Zend\Expressive\Middleware\NotFoundHandler::class =>
-                Zend\Expressive\Container\NotFoundHandlerFactory::class,
+            Middleware\ErrorHandler::class           => Container\ErrorHandlerFactory::class,
+            Middleware\ErrorResponseGenerator::class => Container\ErrorResponseGeneratorFactory::class,
+            Middleware\NotFoundHandler::class        => Container\NotFoundHandlerFactory::class,
         ],
     ],
 ];
