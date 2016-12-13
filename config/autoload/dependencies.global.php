@@ -3,7 +3,7 @@
 use Zend\Expressive\Application;
 use Zend\Expressive\Container;
 use Zend\Expressive\Helper;
-use Zend\Stratigility\Middleware;
+use Zend\Expressive\Middleware;
 
 return [
     // Provides application-wide services.
@@ -24,9 +24,9 @@ return [
             Helper\UrlHelper::class           => Helper\UrlHelperFactory::class,
             Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
 
-            Middleware\ErrorHandler::class           => Container\ErrorHandlerFactory::class,
-            Middleware\ErrorResponseGenerator::class => Container\ErrorResponseGeneratorFactory::class,
-            Middleware\NotFoundHandler::class        => Container\NotFoundHandlerFactory::class,
+            Zend\Stratigility\Middleware\ErrorHandler::class => Container\ErrorHandlerFactory::class,
+            Middleware\ErrorResponseGenerator::class         => Container\ErrorResponseGeneratorFactory::class,
+            Middleware\NotFoundHandler::class                => Container\NotFoundHandlerFactory::class,
         ],
     ],
 ];
