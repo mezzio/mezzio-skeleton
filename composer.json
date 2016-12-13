@@ -30,7 +30,8 @@
         "zendframework/zend-expressive-zendviewrenderer": "^1.0",
         "zendframework/zend-servicemanager": "^2.7.3 || ^3.0",
         "aura/di": "^3.0",
-        "xtreamwayz/pimple-container-interop": "^1.0"
+        "xtreamwayz/pimple-container-interop": "^1.0",
+        "mikey179/vfsStream": "^1.6"
     },
     "autoload": {
         "psr-4": {
