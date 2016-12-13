@@ -79,7 +79,6 @@ class RoutersTest extends InstallerTestCase
             $expectedRouter,
             $config['dependencies']['invokables'][Router\RouterInterface::class]
         );
-        //$this->assertEquals($expectedRoutes, $config['routes']);
 
         // Test home page
         $response = $this->getAppResponse();
