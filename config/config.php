@@ -3,8 +3,17 @@
 use Zend\ConfigAggregator\ConfigAggregator;
 use Zend\ConfigAggregator\PhpFileProvider;
 
+$cacheConfig = [
+    'config_cache_path' => 'data/config-cache.php',
+];
+
 $aggregator = new ConfigAggregator(
     [
+        //Include cache config for zf-development-mode
+        function () use ($cacheConfig) {
+            return $cacheConfig;
+        },
+
         // Load module config
         new PhpFileProvider('src/App/Config/{{,*.}global}.php'),
 
@@ -17,7 +26,7 @@ $aggregator = new ConfigAggregator(
         new PhpFileProvider('config/autoload/{{,*.}global,{,*.}local}.php'),
     ],
     // Cached config file
-    'data/config-cache.php'
+    $cacheConfig['config_cache_path']
 );
 
 return $aggregator->getMergedConfig();
