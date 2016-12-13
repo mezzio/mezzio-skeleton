@@ -73,6 +73,7 @@ class OptionalPackages
         'aura/di',
         'composer/composer',
         'filp/whoops',
+        'mikey179/vfsStream',
         'xtreamwayz/pimple-container-interop',
         'zendframework/zend-expressive-aurarouter',
         'zendframework/zend-expressive-fastroute',
