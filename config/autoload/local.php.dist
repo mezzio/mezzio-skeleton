@@ -1,9 +1,16 @@
 <?php
 
+/**
+ * Local configuration.
+ *
+ * Copy this file to `local.php` and change its settings as required.
+ * `local.php` is ignored by git and safe to use for local and sensitive data like usernames and passwords.
+ */
+
 use Zend\ConfigAggregator\ConfigAggregator;
 
 return [
-    // Cache the configuration: Recommended for production
-    // Closures used somewhere in the configuration make caching impossible
+    // Configuration cache: disabled by default. Recommended to be enabled for production.
+    // If Closures are used anywhere in the merged config, caching is impossible.
     ConfigAggregator::ENABLE_CACHE => false,
 ];
