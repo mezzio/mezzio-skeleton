@@ -240,6 +240,7 @@ class OptionalPackages
         unlink($projectRoot . '/CHANGELOG.md');
         unlink($projectRoot . '/CONDUCT.md');
         unlink($projectRoot . '/CONTRIBUTING.md');
+        unlink($projectRoot . '/phpcs.xml');
         self::recursiveRmdir(__DIR__);
         self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
 
