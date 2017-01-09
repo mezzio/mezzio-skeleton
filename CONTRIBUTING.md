@@ -48,11 +48,11 @@ To run tests:
 - Install dependencies via composer:
 
   ```console
-  $ composer install
+  $ composer install --no-scripts
   ```
 
-  **NOTE:** If you are wanting to test the installer itself, add the
-  `--no-scripts` flag to the `composer install` command.
+  **NOTE:** Without the `--no-scripts` flag, composer will invoke the installer,
+  which in turn will remove itself when complete.
 
   If you don't have `curl` installed, you can also download `composer.phar` from
   https://getcomposer.org/:

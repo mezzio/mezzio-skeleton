@@ -36,7 +36,7 @@ class HomePageAction
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
         } elseif ($this->router instanceof Router\ZendRouter) {
             $data['routerName'] = 'Zend Router';
-            $data['routerDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.mvc.routing.html';
+            $data['routerDocs'] = 'https://docs.zendframework.com/zend-router/';
         }
 
         if ($this->template instanceof PlatesRenderer) {
@@ -47,13 +47,13 @@ class HomePageAction
             $data['templateDocs'] = 'http://twig.sensiolabs.org/documentation';
         } elseif ($this->template instanceof ZendViewRenderer) {
             $data['templateName'] = 'Zend View';
-            $data['templateDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.view.quick-start.html';
+            $data['templateDocs'] = 'https://docs.zendframework.com/zend-view/';
         }
 
         if (!$this->template) {
             return new JsonResponse([
                 'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
-                'docsUrl' => 'zend-expressive.readthedocs.org',
+                'docsUrl' => 'https://docs.zendframework.com/zend-expressive/',
             ]);
         }
 

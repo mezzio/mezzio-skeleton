@@ -1,13 +1,16 @@
 <?php
 
+use Zend\Expressive\Container;
+use Zend\Expressive\Middleware\ErrorResponseGenerator;
+
 return [
     'dependencies' => [
         'invokables' => [
-            'Zend\Expressive\Whoops' => Whoops\Run::class,
-            'Zend\Expressive\WhoopsPageHandler' => Whoops\Handler\PrettyPageHandler::class,
         ],
-        'factories' => [
-            'Zend\Expressive\FinalHandler' => Zend\Expressive\Container\WhoopsErrorHandlerFactory::class,
+        'factories'  => [
+            ErrorResponseGenerator::class       => Container\WhoopsErrorResponseGeneratorFactory::class,
+            'Zend\Expressive\Whoops'            => Container\WhoopsFactory::class,
+            'Zend\Expressive\WhoopsPageHandler' => Container\WhoopsPageHandlerFactory::class,
         ],
     ],
 

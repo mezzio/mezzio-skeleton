@@ -79,7 +79,7 @@ scripts** with `--no-scripts`, otherwise it will remove the installer and all
 tests.
 
 ```bash
-$ composer install --no-scripts
+$ composer update --no-scripts
 $ composer test
 ```
 

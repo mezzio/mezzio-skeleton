@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2015-2016 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
@@ -20,6 +20,7 @@ class ContainersTest extends InstallerTestCase
 {
     protected $teardownFiles = [
         '/config/container.php',
+        '/config/routes.php',
         '/config/autoload/routes.global.php',
     ];
 
