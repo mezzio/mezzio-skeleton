@@ -11,6 +11,19 @@
  * Or with multiple request methods:
  *
  * $app->route('/contact', App\Action\ContactAction::class, ['GET', 'POST', ...], 'contact');
+ *
+ * Or handling all request methods:
+ *
+ * $app->route('/contact', App\Action\ContactAction::class)->setName('contact');
+ *
+ * or:
+ *
+ * $app->route(
+ *     '/contact',
+ *     App\Action\ContactAction::class,
+ *     Zend\Expressive\Router\Route::HTTP_METHOD_ANY,
+ *     'contact'
+ * );
  */
 
 $app->get('/', App\Action\HomePageAction::class, 'home');
