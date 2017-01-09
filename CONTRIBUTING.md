@@ -51,8 +51,8 @@ To run tests:
   $ composer install --no-scripts
   ```
 
-  **NOTE:** Without the `--no-scripts` flag the installer starts and it removes 
-  itself.
+  **NOTE:** Without the `--no-scripts` flag, composer will invoke the installer,
+  which in turn will remove itself when complete.
 
   If you don't have `curl` installed, you can also download `composer.phar` from
   https://getcomposer.org/:
