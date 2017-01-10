@@ -34,7 +34,7 @@
         "zendframework/zend-servicemanager": "^2.7.3 || ^3.0",
         "aura/di": "^3.0",
         "xtreamwayz/pimple-container-interop": "^1.0",
-        "zfcampus/zf-development-mode": "dev-feature/zend-expressive-skeleton-compat"
+        "zfcampus/zf-development-mode": "^3.1"
     },
     "autoload": {
         "psr-4": {
@@ -65,11 +65,5 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "upload-coverage": "coveralls -v"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/MichaelGooden/zf-development-mode.git"
-        }
-    ]
+    }
 }
