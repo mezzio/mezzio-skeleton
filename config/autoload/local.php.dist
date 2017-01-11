@@ -10,7 +10,4 @@
 use Zend\ConfigAggregator\ConfigAggregator;
 
 return [
-    // Configuration cache: disabled by default. Recommended to be enabled for production.
-    // If Closures are used anywhere in the merged config, caching is impossible.
-    ConfigAggregator::ENABLE_CACHE => false,
 ];
