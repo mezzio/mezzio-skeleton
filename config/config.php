@@ -1,5 +1,6 @@
 <?php
 
+use Zend\ConfigAggregator\ArrayProvider;
 use Zend\ConfigAggregator\ConfigAggregator;
 use Zend\ConfigAggregator\PhpFileProvider;
 
@@ -10,12 +11,10 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
-    //Include cache config for zf-development-mode
-    function () use ($cacheConfig) {
-        return $cacheConfig;
-    },
+    // Include cache configuration
+    new ArrayProvider($cacheConfig),
 
-    // Load module config
+    // Default App module config
     App\ConfigProvider::class,
 
     // Load application config in a pre-defined order in such a way that local settings
