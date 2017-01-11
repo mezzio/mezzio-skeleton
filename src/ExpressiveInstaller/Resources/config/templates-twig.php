@@ -3,6 +3,8 @@
 return [
     'dependencies' => [
         'factories' => [
+            Twig_Environment::class => Zend\Expressive\Twig\TwigEnvironmentFactory::class,
+
             'Zend\Expressive\FinalHandler' =>
                 Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
 
@@ -22,5 +24,12 @@ return [
         'extensions'     => [
             // extension service names or instances
         ],
+        'runtime_loaders' => [
+            // runtime loader names or instances
+        ],
+        'globals' => [
+            // Variables to pass to all twig templates
+        ],
+        // 'timezone' => 'default timezone identifier; e.g. America/Chicago',
     ],
 ];
