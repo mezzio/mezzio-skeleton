@@ -68,6 +68,35 @@ If neither of the above help, you might face more serious issues:
 - Info about the [zlib_decode error](https://github.com/composer/composer/issues/4121).
 - Info and solutions for [composer degraded mode](https://getcomposer.org/doc/articles/troubleshooting.md#degraded-mode).
 
+## Application Development Mode Tool
+
+This skeleton comes with [zf-development-mode](https://github.com/zfcampus/zf-development-mode). 
+It provides a composer script to allow you to enable and disable development mode.
+
+### To enable development mode
+
+**Note:** Do NOT run development mode on your production server!
+
+```bash
+$ composer development-enable
+```
+
+**Note:** Enabling development mode will also clear your configuration cache, to 
+allow safely updating dependencies and ensuring any new configuration is picked 
+up by your application.
+
+### To disable development mode
+
+```bash
+$ composer development-disable
+```
+
+### Development mode status
+
+```bash
+$ composer development-status
+```
+
 ## Skeleton Development
 
 This section applies only if you cloned this repo with `git clone`, not when you

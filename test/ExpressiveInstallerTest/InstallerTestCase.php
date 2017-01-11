@@ -7,6 +7,8 @@
 
 namespace ExpressiveInstallerTest;
 
+use App\Action\HomePageAction;
+use App\Action\PingAction;
 use Composer\Config;
 use Composer\Factory;
 use Composer\IO\IOInterface;
@@ -16,11 +18,16 @@ use Composer\Repository\RepositoryManager;
 use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase as TestCase;
-use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
+use Zend\Expressive\Helper\ServerUrlMiddleware;
+use Zend\Expressive\Helper\UrlHelperMiddleware;
+use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
+use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
+use Zend\Expressive\Middleware\NotFoundHandler;
+use Zend\Stratigility\Middleware\ErrorHandler;
 
 abstract class InstallerTestCase extends TestCase
 {
@@ -131,7 +138,7 @@ abstract class InstallerTestCase extends TestCase
 
     protected function getContainer()
     {
-        if (!$this->container) {
+        if (! $this->container) {
             /** @var ContainerInterface $container */
             $this->container = require 'config/container.php';
         }
@@ -139,7 +146,7 @@ abstract class InstallerTestCase extends TestCase
         return $this->container;
     }
 
-    protected function getAppResponse($path = '/')
+    protected function getAppResponse($path = '/', $setupRoutes = true)
     {
         $container = $this->getContainer();
 
@@ -147,19 +154,21 @@ abstract class InstallerTestCase extends TestCase
         $app = $container->get(Application::class);
 
         // Import programmatic/declarative middleware pipeline and routing configuration statements
-        $app->pipe(\Zend\Stratigility\Middleware\ErrorHandler::class);
-        $app->pipe(\Zend\Expressive\Helper\ServerUrlMiddleware::class);
+        $app->pipe(ErrorHandler::class);
+        $app->pipe(ServerUrlMiddleware::class);
         $app->pipeRoutingMiddleware();
-        $app->pipe(\Zend\Expressive\Helper\UrlHelperMiddleware::class);
+        $app->pipe(ImplicitHeadMiddleware::class);
+        $app->pipe(ImplicitOptionsMiddleware::class);
+        $app->pipe(UrlHelperMiddleware::class);
         $app->pipeDispatchMiddleware();
-        $app->pipe(\Zend\Expressive\Middleware\NotFoundHandler::class);
+        $app->pipe(NotFoundHandler::class);
 
-        if ($container->has(\App\Action\HomePageAction::class)) {
-            $app->get('/', \App\Action\HomePageAction::class, 'home');
+        if ($setupRoutes === true && $container->has(HomePageAction::class)) {
+            $app->get('/', HomePageAction::class, 'home');
         }
 
-        if ($container->has(\App\Action\PingAction::class)) {
-            $app->get('/api/ping', \App\Action\PingAction::class, 'api.ping');
+        if ($setupRoutes === true && $container->has(PingAction::class)) {
+            $app->get('/api/ping', PingAction::class, 'api.ping');
         }
 
         return $app(

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Configuration file for the zf-development-mode tool.
+ *
+ * Usage:
+ *  $ composer development-disable
+ *  $ composer development-enable
+ *  $ composer development-status
+ */
+
+use Zend\ConfigAggregator\ConfigAggregator;
+
+return [
+    'debug' => true,
+    ConfigAggregator::ENABLE_CACHE => false,
+];

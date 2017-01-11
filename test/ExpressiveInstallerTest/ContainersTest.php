@@ -65,7 +65,8 @@ class ContainersTest extends InstallerTestCase
         $this->assertTrue($container->has(Expressive\Router\RouterInterface::class));
 
         // Test home page
-        $response = $this->getAppResponse();
+        $setupRoutes = (strpos($copyFilesKey, 'minimal') !== 0);
+        $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 

@@ -239,6 +239,7 @@ class OptionalPackages
         unlink($projectRoot . '/CHANGELOG.md');
         unlink($projectRoot . '/CONDUCT.md');
         unlink($projectRoot . '/CONTRIBUTING.md');
+        unlink($projectRoot . '/src/App/templates/.gitkeep');
         self::recursiveRmdir(__DIR__);
         self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
 
@@ -518,7 +519,8 @@ class OptionalPackages
     private static function removeDefaultMiddleware(IOInterface $io, $projectRoot)
     {
         $io->write("<info>Removing default middleware classes and factories</info>");
-        self::recursiveRmdir($projectRoot . '/src/App/Action');
+        self::recursiveRmdir($projectRoot . '/src/App/src/Action');
+        unlink($projectRoot . '/src/App/src/ConfigProvider.php');
 
         $io->write("<info>Removing default middleware class tests</info>");
         self::recursiveRmdir($projectRoot . '/test/AppTest/Action');
