@@ -59,6 +59,7 @@
             "@cs-check",
             "@test"
         ],
+        "clear-config-cache": "php bin/clear-config-cache.php",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "serve": "php -S 0.0.0.0:8080 -t public public/index.php",
