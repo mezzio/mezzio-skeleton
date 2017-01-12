@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Configuration file for the zf-development-mode tool.
+ *
+ * Usage:
+ *  $ composer development-disable
+ *  $ composer development-enable
+ *  $ composer development-status
+ *
+ * Put settings you want enabled when under development mode in this file, and
+ * check it into your repository.
+ *
+ * Developers on your team will then automatically enable them by calling on
+ * `composer development-enable`.
+ */
+
+use Zend\ConfigAggregator\ConfigAggregator;
+
+return [
+    'debug' => true,
+    ConfigAggregator::ENABLE_CACHE => false,
+];

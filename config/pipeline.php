@@ -2,6 +2,8 @@
 
 use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
+use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
+use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
 use Zend\Expressive\Middleware\NotFoundHandler;
 use Zend\Stratigility\Middleware\ErrorHandler;
 
@@ -33,6 +35,8 @@ $app->pipe(ServerUrlMiddleware::class);
 
 // Register the routing middleware in the middleware pipeline
 $app->pipeRoutingMiddleware();
+$app->pipe(ImplicitHeadMiddleware::class);
+$app->pipe(ImplicitOptionsMiddleware::class);
 $app->pipe(UrlHelperMiddleware::class);
 
 // Add more middleware here that needs to introspect the routing results; this

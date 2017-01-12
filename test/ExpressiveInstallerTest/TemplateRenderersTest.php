@@ -9,6 +9,7 @@ namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
 use Zend\Expressive;
+use Zend\Stratigility\Middleware;
 
 class TemplateRenderersTest extends InstallerTestCase
 {
@@ -17,14 +18,15 @@ class TemplateRenderersTest extends InstallerTestCase
         '/config/routes.php',
         '/config/autoload/routes.global.php',
         '/config/autoload/templates.global.php',
-        '/templates/error/404.phtml',
-        '/templates/error/error.phtml',
-        '/templates/layout/default.phtml',
-        '/templates/app/home-page.phtml',
-        '/templates/error/404.html.twig',
-        '/templates/error/error.html.twig',
-        '/templates/layout/default.html.twig',
-        '/templates/app/home-page.html.twig',
+        '/data/config-cache.php',
+        '/src/App/templates/error/404.phtml',
+        '/src/App/templates/error/error.phtml',
+        '/src/App/templates/layout/default.phtml',
+        '/src/App/templates/app/home-page.phtml',
+        '/src/App/templates/error/404.html.twig',
+        '/src/App/templates/error/error.html.twig',
+        '/src/App/templates/layout/default.html.twig',
+        '/src/App/templates/app/home-page.html.twig',
     ];
 
     /**
@@ -71,13 +73,14 @@ class TemplateRenderersTest extends InstallerTestCase
         // Test container
         $container = $this->getContainer();
         $this->assertTrue($container->has(Expressive\Application::class));
-        $this->assertTrue($container->has('Zend\Expressive\FinalHandler'));
+        $this->assertTrue($container->has(Middleware\ErrorHandler::class));
+        $this->assertTrue($container->has(Expressive\Template\TemplateRendererInterface::class));
 
         // Test config
         $config = $container->get('config');
         $this->assertEquals(
-            Expressive\Container\TemplatedErrorHandlerFactory::class,
-            $config['dependencies']['factories']['Zend\Expressive\FinalHandler']
+            Expressive\Container\ErrorHandlerFactory::class,
+            $config['dependencies']['factories'][Middleware\ErrorHandler::class]
         );
 
         // Test template renderer

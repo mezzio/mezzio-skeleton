@@ -1,10 +1,16 @@
 <?php
 
-return [
-    'debug' => false,
+use Zend\ConfigAggregator\ConfigAggregator;
 
-    // Cache the configuration. Recommended for production.
-    'config_cache_enabled' => false,
+return [
+    // Toggle the configuration cache. Set this to boolean false, or remove the
+    // directive, to disable configuration caching. Toggling development mode
+    // will also disable it by default; clear the configuration cache using
+    // `composer clear-config-cache`.
+    ConfigAggregator::ENABLE_CACHE => true,
+
+    // Enable debugging; typically used to provide debugging information within templates.
+    'debug' => false,
 
     'zend-expressive' => [
         // Enable exception-based error handling via standard middleware.

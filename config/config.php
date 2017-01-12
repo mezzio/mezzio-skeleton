@@ -1,33 +1,32 @@
 <?php
 
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Glob;
+use Zend\ConfigAggregator\ArrayProvider;
+use Zend\ConfigAggregator\ConfigAggregator;
+use Zend\ConfigAggregator\PhpFileProvider;
 
-/**
- * Configuration files are loaded in a specific order. First ``global.php``, then ``*.global.php``.
- * then ``local.php`` and finally ``*.local.php``. This way local settings overwrite global settings.
- *
- * The configuration can be cached. This can be done by setting ``config_cache_enabled`` to ``true``.
- *
- * Obviously, if you use closures in your config you can't cache it.
- */
+// To enable or disable caching, set the `ConfigAggregator::ENABLE_CACHE` boolean in
+// `config/autoload/local.php`.
+$cacheConfig = [
+    'config_cache_path' => 'data/config-cache.php',
+];
 
-$cachedConfigFile = 'data/cache/app_config.php';
+$aggregator = new ConfigAggregator([
+    // Include cache configuration
+    new ArrayProvider($cacheConfig),
 
-$config = [];
-if (is_file($cachedConfigFile)) {
-    // Try to load the cached config
-    $config = include $cachedConfigFile;
-} else {
-    // Load configuration from autoload path
-    foreach (Glob::glob('config/autoload/{{,*.}global,{,*.}local}.php', Glob::GLOB_BRACE) as $file) {
-        $config = ArrayUtils::merge($config, include $file);
-    }
+    // Default App module config
+    App\ConfigProvider::class,
 
-    // Cache config if enabled
-    if (isset($config['config_cache_enabled']) && $config['config_cache_enabled'] === true) {
-        file_put_contents($cachedConfigFile, '<?php return ' . var_export($config, true) . ';');
-    }
-}
+    // Load application config in a pre-defined order in such a way that local settings
+    // overwrite global settings. (Loaded as first to last):
+    //   - `global.php`
+    //   - `*.global.php`
+    //   - `local.php`
+    //   - `*.local.php`
+    new PhpFileProvider('config/autoload/{{,*.}global,{,*.}local}.php'),
 
-return $config;
+    // Load development config if it exists
+    new PhpFileProvider('config/development.config.php'),
+], $cacheConfig['config_cache_path']);
+
+return $aggregator->getMergedConfig();

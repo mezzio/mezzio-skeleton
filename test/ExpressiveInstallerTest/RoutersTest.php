@@ -18,6 +18,7 @@ class RoutersTest extends InstallerTestCase
         '/config/container.php',
         '/config/routes.php',
         '/config/autoload/routes.global.php',
+        '/data/config-cache.php',
     ];
 
     private $expectedRoutes = [
@@ -79,7 +80,8 @@ class RoutersTest extends InstallerTestCase
         );
 
         // Test home page
-        $response = $this->getAppResponse();
+        $setupRoutes = (strpos($copyFilesKey, 'minimal') !== 0);
+        $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
