@@ -20,11 +20,14 @@
         "zendframework/zend-component-installer": "^0.6.0 || ~1.0"
     },
     "require-dev": {
+        "aura/di": "^3.0",
+        "composer/composer": "^1.0",
+        "filp/whoops": "^2.0",
+        "mikey179/vfsStream": "^1.6",
         "phpunit/phpunit": "^5.6",
         "squizlabs/php_codesniffer": "^2.7",
-        "mikey179/vfsStream": "^1.6",
-        "filp/whoops": "^2.0",
-        "composer/composer": "^1.0",
+        "xtreamwayz/pimple-container-interop": "^1.0",
+        "zendframework/zend-coding-standard": "~1.0.0",
         "zendframework/zend-expressive-aurarouter": "^2.0",
         "zendframework/zend-expressive-fastroute": "^2.0",
         "zendframework/zend-expressive-zendrouter": "^2.0",
@@ -32,8 +35,6 @@
         "zendframework/zend-expressive-twigrenderer": "^1.2.1",
         "zendframework/zend-expressive-zendviewrenderer": "^1.2.1",
         "zendframework/zend-servicemanager": "^2.7.3 || ^3.0",
-        "aura/di": "^3.0",
-        "xtreamwayz/pimple-container-interop": "^1.0",
         "zfcampus/zf-development-mode": "^3.1"
     },
     "autoload": {
