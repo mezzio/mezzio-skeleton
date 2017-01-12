@@ -9,6 +9,7 @@ namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
 use Zend\Expressive;
+use Zend\Stratigility\Middleware;
 
 class TemplateRenderersTest extends InstallerTestCase
 {
@@ -71,13 +72,14 @@ class TemplateRenderersTest extends InstallerTestCase
         // Test container
         $container = $this->getContainer();
         $this->assertTrue($container->has(Expressive\Application::class));
-        $this->assertTrue($container->has('Zend\Expressive\FinalHandler'));
+        $this->assertTrue($container->has(Middleware\ErrorHandler::class));
+        $this->assertTrue($container->has(Expressive\Middleware\ErrorResponseGenerator::class));
 
         // Test config
         $config = $container->get('config');
         $this->assertEquals(
-            Expressive\Container\TemplatedErrorHandlerFactory::class,
-            $config['dependencies']['factories']['Zend\Expressive\FinalHandler']
+            Expressive\Container\ErrorHandlerFactory::class,
+            $config['dependencies']['factories'][Middleware\ErrorHandler::class]
         );
 
         // Test template renderer
