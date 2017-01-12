@@ -20,7 +20,7 @@ class RemoveDevDependenciesTest extends InstallerTestCase
         'zendframework/zend-expressive-helpers',
         'zendframework/zend-stdlib',
         'phpunit/phpunit',
-        'zendframework/zend-coding-standard',
+        'squizlabs/php_codesniffer',
     ];
 
     private $devDependencies      = [
@@ -28,6 +28,7 @@ class RemoveDevDependenciesTest extends InstallerTestCase
         'composer/composer',
         'filp/whoops',
         'xtreamwayz/pimple-container-interop',
+        'zendframework/zend-coding-standard',
         'zendframework/zend-expressive-aurarouter',
         'zendframework/zend-expressive-fastroute',
         'zendframework/zend-expressive-platesrenderer',

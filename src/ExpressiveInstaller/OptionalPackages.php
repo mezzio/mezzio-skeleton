@@ -73,6 +73,7 @@ class OptionalPackages
         'filp/whoops',
         'mikey179/vfsStream',
         'xtreamwayz/pimple-container-interop',
+        'zendframework/zend-coding-standard',
         'zendframework/zend-expressive-aurarouter',
         'zendframework/zend-expressive-fastroute',
         'zendframework/zend-expressive-platesrenderer',
