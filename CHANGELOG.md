@@ -60,6 +60,11 @@ All notable changes to this project will be documented in this file, in reverse 
   - zend-expressive-twigrenderer to `^1.2.1`
   - zend-expressive-zendviewrenderer to `^1.2.1`
 
+- [#120](https://github.com/organization/project/pull/120) switches the order of
+  questions in the installer, to prompt for the container to use first. This
+  will allow some optimizations for some third-party container systems such as
+  [Disco](https://github.com/bitExpert/disco).
+
 ### Deprecated
 
 - Nothing.
