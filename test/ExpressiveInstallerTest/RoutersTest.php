@@ -18,6 +18,7 @@ class RoutersTest extends InstallerTestCase
         '/config/container.php',
         '/config/routes.php',
         '/config/autoload/routes.global.php',
+        '/data/config-cache.php',
     ];
 
     private $expectedRoutes = [

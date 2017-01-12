@@ -17,6 +17,7 @@ class ErrorHandlerTest extends InstallerTestCase
         '/config/container.php',
         '/config/routes.php',
         '/config/autoload/errorhandler.local.php',
+        '/data/config-cache.php',
     ];
 
     public function testErrorHandlerIsNotInstalled()

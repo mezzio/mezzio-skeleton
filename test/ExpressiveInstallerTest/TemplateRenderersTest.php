@@ -18,6 +18,7 @@ class TemplateRenderersTest extends InstallerTestCase
         '/config/routes.php',
         '/config/autoload/routes.global.php',
         '/config/autoload/templates.global.php',
+        '/data/config-cache.php',
         '/src/App/templates/error/404.phtml',
         '/src/App/templates/error/error.phtml',
         '/src/App/templates/layout/default.phtml',
@@ -73,7 +74,7 @@ class TemplateRenderersTest extends InstallerTestCase
         $container = $this->getContainer();
         $this->assertTrue($container->has(Expressive\Application::class));
         $this->assertTrue($container->has(Middleware\ErrorHandler::class));
-        $this->assertTrue($container->has(Expressive\Middleware\ErrorResponseGenerator::class));
+        $this->assertTrue($container->has(Expressive\Template\TemplateRendererInterface::class));
 
         // Test config
         $config = $container->get('config');
