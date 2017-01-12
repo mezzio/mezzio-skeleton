@@ -50,7 +50,7 @@ class HomePageAction
             $data['templateDocs'] = 'https://docs.zendframework.com/zend-view/';
         }
 
-        if (!$this->template) {
+        if (! $this->template) {
             return new JsonResponse([
                 'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
                 'docsUrl' => 'https://docs.zendframework.com/zend-expressive/',
