@@ -38,6 +38,16 @@ class OptionalPackages
     const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
     /**
+     * @const string Configuration file lines related to registering the default
+     *     App module configuration.
+     */
+    const APP_MODULE_CONFIG = '
+    // Default App module config
+    App\ConfigProvider::class,
+
+';
+
+    /**
      * @var array
      */
     private static $config;
@@ -174,7 +184,7 @@ class OptionalPackages
 
         // Minimal install? Remove default middleware
         if ($minimal) {
-            self::removeDefaultMiddleware($io, self::$projectRoot);
+            self::removeDefaultModule($io, self::$projectRoot);
         }
 
         self::clearComposerLockFile($io, self::$projectRoot);
@@ -241,7 +251,9 @@ class OptionalPackages
         unlink($projectRoot . '/CONDUCT.md');
         unlink($projectRoot . '/CONTRIBUTING.md');
         unlink($projectRoot . '/phpcs.xml');
-        unlink($projectRoot . '/src/App/templates/.gitkeep');
+        if (file_exists($projectRoot . '/src/App/templates/.gitkeep')) {
+            unlink($projectRoot . '/src/App/templates/.gitkeep');
+        }
         self::recursiveRmdir(__DIR__);
         self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
 
@@ -518,14 +530,16 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    private static function removeDefaultMiddleware(IOInterface $io, $projectRoot)
+    private static function removeDefaultModule(IOInterface $io, $projectRoot)
     {
-        $io->write("<info>Removing default middleware classes and factories</info>");
-        self::recursiveRmdir($projectRoot . '/src/App/src/Action');
-        unlink($projectRoot . '/src/App/src/ConfigProvider.php');
+        $io->write('<info>Removing default App module classes and factories</info>');
+        self::recursiveRmdir($projectRoot . '/src/App');
 
-        $io->write("<info>Removing default middleware class tests</info>");
-        self::recursiveRmdir($projectRoot . '/test/AppTest/Action');
+        $io->write('<info>Removing default App module tests</info>');
+        self::recursiveRmdir($projectRoot . '/test/AppTest');
+
+        $io->write('<info>Removing App module registration from configuration</info>');
+        self::removeAppModuleConfig($projectRoot);
 
         $io->write("<info>Removing assets</info>");
         unlink($projectRoot . '/public/favicon.ico');
@@ -567,5 +581,19 @@ class OptionalPackages
 
         $content = self::removeLinesContainingStrings(['composer.lock'], file_get_contents($ignoreFile));
         file_put_contents($ignoreFile, $content);
+    }
+
+    /**
+     * Removes the App\ConfigProvider entry from the application config file.
+     *
+     * @param string $projectRoot
+     * @return void
+     */
+    private static function removeAppModuleConfig($projectRoot)
+    {
+        $configFile = $projectRoot . '/config/config.php';
+        $contents = file_get_contents($configFile);
+        $contents = str_replace(self::APP_MODULE_CONFIG, '', $contents);
+        file_put_contents($configFile, $contents);
     }
 }
