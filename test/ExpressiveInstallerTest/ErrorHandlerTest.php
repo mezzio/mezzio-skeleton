@@ -13,17 +13,25 @@ use Zend\Expressive\Middleware\ErrorResponseGenerator;
 
 class ErrorHandlerTest extends InstallerTestCase
 {
-    protected $teardownFiles = [
-        '/config/container.php',
-        '/config/routes.php',
-        '/config/autoload/errorhandler.local.php',
-        '/data/config-cache.php',
-    ];
+    protected function tearDown()
+    {
+        parent::tearDown();
+        $this->setInstallType(OptionalPackages::INSTALL_FLAT);
+    }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testErrorHandlerIsNotInstalled()
     {
+        $projectRoot = $this->copyProjectFilesToVirtualFilesystem();
+        $this->setProjectRoot($projectRoot);
+        $this->setInstallType(OptionalPackages::INSTALL_MINIMAL);
+
         $io     = $this->prophesize('Composer\IO\IOInterface');
         $config = $this->getConfig();
+
+        OptionalPackages::setupDefaultApp($io->reveal(), OptionalPackages::INSTALL_MINIMAL, $config['application']);
 
         // Install container
         $containerResult = OptionalPackages::processAnswer(
@@ -43,15 +51,23 @@ class ErrorHandlerTest extends InstallerTestCase
 
     /**
      * @dataProvider errorHandlerProvider
+     * @runInSeparateProcess
      */
     public function testErrorHandler(
+        $installType,
         $containerOption,
         $errorHandlerOption,
         $copyFilesKey,
         $expectedErrorHandler
     ) {
+        $projectRoot = $this->copyProjectFilesToVirtualFilesystem();
+        $this->setProjectRoot($projectRoot);
+        $this->setInstallType($installType);
+
         $io     = $this->prophesize('Composer\IO\IOInterface');
         $config = $this->getConfig();
+
+        OptionalPackages::setupDefaultApp($io->reveal(), $installType, $config['application']);
 
         // Install container
         $containerResult = OptionalPackages::processAnswer(
@@ -86,10 +102,13 @@ class ErrorHandlerTest extends InstallerTestCase
 
     public function errorHandlerProvider()
     {
-        // $containerOption, $errorHandlerOption, $copyFilesKey, $expectedErrorHandler
+        // @codingStandardsIgnoreStart
+        // $installType, $containerOption, $errorHandlerOption, $copyFilesKey, $expectedErrorHandler
         return [
-            'whoops-minimal' => [3, 1, 'minimal-files', WhoopsErrorResponseGeneratorFactory::class],
-            'whoops-full'    => [3, 1, 'copy-files', WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 1, 'minimal-files', WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-full'    => [OptionalPackages::INSTALL_FLAT,    3, 1, 'copy-files', WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 1, 'copy-files', WhoopsErrorResponseGeneratorFactory::class],
         ];
+        // @codingStandardsIgnoreEnd
     }
 }

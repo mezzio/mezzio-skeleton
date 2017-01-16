@@ -18,24 +18,33 @@ use Zend\ServiceManager\ServiceManager as ZendServiceManagerContainer;
 
 class ContainersTest extends InstallerTestCase
 {
-    protected $teardownFiles = [
-        '/config/container.php',
-        '/config/routes.php',
-        '/config/autoload/routes.global.php',
-    ];
+    protected function tearDown()
+    {
+        parent::tearDown();
+        $this->setInstallType(OptionalPackages::INSTALL_FLAT);
+    }
 
     /**
      * @dataProvider containerProvider
+     * @runInSeparateProcess
      */
     public function testContainer(
+        $installType,
         $containerOption,
         $routerOption,
         $copyFilesKey,
         $expectedResponseStatusCode,
         $expectedContainer
     ) {
+        $projectRoot = $this->copyProjectFilesToVirtualFilesystem();
+        $this->setProjectRoot($projectRoot);
+        $this->setInstallType($installType);
+
         $io     = $this->prophesize('Composer\IO\IOInterface');
         $config = $this->getConfig();
+
+        // Ensure we have an App\ConfigProvider defined
+        OptionalPackages::setupDefaultApp($io->reveal(), $installType, $config['application']);
 
         // Install container
         $containerResult = OptionalPackages::processAnswer(
@@ -72,14 +81,19 @@ class ContainersTest extends InstallerTestCase
 
     public function containerProvider()
     {
-        // $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
+        // @codingStandardsIgnoreStart
+        // $installType, $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
         return [
-            'aura-minimal'    => [1, 2, 'minimal-files', 404, AuraContainer::class],
-            'aura-full'       => [1, 2, 'copy-files', 200, AuraContainer::class],
-            'pimple-minimal'  => [2, 2, 'minimal-files', 404, PimpleContainer::class],
-            'pimple-full'     => [2, 2, 'copy-files', 200, PimpleContainer::class],
-            'zend-sm-minimal' => [3, 2, 'minimal-files', 404, ZendServiceManagerContainer::class],
-            'zend-sm-full'    => [3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
+            'aura-minimal'    => [OptionalPackages::INSTALL_MINIMAL, 1, 2, 'minimal-files', 404, AuraContainer::class],
+            'aura-flat'       => [OptionalPackages::INSTALL_FLAT,    1, 2, 'copy-files', 200, AuraContainer::class],
+            'aura-modular'    => [OptionalPackages::INSTALL_MODULAR, 1, 2, 'copy-files', 200, AuraContainer::class],
+            'pimple-minimal'  => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 'minimal-files', 404, PimpleContainer::class],
+            'pimple-flat'     => [OptionalPackages::INSTALL_FLAT,    2, 2, 'copy-files', 200, PimpleContainer::class],
+            'pimple-modular'  => [OptionalPackages::INSTALL_MODULAR, 2, 2, 'copy-files', 200, PimpleContainer::class],
+            'zend-sm-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, ZendServiceManagerContainer::class],
+            'zend-sm-flat'    => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
+            'zend-sm-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
         ];
+        // @codingStandardsIgnoreEnd
     }
 }

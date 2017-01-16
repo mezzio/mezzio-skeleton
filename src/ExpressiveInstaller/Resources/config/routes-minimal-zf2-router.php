@@ -1,9 +1,12 @@
 <?php
 
+use Zend\Expressive\Router\RouterInterface;
+use Zend\Expressive\Router\ZendRouter;
+
 return [
     'dependencies' => [
         'invokables' => [
-            Zend\Expressive\Router\RouterInterface::class => Zend\Expressive\Router\ZendRouter::class,
+            RouterInterface::class => ZendRouter::class,
         ],
         // Map middleware -> factories here
         'factories' => [

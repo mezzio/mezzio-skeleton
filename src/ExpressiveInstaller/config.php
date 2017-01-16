@@ -18,6 +18,15 @@ return [
         'filp/whoops'
     ],
 
+    'application' => [
+        'flat' => [
+            '/Resources/src/ConfigProvider.flat.php' => '/src/App/ConfigProvider.php',
+        ],
+        'modular' => [
+            '/Resources/src/ConfigProvider.modular.php' => '/src/App/src/ConfigProvider.php',
+        ],
+    ],
+
     'questions' => [
         'container' => [
             'question'               => 'Which container do you want to use for dependency injection?',
@@ -135,10 +144,22 @@ return [
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-plates.php' => '/config/autoload/templates.global.php',
-                        '/Resources/templates/plates-404.phtml' => '/src/App/templates/error/404.phtml',
-                        '/Resources/templates/plates-error.phtml' => '/src/App/templates/error/error.phtml',
-                        '/Resources/templates/plates-layout.phtml' => '/src/App/templates/layout/default.phtml',
-                        '/Resources/templates/plates-home-page.phtml' => '/src/App/templates/app/home-page.phtml',
+                        '/Resources/templates/plates-404.phtml' => [
+                            'flat'    => '/templates/error/404.phtml',
+                            'modular' => '/src/App/templates/error/404.phtml',
+                        ],
+                        '/Resources/templates/plates-error.phtml' => [
+                            'flat'    => '/templates/error/error.phtml',
+                            'modular' => '/src/App/templates/error/error.phtml',
+                        ],
+                        '/Resources/templates/plates-layout.phtml' => [
+                            'flat'    => '/templates/layout/default.phtml',
+                            'modular' => '/src/App/templates/layout/default.phtml',
+                        ],
+                        '/Resources/templates/plates-home-page.phtml' => [
+                            'flat'    => '/templates/app/home-page.phtml',
+                            'modular' => '/src/App/templates/app/home-page.phtml',
+                        ],
                     ],
                     'minimal-files' => [
                         '/Resources/config/templates-plates.php' => '/config/autoload/templates.global.php',
@@ -151,10 +172,22 @@ return [
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-twig.php' => '/config/autoload/templates.global.php',
-                        '/Resources/templates/twig-404.html.twig' => '/src/App/templates/error/404.html.twig',
-                        '/Resources/templates/twig-error.html.twig' => '/src/App/templates/error/error.html.twig',
-                        '/Resources/templates/twig-layout.html.twig' => '/src/App/templates/layout/default.html.twig',
-                        '/Resources/templates/twig-home-page.html.twig' => '/src/App/templates/app/home-page.html.twig',
+                        '/Resources/templates/twig-404.html.twig' => [
+                            'flat'    => '/templates/error/404.html.twig',
+                            'modular' => '/src/App/templates/error/404.html.twig',
+                        ],
+                        '/Resources/templates/twig-error.html.twig' => [
+                            'flat'    => '/templates/error/error.html.twig',
+                            'modular' => '/src/App/templates/error/error.html.twig',
+                        ],
+                        '/Resources/templates/twig-layout.html.twig' => [
+                            'flat'    => '/templates/layout/default.html.twig',
+                            'modular' => '/src/App/templates/layout/default.html.twig',
+                        ],
+                        '/Resources/templates/twig-home-page.html.twig' => [
+                            'flat'    => '/templates/app/home-page.html.twig',
+                            'modular' => '/src/App/templates/app/home-page.html.twig',
+                        ],
                     ],
                     'minimal-files' => [
                         '/Resources/config/templates-twig.php' => '/config/autoload/templates.global.php',
@@ -167,10 +200,22 @@ return [
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
-                        '/Resources/templates/zend-view-404.phtml' => '/src/App/templates/error/404.phtml',
-                        '/Resources/templates/zend-view-error.phtml' => '/src/App/templates/error/error.phtml',
-                        '/Resources/templates/zend-view-layout.phtml' => '/src/App/templates/layout/default.phtml',
-                        '/Resources/templates/zend-view-home-page.phtml' => '/src/App/templates/app/home-page.phtml',
+                        '/Resources/templates/zend-view-404.phtml' => [
+                            'flat'    => '/templates/error/404.phtml',
+                            'modular' => '/src/App/templates/error/404.phtml',
+                        ],
+                        '/Resources/templates/zend-view-error.phtml' => [
+                            'flat'    => '/templates/error/error.phtml',
+                            'modular' => '/src/App/templates/error/error.phtml',
+                        ],
+                        '/Resources/templates/zend-view-layout.phtml' => [
+                            'flat'    => '/templates/layout/default.phtml',
+                            'modular' => '/src/App/templates/layout/default.phtml',
+                        ],
+                        '/Resources/templates/zend-view-home-page.phtml' => [
+                            'flat'    => '/templates/app/home-page.phtml',
+                            'modular' => '/src/App/templates/app/home-page.phtml',
+                        ],
                     ],
                     'minimal-files' => [
                         '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',

@@ -15,8 +15,10 @@ use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Composer\Package\Loader\RootPackageLoader;
 use Composer\Repository\RepositoryManager;
+use DirectoryIterator;
 use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
+use org\bovigo\vfs\vfsStream;
 use PHPUnit_Framework_TestCase as TestCase;
 use ReflectionProperty;
 use Zend\Diactoros\Response;
@@ -31,10 +33,28 @@ use Zend\Stratigility\Middleware\ErrorHandler;
 
 abstract class InstallerTestCase extends TestCase
 {
+    const VFS_ROOT_NAME = 'project';
+
+    /**
+     * @var null|callable Additional autoloader to prepend to stack.
+     *     Used when flat install is requested.
+     */
+    protected $autoloader;
+
     /**
      * @var ContainerInterface
      */
     protected $container;
+
+    /**
+     * @var string
+     */
+    protected $origProjectRoot;
+
+    /**
+     * @var \org\bovigo\vfs\vfsStreamDirectory
+     */
+    protected $projectRoot;
 
     protected $teardownFiles = [];
 
@@ -75,6 +95,8 @@ abstract class InstallerTestCase extends TestCase
 
     protected function setup()
     {
+        $this->origProjectRoot = realpath(__DIR__ . '/../../');
+
         // Set config
         $this->refConfig = new ReflectionProperty(OptionalPackages::class, 'config');
         $this->refConfig->setAccessible(true);
@@ -125,6 +147,53 @@ abstract class InstallerTestCase extends TestCase
         parent::tearDown();
 
         $this->cleanup();
+
+        if ($this->autoloader) {
+            spl_autoload_unregister($this->autoloader);
+            unset($this->autoloader);
+        }
+    }
+
+    /**
+     * Adds an alternate autoloader to the stack for the App namespace.
+     *
+     * Required, as the tests will load classes from that namespace, but the
+     * class files will exist in temporary directories.
+     *
+     * Any test that uses this (and it's implicit when using setInstallType())
+     * MUST run in a separate process.
+     *
+     * tearDown() unregisters the autoloader.
+     *
+     * @param string $appPath The path to the App namespace source code,
+     *     relative to the project root.
+     * @param bool $stripNamespace Whether or not to strip the initial
+     *     namespace when determining the path (ala PSR-4).
+     */
+    protected function setUpAlternateAutoloader($appPath, $stripNamespace = false)
+    {
+        $this->autoloader = function ($class) use ($appPath, $stripNamespace) {
+            if (0 !== strpos($class, 'App\\')) {
+                return false;
+            }
+
+            $class = $stripNamespace
+                ? str_replace('App\\', '', $class)
+                : $class;
+
+            $path = $this->projectRoot
+                . $appPath
+                . str_replace('\\', '/', $class)
+                . '.php';
+
+            if (! file_exists($path)) {
+                return false;
+            }
+
+            include $path;
+        };
+
+        spl_autoload_register($this->autoloader, true, true);
     }
 
     protected function cleanup()
@@ -134,13 +203,159 @@ abstract class InstallerTestCase extends TestCase
                 unlink($this->getProjectRoot() . $file);
             }
         }
+
+        if ($this->projectRoot) {
+            chdir($this->origProjectRoot);
+            $this->recursiveDelete($this->projectRoot);
+            $this->setProjectRoot(null);
+            $this->projectRoot = null;
+        }
+    }
+
+    /**
+     * @param null|string $root
+     */
+    protected function setProjectRoot($root)
+    {
+        $r = new ReflectionProperty(OptionalPackages::class, 'projectRoot');
+        $r->setAccessible(true);
+        $r->setValue($root);
+    }
+
+    /**
+     * Copies the project files into a temporary filesystem.
+     *
+     * Sets the path to the new temporary filesystem in the $projectRoot
+     * property, changes the working directory to that new location, and
+     * returns the location.
+     *
+     * cleanup() recursively removes the created directory.
+     */
+    protected function copyProjectFilesToVirtualFilesystem()
+    {
+        $this->projectRoot = sys_get_temp_dir() . '/' . uniqid('exp');
+
+        mkdir($this->projectRoot . '/data', 0777, true);
+        foreach (['config', 'public', 'src', 'templates', 'test'] as $path) {
+            $this->recursiveCopy(
+                $this->origProjectRoot . '/' . $path,
+                $this->projectRoot . '/' . $path
+            );
+        }
+
+        chdir($this->projectRoot);
+        return $this->projectRoot;
+    }
+
+    /**
+     * Recursively copy the files from one tree to another.
+     *
+     * @param string $source Source tree to copy.
+     * @param string $target Target tree to copy into.
+     */
+    protected function recursiveCopy($source, $target)
+    {
+        if (! is_dir($target)) {
+            mkdir($target, 0777, true);
+        }
+
+        $dir = new DirectoryIterator($source);
+        foreach ($dir as $fileInfo) {
+            if ($fileInfo->isFile()) {
+                $realPath = $fileInfo->getRealPath();
+                $path = ltrim(str_replace($source, '', $realPath), '/\\');
+                copy($realPath, sprintf('%s/%s', $target, $path));
+                continue;
+            }
+
+            if ($fileInfo->isDir()
+            ) {
+                $path = $fileInfo->getFilename();
+                if (in_array($path, ['.', '..'], true)) {
+                    continue;
+                }
+
+                mkdir($target . '/' . $path, 0777, true);
+
+                $this->recursiveCopy(
+                    $source . '/' . $path,
+                    $target . '/' . $path
+                );
+                continue;
+            }
+        }
+    }
+
+    /**
+     * Recursively remove a filesystem tree.
+     *
+     * @param string $target Tree to remove.
+     */
+    protected function recursiveDelete($target)
+    {
+        if (! is_dir($target)) {
+            return;
+        }
+
+        foreach (scandir($target) as $node) {
+            if (in_array($node, ['.', '..'], true)) {
+                continue;
+            }
+
+            $path = sprintf('%s/%s', $target, $node);
+
+            if (is_dir($path)) {
+                $this->recursiveDelete($path);
+                continue;
+            }
+
+            unlink($path);
+        }
+
+        rmdir($target);
+    }
+
+    /**
+     * Set the installation type (minimal, flat, modular).
+     *
+     * When set, determines how files are copied into the project and the tree
+     * organized.
+     *
+     * For FLAT and MODULAR installations, this also sets up autoloading for the
+     * App namespace; as such, if you call it within your test, you MUST also
+     * run that test case in a separate process to prevent autoload caching.
+     *
+     * @param string $type One of the OptionalPackages::INSTALL constants
+     */
+    protected function setInstallType($type)
+    {
+        $r = new ReflectionProperty(OptionalPackages::class, 'installType');
+        $r->setAccessible(true);
+        $r->setValue($type);
+
+        if (! $this->projectRoot) {
+            return;
+        }
+
+        switch ($type) {
+            case OptionalPackages::INSTALL_FLAT:
+                $this->setUpAlternateAutoloader('/src/');
+                break;
+            case OptionalPackages::INSTALL_MODULAR:
+                $this->setUpAlternateAutoloader('/src/App/src/', true);
+                break;
+        }
     }
 
     protected function getContainer()
     {
         if (! $this->container) {
+            $path = $this->projectRoot
+                ? $this->projectRoot . '/config/container.php'
+                : 'config/container.php';
+
             /** @var ContainerInterface $container */
-            $this->container = require 'config/container.php';
+            $this->container = require $path;
         }
 
         return $this->container;
