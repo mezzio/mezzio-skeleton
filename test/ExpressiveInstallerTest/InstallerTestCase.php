@@ -259,6 +259,10 @@ abstract class InstallerTestCase extends TestCase
             mkdir($target, 0777, true);
         }
 
+        if (! is_dir($source)) {
+            return;
+        }
+
         $dir = new DirectoryIterator($source);
         foreach ($dir as $fileInfo) {
             if ($fileInfo->isFile()) {
