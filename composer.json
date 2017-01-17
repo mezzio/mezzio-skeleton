@@ -23,7 +23,7 @@
         "aura/di": "^3.0",
         "composer/composer": "^1.0",
         "filp/whoops": "^2.0",
-        "mikey179/vfsStream": "^1.6",
+        "mikey179/vfsstream": "^1.6",
         "phpunit/phpunit": "^5.6",
         "squizlabs/php_codesniffer": "^2.7",
         "xtreamwayz/pimple-container-interop": "^1.0",
@@ -34,12 +34,12 @@
         "zendframework/zend-expressive-platesrenderer": "^1.2",
         "zendframework/zend-expressive-twigrenderer": "^1.2.1",
         "zendframework/zend-expressive-zendviewrenderer": "^1.2.1",
-        "zendframework/zend-servicemanager": "^2.7.3 || ^3.0",
+        "zendframework/zend-servicemanager": "^2.7.3 || ^3.2",
         "zfcampus/zf-development-mode": "^3.1"
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/App/src",
+            "App\\": "src/App/src/",
             "ExpressiveInstaller\\": "src/ExpressiveInstaller/"
         }
     },

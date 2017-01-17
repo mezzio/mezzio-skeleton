@@ -23,6 +23,13 @@ All notable changes to this project will be documented in this file, in reverse 
   - `composer development-status`
   - `composer clear-config-cache`
 
+- [#124](https://github.com/organization/project/pull/124) adds the ability to
+  select the initial application structure from one of the following options:
+
+  - Minimal (no default routes, middleware, or assets)
+  - Flat (default routes and assets; `src/` directory is assumed to be library code)
+  - Modular (default routes and assets; `src/` directory contains application modules)
+
 ### Changes
 
 - [#54](https://github.com/organization/project/pull/54) updates the

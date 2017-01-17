@@ -13,26 +13,18 @@ use Zend\Stratigility\Middleware;
 
 class TemplateRenderersTest extends InstallerTestCase
 {
-    protected $teardownFiles = [
-        '/config/container.php',
-        '/config/routes.php',
-        '/config/autoload/routes.global.php',
-        '/config/autoload/templates.global.php',
-        '/data/config-cache.php',
-        '/src/App/templates/error/404.phtml',
-        '/src/App/templates/error/error.phtml',
-        '/src/App/templates/layout/default.phtml',
-        '/src/App/templates/app/home-page.phtml',
-        '/src/App/templates/error/404.html.twig',
-        '/src/App/templates/error/error.html.twig',
-        '/src/App/templates/layout/default.html.twig',
-        '/src/App/templates/app/home-page.html.twig',
-    ];
+    protected function tearDown()
+    {
+        parent::tearDown();
+        $this->setInstallType(OptionalPackages::INSTALL_FLAT);
+    }
 
     /**
      * @dataProvider templateRendererProvider
+     * @runInSeparateProcess
      */
     public function testTemplateRenderer(
+        $installType,
         $containerOption,
         $routerOption,
         $templateRendererOption,
@@ -40,8 +32,14 @@ class TemplateRenderersTest extends InstallerTestCase
         $expectedResponseStatusCode,
         $expectedTemplateRenderer
     ) {
+        $projectRoot = $this->copyProjectFilesToVirtualFilesystem();
+        $this->setProjectRoot($projectRoot);
+        $this->setInstallType($installType);
+
         $io     = $this->prophesize('Composer\IO\IOInterface');
         $config = $this->getConfig();
+
+        OptionalPackages::setupDefaultApp($io->reveal(), $installType, $config['application']);
 
         // Install container
         $containerResult = OptionalPackages::processAnswer(
@@ -97,17 +95,38 @@ class TemplateRenderersTest extends InstallerTestCase
 
     public function templateRendererProvider()
     {
-        // $containerOption, $routerOption, $templateRendererOption, $copyFilesKey, $expectedResponseStatusCode,
-        // $expectedTemplateRenderer
-        return [
-            // Full tests first so all the template paths are created before the minimal tests start
+        // @codingStandardsIgnoreStart
+        // Minimal framework installation test cases; no templates installed.
+        // Must be run before those that install templates and test the output.
+        // $installType, $containerOption, $routerOption, $templateRendererOption, $copyFilesKey, $expectedResponseStatusCode, $expectedTemplateRenderer
+        yield 'plates-minimal'    => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 1, 'minimal-files', 404, Expressive\Plates\PlatesRenderer::class];
+        yield 'twig-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 2, 'minimal-files', 404, Expressive\Twig\TwigRenderer::class];
+        yield 'zend-view-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 3, 'minimal-files', 404, Expressive\ZendView\ZendViewRenderer::class];
+        // @codingStandardsIgnoreEnd
+
+        // @codingStandardsIgnoreStart
+        // Full framework installation test cases; installation options that install templates.
+        $testCases = [
+            // $containerOption, $routerOption, $templateRendererOption, $copyFilesKey, $expectedResponseStatusCode, $expectedTemplateRenderer
             'plates-full'       => [3, 2, 1, 'copy-files', 200, Expressive\Plates\PlatesRenderer::class],
             'twig-full'         => [3, 2, 2, 'copy-files', 200, Expressive\Twig\TwigRenderer::class],
             'zend-view-full'    => [3, 2, 3, 'copy-files', 200, Expressive\ZendView\ZendViewRenderer::class],
-            // Minimal tests must be after the full tests !!!
-            'plates-minimal'    => [3, 2, 1, 'minimal-files', 404, Expressive\Plates\PlatesRenderer::class],
-            'twig-minimal'      => [3, 2, 2, 'minimal-files', 404, Expressive\Twig\TwigRenderer::class],
-            'zend-view-minimal' => [3, 2, 3, 'minimal-files', 404, Expressive\ZendView\ZendViewRenderer::class],
         ];
+        // @codingStandardsIgnoreEnd
+
+        // Non-minimal installation types
+        $types = [
+            OptionalPackages::INSTALL_FLAT,
+            OptionalPackages::INSTALL_MODULAR,
+        ];
+
+        // Execute a test case for each install type
+        foreach ($types as $type) {
+            foreach ($testCases as $testName => $arguments) {
+                array_unshift($arguments, $type);
+                $name = sprintf('%s-%s', $type, $testName);
+                yield $name => $arguments;
+            }
+        }
     }
 }

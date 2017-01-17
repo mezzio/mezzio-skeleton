@@ -1,15 +1,14 @@
 <?php
 
+use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Expressive\Twig\TwigEnvironmentFactory;
+use Zend\Expressive\Twig\TwigRendererFactory;
+
 return [
     'dependencies' => [
         'factories' => [
-            Twig_Environment::class => Zend\Expressive\Twig\TwigEnvironmentFactory::class,
-
-            'Zend\Expressive\FinalHandler' =>
-                Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
-
-            Zend\Expressive\Template\TemplateRendererInterface::class =>
-                Zend\Expressive\Twig\TwigRendererFactory::class,
+            Twig_Environment::class => TwigEnvironmentFactory::class,
+            TemplateRendererInterface::class => TwigRendererFactory::class,
         ],
     ],
 

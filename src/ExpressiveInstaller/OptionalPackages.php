@@ -19,6 +19,7 @@ use Composer\Script\Event;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use RuntimeException;
 
 /**
  * Composer installer script
@@ -32,20 +33,29 @@ use RecursiveIteratorIterator;
  */
 class OptionalPackages
 {
+    const INSTALL_FLAT    = 'flat';
+    const INSTALL_MINIMAL = 'minimal';
+    const INSTALL_MODULAR = 'modular';
+
     /**
      * @const string Regular expression for matching package name and version
      */
     const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
     /**
+     * @const string Configuration file lines related to registering the default
+     *     App module configuration.
+     */
+    const APP_MODULE_CONFIG = '
+    // Default App module config
+    App\ConfigProvider::class,
+
+';
+
+    /**
      * @var array
      */
     private static $config;
-
-    /**
-     * @var string
-     */
-    private static $projectRoot;
 
     /**
      * @var array
@@ -63,15 +73,13 @@ class OptionalPackages
     private static $composerDevRequires;
 
     /**
-     * @var string[]
+     * @var string[] Dev dependencies to remove after install is complete
      */
-    private static $stabilityFlags;
-
     private static $devDependencies = [
         'aura/di',
         'composer/composer',
         'filp/whoops',
-        'mikey179/vfsStream',
+        'mikey179/vfsstream',
         'xtreamwayz/pimple-container-interop',
         'zendframework/zend-coding-standard',
         'zendframework/zend-expressive-aurarouter',
@@ -82,6 +90,21 @@ class OptionalPackages
         'zendframework/zend-expressive-zendviewrenderer',
         'zendframework/zend-servicemanager',
     ];
+
+    /**
+     * @var string Installation type selected.
+     */
+    private static $installType = self::INSTALL_FLAT;
+
+    /**
+     * @var string
+     */
+    private static $projectRoot;
+
+    /**
+     * @var string[]
+     */
+    private static $stabilityFlags;
 
     /**
      * Install command: choose packages and provide configuration.
@@ -132,11 +155,14 @@ class OptionalPackages
         // Cleanup development dependencies
         self::removeDevDependencies();
 
-        // Minimal?
-        $minimal      = self::requestMinimal($io);
-        $copyFilesKey = $minimal ? 'minimal-files' : 'copy-files';
-
+        // Get optional packages configuration
         self::$config = require __DIR__ . '/config.php';
+
+        // Installation type
+        self::$installType = self::requestInstallType($io);
+        $copyFilesKey = self::$installType === self::INSTALL_MINIMAL ? 'minimal-files' : 'copy-files';
+
+        self::setupDefaultApp($io, self::$installType, self::$config['application']);
 
         foreach (self::$config['questions'] as $questionName => $question) {
             $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
@@ -158,12 +184,12 @@ class OptionalPackages
             $json->write(self::$composerDefinition);
         }
 
-        // Set required packages
+        // Update root package
         $rootPackage->setRequires(self::$composerRequires);
         $rootPackage->setDevRequires(self::$composerDevRequires);
-
-        // Set stability flags
         $rootPackage->setStabilityFlags(self::$stabilityFlags);
+        $rootPackage->setAutoload(self::$composerDefinition['autoload']);
+        $rootPackage->setDevAutoload(self::$composerDefinition['autoload-dev']);
 
         // House keeping
         $io->write("<info>Remove installer</info>");
@@ -172,13 +198,49 @@ class OptionalPackages
         // Update composer definition
         $json->write(self::$composerDefinition);
 
-        // Minimal install? Remove default middleware
-        if ($minimal) {
-            self::removeDefaultMiddleware($io, self::$projectRoot);
-        }
-
         self::clearComposerLockFile($io, self::$projectRoot);
         self::cleanUp($io, self::$projectRoot);
+    }
+
+    /**
+     * @param IOInterface $io
+     * @param string $installType
+     * @param array $appFiles Values from the 'application' key
+     * @return void
+     * @throws RuntimeException if $installType is unknown
+     */
+    public static function setupDefaultApp(IOInterface $io, $installType, array $appFiles)
+    {
+        switch ($installType) {
+            case self::INSTALL_MINIMAL:
+                self::removeDefaultModule($io, self::$projectRoot);
+                // no files to copy
+                return;
+
+            case self::INSTALL_FLAT:
+                // Re-arrange files into a flat structure.
+                self::recursiveRmdir(self::$projectRoot . '/src/App/templates');
+                rename(self::$projectRoot . '/src/App/src/Action', self::$projectRoot . '/src/App/Action');
+                self::recursiveRmdir(self::$projectRoot . '/src/App/src');
+
+                // Re-define autoloading rules
+                self::$composerDefinition['autoload']['psr-4']['App\\'] = 'src/App/';
+                break;
+
+            case self::INSTALL_MODULAR:
+                // Nothing additional to do
+                break;
+
+            default:
+                throw new RuntimeException(sprintf(
+                    'Invalid install type "%s"; this indicates a bug in the installer',
+                    $installType
+                ));
+        }
+
+        foreach ($appFiles[$installType] as $source => $target) {
+            self::copyFile($io, self::$projectRoot, $source, $target);
+        }
     }
 
     /**
@@ -241,7 +303,9 @@ class OptionalPackages
         unlink($projectRoot . '/CONDUCT.md');
         unlink($projectRoot . '/CONTRIBUTING.md');
         unlink($projectRoot . '/phpcs.xml');
-        unlink($projectRoot . '/src/App/templates/.gitkeep');
+        if (file_exists($projectRoot . '/src/App/templates/.gitkeep')) {
+            unlink($projectRoot . '/src/App/templates/.gitkeep');
+        }
         self::recursiveRmdir(__DIR__);
         self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
 
@@ -353,7 +417,8 @@ class OptionalPackages
 
             // Copy files
             if (isset($question['options'][$answer][$copyFilesKey])) {
-                foreach ($question['options'][$answer][$copyFilesKey] as $source => $target) {
+                $files = self::reduceFileTargets($question['options'][$answer][$copyFilesKey], self::$installType);
+                foreach ($files as $source => $target) {
                     self::copyFile($io, self::$projectRoot, $source, $target);
                 }
             }
@@ -470,44 +535,38 @@ class OptionalPackages
     }
 
     /**
-     * Ask if the user would like a minimal install.
-     *
      * @param IOInterface $io
-     *
-     * @return bool
+     * @return string
      */
-    public static function requestMinimal(IOInterface $io)
+    public function requestInstallType(IOInterface $io)
     {
         $query = [
             sprintf(
                 "\n  <question>%s</question>\n",
-                'Minimal skeleton? (no default middleware, templates, or assets; configuration only)'
+                'What type of installation would you like?'
             ),
-            "  [<comment>y</comment>] Yes (minimal)\n",
-            "  [<comment>n</comment>] No (full; recommended)\n",
-            "  Make your selection <comment>(No)</comment>: ",
+            "  [<comment>1</comment>] Minimal (no default middleware, templates, or assets; configuration only)\n",
+            "  [<comment>2</comment>] Flat (flat source code structure; default selection)\n",
+            "  [<comment>3</comment>] Modular (modular source code structure; recommended)\n",
+            "  Make your selection <comment>(2)</comment>: ",
         ];
 
         while (true) {
-            $answer = $io->ask($query, 'n');
+            $answer = $io->ask($query, '2');
 
-            if (strtolower($answer) === 'n') {
-                return false;
+            switch (true) {
+                case ($answer === '1'):
+                    return self::INSTALL_MINIMAL;
+                case ($answer === '2'):
+                    return self::INSTALL_FLAT;
+                case ($answer === '3'):
+                    return self::INSTALL_MODULAR;
+                default:
+                    // @codeCoverageIgnoreStart
+                    $io->write("<error>Invalid answer</error>");
+                    // @codeCoverageIgnoreEnd
             }
-
-            if (strtolower($answer) === 'y') {
-                return true;
-            }
-
-            // @codeCoverageIgnoreStart
-            $io->write("<error>Invalid answer</error>");
-            // @codeCoverageIgnoreEnd
         }
-
-        // This should never be reached, defaults to default answer
-        // @codeCoverageIgnoreStart
-        return false;
-        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -518,14 +577,16 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    private static function removeDefaultMiddleware(IOInterface $io, $projectRoot)
+    private static function removeDefaultModule(IOInterface $io, $projectRoot)
     {
-        $io->write("<info>Removing default middleware classes and factories</info>");
-        self::recursiveRmdir($projectRoot . '/src/App/src/Action');
-        unlink($projectRoot . '/src/App/src/ConfigProvider.php');
+        $io->write('<info>Removing default App module classes and factories</info>');
+        self::recursiveRmdir($projectRoot . '/src/App');
 
-        $io->write("<info>Removing default middleware class tests</info>");
-        self::recursiveRmdir($projectRoot . '/test/AppTest/Action');
+        $io->write('<info>Removing default App module tests</info>');
+        self::recursiveRmdir($projectRoot . '/test/AppTest');
+
+        $io->write('<info>Removing App module registration from configuration</info>');
+        self::removeAppModuleConfig($projectRoot);
 
         $io->write("<info>Removing assets</info>");
         unlink($projectRoot . '/public/favicon.ico');
@@ -541,6 +602,10 @@ class OptionalPackages
      */
     private static function recursiveRmdir($directory)
     {
+        if (! is_dir($directory)) {
+            return;
+        }
+
         $rdi = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
         $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($rii as $filename => $fileInfo) {
@@ -567,5 +632,50 @@ class OptionalPackages
 
         $content = self::removeLinesContainingStrings(['composer.lock'], file_get_contents($ignoreFile));
         file_put_contents($ignoreFile, $content);
+    }
+
+    /**
+     * Removes the App\ConfigProvider entry from the application config file.
+     *
+     * @param string $projectRoot
+     * @return void
+     */
+    private static function removeAppModuleConfig($projectRoot)
+    {
+        $configFile = $projectRoot . '/config/config.php';
+        $contents = file_get_contents($configFile);
+        $contents = str_replace(self::APP_MODULE_CONFIG, '', $contents);
+        file_put_contents($configFile, $contents);
+    }
+
+    /**
+     * Reduce file targets
+     *
+     * If a file target is an array, pull the segment related to the requested
+     * install type.
+     *
+     * @param array $files
+     * @param string $installType One of the INSTALL_* constants
+     * @return array
+     */
+    private static function reduceFileTargets(array $files, $installType)
+    {
+        foreach ($files as $source => $targets) {
+            if (! is_array($targets)) {
+                continue;
+            }
+
+            if (! array_key_exists($installType, $targets)) {
+                throw new RuntimeException(sprintf(
+                    'Cannot copy file %s as no target exists for installation of type "%s"',
+                    $source,
+                    $installType
+                ));
+            }
+
+            $files[$source] = $targets[$installType];
+        }
+
+        return $files;
     }
 }

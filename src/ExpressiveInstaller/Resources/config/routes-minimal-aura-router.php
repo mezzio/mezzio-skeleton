@@ -1,9 +1,12 @@
 <?php
 
+use Zend\Expressive\Router\AuraRouter;
+use Zend\Expressive\Router\RouterInterface;
+
 return [
     'dependencies' => [
         'invokables' => [
-            Zend\Expressive\Router\RouterInterface::class => Zend\Expressive\Router\AuraRouter::class,
+            RouterInterface::class => AuraRouter::class,
         ],
         // Map middleware -> factories here
         'factories' => [

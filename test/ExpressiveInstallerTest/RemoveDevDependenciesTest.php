@@ -23,10 +23,11 @@ class RemoveDevDependenciesTest extends InstallerTestCase
         'squizlabs/php_codesniffer',
     ];
 
-    private $devDependencies      = [
+    private $devDependencies = [
         'aura/di',
         'composer/composer',
         'filp/whoops',
+        'mikey179/vfsstream',
         'xtreamwayz/pimple-container-interop',
         'zendframework/zend-coding-standard',
         'zendframework/zend-expressive-aurarouter',

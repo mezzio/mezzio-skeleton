@@ -1,13 +1,12 @@
 <?php
 
+use Zend\Expressive\Plates\PlatesRendererFactory;
+use Zend\Expressive\Template\TemplateRendererInterface;
+
 return [
     'dependencies' => [
         'factories' => [
-            'Zend\Expressive\FinalHandler' =>
-                Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
-
-            Zend\Expressive\Template\TemplateRendererInterface::class =>
-                Zend\Expressive\Plates\PlatesRendererFactory::class,
+            TemplateRendererInterface::class => PlatesRendererFactory::class,
         ],
     ],
 

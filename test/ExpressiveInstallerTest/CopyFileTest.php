@@ -16,17 +16,17 @@ class CopyFileTest extends InstallerTestCase
     /**
      * @var vfsStreamDirectory
      */
-    private $projectRoot;
+    private $project;
 
     protected function setUp()
     {
-        $this->projectRoot = vfsStream::setup('project-root');
+        $this->project= vfsStream::setup('project-root');
     }
 
     public function testTargetFileDoesNotExist()
     {
-        $this->assertFalse($this->projectRoot->hasChild('data'));
-        $this->assertFalse($this->projectRoot->hasChild('data/target.php'));
+        $this->assertFalse($this->project->hasChild('data'));
+        $this->assertFalse($this->project->hasChild('data/target.php'));
     }
 
     public function testFileIsCopiedIfItDoesNotExist()
@@ -35,8 +35,8 @@ class CopyFileTest extends InstallerTestCase
 
         OptionalPackages::copyFile($io->reveal(), vfsStream::url('project-root'), '/config.php', '/data/target.php');
 
-        $this->assertTrue($this->projectRoot->hasChild('data'));
-        $this->assertTrue($this->projectRoot->hasChild('data/target.php'));
+        $this->assertTrue($this->project->hasChild('data'));
+        $this->assertTrue($this->project->hasChild('data/target.php'));
         $this->assertFileEquals(
             dirname(dirname(__DIR__)) . '/src/ExpressiveInstaller/config.php',
             vfsStream::url('project-root/data/target.php')
@@ -48,14 +48,14 @@ class CopyFileTest extends InstallerTestCase
         $io = $this->prophesize('Composer\IO\IOInterface');
 
         // Create default test file
-        vfsStream::newFile('data/target.php')->at($this->projectRoot)->setContent('TEST');
+        vfsStream::newFile('data/target.php')->at($this->project)->setContent('TEST');
 
-        $this->assertTrue($this->projectRoot->hasChild('data/target.php'));
+        $this->assertTrue($this->project->hasChild('data/target.php'));
 
         // Copy file (should not copy file)
         OptionalPackages::copyFile($io->reveal(), vfsStream::url('project-root'), '/config.php', '/data/target.php');
 
-        $this->assertTrue($this->projectRoot->hasChild('data/target.php'));
+        $this->assertTrue($this->project->hasChild('data/target.php'));
         $this->assertEquals(
             'TEST',
             file_get_contents(vfsStream::url('project-root/data/target.php'))
