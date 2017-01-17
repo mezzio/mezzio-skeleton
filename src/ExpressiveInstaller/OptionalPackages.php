@@ -535,47 +535,6 @@ class OptionalPackages
     }
 
     /**
-     * Ask if the user would like a minimal install.
-     *
-     * @deprecated since 1.1.0, and no longer used internally
-     * @param IOInterface $io
-     * @return bool
-     */
-    public static function requestMinimal(IOInterface $io)
-    {
-        $query = [
-            sprintf(
-                "\n  <question>%s</question>\n",
-                'Minimal skeleton? (no default middleware, templates, or assets; configuration only)'
-            ),
-            "  [<comment>y</comment>] Yes (minimal)\n",
-            "  [<comment>n</comment>] No (full; recommended)\n",
-            "  Make your selection <comment>(No)</comment>: ",
-        ];
-
-        while (true) {
-            $answer = $io->ask($query, 'n');
-
-            if (strtolower($answer) === 'n') {
-                return false;
-            }
-
-            if (strtolower($answer) === 'y') {
-                return true;
-            }
-
-            // @codeCoverageIgnoreStart
-            $io->write("<error>Invalid answer</error>");
-            // @codeCoverageIgnoreEnd
-        }
-
-        // This should never be reached, defaults to default answer
-        // @codeCoverageIgnoreStart
-        return false;
-        // @codeCoverageIgnoreEnd
-    }
-
-    /**
      * @param IOInterface $io
      * @return string
      */
