@@ -53,6 +53,21 @@ class OptionalPackages
 ';
 
     /**
+     * Assets to remove during cleanup.
+     *
+     * @var string[]
+     */
+    private $assetsToRemove = [
+        '.coveralls.yml',
+        '.travis.yml',
+        'CHANGELOG.md',
+        'CONDUCT.md',
+        'CONTRIBUTING.md',
+        'phpcs.xml',
+        'src/App/templates/.gitkeep',
+    ];
+
+    /**
      * @var array
      */
     private $config;
@@ -543,15 +558,13 @@ class OptionalPackages
     private function cleanUp()
     {
         $this->io->write("<info>Removing Expressive installer classes, configuration, tests and docs</info>");
-        unlink($this->projectRoot . '/.coveralls.yml');
-        unlink($this->projectRoot . '/.travis.yml');
-        unlink($this->projectRoot . '/CHANGELOG.md');
-        unlink($this->projectRoot . '/CONDUCT.md');
-        unlink($this->projectRoot . '/CONTRIBUTING.md');
-        unlink($this->projectRoot . '/phpcs.xml');
-        if (file_exists($this->projectRoot . '/src/App/templates/.gitkeep')) {
-            unlink($this->projectRoot . '/src/App/templates/.gitkeep');
+        foreach ($this->assetsToRemove as $target) {
+            $target = $this->projectRoot . $target;
+            if (file_exists($target)) {
+                unlink($target);
+            }
         }
+
         $this->recursiveRmdir($this->installerSource);
         $this->recursiveRmdir($this->projectRoot . '/test/ExpressiveInstallerTest');
 
