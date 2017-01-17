@@ -18,7 +18,6 @@ use Composer\Repository\RepositoryManager;
 use DirectoryIterator;
 use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
-use org\bovigo\vfs\vfsStream;
 use PHPUnit_Framework_TestCase as TestCase;
 use ReflectionProperty;
 use Zend\Diactoros\Response;
@@ -33,8 +32,6 @@ use Zend\Stratigility\Middleware\ErrorHandler;
 
 abstract class InstallerTestCase extends TestCase
 {
-    const VFS_ROOT_NAME = 'project';
-
     /**
      * @var null|callable Additional autoloader to prepend to stack.
      *     Used when flat install is requested.
@@ -52,7 +49,7 @@ abstract class InstallerTestCase extends TestCase
     protected $origProjectRoot;
 
     /**
-     * @var \org\bovigo\vfs\vfsStreamDirectory
+     * @var string Filesystem location of test project.
      */
     protected $projectRoot;
 
