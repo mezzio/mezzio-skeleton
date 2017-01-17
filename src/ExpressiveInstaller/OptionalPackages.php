@@ -566,10 +566,19 @@ class OptionalPackages
         }
 
         $this->recursiveRmdir($this->installerSource);
-        $this->recursiveRmdir($this->projectRoot . '/test/ExpressiveInstallerTest');
+        $this->recursiveRmdir($this->projectRoot . 'test/ExpressiveInstallerTest');
 
-        // Remove ExpressiveInstaller exclusion from phpunit config
-        $phpunitConfigFile = $this->projectRoot . '/phpunit.xml.dist';
+        $this->preparePhpunitConfig();
+    }
+
+    /**
+     * Remove the ExpressiveInstaller exclusion from the phpunit configuration
+     *
+     * @return void
+     */
+    private function preparePhpunitConfig()
+    {
+        $phpunitConfigFile = $this->projectRoot . 'phpunit.xml.dist';
         $phpunitConfig     = file_get_contents($phpunitConfigFile);
         $phpunitConfig     = $this->removeLinesContainingStrings(['exclude', 'ExpressiveInstaller'], $phpunitConfig);
         file_put_contents($phpunitConfigFile, $phpunitConfig);
