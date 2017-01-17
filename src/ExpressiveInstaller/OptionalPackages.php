@@ -55,27 +55,37 @@ class OptionalPackages
     /**
      * @var array
      */
-    private static $config;
+    private $config;
+
+    /**
+     * @var Composer
+     */
+    private $composer;
 
     /**
      * @var array
      */
-    private static $composerDefinition;
+    private $composerDefinition;
+
+    /**
+     * @var JsonFile
+     */
+    private $composerJson;
 
     /**
      * @var string[]
      */
-    private static $composerRequires;
+    private $composerRequires;
 
     /**
      * @var string[]
      */
-    private static $composerDevRequires;
+    private $composerDevRequires;
 
     /**
      * @var string[] Dev dependencies to remove after install is complete
      */
-    private static $devDependencies = [
+    private $devDependencies = [
         'aura/di',
         'composer/composer',
         'filp/whoops',
@@ -92,19 +102,34 @@ class OptionalPackages
     ];
 
     /**
+     * @var string Path to this file.
+     */
+    private $installerSource;
+
+    /**
      * @var string Installation type selected.
      */
-    private static $installType = self::INSTALL_FLAT;
+    private $installType = self::INSTALL_FLAT;
+
+    /**
+     * @var IOInterface
+     */
+    private $io;
 
     /**
      * @var string
      */
-    private static $projectRoot;
+    private $projectRoot;
+
+    /**
+     * @var BasePackage
+     */
+    private $rootPackage;
 
     /**
      * @var string[]
      */
-    private static $stabilityFlags;
+    private $stabilityFlags;
 
     /**
      * Install command: choose packages and provide configuration.
@@ -116,115 +141,157 @@ class OptionalPackages
      * install and update commands on completion.
      *
      * @param Event $event
-     *
+     * return void
      * @codeCoverageIgnore
      */
     public static function install(Event $event)
     {
-        $io       = $event->getIO();
-        $composer = $event->getComposer();
+        $installer = new self($event->getIO(), $event->getComposer());
 
-        // Get composer.json
-        $composerFile             = Factory::getComposerFile();
-        $json                     = new JsonFile($composerFile);
-        self::$composerDefinition = $json->read();
+        $installer->io->write("<info>Setting up optional packages</info>");
 
-        self::$projectRoot = realpath(dirname($composerFile));
-
-        $io->write("<info>Setup data and cache dir</info>");
-        if (! is_dir(self::$projectRoot . '/data/cache')) {
-            mkdir(self::$projectRoot . '/data/cache', 0775, true);
-            chmod(self::$projectRoot . '/data', 0775);
-        }
-
-        $io->write("<info>Setting up optional packages</info>");
-
-        // Get root package
-        $rootPackage = $composer->getPackage();
-        while ($rootPackage instanceof AliasPackage) {
-            $rootPackage = $rootPackage->getAliasOf();
-        }
-
-        // Get required packages
-        self::$composerRequires    = $rootPackage->getRequires();
-        self::$composerDevRequires = $rootPackage->getDevRequires();
-
-        // Get stability flags
-        self::$stabilityFlags = $rootPackage->getStabilityFlags();
-
-        // Cleanup development dependencies
-        self::removeDevDependencies();
-
-        // Get optional packages configuration
-        self::$config = require __DIR__ . '/config.php';
-
-        // Installation type
-        self::$installType = self::requestInstallType($io);
-        $copyFilesKey = self::$installType === self::INSTALL_MINIMAL ? 'minimal-files' : 'copy-files';
-
-        self::setupDefaultApp($io, self::$installType, self::$config['application']);
-
-        foreach (self::$config['questions'] as $questionName => $question) {
-            $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
-            if (isset(self::$composerDefinition['extra']['optional-packages'][$questionName])) {
-                // Skip question, it's already answered
-                continue;
-            }
-
-            // Get answer
-            $answer = self::askQuestion($composer, $io, $question, $defaultOption);
-
-            // Process answer
-            self::processAnswer($io, $question, $answer, $copyFilesKey);
-
-            // Save user selected option
-            self::$composerDefinition['extra']['optional-packages'][$questionName] = $answer;
-
-            // Update composer definition
-            $json->write(self::$composerDefinition);
-        }
-
-        // Update root package
-        $rootPackage->setRequires(self::$composerRequires);
-        $rootPackage->setDevRequires(self::$composerDevRequires);
-        $rootPackage->setStabilityFlags(self::$stabilityFlags);
-        $rootPackage->setAutoload(self::$composerDefinition['autoload']);
-        $rootPackage->setDevAutoload(self::$composerDefinition['autoload-dev']);
-
-        // House keeping
-        $io->write("<info>Remove installer</info>");
-        self::removeInstallerFromDefinition();
-
-        // Update composer definition
-        $json->write(self::$composerDefinition);
-
-        self::clearComposerLockFile($io, self::$projectRoot);
-        self::cleanUp($io, self::$projectRoot);
+        $installer->setupDataAndCacheDir();
+        $installer->removeDevDependencies();
+        $installer->setInstallType($installer->requestInstallType());
+        $installer->setupDefaultApp();
+        $installer->promptForOptionalPackages();
+        $installer->updateRootPackage();
+        $installer->removeInstallerFromDefinition();
+        $installer->finalizePackage();
     }
 
     /**
      * @param IOInterface $io
+     * @param Composer $composer
+     * @param null|string $projectRoot
+     */
+    public function __construct(IOInterface $io, Composer $composer, $projectRoot = null)
+    {
+        $this->io = $io;
+        $this->composer = $composer;
+
+        // Get composer.json location
+        $composerFile = Factory::getComposerFile();
+
+        // Calculate project root from composer.json, if necessary
+        $this->projectRoot = $projectRoot ?: realpath(dirname($composerFile));
+        $this->projectRoot = rtrim($this->projectRoot, '/\\') . '/';
+
+        // Parse the composer.json
+        $this->parseComposerDefinition($composer, $composerFile);
+
+        // Get optional packages configuration
+        $this->config = require __DIR__ . '/config.php';
+
+        // Source path for this file
+        $this->installerSource = realpath(__DIR__) . '/';
+    }
+
+    /**
+     * Create data and cache directories, if not present.
+     *
+     * Also sets up appropriate permissions.
+     */
+    public function setupDataAndCacheDir()
+    {
+        $this->io->write("<info>Setup data and cache dir</info>");
+        if (! is_dir($this->projectRoot . '/data/cache')) {
+            mkdir($this->projectRoot . '/data/cache', 0775, true);
+            chmod($this->projectRoot . '/data', 0775);
+        }
+    }
+
+    /**
+     * Cleanup development dependencies.
+     *
+     * The dev dependencies should be removed from the stability flags,
+     * require-dev and the composer file.
+     */
+    public function removeDevDependencies()
+    {
+        $this->io->write("<info>Removing installer development dependencies</info>");
+        foreach ($this->devDependencies as $devDependency) {
+            unset($this->stabilityFlags[$devDependency]);
+            unset($this->composerDevRequires[$devDependency]);
+            unset($this->composerDefinition['require-dev'][$devDependency]);
+        }
+    }
+
+    /**
+     * Prompt for the installation type.
+     *
+     * @return string
+     */
+    public function requestInstallType()
+    {
+        $query = [
+            sprintf(
+                "\n  <question>%s</question>\n",
+                'What type of installation would you like?'
+            ),
+            "  [<comment>1</comment>] Minimal (no default middleware, templates, or assets; configuration only)\n",
+            "  [<comment>2</comment>] Flat (flat source code structure; default selection)\n",
+            "  [<comment>3</comment>] Modular (modular source code structure; recommended)\n",
+            "  Make your selection <comment>(2)</comment>: ",
+        ];
+
+        while (true) {
+            $answer = $this->io->ask($query, '2');
+
+            switch (true) {
+                case ($answer === '1'):
+                    return self::INSTALL_MINIMAL;
+                case ($answer === '2'):
+                    return self::INSTALL_FLAT;
+                case ($answer === '3'):
+                    return self::INSTALL_MODULAR;
+                default:
+                    // @codeCoverageIgnoreStart
+                    $this->io->write("<error>Invalid answer</error>");
+                    // @codeCoverageIgnoreEnd
+            }
+        }
+    }
+
+    /**
+     * Set the install type.
+     *
      * @param string $installType
-     * @param array $appFiles Values from the 'application' key
+     * @return void
+     */
+    public function setInstallType($installType)
+    {
+        $this->installType = in_array($installType, [
+                self::INSTALL_FLAT,
+                self::INSTALL_MINIMAL,
+                self::INSTALL_MODULAR,
+            ], true)
+            ? $installType
+            : self::INSTALL_FLAT;
+    }
+
+    /**
+     * Setup the default application structure.
+     *
      * @return void
      * @throws RuntimeException if $installType is unknown
      */
-    public static function setupDefaultApp(IOInterface $io, $installType, array $appFiles)
+    public function setupDefaultApp()
     {
-        switch ($installType) {
+        switch ($this->installType) {
             case self::INSTALL_MINIMAL:
-                self::removeDefaultModule($io, self::$projectRoot);
+                $this->removeDefaultModule();
                 // no files to copy
                 return;
 
             case self::INSTALL_FLAT:
                 // Re-arrange files into a flat structure.
-                self::recursiveRmdir(self::$projectRoot . '/src/App/templates');
-                rename(self::$projectRoot . '/src/App/src/Action', self::$projectRoot . '/src/App/Action');
-                self::recursiveRmdir(self::$projectRoot . '/src/App/src');
+                $this->recursiveRmdir($this->projectRoot . '/src/App/templates');
+                rename($this->projectRoot . '/src/App/src/Action', $this->projectRoot . '/src/App/Action');
+                $this->recursiveRmdir($this->projectRoot . '/src/App/src');
 
                 // Re-define autoloading rules
-                self::$composerDefinition['autoload']['psr-4']['App\\'] = 'src/App/';
+                $this->composerDefinition['autoload']['psr-4']['App\\'] = 'src/App/';
                 break;
 
             case self::INSTALL_MODULAR:
@@ -238,49 +305,231 @@ class OptionalPackages
                 ));
         }
 
-        foreach ($appFiles[$installType] as $source => $target) {
-            self::copyFile($io, self::$projectRoot, $source, $target);
+        foreach ($this->config['application'] as $source => $target) {
+            $this->copyFile($source, $target);
         }
     }
 
     /**
-     * Cleanup development dependencies.
+     * Prompt for each optional installation package.
      *
-     * The dev dependencies should be removed from the stability flags,
-     * require-dev and the composer file.
+     * @rturn void
      */
-    public static function removeDevDependencies()
+    public function promptForOptionalPackages()
     {
-        foreach (self::$devDependencies as $devDependency) {
-            unset(self::$stabilityFlags[$devDependency]);
-            unset(self::$composerDevRequires[$devDependency]);
-            unset(self::$composerDefinition['require-dev'][$devDependency]);
+        $copyFilesKey = $this->installType === self::INSTALL_MINIMAL ? 'minimal-files' : 'copy-files';
+
+        foreach ($this->config['questions'] as $questionName => $question) {
+            $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
+            if (isset($this->composerDefinition['extra']['optional-packages'][$questionName])) {
+                // Skip question, it's already answered
+                continue;
+            }
+
+            // Get answer
+            $answer = $this->askQuestion($question, $defaultOption);
+
+            // Process answer
+            $this->processAnswer($question, $answer, $copyFilesKey);
+
+            // Save user selected option
+            $this->composerDefinition['extra']['optional-packages'][$questionName] = $answer;
+
+            // Update composer definition
+            $this->composerJson->write($this->composerDefinition);
         }
+    }
+
+    /**
+     * Update the root package based on current state.
+     *
+     * @return void
+     */
+    public function updateRootPackage()
+    {
+        $this->rootPackage->setRequires($this->composerRequires);
+        $this->rootPackage->setDevRequires($this->composerDevRequires);
+        $this->rootPackage->setStabilityFlags($this->stabilityFlags);
+        $this->rootPackage->setAutoload($this->composerDefinition['autoload']);
+        $this->rootPackage->setDevAutoload($this->composerDefinition['autoload-dev']);
     }
 
     /**
      * Remove the installer from the composer definition
      */
-    public static function removeInstallerFromDefinition()
+    public function removeInstallerFromDefinition()
     {
+        $this->io->write("<info>Remove installer</info>");
+
         // Remove installer script autoloading rules
-        unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
-        unset(self::$composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
+        unset($this->composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
+        unset($this->composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
 
         // Remove branch-alias
-        unset(self::$composerDefinition['extra']['branch-alias']);
+        unset($this->composerDefinition['extra']['branch-alias']);
 
         // Remove installer data
-        unset(self::$composerDefinition['extra']['optional-packages']);
+        unset($this->composerDefinition['extra']['optional-packages']);
 
         // Remove left over
-        if (empty(self::$composerDefinition['extra'])) {
-            unset(self::$composerDefinition['extra']);
+        if (empty($this->composerDefinition['extra'])) {
+            unset($this->composerDefinition['extra']);
         }
 
         // Remove installer scripts
-        unset(self::$composerDefinition['scripts']['pre-update-cmd']);
-        unset(self::$composerDefinition['scripts']['pre-install-cmd']);
+        unset($this->composerDefinition['scripts']['pre-update-cmd']);
+        unset($this->composerDefinition['scripts']['pre-install-cmd']);
+    }
+
+    /**
+     * Finalize the package.
+     *
+     * Writes the current JSON state to composer.json, clears the
+     * composer.lock file, and cleans up all files specific to the
+     * installer.
+     *
+     * @return void
+     */
+    public function finalizePackage()
+    {
+        // Update composer definition
+        $this->json->write($this->composerDefinition);
+
+        $this->clearComposerLockFile();
+        $this->cleanUp();
+    }
+
+    /**
+     * Process the answer of a question
+     *
+     * @param array       $question
+     * @param string|int  $answer
+     * @param string      $copyFilesKey
+     * @return bool
+     */
+    public function processAnswer(array $question, $answer, $copyFilesKey)
+    {
+        if (is_numeric($answer) && isset($question['options'][$answer])) {
+            // Add packages to install
+            if (isset($question['options'][$answer]['packages'])) {
+                foreach ($question['options'][$answer]['packages'] as $packageName) {
+                    $this->addPackage($packageName, $this->config['packages'][$packageName]);
+                }
+            }
+
+            // Copy files
+            if (isset($question['options'][$answer][$copyFilesKey])) {
+                $files = $this->reduceFileTargets($question['options'][$answer][$copyFilesKey], $this->installType);
+                foreach ($files as $source => $target) {
+                    $this->copyFile($source, $target);
+                }
+            }
+
+            return true;
+        }
+
+        if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
+            $this->addPackage($match['name'], $match['version']);
+            if (isset($question['custom-package-warning'])) {
+                $this->io->write(sprintf("  <warning>%s</warning>", $question['custom-package-warning']));
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Add a package
+     *
+     * @param string      $packageName
+     * @param string      $packageVersion
+     */
+    public function addPackage($packageName, $packageVersion)
+    {
+        $this->io->write(sprintf(
+            "  - Adding package <info>%s</info> (<comment>%s</comment>)",
+            $packageName,
+            $packageVersion
+        ));
+
+        // Get the version constraint
+        $versionParser = new VersionParser();
+        $constraint    = $versionParser->parseConstraints($packageVersion);
+
+        // Create package link
+        $link = new Link('__root__', $packageName, $constraint, 'requires', $packageVersion);
+
+        // Add package to the root package and composer.json requirements
+        if (in_array($packageName, $this->config['require-dev'])) {
+            unset($this->composerDefinition['require'][$packageName]);
+            unset($this->composerRequires[$packageName]);
+
+            $this->composerDefinition['require-dev'][$packageName] = $packageVersion;
+            $this->composerDevRequires[$packageName]               = $link;
+        } else {
+            unset($this->composerDefinition['require-dev'][$packageName]);
+            unset($this->composerDevRequires[$packageName]);
+
+            $this->composerDefinition['require'][$packageName] = $packageVersion;
+            $this->composerRequires[$packageName]              = $link;
+        }
+
+        // Set package stability if needed
+        switch (VersionParser::parseStability($packageVersion)) {
+            case 'dev':
+                $this->stabilityFlags[$packageName] = BasePackage::STABILITY_DEV;
+                break;
+            case 'alpha':
+                $this->stabilityFlags[$packageName] = BasePackage::STABILITY_ALPHA;
+                break;
+            case 'beta':
+                $this->stabilityFlags[$packageName] = BasePackage::STABILITY_BETA;
+                break;
+            case 'RC':
+                $this->stabilityFlags[$packageName] = BasePackage::STABILITY_RC;
+                break;
+        }
+    }
+
+    /**
+     * Copy a file to its final destination in the skeleton.
+     *
+     * @param string $source Source file.
+     * @param string $target Destination.
+     * @param bool   $force  whether or not to copy over an existing file.
+     */
+    public function copyFile($source, $target, $force = false)
+    {
+        // Copy file
+        if ($force === false && is_file($this->projectRoot . $target)) {
+            return;
+        }
+
+        $destinationPath = dirname($this->projectRoot . $target);
+        if (! is_dir($destinationPath)) {
+            mkdir($destinationPath, 0775, true);
+        }
+
+        $this->io->write(sprintf("  - Copying <info>%s</info>", $target));
+        copy($this->installerSource . $source, $this->projectRoot . $target);
+    }
+
+    /**
+     * Remove lines from string content containing words in array.
+     *
+     * @param array  $entries Entries to remove.
+     * @param string $content String to remove entry from.
+     * @return string
+     */
+    public function removeLinesContainingStrings(array $entries, $content)
+    {
+        $entries = join('|', array_map(function ($word) {
+            return preg_quote($word, '/');
+        }, $entries));
+
+        return preg_replace("/^.*(?:" . $entries . ").*$(?:\r?\n)?/m", '', $content);
     }
 
     /**
@@ -289,45 +538,39 @@ class OptionalPackages
      * On completion of install/update, removes the installer classes (including
      * this one) and assets (including configuration and templates).
      *
-     * @param IOInterface $io
-     * @param string      $projectRoot
-     *
      * @codeCoverageIgnore
      */
-    private static function cleanUp(IOInterface $io, $projectRoot)
+    private function cleanUp()
     {
-        $io->write("<info>Removing Expressive installer classes, configuration, tests and docs</info>");
-        unlink($projectRoot . '/.coveralls.yml');
-        unlink($projectRoot . '/.travis.yml');
-        unlink($projectRoot . '/CHANGELOG.md');
-        unlink($projectRoot . '/CONDUCT.md');
-        unlink($projectRoot . '/CONTRIBUTING.md');
-        unlink($projectRoot . '/phpcs.xml');
-        if (file_exists($projectRoot . '/src/App/templates/.gitkeep')) {
-            unlink($projectRoot . '/src/App/templates/.gitkeep');
+        $this->io->write("<info>Removing Expressive installer classes, configuration, tests and docs</info>");
+        unlink($this->projectRoot . '/.coveralls.yml');
+        unlink($this->projectRoot . '/.travis.yml');
+        unlink($this->projectRoot . '/CHANGELOG.md');
+        unlink($this->projectRoot . '/CONDUCT.md');
+        unlink($this->projectRoot . '/CONTRIBUTING.md');
+        unlink($this->projectRoot . '/phpcs.xml');
+        if (file_exists($this->projectRoot . '/src/App/templates/.gitkeep')) {
+            unlink($this->projectRoot . '/src/App/templates/.gitkeep');
         }
-        self::recursiveRmdir(__DIR__);
-        self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
+        $this->recursiveRmdir($this->installerSource);
+        $this->recursiveRmdir($this->projectRoot . '/test/ExpressiveInstallerTest');
 
         // Remove ExpressiveInstaller exclusion from phpunit config
-        $phpunitConfigFile = $projectRoot . '/phpunit.xml.dist';
+        $phpunitConfigFile = $this->projectRoot . '/phpunit.xml.dist';
         $phpunitConfig     = file_get_contents($phpunitConfigFile);
-        $phpunitConfig     = self::removeLinesContainingStrings(['exclude', 'ExpressiveInstaller'], $phpunitConfig);
+        $phpunitConfig     = $this->removeLinesContainingStrings(['exclude', 'ExpressiveInstaller'], $phpunitConfig);
         file_put_contents($phpunitConfigFile, $phpunitConfig);
     }
 
     /**
      * Prepare and ask questions and return the answer
      *
-     * @param Composer    $composer
-     * @param IOInterface $io
      * @param string      $question
      * @param string      $defaultOption
-     *
      * @return bool|int|string
      * @codeCoverageIgnore
      */
-    private static function askQuestion(Composer $composer, IOInterface $io, $question, $defaultOption)
+    private function askQuestion($question, $defaultOption)
     {
         // Construct question
         $ask = [
@@ -354,7 +597,7 @@ class OptionalPackages
 
         while (true) {
             // Ask for user input
-            $answer = $io->ask($ask, $defaultOption);
+            $answer = $this->io->ask($ask, $defaultOption);
 
             // Handle none of the options
             if ($answer == 'n' && $question['required'] !== true) {
@@ -372,225 +615,46 @@ class OptionalPackages
                 $packageVersion = $match['version'];
 
                 if (! $packageVersion) {
-                    $io->write("<error>No package version specified</error>");
+                    $this->io->write("<error>No package version specified</error>");
                     continue;
                 }
 
-                $io->write(sprintf("  - Searching for <info>%s:%s</info>", $packageName, $packageVersion));
+                $this->io->write(sprintf("  - Searching for <info>%s:%s</info>", $packageName, $packageVersion));
 
-                $optionalPackage = $composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
+                $optionalPackage = $this->composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
                 if (! $optionalPackage) {
-                    $io->write(sprintf("<error>Package not found %s:%s</error>", $packageName, $packageVersion));
+                    $this->io->write(sprintf("<error>Package not found %s:%s</error>", $packageName, $packageVersion));
                     continue;
                 }
 
                 return sprintf('%s:%s', $packageName, $packageVersion);
             }
 
-            $io->write("<error>Invalid answer</error>");
+            $this->io->write("<error>Invalid answer</error>");
         }
 
         return false;
-    }
-
-    /**
-     * Process the answer of a question
-     *
-     * This process
-     *
-     * @param IOInterface $io
-     * @param array       $question
-     * @param string|int  $answer
-     * @param string      $copyFilesKey
-     *
-     * @return bool
-     */
-    public static function processAnswer(IOInterface $io, array $question, $answer, $copyFilesKey)
-    {
-        if (is_numeric($answer) && isset($question['options'][$answer])) {
-            // Add packages to install
-            if (isset($question['options'][$answer]['packages'])) {
-                foreach ($question['options'][$answer]['packages'] as $packageName) {
-                    self::addPackage($io, $packageName, self::$config['packages'][$packageName]);
-                }
-            }
-
-            // Copy files
-            if (isset($question['options'][$answer][$copyFilesKey])) {
-                $files = self::reduceFileTargets($question['options'][$answer][$copyFilesKey], self::$installType);
-                foreach ($files as $source => $target) {
-                    self::copyFile($io, self::$projectRoot, $source, $target);
-                }
-            }
-
-            return true;
-        }
-
-        if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
-            self::addPackage($io, $match['name'], $match['version']);
-            if (isset($question['custom-package-warning'])) {
-                $io->write(sprintf("  <warning>%s</warning>", $question['custom-package-warning']));
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Add a package
-     *
-     * @param IOInterface $io
-     * @param string      $packageName
-     * @param string      $packageVersion
-     */
-    public static function addPackage(IOInterface $io, $packageName, $packageVersion)
-    {
-        $io->write(sprintf(
-            "  - Adding package <info>%s</info> (<comment>%s</comment>)",
-            $packageName,
-            $packageVersion
-        ));
-
-        // Get the version constraint
-        $versionParser = new VersionParser();
-        $constraint    = $versionParser->parseConstraints($packageVersion);
-
-        // Create package link
-        $link = new Link('__root__', $packageName, $constraint, 'requires', $packageVersion);
-
-        // Add package to the root package and composer.json requirements
-        if (in_array($packageName, self::$config['require-dev'])) {
-            unset(self::$composerDefinition['require'][$packageName]);
-            unset(self::$composerRequires[$packageName]);
-
-            self::$composerDefinition['require-dev'][$packageName] = $packageVersion;
-            self::$composerDevRequires[$packageName]               = $link;
-        } else {
-            unset(self::$composerDefinition['require-dev'][$packageName]);
-            unset(self::$composerDevRequires[$packageName]);
-
-            self::$composerDefinition['require'][$packageName] = $packageVersion;
-            self::$composerRequires[$packageName]              = $link;
-        }
-
-        // Set package stability if needed
-        switch (VersionParser::parseStability($packageVersion)) {
-            case 'dev':
-                self::$stabilityFlags[$packageName] = BasePackage::STABILITY_DEV;
-                break;
-            case 'alpha':
-                self::$stabilityFlags[$packageName] = BasePackage::STABILITY_ALPHA;
-                break;
-            case 'beta':
-                self::$stabilityFlags[$packageName] = BasePackage::STABILITY_BETA;
-                break;
-            case 'RC':
-                self::$stabilityFlags[$packageName] = BasePackage::STABILITY_RC;
-                break;
-        }
-    }
-
-    /**
-     * Copy a file to its final destination in the skeleton.
-     *
-     * @param IOInterface $io
-     * @param string      $projectRoot
-     * @param string      $source Source file.
-     * @param string      $target Destination.
-     * @param bool        $force  whether or not to copy over an existing file.
-     */
-    public static function copyFile(IOInterface $io, $projectRoot, $source, $target, $force = false)
-    {
-        // Copy file
-        if ($force === false && is_file($projectRoot . $target)) {
-            return;
-        }
-
-        $destinationPath = dirname($projectRoot . $target);
-        if (! is_dir($destinationPath)) {
-            mkdir($destinationPath, 0775, true);
-        }
-
-        $io->write(sprintf("  - Copying <info>%s</info>", $target));
-        copy(__DIR__ . $source, $projectRoot . $target);
-    }
-
-    /**
-     * Remove lines from string content containing words in array.
-     *
-     * @param array  $entries Entries to remove.
-     * @param string $content String to remove entry from.
-     *
-     * @return string
-     */
-    public static function removeLinesContainingStrings(array $entries, $content)
-    {
-        $entries = join('|', array_map(function ($word) {
-            return preg_quote($word, '/');
-        }, $entries));
-
-        return preg_replace("/^.*(?:" . $entries . ").*$(?:\r?\n)?/m", '', $content);
-    }
-
-    /**
-     * @param IOInterface $io
-     * @return string
-     */
-    public function requestInstallType(IOInterface $io)
-    {
-        $query = [
-            sprintf(
-                "\n  <question>%s</question>\n",
-                'What type of installation would you like?'
-            ),
-            "  [<comment>1</comment>] Minimal (no default middleware, templates, or assets; configuration only)\n",
-            "  [<comment>2</comment>] Flat (flat source code structure; default selection)\n",
-            "  [<comment>3</comment>] Modular (modular source code structure; recommended)\n",
-            "  Make your selection <comment>(2)</comment>: ",
-        ];
-
-        while (true) {
-            $answer = $io->ask($query, '2');
-
-            switch (true) {
-                case ($answer === '1'):
-                    return self::INSTALL_MINIMAL;
-                case ($answer === '2'):
-                    return self::INSTALL_FLAT;
-                case ($answer === '3'):
-                    return self::INSTALL_MODULAR;
-                default:
-                    // @codeCoverageIgnoreStart
-                    $io->write("<error>Invalid answer</error>");
-                    // @codeCoverageIgnoreEnd
-            }
-        }
     }
 
     /**
      * If a minimal install was requested, remove the default middleware and assets.
      *
-     * @param IOInterface $io
-     * @param string      $projectRoot Project root from which to derive the directory to remove
-     *
      * @codeCoverageIgnore
      */
-    private static function removeDefaultModule(IOInterface $io, $projectRoot)
+    private function removeDefaultModule()
     {
-        $io->write('<info>Removing default App module classes and factories</info>');
-        self::recursiveRmdir($projectRoot . '/src/App');
+        $this->io->write('<info>Removing default App module classes and factories</info>');
+        $this->recursiveRmdir($this->projectRoot . '/src/App');
 
-        $io->write('<info>Removing default App module tests</info>');
-        self::recursiveRmdir($projectRoot . '/test/AppTest');
+        $this->io->write('<info>Removing default App module tests</info>');
+        $this->recursiveRmdir($this->projectRoot . '/test/AppTest');
 
-        $io->write('<info>Removing App module registration from configuration</info>');
-        self::removeAppModuleConfig($projectRoot);
+        $this->io->write('<info>Removing App module registration from configuration</info>');
+        $this->removeAppModuleConfig();
 
-        $io->write("<info>Removing assets</info>");
-        unlink($projectRoot . '/public/favicon.ico');
-        unlink($projectRoot . '/public/zf-logo.png');
+        $this->io->write("<info>Removing assets</info>");
+        unlink($this->projectRoot . '/public/favicon.ico');
+        unlink($this->projectRoot . '/public/zf-logo.png');
     }
 
     /**
@@ -600,7 +664,7 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    private static function recursiveRmdir($directory)
+    private function recursiveRmdir($directory)
     {
         if (! is_dir($directory)) {
             return;
@@ -619,30 +683,26 @@ class OptionalPackages
     }
 
     /**
-     * @param IOInterface $io
-     * @param string      $projectRoot
-     *
      * @codeCoverageIgnore
      */
-    private static function clearComposerLockFile($io, $projectRoot)
+    private function clearComposerLockFile()
     {
-        $io->write("<info>Removing composer.lock from .gitignore</info>");
+        $this->io->write("<info>Removing composer.lock from .gitignore</info>");
 
-        $ignoreFile = "$projectRoot/.gitignore";
+        $ignoreFile = sprintf('%s/.gitignore', $this->projectRoot);
 
-        $content = self::removeLinesContainingStrings(['composer.lock'], file_get_contents($ignoreFile));
+        $content = $this->removeLinesContainingStrings(['composer.lock'], file_get_contents($ignoreFile));
         file_put_contents($ignoreFile, $content);
     }
 
     /**
      * Removes the App\ConfigProvider entry from the application config file.
      *
-     * @param string $projectRoot
      * @return void
      */
-    private static function removeAppModuleConfig($projectRoot)
+    private function removeAppModuleConfig()
     {
-        $configFile = $projectRoot . '/config/config.php';
+        $configFile = $this->projectRoot . '/config/config.php';
         $contents = file_get_contents($configFile);
         $contents = str_replace(self::APP_MODULE_CONFIG, '', $contents);
         file_put_contents($configFile, $contents);
@@ -658,7 +718,7 @@ class OptionalPackages
      * @param string $installType One of the INSTALL_* constants
      * @return array
      */
-    private static function reduceFileTargets(array $files, $installType)
+    private function reduceFileTargets(array $files, $installType)
     {
         foreach ($files as $source => $targets) {
             if (! is_array($targets)) {
@@ -677,5 +737,27 @@ class OptionalPackages
         }
 
         return $files;
+    }
+
+    /**
+     * @param string $composerFile
+     */
+    private function parseComposerDefinition(Composer $composer, $composerFile)
+    {
+        $this->composerJson = new JsonFile($composerFile);
+        $this->composerDefinition = $this->composerJson->read();
+
+        // Get root package
+        $this->rootPackage = $composer->getPackage();
+        while ($this->rootPackage instanceof AliasPackage) {
+            $this->rootPackage = $this->rootPackage->getAliasOf();
+        }
+
+        // Get required packages
+        $this->composerRequires    = $this->rootPackage->getRequires();
+        $this->composerDevRequires = $this->rootPackage->getDevRequires();
+
+        // Get stability flags
+        $this->stabilityFlags = $this->rootPackage->getStabilityFlags();
     }
 }
