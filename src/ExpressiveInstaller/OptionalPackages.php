@@ -332,8 +332,6 @@ class OptionalPackages
      */
     public function promptForOptionalPackages()
     {
-        $copyFilesKey = $this->installType === self::INSTALL_MINIMAL ? 'minimal-files' : 'copy-files';
-
         foreach ($this->config['questions'] as $questionName => $question) {
             $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
             if (isset($this->composerDefinition['extra']['optional-packages'][$questionName])) {
@@ -345,7 +343,7 @@ class OptionalPackages
             $answer = $this->askQuestion($question, $defaultOption);
 
             // Process answer
-            $this->processAnswer($question, $answer, $copyFilesKey);
+            $this->processAnswer($question, $answer);
 
             // Save user selected option
             $this->composerDefinition['extra']['optional-packages'][$questionName] = $answer;
@@ -419,10 +417,9 @@ class OptionalPackages
      *
      * @param array       $question
      * @param string|int  $answer
-     * @param string      $copyFilesKey
      * @return bool
      */
-    public function processAnswer(array $question, $answer, $copyFilesKey)
+    public function processAnswer(array $question, $answer)
     {
         if (is_numeric($answer) && isset($question['options'][$answer])) {
             // Add packages to install
@@ -433,9 +430,8 @@ class OptionalPackages
             }
 
             // Copy files
-            if (isset($question['options'][$answer][$copyFilesKey])) {
-                $files = $this->reduceFileTargets($question['options'][$answer][$copyFilesKey], $this->installType);
-                foreach ($files as $source => $target) {
+            if (isset($question['options'][$answer][$this->installType])) {
+                foreach ($question['options'][$answer][$this->installType] as $source => $target) {
                     $this->copyFile($source, $target);
                 }
             }
@@ -728,37 +724,6 @@ class OptionalPackages
         $contents = file_get_contents($configFile);
         $contents = str_replace(self::APP_MODULE_CONFIG, '', $contents);
         file_put_contents($configFile, $contents);
-    }
-
-    /**
-     * Reduce file targets
-     *
-     * If a file target is an array, pull the segment related to the requested
-     * install type.
-     *
-     * @param array $files
-     * @param string $installType One of the INSTALL_* constants
-     * @return array
-     */
-    private function reduceFileTargets(array $files, $installType)
-    {
-        foreach ($files as $source => $targets) {
-            if (! is_array($targets)) {
-                continue;
-            }
-
-            if (! array_key_exists($installType, $targets)) {
-                throw new RuntimeException(sprintf(
-                    'Cannot copy file %s as no target exists for installation of type "%s"',
-                    $source,
-                    $installType
-                ));
-            }
-
-            $files[$source] = $targets[$installType];
-        }
-
-        return $files;
     }
 
     /**
