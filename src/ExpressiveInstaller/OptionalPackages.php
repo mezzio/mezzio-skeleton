@@ -79,7 +79,7 @@ class OptionalPackages
         'aura/di',
         'composer/composer',
         'filp/whoops',
-        'mikey179/vfsStream',
+        'mikey179/vfsstream',
         'xtreamwayz/pimple-container-interop',
         'zendframework/zend-coding-standard',
         'zendframework/zend-expressive-aurarouter',
@@ -184,12 +184,12 @@ class OptionalPackages
             $json->write(self::$composerDefinition);
         }
 
-        // Set required packages
+        // Update root package
         $rootPackage->setRequires(self::$composerRequires);
         $rootPackage->setDevRequires(self::$composerDevRequires);
-
-        // Set stability flags
         $rootPackage->setStabilityFlags(self::$stabilityFlags);
+        $rootPackage->setAutoload(self::$composerDefinition['autoload']);
+        $rootPackage->setDevAutoload(self::$composerDefinition['autoload-dev']);
 
         // House keeping
         $io->write("<info>Remove installer</info>");
