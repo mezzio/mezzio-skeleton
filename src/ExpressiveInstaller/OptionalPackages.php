@@ -393,7 +393,7 @@ class OptionalPackages
     public function finalizePackage()
     {
         // Update composer definition
-        $this->json->write($this->composerDefinition);
+        $this->composerJson->write($this->composerDefinition);
 
         $this->clearComposerLockFile();
         $this->cleanUp();
