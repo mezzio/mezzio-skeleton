@@ -305,7 +305,7 @@ class OptionalPackages
                 ));
         }
 
-        foreach ($this->config['application'] as $source => $target) {
+        foreach ($this->config['application'][$this->installType] as $source => $target) {
             $this->copyFile($source, $target);
         }
     }
