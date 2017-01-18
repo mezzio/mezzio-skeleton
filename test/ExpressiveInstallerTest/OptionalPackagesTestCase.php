@@ -184,6 +184,20 @@ abstract class OptionalPackagesTestCase extends TestCase
     }
 
     /**
+     * Retrieve a single property value from the installer.
+     *
+     * @param OptionalPackages $installer
+     * @param string $property
+     * @return mixed
+     */
+    protected function getInstallerProperty(OptionalPackages $installer, $property)
+    {
+        $r = new ReflectionProperty($installer, $property);
+        $r->setAccessible(true);
+        return $r->getValue($installer);
+    }
+
+    /**
      * Retrieve the stored composer data structure from an installer instance.
      *
      * @param OptionalPackages $instance
@@ -191,8 +205,17 @@ abstract class OptionalPackagesTestCase extends TestCase
      */
     protected function getComposerDataFromInstaller(OptionalPackages $installer)
     {
-        $r = new ReflectionProperty($installer, 'composerDefinition');
-        $r->setAccessible(true);
-        return $r->getValue($installer);
+        return $this->getInstallerProperty($installer, 'composerDefinition');
+    }
+
+    /**
+     * Retrieve the stored resource configuration from an installer instance.
+     *
+     * @param OptionalPackages $instance
+     * @return array
+     */
+    protected function getInstallerConfig(OptionalPackages $installer)
+    {
+        return $this->getInstallerProperty($installer, 'config');
     }
 }

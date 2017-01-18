@@ -1,9 +1,7 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
  * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
@@ -16,12 +14,28 @@ use Xtreamwayz\Pimple\Container as PimpleContainer;
 use Zend\Expressive;
 use Zend\ServiceManager\ServiceManager as ZendServiceManagerContainer;
 
-class ContainersTest extends InstallerTestCase
+class ContainersTest extends OptionalPackagesTestCase
 {
+    use ProjectSandboxTrait;
+
+    /**
+     * @param OptionalPackages
+     */
+    protected $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
+        $this->installer   = $this->createOptionalPackages($this->projectRoot);
+    }
+
     protected function tearDown()
     {
         parent::tearDown();
-        $this->setInstallType(OptionalPackages::INSTALL_FLAT);
+        chdir($this->packageRoot);
+        $this->recursiveDelete($this->projectRoot);
+        $this->tearDownAlternateAutoloader();
     }
 
     /**
@@ -36,31 +50,20 @@ class ContainersTest extends InstallerTestCase
         $expectedResponseStatusCode,
         $expectedContainer
     ) {
-        $projectRoot = $this->copyProjectFilesToVirtualFilesystem();
-        $this->setProjectRoot($projectRoot);
-        $this->setInstallType($installType);
-
-        $io     = $this->prophesize('Composer\IO\IOInterface');
-        $config = $this->getConfig();
-
-        // Ensure we have an App\ConfigProvider defined
-        OptionalPackages::setupDefaultApp($io->reveal(), $installType, $config['application']);
+        $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $containerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $config = $this->getInstallerConfig($this->installer);
+        $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
-            $containerOption,
-            $copyFilesKey
+            $containerOption
         );
         $this->assertTrue($containerResult);
 
         // Install router
-        $routerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
-            $routerOption,
-            $copyFilesKey
+            $routerOption
         );
         $this->assertTrue($routerResult);
 
