@@ -402,6 +402,7 @@ class OptionalPackages
      * installer.
      *
      * @return void
+     * @codeCoverageIgnore
      */
     public function finalizePackage()
     {
@@ -571,6 +572,7 @@ class OptionalPackages
      * Remove the ExpressiveInstaller exclusion from the phpunit configuration
      *
      * @return void
+     * @codeCoverageIgnore
      */
     private function preparePhpunitConfig()
     {
