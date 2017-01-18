@@ -182,4 +182,17 @@ abstract class OptionalPackagesTestCase extends TestCase
         $properties = $r->getDefaultProperties();
         return array_fill_keys($properties['devDependencies'], BasePackage::STABILITY_DEV);
     }
+
+    /**
+     * Retrieve the stored composer data structure from an installer instance.
+     *
+     * @param OptionalPackages $instance
+     * @return array
+     */
+    protected function getComposerDataFromInstaller(OptionalPackages $installer)
+    {
+        $r = new ReflectionProperty($installer, 'composerDefinition');
+        $r->setAccessible(true);
+        return $r->getValue($installer);
+    }
 }
