@@ -30,11 +30,6 @@ abstract class OptionalPackagesTestCase extends TestCase
     protected $composerData;
 
     /**
-     * @var OptionalPackages
-     */
-    protected $installer;
-
-    /**
      * @var IOInterface|ObjectProphecy
      */
     protected $io;
@@ -75,6 +70,46 @@ abstract class OptionalPackagesTestCase extends TestCase
     }
 
     /**
+     * Assert that the installer DOES NOT contain a specification for the package.
+     *
+     * @param string $package
+     * @param OptionalPackages $installer
+     * @param null|string $message
+     * @throws \PHPUnit_Framework_AssertionFailedError
+     */
+    public static function assertNotPackage($package, OptionalPackages $installer, $message = null)
+    {
+        $message = $message ?: sprintf('Failed asserting that package "%s" is absent from the installer', $package);
+        $found   = false;
+
+        foreach (['composerRequires', 'composerDevRequires'] as $property) {
+            $r = new ReflectionProperty($installer, $property);
+            $r->setAccessible(true);
+            if (array_key_exists($package, $r->getValue($installer))) {
+                $found = true;
+                break;
+            }
+        }
+
+        self::assertThat($found, self::isFalse(), $message);
+    }
+
+    /**
+     * Assert that the installer DOES NOT contain a specification for each package in the list.
+     *
+     * @param string[] $packages
+     * @param OptionalPackages $installer
+     * @param null|string $message
+     * @throws \PHPUnit_Framework_AssertionFailedError
+     */
+    public static function assertPackages(array $packages, OptionalPackages $installer, $message = null)
+    {
+        foreach ($packages as $package) {
+            self::assertPackage($package, $installer, $message);
+        }
+    }
+
+    /**
      * Assert that the installer contains a specification for each package in the list.
      *
      * @param string[] $packages
@@ -82,10 +117,10 @@ abstract class OptionalPackagesTestCase extends TestCase
      * @param null|string $message
      * @throws \PHPUnit_Framework_AssertionFailedError
      */
-    public static function assertPackageSpecs(array $packages, OptionalPackages $installer, $message = null)
+    public static function assertNotPackages(array $packages, OptionalPackages $installer, $message = null)
     {
         foreach ($packages as $package) {
-            self::assertPackage($package, $installer, $message);
+            self::assertNotPackage($package, $installer, $message);
         }
     }
 

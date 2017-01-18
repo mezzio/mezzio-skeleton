@@ -10,8 +10,9 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
+use ReflectionClass;
 
-class RemoveDevDependenciesTest extends InstallerTestCase
+class RemoveDevDependenciesTest extends OptionalPackagesTestCase
 {
     private $standardDependencies = [
         'php',
@@ -23,34 +24,41 @@ class RemoveDevDependenciesTest extends InstallerTestCase
         'squizlabs/php_codesniffer',
     ];
 
-    private $devDependencies = [
-        'aura/di',
-        'composer/composer',
-        'filp/whoops',
-        'mikey179/vfsstream',
-        'xtreamwayz/pimple-container-interop',
-        'zendframework/zend-coding-standard',
-        'zendframework/zend-expressive-aurarouter',
-        'zendframework/zend-expressive-fastroute',
-        'zendframework/zend-expressive-platesrenderer',
-        'zendframework/zend-expressive-twigrenderer',
-        'zendframework/zend-expressive-zendrouter',
-        'zendframework/zend-expressive-zendviewrenderer',
-        'zendframework/zend-servicemanager',
-    ];
+    /**
+     * @var string[] List of dev dependencies intended for removal.
+     */
+    private $devDependencies;
+
+    /**
+     * @var OptionalPackages
+     */
+    private $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        // Get list of dev dependencies expected to remove from
+        // OptionalPackages class
+        $r = new ReflectionClass(OptionalPackages::class);
+        $props = $r->getDefaultProperties();
+        $this->devDependencies = $props['devDependencies'];
+
+        $this->installer = $this->createOptionalPackages();
+    }
 
     public function testComposerHasAllDependencies()
     {
-        $this->assertComposerHasPackages($this->standardDependencies);
-        $this->assertComposerHasPackages($this->devDependencies);
+        $this->assertPackages($this->standardDependencies, $this->installer);
+        $this->assertPackages($this->devDependencies, $this->installer);
     }
 
     public function testDevDependenciesAreRemoved()
     {
-        // Prepare the installer
-        OptionalPackages::removeDevDependencies();
+        // Remove development dependencies
+        $this->installer->removeDevDependencies();
 
-        $this->assertComposerHasPackages($this->standardDependencies);
-        $this->assertComposerNotHasPackages($this->devDependencies);
+        $this->assertPackages($this->standardDependencies, $this->installer);
+        $this->assertNotPackages($this->devDependencies, $this->installer);
     }
 }
