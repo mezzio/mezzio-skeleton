@@ -328,29 +328,42 @@ class OptionalPackages
     /**
      * Prompt for each optional installation package.
      *
-     * @rturn void
+     * @return void
+     * @codeCoverageIgnore
      */
     public function promptForOptionalPackages()
     {
         foreach ($this->config['questions'] as $questionName => $question) {
-            $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
-            if (isset($this->composerDefinition['extra']['optional-packages'][$questionName])) {
-                // Skip question, it's already answered
-                continue;
-            }
-
-            // Get answer
-            $answer = $this->askQuestion($question, $defaultOption);
-
-            // Process answer
-            $this->processAnswer($question, $answer);
-
-            // Save user selected option
-            $this->composerDefinition['extra']['optional-packages'][$questionName] = $answer;
-
-            // Update composer definition
-            $this->composerJson->write($this->composerDefinition);
+            $this->promptForOptionalPackage($questionName, $question);
         }
+    }
+
+    /**
+     * Prompt for a single optional installation package.
+     *
+     * @param string $questionName Name of question
+     * @param array $question Question details from configuration
+     * @return void
+     */
+    public function promptForOptionalPackage($questionName, array $question)
+    {
+        $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
+        if (isset($this->composerDefinition['extra']['optional-packages'][$questionName])) {
+            // Skip question, it's already answered
+            return;
+        }
+
+        // Get answer
+        $answer = $this->askQuestion($question, $defaultOption);
+
+        // Process answer
+        $this->processAnswer($question, $answer);
+
+        // Save user selected option
+        $this->composerDefinition['extra']['optional-packages'][$questionName] = $answer;
+
+        // Update composer definition
+        $this->composerJson->write($this->composerDefinition);
     }
 
     /**
