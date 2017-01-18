@@ -320,8 +320,8 @@ class OptionalPackages
                 ));
         }
 
-        foreach ($this->config['application'][$this->installType] as $source => $target) {
-            $this->copyFile($source, $target);
+        foreach ($this->config['application'][$this->installType] as $resource => $target) {
+            $this->copyResource($resource, $target);
         }
     }
 
@@ -431,8 +431,8 @@ class OptionalPackages
 
             // Copy files
             if (isset($question['options'][$answer][$this->installType])) {
-                foreach ($question['options'][$answer][$this->installType] as $source => $target) {
-                    $this->copyFile($source, $target);
+                foreach ($question['options'][$answer][$this->installType] as $resource => $target) {
+                    $this->copyResource($resource, $target);
                 }
             }
 
@@ -507,11 +507,11 @@ class OptionalPackages
     /**
      * Copy a file to its final destination in the skeleton.
      *
-     * @param string $source Source file.
+     * @param string $resource Resource file.
      * @param string $target Destination.
      * @param bool   $force  whether or not to copy over an existing file.
      */
-    public function copyFile($source, $target, $force = false)
+    public function copyResource($resource, $target, $force = false)
     {
         // Copy file
         if ($force === false && is_file($this->projectRoot . $target)) {
@@ -524,7 +524,7 @@ class OptionalPackages
         }
 
         $this->io->write(sprintf("  - Copying <info>%s</info>", $target));
-        copy($this->installerSource . $source, $this->projectRoot . $target);
+        copy($this->installerSource . $resource, $this->projectRoot . $target);
     }
 
     /**
