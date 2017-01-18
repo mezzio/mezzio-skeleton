@@ -156,7 +156,7 @@ class OptionalPackages
      * install and update commands on completion.
      *
      * @param Event $event
-     * return void
+     * @return void
      * @codeCoverageIgnore
      */
     public static function install(Event $event)
@@ -206,6 +206,8 @@ class OptionalPackages
      * Create data and cache directories, if not present.
      *
      * Also sets up appropriate permissions.
+     *
+     * @return void
      */
     public function setupDataAndCacheDir()
     {
@@ -221,6 +223,8 @@ class OptionalPackages
      *
      * The dev dependencies should be removed from the stability flags,
      * require-dev and the composer file.
+     *
+     * @return void
      */
     public function removeDevDependencies()
     {
@@ -236,6 +240,7 @@ class OptionalPackages
      * Prompt for the installation type.
      *
      * @return string
+     * @return string One of the INSTALL_ constants.
      */
     public function requestInstallType()
     {
@@ -382,6 +387,8 @@ class OptionalPackages
 
     /**
      * Remove the installer from the composer definition
+     *
+     * @return void
      */
     public function removeInstallerFromDefinition()
     {
@@ -429,8 +436,8 @@ class OptionalPackages
     /**
      * Process the answer of a question
      *
-     * @param array       $question
-     * @param string|int  $answer
+     * @param array $question
+     * @param string|int $answer
      * @return bool
      */
     public function processAnswer(array $question, $answer)
@@ -468,8 +475,9 @@ class OptionalPackages
     /**
      * Add a package
      *
-     * @param string      $packageName
-     * @param string      $packageVersion
+     * @param string $packageName
+     * @param string $packageVersion
+     * @return void
      */
     public function addPackage($packageName, $packageVersion)
     {
@@ -523,7 +531,8 @@ class OptionalPackages
      *
      * @param string $resource Resource file.
      * @param string $target Destination.
-     * @param bool   $force  whether or not to copy over an existing file.
+     * @param bool $force  whether or not to copy over an existing file.
+     * @return void
      */
     public function copyResource($resource, $target, $force = false)
     {
@@ -598,8 +607,8 @@ class OptionalPackages
     /**
      * Prepare and ask questions and return the answer
      *
-     * @param string      $question
-     * @param string      $defaultOption
+     * @param string $question
+     * @param string $defaultOption
      * @return bool|int|string
      * @codeCoverageIgnore
      */
@@ -672,6 +681,7 @@ class OptionalPackages
     /**
      * If a minimal install was requested, remove the default middleware and assets.
      *
+     * @return void
      * @codeCoverageIgnore
      */
     private function removeDefaultModule()
@@ -694,7 +704,7 @@ class OptionalPackages
      * Recursively remove a directory.
      *
      * @param string $directory
-     *
+     * @return void
      * @codeCoverageIgnore
      */
     private function recursiveRmdir($directory)
@@ -716,6 +726,7 @@ class OptionalPackages
     }
 
     /**
+     * @return void
      * @codeCoverageIgnore
      */
     private function clearComposerLockFile()
@@ -743,6 +754,7 @@ class OptionalPackages
 
     /**
      * @param string $composerFile
+     * @return void
      */
     private function parseComposerDefinition(Composer $composer, $composerFile)
     {
