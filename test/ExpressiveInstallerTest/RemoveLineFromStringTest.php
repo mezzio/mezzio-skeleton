@@ -1,24 +1,25 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
  * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
 namespace ExpressiveInstallerTest;
 
-use ExpressiveInstaller\OptionalPackages;
-use PHPUnit_Framework_TestCase as TestCase;
-
-class RemoveLineFromStringTest extends TestCase
+class RemoveLineFromStringTest extends OptionalPackagesTestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->installer = $this->createOptionalPackages();
+    }
+
     public function testRemoveFirstLine()
     {
         $string = "foo\nbar\nbaz\nqux\nquux";
 
-        $actual = OptionalPackages::removeLinesContainingStrings(['foo'], $string);
+        $actual = $this->installer->removeLinesContainingStrings(['foo'], $string);
         $expected = "bar\nbaz\nqux\nquux";
 
         $this->assertEquals($expected, $actual);
@@ -28,7 +29,7 @@ class RemoveLineFromStringTest extends TestCase
     {
         $string = "foo\nbar\nbaz\nqux\nquux";
 
-        $actual = OptionalPackages::removeLinesContainingStrings(['bar'], $string);
+        $actual = $this->installer->removeLinesContainingStrings(['bar'], $string);
         $expected = "foo\nbaz\nqux\nquux";
 
         $this->assertEquals($expected, $actual);
@@ -38,7 +39,7 @@ class RemoveLineFromStringTest extends TestCase
     {
         $string = "foo\nbar\nbaz\nqux\nquux";
 
-        $actual = OptionalPackages::removeLinesContainingStrings(['bar', 'baz'], $string);
+        $actual = $this->installer->removeLinesContainingStrings(['bar', 'baz'], $string);
         $expected = "foo\nqux\nquux";
 
         $this->assertEquals($expected, $actual);
@@ -48,7 +49,7 @@ class RemoveLineFromStringTest extends TestCase
     {
         $string = "foo\n  bar\n  baz  \n  qux\nquux";
 
-        $actual = OptionalPackages::removeLinesContainingStrings(['bar', 'baz'], $string);
+        $actual = $this->installer->removeLinesContainingStrings(['bar', 'baz'], $string);
         $expected = "foo\n  qux\nquux";
 
         $this->assertEquals($expected, $actual);
@@ -58,7 +59,7 @@ class RemoveLineFromStringTest extends TestCase
     {
         $string = "foo\nbar\nbaz\nqux\nquux";
 
-        $actual = OptionalPackages::removeLinesContainingStrings(['quux'], $string);
+        $actual = $this->installer->removeLinesContainingStrings(['quux'], $string);
         $expected = "foo\nbar\nbaz\nqux\n";
 
         $this->assertEquals($expected, $actual);
