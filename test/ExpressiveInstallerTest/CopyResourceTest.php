@@ -11,16 +11,23 @@ use ExpressiveInstaller\OptionalPackages;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 
-class CopyFileTest extends InstallerTestCase
+class CopyResourceTest extends OptionalPackagesTestCase
 {
     /**
      * @var vfsStreamDirectory
      */
-    private $project;
+    protected $project;
+
+    /**
+     * @var string URL of project root
+     */
+    protected $projectRoot;
 
     protected function setUp()
     {
-        $this->project= vfsStream::setup('project-root');
+        parent::setUp();
+        $this->project = vfsStream::setup('project-root');
+        $this->projectRoot = vfsStream::url('project-root');
     }
 
     public function testTargetFileDoesNotExist()
@@ -29,31 +36,32 @@ class CopyFileTest extends InstallerTestCase
         $this->assertFalse($this->project->hasChild('data/target.php'));
     }
 
-    public function testFileIsCopiedIfItDoesNotExist()
+    public function testResourceIsCopiedIfItDoesNotExist()
     {
-        $io = $this->prophesize('Composer\IO\IOInterface');
+        $installer = $this->createOptionalPackages($this->projectRoot);
 
-        OptionalPackages::copyFile($io->reveal(), vfsStream::url('project-root'), '/config.php', '/data/target.php');
+        $installer->copyResource('config.php', 'data/target.php');
 
         $this->assertTrue($this->project->hasChild('data'));
         $this->assertTrue($this->project->hasChild('data/target.php'));
         $this->assertFileEquals(
-            dirname(dirname(__DIR__)) . '/src/ExpressiveInstaller/config.php',
+            $this->packageRoot . '/src/ExpressiveInstaller/config.php',
             vfsStream::url('project-root/data/target.php')
         );
     }
 
-    public function testFileIsNotCopiedIfItExists()
+    public function testResourceIsNotCopiedIfItExists()
     {
-        $io = $this->prophesize('Composer\IO\IOInterface');
-
         // Create default test file
-        vfsStream::newFile('data/target.php')->at($this->project)->setContent('TEST');
+        vfsStream::newFile('data/target.php')
+            ->at($this->project)
+            ->setContent('TEST');
 
         $this->assertTrue($this->project->hasChild('data/target.php'));
 
         // Copy file (should not copy file)
-        OptionalPackages::copyFile($io->reveal(), vfsStream::url('project-root'), '/config.php', '/data/target.php');
+        $installer = $this->createOptionalPackages($this->projectRoot);
+        $installer->copyResource('config.php', 'data/target.php');
 
         $this->assertTrue($this->project->hasChild('data/target.php'));
         $this->assertEquals(
