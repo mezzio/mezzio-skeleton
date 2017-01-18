@@ -9,11 +9,13 @@ namespace ExpressiveInstallerTest;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
+use Composer\Package\BasePackage;
 use Composer\Package\RootPackage;
 use ExpressiveInstaller\OptionalPackages;
 use PHPUnit_Framework_TestCase as TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use ReflectionClass;
+use ReflectionProperty;
 
 abstract class OptionalPackagesTestCase extends TestCase
 {
@@ -21,6 +23,11 @@ abstract class OptionalPackagesTestCase extends TestCase
      * @var Composer|ObjectProphecy
      */
     protected $composer;
+
+    /**
+     * @var array Array version of composer.json
+     */
+    protected $composerData;
 
     /**
      * @var OptionalPackages
@@ -41,6 +48,46 @@ abstract class OptionalPackagesTestCase extends TestCase
      * @var RootPackage|ObjectProphecy
      */
     protected $rootPackage;
+
+    /**
+     * Assert that the installer contains a specification for the package.
+     *
+     * @param string $package
+     * @param OptionalPackages $installer
+     * @param null|string $message
+     * @throws \PHPUnit_Framework_AssertionFailedError
+     */
+    public static function assertPackage($package, OptionalPackages $installer, $message = null)
+    {
+        $message = $message ?: sprintf('Failed asserting that package "%s" is present in the installer', $package);
+        $found   = false;
+
+        foreach (['composerRequires', 'composerDevRequires'] as $property) {
+            $r = new ReflectionProperty($installer, $property);
+            $r->setAccessible(true);
+            if (array_key_exists($package, $r->getValue($installer))) {
+                $found = true;
+                break;
+            }
+        }
+
+        self::assertThat($found, self::isTrue(), $message);
+    }
+
+    /**
+     * Assert that the installer contains a specification for each package in the list.
+     *
+     * @param string[] $packages
+     * @param OptionalPackages $installer
+     * @param null|string $message
+     * @throws \PHPUnit_Framework_AssertionFailedError
+     */
+    public static function assertPackageSpecs(array $packages, OptionalPackages $installer, $message = null)
+    {
+        foreach ($packages as $package) {
+            self::assertPackage($package, $installer, $message);
+        }
+    }
 
     protected function setUp()
     {
@@ -83,9 +130,9 @@ abstract class OptionalPackagesTestCase extends TestCase
 
     protected function createRootPackage()
     {
-        $composerJson      = file_get_contents($this->packageRoot . '/composer.json');
-        $composer          = json_decode($composerJson, true);
-        $this->rootPackage = $package = $this->prophesize(RootPackage::class);
+        $composerJson       = file_get_contents($this->packageRoot . '/composer.json');
+        $this->composerJson = $composer = json_decode($composerJson, true);
+        $this->rootPackage  = $package = $this->prophesize(RootPackage::class);
 
         $package->getRequires()->willReturn($composer['require']);
         $package->getDevRequires()->willReturn($composer['require-dev']);
@@ -98,6 +145,6 @@ abstract class OptionalPackagesTestCase extends TestCase
     {
         $r = new ReflectionClass(OptionalPackages::class);
         $properties = $r->getDefaultProperties();
-        return array_fill_keys($properties['devDependencies'], true);
+        return array_fill_keys($properties['devDependencies'], BasePackage::STABILITY_DEV);
     }
 }
