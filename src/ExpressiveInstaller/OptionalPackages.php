@@ -321,7 +321,7 @@ class OptionalPackages
             default:
                 throw new RuntimeException(sprintf(
                     'Invalid install type "%s"; this indicates a bug in the installer',
-                    $installType
+                    $this->installType
                 ));
         }
 
