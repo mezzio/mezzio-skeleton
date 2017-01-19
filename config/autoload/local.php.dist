@@ -7,7 +7,5 @@
  * `local.php` is ignored by git and safe to use for local and sensitive data like usernames and passwords.
  */
 
-use Zend\ConfigAggregator\ConfigAggregator;
-
 return [
 ];
