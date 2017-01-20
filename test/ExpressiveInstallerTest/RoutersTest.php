@@ -12,8 +12,10 @@ use App\Action\PingAction;
 use ExpressiveInstaller\OptionalPackages;
 use Zend\Expressive\Router;
 
-class RoutersTest extends InstallerTestCase
+class RoutersTest extends OptionalPackagesTestCase
 {
+    use ProjectSandboxTrait;
+
     private $expectedRoutes = [
         [
             'name'            => 'home',
@@ -29,10 +31,24 @@ class RoutersTest extends InstallerTestCase
         ],
     ];
 
+    /**
+     * @param OptionalPackages
+     */
+    protected $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
+        $this->installer   = $this->createOptionalPackages($this->projectRoot);
+    }
+
     protected function tearDown()
     {
         parent::tearDown();
-        $this->setInstallType(OptionalPackages::INSTALL_FLAT);
+        chdir($this->packageRoot);
+        $this->recursiveDelete($this->projectRoot);
+        $this->tearDownAlternateAutoloader();
     }
 
     /**
@@ -48,31 +64,20 @@ class RoutersTest extends InstallerTestCase
         $expectedRoutes,
         $expectedRouter
     ) {
-        $projectRoot = $this->copyProjectFilesToVirtualFilesystem();
-        $this->setProjectRoot($projectRoot);
-        $this->setInstallType($installType);
-
-        $io     = $this->prophesize('Composer\IO\IOInterface');
-        $config = $this->getConfig();
-
-        // Ensure we have an App\ConfigProvider defined
-        OptionalPackages::setupDefaultApp($io->reveal(), $installType, $config['application']);
+        $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $containerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $config = $this->getInstallerConfig($this->installer);
+        $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
-            $containerOption,
-            $copyFilesKey
+            $containerOption
         );
         $this->assertTrue($containerResult);
 
         // Install router
-        $routerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
-            $routerOption,
-            $copyFilesKey
+            $routerOption
         );
         $this->assertTrue($routerResult);
 

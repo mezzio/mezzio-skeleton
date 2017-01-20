@@ -10,97 +10,102 @@ namespace ExpressiveInstallerTest;
 use ExpressiveInstaller\OptionalPackages;
 use Prophecy\Argument;
 
-class ProcessAnswersTest extends InstallerTestCase
+class ProcessAnswersTest extends OptionalPackagesTestCase
 {
-    protected $teardownFiles = [
-        '/config/container.php',
-        '/config/routes.php',
-    ];
+    use ProjectSandboxTrait;
+
+    /**
+     * @param OptionalPackages
+     */
+    protected $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
+        $this->installer   = $this->createOptionalPackages($this->projectRoot);
+        $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        chdir($this->packageRoot);
+        $this->recursiveDelete($this->projectRoot);
+    }
 
     public function testInvalidAnswer()
     {
-        $io = $this->prophesize('Composer\IO\IOInterface');
-        $io->write()->shouldNotBeCalled();
+        $this->io->write()->shouldNotBeCalled();
 
-        $config       = $this->getConfig();
-        $question     = $config['questions']['container'];
-        $answer       = 'foobar';
-        $copyFilesKey = 'minimal-files';
-        $result       = OptionalPackages::processAnswer($io->reveal(), $question, $answer, $copyFilesKey);
+        $config   = $this->getInstallerConfig($this->installer);
+        $question = $config['questions']['container'];
+        $answer   = 'foobar';
+        $result   = $this->installer->processAnswer($question, $answer);
 
         $this->assertFalse($result);
-        $this->assertFileNotExists($this->getProjectRoot() . '/config/container.php');
+        $this->assertFileNotExists($this->projectRoot . '/config/container.php');
     }
 
     public function testAnsweredWithN()
     {
-        $io = $this->prophesize('Composer\IO\IOInterface');
-        $io->write()->shouldNotBeCalled();
+        $this->io->write()->shouldNotBeCalled();
 
-        $config       = $this->getConfig();
-        $question     = $config['questions']['container'];
-        $answer       = 'n';
-        $copyFilesKey = 'minimal-files';
-        $result       = OptionalPackages::processAnswer($io->reveal(), $question, $answer, $copyFilesKey);
+        $config   = $this->getInstallerConfig($this->installer);
+        $question = $config['questions']['container'];
+        $answer   = 'n';
+        $result   = $this->installer->processAnswer($question, $answer);
 
         $this->assertFalse($result);
-        $this->assertFileNotExists($this->getProjectRoot() . '/config/container.php');
+        $this->assertFileNotExists($this->projectRoot . '/config/container.php');
     }
 
     public function testAnsweredWithInvalidOption()
     {
-        $io = $this->prophesize('Composer\IO\IOInterface');
-        $io->write()->shouldNotBeCalled();
+        $this->io->write()->shouldNotBeCalled();
 
-        $config       = $this->getConfig();
-        $question     = $config['questions']['container'];
-        $answer       = 10;
-        $copyFilesKey = 'minimal-files';
-        $result       = OptionalPackages::processAnswer($io->reveal(), $question, $answer, $copyFilesKey);
+        $config   = $this->getInstallerConfig($this->installer);
+        $question = $config['questions']['container'];
+        $answer   = 10;
+        $result   = $this->installer->processAnswer($question, $answer);
 
         $this->assertFalse($result);
-        $this->assertFileNotExists($this->getProjectRoot() . '/config/container.php');
+        $this->assertFileNotExists($this->projectRoot . '/config/container.php');
     }
 
     public function testAnsweredWithValidOption()
     {
         // Prepare the installer
-        OptionalPackages::removeDevDependencies();
+        $this->installer->removeDevDependencies();
 
-        $io = $this->prophesize('Composer\IO\IOInterface');
+        $this->io->write(Argument::containingString('Adding package <info>aura/di</info>'))->shouldBeCalled();
+        $this->io->write(Argument::containingString('Copying <info>config/container.php</info>'))->shouldBeCalled();
 
-        $io->write(Argument::containingString('Adding package <info>aura/di</info>'))->shouldBeCalled();
-        $io->write(Argument::containingString('Copying <info>/config/container.php</info>'))->shouldBeCalled();
-
-        $config       = $this->getConfig();
-        $question     = $config['questions']['container'];
-        $answer       = 1;
-        $copyFilesKey = 'minimal-files';
-        $result       = OptionalPackages::processAnswer($io->reveal(), $question, $answer, $copyFilesKey);
+        $config   = $this->getInstallerConfig($this->installer);
+        $question = $config['questions']['container'];
+        $answer   = 1;
+        $result   = $this->installer->processAnswer($question, $answer);
 
         $this->assertTrue($result);
-        $this->assertFileExists($this->getProjectRoot() . '/config/container.php');
-        $this->assertComposerHasPackages(['aura/di']);
+        $this->assertFileExists($this->projectRoot . '/config/container.php');
+        $this->assertPackage('aura/di', $this->installer);
     }
 
     public function testAnsweredWithPackage()
     {
         // Prepare the installer
-        OptionalPackages::removeDevDependencies();
+        $this->installer->removeDevDependencies();
 
-        $io = $this->prophesize('Composer\IO\IOInterface');
+        $this->io->write(Argument::containingString('Adding package <info>league/container</info>'))->shouldBeCalled();
+        $this->io->write(Argument::containingString('<warning>You need to edit public/index.php'))->shouldBeCalled();
 
-        $io->write(Argument::containingString('Adding package <info>league/container</info>'))->shouldBeCalled();
-        $io->write(Argument::containingString('<warning>You need to edit public/index.php'))->shouldBeCalled();
-
-        $config       = $this->getConfig();
-        $question     = $config['questions']['container'];
-        $answer       = 'league/container:2.2.0';
-        $copyFilesKey = 'minimal-files';
-        $result       = OptionalPackages::processAnswer($io->reveal(), $question, $answer, $copyFilesKey);
+        $config   = $this->getInstallerConfig($this->installer);
+        $question = $config['questions']['container'];
+        $answer   = 'league/container:2.2.0';
+        $result   = $this->installer->processAnswer($question, $answer);
 
         $this->assertTrue($result);
-        $this->assertFileNotExists($this->getProjectRoot() . '/config/container.php');
-        $this->assertComposerHasPackages(['league/container']);
+        $this->assertFileNotExists($this->projectRoot . '/config/container.php');
+        $this->assertPackage('league/container', $this->installer);
     }
 }

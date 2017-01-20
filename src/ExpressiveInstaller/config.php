@@ -20,10 +20,10 @@ return [
 
     'application' => [
         'flat' => [
-            '/Resources/src/ConfigProvider.flat.php' => '/src/App/ConfigProvider.php',
+            'Resources/src/ConfigProvider.flat.php' => 'src/App/ConfigProvider.php',
         ],
         'modular' => [
-            '/Resources/src/ConfigProvider.modular.php' => '/src/App/src/ConfigProvider.php',
+            'Resources/src/ConfigProvider.modular.php' => 'src/App/src/ConfigProvider.php',
         ],
     ],
 
@@ -40,11 +40,14 @@ return [
                     'packages' => [
                         'aura/di',
                     ],
-                    'copy-files' => [
-                        '/Resources/config/container-aura-di.php' => '/config/container.php',
+                    'flat' => [
+                        'Resources/config/container-aura-di.php' => 'config/container.php',
                     ],
-                    'minimal-files' => [
-                        '/Resources/config/container-aura-di.php' => '/config/container.php',
+                    'modular' => [
+                        'Resources/config/container-aura-di.php' => 'config/container.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/container-aura-di.php' => 'config/container.php',
                     ],
                 ],
                 2 => [
@@ -52,11 +55,14 @@ return [
                     'packages' => [
                         'xtreamwayz/pimple-container-interop',
                     ],
-                    'copy-files' => [
-                        '/Resources/config/container-pimple.php' => '/config/container.php',
+                    'flat' => [
+                        'Resources/config/container-pimple.php' => 'config/container.php',
                     ],
-                    'minimal-files' => [
-                        '/Resources/config/container-pimple.php' => '/config/container.php',
+                    'modular' => [
+                        'Resources/config/container-pimple.php' => 'config/container.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/container-pimple.php' => 'config/container.php',
                     ],
                 ],
                 3 => [
@@ -64,11 +70,14 @@ return [
                     'packages' => [
                         'zendframework/zend-servicemanager',
                     ],
-                    'copy-files' => [
-                        '/Resources/config/container-zend-servicemanager.php' => '/config/container.php',
+                    'flat' => [
+                        'Resources/config/container-zend-servicemanager.php' => 'config/container.php',
                     ],
-                    'minimal-files' => [
-                        '/Resources/config/container-zend-servicemanager.php' => '/config/container.php',
+                    'modular' => [
+                        'Resources/config/container-zend-servicemanager.php' => 'config/container.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/container-zend-servicemanager.php' => 'config/container.php',
                     ],
                 ],
             ],
@@ -89,15 +98,17 @@ return [
                     'packages' => [
                         'zendframework/zend-expressive-aurarouter',
                     ],
-                    'copy-files' => [
-                        // Copy source file to target: '<source>' => '<target>'
-                        '/Resources/config/routes-full.php' => '/config/routes.php',
-                        '/Resources/config/routes-aura-router.php' => '/config/autoload/routes.global.php',
+                    'flat' => [
+                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-aura-router.php' => 'config/autoload/routes.global.php',
                     ],
-                    'minimal-files' => [
-                        // Copy source file to target: '<source>' => '<target>'
-                        '/Resources/config/routes-minimal.php' => '/config/routes.php',
-                        '/Resources/config/routes-minimal-aura-router.php' => '/config/autoload/routes.global.php',
+                    'modular' => [
+                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-aura-router.php' => 'config/autoload/routes.global.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/routes-minimal.php' => 'config/routes.php',
+                        'Resources/config/routes-minimal-aura-router.php' => 'config/autoload/routes.global.php',
                     ],
                 ],
                 2 => [
@@ -105,13 +116,17 @@ return [
                     'packages' => [
                         'zendframework/zend-expressive-fastroute',
                     ],
-                    'copy-files' => [
-                        '/Resources/config/routes-full.php' => '/config/routes.php',
-                        '/Resources/config/routes-fast-route.php' => '/config/autoload/routes.global.php',
+                    'flat' => [
+                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-fast-route.php' => 'config/autoload/routes.global.php',
                     ],
-                    'minimal-files' => [
-                        '/Resources/config/routes-minimal.php' => '/config/routes.php',
-                        '/Resources/config/routes-minimal-fast-route.php' => '/config/autoload/routes.global.php',
+                    'modular' => [
+                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-fast-route.php' => 'config/autoload/routes.global.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/routes-minimal.php' => 'config/routes.php',
+                        'Resources/config/routes-minimal-fast-route.php' => 'config/autoload/routes.global.php',
                     ],
                 ],
                 3 => [
@@ -119,13 +134,17 @@ return [
                     'packages' => [
                         'zendframework/zend-expressive-zendrouter',
                     ],
-                    'copy-files' => [
-                        '/Resources/config/routes-full.php' => '/config/routes.php',
-                        '/Resources/config/routes-zf2-router.php' => '/config/autoload/routes.global.php',
+                    'flat' => [
+                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-zf2-router.php' => 'config/autoload/routes.global.php',
                     ],
-                    'minimal-files' => [
-                        '/Resources/config/routes-minimal.php' => '/config/routes.php',
-                        '/Resources/config/routes-minimal-zf2-router.php' => '/config/autoload/routes.global.php',
+                    'modular' => [
+                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-zf2-router.php' => 'config/autoload/routes.global.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/routes-minimal.php' => 'config/routes.php',
+                        'Resources/config/routes-minimal-zf2-router.php' => 'config/autoload/routes.global.php',
                     ],
                 ],
             ],
@@ -142,27 +161,22 @@ return [
                     'packages' => [
                         'zendframework/zend-expressive-platesrenderer',
                     ],
-                    'copy-files' => [
-                        '/Resources/config/templates-plates.php' => '/config/autoload/templates.global.php',
-                        '/Resources/templates/plates-404.phtml' => [
-                            'flat'    => '/templates/error/404.phtml',
-                            'modular' => '/src/App/templates/error/404.phtml',
-                        ],
-                        '/Resources/templates/plates-error.phtml' => [
-                            'flat'    => '/templates/error/error.phtml',
-                            'modular' => '/src/App/templates/error/error.phtml',
-                        ],
-                        '/Resources/templates/plates-layout.phtml' => [
-                            'flat'    => '/templates/layout/default.phtml',
-                            'modular' => '/src/App/templates/layout/default.phtml',
-                        ],
-                        '/Resources/templates/plates-home-page.phtml' => [
-                            'flat'    => '/templates/app/home-page.phtml',
-                            'modular' => '/src/App/templates/app/home-page.phtml',
-                        ],
+                    'flat' => [
+                        'Resources/config/templates-plates.php'      => 'config/autoload/templates.global.php',
+                        'Resources/templates/plates-404.phtml'       => 'templates/error/404.phtml',
+                        'Resources/templates/plates-error.phtml'     => 'templates/error/error.phtml',
+                        'Resources/templates/plates-layout.phtml'    => 'templates/layout/default.phtml',
+                        'Resources/templates/plates-home-page.phtml' => 'templates/app/home-page.phtml',
                     ],
-                    'minimal-files' => [
-                        '/Resources/config/templates-plates.php' => '/config/autoload/templates.global.php',
+                    'modular' => [
+                        'Resources/config/templates-plates.php'      => 'config/autoload/templates.global.php',
+                        'Resources/templates/plates-404.phtml'       => 'src/App/templates/error/404.phtml',
+                        'Resources/templates/plates-error.phtml'     => 'src/App/templates/error/error.phtml',
+                        'Resources/templates/plates-layout.phtml'    => 'src/App/templates/layout/default.phtml',
+                        'Resources/templates/plates-home-page.phtml' => 'src/App/templates/app/home-page.phtml',
+                    ],
+                    'minimal' => [
+                        'Resources/config/templates-plates.php' => 'config/autoload/templates.global.php',
                     ],
                 ],
                 2 => [
@@ -170,27 +184,22 @@ return [
                     'packages' => [
                         'zendframework/zend-expressive-twigrenderer',
                     ],
-                    'copy-files' => [
-                        '/Resources/config/templates-twig.php' => '/config/autoload/templates.global.php',
-                        '/Resources/templates/twig-404.html.twig' => [
-                            'flat'    => '/templates/error/404.html.twig',
-                            'modular' => '/src/App/templates/error/404.html.twig',
-                        ],
-                        '/Resources/templates/twig-error.html.twig' => [
-                            'flat'    => '/templates/error/error.html.twig',
-                            'modular' => '/src/App/templates/error/error.html.twig',
-                        ],
-                        '/Resources/templates/twig-layout.html.twig' => [
-                            'flat'    => '/templates/layout/default.html.twig',
-                            'modular' => '/src/App/templates/layout/default.html.twig',
-                        ],
-                        '/Resources/templates/twig-home-page.html.twig' => [
-                            'flat'    => '/templates/app/home-page.html.twig',
-                            'modular' => '/src/App/templates/app/home-page.html.twig',
-                        ],
+                    'flat' => [
+                        'Resources/config/templates-twig.php'          => 'config/autoload/templates.global.php',
+                        'Resources/templates/twig-404.html.twig'       => 'templates/error/404.html.twig',
+                        'Resources/templates/twig-error.html.twig'     => 'templates/error/error.html.twig',
+                        'Resources/templates/twig-layout.html.twig'    => 'templates/layout/default.html.twig',
+                        'Resources/templates/twig-home-page.html.twig' => 'templates/app/home-page.html.twig',
                     ],
-                    'minimal-files' => [
-                        '/Resources/config/templates-twig.php' => '/config/autoload/templates.global.php',
+                    'modular' => [
+                        'Resources/config/templates-twig.php'          => 'config/autoload/templates.global.php',
+                        'Resources/templates/twig-404.html.twig'       => 'src/App/templates/error/404.html.twig',
+                        'Resources/templates/twig-error.html.twig'     => 'src/App/templates/error/error.html.twig',
+                        'Resources/templates/twig-layout.html.twig'    => 'src/App/templates/layout/default.html.twig',
+                        'Resources/templates/twig-home-page.html.twig' => 'src/App/templates/app/home-page.html.twig',
+                    ],
+                    'minimal' => [
+                        'Resources/config/templates-twig.php' => 'config/autoload/templates.global.php',
                     ],
                 ],
                 3 => [
@@ -198,27 +207,22 @@ return [
                     'packages' => [
                         'zendframework/zend-expressive-zendviewrenderer',
                     ],
-                    'copy-files' => [
-                        '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
-                        '/Resources/templates/zend-view-404.phtml' => [
-                            'flat'    => '/templates/error/404.phtml',
-                            'modular' => '/src/App/templates/error/404.phtml',
-                        ],
-                        '/Resources/templates/zend-view-error.phtml' => [
-                            'flat'    => '/templates/error/error.phtml',
-                            'modular' => '/src/App/templates/error/error.phtml',
-                        ],
-                        '/Resources/templates/zend-view-layout.phtml' => [
-                            'flat'    => '/templates/layout/default.phtml',
-                            'modular' => '/src/App/templates/layout/default.phtml',
-                        ],
-                        '/Resources/templates/zend-view-home-page.phtml' => [
-                            'flat'    => '/templates/app/home-page.phtml',
-                            'modular' => '/src/App/templates/app/home-page.phtml',
-                        ],
+                    'flat' => [
+                        'Resources/config/templates-zend-view.php'      => 'config/autoload/templates.global.php',
+                        'Resources/templates/zend-view-404.phtml'       => 'templates/error/404.phtml',
+                        'Resources/templates/zend-view-error.phtml'     => 'templates/error/error.phtml',
+                        'Resources/templates/zend-view-layout.phtml'    => 'templates/layout/default.phtml',
+                        'Resources/templates/zend-view-home-page.phtml' => 'templates/app/home-page.phtml',
                     ],
-                    'minimal-files' => [
-                        '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
+                    'modular' => [
+                        'Resources/config/templates-zend-view.php'      => 'config/autoload/templates.global.php',
+                        'Resources/templates/zend-view-404.phtml'       => 'src/App/templates/error/404.phtml',
+                        'Resources/templates/zend-view-error.phtml'     => 'src/App/templates/error/error.phtml',
+                        'Resources/templates/zend-view-layout.phtml'    => 'src/App/templates/layout/default.phtml',
+                        'Resources/templates/zend-view-home-page.phtml' => 'src/App/templates/app/home-page.phtml',
+                    ],
+                    'minimal' => [
+                        'Resources/config/templates-zend-view.php' => 'config/autoload/templates.global.php',
                     ],
                 ],
             ],
@@ -235,11 +239,14 @@ return [
                     'packages' => [
                         'filp/whoops',
                     ],
-                    'copy-files' => [
-                        '/Resources/config/error-handler-whoops.php' => '/config/autoload/errorhandler.local.php',
+                    'flat' => [
+                        'Resources/config/error-handler-whoops.php' => 'config/autoload/errorhandler.local.php',
                     ],
-                    'minimal-files' => [
-                        '/Resources/config/error-handler-whoops.php' => '/config/autoload/errorhandler.local.php',
+                    'modular' => [
+                        'Resources/config/error-handler-whoops.php' => 'config/autoload/errorhandler.local.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/error-handler-whoops.php' => 'config/autoload/errorhandler.local.php',
                     ],
                 ],
             ],

@@ -11,12 +11,28 @@ use ExpressiveInstaller\OptionalPackages;
 use Zend\Expressive\Container\WhoopsErrorResponseGeneratorFactory;
 use Zend\Expressive\Middleware\ErrorResponseGenerator;
 
-class ErrorHandlerTest extends InstallerTestCase
+class ErrorHandlerTest extends OptionalPackagesTestCase
 {
+    use ProjectSandboxTrait;
+
+    /**
+     * @param OptionalPackages
+     */
+    protected $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
+        $this->installer   = $this->createOptionalPackages($this->projectRoot);
+    }
+
     protected function tearDown()
     {
         parent::tearDown();
-        $this->setInstallType(OptionalPackages::INSTALL_FLAT);
+        chdir($this->packageRoot);
+        $this->recursiveDelete($this->projectRoot);
+        $this->tearDownAlternateAutoloader();
     }
 
     /**
@@ -24,21 +40,13 @@ class ErrorHandlerTest extends InstallerTestCase
      */
     public function testErrorHandlerIsNotInstalled()
     {
-        $projectRoot = $this->copyProjectFilesToVirtualFilesystem();
-        $this->setProjectRoot($projectRoot);
-        $this->setInstallType(OptionalPackages::INSTALL_MINIMAL);
-
-        $io     = $this->prophesize('Composer\IO\IOInterface');
-        $config = $this->getConfig();
-
-        OptionalPackages::setupDefaultApp($io->reveal(), OptionalPackages::INSTALL_MINIMAL, $config['application']);
+        $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
 
         // Install container
-        $containerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $config = $this->getInstallerConfig($this->installer);
+        $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
-            3,
-            'minimal-files'
+            3
         );
         $this->assertTrue($containerResult);
 
@@ -60,30 +68,20 @@ class ErrorHandlerTest extends InstallerTestCase
         $copyFilesKey,
         $expectedErrorHandler
     ) {
-        $projectRoot = $this->copyProjectFilesToVirtualFilesystem();
-        $this->setProjectRoot($projectRoot);
-        $this->setInstallType($installType);
-
-        $io     = $this->prophesize('Composer\IO\IOInterface');
-        $config = $this->getConfig();
-
-        OptionalPackages::setupDefaultApp($io->reveal(), $installType, $config['application']);
+        $this->prepareSandboxForInstallType($installType, $this->installer);
+        $config = $this->getInstallerConfig($this->installer);
 
         // Install container
-        $containerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
-            $containerOption,
-            $copyFilesKey
+            $containerOption
         );
         $this->assertTrue($containerResult);
 
         // Install error handler
-        $containerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $containerResult = $this->installer->processAnswer(
             $config['questions']['error-handler'],
-            $errorHandlerOption,
-            $copyFilesKey
+            $errorHandlerOption
         );
         $this->assertTrue($containerResult);
 

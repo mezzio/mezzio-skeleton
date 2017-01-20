@@ -11,12 +11,28 @@ use ExpressiveInstaller\OptionalPackages;
 use Zend\Expressive;
 use Zend\Stratigility\Middleware;
 
-class TemplateRenderersTest extends InstallerTestCase
+class TemplateRenderersTest extends OptionalPackagesTestCase
 {
+    use ProjectSandboxTrait;
+
+    /**
+     * @param OptionalPackages
+     */
+    protected $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
+        $this->installer   = $this->createOptionalPackages($this->projectRoot);
+    }
+
     protected function tearDown()
     {
         parent::tearDown();
-        $this->setInstallType(OptionalPackages::INSTALL_FLAT);
+        chdir($this->packageRoot);
+        $this->recursiveDelete($this->projectRoot);
+        $this->tearDownAlternateAutoloader();
     }
 
     /**
@@ -28,43 +44,30 @@ class TemplateRenderersTest extends InstallerTestCase
         $containerOption,
         $routerOption,
         $templateRendererOption,
-        $copyFilesKey,
         $expectedResponseStatusCode,
         $expectedTemplateRenderer
     ) {
-        $projectRoot = $this->copyProjectFilesToVirtualFilesystem();
-        $this->setProjectRoot($projectRoot);
-        $this->setInstallType($installType);
-
-        $io     = $this->prophesize('Composer\IO\IOInterface');
-        $config = $this->getConfig();
-
-        OptionalPackages::setupDefaultApp($io->reveal(), $installType, $config['application']);
+        $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $containerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $config = $this->getInstallerConfig($this->installer);
+        $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
-            $containerOption,
-            $copyFilesKey
+            $containerOption
         );
         $this->assertTrue($containerResult);
 
         // Install router
-        $routerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
-            $routerOption,
-            $copyFilesKey
+            $routerOption
         );
         $this->assertTrue($routerResult);
 
         // Install template engine
-        $templateEngineResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $templateEngineResult = $this->installer->processAnswer(
             $config['questions']['template-engine'],
-            $templateRendererOption,
-            $copyFilesKey
+            $templateRendererOption
         );
         $this->assertTrue($templateEngineResult);
 
@@ -86,8 +89,9 @@ class TemplateRenderersTest extends InstallerTestCase
         $this->assertInstanceOf(Expressive\Template\TemplateRendererInterface::class, $templateRenderer);
         $this->assertInstanceOf($expectedTemplateRenderer, $templateRenderer);
 
-        if ($copyFilesKey == 'copy-files') {
-            // Test home page for full install only, otherwise you get invalid template name errors
+        if ($installType !== OptionalPackages::INSTALL_MINIMAL) {
+            // Test home page for non-minimal installs only, otherwise you get
+            // invalid template name errors
             $response = $this->getAppResponse();
             $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
         }
@@ -98,19 +102,19 @@ class TemplateRenderersTest extends InstallerTestCase
         // @codingStandardsIgnoreStart
         // Minimal framework installation test cases; no templates installed.
         // Must be run before those that install templates and test the output.
-        // $installType, $containerOption, $routerOption, $templateRendererOption, $copyFilesKey, $expectedResponseStatusCode, $expectedTemplateRenderer
-        yield 'plates-minimal'    => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 1, 'minimal-files', 404, Expressive\Plates\PlatesRenderer::class];
-        yield 'twig-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 2, 'minimal-files', 404, Expressive\Twig\TwigRenderer::class];
-        yield 'zend-view-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 3, 'minimal-files', 404, Expressive\ZendView\ZendViewRenderer::class];
+        // $installType, $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
+        yield 'plates-minimal'    => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 1, 404, Expressive\Plates\PlatesRenderer::class];
+        yield 'twig-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 2, 404, Expressive\Twig\TwigRenderer::class];
+        yield 'zend-view-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 3, 404, Expressive\ZendView\ZendViewRenderer::class];
         // @codingStandardsIgnoreEnd
 
         // @codingStandardsIgnoreStart
         // Full framework installation test cases; installation options that install templates.
         $testCases = [
-            // $containerOption, $routerOption, $templateRendererOption, $copyFilesKey, $expectedResponseStatusCode, $expectedTemplateRenderer
-            'plates-full'       => [3, 2, 1, 'copy-files', 200, Expressive\Plates\PlatesRenderer::class],
-            'twig-full'         => [3, 2, 2, 'copy-files', 200, Expressive\Twig\TwigRenderer::class],
-            'zend-view-full'    => [3, 2, 3, 'copy-files', 200, Expressive\ZendView\ZendViewRenderer::class],
+            // $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
+            'plates-full'       => [3, 2, 1, 200, Expressive\Plates\PlatesRenderer::class],
+            'twig-full'         => [3, 2, 2, 200, Expressive\Twig\TwigRenderer::class],
+            'zend-view-full'    => [3, 2, 3, 200, Expressive\ZendView\ZendViewRenderer::class],
         ];
         // @codingStandardsIgnoreEnd
 
