@@ -2,15 +2,37 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.5 - 2017-01-25
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- [#127](https://github.com/zendframework/zend-expressive-skeleton/pull/127)
+  removes PHP 5.5 support.
+
+### Fixed
+
+- [#127](https://github.com/zendframework/zend-expressive-skeleton/pull/127)
+  registers the missing TwigEnvironmentFactory which was introduced in
+  zend-expressive-twigrenderer 1.2.0. Not having this factory registered
+  causes a deprecation message.
+
 ## 1.0.4 - 2016-12-01
 
 ### Added
 
-- [#113](https://github.com/zendframework/zend-expressive-skeleton/pull/113) 
+- [#113](https://github.com/zendframework/zend-expressive-skeleton/pull/113)
   removes leftover skeleton files.
-- [#118](https://github.com/zendframework/zend-expressive-skeleton/pull/118) 
+- [#118](https://github.com/zendframework/zend-expressive-skeleton/pull/118)
   removes CHANGELOG.md, CONDUCT.md and CONTRIBUTING.md after setup.
-  
+
 ### Deprecated
 
 - Nothing.
@@ -201,7 +223,7 @@ Seventh release candidate.
 
 - [#64](https://github.com/zendframework/zend-expressive-skeleton/pull/64)
   fixes the installer script to correctly rewrite the `require-dev` section
-  and ensure only the development dependencies selected, as well as base 
+  and ensure only the development dependencies selected, as well as base
   requirements such as PHPUnit and PHP_CodeSniffer, are installed. As such,
   the `--no-dev` flag is no longer required, and development dependencies
   such as whoops are properly installed.
