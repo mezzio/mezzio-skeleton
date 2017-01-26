@@ -26,7 +26,7 @@ class HomePageAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        if (!$this->template) {
+        if (! $this->template) {
             return new JsonResponse([
                 'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
                 'docsUrl' => 'zend-expressive.readthedocs.org',
