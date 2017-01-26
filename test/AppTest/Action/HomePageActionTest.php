@@ -3,11 +3,17 @@
 namespace AppTest\Action;
 
 use App\Action\HomePageAction;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router\RouterInterface;
+use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageActionTest extends \PHPUnit_Framework_TestCase
+class HomePageActionTest extends TestCase
 {
     /** @var RouterInterface */
     protected $router;
@@ -17,12 +23,31 @@ class HomePageActionTest extends \PHPUnit_Framework_TestCase
         $this->router = $this->prophesize(RouterInterface::class);
     }
 
-    public function testResponse()
+    public function testReturnsJsonResponseWhenNoTemplateRendererProvided()
     {
         $homePage = new HomePageAction($this->router->reveal(), null);
-        $response = $homePage(new ServerRequest(['/']), new Response(), function () {
-        });
+        $response = $homePage->process(
+            $this->prophesize(ServerRequestInterface::class)->reveal(),
+            $this->prophesize(DelegateInterface::class)->reveal()
+        );
 
-        $this->assertTrue($response instanceof Response);
+        $this->assertInstanceOf(JsonResponse::class, $response);
+    }
+
+    public function testReturnsHtmlResponseWhenTemplateRendererProvided()
+    {
+        $renderer = $this->prophesize(TemplateRendererInterface::class);
+        $renderer
+            ->render('app::home-page', Argument::type('array'))
+            ->willReturn('');
+
+        $homePage = new HomePageAction($this->router->reveal(), $renderer->reveal());
+
+        $response = $homePage->process(
+            $this->prophesize(ServerRequestInterface::class)->reveal(),
+            $this->prophesize(DelegateInterface::class)->reveal()
+        );
+
+        $this->assertInstanceOf(HtmlResponse::class, $response);
     }
 }
