@@ -4,7 +4,6 @@ namespace AppTest\Action;
 
 use App\Action\HomePageAction;
 use Interop\Http\ServerMiddleware\DelegateInterface;
-use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Http\Message\ServerRequestInterface;
