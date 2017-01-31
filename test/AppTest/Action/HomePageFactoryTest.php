@@ -26,11 +26,11 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
         $factory = new HomePageFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
 
-        $this->assertTrue($factory instanceof HomePageFactory);
+        $this->assertInstanceOf(HomePageFactory::class, $factory);
 
         $homePage = $factory($this->container->reveal());
 
-        $this->assertTrue($homePage instanceof HomePageAction);
+        $this->assertInstanceOf(HomePageAction::class, $homePage);
     }
 
     public function testFactoryWithTemplate()
@@ -41,10 +41,10 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
             ->get(TemplateRendererInterface::class)
             ->willReturn($this->prophesize(TemplateRendererInterface::class));
 
-        $this->assertTrue($factory instanceof HomePageFactory);
+        $this->assertInstanceOf(HomePageFactory::class, $factory);
 
         $homePage = $factory($this->container->reveal());
 
-        $this->assertTrue($homePage instanceof HomePageAction);
+        $this->assertInstanceOf(HomePageAction::class, $homePage);
     }
 }
