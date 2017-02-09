@@ -23,4 +23,9 @@ foreach ($config['dependencies']['invokables'] as $name => $object) {
     $container->set($name, $container->lazyNew($object));
 }
 
+// Inject aliases
+foreach ($config['dependencies']['aliases'] as $alias => $target) {
+    $container->set($alias, $container->lazyGet($target));
+}
+
 return $container;
