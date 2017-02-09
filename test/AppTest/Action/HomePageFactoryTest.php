@@ -5,10 +5,11 @@ namespace AppTest\Action;
 use App\Action\HomePageAction;
 use App\Action\HomePageFactory;
 use Interop\Container\ContainerInterface;
+use PHPUnit\Framework\TestCase;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
+class HomePageFactoryTest extends TestCase
 {
     /** @var ContainerInterface */
     protected $container;

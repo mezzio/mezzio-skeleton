@@ -21,7 +21,6 @@ use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
 use Zend\Expressive\Middleware\NotFoundHandler;
 use Zend\Stratigility\Middleware\ErrorHandler;
-use Zend\Stratigility\NoopFinalHandler;
 
 trait ProjectSandboxTrait
 {
@@ -201,7 +200,7 @@ trait ProjectSandboxTrait
         return $app(
             new ServerRequest([], [], 'https://example.com' . $path, 'GET'),
             new Response(),
-            new NoopFinalHandler()
+            $app->getDefaultDelegate()
         );
     }
 

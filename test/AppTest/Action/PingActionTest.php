@@ -4,10 +4,11 @@ namespace AppTest\Action;
 
 use App\Action\PingAction;
 use Interop\Http\ServerMiddleware\DelegateInterface;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
-class PingActionTest extends \PHPUnit_Framework_TestCase
+class PingActionTest extends TestCase
 {
     public function testResponse()
     {

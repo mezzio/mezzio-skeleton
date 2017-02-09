@@ -95,7 +95,16 @@ class RoutersTest extends OptionalPackagesTestCase
         // Test home page
         $setupRoutes = (strpos($copyFilesKey, 'minimal') !== 0);
         $response = $this->getAppResponse('/', $setupRoutes);
-        $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
+        $status = $response->getStatusCode();
+
+        // Using assertTrue here because when assertEquals failed when using FastRoute,
+        // it reported as a serialization error instead. See
+        // https://github.com/sebastianbergmann/phpunit/issues/1515
+        // for details. (Issue was never resolved)
+        $this->assertTrue(
+            $expectedResponseStatusCode === $status,
+            sprintf("Expected response status '%s', received '%s'", $expectedResponseStatusCode, $status)
+        );
     }
 
     public function routerProvider()
