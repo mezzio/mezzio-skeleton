@@ -11,6 +11,17 @@ $container = new Container();
 // Inject config
 $container['config'] = $config;
 
+// Inject services
+if (! empty($config['dependencies']['services'])
+    && is_array($config['dependencies']['services'])
+) {
+    foreach ($config['dependencies']['services'] as $name => $service) {
+        $container[$name] = function ($c) use ($service) {
+            return $service;
+        };
+    }
+}
+
 // Inject factories
 foreach ($config['dependencies']['factories'] as $name => $object) {
     $container[$name] = function ($c) use ($object, $name) {
