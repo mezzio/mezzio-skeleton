@@ -1,31 +1,17 @@
 <?php
 
+use App\ExpressiveAuraConfig;
+use App\ExpressiveAuraDelegatorFactory;
 use Aura\Di\ContainerBuilder;
+
+require_once __DIR__ . '/ExpressiveAuraConfig.php';
+require_once __DIR__ . '/ExpressiveAuraDelegatorFactory.php';
 
 // Load configuration
 $config = require __DIR__ . '/config.php';
 
 // Build container
 $builder = new ContainerBuilder();
-$container = $builder->newInstance();
-
-// Convert config to an object and inject it
-$container->set('config', new ArrayObject($config, ArrayObject::ARRAY_AS_PROPS));
-
-// Inject factories
-foreach ($config['dependencies']['factories'] as $name => $object) {
-    $container->set($object, $container->lazyNew($object));
-    $container->set($name, $container->lazyGetCall($object, '__invoke', $container));
-}
-
-// Inject invokables
-foreach ($config['dependencies']['invokables'] as $name => $object) {
-    $container->set($name, $container->lazyNew($object));
-}
-
-// Inject aliases
-foreach ($config['dependencies']['aliases'] as $alias => $target) {
-    $container->set($alias, $container->lazyGet($target));
-}
-
-return $container;
+return $builder->newConfiguredInstance([
+    new ExpressiveAuraConfig($config),
+]);

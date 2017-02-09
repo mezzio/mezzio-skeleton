@@ -40,15 +40,23 @@ return [
                     'packages' => [
                         'aura/di',
                     ],
+                    // @codingStandardsIgnoreStart
                     'flat' => [
-                        'Resources/config/container-aura-di.php' => 'config/container.php',
+                        'Resources/config/container-aura-di.php'           => 'config/container.php',
+                        'Resources/src/ExpressiveAuraConfig.php'           => 'config/ExpressiveAuraConfig.php',
+                        'Resources/src/ExpressiveAuraDelegatorFactory.php' => 'config/ExpressiveAuraDelegatorFactory.php',
                     ],
                     'modular' => [
-                        'Resources/config/container-aura-di.php' => 'config/container.php',
+                        'Resources/config/container-aura-di.php'           => 'config/container.php',
+                        'Resources/src/ExpressiveAuraConfig.php'           => 'config/ExpressiveAuraConfig.php',
+                        'Resources/src/ExpressiveAuraDelegatorFactory.php' => 'config/ExpressiveAuraDelegatorFactory.php',
                     ],
                     'minimal' => [
-                        'Resources/config/container-aura-di.php' => 'config/container.php',
+                        'Resources/config/container-aura-di.php'           => 'config/container.php',
+                        'Resources/src/ExpressiveAuraConfig.php'           => 'config/ExpressiveAuraConfig.php',
+                        'Resources/src/ExpressiveAuraDelegatorFactory.php' => 'config/ExpressiveAuraDelegatorFactory.php',
                     ],
+                    // @codingStandardsIgnoreEnd
                 ],
                 2 => [
                     'name'     => 'Pimple',
