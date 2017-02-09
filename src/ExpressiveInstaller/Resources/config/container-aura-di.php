@@ -13,5 +13,5 @@ $config = require __DIR__ . '/config.php';
 // Build container
 $builder = new ContainerBuilder();
 return $builder->newConfiguredInstance([
-    new ExpressiveAuraConfig($config),
+    new ExpressiveAuraConfig(is_array($config) ? $config : []),
 ]);
