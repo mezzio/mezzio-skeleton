@@ -8,8 +8,5 @@ return [
         'invokables' => [
             RouterInterface::class => AuraRouter::class,
         ],
-        // Map middleware -> factories here
-        'factories' => [
-        ],
     ],
 ];
