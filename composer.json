@@ -15,7 +15,7 @@
         "roave/security-advisories": "dev-master",
         "zendframework/zend-expressive": "^2.0 || dev-2.0.X@dev",
         "zendframework/zend-expressive-helpers": "^3.0.1",
-        "zendframework/zend-stdlib": "^2.7 || ^3.0",
+        "zendframework/zend-stdlib": "^3.1",
         "zendframework/zend-config-aggregator": "^0.2.0",
         "zendframework/zend-component-installer": "^0.6.0 || ~1.0"
     },
@@ -34,7 +34,7 @@
         "zendframework/zend-expressive-platesrenderer": "^1.2",
         "zendframework/zend-expressive-twigrenderer": "^1.2.1",
         "zendframework/zend-expressive-zendviewrenderer": "^1.2.1",
-        "zendframework/zend-servicemanager": "^2.7.3 || ^3.2",
+        "zendframework/zend-servicemanager": "^3.2",
         "zfcampus/zf-development-mode": "^3.1"
     },
     "autoload": {
