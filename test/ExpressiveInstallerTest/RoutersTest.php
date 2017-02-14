@@ -105,7 +105,7 @@ class RoutersTest extends OptionalPackagesTestCase
         );
 
         // Test home page
-        $setupRoutes = (strpos($copyFilesKey, 'minimal') !== 0);
+        $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
         $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }

@@ -85,7 +85,7 @@ class ContainersTest extends OptionalPackagesTestCase
         $this->assertTrue($container->has(Expressive\Router\RouterInterface::class));
 
         // Test home page
-        $setupRoutes = (strpos($copyFilesKey, 'minimal') !== 0);
+        $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
         $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
