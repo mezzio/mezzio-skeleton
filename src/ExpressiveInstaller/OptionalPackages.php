@@ -558,7 +558,7 @@ class OptionalPackages
      */
     public function removeLinesContainingStrings(array $entries, $content)
     {
-        $entries = join('|', array_map(function ($word) {
+        $entries = implode('|', array_map(function ($word) {
             return preg_quote($word, '/');
         }, $entries));
 
