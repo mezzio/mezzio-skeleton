@@ -90,6 +90,6 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     {
         $argument = is_array($argument) ? array_shift($argument) : $argument;
         $message  = sprintf('Expected prompt not received: "%s"', $expected);
-        self::assertThat(false !== strstr($argument, $expected), self::isTrue(), $message);
+        self::assertThat(false !== strpos($argument, $expected), self::isTrue(), $message);
     }
 }

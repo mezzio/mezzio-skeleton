@@ -78,7 +78,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         $value = is_array($value) ? array_shift($value) : $value;
 
         self::assertThat(
-            false !== strstr($value, 'What type of installation would you like?'),
+            false !== strpos($value, 'What type of installation would you like?'),
             self::isTrue(),
             'Unexpected prompt value'
         );
