@@ -12,7 +12,7 @@ use Composer\IO\IOInterface;
 use Composer\Package\BasePackage;
 use Composer\Package\RootPackage;
 use ExpressiveInstaller\OptionalPackages;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use ReflectionClass;
 use ReflectionProperty;

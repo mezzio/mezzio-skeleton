@@ -8,8 +8,5 @@ return [
         'invokables' => [
             RouterInterface::class => ZendRouter::class,
         ],
-        // Map middleware -> factories here
-        'factories' => [
-        ],
     ],
 ];

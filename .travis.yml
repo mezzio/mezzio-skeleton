@@ -9,7 +9,7 @@ cache:
 
 env:
   global:
-    - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs --no-scripts"
+    - COMPOSER_ARGS="--no-interaction --no-scripts"
 
 notifications:
   irc: "irc.freenode.org#zftalk.dev"

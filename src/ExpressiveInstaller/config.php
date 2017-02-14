@@ -40,15 +40,23 @@ return [
                     'packages' => [
                         'aura/di',
                     ],
+                    // @codingStandardsIgnoreStart
                     'flat' => [
-                        'Resources/config/container-aura-di.php' => 'config/container.php',
+                        'Resources/config/container-aura-di.php'           => 'config/container.php',
+                        'Resources/src/ExpressiveAuraConfig.php'           => 'config/ExpressiveAuraConfig.php',
+                        'Resources/src/ExpressiveAuraDelegatorFactory.php' => 'config/ExpressiveAuraDelegatorFactory.php',
                     ],
                     'modular' => [
-                        'Resources/config/container-aura-di.php' => 'config/container.php',
+                        'Resources/config/container-aura-di.php'           => 'config/container.php',
+                        'Resources/src/ExpressiveAuraConfig.php'           => 'config/ExpressiveAuraConfig.php',
+                        'Resources/src/ExpressiveAuraDelegatorFactory.php' => 'config/ExpressiveAuraDelegatorFactory.php',
                     ],
                     'minimal' => [
-                        'Resources/config/container-aura-di.php' => 'config/container.php',
+                        'Resources/config/container-aura-di.php'           => 'config/container.php',
+                        'Resources/src/ExpressiveAuraConfig.php'           => 'config/ExpressiveAuraConfig.php',
+                        'Resources/src/ExpressiveAuraDelegatorFactory.php' => 'config/ExpressiveAuraDelegatorFactory.php',
                     ],
+                    // @codingStandardsIgnoreEnd
                 ],
                 2 => [
                     'name'     => 'Pimple',
@@ -100,15 +108,15 @@ return [
                     ],
                     'flat' => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
-                        'Resources/config/routes-aura-router.php' => 'config/autoload/routes.global.php',
+                        'Resources/config/router-aura-router.php' => 'config/autoload/router.global.php',
                     ],
                     'modular' => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
-                        'Resources/config/routes-aura-router.php' => 'config/autoload/routes.global.php',
+                        'Resources/config/router-aura-router.php' => 'config/autoload/router.global.php',
                     ],
                     'minimal' => [
                         'Resources/config/routes-minimal.php' => 'config/routes.php',
-                        'Resources/config/routes-minimal-aura-router.php' => 'config/autoload/routes.global.php',
+                        'Resources/config/router-aura-router.php' => 'config/autoload/router.global.php',
                     ],
                 ],
                 2 => [
@@ -118,15 +126,15 @@ return [
                     ],
                     'flat' => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
-                        'Resources/config/routes-fast-route.php' => 'config/autoload/routes.global.php',
+                        'Resources/config/router-fast-route.php' => 'config/autoload/router.global.php',
                     ],
                     'modular' => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
-                        'Resources/config/routes-fast-route.php' => 'config/autoload/routes.global.php',
+                        'Resources/config/router-fast-route.php' => 'config/autoload/router.global.php',
                     ],
                     'minimal' => [
                         'Resources/config/routes-minimal.php' => 'config/routes.php',
-                        'Resources/config/routes-minimal-fast-route.php' => 'config/autoload/routes.global.php',
+                        'Resources/config/router-fast-route.php' => 'config/autoload/router.global.php',
                     ],
                 ],
                 3 => [
@@ -136,15 +144,15 @@ return [
                     ],
                     'flat' => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
-                        'Resources/config/routes-zf2-router.php' => 'config/autoload/routes.global.php',
+                        'Resources/config/router-zend-router.php' => 'config/autoload/router.global.php',
                     ],
                     'modular' => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
-                        'Resources/config/routes-zf2-router.php' => 'config/autoload/routes.global.php',
+                        'Resources/config/router-zend-router.php' => 'config/autoload/router.global.php',
                     ],
                     'minimal' => [
                         'Resources/config/routes-minimal.php' => 'config/routes.php',
-                        'Resources/config/routes-minimal-zf2-router.php' => 'config/autoload/routes.global.php',
+                        'Resources/config/router-zend-router.php' => 'config/autoload/router.global.php',
                     ],
                 ],
             ],
