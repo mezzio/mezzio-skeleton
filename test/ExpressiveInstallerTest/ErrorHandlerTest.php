@@ -71,7 +71,6 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
         $installType,
         $containerOption,
         $errorHandlerOption,
-        $copyFilesKey,
         $expectedErrorHandler
     ) {
         $this->prepareSandboxForInstallType($installType, $this->installer);
@@ -106,13 +105,11 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
 
     public function errorHandlerProvider()
     {
-        // @codingStandardsIgnoreStart
         // $installType, $containerOption, $errorHandlerOption, $copyFilesKey, $expectedErrorHandler
         return [
-            'whoops-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 1, 'minimal-files', WhoopsErrorResponseGeneratorFactory::class],
-            'whoops-full'    => [OptionalPackages::INSTALL_FLAT,    3, 1, 'copy-files', WhoopsErrorResponseGeneratorFactory::class],
-            'whoops-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 1, 'copy-files', WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 1, WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-full'    => [OptionalPackages::INSTALL_FLAT,    3, 1, WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 1, WhoopsErrorResponseGeneratorFactory::class],
         ];
-        // @codingStandardsIgnoreEnd
     }
 }
