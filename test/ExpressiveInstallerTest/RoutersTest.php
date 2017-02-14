@@ -10,6 +10,7 @@ namespace ExpressiveInstallerTest;
 use App\Action\HomePageAction;
 use App\Action\PingAction;
 use ExpressiveInstaller\OptionalPackages;
+use Zend\Expressive\Application;
 use Zend\Expressive\Router;
 
 class RoutersTest extends OptionalPackagesTestCase
@@ -108,6 +109,24 @@ class RoutersTest extends OptionalPackagesTestCase
         $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
         $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
+
+        /** @var Application $app */
+        $app = $container->get(Application::class);
+        $this->assertCount(count($expectedRoutes), $app->getRoutes());
+        foreach ($app->getRoutes() as $route) {
+            foreach ($expectedRoutes as $expectedRoute) {
+                if ($expectedRoute['name'] === $route->getName()) {
+                    $this->assertEquals($expectedRoute['path'], $route->getPath());
+                    // todo: not sure how we can test middleware?
+                    // $this->assertEquals($expectedRoute['middleware'], $route->getMiddleware());
+                    $this->assertEquals($expectedRoute['allowed_methods'], $route->getAllowedMethods());
+
+                    continue 2;
+                }
+            }
+
+            $this->fail(sprintf('Route with name "%s" has not been found', $route->getName()));
+        }
     }
 
     public function routerProvider()
