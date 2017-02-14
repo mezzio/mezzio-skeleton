@@ -79,13 +79,7 @@ class ContainersTest extends OptionalPackagesTestCase
         // Test home page
         $setupRoutes = (strpos($copyFilesKey, 'minimal') !== 0);
         $response = $this->getAppResponse('/', $setupRoutes);
-        $status = $response->getStatusCode();
-
-        $this->assertEquals(
-            $expectedResponseStatusCode,
-            $status,
-            sprintf("Expected response status '%s', received '%s'", $expectedResponseStatusCode, $status)
-        );
+        $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
     public function containerProvider()
