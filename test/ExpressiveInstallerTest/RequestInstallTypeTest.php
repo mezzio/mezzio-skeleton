@@ -45,7 +45,6 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
     public function testWillContinueToPromptUntilValidAnswerPresented()
     {
         $io     = $this->io;
-        $prompt = 'What type of installation would you like?';
         $tries  = mt_rand(1, 10);
 
         // Handle a call to ask() by looping $tries times
