@@ -163,7 +163,7 @@ class OptionalPackages
     {
         $installer = new self($event->getIO(), $event->getComposer());
 
-        $installer->io->write("<info>Setting up optional packages</info>");
+        $installer->io->write('<info>Setting up optional packages</info>');
 
         $installer->setupDataAndCacheDir();
         $installer->removeDevDependencies();
@@ -211,7 +211,7 @@ class OptionalPackages
      */
     public function setupDataAndCacheDir()
     {
-        $this->io->write("<info>Setup data and cache dir</info>");
+        $this->io->write('<info>Setup data and cache dir</info>');
         if (! is_dir($this->projectRoot . '/data/cache')) {
             mkdir($this->projectRoot . '/data/cache', 0775, true);
             chmod($this->projectRoot . '/data', 0775);
@@ -228,7 +228,7 @@ class OptionalPackages
      */
     public function removeDevDependencies()
     {
-        $this->io->write("<info>Removing installer development dependencies</info>");
+        $this->io->write('<info>Removing installer development dependencies</info>');
         foreach ($this->devDependencies as $devDependency) {
             unset($this->stabilityFlags[$devDependency]);
             unset($this->composerDevRequires[$devDependency]);
@@ -239,7 +239,6 @@ class OptionalPackages
     /**
      * Prompt for the installation type.
      *
-     * @return string
      * @return string One of the INSTALL_ constants.
      */
     public function requestInstallType()
@@ -252,7 +251,7 @@ class OptionalPackages
             "  [<comment>1</comment>] Minimal (no default middleware, templates, or assets; configuration only)\n",
             "  [<comment>2</comment>] Flat (flat source code structure; default selection)\n",
             "  [<comment>3</comment>] Modular (modular source code structure; recommended)\n",
-            "  Make your selection <comment>(2)</comment>: ",
+            '  Make your selection <comment>(2)</comment>: ',
         ];
 
         while (true) {
@@ -267,7 +266,7 @@ class OptionalPackages
                     return self::INSTALL_MODULAR;
                 default:
                     // @codeCoverageIgnoreStart
-                    $this->io->write("<error>Invalid answer</error>");
+                    $this->io->write('<error>Invalid answer</error>');
                     // @codeCoverageIgnoreEnd
             }
         }
@@ -392,7 +391,7 @@ class OptionalPackages
      */
     public function removeInstallerFromDefinition()
     {
-        $this->io->write("<info>Remove installer</info>");
+        $this->io->write('<info>Remove installer</info>');
 
         // Remove installer script autoloading rules
         unset($this->composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
@@ -463,7 +462,7 @@ class OptionalPackages
         if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
             $this->addPackage($match['name'], $match['version']);
             if (isset($question['custom-package-warning'])) {
-                $this->io->write(sprintf("  <warning>%s</warning>", $question['custom-package-warning']));
+                $this->io->write(sprintf('  <warning>%s</warning>', $question['custom-package-warning']));
             }
 
             return true;
@@ -482,7 +481,7 @@ class OptionalPackages
     public function addPackage($packageName, $packageVersion)
     {
         $this->io->write(sprintf(
-            "  - Adding package <info>%s</info> (<comment>%s</comment>)",
+            '  - Adding package <info>%s</info> (<comment>%s</comment>)',
             $packageName,
             $packageVersion
         ));
@@ -546,7 +545,7 @@ class OptionalPackages
             mkdir($destinationPath, 0775, true);
         }
 
-        $this->io->write(sprintf("  - Copying <info>%s</info>", $target));
+        $this->io->write(sprintf('  - Copying <info>%s</info>', $target));
         copy($this->installerSource . $resource, $this->projectRoot . $target);
     }
 
@@ -563,7 +562,7 @@ class OptionalPackages
             return preg_quote($word, '/');
         }, $entries));
 
-        return preg_replace("/^.*(?:" . $entries . ").*$(?:\r?\n)?/m", '', $content);
+        return preg_replace('/^.*(?:' . $entries . ").*$(?:\r?\n)?/m", '', $content);
     }
 
     /**
@@ -576,7 +575,7 @@ class OptionalPackages
      */
     private function cleanUp()
     {
-        $this->io->write("<info>Removing Expressive installer classes, configuration, tests and docs</info>");
+        $this->io->write('<info>Removing Expressive installer classes, configuration, tests and docs</info>');
         foreach ($this->assetsToRemove as $target) {
             $target = $this->projectRoot . $target;
             if (file_exists($target)) {
@@ -632,10 +631,10 @@ class OptionalPackages
 
         $ask[] = ($question['custom-package'] === true)
             ? sprintf(
-                "  Make your selection or type a composer package name and version <comment>(%s)</comment>: ",
+                '  Make your selection or type a composer package name and version <comment>(%s)</comment>: ',
                 $defaultText
             )
-            : sprintf("  Make your selection <comment>(%s)</comment>: ", $defaultText);
+            : sprintf('  Make your selection <comment>(%s)</comment>: ', $defaultText);
 
         while (true) {
             // Ask for user input
@@ -657,22 +656,22 @@ class OptionalPackages
                 $packageVersion = $match['version'];
 
                 if (! $packageVersion) {
-                    $this->io->write("<error>No package version specified</error>");
+                    $this->io->write('<error>No package version specified</error>');
                     continue;
                 }
 
-                $this->io->write(sprintf("  - Searching for <info>%s:%s</info>", $packageName, $packageVersion));
+                $this->io->write(sprintf('  - Searching for <info>%s:%s</info>', $packageName, $packageVersion));
 
                 $optionalPackage = $this->composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
                 if (! $optionalPackage) {
-                    $this->io->write(sprintf("<error>Package not found %s:%s</error>", $packageName, $packageVersion));
+                    $this->io->write(sprintf('<error>Package not found %s:%s</error>', $packageName, $packageVersion));
                     continue;
                 }
 
                 return sprintf('%s:%s', $packageName, $packageVersion);
             }
 
-            $this->io->write("<error>Invalid answer</error>");
+            $this->io->write('<error>Invalid answer</error>');
         }
 
         return false;
@@ -695,7 +694,7 @@ class OptionalPackages
         $this->io->write('<info>Removing App module registration from configuration</info>');
         $this->removeAppModuleConfig();
 
-        $this->io->write("<info>Removing assets</info>");
+        $this->io->write('<info>Removing assets</info>');
         unlink($this->projectRoot . '/public/favicon.ico');
         unlink($this->projectRoot . '/public/zf-logo.png');
     }
@@ -731,7 +730,7 @@ class OptionalPackages
      */
     private function clearComposerLockFile()
     {
-        $this->io->write("<info>Removing composer.lock from .gitignore</info>");
+        $this->io->write('<info>Removing composer.lock from .gitignore</info>');
 
         $ignoreFile = sprintf('%s/.gitignore', $this->projectRoot);
 
