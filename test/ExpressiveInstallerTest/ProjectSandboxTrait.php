@@ -229,11 +229,8 @@ trait ProjectSandboxTrait
                 continue;
             }
 
-            if ($fileInfo->isDir()) {
+            if ($fileInfo->isDir() && ! $fileInfo->isDot()) {
                 $path = $fileInfo->getFilename();
-                if (in_array($path, ['.', '..'], true)) {
-                    continue;
-                }
 
                 mkdir($target . '/' . $path, 0777, true);
 
