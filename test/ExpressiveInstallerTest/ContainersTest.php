@@ -19,7 +19,7 @@ class ContainersTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
     protected $installer;
 
@@ -39,8 +39,16 @@ class ContainersTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @dataProvider containerProvider
      * @runInSeparateProcess
+     *
+     * @dataProvider containerProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $routerOption
+     * @param string $copyFilesKey
+     * @param int $expectedResponseStatusCode
+     * @param string $expectedContainer
      */
     public function testContainer(
         $installType,

@@ -15,7 +15,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
     protected $installer;
 
@@ -53,6 +53,11 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 
     /**
      * @dataProvider promptCombinations
+     *
+     * @param string $questionName
+     * @param array $question
+     * @param int $selection
+     * @param array $expectedPackage
      */
     public function testPromptForOptionalPackage($questionName, array $question, $selection, array $expectedPackage)
     {

@@ -31,6 +31,9 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
 
     /**
      * @dataProvider installSelections
+     *
+     * @param string $selection
+     * @param string $expected
      */
     public function testRequestInstallTypeReturnsExpectedConstantValue($selection, $expected)
     {

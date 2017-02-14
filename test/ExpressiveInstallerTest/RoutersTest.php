@@ -16,6 +16,9 @@ class RoutersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
+    /**
+     * @var array
+     */
     private $expectedRoutes = [
         [
             'name'            => 'home',
@@ -32,7 +35,7 @@ class RoutersTest extends OptionalPackagesTestCase
     ];
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
     protected $installer;
 
@@ -52,8 +55,17 @@ class RoutersTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @dataProvider routerProvider
      * @runInSeparateProcess
+     *
+     * @dataProvider routerProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $routerOption
+     * @param string $copyFilesKey
+     * @param int $expectedResponseStatusCode
+     * @param array $expectedRoutes
+     * @param string $expectedRouter
      */
     public function testRouter(
         $installType,
@@ -61,7 +73,7 @@ class RoutersTest extends OptionalPackagesTestCase
         $routerOption,
         $copyFilesKey,
         $expectedResponseStatusCode,
-        $expectedRoutes,
+        array $expectedRoutes,
         $expectedRouter
     ) {
         $this->prepareSandboxForInstallType($installType, $this->installer);

@@ -530,7 +530,7 @@ class OptionalPackages
      *
      * @param string $resource Resource file.
      * @param string $target Destination.
-     * @param bool $force  whether or not to copy over an existing file.
+     * @param bool $force Whether or not to copy over an existing file.
      * @return void
      */
     public function copyResource($resource, $target, $force = false)
@@ -571,6 +571,7 @@ class OptionalPackages
      * On completion of install/update, removes the installer classes (including
      * this one) and assets (including configuration and templates).
      *
+     * @return void
      * @codeCoverageIgnore
      */
     private function cleanUp()
@@ -752,6 +753,7 @@ class OptionalPackages
     }
 
     /**
+     * @param Composer $composer
      * @param string $composerFile
      * @return void
      */

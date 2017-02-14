@@ -15,7 +15,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
     protected $installer;
 

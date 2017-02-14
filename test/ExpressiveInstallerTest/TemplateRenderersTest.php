@@ -16,7 +16,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
     protected $installer;
 
@@ -36,8 +36,16 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @dataProvider templateRendererProvider
      * @runInSeparateProcess
+     *
+     * @dataProvider templateRendererProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $routerOption
+     * @param int $templateRendererOption
+     * @param int $expectedResponseStatusCode
+     * @param string $expectedTemplateRenderer
      */
     public function testTemplateRenderer(
         $installType,

@@ -16,7 +16,7 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
     protected $installer;
 
@@ -58,8 +58,14 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @dataProvider errorHandlerProvider
      * @runInSeparateProcess
+     *
+     * @dataProvider errorHandlerProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $errorHandlerOption
+     * @param string $expectedErrorHandler
      */
     public function testErrorHandler(
         $installType,
