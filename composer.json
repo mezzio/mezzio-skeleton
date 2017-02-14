@@ -17,14 +17,14 @@
         "zendframework/zend-expressive-helpers": "^3.0.1",
         "zendframework/zend-stdlib": "^3.1",
         "zendframework/zend-config-aggregator": "^0.2.0",
-        "zendframework/zend-component-installer": "^0.6.0 || ~1.0"
+        "zendframework/zend-component-installer": "~1.0 || ^0.6.0"
     },
     "require-dev": {
         "aura/di": "^3.1",
         "composer/composer": "^1.0",
         "filp/whoops": "^2.0",
         "mikey179/vfsstream": "^1.6",
-        "phpunit/phpunit": "^5.7.12 || ^6.0.6",
+        "phpunit/phpunit": "^6.0.6 || ^5.7.12",
         "squizlabs/php_codesniffer": "^2.7",
         "xtreamwayz/pimple-container-interop": "^1.0",
         "zendframework/zend-coding-standard": "~1.0.0",
