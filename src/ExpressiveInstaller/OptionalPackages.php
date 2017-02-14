@@ -641,7 +641,7 @@ class OptionalPackages
             $answer = $this->io->ask($ask, $defaultOption);
 
             // Handle none of the options
-            if ($answer == 'n' && $question['required'] !== true) {
+            if ($answer === 'n' && $question['required'] !== true) {
                 return 'n';
             }
 
