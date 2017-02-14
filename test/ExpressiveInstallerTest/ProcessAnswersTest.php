@@ -78,10 +78,12 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
+        // @codingStandardsIgnoreStart
         $this->io->write(Argument::containingString('Adding package <info>aura/di</info>'))->shouldBeCalled();
         $this->io->write(Argument::containingString('Copying <info>config/container.php</info>'))->shouldBeCalled();
         $this->io->write(Argument::containingString('Copying <info>config/ExpressiveAuraConfig.php</info>'))->shouldBeCalled();
         $this->io->write(Argument::containingString('Copying <info>config/ExpressiveAuraDelegatorFactory.php</info>'))->shouldBeCalled();
+        // @codingStandardsIgnoreEnd
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
