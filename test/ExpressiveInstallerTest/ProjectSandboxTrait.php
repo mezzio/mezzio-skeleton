@@ -51,13 +51,13 @@ trait ProjectSandboxTrait
      */
     protected function copyProjectFilesToTempFilesystem()
     {
-        $this->projectRoot = sys_get_temp_dir() . '/' . uniqid('exp');
+        $this->projectRoot = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('exp');
 
         mkdir($this->projectRoot . '/data', 0777, true);
         foreach (['config', 'public', 'src', 'templates', 'test'] as $path) {
             $this->recursiveCopy(
-                $this->packageRoot . '/' . $path,
-                $this->projectRoot . '/' . $path
+                $this->packageRoot . DIRECTORY_SEPARATOR . $path,
+                $this->projectRoot . DIRECTORY_SEPARATOR . $path
             );
         }
 
@@ -229,18 +229,14 @@ trait ProjectSandboxTrait
                 continue;
             }
 
-            if ($fileInfo->isDir()
-            ) {
+            if ($fileInfo->isDir() && ! $fileInfo->isDot()) {
                 $path = $fileInfo->getFilename();
-                if (in_array($path, ['.', '..'], true)) {
-                    continue;
-                }
 
                 mkdir($target . '/' . $path, 0777, true);
 
                 $this->recursiveCopy(
-                    $source . '/' . $path,
-                    $target . '/' . $path
+                    $source . DIRECTORY_SEPARATOR . $path,
+                    $target . DIRECTORY_SEPARATOR . $path
                 );
                 continue;
             }
