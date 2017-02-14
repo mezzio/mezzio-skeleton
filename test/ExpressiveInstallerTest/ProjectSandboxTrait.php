@@ -53,7 +53,7 @@ trait ProjectSandboxTrait
     {
         $this->projectRoot = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('exp');
 
-        mkdir($this->projectRoot . DIRECTORY_SEPARATOR . 'data', 0777, true);
+        mkdir($this->projectRoot . '/data', 0777, true);
         foreach (['config', 'public', 'src', 'templates', 'test'] as $path) {
             $this->recursiveCopy(
                 $this->packageRoot . DIRECTORY_SEPARATOR . $path,
@@ -235,7 +235,7 @@ trait ProjectSandboxTrait
                     continue;
                 }
 
-                mkdir($target . DIRECTORY_SEPARATOR . $path, 0777, true);
+                mkdir($target . '/' . $path, 0777, true);
 
                 $this->recursiveCopy(
                     $source . DIRECTORY_SEPARATOR . $path,
