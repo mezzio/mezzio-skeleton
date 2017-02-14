@@ -12,6 +12,9 @@ use ReflectionClass;
 
 class RemoveDevDependenciesTest extends OptionalPackagesTestCase
 {
+    /**
+     * @var string[]
+     */
     private $standardDependencies = [
         'php',
         'roave/security-advisories',

@@ -12,6 +12,9 @@ use ReflectionProperty;
 
 class UpdateRootPackageTest extends OptionalPackagesTestCase
 {
+    /**
+     * @var array[]
+     */
     protected $changes = [
         'composerRequires' => [
             'foo/bar',

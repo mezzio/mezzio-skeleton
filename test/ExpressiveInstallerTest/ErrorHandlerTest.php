@@ -18,7 +18,7 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
     /**
      * @var OptionalPackages
      */
-    protected $installer;
+    private $installer;
 
     protected function setUp()
     {

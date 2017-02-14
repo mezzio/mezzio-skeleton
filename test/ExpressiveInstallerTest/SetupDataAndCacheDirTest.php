@@ -17,17 +17,17 @@ class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
     /**
      * @var OptionalPackages
      */
-    protected $installer;
+    private $installer;
 
     /**
      * @var vfsStreamDirectory
      */
-    protected $project;
+    private $project;
 
     /**
      * @var string URL of project root
      */
-    protected $projectRoot;
+    private $projectRoot;
 
     protected function setUp()
     {

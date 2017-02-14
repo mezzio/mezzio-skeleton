@@ -18,7 +18,7 @@ class RoutersTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @var array
+     * @var array[]
      */
     private $expectedRoutes = [
         [
@@ -38,7 +38,7 @@ class RoutersTest extends OptionalPackagesTestCase
     /**
      * @var OptionalPackages
      */
-    protected $installer;
+    private $installer;
 
     protected function setUp()
     {

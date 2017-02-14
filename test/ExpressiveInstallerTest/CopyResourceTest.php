@@ -15,12 +15,12 @@ class CopyResourceTest extends OptionalPackagesTestCase
     /**
      * @var vfsStreamDirectory
      */
-    protected $project;
+    private $project;
 
     /**
      * @var string URL of project root
      */
-    protected $projectRoot;
+    private $projectRoot;
 
     protected function setUp()
     {

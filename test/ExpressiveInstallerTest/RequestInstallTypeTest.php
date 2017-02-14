@@ -12,7 +12,12 @@ use Prophecy\Argument;
 
 class RequestInstallTypeTest extends OptionalPackagesTestCase
 {
-    public function setUp()
+    /**
+     * @var OptionalPackages
+     */
+    private $installer;
+
+    protected function setUp()
     {
         parent::setUp();
         $this->installer = $this->createOptionalPackages();
