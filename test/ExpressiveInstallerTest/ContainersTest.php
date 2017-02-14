@@ -81,12 +81,9 @@ class ContainersTest extends OptionalPackagesTestCase
         $response = $this->getAppResponse('/', $setupRoutes);
         $status = $response->getStatusCode();
 
-        // Using assertTrue here because when assertEquals failed when using FastRoute,
-        // it reported as a serialization error instead. See
-        // https://github.com/sebastianbergmann/phpunit/issues/1515
-        // for details. (Issue was never resolved)
-        $this->assertTrue(
-            $expectedResponseStatusCode === $status,
+        $this->assertEquals(
+            $expectedResponseStatusCode,
+            $status,
             sprintf("Expected response status '%s', received '%s'", $expectedResponseStatusCode, $status)
         );
     }
