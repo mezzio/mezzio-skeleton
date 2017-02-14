@@ -8,8 +8,6 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
-use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
 use Prophecy\Argument;
 
 class RequestInstallTypeTest extends OptionalPackagesTestCase

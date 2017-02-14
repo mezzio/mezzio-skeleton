@@ -8,7 +8,6 @@
 namespace ExpressiveInstallerTest;
 
 use Composer\Package\BasePackage;
-use ExpressiveInstaller\OptionalPackages;
 use Prophecy\Argument;
 use ReflectionProperty;
 

@@ -1,7 +1,6 @@
 <?php
 
 use App\ExpressiveAuraConfig;
-use App\ExpressiveAuraDelegatorFactory;
 use Aura\Di\ContainerBuilder;
 
 require_once __DIR__ . '/ExpressiveAuraConfig.php';
