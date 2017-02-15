@@ -12,6 +12,7 @@ use App\Action\PingAction;
 use DirectoryIterator;
 use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
+use PHPUnit\Framework\Assert;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
@@ -89,6 +90,33 @@ trait ProjectSandboxTrait
                 $this->setUpAlternateAutoloader('/src/App/src/', true);
                 break;
         }
+    }
+
+    /**
+     * Enable development-mode configuration within the sandbox.
+     */
+    protected function enableDevelopmentMode()
+    {
+        $target = sprintf(
+            '%s%sconfig%sdevelopment.config.php',
+            $this->projectRoot,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR
+        );
+        copy($target . '.dist', $target);
+
+        Assert::assertFileExists($target);
+
+        $target = sprintf(
+            '%s%sconfig%sautoload%sdevelopment.local.php',
+            $this->projectRoot,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR
+        );
+        copy($target . '.dist', $target);
+
+        Assert::assertFileExists($target);
     }
 
     /**

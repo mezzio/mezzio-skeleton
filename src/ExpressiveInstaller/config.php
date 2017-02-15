@@ -241,6 +241,7 @@ return [
             'default'        => 1,
             'required'       => false,
             'custom-package' => true,
+            'force'          => true,
             'options'        => [
                 1 => [
                     'name'     => 'Whoops',
@@ -248,13 +249,13 @@ return [
                         'filp/whoops',
                     ],
                     'flat' => [
-                        'Resources/config/error-handler-whoops.php' => 'config/autoload/errorhandler.local.php',
+                        'Resources/config/error-handler-whoops.php' => 'config/autoload/development.local.php.dist',
                     ],
                     'modular' => [
-                        'Resources/config/error-handler-whoops.php' => 'config/autoload/errorhandler.local.php',
+                        'Resources/config/error-handler-whoops.php' => 'config/autoload/development.local.php.dist',
                     ],
                     'minimal' => [
-                        'Resources/config/error-handler-whoops.php' => 'config/autoload/errorhandler.local.php',
+                        'Resources/config/error-handler-whoops.php' => 'config/autoload/development.local.php.dist',
                     ],
                 ],
             ],

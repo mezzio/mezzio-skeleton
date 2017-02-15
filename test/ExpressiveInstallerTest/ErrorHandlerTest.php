@@ -50,6 +50,9 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
         );
         $this->assertTrue($containerResult);
 
+        // Enable development mode
+        $this->enableDevelopmentMode();
+
         // Test container
         $container = $this->getContainer();
         $this->assertTrue($container->has(ErrorResponseGenerator::class));
@@ -84,6 +87,9 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
             $errorHandlerOption
         );
         $this->assertTrue($containerResult);
+
+        // Enable development mode
+        $this->enableDevelopmentMode();
 
         // Test container
         $container = $this->getContainer();
