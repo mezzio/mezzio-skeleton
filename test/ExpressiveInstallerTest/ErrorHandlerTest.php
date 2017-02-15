@@ -105,7 +105,7 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
 
     public function errorHandlerProvider()
     {
-        // $installType, $containerOption, $errorHandlerOption, $copyFilesKey, $expectedErrorHandler
+        // $installType, $containerOption, $errorHandlerOption, $expectedErrorHandler
         return [
             'whoops-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 1, WhoopsErrorResponseGeneratorFactory::class],
             'whoops-full'    => [OptionalPackages::INSTALL_FLAT,    3, 1, WhoopsErrorResponseGeneratorFactory::class],
