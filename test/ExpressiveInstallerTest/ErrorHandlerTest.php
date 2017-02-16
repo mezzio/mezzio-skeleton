@@ -16,9 +16,9 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
-    protected $installer;
+    private $installer;
 
     protected function setUp()
     {
@@ -58,14 +58,19 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @dataProvider errorHandlerProvider
      * @runInSeparateProcess
+     *
+     * @dataProvider errorHandlerProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $errorHandlerOption
+     * @param string $expectedErrorHandler
      */
     public function testErrorHandler(
         $installType,
         $containerOption,
         $errorHandlerOption,
-        $copyFilesKey,
         $expectedErrorHandler
     ) {
         $this->prepareSandboxForInstallType($installType, $this->installer);
@@ -100,13 +105,11 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
 
     public function errorHandlerProvider()
     {
-        // @codingStandardsIgnoreStart
-        // $installType, $containerOption, $errorHandlerOption, $copyFilesKey, $expectedErrorHandler
+        // $installType, $containerOption, $errorHandlerOption, $expectedErrorHandler
         return [
-            'whoops-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 1, 'minimal-files', WhoopsErrorResponseGeneratorFactory::class],
-            'whoops-full'    => [OptionalPackages::INSTALL_FLAT,    3, 1, 'copy-files', WhoopsErrorResponseGeneratorFactory::class],
-            'whoops-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 1, 'copy-files', WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 1, WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-full'    => [OptionalPackages::INSTALL_FLAT,    3, 1, WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 1, WhoopsErrorResponseGeneratorFactory::class],
         ];
-        // @codingStandardsIgnoreEnd
     }
 }

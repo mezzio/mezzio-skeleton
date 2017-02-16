@@ -200,7 +200,7 @@ abstract class OptionalPackagesTestCase extends TestCase
     /**
      * Retrieve the stored composer data structure from an installer instance.
      *
-     * @param OptionalPackages $instance
+     * @param OptionalPackages $installer
      * @return array
      */
     protected function getComposerDataFromInstaller(OptionalPackages $installer)
@@ -211,7 +211,7 @@ abstract class OptionalPackagesTestCase extends TestCase
     /**
      * Retrieve the stored resource configuration from an installer instance.
      *
-     * @param OptionalPackages $instance
+     * @param OptionalPackages $installer
      * @return array
      */
     protected function getInstallerConfig(OptionalPackages $installer)

@@ -10,12 +10,16 @@ namespace ExpressiveInstallerTest;
 use App\Action\HomePageAction;
 use App\Action\PingAction;
 use ExpressiveInstaller\OptionalPackages;
+use Zend\Expressive\Application;
 use Zend\Expressive\Router;
 
 class RoutersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
+    /**
+     * @var array[]
+     */
     private $expectedRoutes = [
         [
             'name'            => 'home',
@@ -32,9 +36,9 @@ class RoutersTest extends OptionalPackagesTestCase
     ];
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
-    protected $installer;
+    private $installer;
 
     protected function setUp()
     {
@@ -52,8 +56,17 @@ class RoutersTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @dataProvider routerProvider
      * @runInSeparateProcess
+     *
+     * @dataProvider routerProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $routerOption
+     * @param string $copyFilesKey
+     * @param int $expectedResponseStatusCode
+     * @param array $expectedRoutes
+     * @param string $expectedRouter
      */
     public function testRouter(
         $installType,
@@ -61,7 +74,7 @@ class RoutersTest extends OptionalPackagesTestCase
         $routerOption,
         $copyFilesKey,
         $expectedResponseStatusCode,
-        $expectedRoutes,
+        array $expectedRoutes,
         $expectedRouter
     ) {
         $this->prepareSandboxForInstallType($installType, $this->installer);
@@ -93,9 +106,25 @@ class RoutersTest extends OptionalPackagesTestCase
         );
 
         // Test home page
-        $setupRoutes = (strpos($copyFilesKey, 'minimal') !== 0);
+        $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
         $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
+
+        /** @var Application $app */
+        $app = $container->get(Application::class);
+        $this->assertCount(count($expectedRoutes), $app->getRoutes());
+        foreach ($app->getRoutes() as $route) {
+            foreach ($expectedRoutes as $expectedRoute) {
+                if ($expectedRoute['name'] === $route->getName()) {
+                    $this->assertEquals($expectedRoute['path'], $route->getPath());
+                    $this->assertEquals($expectedRoute['allowed_methods'], $route->getAllowedMethods());
+
+                    continue 2;
+                }
+            }
+
+            $this->fail(sprintf('Route with name "%s" has not been found', $route->getName()));
+        }
     }
 
     public function routerProvider()

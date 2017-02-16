@@ -15,7 +15,7 @@ return [
     ],
 
     'require-dev' => [
-        'filp/whoops'
+        'filp/whoops',
     ],
 
     'application' => [

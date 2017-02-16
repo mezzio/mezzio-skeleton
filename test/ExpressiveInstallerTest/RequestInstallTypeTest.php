@@ -8,13 +8,16 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
-use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
 use Prophecy\Argument;
 
 class RequestInstallTypeTest extends OptionalPackagesTestCase
 {
-    public function setUp()
+    /**
+     * @var OptionalPackages
+     */
+    private $installer;
+
+    protected function setUp()
     {
         parent::setUp();
         $this->installer = $this->createOptionalPackages();
@@ -31,6 +34,9 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
 
     /**
      * @dataProvider installSelections
+     *
+     * @param string $selection
+     * @param string $expected
      */
     public function testRequestInstallTypeReturnsExpectedConstantValue($selection, $expected)
     {
@@ -44,7 +50,6 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
     public function testWillContinueToPromptUntilValidAnswerPresented()
     {
         $io     = $this->io;
-        $prompt = 'What type of installation would you like?';
         $tries  = mt_rand(1, 10);
 
         // Handle a call to ask() by looping $tries times
@@ -77,7 +82,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         $value = is_array($value) ? array_shift($value) : $value;
 
         self::assertThat(
-            false !== strstr($value, 'What type of installation would you like?'),
+            false !== strpos($value, 'What type of installation would you like?'),
             self::isTrue(),
             'Unexpected prompt value'
         );

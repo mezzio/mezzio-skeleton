@@ -15,9 +15,9 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
-    protected $installer;
+    private $installer;
 
     protected function setUp()
     {
@@ -53,6 +53,11 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 
     /**
      * @dataProvider promptCombinations
+     *
+     * @param string $questionName
+     * @param array $question
+     * @param int $selection
+     * @param array $expectedPackage
      */
     public function testPromptForOptionalPackage($questionName, array $question, $selection, array $expectedPackage)
     {
@@ -85,6 +90,6 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     {
         $argument = is_array($argument) ? array_shift($argument) : $argument;
         $message  = sprintf('Expected prompt not received: "%s"', $expected);
-        self::assertThat(false !== strstr($argument, $expected), self::isTrue(), $message);
+        self::assertThat(false !== strpos($argument, $expected), self::isTrue(), $message);
     }
 }

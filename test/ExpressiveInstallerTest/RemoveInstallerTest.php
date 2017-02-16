@@ -8,14 +8,13 @@
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
-use ReflectionProperty;
 
 class RemoveInstallerTest extends OptionalPackagesTestCase
 {
     /**
      * @var OptionalPackages
      */
-    protected $installer;
+    private $installer;
 
     protected function setUp()
     {

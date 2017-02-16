@@ -16,9 +16,9 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
-    protected $installer;
+    private $installer;
 
     protected function setUp()
     {
@@ -36,8 +36,16 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @dataProvider templateRendererProvider
      * @runInSeparateProcess
+     *
+     * @dataProvider templateRendererProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $routerOption
+     * @param int $templateRendererOption
+     * @param int $expectedResponseStatusCode
+     * @param string $expectedTemplateRenderer
      */
     public function testTemplateRenderer(
         $installType,
@@ -112,9 +120,9 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         // Full framework installation test cases; installation options that install templates.
         $testCases = [
             // $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
-            'plates-full'       => [3, 2, 1, 200, Expressive\Plates\PlatesRenderer::class],
-            'twig-full'         => [3, 2, 2, 200, Expressive\Twig\TwigRenderer::class],
-            'zend-view-full'    => [3, 2, 3, 200, Expressive\ZendView\ZendViewRenderer::class],
+            'plates-full'    => [3, 2, 1, 200, Expressive\Plates\PlatesRenderer::class],
+            'twig-full'      => [3, 2, 2, 200, Expressive\Twig\TwigRenderer::class],
+            'zend-view-full' => [3, 2, 3, 200, Expressive\ZendView\ZendViewRenderer::class],
         ];
         // @codingStandardsIgnoreEnd
 
