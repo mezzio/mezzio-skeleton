@@ -8,7 +8,6 @@
 namespace ExpressiveInstallerTest;
 
 use Composer\Package\BasePackage;
-use ExpressiveInstaller\OptionalPackages;
 use Prophecy\Argument;
 use ReflectionProperty;
 
@@ -16,6 +15,10 @@ class AddPackageTest extends OptionalPackagesTestCase
 {
     /**
      * @dataProvider packageProvider
+     *
+     * @param string $packageName
+     * @param string $packageVersion
+     * @param null|int $expectedStability
      */
     public function testAddPackage($packageName, $packageVersion, $expectedStability)
     {

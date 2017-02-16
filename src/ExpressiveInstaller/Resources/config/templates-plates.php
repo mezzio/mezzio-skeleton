@@ -12,5 +12,5 @@ return [
 
     'templates' => [
         'extension' => 'phtml',
-    ]
+    ],
 ];

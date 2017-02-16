@@ -33,7 +33,7 @@ class ExpressiveAuraDelegatorFactory
     private $delegators;
 
     /**
-     * @var callable;
+     * @var callable
      */
     private $factory;
 

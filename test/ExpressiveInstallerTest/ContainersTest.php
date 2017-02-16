@@ -19,9 +19,9 @@ class ContainersTest extends OptionalPackagesTestCase
     use ProjectSandboxTrait;
 
     /**
-     * @param OptionalPackages
+     * @var OptionalPackages
      */
-    protected $installer;
+    private $installer;
 
     protected function setUp()
     {
@@ -39,8 +39,16 @@ class ContainersTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @dataProvider containerProvider
      * @runInSeparateProcess
+     *
+     * @dataProvider containerProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $routerOption
+     * @param string $copyFilesKey
+     * @param int $expectedResponseStatusCode
+     * @param string $expectedContainer
      */
     public function testContainer(
         $installType,
@@ -77,7 +85,7 @@ class ContainersTest extends OptionalPackagesTestCase
         $this->assertTrue($container->has(Expressive\Router\RouterInterface::class));
 
         // Test home page
-        $setupRoutes = (strpos($copyFilesKey, 'minimal') !== 0);
+        $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
         $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }

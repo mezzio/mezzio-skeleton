@@ -7,8 +7,15 @@
 
 namespace ExpressiveInstallerTest;
 
+use ExpressiveInstaller\OptionalPackages;
+
 class RemoveLineFromStringTest extends OptionalPackagesTestCase
 {
+    /**
+     * @var OptionalPackages
+     */
+    private $installer;
+
     protected function setUp()
     {
         parent::setUp();
