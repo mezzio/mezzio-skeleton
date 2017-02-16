@@ -117,8 +117,6 @@ class RoutersTest extends OptionalPackagesTestCase
             foreach ($expectedRoutes as $expectedRoute) {
                 if ($expectedRoute['name'] === $route->getName()) {
                     $this->assertEquals($expectedRoute['path'], $route->getPath());
-                    // todo: not sure how we can test middleware?
-                    // $this->assertEquals($expectedRoute['middleware'], $route->getMiddleware());
                     $this->assertEquals($expectedRoute['allowed_methods'], $route->getAllowedMethods());
 
                     continue 2;
