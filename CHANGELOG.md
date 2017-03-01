@@ -78,6 +78,12 @@ All notable changes to this project will be documented in this file, in reverse 
   `config/autoload/development.local.php.dist`, allowing enabling/disabling the
   Whoops integration via the `zf-development-mode` tooling.
 
+- [#130](https://github.com/organization/project/pull/130) changes the structure
+  of `public/index.php` slightly. In order to prevent creation of new globals,
+  it now creates and calls a closure around creation of the container, retrieval
+  of the application, registration of the pipeline and routes, and execution of
+  the application.
+
 ### Deprecated
 
 - Nothing.
