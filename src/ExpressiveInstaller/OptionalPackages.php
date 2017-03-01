@@ -451,8 +451,9 @@ class OptionalPackages
 
             // Copy files
             if (isset($question['options'][$answer][$this->installType])) {
+                $force = ! empty($question['force']);
                 foreach ($question['options'][$answer][$this->installType] as $resource => $target) {
-                    $this->copyResource($resource, $target);
+                    $this->copyResource($resource, $target, $force);
                 }
             }
 

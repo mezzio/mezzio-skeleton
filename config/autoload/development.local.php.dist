@@ -10,7 +10,5 @@
  * `composer development-enable`.
  */
 
-use Zend\ConfigAggregator\ConfigAggregator;
-
 return [
 ];
