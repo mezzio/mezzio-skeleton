@@ -72,6 +72,12 @@ All notable changes to this project will be documented in this file, in reverse 
   will allow some optimizations for some third-party container systems such as
   [Disco](https://github.com/bitExpert/disco).
 
+- [#132](https://github.com/organization/project/pull/132) modifies which file
+  the installer writes Whoops configuration to when selected. Previously, it
+  wrote it to `config/autoload/local.php`; it now writes it to
+  `config/autoload/development.local.php.dist`, allowing enabling/disabling the
+  Whoops integration via the `zf-development-mode` tooling.
+
 ### Deprecated
 
 - Nothing.
