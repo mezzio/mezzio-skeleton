@@ -16,14 +16,23 @@ return [
 
     'require-dev' => [
         'filp/whoops',
+        'zendframework/zend-expressive-tooling',
     ],
 
     'application' => [
         'flat' => [
-            'Resources/src/ConfigProvider.flat.php' => 'src/App/ConfigProvider.php',
+            'packages' => [],
+            'resources' => [
+                'Resources/src/ConfigProvider.flat.php' => 'src/App/ConfigProvider.php',
+            ],
         ],
         'modular' => [
-            'Resources/src/ConfigProvider.modular.php' => 'src/App/src/ConfigProvider.php',
+            'packages' => [
+                'zendframework/zend-expressive-tooling' => '^0.3.1',
+            ],
+            'resources' => [
+                'Resources/src/ConfigProvider.modular.php' => 'src/App/src/ConfigProvider.php',
+            ],
         ],
     ],
 
