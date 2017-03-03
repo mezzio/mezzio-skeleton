@@ -2,16 +2,16 @@
 
 return [
     'packages' => [
-        'aura/di'                                        => '^3.0',
-        'filp/whoops'                                    => '^2.0',
+        'aura/di'                                        => '^3.2',
+        'filp/whoops'                                    => '^2.1.7',
         'xtreamwayz/pimple-container-interop'            => '^1.0',
         'zendframework/zend-expressive-aurarouter'       => '^2.0',
         'zendframework/zend-expressive-fastroute'        => '^2.0',
-        'zendframework/zend-expressive-platesrenderer'   => '^1.2',
-        'zendframework/zend-expressive-twigrenderer'     => '^1.2.1',
-        'zendframework/zend-expressive-zendrouter'       => '^2.0',
-        'zendframework/zend-expressive-zendviewrenderer' => '^1.2.1',
-        'zendframework/zend-servicemanager'              => '^2.7.3 || ^3.2',
+        'zendframework/zend-expressive-platesrenderer'   => '^1.2.1',
+        'zendframework/zend-expressive-twigrenderer'     => '^1.3',
+        'zendframework/zend-expressive-zendrouter'       => '^2.0.1',
+        'zendframework/zend-expressive-zendviewrenderer' => '^1.3',
+        'zendframework/zend-servicemanager'              => '^3.3 || ^2.7.8',
     ],
 
     'require-dev' => [
