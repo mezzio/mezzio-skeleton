@@ -4,6 +4,9 @@
     "type": "project",
     "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
     "license": "BSD-3-Clause",
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev",
