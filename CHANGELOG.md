@@ -30,6 +30,18 @@ All notable changes to this project will be documented in this file, in reverse 
   - Flat (default routes and assets; `src/` directory is assumed to be library code)
   - Modular (default routes and assets; `src/` directory contains application modules)
 
+  [#138](https://github.com/organization/project/pull/138) updated the logic
+  when creating a modular structure to also inject
+  [zendframework/zend-expressive-tooling](https://github.com/zendframework/zend-expressive-tooling)
+  as a development requirement, as it provides the tools:
+
+  - `./vendor/bin/expressive-module create <modulename>` (create and activate a
+    new module in your application, including composer autoloading rules)
+  - `./vendor/bin/expressive-module register <modulename>` (register an existing
+    module with your application, including composer autoloading rules)
+  - `./vendor/bin/expressive-module deregister <modulename>` (deregister an existing
+    module from your application, including composer autoloading rules)
+
 ### Changes
 
 - [#54](https://github.com/organization/project/pull/54) updates the

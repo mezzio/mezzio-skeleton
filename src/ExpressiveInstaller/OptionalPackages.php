@@ -324,7 +324,11 @@ class OptionalPackages
                 ));
         }
 
-        foreach ($this->config['application'][$this->installType] as $resource => $target) {
+        foreach ($this->config['application'][$this->installType]['packages'] as $package => $constraint) {
+            $this->addPackage($package, $constraint);
+        }
+
+        foreach ($this->config['application'][$this->installType]['resources'] as $resource => $target) {
             $this->copyResource($resource, $target);
         }
     }
