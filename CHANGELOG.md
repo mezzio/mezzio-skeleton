@@ -2,6 +2,113 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.1.0 - TBD
+
+### Added
+
+- [#54](https://github.com/organization/project/pull/54) adds
+  [zfcampus/zf-development-mode](https://github.com/zfcampus/zf-development-mode)
+  as a development dependency, and places the application into development mode
+  during initial installation. This allows production applications to be
+  configured out-of-the-box with features such as configuration caching.
+
+  A new tool, invokable via `composer clear-config-cache`, allows you to clear
+  the configuration cache programmatically from the command line if necessary.
+  Toggling development mode also clears the configuration cache.
+
+  Development mode commands include:
+
+  - `composer development-enable`
+  - `composer development-disable`
+  - `composer development-status`
+  - `composer clear-config-cache`
+
+- [#124](https://github.com/organization/project/pull/124) adds the ability to
+  select the initial application structure from one of the following options:
+
+  - Minimal (no default routes, middleware, or assets)
+  - Flat (default routes and assets; `src/` directory is assumed to be library code)
+  - Modular (default routes and assets; `src/` directory contains application modules)
+
+  [#138](https://github.com/organization/project/pull/138) updated the logic
+  when creating a modular structure to also inject
+  [zendframework/zend-expressive-tooling](https://github.com/zendframework/zend-expressive-tooling)
+  as a development requirement, as it provides the tools:
+
+  - `./vendor/bin/expressive-module create <modulename>` (create and activate a
+    new module in your application, including composer autoloading rules)
+  - `./vendor/bin/expressive-module register <modulename>` (register an existing
+    module with your application, including composer autoloading rules)
+  - `./vendor/bin/expressive-module deregister <modulename>` (deregister an existing
+    module from your application, including composer autoloading rules)
+
+### Changes
+
+- [#54](https://github.com/organization/project/pull/54) updates the
+  shipped `config/config.php` to leverage [zend-config-aggregator](https://github.com/zendframework/zend-config-aggregator)
+  for purposes of aggregating configuration. This change allows the use of
+  third party "modules" (packages providing a `ConfigProvider` class that
+  returns configuration on invocation) with the skeleton. Additionally, this
+  update now adds [zend-component-installer](https://github.com/zendframework/zend-component-installer)
+  as a development requirement, which allows packages to declare if they have a
+  configuration provider, and then prompt you as to whether or not you want it
+  registered in your application.
+
+- [#54](https://github.com/organization/project/pull/54) updates the skeleton to
+  default to a _programmatic pipeline_. This results in the following:
+
+  - Removal of the `config/autoload/middleware-pipeline.global.php` file.
+  - Addition of a `config/pipeline.php` file, containing the various application
+    calls necessary to build your application pipeline; this file may be
+    edited to suit your application.
+  - Removal of any routing configuration from the `config/autoload/routes.global.php`
+    file. Routes are now defined in `config/routes.php` using programmatic
+    statements instead. You may add as many routes as you desire to this file,
+    segregate them into multiple files, or even add them via delegator factories
+    on the `Application` instance.
+
+- [#54](https://github.com/organization/project/pull/54) updates the
+  following dependencies:
+
+  - zend-expressive-router to `^2.0`
+  - zend-expressive-helpers to `^3.0.1`
+  - zend-expressive-aurarouter to `^2.0`
+  - zend-expressive-fastroute to `^2.0`
+  - zend-expressive-zendrouter to `^2.0`
+  - zend-expressive-platesrenderer to `^1.2`
+  - zend-expressive-twigrenderer to `^1.2.1`
+  - zend-expressive-zendviewrenderer to `^1.2.1`
+
+- [#120](https://github.com/organization/project/pull/120) switches the order of
+  questions in the installer, to prompt for the container to use first. This
+  will allow some optimizations for some third-party container systems such as
+  [Disco](https://github.com/bitExpert/disco).
+
+- [#132](https://github.com/organization/project/pull/132) modifies which file
+  the installer writes Whoops configuration to when selected. Previously, it
+  wrote it to `config/autoload/local.php`; it now writes it to
+  `config/autoload/development.local.php.dist`, allowing enabling/disabling the
+  Whoops integration via the `zf-development-mode` tooling.
+
+- [#130](https://github.com/organization/project/pull/130) changes the structure
+  of `public/index.php` slightly. In order to prevent creation of new globals,
+  it now creates and calls a closure around creation of the container, retrieval
+  of the application, registration of the pipeline and routes, and execution of
+  the application.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- [#110](https://github.com/organization/project/pull/110) removes the global
+  config array to ArrayObject conversion for all containers except Aura.Di.
+
+### Fixed
+
+- Nothing.
+
 ## 1.0.5 - 2017-01-25
 
 ### Added

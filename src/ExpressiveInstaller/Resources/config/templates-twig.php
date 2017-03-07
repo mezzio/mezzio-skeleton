@@ -1,25 +1,19 @@
 <?php
 
+use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Expressive\Twig\TwigEnvironmentFactory;
+use Zend\Expressive\Twig\TwigRendererFactory;
+
 return [
     'dependencies' => [
         'factories' => [
-            'Zend\Expressive\FinalHandler' =>
-                Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
-
-            Zend\Expressive\Template\TemplateRendererInterface::class =>
-                Zend\Expressive\Twig\TwigRendererFactory::class,
-
-            Twig_Environment::class => Zend\Expressive\Twig\TwigEnvironmentFactory::class,
+            Twig_Environment::class => TwigEnvironmentFactory::class,
+            TemplateRendererInterface::class => TwigRendererFactory::class,
         ],
     ],
 
     'templates' => [
         'extension' => 'html.twig',
-        'paths'     => [
-            'app'    => ['templates/app'],
-            'layout' => ['templates/layout'],
-            'error'  => ['templates/error'],
-        ],
     ],
 
     'twig' => [
@@ -29,5 +23,12 @@ return [
         'extensions'     => [
             // extension service names or instances
         ],
+        'runtime_loaders' => [
+            // runtime loader names or instances
+        ],
+        'globals' => [
+            // Variables to pass to all twig templates
+        ],
+        // 'timezone' => 'default timezone identifier; e.g. America/Chicago',
     ],
 ];

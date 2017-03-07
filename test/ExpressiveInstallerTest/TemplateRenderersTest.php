@@ -1,9 +1,7 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
  * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
@@ -11,74 +9,87 @@ namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
 use Zend\Expressive;
+use Zend\Stratigility\Middleware;
 
-class TemplateRenderersTest extends InstallerTestCase
+class TemplateRenderersTest extends OptionalPackagesTestCase
 {
-    protected $teardownFiles = [
-        '/config/container.php',
-        '/config/autoload/routes.global.php',
-        '/config/autoload/templates.global.php',
-        '/templates/error/404.phtml',
-        '/templates/error/error.phtml',
-        '/templates/layout/default.phtml',
-        '/templates/app/home-page.phtml',
-        '/templates/error/404.html.twig',
-        '/templates/error/error.html.twig',
-        '/templates/layout/default.html.twig',
-        '/templates/app/home-page.html.twig',
-    ];
+    use ProjectSandboxTrait;
 
     /**
+     * @var OptionalPackages
+     */
+    private $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
+        $this->installer   = $this->createOptionalPackages($this->projectRoot);
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        chdir($this->packageRoot);
+        $this->recursiveDelete($this->projectRoot);
+        $this->tearDownAlternateAutoloader();
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
      * @dataProvider templateRendererProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $routerOption
+     * @param int $templateRendererOption
+     * @param int $expectedResponseStatusCode
+     * @param string $expectedTemplateRenderer
      */
     public function testTemplateRenderer(
+        $installType,
         $containerOption,
         $routerOption,
         $templateRendererOption,
-        $copyFilesKey,
         $expectedResponseStatusCode,
         $expectedTemplateRenderer
     ) {
-        $io     = $this->prophesize('Composer\IO\IOInterface');
-        $config = $this->getConfig();
+        $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $containerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $config = $this->getInstallerConfig($this->installer);
+        $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
-            $containerOption,
-            $copyFilesKey
+            $containerOption
         );
         $this->assertTrue($containerResult);
 
         // Install router
-        $routerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
-            $routerOption,
-            $copyFilesKey
+            $routerOption
         );
         $this->assertTrue($routerResult);
 
         // Install template engine
-        $templateEngineResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $templateEngineResult = $this->installer->processAnswer(
             $config['questions']['template-engine'],
-            $templateRendererOption,
-            $copyFilesKey
+            $templateRendererOption
         );
         $this->assertTrue($templateEngineResult);
 
         // Test container
         $container = $this->getContainer();
         $this->assertTrue($container->has(Expressive\Application::class));
-        $this->assertTrue($container->has('Zend\Expressive\FinalHandler'));
+        $this->assertTrue($container->has(Middleware\ErrorHandler::class));
+        $this->assertTrue($container->has(Expressive\Template\TemplateRendererInterface::class));
 
         // Test config
         $config = $container->get('config');
         $this->assertEquals(
-            Expressive\Container\TemplatedErrorHandlerFactory::class,
-            $config['dependencies']['factories']['Zend\Expressive\FinalHandler']
+            Expressive\Container\ErrorHandlerFactory::class,
+            $config['dependencies']['factories'][Middleware\ErrorHandler::class]
         );
 
         // Test template renderer
@@ -86,8 +97,9 @@ class TemplateRenderersTest extends InstallerTestCase
         $this->assertInstanceOf(Expressive\Template\TemplateRendererInterface::class, $templateRenderer);
         $this->assertInstanceOf($expectedTemplateRenderer, $templateRenderer);
 
-        if ($copyFilesKey == 'copy-files') {
-            // Test home page for full install only, otherwise you get invalid template name errors
+        if ($installType !== OptionalPackages::INSTALL_MINIMAL) {
+            // Test home page for non-minimal installs only, otherwise you get
+            // invalid template name errors
             $response = $this->getAppResponse();
             $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
         }
@@ -95,17 +107,38 @@ class TemplateRenderersTest extends InstallerTestCase
 
     public function templateRendererProvider()
     {
-        // $containerOption, $routerOption, $templateRendererOption, $copyFilesKey, $expectedResponseStatusCode,
-        // $expectedTemplateRenderer
-        return [
-            // Full tests first so all the template paths are created before the minimal tests start
-            'plates-full'       => [3, 2, 1, 'copy-files', 200, Expressive\Plates\PlatesRenderer::class],
-            'twig-full'         => [3, 2, 2, 'copy-files', 200, Expressive\Twig\TwigRenderer::class],
-            'zend-view-full'    => [3, 2, 3, 'copy-files', 200, Expressive\ZendView\ZendViewRenderer::class],
-            // Minimal tests must be after the full tests !!!
-            'plates-minimal'    => [3, 2, 1, 'minimal-files', 404, Expressive\Plates\PlatesRenderer::class],
-            'twig-minimal'      => [3, 2, 2, 'minimal-files', 404, Expressive\Twig\TwigRenderer::class],
-            'zend-view-minimal' => [3, 2, 3, 'minimal-files', 404, Expressive\ZendView\ZendViewRenderer::class],
+        // @codingStandardsIgnoreStart
+        // Minimal framework installation test cases; no templates installed.
+        // Must be run before those that install templates and test the output.
+        // $installType, $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
+        yield 'plates-minimal'    => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 1, 404, Expressive\Plates\PlatesRenderer::class];
+        yield 'twig-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 2, 404, Expressive\Twig\TwigRenderer::class];
+        yield 'zend-view-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 3, 404, Expressive\ZendView\ZendViewRenderer::class];
+        // @codingStandardsIgnoreEnd
+
+        // @codingStandardsIgnoreStart
+        // Full framework installation test cases; installation options that install templates.
+        $testCases = [
+            // $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
+            'plates-full'    => [3, 2, 1, 200, Expressive\Plates\PlatesRenderer::class],
+            'twig-full'      => [3, 2, 2, 200, Expressive\Twig\TwigRenderer::class],
+            'zend-view-full' => [3, 2, 3, 200, Expressive\ZendView\ZendViewRenderer::class],
         ];
+        // @codingStandardsIgnoreEnd
+
+        // Non-minimal installation types
+        $types = [
+            OptionalPackages::INSTALL_FLAT,
+            OptionalPackages::INSTALL_MODULAR,
+        ];
+
+        // Execute a test case for each install type
+        foreach ($types as $type) {
+            foreach ($testCases as $testName => $arguments) {
+                array_unshift($arguments, $type);
+                $name = sprintf('%s-%s', $type, $testName);
+                yield $name => $arguments;
+            }
+        }
     }
 }

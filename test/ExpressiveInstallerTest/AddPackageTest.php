@@ -1,35 +1,45 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
  * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
 namespace ExpressiveInstallerTest;
 
 use Composer\Package\BasePackage;
-use ExpressiveInstaller\OptionalPackages;
 use Prophecy\Argument;
+use ReflectionProperty;
 
-class AddPackageTest extends InstallerTestCase
+class AddPackageTest extends OptionalPackagesTestCase
 {
     /**
      * @dataProvider packageProvider
+     *
+     * @param string $packageName
+     * @param string $packageVersion
+     * @param null|int $expectedStability
      */
     public function testAddPackage($packageName, $packageVersion, $expectedStability)
     {
-        // Prepare the installer
-        OptionalPackages::removeDevDependencies();
+        $installer = $this->createOptionalPackages();
 
-        $io = $this->prophesize('Composer\IO\IOInterface');
-        $io->write(Argument::containingString('Adding package'))->shouldBeCalled();
+        $this->io
+            ->write(Argument::containingString('Removing installer development dependencies'))
+            ->shouldBeCalled();
+        $installer->removeDevDependencies();
 
-        OptionalPackages::addPackage($io->reveal(), $packageName, $packageVersion);
+        $this->io
+            ->write(Argument::containingString('Adding package'))
+            ->shouldBeCalled();
 
-        $this->assertComposerHasPackages(['zendframework/zend-stdlib']);
-        $stabilityFlags = $this->getStabilityFlags();
+        $installer->addPackage($packageName, $packageVersion);
+
+        $this->assertPackage('zendframework/zend-stdlib', $installer);
+
+        $r = new ReflectionProperty($installer, 'stabilityFlags');
+        $r->setAccessible(true);
+        $stabilityFlags = $r->getValue($installer);
 
         // Stability flags are only set for non-stable packages
         if ($expectedStability) {

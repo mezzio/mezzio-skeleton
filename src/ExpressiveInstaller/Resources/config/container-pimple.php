@@ -11,6 +11,17 @@ $container = new Container();
 // Inject config
 $container['config'] = $config;
 
+// Inject services
+if (! empty($config['dependencies']['services'])
+    && is_array($config['dependencies']['services'])
+) {
+    foreach ($config['dependencies']['services'] as $name => $service) {
+        $container[$name] = function ($c) use ($service) {
+            return $service;
+        };
+    }
+}
+
 // Inject factories
 foreach ($config['dependencies']['factories'] as $name => $object) {
     $container[$name] = function ($c) use ($object, $name) {
@@ -24,12 +35,21 @@ foreach ($config['dependencies']['factories'] as $name => $object) {
         return $factory($c, $name);
     };
 }
+
 // Inject invokables
 foreach ($config['dependencies']['invokables'] as $name => $object) {
     $container[$name] = function ($c) use ($object) {
         return new $object();
     };
 }
+
+// Inject aliases
+foreach ($config['dependencies']['aliases'] as $alias => $target) {
+    $container[$alias] = function ($c) use ($target) {
+        return $c->get($target);
+    };
+}
+
 // Inject "pimple extend-style" factories
 if (! empty($config['dependencies']['extensions'])
     && is_array($config['dependencies']['extensions'])
@@ -43,6 +63,7 @@ if (! empty($config['dependencies']['extensions'])
         }
     }
 }
+
 // Inject "zend-servicemanager3 style" delegators as Pimple anonymous "extend" functions
 if (! empty($config['dependencies']['delegators'])
     && is_array($config['dependencies']['delegators'])

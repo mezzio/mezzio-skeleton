@@ -1,9 +1,7 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
  * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
@@ -12,16 +10,17 @@ namespace ExpressiveInstallerTest;
 use App\Action\HomePageAction;
 use App\Action\PingAction;
 use ExpressiveInstaller\OptionalPackages;
+use Zend\Expressive\Application;
 use Zend\Expressive\Router;
 
-class RoutersTest extends InstallerTestCase
+class RoutersTest extends OptionalPackagesTestCase
 {
-    protected $teardownFiles  = [
-        '/config/container.php',
-        '/config/autoload/routes.global.php',
-    ];
+    use ProjectSandboxTrait;
 
-    private   $expectedRoutes = [
+    /**
+     * @var array[]
+     */
+    private $expectedRoutes = [
         [
             'name'            => 'home',
             'path'            => '/',
@@ -37,34 +36,61 @@ class RoutersTest extends InstallerTestCase
     ];
 
     /**
+     * @var OptionalPackages
+     */
+    private $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
+        $this->installer   = $this->createOptionalPackages($this->projectRoot);
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        chdir($this->packageRoot);
+        $this->recursiveDelete($this->projectRoot);
+        $this->tearDownAlternateAutoloader();
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
      * @dataProvider routerProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $routerOption
+     * @param string $copyFilesKey
+     * @param int $expectedResponseStatusCode
+     * @param array $expectedRoutes
+     * @param string $expectedRouter
      */
     public function testRouter(
+        $installType,
         $containerOption,
         $routerOption,
         $copyFilesKey,
         $expectedResponseStatusCode,
-        $expectedRoutes,
+        array $expectedRoutes,
         $expectedRouter
     ) {
-        $io     = $this->prophesize('Composer\IO\IOInterface');
-        $config = $this->getConfig();
+        $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $containerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $config = $this->getInstallerConfig($this->installer);
+        $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
-            $containerOption,
-            $copyFilesKey
+            $containerOption
         );
         $this->assertTrue($containerResult);
 
         // Install router
-        $routerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
-            $routerOption,
-            $copyFilesKey
+            $routerOption
         );
         $this->assertTrue($routerResult);
 
@@ -78,23 +104,44 @@ class RoutersTest extends InstallerTestCase
             $expectedRouter,
             $config['dependencies']['invokables'][Router\RouterInterface::class]
         );
-        $this->assertEquals($expectedRoutes, $config['routes']);
 
         // Test home page
-        $response = $this->getAppResponse();
+        $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
+        $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
+
+        /** @var Application $app */
+        $app = $container->get(Application::class);
+        $this->assertCount(count($expectedRoutes), $app->getRoutes());
+        foreach ($app->getRoutes() as $route) {
+            foreach ($expectedRoutes as $expectedRoute) {
+                if ($expectedRoute['name'] === $route->getName()) {
+                    $this->assertEquals($expectedRoute['path'], $route->getPath());
+                    $this->assertEquals($expectedRoute['allowed_methods'], $route->getAllowedMethods());
+
+                    continue 2;
+                }
+            }
+
+            $this->fail(sprintf('Route with name "%s" has not been found', $route->getName()));
+        }
     }
 
     public function routerProvider()
     {
+        // @codingStandardsIgnoreStart
         // $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter
         return [
-            'aura-minimal'        => [3, 1, 'minimal-files', 404, [], Router\AuraRouter::class],
-            'aura-full'           => [3, 1, 'copy-files', 200, $this->expectedRoutes, Router\AuraRouter::class],
-            'fastroute-minimal'   => [3, 2, 'minimal-files', 404, [], Router\FastRouteRouter::class],
-            'fastroute-full'      => [3, 2, 'copy-files', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            'zend-router-minimal' => [3, 3, 'minimal-files', 404, [], Router\ZendRouter::class],
-            'zend-router-full'    => [3, 3, 'copy-files', 200, $this->expectedRoutes, Router\ZendRouter::class],
+            'aura-minimal'        => [OptionalPackages::INSTALL_MINIMAL, 3, 1, 'minimal-files', 404, [], Router\AuraRouter::class],
+            'aura-flat'           => [OptionalPackages::INSTALL_FLAT, 3, 1, 'copy-files', 200, $this->expectedRoutes, Router\AuraRouter::class],
+            'aura-modular'        => [OptionalPackages::INSTALL_MODULAR, 3, 1, 'copy-files', 200, $this->expectedRoutes, Router\AuraRouter::class],
+            'fastroute-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, [], Router\FastRouteRouter::class],
+            'fastroute-flat'      => [OptionalPackages::INSTALL_FLAT, 3, 2, 'copy-files', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
+            'fastroute-modular'   => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
+            'zend-router-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 3, 'minimal-files', 404, [], Router\ZendRouter::class],
+            'zend-router-flat'    => [OptionalPackages::INSTALL_FLAT, 3, 3, 'copy-files', 200, $this->expectedRoutes, Router\ZendRouter::class],
+            'zend-router-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 3, 'copy-files', 200, $this->expectedRoutes, Router\ZendRouter::class],
         ];
+        // @codingStandardsIgnoreEnd
     }
 }

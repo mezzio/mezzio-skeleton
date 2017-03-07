@@ -2,7 +2,8 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
@@ -12,7 +13,7 @@ use Zend\Expressive\Plates\PlatesRenderer;
 use Zend\Expressive\Twig\TwigRenderer;
 use Zend\Expressive\ZendView\ZendViewRenderer;
 
-class HomePageAction
+class HomePageAction implements ServerMiddlewareInterface
 {
     private $router;
 
@@ -24,8 +25,15 @@ class HomePageAction
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
+        if (! $this->template) {
+            return new JsonResponse([
+                'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
+                'docsUrl' => 'https://docs.zendframework.com/zend-expressive/',
+            ]);
+        }
+
         $data = [];
 
         if ($this->router instanceof Router\AuraRouter) {
@@ -36,7 +44,7 @@ class HomePageAction
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
         } elseif ($this->router instanceof Router\ZendRouter) {
             $data['routerName'] = 'Zend Router';
-            $data['routerDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.mvc.routing.html';
+            $data['routerDocs'] = 'https://docs.zendframework.com/zend-router/';
         }
 
         if ($this->template instanceof PlatesRenderer) {
@@ -47,14 +55,7 @@ class HomePageAction
             $data['templateDocs'] = 'http://twig.sensiolabs.org/documentation';
         } elseif ($this->template instanceof ZendViewRenderer) {
             $data['templateName'] = 'Zend View';
-            $data['templateDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.view.quick-start.html';
-        }
-
-        if (!$this->template) {
-            return new JsonResponse([
-                'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
-                'docsUrl' => 'zend-expressive.readthedocs.org',
-            ]);
+            $data['templateDocs'] = 'https://docs.zendframework.com/zend-view/';
         }
 
         return new HtmlResponse($this->template->render('app::home-page', $data));

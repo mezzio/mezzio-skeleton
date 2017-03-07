@@ -9,11 +9,8 @@ cache:
 
 env:
   global:
-    - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs --no-scripts"
-
-notifications:
-  irc: "irc.freenode.org#zftalk.dev"
-  email: false
+    - COMPOSER_ARGS="--no-interaction --no-scripts"
+    - COVERAGE_DEPS="satooshi/php-coveralls"
 
 matrix:
   include:
@@ -23,14 +20,20 @@ matrix:
     - php: 5.6
       env:
         - DEPS=latest
-        - TEST_COVERAGE=true
-    - php: 7
+    - php: 7.0
       env:
         - DEPS=lowest
-    - php: 7
+    - php: 7.0
       env:
         - DEPS=latest
-        - CHECK_CS=true
+    - php: 7.1
+      env:
+        - DEPS=lowest
+        - CS_CHECK=true
+    - php: 7.1
+      env:
+        - DEPS=latest
+        - TEST_COVERAGE=true
     - php: hhvm
   allow_failures:
     - php: hhvm
@@ -40,16 +43,19 @@ before_install:
   - travis_retry composer self-update
 
 install:
+  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS $COVERAGE_DEPS ; fi
   - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
   - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
-  - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS satooshi/php-coveralls:^1.0 ; fi
   - travis_retry composer install $COMPOSER_ARGS
-  - composer show --installed
+  - composer show
 
 script:
-  - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; fi
-  - if [[ $TEST_COVERAGE != 'true' ]]; then composer test ; fi
-  - if [[ $CHECK_CS == 'true' ]]; then composer cs-check ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer upload-coverage ; fi
+
+notifications:
+  irc: "irc.freenode.org#zftalk.dev"
+  email: false

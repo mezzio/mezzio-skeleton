@@ -1,65 +1,51 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
  * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
-use ReflectionProperty;
 
-class RemoveInstallerTest extends InstallerTestCase
+class RemoveInstallerTest extends OptionalPackagesTestCase
 {
+    /**
+     * @var OptionalPackages
+     */
+    private $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->installer = $this->createOptionalPackages();
+    }
+
     public function testComposerHasInstaller()
     {
-        $config = $this->getComposerDefinition();
+        $composer = $this->getComposerDataFromInstaller($this->installer);
 
-        $this->assertTrue(isset($config['autoload']['psr-4']['ExpressiveInstaller\\']));
-        $this->assertTrue(isset($config['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']));
-        $this->assertTrue(isset($config['extra']['branch-alias']));
-        $this->assertFalse(isset($config['extra']['optional-packages']));
-        $this->assertTrue(isset($config['scripts']['pre-install-cmd']));
-        $this->assertTrue(isset($config['scripts']['pre-update-cmd']));
+        $this->assertTrue(isset($composer['autoload']['psr-4']['ExpressiveInstaller\\']));
+        $this->assertTrue(isset($composer['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']));
+        $this->assertTrue(isset($composer['extra']['branch-alias']));
+        $this->assertFalse(isset($composer['extra']['optional-packages']));
+        $this->assertTrue(isset($composer['scripts']['pre-install-cmd']));
+        $this->assertTrue(isset($composer['scripts']['pre-update-cmd']));
     }
 
     public function testInstallerIsRemoved()
     {
         // Remove the installer
-        OptionalPackages::removeInstallerFromDefinition();
+        $this->installer->removeInstallerFromDefinition();
 
-        $config = $this->getComposerDefinition();
+        $composer = $this->getComposerDataFromInstaller($this->installer);
 
-        $this->assertFalse(isset($config['autoload']['psr-4']['ExpressiveInstaller\\']));
-        $this->assertFalse(isset($config['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']));
-        $this->assertFalse(isset($config['extra']['branch-alias']));
-        $this->assertFalse(isset($config['extra']['optional-packages']));
-        $this->assertFalse(isset($config['scripts']['pre-install-cmd']));
-        $this->assertFalse(isset($config['scripts']['pre-update-cmd']));
-    }
-
-    public function testInstallerDataIsRemoved()
-    {
-        // Mimic answered question
-        $refDefinition = new ReflectionProperty(OptionalPackages::class, 'composerDefinition');
-        $refDefinition->setAccessible(true);
-        $definition = $refDefinition->getValue();
-        $definition['extra']['optional-packages']['router'] = 3;
-        $refDefinition->setValue($definition);
-
-        // Test if the value is stored
-        $definition = $this->getComposerDefinition();
-        $this->assertTrue(isset($definition['extra']['optional-packages']));
-
-        // Remove the installer
-        OptionalPackages::removeInstallerFromDefinition();
-
-        // Test if the value is removed
-        $definition = $this->getComposerDefinition();
-        $this->assertFalse(isset($definition['extra']['optional-packages']));
-        $this->assertFalse(isset($definition['extra']));
+        $this->assertFalse(isset($composer['autoload']['psr-4']['ExpressiveInstaller\\']));
+        $this->assertFalse(isset($composer['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']));
+        $this->assertFalse(isset($composer['extra']['branch-alias']));
+        $this->assertFalse(isset($composer['extra']['optional-packages']));
+        $this->assertFalse(isset($composer['scripts']['pre-install-cmd']));
+        $this->assertFalse(isset($composer['scripts']['pre-update-cmd']));
     }
 }

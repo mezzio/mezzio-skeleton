@@ -1,9 +1,7 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
  * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
@@ -16,41 +14,64 @@ use Xtreamwayz\Pimple\Container as PimpleContainer;
 use Zend\Expressive;
 use Zend\ServiceManager\ServiceManager as ZendServiceManagerContainer;
 
-class ContainersTest extends InstallerTestCase
+class ContainersTest extends OptionalPackagesTestCase
 {
-    protected $teardownFiles = [
-        '/config/container.php',
-        '/config/autoload/routes.global.php',
-    ];
+    use ProjectSandboxTrait;
 
     /**
+     * @var OptionalPackages
+     */
+    private $installer;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
+        $this->installer   = $this->createOptionalPackages($this->projectRoot);
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        chdir($this->packageRoot);
+        $this->recursiveDelete($this->projectRoot);
+        $this->tearDownAlternateAutoloader();
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
      * @dataProvider containerProvider
+     *
+     * @param string $installType
+     * @param int $containerOption
+     * @param int $routerOption
+     * @param string $copyFilesKey
+     * @param int $expectedResponseStatusCode
+     * @param string $expectedContainer
      */
     public function testContainer(
+        $installType,
         $containerOption,
         $routerOption,
         $copyFilesKey,
         $expectedResponseStatusCode,
         $expectedContainer
     ) {
-        $io     = $this->prophesize('Composer\IO\IOInterface');
-        $config = $this->getConfig();
+        $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $containerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $config = $this->getInstallerConfig($this->installer);
+        $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
-            $containerOption,
-            $copyFilesKey
+            $containerOption
         );
         $this->assertTrue($containerResult);
 
         // Install router
-        $routerResult = OptionalPackages::processAnswer(
-            $io->reveal(),
+        $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
-            $routerOption,
-            $copyFilesKey
+            $routerOption
         );
         $this->assertTrue($routerResult);
 
@@ -64,20 +85,26 @@ class ContainersTest extends InstallerTestCase
         $this->assertTrue($container->has(Expressive\Router\RouterInterface::class));
 
         // Test home page
-        $response = $this->getAppResponse();
+        $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
+        $response = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
     public function containerProvider()
     {
-        // $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
+        // @codingStandardsIgnoreStart
+        // $installType, $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
         return [
-            'aura-minimal'    => [1, 2, 'minimal-files', 404, AuraContainer::class],
-            'aura-full'       => [1, 2, 'copy-files', 200, AuraContainer::class],
-            'pimple-minimal'  => [2, 2, 'minimal-files', 404, PimpleContainer::class],
-            'pimple-full'     => [2, 2, 'copy-files', 200, PimpleContainer::class],
-            'zend-sm-minimal' => [3, 2, 'minimal-files', 404, ZendServiceManagerContainer::class],
-            'zend-sm-full'    => [3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
+            'aura-minimal'    => [OptionalPackages::INSTALL_MINIMAL, 1, 2, 'minimal-files', 404, AuraContainer::class],
+            'aura-flat'       => [OptionalPackages::INSTALL_FLAT,    1, 2, 'copy-files', 200, AuraContainer::class],
+            'aura-modular'    => [OptionalPackages::INSTALL_MODULAR, 1, 2, 'copy-files', 200, AuraContainer::class],
+            'pimple-minimal'  => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 'minimal-files', 404, PimpleContainer::class],
+            'pimple-flat'     => [OptionalPackages::INSTALL_FLAT,    2, 2, 'copy-files', 200, PimpleContainer::class],
+            'pimple-modular'  => [OptionalPackages::INSTALL_MODULAR, 2, 2, 'copy-files', 200, PimpleContainer::class],
+            'zend-sm-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, ZendServiceManagerContainer::class],
+            'zend-sm-flat'    => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
+            'zend-sm-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
         ];
+        // @codingStandardsIgnoreEnd
     }
 }

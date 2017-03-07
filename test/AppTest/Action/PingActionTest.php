@@ -3,20 +3,24 @@
 namespace AppTest\Action;
 
 use App\Action\PingAction;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\JsonResponse;
 
-class PingActionTest extends \PHPUnit_Framework_TestCase
+class PingActionTest extends TestCase
 {
     public function testResponse()
     {
         $pingAction = new PingAction();
-        $response = $pingAction(new ServerRequest(['/']), new Response(), function () {
-        });
+        $response = $pingAction->process(
+            $this->prophesize(ServerRequestInterface::class)->reveal(),
+            $this->prophesize(DelegateInterface::class)->reveal()
+        );
+
         $json = json_decode((string) $response->getBody());
 
-        $this->assertTrue($response instanceof Response);
-        $this->assertTrue($response instanceof Response\JsonResponse);
+        $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertTrue(isset($json->ack));
     }
 }

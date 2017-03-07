@@ -5,10 +5,11 @@ namespace AppTest\Action;
 use App\Action\HomePageAction;
 use App\Action\HomePageFactory;
 use Interop\Container\ContainerInterface;
+use PHPUnit\Framework\TestCase;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
+class HomePageFactoryTest extends TestCase
 {
     /** @var ContainerInterface */
     protected $container;
@@ -26,11 +27,11 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
         $factory = new HomePageFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
 
-        $this->assertTrue($factory instanceof HomePageFactory);
+        $this->assertInstanceOf(HomePageFactory::class, $factory);
 
         $homePage = $factory($this->container->reveal());
 
-        $this->assertTrue($homePage instanceof HomePageAction);
+        $this->assertInstanceOf(HomePageAction::class, $homePage);
     }
 
     public function testFactoryWithTemplate()
@@ -41,10 +42,10 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
             ->get(TemplateRendererInterface::class)
             ->willReturn($this->prophesize(TemplateRendererInterface::class));
 
-        $this->assertTrue($factory instanceof HomePageFactory);
+        $this->assertInstanceOf(HomePageFactory::class, $factory);
 
         $homePage = $factory($this->container->reveal());
 
-        $this->assertTrue($homePage instanceof HomePageAction);
+        $this->assertInstanceOf(HomePageAction::class, $homePage);
     }
 }
