@@ -9,8 +9,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev",
-            "dev-develop": "2.0-dev"
+            "dev-master": "2.0-dev",
+            "dev-develop": "2.1-dev"
         }
     },
     "require": {
@@ -18,7 +18,7 @@
         "roave/security-advisories": "dev-master",
         "zendframework/zend-component-installer": "^1.0 || ^0.7.0",
         "zendframework/zend-config-aggregator": "^0.2.0",
-        "zendframework/zend-expressive": "^2.0 || dev-2.0.X@dev",
+        "zendframework/zend-expressive": "^2.0",
         "zendframework/zend-expressive-helpers": "^3.0.1",
         "zendframework/zend-stdlib": "^3.1"
     },
