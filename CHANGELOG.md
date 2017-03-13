@@ -8,6 +8,13 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+### Changes
+
+- [#141](https://github.com/organization/project/pull/141) changes the reference
+  to the `DefaultDelegate` in `config/autoload/dependencies.global.php` to be a
+  string instead of using `::class` notation. Using a string name makes it clear
+  the service is not a concrete class or interface name.
+
 ### Deprecated
 
 - Nothing.
