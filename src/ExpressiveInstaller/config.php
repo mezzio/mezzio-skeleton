@@ -7,10 +7,10 @@ return [
         'xtreamwayz/pimple-container-interop'            => '^1.0',
         'zendframework/zend-expressive-aurarouter'       => '^2.0',
         'zendframework/zend-expressive-fastroute'        => '^2.0',
-        'zendframework/zend-expressive-platesrenderer'   => '^1.2.1',
-        'zendframework/zend-expressive-twigrenderer'     => '^1.3',
+        'zendframework/zend-expressive-platesrenderer'   => '^1.3',
+        'zendframework/zend-expressive-twigrenderer'     => '^1.4',
         'zendframework/zend-expressive-zendrouter'       => '^2.0.1',
-        'zendframework/zend-expressive-zendviewrenderer' => '^1.3',
+        'zendframework/zend-expressive-zendviewrenderer' => '^1.4',
         'zendframework/zend-servicemanager'              => '^3.3',
     ],
 
@@ -28,7 +28,7 @@ return [
         ],
         'modular' => [
             'packages' => [
-                'zendframework/zend-expressive-tooling' => '^0.3.1',
+                'zendframework/zend-expressive-tooling' => '^0.3.2',
             ],
             'resources' => [
                 'Resources/src/ConfigProvider.modular.php' => 'src/App/src/ConfigProvider.php',
