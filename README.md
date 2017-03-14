@@ -34,7 +34,7 @@ After choosing and installing the packages you want, go to the
 `<project-path>` and start PHP's built-in web server to verify installation:
 
 ```bash
-$ composer run serve --timeout 0
+$ composer run --timeout=0 serve
 ```
 
 You can then browse to http://localhost:8080.
@@ -45,14 +45,15 @@ You can then browse to http://localhost:8080.
 > systems, the `php -S` command that `composer serve` spawns continues running
 > as a background process, but on other systems halts when the timeout occurs.
 >
-> If you want the server to live longer, you can use the
-> `COMPOSER_PROCESS_TIMEOUT` environment variable when executing `composer
-> serve` to extend the timeout or you can use `--timeout` parameter when
-> executing `composer run serve`. As an example, the following will extend it
-> to a full day:
+> As such, we recommend running the `serve` script using a timeout. This can
+> be done by using `composer run` to execute the `serve` script, with a
+> `--timeout` option. When set to `0`, as in the previous example, no timeout
+> will be used, and it will run until you cancel the process (usually via
+> `Ctrl-C`). Alternately, you can specify a finite timeout; as an example,
+> the following will extend the timeout to a full day:
 >
 > ```bash
-> $ COMPOSER_PROCESS_TIMEOUT=86400 composer serve
+> $ composer run --timeout=86400 serve
 > ```
 
 ## Troubleshooting
