@@ -15,6 +15,10 @@ All notable changes to this project will be documented in this file, in reverse 
   string instead of using `::class` notation. Using a string name makes it clear
   the service is not a concrete class or interface name.
 
+- [#143](https://github.com/organization/project/pull/143) updates dependencies
+  to pick up the Expressive 2.0.2 release, zend-expressive-helpers 4.0 release,
+  and renderer releases related to the helpers 4.0 release.
+
 ### Deprecated
 
 - Nothing.
