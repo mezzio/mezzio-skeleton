@@ -28,12 +28,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changes
 
-- [#141](https://github.com/organization/project/pull/141) changes the reference
+- [#141](https://github.com/zendframework/zend-expressive-skeleton/pull/141) changes the reference
   to the `DefaultDelegate` in `config/autoload/dependencies.global.php` to be a
   string instead of using `::class` notation. Using a string name makes it clear
   the service is not a concrete class or interface name.
 
-- [#143](https://github.com/organization/project/pull/143) updates dependencies
+- [#143](https://github.com/zendframework/zend-expressive-skeleton/pull/143) updates dependencies
   to pick up the Expressive 2.0.2 release, zend-expressive-helpers 4.0 release,
   and renderer releases related to the helpers 4.0 release.
 
@@ -53,7 +53,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#54](https://github.com/organization/project/pull/54) adds
+- [#54](https://github.com/zendframework/zend-expressive-skeleton/pull/54) adds
   [zfcampus/zf-development-mode](https://github.com/zfcampus/zf-development-mode)
   as a development dependency, and places the application into development mode
   during initial installation. This allows production applications to be
@@ -70,14 +70,14 @@ All notable changes to this project will be documented in this file, in reverse 
   - `composer development-status`
   - `composer clear-config-cache`
 
-- [#124](https://github.com/organization/project/pull/124) adds the ability to
+- [#124](https://github.com/zendframework/zend-expressive-skeleton/pull/124) adds the ability to
   select the initial application structure from one of the following options:
 
   - Minimal (no default routes, middleware, or assets)
   - Flat (default routes and assets; `src/` directory is assumed to be library code)
   - Modular (default routes and assets; `src/` directory contains application modules)
 
-  [#138](https://github.com/organization/project/pull/138) updated the logic
+  [#138](https://github.com/zendframework/zend-expressive-skeleton/pull/138) updated the logic
   when creating a modular structure to also inject
   [zendframework/zend-expressive-tooling](https://github.com/zendframework/zend-expressive-tooling)
   as a development requirement, as it provides the tools:
@@ -91,7 +91,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changes
 
-- [#54](https://github.com/organization/project/pull/54) updates the
+- [#54](https://github.com/zendframework/zend-expressive-skeleton/pull/54) updates the
   shipped `config/config.php` to leverage [zend-config-aggregator](https://github.com/zendframework/zend-config-aggregator)
   for purposes of aggregating configuration. This change allows the use of
   third party "modules" (packages providing a `ConfigProvider` class that
@@ -101,7 +101,7 @@ All notable changes to this project will be documented in this file, in reverse 
   configuration provider, and then prompt you as to whether or not you want it
   registered in your application.
 
-- [#54](https://github.com/organization/project/pull/54) updates the skeleton to
+- [#54](https://github.com/zendframework/zend-expressive-skeleton/pull/54) updates the skeleton to
   default to a _programmatic pipeline_. This results in the following:
 
   - Removal of the `config/autoload/middleware-pipeline.global.php` file.
@@ -114,7 +114,7 @@ All notable changes to this project will be documented in this file, in reverse 
     segregate them into multiple files, or even add them via delegator factories
     on the `Application` instance.
 
-- [#54](https://github.com/organization/project/pull/54) updates the
+- [#54](https://github.com/zendframework/zend-expressive-skeleton/pull/54) updates the
   following dependencies:
 
   - zend-expressive-router to `^2.0`
@@ -126,18 +126,18 @@ All notable changes to this project will be documented in this file, in reverse 
   - zend-expressive-twigrenderer to `^1.2.1`
   - zend-expressive-zendviewrenderer to `^1.2.1`
 
-- [#120](https://github.com/organization/project/pull/120) switches the order of
+- [#120](https://github.com/zendframework/zend-expressive-skeleton/pull/120) switches the order of
   questions in the installer, to prompt for the container to use first. This
   will allow some optimizations for some third-party container systems such as
   [Disco](https://github.com/bitExpert/disco).
 
-- [#132](https://github.com/organization/project/pull/132) modifies which file
+- [#132](https://github.com/zendframework/zend-expressive-skeleton/pull/132) modifies which file
   the installer writes Whoops configuration to when selected. Previously, it
   wrote it to `config/autoload/local.php`; it now writes it to
   `config/autoload/development.local.php.dist`, allowing enabling/disabling the
   Whoops integration via the `zf-development-mode` tooling.
 
-- [#130](https://github.com/organization/project/pull/130) changes the structure
+- [#130](https://github.com/zendframework/zend-expressive-skeleton/pull/130) changes the structure
   of `public/index.php` slightly. In order to prevent creation of new globals,
   it now creates and calls a closure around creation of the container, retrieval
   of the application, registration of the pipeline and routes, and execution of
@@ -149,7 +149,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#110](https://github.com/organization/project/pull/110) removes the global
+- [#110](https://github.com/zendframework/zend-expressive-skeleton/pull/110) removes the global
   config array to ArrayObject conversion for all containers except Aura.Di.
 
 ### Fixed
