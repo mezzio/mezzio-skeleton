@@ -14,7 +14,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#146](https://github.com/zendframework/zend-expressive-skeleton/pull/146) removes
+  obsolete `raise_throwables` key from default config.
 
 ### Fixed
 
