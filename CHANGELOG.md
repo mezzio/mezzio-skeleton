@@ -2,11 +2,21 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.0.2 - TBD
+## 2.0.2 - 2017-04-11
 
 ### Added
 
 - Nothing.
+
+### Changes
+
+- Updated select dependencies to latest patch releases:
+  - zend-component-installer: 0.7.1 (fixes issue with `ConfigProvider`
+    detection)
+  - zend-expressive-platesrenderer: 1.3.1 (fixes issue with `UrlExtension`'s
+    `$fragmentIdentifier` default value)
+  - zend-expressive-tooling: 0.4.1 (brings in `expressive` binary, with its
+    `middleware:create` command)
 
 ### Deprecated
 
