@@ -2,11 +2,19 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.0.3 - TBD
+## 2.0.3 - 2017-04-25
 
 ### Added
 
 - Nothing.
+
+### Changed
+
+- [#151](https://github.com/zendframework/zend-expressive-skeleton/pull/151)
+  updates the following dependencies to use their newly released stable 1.0
+  branches:
+  - zend-config-aggregator
+  - zend-component-installer
 
 ### Deprecated
 
