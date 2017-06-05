@@ -14,7 +14,7 @@ require 'vendor/autoload.php';
  * Self-called anonymous function that creates its own scope and keep the global namespace clean.
  */
 call_user_func(function () {
-    /** @var \Interop\Container\ContainerInterface $container */
+    /** @var \Psr\Container\ContainerInterface $container */
     $container = require 'config/container.php';
 
     /** @var \Zend\Expressive\Application $app */
