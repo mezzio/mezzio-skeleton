@@ -9,8 +9,9 @@ use Zend\Stratigility\Middleware\ErrorHandler;
 
 /**
  * Setup middleware pipeline:
- * @var \Zend\Expressive\Application $app
  */
+
+/** @var \Zend\Expressive\Application $app */
 
 // The error handler should be the first (most outer) middleware to catch
 // all Exceptions.
