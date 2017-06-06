@@ -9,6 +9,7 @@ namespace ExpressiveInstallerTest;
 
 use Aura\Di\Container as AuraContainer;
 use ExpressiveInstaller\OptionalPackages;
+use Northwoods\Container\InjectorContainer as AurynContainer;
 use Psr\Container\ContainerInterface;
 use Xtreamwayz\Pimple\Container as PimpleContainer;
 use Zend\Expressive;
@@ -104,6 +105,9 @@ class ContainersTest extends OptionalPackagesTestCase
             'zend-sm-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, ZendServiceManagerContainer::class],
             'zend-sm-flat'    => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
             'zend-sm-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
+            'auryn-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, AurynContainer::class],
+            'auryn-flat'      => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, AurynContainer::class],
+            'auryn-modular'   => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, AurynContainer::class],
         ];
         // @codingStandardsIgnoreEnd
     }
