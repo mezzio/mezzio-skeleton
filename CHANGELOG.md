@@ -8,6 +8,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+### Changes
+
+- [#153](https://github.com/zendframework/zend-expressive-skeleton/pull/153) replaces
+  php_sapi_name() with PHP_SAPI.
+
 ### Deprecated
 
 - Nothing.
