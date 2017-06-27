@@ -12,3 +12,5 @@
  *
  * $app->route('/contact', App\Action\ContactAction::class, ['GET', 'POST', ...], 'contact');
  */
+
+/** @var \Zend\Expressive\Application $app */

@@ -24,7 +24,6 @@
  *     Zend\Expressive\Router\Route::HTTP_METHOD_ANY,
  *     'contact'
  * );
- *
  */
 
 /** @var \Zend\Expressive\Application $app */
