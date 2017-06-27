@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changes
 
+- [#160](https://github.com/zendframework/zend-expressive-skeleton/pull/160) switches 
+  to PSR-11 container references.
+
 - [#153](https://github.com/zendframework/zend-expressive-skeleton/pull/153) replaces
   php_sapi_name() with PHP_SAPI.
 
