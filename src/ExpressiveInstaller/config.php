@@ -12,9 +12,8 @@ return [
         'zendframework/zend-expressive-zendrouter'       => '^2.0.1',
         'zendframework/zend-expressive-zendviewrenderer' => '^1.4',
         'zendframework/zend-servicemanager'              => '^3.3',
-        'symfony/dependency-injection'                   => '^3.3',
-        'symfony/config'                                 => '^3.3',
-        'jsoumelidis/zend-sm-sf-di-bridge'               => 'dev-master',
+        'jsoumelidis/zend-sm-sf-di-bridge'               => '^0.1',
+        'jsoumelidis/symfony-di-container-interop'       => '^1.0',
     ],
 
     'require-dev' => [
@@ -103,9 +102,8 @@ return [
                 4 => [
                     'name'     => 'Symfony DI Container',
                     'packages' => [
-                        'symfony/dependency-injection',
-                        'symfony/config',
                         'jsoumelidis/zend-sm-sf-di-bridge',
+                        'jsoumelidis/symfony-di-container-interop',
                     ],
                     'flat' => [
                         'Resources/config/container-sf-di.php'     => 'config/container.php',
