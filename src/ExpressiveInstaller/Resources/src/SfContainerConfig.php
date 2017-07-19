@@ -129,8 +129,10 @@ class SfContainerConfig
         }
         
         //Set known (synthetic) services
-        if ( !empty($this->config['services']) && is_array($this->config['services']) ) {
-            foreach ( $this->config['services'] as $name => $object ) {
+        if ( !empty($this->config['dependencies']['services'])
+        &&   is_array($this->config['dependencies']['services']) )
+        {
+            foreach ( $this->config['dependencies']['services'] as $name => $object ) {
                 $container->set($name, $object);
             }
         }
