@@ -2,9 +2,9 @@
 
 return [
     'packages' => [
-        'aura/di'                                        => '^3.2',
         'filp/whoops'                                    => '^2.1.7',
-        'xtreamwayz/pimple-container-interop'            => '^1.0',
+        'webimpress/zend-auradi-config'                  => '^0.1.1',
+        'webimpress/zend-pimple-config'                  => '^0.1',
         'zendframework/zend-expressive-aurarouter'       => '^2.0',
         'zendframework/zend-expressive-fastroute'        => '^2.0',
         'zendframework/zend-expressive-platesrenderer'   => '^1.3.1',
@@ -47,30 +47,22 @@ return [
                 1 => [
                     'name'     => 'Aura.Di',
                     'packages' => [
-                        'aura/di',
+                        'webimpress/zend-auradi-config',
                     ],
-                    // @codingStandardsIgnoreStart
                     'flat' => [
-                        'Resources/config/container-aura-di.php'           => 'config/container.php',
-                        'Resources/src/ExpressiveAuraConfig.php'           => 'config/ExpressiveAuraConfig.php',
-                        'Resources/src/ExpressiveAuraDelegatorFactory.php' => 'config/ExpressiveAuraDelegatorFactory.php',
+                        'Resources/config/container-aura-di.php' => 'config/container.php',
                     ],
                     'modular' => [
-                        'Resources/config/container-aura-di.php'           => 'config/container.php',
-                        'Resources/src/ExpressiveAuraConfig.php'           => 'config/ExpressiveAuraConfig.php',
-                        'Resources/src/ExpressiveAuraDelegatorFactory.php' => 'config/ExpressiveAuraDelegatorFactory.php',
+                        'Resources/config/container-aura-di.php' => 'config/container.php',
                     ],
                     'minimal' => [
-                        'Resources/config/container-aura-di.php'           => 'config/container.php',
-                        'Resources/src/ExpressiveAuraConfig.php'           => 'config/ExpressiveAuraConfig.php',
-                        'Resources/src/ExpressiveAuraDelegatorFactory.php' => 'config/ExpressiveAuraDelegatorFactory.php',
+                        'Resources/config/container-aura-di.php' => 'config/container.php',
                     ],
-                    // @codingStandardsIgnoreEnd
                 ],
                 2 => [
                     'name'     => 'Pimple',
                     'packages' => [
-                        'xtreamwayz/pimple-container-interop',
+                        'webimpress/zend-pimple-config',
                     ],
                     'flat' => [
                         'Resources/config/container-pimple.php' => 'config/container.php',
