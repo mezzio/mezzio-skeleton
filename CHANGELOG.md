@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.0.4 - TBD
+## 2.0.4 - 2017-10-12
 
 ### Added
 
@@ -18,7 +18,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#178](https://github.com/zendframework/zend-expressive-skeleton/pull/178)
+  fixes the installer to work with the most recent zend-stratigility releases
+  by pinning http-interop/http-middleware to `^0.4.1` and
+  zendframework/zend-expressive to `^2.0.5`; without these changes, installation
+  was leading to exceptions and partial installation previously.
 
 ## 2.0.3 - 2017-04-25
 
