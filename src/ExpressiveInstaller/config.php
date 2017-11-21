@@ -3,14 +3,14 @@
 return [
     'packages' => [
         'filp/whoops'                                    => '^2.1.7',
-        'webimpress/zend-auradi-config'                  => '^0.1.1',
-        'webimpress/zend-pimple-config'                  => '^0.1',
+        'zendframework/zend-auradi-config'               => '^0.2',
         'zendframework/zend-expressive-aurarouter'       => '^2.0',
         'zendframework/zend-expressive-fastroute'        => '^2.0',
         'zendframework/zend-expressive-platesrenderer'   => '^1.3.1',
         'zendframework/zend-expressive-twigrenderer'     => '^1.4',
         'zendframework/zend-expressive-zendrouter'       => '^2.0.1',
         'zendframework/zend-expressive-zendviewrenderer' => '^1.4',
+        'zendframework/zend-pimple-config'               => '^0.2',
         'zendframework/zend-servicemanager'              => '^3.3',
     ],
 
@@ -47,7 +47,7 @@ return [
                 1 => [
                     'name'     => 'Aura.Di',
                     'packages' => [
-                        'webimpress/zend-auradi-config',
+                        'zendframework/zend-auradi-config',
                     ],
                     'flat' => [
                         'Resources/config/container-aura-di.php' => 'config/container.php',
@@ -62,7 +62,7 @@ return [
                 2 => [
                     'name'     => 'Pimple',
                     'packages' => [
-                        'webimpress/zend-pimple-config',
+                        'zendframework/zend-pimple-config',
                     ],
                     'flat' => [
                         'Resources/config/container-pimple.php' => 'config/container.php',

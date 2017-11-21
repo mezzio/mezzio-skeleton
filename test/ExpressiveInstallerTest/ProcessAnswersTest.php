@@ -79,7 +79,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $this->installer->removeDevDependencies();
 
         // @codingStandardsIgnoreStart
-        $this->io->write(Argument::containingString('Adding package <info>webimpress/zend-auradi-config</info>'))->shouldBeCalled();
+        $this->io->write(Argument::containingString('Adding package <info>zendframework/zend-auradi-config</info>'))->shouldBeCalled();
         $this->io->write(Argument::containingString('Copying <info>config/container.php</info>'))->shouldBeCalled();
         // @codingStandardsIgnoreEnd
 
@@ -90,7 +90,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
 
         $this->assertTrue($result);
         $this->assertFileExists($this->projectRoot . '/config/container.php');
-        $this->assertPackage('webimpress/zend-auradi-config', $this->installer);
+        $this->assertPackage('zendframework/zend-auradi-config', $this->installer);
     }
 
     public function testAnsweredWithPackage()

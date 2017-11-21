@@ -104,8 +104,7 @@ class OptionalPackages
         'composer/composer',
         'filp/whoops',
         'mikey179/vfsstream',
-        'webimpress/zend-auradi-config',
-        'webimpress/zend-pimple-config',
+        'zendframework/zend-auradi-config',
         'zendframework/zend-coding-standard',
         'zendframework/zend-expressive-aurarouter',
         'zendframework/zend-expressive-fastroute',
@@ -113,6 +112,7 @@ class OptionalPackages
         'zendframework/zend-expressive-twigrenderer',
         'zendframework/zend-expressive-zendrouter',
         'zendframework/zend-expressive-zendviewrenderer',
+        'zendframework/zend-pimple-config',
         'zendframework/zend-servicemanager',
     ];
 
