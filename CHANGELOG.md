@@ -31,6 +31,9 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#175](https://github.com/zendframework/zend-expressive-skeleton/pull/175)
   adds an authentication fix for fast-cgi.
 
+- [#180](https://github.com/zendframework/zend-expressive-skeleton/pull/180)
+  fixes loading config files on IBMi.
+
 ## 2.0.4 - 2017-10-12
 
 ### Added
