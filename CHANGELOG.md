@@ -6,16 +6,16 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#155](https://github.com/zendframework/zend-expressive-skeleton/pull/155) 
+- [#155](https://github.com/zendframework/zend-expressive-skeleton/pull/155)
   adds $app typehinting in routes and pipeline config.
 
 ### Changes
 
-- [#160](https://github.com/zendframework/zend-expressive-skeleton/pull/160) 
+- [#160](https://github.com/zendframework/zend-expressive-skeleton/pull/160)
   switches to PSR-11 container references.
 
 - [#153](https://github.com/zendframework/zend-expressive-skeleton/pull/153),
-  [#163](https://github.com/zendframework/zend-expressive-skeleton/pull/163) 
+  [#163](https://github.com/zendframework/zend-expressive-skeleton/pull/163)
   simplifies method of checking for static file requests.
 
 ### Deprecated
@@ -28,7 +28,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#175](https://github.com/zendframework/zend-expressive-skeleton/pull/175)
+  adds an authentication fix for fast-cgi.
 
 ## 2.0.4 - 2017-10-12
 
