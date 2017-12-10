@@ -6,16 +6,16 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#155](https://github.com/zendframework/zend-expressive-skeleton/pull/155) 
+- [#155](https://github.com/zendframework/zend-expressive-skeleton/pull/155)
   adds $app typehinting in routes and pipeline config.
 
 ### Changes
 
-- [#160](https://github.com/zendframework/zend-expressive-skeleton/pull/160) 
+- [#160](https://github.com/zendframework/zend-expressive-skeleton/pull/160)
   switches to PSR-11 container references.
 
 - [#153](https://github.com/zendframework/zend-expressive-skeleton/pull/153),
-  [#163](https://github.com/zendframework/zend-expressive-skeleton/pull/163) 
+  [#163](https://github.com/zendframework/zend-expressive-skeleton/pull/163)
   simplifies method of checking for static file requests.
 
 ### Deprecated
@@ -28,9 +28,13 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#175](https://github.com/zendframework/zend-expressive-skeleton/pull/175)
+  adds an authentication fix for fast-cgi.
 
-## 2.0.4 - TBD
+- [#180](https://github.com/zendframework/zend-expressive-skeleton/pull/180)
+  fixes loading config files on IBMi.
+
+## 2.0.4 - 2017-10-12
 
 ### Added
 
@@ -46,7 +50,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#178](https://github.com/zendframework/zend-expressive-skeleton/pull/178)
+  fixes the installer to work with the most recent zend-stratigility releases
+  by pinning http-interop/http-middleware to `^0.4.1` and
+  zendframework/zend-expressive to `^2.0.5`; without these changes, installation
+  was leading to exceptions and partial installation previously.
 
 ## 2.0.3 - 2017-04-25
 
