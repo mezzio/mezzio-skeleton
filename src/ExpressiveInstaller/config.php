@@ -12,8 +12,7 @@ return [
         'zendframework/zend-expressive-zendrouter'       => '^2.0.1',
         'zendframework/zend-expressive-zendviewrenderer' => '^1.4',
         'zendframework/zend-servicemanager'              => '^3.3',
-        'jsoumelidis/zend-sm-sf-di-bridge'               => '^0.1',
-        'jsoumelidis/symfony-di-container-interop'       => '^1.0',
+        'jsoumelidis/zend-sf-di-config'                  => '^0.1',
     ],
 
     'require-dev' => [
@@ -102,23 +101,16 @@ return [
                 4 => [
                     'name'     => 'Symfony DI Container',
                     'packages' => [
-                        'jsoumelidis/zend-sm-sf-di-bridge',
-                        'jsoumelidis/symfony-di-container-interop',
+                        'jsoumelidis/zend-sf-di-config',
                     ],
                     'flat' => [
                         'Resources/config/container-sf-di.php'     => 'config/container.php',
-                        'Resources/config/sf-container.global.php' => 'config/autoload/sf-container.global.php',
-                        'Resources/src/SfContainerConfig.php'      => 'config/SfContainerConfig.php',
                     ],
                     'modular' => [
                         'Resources/config/container-sf-di.php'     => 'config/container.php',
-                        'Resources/config/sf-container.global.php' => 'config/autoload/sf-container.global.php',
-                        'Resources/src/SfContainerConfig.php'      => 'config/SfContainerConfig.php',
                     ],
                     'minimal' => [
                         'Resources/config/container-sf-di.php'     => 'config/container.php',
-                        'Resources/config/sf-container.global.php' => 'config/autoload/sf-container.global.php',
-                        'Resources/src/SfContainerConfig.php'      => 'config/SfContainerConfig.php',
                     ],
                 ]
             ],

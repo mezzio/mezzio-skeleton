@@ -1,9 +1,9 @@
 <?php
-use App\SfContainerConfig;
 
-require_once(__DIR__ . DIRECTORY_SEPARATOR . 'SfContainerConfig.php');
+use JSoumelidis\SymfonyDI\Config\Config;
+use JSoumelidis\SymfonyDI\Config\ContainerFactory;
 
-// Load configuration
-$config = require __DIR__ . '/config.php';
+$config  = require realpath(__DIR__) . '/config.php';
+$factory = new ContainerFactory();
 
-return (new SfContainerConfig($config))->create();
+return $factory(new Config($config));
