@@ -4,6 +4,7 @@ return [
     'packages' => [
         'aura/di'                                        => '^3.2',
         'filp/whoops'                                    => '^2.1.7',
+        'jsoumelidis/zend-sf-di-config'                  => '^0.1',
         'xtreamwayz/pimple-container-interop'            => '^1.0',
         'zendframework/zend-expressive-aurarouter'       => '^2.0',
         'zendframework/zend-expressive-fastroute'        => '^2.0',
@@ -12,7 +13,6 @@ return [
         'zendframework/zend-expressive-zendrouter'       => '^2.0.1',
         'zendframework/zend-expressive-zendviewrenderer' => '^1.4',
         'zendframework/zend-servicemanager'              => '^3.3',
-        'jsoumelidis/zend-sf-di-config'                  => '^0.1',
     ],
 
     'require-dev' => [
@@ -104,13 +104,13 @@ return [
                         'jsoumelidis/zend-sf-di-config',
                     ],
                     'flat' => [
-                        'Resources/config/container-sf-di.php'     => 'config/container.php',
+                        'Resources/config/container-sf-di.php' => 'config/container.php',
                     ],
                     'modular' => [
-                        'Resources/config/container-sf-di.php'     => 'config/container.php',
+                        'Resources/config/container-sf-di.php' => 'config/container.php',
                     ],
                     'minimal' => [
-                        'Resources/config/container-sf-di.php'     => 'config/container.php',
+                        'Resources/config/container-sf-di.php' => 'config/container.php',
                     ],
                 ]
             ],
