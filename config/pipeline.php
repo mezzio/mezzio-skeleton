@@ -11,6 +11,8 @@ use Zend\Stratigility\Middleware\ErrorHandler;
  * Setup middleware pipeline:
  */
 
+/** @var \Zend\Expressive\Application $app */
+
 // The error handler should be the first (most outer) middleware to catch
 // all Exceptions.
 $app->pipe(ErrorHandler::class);
@@ -49,7 +51,7 @@ $app->pipe(UrlHelperMiddleware::class);
 // Register the dispatch middleware in the middleware pipeline
 $app->pipeDispatchMiddleware();
 
-// At this point, if no Response is return by any middleware, the
+// At this point, if no Response is returned by any middleware, the
 // NotFoundHandler kicks in; alternately, you can provide other fallback
 // middleware to execute.
 $app->pipe(NotFoundHandler::class);

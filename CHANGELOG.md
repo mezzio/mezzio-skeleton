@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.1.0 - TBD
+
+### Added
+
+- [#155](https://github.com/zendframework/zend-expressive-skeleton/pull/155)
+  adds $app typehinting in routes and pipeline config.
+
+### Changes
+
+- [#160](https://github.com/zendframework/zend-expressive-skeleton/pull/160)
+  switches to PSR-11 container references.
+
+- [#153](https://github.com/zendframework/zend-expressive-skeleton/pull/153),
+  [#163](https://github.com/zendframework/zend-expressive-skeleton/pull/163)
+  simplifies method of checking for static file requests.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#175](https://github.com/zendframework/zend-expressive-skeleton/pull/175)
+  adds an authentication fix for fast-cgi.
+
+- [#180](https://github.com/zendframework/zend-expressive-skeleton/pull/180)
+  fixes loading config files on IBMi.
+
 ## 2.0.4 - 2017-10-12
 
 ### Added

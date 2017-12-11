@@ -4,8 +4,8 @@ namespace AppTest\Action;
 
 use App\Action\HomePageAction;
 use App\Action\HomePageFactory;
-use Interop\Container\ContainerInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
