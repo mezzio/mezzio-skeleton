@@ -3,6 +3,7 @@
 return [
     'packages' => [
         'filp/whoops'                                    => '^2.1.12',
+        'jsoumelidis/zend-sf-di-config'                  => '^0.1',
         'northwoods/container'                           => '^1.2',
         'zendframework/zend-auradi-config'               => '^0.2',
         'zendframework/zend-expressive-aurarouter'       => '^2.0',
@@ -103,6 +104,21 @@ return [
                     ],
                     'minimal' => [
                         'Resources/config/container-auryn.php' => 'config/container.php',
+                    ],
+                ],
+                5 => [
+                    'name'     => 'Symfony DI Container',
+                    'packages' => [
+                        'jsoumelidis/zend-sf-di-config',
+                    ],
+                    'flat' => [
+                        'Resources/config/container-sf-di.php' => 'config/container.php',
+                    ],
+                    'modular' => [
+                        'Resources/config/container-sf-di.php' => 'config/container.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/container-sf-di.php' => 'config/container.php',
                     ],
                 ],
             ],

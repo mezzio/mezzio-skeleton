@@ -44,6 +44,7 @@
     "require-dev": {
         "composer/composer": "^1.5.2",
         "filp/whoops": "^2.1.12",
+        "jsoumelidis/zend-sf-di-config": "^0.1",
         "mikey179/vfsstream": "^1.6.5",
         "northwoods/container": "^1.2",
         "phpunit/phpunit": "^5.7.23 || ^6.4.3",
