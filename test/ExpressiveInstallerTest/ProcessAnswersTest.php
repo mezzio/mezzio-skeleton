@@ -79,10 +79,8 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $this->installer->removeDevDependencies();
 
         // @codingStandardsIgnoreStart
-        $this->io->write(Argument::containingString('Adding package <info>aura/di</info>'))->shouldBeCalled();
+        $this->io->write(Argument::containingString('Adding package <info>zendframework/zend-auradi-config</info>'))->shouldBeCalled();
         $this->io->write(Argument::containingString('Copying <info>config/container.php</info>'))->shouldBeCalled();
-        $this->io->write(Argument::containingString('Copying <info>config/ExpressiveAuraConfig.php</info>'))->shouldBeCalled();
-        $this->io->write(Argument::containingString('Copying <info>config/ExpressiveAuraDelegatorFactory.php</info>'))->shouldBeCalled();
         // @codingStandardsIgnoreEnd
 
         $config   = $this->getInstallerConfig($this->installer);
@@ -92,7 +90,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
 
         $this->assertTrue($result);
         $this->assertFileExists($this->projectRoot . '/config/container.php');
-        $this->assertPackage('aura/di', $this->installer);
+        $this->assertPackage('zendframework/zend-auradi-config', $this->installer);
     }
 
     public function testAnsweredWithPackage()
