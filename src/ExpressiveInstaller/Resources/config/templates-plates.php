@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Zend\Expressive\Plates\PlatesRendererFactory;
 use Zend\Expressive\Template\TemplateRendererInterface;
 

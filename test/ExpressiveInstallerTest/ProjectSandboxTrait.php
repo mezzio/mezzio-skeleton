@@ -5,6 +5,8 @@
  * @license   https://github.com/zendframework/zend-expressive-installer/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstallerTest;
 
 use App\Action\HomePageAction;
@@ -13,6 +15,7 @@ use DirectoryIterator;
 use ExpressiveInstaller\OptionalPackages;
 use PHPUnit\Framework\Assert;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
@@ -135,7 +138,7 @@ trait ProjectSandboxTrait
      * @param bool $stripNamespace Whether or not to strip the initial
      *     namespace when determining the path (ala PSR-4).
      */
-    protected function setUpAlternateAutoloader($appPath, $stripNamespace = false)
+    protected function setUpAlternateAutoloader(string $appPath, bool $stripNamespace = false)
     {
         $this->autoloader = function ($class) use ($appPath, $stripNamespace) {
             if (0 !== strpos($class, 'App\\')) {
@@ -198,9 +201,8 @@ trait ProjectSandboxTrait
      *
      * @param string $path Path to request within the application
      * @param bool $setupRoutes Whether or not to setup routes before dispatch
-     * @return Response
      */
-    protected function getAppResponse($path = '/', $setupRoutes = true)
+    protected function getAppResponse(string $path = '/', bool $setupRoutes = true) : ResponseInterface
     {
         $container = $this->getContainer();
 
@@ -234,11 +236,8 @@ trait ProjectSandboxTrait
 
     /**
      * Recursively copy the files from one tree to another.
-     *
-     * @param string $source Source tree to copy.
-     * @param string $target Target tree to copy into.
      */
-    protected function recursiveCopy($source, $target)
+    protected function recursiveCopy(string $source, string $target)
     {
         if (! is_dir($target)) {
             mkdir($target, 0777, true);
@@ -276,7 +275,7 @@ trait ProjectSandboxTrait
      *
      * @param string $target Tree to remove.
      */
-    protected function recursiveDelete($target)
+    protected function recursiveDelete(string $target)
     {
         if (! is_dir($target)) {
             return;

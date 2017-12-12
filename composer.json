@@ -32,22 +32,22 @@
         "forum": "https://discourse.zendframework.com/c/questions/expressive"
     },
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.1",
         "http-interop/http-middleware": "^0.4.1",
         "roave/security-advisories": "dev-master",
         "zendframework/zend-component-installer": "^1.0",
         "zendframework/zend-config-aggregator": "^1.0",
-        "zendframework/zend-expressive": "^2.0.5",
+        "zendframework/zend-expressive": "^2.1.0",
         "zendframework/zend-expressive-helpers": "^4.0",
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
-        "composer/composer": "^1.5.2",
+        "composer/composer": "^1.5",
         "filp/whoops": "^2.1.12",
         "jsoumelidis/zend-sf-di-config": "^0.1",
         "mikey179/vfsstream": "^1.6.5",
         "northwoods/container": "^1.2",
-        "phpunit/phpunit": "^5.7.23 || ^6.4.3",
+        "phpunit/phpunit": "^6.5.4",
         "squizlabs/php_codesniffer": "^2.9.1",
         "zendframework/zend-auradi-config": "^0.2",
         "zendframework/zend-coding-standard": "~1.0.0",

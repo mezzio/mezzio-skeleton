@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use JSoumelidis\SymfonyDI\Config\Config;
 use JSoumelidis\SymfonyDI\Config\ContainerFactory;
 

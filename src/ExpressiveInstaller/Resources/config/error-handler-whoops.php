@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Development-only configuration.
  *
@@ -9,6 +8,8 @@
  * Developers on your team will then automatically enable them by calling on
  * `composer development-enable`.
  */
+
+declare(strict_types=1);
 
 use Zend\Expressive\Container;
 use Zend\Expressive\Middleware\ErrorResponseGenerator;

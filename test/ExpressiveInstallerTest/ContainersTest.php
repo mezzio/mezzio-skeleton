@@ -5,6 +5,8 @@
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstallerTest;
 
 use Aura\Di\Container as AuraContainer;
@@ -44,21 +46,14 @@ class ContainersTest extends OptionalPackagesTestCase
      * @runInSeparateProcess
      *
      * @dataProvider containerProvider
-     *
-     * @param string $installType
-     * @param int $containerOption
-     * @param int $routerOption
-     * @param string $copyFilesKey
-     * @param int $expectedResponseStatusCode
-     * @param string $expectedContainer
      */
     public function testContainer(
-        $installType,
-        $containerOption,
-        $routerOption,
-        $copyFilesKey,
-        $expectedResponseStatusCode,
-        $expectedContainer
+        string $installType,
+        int $containerOption,
+        int $routerOption,
+        string $copyFilesKey,
+        int $expectedResponseStatusCode,
+        string $expectedContainer
     ) {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
@@ -92,7 +87,7 @@ class ContainersTest extends OptionalPackagesTestCase
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
-    public function containerProvider()
+    public function containerProvider() : array
     {
         // @codingStandardsIgnoreStart
         // $installType, $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
