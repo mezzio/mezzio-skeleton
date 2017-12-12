@@ -52,7 +52,7 @@ abstract class OptionalPackagesTestCase extends TestCase
      *
      * @throws AssertionFailedError
      */
-    public static function assertPackage(string $package, OptionalPackages $installer, ?string $message = null)
+    public static function assertPackage(string $package, OptionalPackages $installer, string $message = null)
     {
         $message = $message ?: sprintf('Failed asserting that package "%s" is present in the installer', $package);
         $found   = false;
@@ -74,7 +74,7 @@ abstract class OptionalPackagesTestCase extends TestCase
      *
      * @throws AssertionFailedError
      */
-    public static function assertNotPackage(string $package, OptionalPackages $installer, ?string $message = null)
+    public static function assertNotPackage(string $package, OptionalPackages $installer, string $message = null)
     {
         $message = $message ?: sprintf('Failed asserting that package "%s" is absent from the installer', $package);
         $found   = false;
@@ -97,7 +97,7 @@ abstract class OptionalPackagesTestCase extends TestCase
      * @param string[] $packages
      * @throws AssertionFailedError
      */
-    public static function assertPackages(array $packages, OptionalPackages $installer, ?string $message = null)
+    public static function assertPackages(array $packages, OptionalPackages $installer, string $message = null)
     {
         foreach ($packages as $package) {
             self::assertPackage($package, $installer, $message);
@@ -110,7 +110,7 @@ abstract class OptionalPackagesTestCase extends TestCase
      * @param string[] $packages
      * @throws AssertionFailedError
      */
-    public static function assertNotPackages(array $packages, OptionalPackages $installer, ?string $message = null)
+    public static function assertNotPackages(array $packages, OptionalPackages $installer, string $message = null)
     {
         foreach ($packages as $package) {
             self::assertNotPackage($package, $installer, $message);
@@ -134,7 +134,7 @@ abstract class OptionalPackagesTestCase extends TestCase
      * Creates the IOInterface and Composer mock instances when doing so,
      * and uses the provided $projectRoot, if specified.
      */
-    protected function createOptionalPackages(?string $projectRoot = null) : OptionalPackages
+    protected function createOptionalPackages(string $projectRoot = null) : OptionalPackages
     {
         $projectRoot = $projectRoot ?: $this->packageRoot;
 

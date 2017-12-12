@@ -177,7 +177,7 @@ class OptionalPackages
         $installer->finalizePackage();
     }
 
-    public function __construct(IOInterface $io, Composer $composer, ?string $projectRoot = null)
+    public function __construct(IOInterface $io, Composer $composer, string $projectRoot = null)
     {
         $this->io = $io;
         $this->composer = $composer;
