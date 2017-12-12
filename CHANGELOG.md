@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#182](https://github.com/zendframework/zend-expressive-skeleton/pull/182)
   adds Symfony DI container support.
 
+- [#185](https://github.com/zendframework/zend-expressive-skeleton/pull/185)
+  adds PSR-15 support.
+
 ### Changed
 
 - [#177](https://github.com/zendframework/zend-expressive-skeleton/pull/177)
