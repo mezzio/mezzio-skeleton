@@ -9,6 +9,9 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#161](https://github.com/zendframework/zend-expressive-skeleton/pull/161)
   adds support for Auryn to be used as a container via a wrapper.
 
+- [#182](https://github.com/zendframework/zend-expressive-skeleton/pull/182)
+  adds Symfony DI container support.
+
 ### Changed
 
 - [#177](https://github.com/zendframework/zend-expressive-skeleton/pull/177)
