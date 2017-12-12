@@ -23,7 +23,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#183](https://github.com/zendframework/zend-pimple-config/pull/183)
+  removes support for PHP versions prior to PHP 7.1.
 
 ### Fixed
 
