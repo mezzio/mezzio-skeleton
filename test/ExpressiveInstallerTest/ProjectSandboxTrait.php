@@ -13,6 +13,7 @@ use App\Action\HomePageAction;
 use App\Action\PingAction;
 use DirectoryIterator;
 use ExpressiveInstaller\OptionalPackages;
+use Interop\Http\Server\RequestHandlerInterface;
 use PHPUnit\Framework\Assert;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -209,6 +210,8 @@ trait ProjectSandboxTrait
         /** @var Application $app */
         $app = $container->get(Application::class);
 
+        $handler = $this->prophesize(RequestHandlerInterface::class);
+
         // Import programmatic/declarative middleware pipeline and routing configuration statements
         $app->pipe(ErrorHandler::class);
         $app->pipe(ServerUrlMiddleware::class);
@@ -227,10 +230,9 @@ trait ProjectSandboxTrait
             $app->get('/api/ping', PingAction::class, 'api.ping');
         }
 
-        return $app(
+        return $app->process(
             new ServerRequest([], [], 'https://example.com' . $path, 'GET'),
-            new Response(),
-            $app->getDefaultDelegate()
+            $handler->reveal()
         );
     }
 
