@@ -42,12 +42,12 @@
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
-        "aura/di": "^3.4",
         "composer/composer": "^1.5.2",
         "filp/whoops": "^2.1.12",
         "mikey179/vfsstream": "^1.6.5",
         "phpunit/phpunit": "^5.7.23 || ^6.4.3",
         "squizlabs/php_codesniffer": "^2.9.1",
+        "zendframework/zend-auradi-config": "^0.2",
         "zendframework/zend-coding-standard": "~1.0.0",
         "zendframework/zend-expressive-aurarouter": "^2.0",
         "zendframework/zend-expressive-fastroute": "^2.0",
