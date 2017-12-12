@@ -5,6 +5,8 @@
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstallerTest;
 
 use App\Action\HomePageAction;
@@ -59,23 +61,15 @@ class RoutersTest extends OptionalPackagesTestCase
      * @runInSeparateProcess
      *
      * @dataProvider routerProvider
-     *
-     * @param string $installType
-     * @param int $containerOption
-     * @param int $routerOption
-     * @param string $copyFilesKey
-     * @param int $expectedResponseStatusCode
-     * @param array $expectedRoutes
-     * @param string $expectedRouter
      */
     public function testRouter(
-        $installType,
-        $containerOption,
-        $routerOption,
-        $copyFilesKey,
-        $expectedResponseStatusCode,
+        string $installType,
+        int $containerOption,
+        int $routerOption,
+        string $copyFilesKey,
+        int $expectedResponseStatusCode,
         array $expectedRoutes,
-        $expectedRouter
+        string $expectedRouter
     ) {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
@@ -127,7 +121,7 @@ class RoutersTest extends OptionalPackagesTestCase
         }
     }
 
-    public function routerProvider()
+    public function routerProvider() : array
     {
         // @codingStandardsIgnoreStart
         // $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter

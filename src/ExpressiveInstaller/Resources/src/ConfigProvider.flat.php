@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 /**
@@ -27,10 +29,8 @@ class ConfigProvider
 
     /**
      * Returns the container dependencies
-     *
-     * @return array
      */
-    public function getDependencies()
+    public function getDependencies() : array
     {
         return [
             'invokables' => [
@@ -44,10 +44,8 @@ class ConfigProvider
 
     /**
      * Returns the templates configuration
-     *
-     * @return array
      */
-    public function getTemplates()
+    public function getTemplates() : array
     {
         return [
             'paths' => [

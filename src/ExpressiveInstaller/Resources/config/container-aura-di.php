@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Zend\AuraDi\Config\Config;
 use Zend\AuraDi\Config\ContainerFactory;
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Zend\Expressive\Application;
 use Zend\Expressive\Container;
 use Zend\Expressive\Delegate;
