@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#183](https://github.com/zendframework/zend-pimple-config/pull/183)
+- [#183](https://github.com/zendframework/zend-expressive-skeleton/pull/183)
   removes support for PHP versions prior to PHP 7.1.
 
 ### Fixed

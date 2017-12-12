@@ -336,6 +336,9 @@ class OptionalPackages
 
     /**
      * Prompt for a single optional installation package.
+     *
+     * @param string $questionName Name of question
+     * @param array $question Question details from configuration
      */
     public function promptForOptionalPackage(string $questionName, array $question) : void
     {
@@ -418,7 +421,6 @@ class OptionalPackages
     /**
      * Process the answer of a question
      *
-     * @param array $question
      * @param string|int $answer
      */
     public function processAnswer(array $question, $answer) : bool
@@ -579,8 +581,7 @@ class OptionalPackages
     /**
      * Prepare and ask questions and return the answer
      *
-     * @param array $question
-     * @param string|int $defaultOption
+     * @param int|string $defaultOption
      * @return bool|int|string
      * @codeCoverageIgnore
      */

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use ArrayObject;
 use Northwoods\Container\InjectorBuilder;
 use Northwoods\Container\Config;
 use Psr\Container\ContainerInterface;

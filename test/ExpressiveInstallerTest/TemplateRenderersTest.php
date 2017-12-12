@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
+use Generator;
 use Zend\Expressive;
 use Zend\Stratigility\Middleware;
 
@@ -100,7 +101,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         }
     }
 
-    public function templateRendererProvider() : \Generator
+    public function templateRendererProvider() : Generator
     {
         // @codingStandardsIgnoreStart
         // Minimal framework installation test cases; no templates installed.
