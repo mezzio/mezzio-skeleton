@@ -104,6 +104,7 @@ class OptionalPackages
         'composer/composer',
         'filp/whoops',
         'mikey179/vfsstream',
+        'northwoods/container',
         'zendframework/zend-auradi-config',
         'zendframework/zend-coding-standard',
         'zendframework/zend-expressive-aurarouter',

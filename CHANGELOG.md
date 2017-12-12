@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#161](https://github.com/zendframework/zend-expressive-skeleton/pull/161)
+  adds support for Auryn to be used as a container via a wrapper.
 
 ### Changed
 
