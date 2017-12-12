@@ -103,6 +103,7 @@ class OptionalPackages
     private $devDependencies = [
         'composer/composer',
         'filp/whoops',
+        'jsoumelidis/zend-sf-di-config',
         'mikey179/vfsstream',
         'northwoods/container',
         'zendframework/zend-auradi-config',
