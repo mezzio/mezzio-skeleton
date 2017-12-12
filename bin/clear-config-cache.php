@@ -9,6 +9,8 @@
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 chdir(__DIR__ . '/../');
 
 require 'vendor/autoload.php';

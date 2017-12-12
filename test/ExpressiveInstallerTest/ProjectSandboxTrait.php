@@ -5,6 +5,8 @@
  * @license   https://github.com/zendframework/zend-expressive-installer/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstallerTest;
 
 use App\Action\HomePageAction;

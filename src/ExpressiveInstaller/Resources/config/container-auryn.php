@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Northwoods\Container\InjectorBuilder;
 use Northwoods\Container\Config;
 use Psr\Container\ContainerInterface;

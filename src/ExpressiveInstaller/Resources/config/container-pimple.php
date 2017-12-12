@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Zend\Pimple\Config\Config;
 use Zend\Pimple\Config\ContainerFactory;
 
