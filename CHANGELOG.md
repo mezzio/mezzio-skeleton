@@ -23,7 +23,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#181](https://github.com/zendframework/zend-expressive-skeleton/pull/181)
+  fixes composer serve command for WSL.
 
 ## 2.1.0 - 2017-12-11
 
