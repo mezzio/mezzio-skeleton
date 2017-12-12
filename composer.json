@@ -32,13 +32,15 @@
         "forum": "https://discourse.zendframework.com/c/questions/expressive"
     },
     "require": {
+        "zendframework/zend-stratigility": "^3.0.0-dev",
+        "zendframework/zend-expressive-router": "^3.0.0-dev",
+        "zendframework/zend-expressive-template": "^2.0.0-dev",
         "php": "^7.1",
-        "http-interop/http-middleware": "^0.4.1",
         "roave/security-advisories": "dev-master",
         "zendframework/zend-component-installer": "^1.0",
         "zendframework/zend-config-aggregator": "^1.0",
-        "zendframework/zend-expressive": "^2.1.0",
-        "zendframework/zend-expressive-helpers": "^4.0",
+        "zendframework/zend-expressive": "^3.0.0-dev",
+        "zendframework/zend-expressive-helpers": "^5.0.0-dev",
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
@@ -51,12 +53,12 @@
         "squizlabs/php_codesniffer": "^2.9.1",
         "zendframework/zend-auradi-config": "^0.2",
         "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-expressive-aurarouter": "^2.0",
-        "zendframework/zend-expressive-fastroute": "^2.0",
-        "zendframework/zend-expressive-platesrenderer": "^1.3",
-        "zendframework/zend-expressive-twigrenderer": "^1.4",
-        "zendframework/zend-expressive-zendrouter": "^2.0.1",
-        "zendframework/zend-expressive-zendviewrenderer": "^1.4",
+        "zendframework/zend-expressive-aurarouter": "^3.0.0-dev",
+        "zendframework/zend-expressive-fastroute": "^3.0.0-dev",
+        "zendframework/zend-expressive-platesrenderer": "^2.0.0-dev",
+        "zendframework/zend-expressive-twigrenderer": "^2.0.0-dev",
+        "zendframework/zend-expressive-zendrouter": "^3.0.0-dev",
+        "zendframework/zend-expressive-zendviewrenderer": "^2.0.0-dev",
         "zendframework/zend-pimple-config": "^0.2",
         "zendframework/zend-servicemanager": "^3.3",
         "zfcampus/zf-development-mode": "^3.1"

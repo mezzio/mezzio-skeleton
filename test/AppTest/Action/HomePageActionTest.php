@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AppTest\Action;
 
 use App\Action\HomePageAction;
-use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\Server\RequestHandlerInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Http\Message\ServerRequestInterface;
@@ -29,7 +29,7 @@ class HomePageActionTest extends TestCase
         $homePage = new HomePageAction($this->router->reveal(), null);
         $response = $homePage->process(
             $this->prophesize(ServerRequestInterface::class)->reveal(),
-            $this->prophesize(DelegateInterface::class)->reveal()
+            $this->prophesize(RequestHandlerInterface::class)->reveal()
         );
 
         $this->assertInstanceOf(JsonResponse::class, $response);
@@ -46,7 +46,7 @@ class HomePageActionTest extends TestCase
 
         $response = $homePage->process(
             $this->prophesize(ServerRequestInterface::class)->reveal(),
-            $this->prophesize(DelegateInterface::class)->reveal()
+            $this->prophesize(RequestHandlerInterface::class)->reveal()
         );
 
         $this->assertInstanceOf(HtmlResponse::class, $response);

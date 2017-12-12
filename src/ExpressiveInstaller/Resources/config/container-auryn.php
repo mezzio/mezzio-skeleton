@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use ArrayObject;
 use Northwoods\Container\InjectorBuilder;
 use Northwoods\Container\Config;
 use Psr\Container\ContainerInterface;
@@ -18,10 +17,10 @@ $builder = new InjectorBuilder([
 /** @var \Auryn\Injector */
 $injector = $builder->build();
 
-$injector->share('config')->delegate('config', function () use ($config) : ArrayObject {
+$injector->share('config')->delegate('config', function () use ($config) : \ArrayObject {
     // Auryn requires that all injections resolve to an object.
     // Wrap the config array with an ArrayObject to appease the gods.
-    return new ArrayObject($config);
+    return new \ArrayObject($config);
 });
 
 return $injector->make(ContainerInterface::class);
