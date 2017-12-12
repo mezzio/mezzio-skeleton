@@ -3,6 +3,7 @@
 return [
     'packages' => [
         'filp/whoops'                                    => '^2.1.12',
+        'northwoods/container'                           => '^1.2',
         'zendframework/zend-auradi-config'               => '^0.2',
         'zendframework/zend-expressive-aurarouter'       => '^2.0',
         'zendframework/zend-expressive-fastroute'        => '^2.0',
@@ -87,6 +88,21 @@ return [
                     ],
                     'minimal' => [
                         'Resources/config/container-zend-servicemanager.php' => 'config/container.php',
+                    ],
+                ],
+                4 => [
+                    'name'     => 'Auryn',
+                    'packages' => [
+                        'northwoods/container',
+                    ],
+                    'flat' => [
+                        'Resources/config/container-auryn.php' => 'config/container.php',
+                    ],
+                    'modular' => [
+                        'Resources/config/container-auryn.php' => 'config/container.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/container-auryn.php' => 'config/container.php',
                     ],
                 ],
             ],
