@@ -109,9 +109,9 @@ class ContainersTest extends OptionalPackagesTestCase
             'auryn-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, AurynContainer::class],
             'auryn-flat'      => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, AurynContainer::class],
             'auryn-modular'   => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, AurynContainer::class],
-            'sf-di-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, SfContainerBuilder::class],
-            'sf-di-flat'      => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, SfContainerBuilder::class],
-            'sf-di-modular'   => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, SfContainerBuilder::class],
+            'sf-di-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 5, 2, 'minimal-files', 404, SfContainerBuilder::class],
+            'sf-di-flat'      => [OptionalPackages::INSTALL_FLAT,    5, 2, 'copy-files', 200, SfContainerBuilder::class],
+            'sf-di-modular'   => [OptionalPackages::INSTALL_MODULAR, 5, 2, 'copy-files', 200, SfContainerBuilder::class],
         ];
         // @codingStandardsIgnoreEnd
     }
