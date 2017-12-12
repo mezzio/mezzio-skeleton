@@ -10,7 +10,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#177](https://github.com/zendframework/zend-expressive-skeleton/pull/177)
+  moves Aura.Di and Pimple container configuration to separate repositories.
 
 ### Deprecated
 
