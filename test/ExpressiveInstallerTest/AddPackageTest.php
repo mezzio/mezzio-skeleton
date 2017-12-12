@@ -17,12 +17,8 @@ class AddPackageTest extends OptionalPackagesTestCase
 {
     /**
      * @dataProvider packageProvider
-     *
-     * @param string $packageName
-     * @param string $packageVersion
-     * @param null|int $expectedStability
      */
-    public function testAddPackage($packageName, $packageVersion, $expectedStability)
+    public function testAddPackage(string $packageName, string $packageVersion, ?int $expectedStability)
     {
         $installer = $this->createOptionalPackages();
 
@@ -50,7 +46,7 @@ class AddPackageTest extends OptionalPackagesTestCase
         }
     }
 
-    public function packageProvider()
+    public function packageProvider() : array
     {
         // $packageName, $packageVersion, $expectedStability
         return [

@@ -66,17 +66,12 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
      * @runInSeparateProcess
      *
      * @dataProvider errorHandlerProvider
-     *
-     * @param string $installType
-     * @param int $containerOption
-     * @param int $errorHandlerOption
-     * @param string $expectedErrorHandler
      */
     public function testErrorHandler(
-        $installType,
-        $containerOption,
-        $errorHandlerOption,
-        $expectedErrorHandler
+        string $installType,
+        int $containerOption,
+        int $errorHandlerOption,
+        string $expectedErrorHandler
     ) {
         $this->prepareSandboxForInstallType($installType, $this->installer);
         $config = $this->getInstallerConfig($this->installer);
@@ -111,7 +106,7 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
         );
     }
 
-    public function errorHandlerProvider()
+    public function errorHandlerProvider() : array
     {
         // $installType, $containerOption, $errorHandlerOption, $expectedErrorHandler
         return [

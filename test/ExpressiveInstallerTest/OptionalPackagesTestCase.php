@@ -14,6 +14,7 @@ use Composer\IO\IOInterface;
 use Composer\Package\BasePackage;
 use Composer\Package\RootPackage;
 use ExpressiveInstaller\OptionalPackages;
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use ReflectionClass;
@@ -49,12 +50,9 @@ abstract class OptionalPackagesTestCase extends TestCase
     /**
      * Assert that the installer contains a specification for the package.
      *
-     * @param string $package
-     * @param OptionalPackages $installer
-     * @param null|string $message
-     * @throws \PHPUnit_Framework_AssertionFailedError
+     * @throws AssertionFailedError
      */
-    public static function assertPackage($package, OptionalPackages $installer, $message = null)
+    public static function assertPackage(string $package, OptionalPackages $installer, ?string $message = null)
     {
         $message = $message ?: sprintf('Failed asserting that package "%s" is present in the installer', $package);
         $found   = false;
@@ -74,12 +72,9 @@ abstract class OptionalPackagesTestCase extends TestCase
     /**
      * Assert that the installer DOES NOT contain a specification for the package.
      *
-     * @param string $package
-     * @param OptionalPackages $installer
-     * @param null|string $message
-     * @throws \PHPUnit_Framework_AssertionFailedError
+     * @throws AssertionFailedError
      */
-    public static function assertNotPackage($package, OptionalPackages $installer, $message = null)
+    public static function assertNotPackage(string $package, OptionalPackages $installer, ?string $message = null)
     {
         $message = $message ?: sprintf('Failed asserting that package "%s" is absent from the installer', $package);
         $found   = false;
@@ -100,11 +95,9 @@ abstract class OptionalPackagesTestCase extends TestCase
      * Assert that the installer DOES NOT contain a specification for each package in the list.
      *
      * @param string[] $packages
-     * @param OptionalPackages $installer
-     * @param null|string $message
-     * @throws \PHPUnit_Framework_AssertionFailedError
+     * @throws AssertionFailedError
      */
-    public static function assertPackages(array $packages, OptionalPackages $installer, $message = null)
+    public static function assertPackages(array $packages, OptionalPackages $installer, ?string $message = null)
     {
         foreach ($packages as $package) {
             self::assertPackage($package, $installer, $message);
@@ -115,11 +108,9 @@ abstract class OptionalPackagesTestCase extends TestCase
      * Assert that the installer contains a specification for each package in the list.
      *
      * @param string[] $packages
-     * @param OptionalPackages $installer
-     * @param null|string $message
-     * @throws \PHPUnit_Framework_AssertionFailedError
+     * @throws AssertionFailedError
      */
-    public static function assertNotPackages(array $packages, OptionalPackages $installer, $message = null)
+    public static function assertNotPackages(array $packages, OptionalPackages $installer, ?string $message = null)
     {
         foreach ($packages as $package) {
             self::assertNotPackage($package, $installer, $message);
@@ -142,11 +133,8 @@ abstract class OptionalPackagesTestCase extends TestCase
      *
      * Creates the IOInterface and Composer mock instances when doing so,
      * and uses the provided $projectRoot, if specified.
-     *
-     * @param null|string $projectRoot
-     * @return OptionalPackages
      */
-    protected function createOptionalPackages($projectRoot = null)
+    protected function createOptionalPackages(?string $projectRoot = null) : OptionalPackages
     {
         $projectRoot = $projectRoot ?: $this->packageRoot;
 
@@ -188,11 +176,9 @@ abstract class OptionalPackagesTestCase extends TestCase
     /**
      * Retrieve a single property value from the installer.
      *
-     * @param OptionalPackages $installer
-     * @param string $property
      * @return mixed
      */
-    protected function getInstallerProperty(OptionalPackages $installer, $property)
+    protected function getInstallerProperty(OptionalPackages $installer, string $property)
     {
         $r = new ReflectionProperty($installer, $property);
         $r->setAccessible(true);
@@ -201,22 +187,16 @@ abstract class OptionalPackagesTestCase extends TestCase
 
     /**
      * Retrieve the stored composer data structure from an installer instance.
-     *
-     * @param OptionalPackages $installer
-     * @return array
      */
-    protected function getComposerDataFromInstaller(OptionalPackages $installer)
+    protected function getComposerDataFromInstaller(OptionalPackages $installer) : array
     {
         return $this->getInstallerProperty($installer, 'composerDefinition');
     }
 
     /**
      * Retrieve the stored resource configuration from an installer instance.
-     *
-     * @param OptionalPackages $installer
-     * @return array
      */
-    protected function getInstallerConfig(OptionalPackages $installer)
+    protected function getInstallerConfig(OptionalPackages $installer) : array
     {
         return $this->getInstallerProperty($installer, 'config');
     }

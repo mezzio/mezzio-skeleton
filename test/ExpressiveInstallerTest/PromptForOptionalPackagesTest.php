@@ -31,7 +31,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         copy($this->packageRoot . '/composer.json', $this->projectRoot . '/composer.json');
         putenv('COMPOSER=' . $this->projectRoot . '/composer.json');
 
-        $this->installer   = $this->createOptionalPackages($this->projectRoot);
+        $this->installer = $this->createOptionalPackages($this->projectRoot);
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
     }
 
@@ -55,18 +55,18 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 
     /**
      * @dataProvider promptCombinations
-     *
-     * @param string $questionName
-     * @param array $question
-     * @param int $selection
-     * @param array $expectedPackage
      */
-    public function testPromptForOptionalPackage($questionName, array $question, $selection, array $expectedPackage)
-    {
+    public function testPromptForOptionalPackage(
+        string $questionName,
+        array $question,
+        int $selection,
+        array $expectedPackage
+    ) {
         $this->io
             ->ask(
                 Argument::that(function ($arg) use ($question) {
                     PromptForOptionalPackagesTest::assertPromptText($question['question'], $arg);
+
                     return true;
                 }),
                 $question['default']
@@ -91,7 +91,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     public static function assertPromptText($expected, $argument)
     {
         $argument = is_array($argument) ? array_shift($argument) : $argument;
-        $message  = sprintf('Expected prompt not received: "%s"', $expected);
+        $message = sprintf('Expected prompt not received: "%s"', $expected);
         self::assertThat(false !== strpos($argument, $expected), self::isTrue(), $message);
     }
 }

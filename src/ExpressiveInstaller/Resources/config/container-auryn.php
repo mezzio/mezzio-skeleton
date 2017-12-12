@@ -17,7 +17,7 @@ $builder = new InjectorBuilder([
 /** @var \Auryn\Injector */
 $injector = $builder->build();
 
-$injector->share('config')->delegate('config', function () use ($config) {
+$injector->share('config')->delegate('config', function () use ($config) : ArrayObject {
     // Auryn requires that all injections resolve to an object.
     // Wrap the config array with an ArrayObject to appease the gods.
     return new ArrayObject($config);
