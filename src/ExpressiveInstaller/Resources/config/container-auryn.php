@@ -11,7 +11,7 @@ $config = require __DIR__ . '/config.php';
 
 $builder = new InjectorBuilder([
     new Config\ContainerConfig(),
-    new Config\ServiceConfig(isset($config['dependencies']) ? $config['dependencies'] : []),
+    new Config\ServiceConfig($config['dependencies'] ?? []),
 ]);
 
 /** @var \Auryn\Injector */
