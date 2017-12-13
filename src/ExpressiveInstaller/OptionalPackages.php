@@ -342,7 +342,7 @@ class OptionalPackages
      */
     public function promptForOptionalPackage(string $questionName, array $question) : void
     {
-        $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
+        $defaultOption = $question['default'] ?? 1;
         if (isset($this->composerDefinition['extra']['optional-packages'][$questionName])) {
             // Skip question, it's already answered
             return;
