@@ -31,8 +31,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#181](https://github.com/zendframework/zend-expressive-skeleton/pull/181)
-  fixes composer serve command for WSL.
+- [#195](https://github.com/zendframework/zend-expressive-skeleton/pull/195)
+  fixes unwanted installation of every dependency when installing a dev version
+  of the skeleton.
 
 ## 2.1.0 - 2017-12-11
 
