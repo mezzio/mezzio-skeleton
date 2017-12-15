@@ -729,11 +729,8 @@ class OptionalPackages
         $this->composerJson = new JsonFile($composerFile);
         $this->composerDefinition = $this->composerJson->read();
 
-        // Get root package
+        // Get root package or root alias package
         $this->rootPackage = $composer->getPackage();
-        while ($this->rootPackage instanceof AliasPackage) {
-            $this->rootPackage = $this->rootPackage->getAliasOf();
-        }
 
         // Get required packages
         $this->composerRequires    = $this->rootPackage->getRequires();
