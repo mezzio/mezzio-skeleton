@@ -13,7 +13,6 @@ use Composer\Composer;
 use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
-use Composer\Package\AliasPackage;
 use Composer\Package\BasePackage;
 use Composer\Package\Link;
 use Composer\Package\Version\VersionParser;
@@ -729,11 +728,8 @@ class OptionalPackages
         $this->composerJson = new JsonFile($composerFile);
         $this->composerDefinition = $this->composerJson->read();
 
-        // Get root package
+        // Get root package or root alias package
         $this->rootPackage = $composer->getPackage();
-        while ($this->rootPackage instanceof AliasPackage) {
-            $this->rootPackage = $this->rootPackage->getAliasOf();
-        }
 
         // Get required packages
         $this->composerRequires    = $this->rootPackage->getRequires();
