@@ -17,6 +17,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
+- [#197](https://github.com/zendframework/zend-expressive-skeleton/pull/197)
+  updates `public/index.php` to remove `call_user_func()` in favor of direct
+  callable invocation (e.g., `(function () { /* ... */ })()`).
+
 - [#177](https://github.com/zendframework/zend-expressive-skeleton/pull/177)
   moves Aura.Di and Pimple container configuration to separate repositories.
 

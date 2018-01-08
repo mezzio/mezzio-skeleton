@@ -13,7 +13,7 @@ require 'vendor/autoload.php';
 /**
  * Self-called anonymous function that creates its own scope and keep the global namespace clean.
  */
-call_user_func(function () {
+(function () {
     /** @var \Psr\Container\ContainerInterface $container */
     $container = require 'config/container.php';
 
@@ -26,4 +26,4 @@ call_user_func(function () {
     require 'config/routes.php';
 
     $app->run();
-});
+})();
