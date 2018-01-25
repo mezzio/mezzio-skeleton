@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-md-4">
         <h2>
-            <a href="https://docs.zendframework.com/zend-expressive/getting-started/features/" target="_blank">
+            <a href="https://docs.zendframework.com/zend-expressive/getting-started/features" target="_blank">
                 <i class="fa fa-refresh"></i> Agile &amp; Lean
             </a>
         </h2>
@@ -56,7 +56,7 @@
 <div class="row">
     <div class="col-md-4">
         <h2>
-            <a href="https://docs.zendframework.com/zend-expressive/features/container/intro/" target="_blank">
+            <a href="https://docs.zendframework.com/zend-expressive/features/container/intro" target="_blank">
                 <i class="fa fa-cube"></i> Containers
             </a>
         </h2>
@@ -69,7 +69,7 @@
 
     <div class="col-md-4">
         <h2>
-            <a href="https://docs.zendframework.com/zend-expressive/features/router/intro/" target="_blank">
+            <a href="https://docs.zendframework.com/zend-expressive/features/router/intro" target="_blank">
                 <i class="fa fa-plane"></i> Routers
             </a>
         </h2>
@@ -79,8 +79,8 @@
         </p>
         <?php if (isset($this->routerName)) : ?>
             <p>
-                <a href="<?php echo $this->routerDocs ?>" target="_blank">
-                    Get started with <?php echo $this->routerName ?>.
+                <a href="<?=$this->routerDocs?>" target="_blank">
+                    Get started with <?=$this->routerName?>.
                 </a>
             </p>
         <?php endif; ?>
@@ -88,7 +88,7 @@
 
     <div class="col-md-4">
         <h2>
-            <a href="https://docs.zendframework.com/zend-expressive/features/template/zend-view/" target="_blank">
+            <a href="https://docs.zendframework.com/zend-expressive/features/template/zend-view" target="_blank">
                 <i class="fa fa-files-o"></i> Templating
             </a>
         </h2>
@@ -100,8 +100,8 @@
         </p>
         <?php if (isset($this->templateName)) : ?>
             <p>
-                <a href="<?php echo $this->templateDocs ?>" target="_blank">
-                    Get started with <?php echo $this->templateName ?>.
+                <a href="<?=$this->templateDocs?>" target="_blank">
+                    Get started with <?=$this->templateName?>.
                 </a>
             </p>
         <?php endif; ?>
