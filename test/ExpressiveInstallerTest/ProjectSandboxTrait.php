@@ -24,7 +24,9 @@ use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
 use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
-use Zend\Expressive\Middleware\NotFoundHandler;
+use Zend\Expressive\Middleware\NotFoundMiddleware;
+use Zend\Expressive\Router\DispatchMiddleware;
+use Zend\Expressive\Router\PathBasedRoutingMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
 
 trait ProjectSandboxTrait
@@ -210,17 +212,15 @@ trait ProjectSandboxTrait
         /** @var Application $app */
         $app = $container->get(Application::class);
 
-        $handler = $this->prophesize(RequestHandlerInterface::class);
-
         // Import programmatic/declarative middleware pipeline and routing configuration statements
         $app->pipe(ErrorHandler::class);
         $app->pipe(ServerUrlMiddleware::class);
-        $app->pipeRoutingMiddleware();
+        $app->pipe(PathBasedRoutingMiddleware::class);
         $app->pipe(ImplicitHeadMiddleware::class);
         $app->pipe(ImplicitOptionsMiddleware::class);
         $app->pipe(UrlHelperMiddleware::class);
-        $app->pipeDispatchMiddleware();
-        $app->pipe(NotFoundHandler::class);
+        $app->pipe(DispatchMiddleware::class);
+        $app->pipe(NotFoundMiddleware::class);
 
         if ($setupRoutes === true && $container->has(HomePageAction::class)) {
             $app->get('/', HomePageAction::class, 'home');
@@ -230,9 +230,8 @@ trait ProjectSandboxTrait
             $app->get('/api/ping', PingAction::class, 'api.ping');
         }
 
-        return $app->process(
-            new ServerRequest([], [], 'https://example.com' . $path, 'GET'),
-            $handler->reveal()
+        return $app->handle(
+            new ServerRequest([], [], 'https://example.com' . $path, 'GET')
         );
     }
 
