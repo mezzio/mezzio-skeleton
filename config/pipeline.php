@@ -6,7 +6,7 @@ use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
 use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
-use Zend\Expressive\Middleware\NotFoundHandler;
+use Zend\Expressive\Middleware\NotFoundMiddleware;
 use Zend\Expressive\Router\DispatchMiddleware;
 use Zend\Expressive\Router\PathBasedRoutingMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
@@ -56,6 +56,6 @@ $app->pipe(UrlHelperMiddleware::class);
 $app->pipe(DispatchMiddleware::class);
 
 // At this point, if no Response is returned by any middleware, the
-// NotFoundHandler kicks in; alternately, you can provide other fallback
+// NotFoundMiddleware kicks in; alternately, you can provide other fallback
 // middleware to execute.
-$app->pipe(NotFoundHandler::class);
+$app->pipe(NotFoundMiddleware::class);

@@ -16,6 +16,9 @@ $aggregator = new ConfigAggregator([
     // Include cache configuration
     new ArrayProvider($cacheConfig),
 
+    \Zend\Expressive\Helper\ConfigProvider::class,
+    \Zend\Expressive\ConfigProvider::class,
+
     // Default App module config
     App\ConfigProvider::class,
 
