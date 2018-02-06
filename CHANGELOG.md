@@ -28,6 +28,13 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#201](https://github.com/zendframework/zend-expressive-skeleton/pull/201)
   updates the default assets to Bootstrap 4, jQuery 3.3.1 and Font-Awesome 5.
 
+- [#202](https://github.com/zendframework/zend-expressive-skeleton/pull/202),
+  [#205](https://github.com/zendframework/zend-expressive-skeleton/pull/205)
+  uses ConfigProviders to setup components. To make sure all ConfigProviders
+  are loaded you need to answer yes to all inject
+  `Zend\<component>\ConfigProvider` questions or do this once and select for
+  all other packages.
+
 ### Deprecated
 
 - Nothing.
