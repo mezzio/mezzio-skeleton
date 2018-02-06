@@ -8,7 +8,7 @@ return [
         'jsoumelidis/zend-sf-di-config'                  => '^0.1',
         'northwoods/container'                           => '^1.2',
         'zendframework/zend-auradi-config'               => '^1.0.0-dev',
-        'zendframework/zend-expressive-aurarouter'       => '^3.0.0alpha1 || ^3.0',
+        'zendframework/zend-expressive-aurarouter'       => '^3.0.0alpha2 || ^3.0',
         'zendframework/zend-expressive-fastroute'        => '^3.0.0alpha1 || ^3.0',
         'zendframework/zend-expressive-platesrenderer'   => '^2.0.0alpha1 || ^2.0',
         'zendframework/zend-expressive-twigrenderer'     => '^2.0.0alpha1 || ^2.0',
