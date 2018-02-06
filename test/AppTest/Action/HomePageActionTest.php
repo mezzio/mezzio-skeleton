@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace AppTest\Action;
 
 use App\Action\HomePageAction;
-use Interop\Http\Server\RequestHandlerInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Psr\Http\Message\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
