@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AppTest\Action;
 
 use App\Action\PingAction;
-use Interop\Http\Server\RequestHandlerInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
