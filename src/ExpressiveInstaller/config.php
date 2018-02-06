@@ -8,12 +8,12 @@ return [
         'jsoumelidis/zend-sf-di-config'                  => '^0.1',
         'northwoods/container'                           => '^1.2',
         'zendframework/zend-auradi-config'               => '^1.0.0-dev',
-        'zendframework/zend-expressive-aurarouter'       => '^3.0.0-dev',
-        'zendframework/zend-expressive-fastroute'        => '^3.0.0-dev',
-        'zendframework/zend-expressive-platesrenderer'   => '^2.0.0-dev',
-        'zendframework/zend-expressive-twigrenderer'     => '^2.0.0-dev',
-        'zendframework/zend-expressive-zendrouter'       => '^3.0.0-dev',
-        'zendframework/zend-expressive-zendviewrenderer' => '^2.0.0-dev',
+        'zendframework/zend-expressive-aurarouter'       => '^3.0.0alpha1 || ^3.0',
+        'zendframework/zend-expressive-fastroute'        => '^3.0.0alpha1 || ^3.0',
+        'zendframework/zend-expressive-platesrenderer'   => '^2.0.0alpha1 || ^2.0',
+        'zendframework/zend-expressive-twigrenderer'     => '^2.0.0alpha1 || ^2.0',
+        'zendframework/zend-expressive-zendrouter'       => '^3.0.0alpha1 || ^3.0',
+        'zendframework/zend-expressive-zendviewrenderer' => '^2.0.0alpha1 || ^2.0',
         'zendframework/zend-pimple-config'               => '^1.0.0-dev',
         'zendframework/zend-servicemanager'              => '^3.3',
     ],
@@ -32,7 +32,7 @@ return [
         ],
         'modular' => [
             'packages' => [
-                'zendframework/zend-expressive-tooling' => '^1.0.0-dev',
+                'zendframework/zend-expressive-tooling' => '^1.0.0alpha1 || ^1.0',
             ],
             'resources' => [
                 'Resources/src/ConfigProvider.modular.php' => 'src/App/src/ConfigProvider.php',
