@@ -23,6 +23,12 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
      */
     private $installer;
 
+    private $templateConfigProviders = [
+        Expressive\Plates\PlatesRenderer::class => Expressive\Plates\ConfigProvider::class,
+        Expressive\Twig\TwigRenderer::class => Expressive\Twig\ConfigProvider::class,
+        Expressive\ZendView\ZendViewRenderer::class => Expressive\ZendView\ConfigProvider::class,
+    ];
+
     protected function setUp()
     {
         parent::setUp();
@@ -67,6 +73,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
             $routerOption
         );
         $this->assertTrue($routerResult);
+        $this->injectRouterConfigProvider();
 
         // Install template engine
         $templateEngineResult = $this->installer->processAnswer(
@@ -74,6 +81,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
             $templateRendererOption
         );
         $this->assertTrue($templateEngineResult);
+        $this->injectConfigProvider($expectedTemplateRenderer);
 
         // Test container
         $container = $this->getContainer();
@@ -136,5 +144,29 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
                 yield $name => $arguments;
             }
         }
+    }
+
+    public function injectRouterConfigProvider()
+    {
+        $configFile = $this->projectRoot . '/config/config.php';
+        $contents = file_get_contents($configFile);
+        $contents = preg_replace(
+            '/(new ConfigAggregator\(\[)/s',
+            '$1' . "\n    " . Expressive\Router\FastRouteRouter\ConfigProvider::class . "::class,\n",
+            $contents
+        );
+        file_put_contents($configFile, $contents);
+    }
+
+    public function injectConfigProvider(string $rendererClass)
+    {
+        $configFile = $this->projectRoot . '/config/config.php';
+        $contents = file_get_contents($configFile);
+        $contents = preg_replace(
+            '/(new ConfigAggregator\(\[)/s',
+            '$1' . "\n    " . $this->templateConfigProviders[$rendererClass] . "::class,\n",
+            $contents
+        );
+        file_put_contents($configFile, $contents);
     }
 }

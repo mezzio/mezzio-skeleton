@@ -42,6 +42,15 @@ class RoutersTest extends OptionalPackagesTestCase
      */
     private $installer;
 
+    /**
+     * @var string[]
+     */
+    private $routerConfigProviders = [
+        Router\AuraRouter::class      => Router\AuraRouter\ConfigProvider::class,
+        Router\FastRouteRouter::class => Router\FastRouteRouter\ConfigProvider::class,
+        Router\ZendRouter::class      => Router\ZendRouter\ConfigProvider::class,
+    ];
+
     protected function setUp()
     {
         parent::setUp();
@@ -67,6 +76,7 @@ class RoutersTest extends OptionalPackagesTestCase
         int $containerOption,
         int $routerOption,
         string $copyFilesKey,
+        string $dependencyKey,
         int $expectedResponseStatusCode,
         array $expectedRoutes,
         string $expectedRouter
@@ -87,6 +97,7 @@ class RoutersTest extends OptionalPackagesTestCase
             $routerOption
         );
         $this->assertTrue($routerResult);
+        $this->enableRouter($expectedRouter);
 
         // Test container
         $container = $this->getContainer();
@@ -96,7 +107,7 @@ class RoutersTest extends OptionalPackagesTestCase
         $config = $container->get('config');
         $this->assertEquals(
             $expectedRouter,
-            $config['dependencies']['invokables'][Router\RouterInterface::class]
+            $config['dependencies'][$dependencyKey][Router\RouterInterface::class]
         );
 
         // Test home page
@@ -124,18 +135,30 @@ class RoutersTest extends OptionalPackagesTestCase
     public function routerProvider() : array
     {
         // @codingStandardsIgnoreStart
-        // $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter
+        // $containerOption, $routerOption, $copyFilesKey, $dependencyKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter
         return [
-            'aura-minimal'        => [OptionalPackages::INSTALL_MINIMAL, 3, 1, 'minimal-files', 404, [], Router\AuraRouter::class],
-            'aura-flat'           => [OptionalPackages::INSTALL_FLAT, 3, 1, 'copy-files', 200, $this->expectedRoutes, Router\AuraRouter::class],
-            'aura-modular'        => [OptionalPackages::INSTALL_MODULAR, 3, 1, 'copy-files', 200, $this->expectedRoutes, Router\AuraRouter::class],
-            'fastroute-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, [], Router\FastRouteRouter::class],
-            'fastroute-flat'      => [OptionalPackages::INSTALL_FLAT, 3, 2, 'copy-files', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            'fastroute-modular'   => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            'zend-router-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 3, 'minimal-files', 404, [], Router\ZendRouter::class],
-            'zend-router-flat'    => [OptionalPackages::INSTALL_FLAT, 3, 3, 'copy-files', 200, $this->expectedRoutes, Router\ZendRouter::class],
-            'zend-router-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 3, 'copy-files', 200, $this->expectedRoutes, Router\ZendRouter::class],
+            'aura-minimal'        => [OptionalPackages::INSTALL_MINIMAL, 3, 1, 'minimal-files', 'aliases', 404, [], Router\AuraRouter::class],
+            'aura-flat'           => [OptionalPackages::INSTALL_FLAT, 3, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\AuraRouter::class],
+            'aura-modular'        => [OptionalPackages::INSTALL_MODULAR, 3, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\AuraRouter::class],
+            'fastroute-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 'aliases', 404, [], Router\FastRouteRouter::class],
+            'fastroute-flat'      => [OptionalPackages::INSTALL_FLAT, 3, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
+            'fastroute-modular'   => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
+            'zend-router-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 3, 'minimal-files', 'aliases', 404, [], Router\ZendRouter::class],
+            'zend-router-flat'    => [OptionalPackages::INSTALL_FLAT, 3, 3, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\ZendRouter::class],
+            'zend-router-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 3, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\ZendRouter::class],
         ];
         // @codingStandardsIgnoreEnd
+    }
+
+    public function enableRouter(string $expectedRouter)
+    {
+        $configFile = $this->projectRoot . '/config/config.php';
+        $contents = file_get_contents($configFile);
+        $contents = preg_replace(
+            '/(new ConfigAggregator\(\[)/s',
+            '$1' . "\n    " . $this->routerConfigProviders[$expectedRouter] . "::class,\n",
+            $contents
+        );
+        file_put_contents($configFile, $contents);
     }
 }

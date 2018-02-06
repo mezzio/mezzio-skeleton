@@ -72,6 +72,15 @@ class ContainersTest extends OptionalPackagesTestCase
         );
         $this->assertTrue($routerResult);
 
+        $configFile = $this->projectRoot . DIRECTORY_SEPARATOR . '/config/config.php';
+        $configFileContents = file_get_contents($configFile);
+        $configFileContents = preg_replace(
+            '/(new ConfigAggregator\(\[)/s',
+            '$1' . "\n    \Zend\Expressive\\Router\\FastRouteRouter\ConfigProvider::class,\n",
+            $configFileContents
+        );
+        file_put_contents($configFile, $configFileContents);
+
         // Test container
         $container = $this->getContainer();
         $this->assertInstanceOf(ContainerInterface::class, $container);
@@ -79,6 +88,7 @@ class ContainersTest extends OptionalPackagesTestCase
         $this->assertTrue($container->has(Expressive\Helper\UrlHelper::class));
         $this->assertTrue($container->has(Expressive\Helper\ServerUrlHelper::class));
         $this->assertTrue($container->has(Expressive\Application::class));
+        $this->assertTrue($container->has(Expressive\Router\RouterInterface::class));
 
         // Test home page
         $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
