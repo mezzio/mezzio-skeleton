@@ -19,11 +19,12 @@ require 'vendor/autoload.php';
 
     /** @var \Zend\Expressive\Application $app */
     $app = $container->get(\Zend\Expressive\Application::class);
+    $factory = $container->get(\Zend\Expressive\MiddlewareFactory::class);
 
-    // Import programmatic/declarative middleware pipeline and routing
+    // Execute programmatic/declarative middleware pipeline and routing
     // configuration statements
-    require 'config/pipeline.php';
-    require 'config/routes.php';
+    (require 'config/pipeline.php')($app, $factory, $container);
+    (require 'config/routes.php')($app, $factory, $container);
 
     $app->run();
 })();

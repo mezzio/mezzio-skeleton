@@ -1,4 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
+use Psr\Container\ContainerInterface;
+use Zend\Expressive\Application;
+use Zend\Expressive\MiddlewareFactory;
+
 /**
  * Setup routes with a single request method:
  *
@@ -12,7 +19,5 @@
  *
  * $app->route('/contact', App\Action\ContactAction::class, ['GET', 'POST', ...], 'contact');
  */
-
-declare(strict_types=1);
-
-/** @var \Zend\Expressive\Application $app */
+return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
+};
