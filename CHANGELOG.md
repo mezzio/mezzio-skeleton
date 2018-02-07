@@ -46,6 +46,11 @@ All notable changes to this project will be documented in this file, in reverse 
   along with features such as the `Zend\Stratigility\path()` and `host()`
   utility methods.
 
+- [#214](https://github.com/zendframework/zend-expressive-skeleton/pull/214)
+  renames the shipped "Action" namespace and classes to use the verbiage
+  "Handler" (for consistency with PSR-15), and be implemented as PSR-15
+  `RequestHandlerInterface` implementations.
+
 ### Deprecated
 
 - Nothing.

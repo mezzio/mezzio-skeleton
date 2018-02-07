@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Action;
+namespace App\Handler;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
@@ -16,7 +15,7 @@ use Zend\Expressive\Template;
 use Zend\Expressive\Twig\TwigRenderer;
 use Zend\Expressive\ZendView\ZendViewRenderer;
 
-class HomePageAction implements MiddlewareInterface
+class HomePageHandler implements RequestHandlerInterface
 {
     private $router;
 
@@ -28,7 +27,7 @@ class HomePageAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         if (! $this->template) {
             return new JsonResponse([

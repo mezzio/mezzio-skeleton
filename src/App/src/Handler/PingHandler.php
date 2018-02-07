@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Action;
+namespace App\Handler;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
-class PingAction implements MiddlewareInterface
+class PingHandler implements RequestHandlerInterface
 {
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         return new JsonResponse(['ack' => time()]);
     }

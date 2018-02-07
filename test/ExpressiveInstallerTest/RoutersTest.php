@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace ExpressiveInstallerTest;
 
-use App\Action\HomePageAction;
-use App\Action\PingAction;
+use App\Handler\HomePageHandler;
+use App\Handler\PingHandler;
 use ExpressiveInstaller\OptionalPackages;
 use Zend\Expressive\Application;
 use Zend\Expressive\Router;
@@ -26,13 +26,13 @@ class RoutersTest extends OptionalPackagesTestCase
         [
             'name'            => 'home',
             'path'            => '/',
-            'middleware'      => HomePageAction::class,
+            'middleware'      => HomePageHandler::class,
             'allowed_methods' => ['GET'],
         ],
         [
             'name'            => 'api.ping',
             'path'            => '/api/ping',
-            'middleware'      => PingAction::class,
+            'middleware'      => PingHandler::class,
             'allowed_methods' => ['GET'],
         ],
     ];
