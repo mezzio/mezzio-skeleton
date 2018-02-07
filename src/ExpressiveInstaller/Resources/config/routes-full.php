@@ -1,4 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
+use Psr\Container\ContainerInterface;
+use Zend\Expressive\Application;
+use Zend\Expressive\MiddlewareFactory;
+
 /**
  * Setup routes with a single request method:
  *
@@ -25,10 +32,7 @@
  *     'contact'
  * );
  */
-
-declare(strict_types=1);
-
-/** @var \Zend\Expressive\Application $app */
-
-$app->get('/', App\Action\HomePageAction::class, 'home');
-$app->get('/api/ping', App\Action\PingAction::class, 'api.ping');
+return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
+    $app->get('/', App\Action\HomePageAction::class, 'home');
+    $app->get('/api/ping', App\Action\PingAction::class, 'api.ping');
+};
