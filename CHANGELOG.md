@@ -20,6 +20,32 @@ All notable changes to this project will be documented in this file, in reverse 
   makes the zend-expressive-tooling package an explicit development requirement;
   it is no longer an optional package.
 
+- [#213](https://github.com/zendframework/zend-expressive-skeleton/pull/213)
+  updates how the `routes.php` and `pipeline.php` files are defined. They now
+  return anonymous functions with the following signature:
+
+  ```php
+  function (
+      Zend\Expressive\Application $app,
+      Zend\Expressive\MiddlewareFactory $factory,
+      Psr\Container\ContainerInterface $container
+  ) : void
+  ```
+
+  The `public/index.php` file now does the following:
+
+  ```php
+  $app = $container->get(\Zend\Expressive\Application::class);
+  $factory = $container->get(\Zend\Expressive\MiddlewareFactory::class);
+  (require 'config/pipeline.php')($app, $factory, $container);
+  (require 'config/routes.php')($app, $factory, $container);
+  ```
+
+  This approach allows users to pull other dependencies as needed, without
+  cluttering the global namespace, and to use the `MiddlewareFactory` features
+  along with features such as the `Zend\Stratigility\path()` and `host()`
+  utility methods.
+
 ### Deprecated
 
 - Nothing.
