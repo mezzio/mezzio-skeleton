@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace ExpressiveInstallerTest;
 
-use App\Action\HomePageAction;
-use App\Action\PingAction;
+use App\Handler\HomePageHandler;
+use App\Handler\PingHandler;
 use DirectoryIterator;
 use ExpressiveInstaller\OptionalPackages;
 use PHPUnit\Framework\Assert;
@@ -222,12 +222,12 @@ trait ProjectSandboxTrait
         $app->pipe(DispatchMiddleware::class);
         $app->pipe(NotFoundMiddleware::class);
 
-        if ($setupRoutes === true && $container->has(HomePageAction::class)) {
-            $app->get('/', HomePageAction::class, 'home');
+        if ($setupRoutes === true && $container->has(HomePageHandler::class)) {
+            $app->get('/', HomePageHandler::class, 'home');
         }
 
-        if ($setupRoutes === true && $container->has(PingAction::class)) {
-            $app->get('/api/ping', PingAction::class, 'api.ping');
+        if ($setupRoutes === true && $container->has(PingHandler::class)) {
+            $app->get('/api/ping', PingHandler::class, 'api.ping');
         }
 
         return $app->handle(

@@ -294,7 +294,7 @@ class OptionalPackages
             case self::INSTALL_FLAT:
                 // Re-arrange files into a flat structure.
                 $this->recursiveRmdir($this->projectRoot . '/src/App/templates');
-                rename($this->projectRoot . '/src/App/src/Action', $this->projectRoot . '/src/App/Action');
+                rename($this->projectRoot . '/src/App/src/Handler', $this->projectRoot . '/src/App/Handler');
                 $this->recursiveRmdir($this->projectRoot . '/src/App/src');
 
                 // Re-define autoloading rules
