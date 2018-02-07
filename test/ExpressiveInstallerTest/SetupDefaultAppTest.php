@@ -44,14 +44,4 @@ class SetupDefaultAppTest extends OptionalPackagesTestCase
             'zend-expressive-tooling package was not injected into composer.json'
         );
     }
-
-    public function testFlatInstallationDoesNotAddToolingSupport()
-    {
-        $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_FLAT, $this->installer);
-        $this->assertNotPackage(
-            'zendframework/zend-expressive-tooling',
-            $this->installer,
-            'zend-expressive-tooling package WAS injected into composer.json, but should not have been'
-        );
-    }
 }

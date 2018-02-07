@@ -20,7 +20,6 @@ return [
 
     'require-dev' => [
         'filp/whoops',
-        'zendframework/zend-expressive-tooling',
     ],
 
     'application' => [
@@ -32,7 +31,6 @@ return [
         ],
         'modular' => [
             'packages' => [
-                'zendframework/zend-expressive-tooling' => '^1.0.0alpha1 || ^1.0',
             ],
             'resources' => [
                 'Resources/src/ConfigProvider.modular.php' => 'src/App/src/ConfigProvider.php',
