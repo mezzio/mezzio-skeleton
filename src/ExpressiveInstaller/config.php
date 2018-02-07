@@ -13,7 +13,7 @@ return [
         'zendframework/zend-expressive-platesrenderer'   => '^2.0.0alpha1 || ^2.0',
         'zendframework/zend-expressive-twigrenderer'     => '^2.0.0alpha1 || ^2.0',
         'zendframework/zend-expressive-zendrouter'       => '^3.0.0alpha2 || ^3.0',
-        'zendframework/zend-expressive-zendviewrenderer' => '^2.0.0alpha1 || ^2.0',
+        'zendframework/zend-expressive-zendviewrenderer' => '^2.0.0alpha2 || ^2.0',
         'zendframework/zend-pimple-config'               => '^1.0.0-dev',
         'zendframework/zend-servicemanager'              => '^3.3',
     ],
