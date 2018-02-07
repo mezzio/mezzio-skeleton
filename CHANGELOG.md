@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.0.0alpha2 - TBD
+
+### Added
+
+- [#212](https://github.com/zendframework/zend-expressive-skeleton/pull/212)
+  adds the Composer script "expressive", which will invoke the "expressive"
+  command from the zend-expressive-tooling package:
+
+  ```bash
+  $ composer expressive help
+  ```
+
+### Changed
+
+- [#212](https://github.com/zendframework/zend-expressive-skeleton/pull/212)
+  makes the zend-expressive-tooling package an explicit development requirement;
+  it is no longer an optional package.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.0.0alpha1 - 2018-02-06
 
 ### Added

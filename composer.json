@@ -55,6 +55,7 @@
         "zendframework/zend-expressive-aurarouter": "^3.0.0alpha2",
         "zendframework/zend-expressive-fastroute": "^3.0.0alpha1",
         "zendframework/zend-expressive-platesrenderer": "^2.0.0alpha1",
+        "zendframework/zend-expressive-tooling": "^1.0.0alpha2",
         "zendframework/zend-expressive-twigrenderer": "^2.0.0alpha1",
         "zendframework/zend-expressive-zendrouter": "^3.0.0alpha2",
         "zendframework/zend-expressive-zendviewrenderer": "^2.0.0alpha2",
@@ -81,6 +82,7 @@
         "development-disable": "zf-development-mode disable",
         "development-enable": "zf-development-mode enable",
         "development-status": "zf-development-mode status",
+        "expressive": "expressive --ansi",
         "check": [
             "@cs-check",
             "@test"
