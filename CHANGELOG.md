@@ -32,6 +32,9 @@ All notable changes to this project will be documented in this file, in reverse 
   using an affected PHP version, you will need to manually start the PHP
   built-in server using the comand `php -S 0.0.0.0:8080 -t public/ public/index.php`.
 
+- [#217](https://github.com/zendframework/zend-expressive-skeleton/pull/217)
+  fixes a syntax error in the shipped `config/pipeline.php`.
+
 ## 3.0.0alpha2 - 2018-02-07
 
 ### Added
