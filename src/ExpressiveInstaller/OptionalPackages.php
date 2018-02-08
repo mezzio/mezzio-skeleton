@@ -269,7 +269,8 @@ class OptionalPackages
      */
     public function setInstallType(string $installType) : void
     {
-        $this->installType = in_array($installType, [
+        $this->installType =
+            in_array($installType, [
                 self::INSTALL_FLAT,
                 self::INSTALL_MINIMAL,
                 self::INSTALL_MODULAR,
@@ -370,6 +371,7 @@ class OptionalPackages
         $this->rootPackage->setStabilityFlags($this->stabilityFlags);
         $this->rootPackage->setAutoload($this->composerDefinition['autoload']);
         $this->rootPackage->setDevAutoload($this->composerDefinition['autoload-dev']);
+        $this->rootPackage->setExtra($this->composerDefinition['extra'] ?? []);
     }
 
     /**
@@ -428,7 +430,8 @@ class OptionalPackages
             // Add packages to install
             if (isset($question['options'][$answer]['packages'])) {
                 foreach ($question['options'][$answer]['packages'] as $packageName) {
-                    $this->addPackage($packageName, $this->config['packages'][$packageName]);
+                    $packageData = $this->config['packages'][$packageName];
+                    $this->addPackage($packageName, $packageData['version'], $packageData['whitelist'] ?? []);
                 }
             }
 
@@ -444,7 +447,7 @@ class OptionalPackages
         }
 
         if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, (string) $answer, $match)) {
-            $this->addPackage($match['name'], $match['version']);
+            $this->addPackage($match['name'], $match['version'], []);
             if (isset($question['custom-package-warning'])) {
                 $this->io->write(sprintf('  <warning>%s</warning>', $question['custom-package-warning']));
             }
@@ -458,7 +461,7 @@ class OptionalPackages
     /**
      * Add a package
      */
-    public function addPackage(string $packageName, string $packageVersion) : void
+    public function addPackage(string $packageName, string $packageVersion, array $whitelist = []) : void
     {
         $this->io->write(sprintf(
             '  - Adding package <info>%s</info> (<comment>%s</comment>)',
@@ -502,6 +505,13 @@ class OptionalPackages
             case 'RC':
                 $this->stabilityFlags[$packageName] = BasePackage::STABILITY_RC;
                 break;
+        }
+
+        // Whitelist packages for the component installer
+        foreach ($whitelist as $package) {
+            if (! in_array($package, $this->composerDefinition['extra']['zf']['component-whitelist'])) {
+                $this->composerDefinition['extra']['zf']['component-whitelist'][] = $package;
+            }
         }
     }
 

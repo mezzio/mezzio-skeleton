@@ -112,4 +112,25 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $this->assertFileNotExists($this->projectRoot . '/config/container.php');
         $this->assertPackage('league/container', $this->installer);
     }
+
+    public function testPackagesAreAddedToWhitelist()
+    {
+        // Prepare the installer
+        $this->installer->removeDevDependencies();
+
+        $this->io
+            ->write(Argument::containingString(
+                'Adding package <info>zendframework/zend-expressive-zendviewrenderer</info>'
+            ))
+            ->shouldBeCalled();
+
+        $config   = $this->getInstallerConfig($this->installer);
+        $question = $config['questions']['template-engine'];
+        $answer   = 3;
+        $result   = $this->installer->processAnswer($question, $answer);
+
+        $this->assertTrue($result);
+        $this->assertPackage('zendframework/zend-expressive-zendviewrenderer', $this->installer);
+        $this->assertWhitelisted('zendframework/zend-expressive-zendviewrenderer', $this->installer);
+    }
 }

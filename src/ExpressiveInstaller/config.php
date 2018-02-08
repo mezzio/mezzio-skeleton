@@ -4,18 +4,60 @@ declare(strict_types=1);
 
 return [
     'packages' => [
-        'filp/whoops'                                    => '^2.1.12',
-        'jsoumelidis/zend-sf-di-config'                  => '^0.1',
-        'northwoods/container'                           => '^1.2',
-        'zendframework/zend-auradi-config'               => '^1.0.0-dev',
-        'zendframework/zend-expressive-aurarouter'       => '^3.0.0alpha2 || ^3.0',
-        'zendframework/zend-expressive-fastroute'        => '^3.0.0alpha1 || ^3.0',
-        'zendframework/zend-expressive-platesrenderer'   => '^2.0.0alpha1 || ^2.0',
-        'zendframework/zend-expressive-twigrenderer'     => '^2.0.0alpha1 || ^2.0',
-        'zendframework/zend-expressive-zendrouter'       => '^3.0.0alpha2 || ^3.0',
-        'zendframework/zend-expressive-zendviewrenderer' => '^2.0.0alpha2 || ^2.0',
-        'zendframework/zend-pimple-config'               => '^1.0.0-dev',
-        'zendframework/zend-servicemanager'              => '^3.3',
+        'filp/whoops' => [
+            'version' => '^2.1.12',
+        ],
+        'jsoumelidis/zend-sf-di-config' => [
+            'version' => '^0.1',
+        ],
+        'northwoods/container' => [
+            'version' => '^1.2',
+        ],
+        'zendframework/zend-auradi-config' => [
+            'version' => '^1.0.0-dev',
+        ],
+        'zendframework/zend-expressive-aurarouter' => [
+            'version'   => '^3.0.0alpha2 || ^3.0',
+            'whitelist' => [
+                'zendframework/zend-expressive-aurarouter'
+            ]
+        ],
+        'zendframework/zend-expressive-fastroute' => [
+            'version'   => '^3.0.0alpha1 || ^3.0',
+            'whitelist' => [
+                'zendframework/zend-expressive-fastroute'
+            ]
+        ],
+        'zendframework/zend-expressive-platesrenderer' => [
+            'version'   => '^2.0.0alpha1 || ^2.0',
+            'whitelist' => [
+                'zendframework/zend-expressive-platesrenderer'
+            ]
+        ],
+        'zendframework/zend-expressive-twigrenderer' => [
+            'version'   => '^2.0.0alpha1 || ^2.0',
+            'whitelist' => [
+                'zendframework/zend-expressive-twigrenderer'
+            ]
+        ],
+        'zendframework/zend-expressive-zendrouter' => [
+            'version'   => '^3.0.0alpha2 || ^3.0',
+            'whitelist' => [
+                'zendframework/zend-expressive-zendrouter'
+            ]
+        ],
+        'zendframework/zend-expressive-zendviewrenderer' => [
+            'version'   => '^2.0.0alpha2 || ^2.0',
+            'whitelist' => [
+                'zendframework/zend-expressive-zendviewrenderer'
+            ]
+        ],
+        'zendframework/zend-pimple-config' => [
+            'version' => '^1.0.0-dev',
+        ],
+        'zendframework/zend-servicemanager' => [
+            'version' => '^3.3',
+        ],
     ],
 
     'require-dev' => [
