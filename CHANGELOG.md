@@ -24,7 +24,13 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#216](https://github.com/zendframework/zend-expressive-skeleton/pull/216)
+  updates the `composer serve command to read `php -S 0.0.0.0:8080 -t public/`.
+  This command has been tested to work across a variety of platforms, including
+  Windows, macOS, and Linux. However, for Linux users, the command will fail on
+  PHP versions prior to 7.1.14 and 7.2.2, due to a language bug. If you are
+  using an affected PHP version, you will need to manually start the PHP
+  built-in server using the comand `php -S 0.0.0.0:8080 -t public/ public/index.php`.
 
 ## 3.0.0alpha2 - 2018-02-07
 
