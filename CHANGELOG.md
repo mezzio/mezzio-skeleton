@@ -12,7 +12,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#199](https://github.com/zendframework/zend-expressive-skeleton/pull/199)
+  moves the location of the configuration cache from `data/config-cache.php` to
+  `data/cache/config-cache.php`. Since the shipped `composer clear-config-cache`
+  script and zf-development-mode both use the `$config['config_cache_path']`
+  setting to determine where the cache file lives, this should have no bearing
+  on normal, documented usage.
 
 ### Deprecated
 
