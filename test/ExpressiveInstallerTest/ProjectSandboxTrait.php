@@ -61,6 +61,7 @@ trait ProjectSandboxTrait
         $this->projectRoot = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('exp');
 
         mkdir($this->projectRoot . '/data', 0777, true);
+        mkdir($this->projectRoot . '/data/cache', 0777, true);
         foreach (['config', 'public', 'src', 'templates', 'test'] as $path) {
             $this->recursiveCopy(
                 $this->packageRoot . DIRECTORY_SEPARATOR . $path,
