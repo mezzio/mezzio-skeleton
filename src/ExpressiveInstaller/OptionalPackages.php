@@ -37,10 +37,12 @@ class OptionalPackages
     public const INSTALL_FLAT    = 'flat';
     public const INSTALL_MINIMAL = 'minimal';
     public const INSTALL_MODULAR = 'modular';
+
     /**
      * @const string Regular expression for matching package name and version
      */
     public const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
+
     /**
      * @const string Configuration file lines related to registering the default
      *     App module configuration.
