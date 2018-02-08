@@ -118,9 +118,11 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
-        // @codingStandardsIgnoreStart
-        $this->io->write(Argument::containingString('Adding package <info>zendframework/zend-expressive-zendviewrenderer</info>'))->shouldBeCalled();
-        // @codingStandardsIgnoreEnd
+        $this->io
+            ->write(Argument::containingString(
+                'Adding package <info>zendframework/zend-expressive-zendviewrenderer</info>'
+            ))
+            ->shouldBeCalled();
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['template-engine'];
