@@ -37,7 +37,10 @@ After choosing and installing the packages you want, go to the
 $ composer run --timeout=0 serve
 ```
 
-You can then browse to http://localhost:8080.
+You can then browse to http://localhost:8080. On PHP versions prior to 7.1.14 
+and 7.2.2 this command might not work and you need to start the 
+[built-in web server](http://php.net/manual/en/features.commandline.webserver.php) 
+yourself.
 
 > ### Setting a timeout
 >
