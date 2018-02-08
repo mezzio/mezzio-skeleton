@@ -117,6 +117,27 @@ abstract class OptionalPackagesTestCase extends TestCase
         }
     }
 
+    /**
+     * Assert that the installer contains a specification for the package.
+     *
+     * @throws AssertionFailedError
+     */
+    public static function assertWhitelisted(string $package, OptionalPackages $installer, string $message = null)
+    {
+        $message = $message ?: sprintf('Failed asserting that package "%s" is whitelisted in composer.json', $package);
+        $found   = false;
+
+        $r = new ReflectionProperty($installer, 'composerDefinition');
+        $r->setAccessible(true);
+        $whitelist = $r->getValue($installer)['extra']['zf']['component-whitelist'];
+
+        if (in_array($package, $whitelist)) {
+            $found = true;
+        }
+
+        self::assertThat($found, self::isTrue(), $message);
+    }
+
     protected function setUp()
     {
         $this->packageRoot = realpath(__DIR__ . '/../../');

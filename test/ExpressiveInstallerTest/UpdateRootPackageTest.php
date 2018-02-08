@@ -54,6 +54,7 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
         $this->rootPackage->setStabilityFlags($this->changes['stabilityFlags'])->shouldBeCalled();
         $this->rootPackage->setAutoload($this->changes['composerDefinition']['autoload'])->shouldBeCalled();
         $this->rootPackage->setDevAutoload($this->changes['composerDefinition']['autoload-dev'])->shouldBeCalled();
+        $this->rootPackage->setExtra([])->shouldBeCalled();
 
         $installer->updateRootPackage();
     }

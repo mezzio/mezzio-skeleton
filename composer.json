@@ -26,13 +26,7 @@
         "zf": {
             "component-whitelist": [
                 "zendframework/zend-expressive",
-                "zendframework/zend-expressive-aurarouter",
-                "zendframework/zend-expressive-fastroute",
                 "zendframework/zend-expressive-helpers",
-                "zendframework/zend-expressive-platesrenderer",
-                "zendframework/zend-expressive-twigrenderer",
-                "zendframework/zend-expressive-zendrouter",
-                "zendframework/zend-expressive-zendviewrenderer",
                 "zendframework/zend-httphandlerrunner"
             ]
         }
