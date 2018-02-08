@@ -178,7 +178,7 @@ class OptionalPackages
 
     public function __construct(IOInterface $io, Composer $composer, string $projectRoot = null)
     {
-        $this->io       = $io;
+        $this->io = $io;
         $this->composer = $composer;
 
         // Get composer.json location
@@ -259,7 +259,7 @@ class OptionalPackages
                 default:
                     // @codeCoverageIgnoreStart
                     $this->io->write('<error>Invalid answer</error>');
-                // @codeCoverageIgnoreEnd
+                    // @codeCoverageIgnoreEnd
             }
         }
     }
@@ -269,11 +269,12 @@ class OptionalPackages
      */
     public function setInstallType(string $installType) : void
     {
-        $this->installType = in_array($installType, [
-            self::INSTALL_FLAT,
-            self::INSTALL_MINIMAL,
-            self::INSTALL_MODULAR,
-        ], true)
+        $this->installType =
+            in_array($installType, [
+                self::INSTALL_FLAT,
+                self::INSTALL_MINIMAL,
+                self::INSTALL_MODULAR,
+            ], true)
             ? $installType
             : self::INSTALL_FLAT;
     }
@@ -288,7 +289,6 @@ class OptionalPackages
         switch ($this->installType) {
             case self::INSTALL_MINIMAL:
                 $this->removeDefaultModule();
-
                 // no files to copy
                 return;
 
@@ -338,7 +338,7 @@ class OptionalPackages
      * Prompt for a single optional installation package.
      *
      * @param string $questionName Name of question
-     * @param array  $question Question details from configuration
+     * @param array $question Question details from configuration
      */
     public function promptForOptionalPackage(string $questionName, array $question) : void
     {
@@ -520,7 +520,7 @@ class OptionalPackages
      *
      * @param string $resource Resource file.
      * @param string $target Destination.
-     * @param bool   $force Whether or not to copy over an existing file.
+     * @param bool $force Whether or not to copy over an existing file.
      */
     public function copyResource(string $resource, string $target, bool $force = false) : void
     {
@@ -725,8 +725,8 @@ class OptionalPackages
     private function removeAppModuleConfig() : void
     {
         $configFile = $this->projectRoot . '/config/config.php';
-        $contents   = file_get_contents($configFile);
-        $contents   = str_replace(self::APP_MODULE_CONFIG, '', $contents);
+        $contents = file_get_contents($configFile);
+        $contents = str_replace(self::APP_MODULE_CONFIG, '', $contents);
         file_put_contents($configFile, $contents);
     }
 
@@ -735,7 +735,7 @@ class OptionalPackages
      */
     private function parseComposerDefinition(Composer $composer, string $composerFile) : void
     {
-        $this->composerJson       = new JsonFile($composerFile);
+        $this->composerJson = new JsonFile($composerFile);
         $this->composerDefinition = $this->composerJson->read();
 
         // Get root package or root alias package
