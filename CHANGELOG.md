@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.0.0alpha3 - TBD
+
+### Added
+
+- [#215](https://github.com/zendframework/zend-expressive-skeleton/pull/215)
+  adds packages to the component installer whitelist to prevent ConfigProvider 
+  prompts.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.0.0alpha2 - 2018-02-07
 
 ### Added
