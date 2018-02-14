@@ -57,7 +57,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->pipe(DispatchMiddleware::class);
 
     // At this point, if no Response is returned by any middleware, the
-    // NotFoundMiddleware kicks in; alternately, you can provide other fallback
+    // NotFoundHandler kicks in; alternately, you can provide other fallback
     // middleware to execute.
     $app->pipe(NotFoundHandler::class);
 };
