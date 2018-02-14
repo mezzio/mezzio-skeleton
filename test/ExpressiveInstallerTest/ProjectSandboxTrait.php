@@ -15,18 +15,16 @@ use DirectoryIterator;
 use ExpressiveInstaller\OptionalPackages;
 use PHPUnit\Framework\Assert;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
 use Zend\Expressive\Handler\NotFoundHandler;
 use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
-use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
-use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
-use Zend\Expressive\Router\DispatchMiddleware;
-use Zend\Expressive\Router\PathBasedRoutingMiddleware;
+use Zend\Expressive\Router\Middleware\DispatchMiddleware;
+use Zend\Expressive\Router\Middleware\ImplicitHeadMiddleware;
+use Zend\Expressive\Router\Middleware\ImplicitOptionsMiddleware;
+use Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
 
 trait ProjectSandboxTrait
