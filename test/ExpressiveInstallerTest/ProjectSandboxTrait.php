@@ -20,11 +20,11 @@ use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
+use Zend\Expressive\Handler\NotFoundHandler;
 use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
 use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
-use Zend\Expressive\Middleware\NotFoundMiddleware;
 use Zend\Expressive\Router\DispatchMiddleware;
 use Zend\Expressive\Router\PathBasedRoutingMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
@@ -221,7 +221,7 @@ trait ProjectSandboxTrait
         $app->pipe(ImplicitOptionsMiddleware::class);
         $app->pipe(UrlHelperMiddleware::class);
         $app->pipe(DispatchMiddleware::class);
-        $app->pipe(NotFoundMiddleware::class);
+        $app->pipe(NotFoundHandler::class);
 
         if ($setupRoutes === true && $container->has(HomePageHandler::class)) {
             $app->get('/', HomePageHandler::class, 'home');
