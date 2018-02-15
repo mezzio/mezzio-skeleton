@@ -27,6 +27,7 @@
             "component-whitelist": [
                 "zendframework/zend-expressive",
                 "zendframework/zend-expressive-helpers",
+                "zendframework/zend-expressive-router",
                 "zendframework/zend-httphandlerrunner"
             ]
         }
