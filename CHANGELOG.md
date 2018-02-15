@@ -25,7 +25,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#221](https://github.com/zendframework/zend-expressive-skeleton/pull/221)
+  adds missing array return type to the ConfigProviders.
 
 ## 3.0.0alpha3 - 2018-02-08
 
