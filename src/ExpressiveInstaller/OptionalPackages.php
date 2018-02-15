@@ -391,11 +391,6 @@ class OptionalPackages
         // Remove installer data
         unset($this->composerDefinition['extra']['optional-packages']);
 
-        // Remove left over
-        if (empty($this->composerDefinition['extra'])) {
-            unset($this->composerDefinition['extra']);
-        }
-
         // Remove installer scripts
         unset($this->composerDefinition['scripts']['pre-update-cmd']);
         unset($this->composerDefinition['scripts']['pre-install-cmd']);
