@@ -15,6 +15,9 @@ All notable changes to this project will be documented in this file, in reverse 
   [zend-expressive 3.0.0alpha6](https://github.com/zendframework/zend-expressive/tree/3.0.0alpha6),
   [zend-expressive 3.0.0alpha7](https://github.com/zendframework/zend-expressive/tree/3.0.0alpha6).
 
+- [#219](https://github.com/zendframework/zend-expressive-skeleton/pull/219)
+  all example assets (css, images, javascript) are now loaded from remote urls.
+
 ### Deprecated
 
 - Nothing.
