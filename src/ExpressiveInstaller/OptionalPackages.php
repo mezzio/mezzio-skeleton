@@ -675,10 +675,6 @@ class OptionalPackages
 
         $this->io->write('<info>Removing App module registration from configuration</info>');
         $this->removeAppModuleConfig();
-
-        $this->io->write('<info>Removing assets</info>');
-        unlink($this->projectRoot . '/public/favicon.ico');
-        unlink($this->projectRoot . '/public/zf-logo.png');
     }
 
     /**
