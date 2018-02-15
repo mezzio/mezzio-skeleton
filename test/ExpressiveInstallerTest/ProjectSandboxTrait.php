@@ -25,10 +25,7 @@ use Zend\Expressive\Router\Middleware\DispatchMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitOptionsMiddleware;
 use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
-use Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware;
-use Zend\Expressive\Router\Middleware\RouteMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
-
 use const Zend\Expressive\ROUTE_MIDDLEWARE;
 
 trait ProjectSandboxTrait
@@ -218,7 +215,7 @@ trait ProjectSandboxTrait
         // Import programmatic/declarative middleware pipeline and routing configuration statements
         $app->pipe(ErrorHandler::class);
         $app->pipe(ServerUrlMiddleware::class);
-        $app->pipe(ROUTE_MIDDLEWARE::class);
+        $app->pipe(ROUTE_MIDDLEWARE);
         $app->pipe(MethodNotAllowedMiddleware::class);
         $app->pipe(ImplicitHeadMiddleware::class);
         $app->pipe(ImplicitOptionsMiddleware::class);
