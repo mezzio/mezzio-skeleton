@@ -391,11 +391,6 @@ class OptionalPackages
         // Remove installer data
         unset($this->composerDefinition['extra']['optional-packages']);
 
-        // Remove left over
-        if (empty($this->composerDefinition['extra'])) {
-            unset($this->composerDefinition['extra']);
-        }
-
         // Remove installer scripts
         unset($this->composerDefinition['scripts']['pre-update-cmd']);
         unset($this->composerDefinition['scripts']['pre-install-cmd']);
@@ -511,6 +506,7 @@ class OptionalPackages
         foreach ($whitelist as $package) {
             if (! in_array($package, $this->composerDefinition['extra']['zf']['component-whitelist'])) {
                 $this->composerDefinition['extra']['zf']['component-whitelist'][] = $package;
+                $this->io->write(sprintf('  - Whitelist package <info>%s</info>', $package));
             }
         }
     }

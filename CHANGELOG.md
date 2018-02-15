@@ -6,17 +6,18 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#224](https://github.com/zendframework/zend-expressive-skeleton/pull/224)
+  adds notifications for whitelisted packages.
 
 ### Changed
+
+- [#219](https://github.com/zendframework/zend-expressive-skeleton/pull/219)
+  all example assets (css, images, javascript) are now loaded from remote urls.
 
 - [#222](https://github.com/zendframework/zend-expressive-skeleton/pull/222)
   requires now zend-expressive 3.0.0alpha7. For detailed changes see
   [zend-expressive 3.0.0alpha6](https://github.com/zendframework/zend-expressive/tree/3.0.0alpha6),
   [zend-expressive 3.0.0alpha7](https://github.com/zendframework/zend-expressive/tree/3.0.0alpha6).
-
-- [#219](https://github.com/zendframework/zend-expressive-skeleton/pull/219)
-  all example assets (css, images, javascript) are now loaded from remote urls.
 
 ### Deprecated
 
@@ -30,6 +31,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#221](https://github.com/zendframework/zend-expressive-skeleton/pull/221)
   adds missing array return type to the ConfigProviders.
+
+- [#224](https://github.com/zendframework/zend-expressive-skeleton/pull/224)
+  fixed unwanted removal of whitelisted packages.
 
 ## 3.0.0alpha3 - 2018-02-08
 
