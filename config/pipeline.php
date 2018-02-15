@@ -9,11 +9,11 @@ use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
 use Zend\Expressive\MiddlewareFactory;
 use Zend\Expressive\Router\Middleware\DispatchMiddleware;
+use Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitOptionsMiddleware;
 use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
-use const Zend\Expressive\ROUTE_MIDDLEWARE;
 
 /**
  * Setup middleware pipeline:
@@ -42,10 +42,17 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - $app->pipe('/files', $filesMiddleware);
 
     // Register the routing middleware in the middleware pipeline
-    $app->pipe(ROUTE_MIDDLEWARE);
+    $app->pipe(PathBasedRoutingMiddleware::class);
+
+    // The following handle routing failures for common conditions:
+    // - method not allowed
+    // - HEAD request but no routes answer that method
+    // - OPTIONS request but no routes answer that method
     $app->pipe(MethodNotAllowedMiddleware::class);
     $app->pipe(ImplicitHeadMiddleware::class);
     $app->pipe(ImplicitOptionsMiddleware::class);
+
+    // Seed the UrlHelper with the routing results:
     $app->pipe(UrlHelperMiddleware::class);
 
     // Add more middleware here that needs to introspect the routing results; this
