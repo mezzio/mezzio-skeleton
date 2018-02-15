@@ -1,7 +1,7 @@
 <?php
 /**
  * @see       https://github.com/zendframework/zend-expressive-installer for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2017-2018 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-installer/blob/master/LICENSE.md New BSD License
  */
 
@@ -15,19 +15,18 @@ use DirectoryIterator;
 use ExpressiveInstaller\OptionalPackages;
 use PHPUnit\Framework\Assert;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
+use Zend\Expressive\Handler\NotFoundHandler;
 use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
-use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
-use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
-use Zend\Expressive\Middleware\NotFoundMiddleware;
-use Zend\Expressive\Router\DispatchMiddleware;
-use Zend\Expressive\Router\PathBasedRoutingMiddleware;
+use Zend\Expressive\Router\Middleware\DispatchMiddleware;
+use Zend\Expressive\Router\Middleware\ImplicitHeadMiddleware;
+use Zend\Expressive\Router\Middleware\ImplicitOptionsMiddleware;
+use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
+use const Zend\Expressive\ROUTE_MIDDLEWARE;
 
 trait ProjectSandboxTrait
 {
@@ -216,12 +215,13 @@ trait ProjectSandboxTrait
         // Import programmatic/declarative middleware pipeline and routing configuration statements
         $app->pipe(ErrorHandler::class);
         $app->pipe(ServerUrlMiddleware::class);
-        $app->pipe(PathBasedRoutingMiddleware::class);
+        $app->pipe(ROUTE_MIDDLEWARE);
+        $app->pipe(MethodNotAllowedMiddleware::class);
         $app->pipe(ImplicitHeadMiddleware::class);
         $app->pipe(ImplicitOptionsMiddleware::class);
         $app->pipe(UrlHelperMiddleware::class);
         $app->pipe(DispatchMiddleware::class);
-        $app->pipe(NotFoundMiddleware::class);
+        $app->pipe(NotFoundHandler::class);
 
         if ($setupRoutes === true && $container->has(HomePageHandler::class)) {
             $app->get('/', HomePageHandler::class, 'home');
