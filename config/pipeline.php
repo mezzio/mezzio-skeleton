@@ -15,6 +15,8 @@ use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
 use Zend\Expressive\Router\Middleware\RouteMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
 
+use const Zend\Expressive\ROUTE_MIDDLEWARE;
+
 /**
  * Setup middleware pipeline:
  */
@@ -42,7 +44,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - $app->pipe('/files', $filesMiddleware);
 
     // Register the routing middleware in the middleware pipeline
-    $app->pipe(RouteMiddleware::class);
+    $app->pipe(ROUTE_MIDDLEWARE);
     $app->pipe(MethodNotAllowedMiddleware::class);
     $app->pipe(ImplicitHeadMiddleware::class);
     $app->pipe(ImplicitOptionsMiddleware::class);
