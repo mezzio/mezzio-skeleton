@@ -45,7 +45,7 @@
         "roave/security-advisories": "dev-master",
         "zendframework/zend-component-installer": "^2.1",
         "zendframework/zend-config-aggregator": "^1.0",
-        "zendframework/zend-expressive": "^3.0.0alpha5",
+        "zendframework/zend-expressive": "^3.0.0alpha7",
         "zendframework/zend-expressive-helpers": "^5.0.0alpha3",
         "zendframework/zend-stdlib": "^3.1"
     },
@@ -55,7 +55,7 @@
         "jsoumelidis/zend-sf-di-config": "^0.1",
         "mikey179/vfsstream": "^1.6.5",
         "northwoods/container": "^1.2",
-        "phpunit/phpunit": "^6.5.4",
+        "phpunit/phpunit": "^7.0",
         "squizlabs/php_codesniffer": "^2.9.1",
         "zendframework/zend-auradi-config": "^1.0.0alpha1",
         "zendframework/zend-coding-standard": "~1.0.0",
