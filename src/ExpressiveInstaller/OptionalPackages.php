@@ -506,7 +506,7 @@ class OptionalPackages
         foreach ($whitelist as $package) {
             if (! in_array($package, $this->composerDefinition['extra']['zf']['component-whitelist'])) {
                 $this->composerDefinition['extra']['zf']['component-whitelist'][] = $package;
-                $this->io->write(sprintf('  - Whitelist package <info>%s</info>', $packageName));
+                $this->io->write(sprintf('  - Whitelist package <info>%s</info>', $package));
             }
         }
     }
