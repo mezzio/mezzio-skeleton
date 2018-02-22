@@ -9,7 +9,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageFactory
+class HomePageHandlerFactory
 {
     public function __invoke(ContainerInterface $container) : RequestHandlerInterface
     {
