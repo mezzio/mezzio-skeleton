@@ -119,7 +119,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'Zend ServiceManager',
+                    'name'     => 'zend-servicemanager',
                     'packages' => [
                         'zendframework/zend-servicemanager',
                     ],
@@ -207,7 +207,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'Zend Router',
+                    'name'     => 'zend-router',
                     'packages' => [
                         'zendframework/zend-expressive-zendrouter',
                     ],
@@ -271,7 +271,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'Zend View <comment>installs Zend ServiceManager</comment>',
+                    'name'     => 'zend-view <comment>installs zend-servicemanager</comment>',
                     'packages' => [
                         'zendframework/zend-expressive-zendviewrenderer',
                     ],
