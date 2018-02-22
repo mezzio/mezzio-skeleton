@@ -11,24 +11,21 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
+- The skeleton now requires zend-expressive 3.0.0alpha9. For detailed changes, see the
+  [zend-expressive 3.0.0alpha6](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha6),
+  [zend-expressive 3.0.0alpha7](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha7),
+  [zend-expressive 3.0.0alpha8](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha8),
+  and [zend-expressive 3.0.0alpha9](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha9)
+  changelogs.
+
 - [#219](https://github.com/zendframework/zend-expressive-skeleton/pull/219)
   updates templates such that all example assets (css, images, and javascript)
   are now loaded from remote urls.
-
-- [#222](https://github.com/zendframework/zend-expressive-skeleton/pull/222)
-  now requires zend-expressive 3.0.0alpha7. For detailed changes see the
-  [zend-expressive 3.0.0alpha6](https://github.com/zendframework/zend-expressive/tree/3.0.0alpha6)
-  and [zend-expressive 3.0.0alpha7](https://github.com/zendframework/zend-expressive/tree/3.0.0alpha6)
-  changelogs.
 
 - [#226](https://github.com/zendframework/zend-expressive-skeleton/pull/226)
   renames the factory class `App\Handler\HomePageFactory` to
   `App\Handler\HomePageHandlerFactory` to reflect the name of the class it
   generates.
-
-- [#228](https://github.com/zendframework/zend-expressive-skeleton/pull/228)
-  updates the skeleton to use zendframework/zend-expressive 3.0.0alpha9 as the
-  minimum supported version.
 
 ### Deprecated
 
