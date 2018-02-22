@@ -66,6 +66,7 @@ class OptionalPackages
         'CONDUCT.md',
         'CONTRIBUTING.md',
         'phpcs.xml',
+        'phpstan.installer.neon',
         'src/App/templates/.gitkeep',
     ];
 
@@ -108,6 +109,8 @@ class OptionalPackages
         'jsoumelidis/zend-sf-di-config',
         'mikey179/vfsstream',
         'northwoods/container',
+        "phpstan/phpstan",
+        "phpstan/phpstan-strict-rules",
         'zendframework/zend-auradi-config',
         'zendframework/zend-coding-standard',
         'zendframework/zend-expressive-aurarouter',

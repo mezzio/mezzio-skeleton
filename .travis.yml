@@ -20,6 +20,7 @@ matrix:
       env:
         - DEPS=latest
         - CS_CHECK=true
+        - PHPSTAN=true
         - TEST_COVERAGE=true
     - php: 7.2
       env:
@@ -40,6 +41,7 @@ install:
 script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
+  - if [[ $PHPSTAN == 'true' ]]; then phpstan analyze -l max -c ./phpstan.installer.neon ./src ./config ; fi
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry vendor/bin/php-coveralls -v ; fi
