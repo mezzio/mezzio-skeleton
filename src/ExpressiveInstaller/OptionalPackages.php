@@ -476,7 +476,7 @@ class OptionalPackages
         $link = new Link('__root__', $packageName, $constraint, 'requires', $packageVersion);
 
         // Add package to the root package and composer.json requirements
-        if (in_array($packageName, $this->config['require-dev'])) {
+        if (in_array($packageName, $this->config['require-dev'], true)) {
             unset($this->composerDefinition['require'][$packageName]);
             unset($this->composerRequires[$packageName]);
 
@@ -508,7 +508,7 @@ class OptionalPackages
 
         // Whitelist packages for the component installer
         foreach ($whitelist as $package) {
-            if (! in_array($package, $this->composerDefinition['extra']['zf']['component-whitelist'])) {
+            if (! in_array($package, $this->composerDefinition['extra']['zf']['component-whitelist'], true)) {
                 $this->composerDefinition['extra']['zf']['component-whitelist'][] = $package;
                 $this->io->write(sprintf('  - Whitelist package <info>%s</info>', $package));
             }
@@ -646,7 +646,7 @@ class OptionalPackages
                 $this->io->write(sprintf('  - Searching for <info>%s:%s</info>', $packageName, $packageVersion));
 
                 $optionalPackage = $this->composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
-                if (! $optionalPackage) {
+                if (null === $optionalPackage) {
                     $this->io->write(sprintf('<error>Package not found %s:%s</error>', $packageName, $packageVersion));
                     continue;
                 }
