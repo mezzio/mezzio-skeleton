@@ -22,7 +22,9 @@ All notable changes to this project will be documented in this file, in reverse 
   changelogs.
 
 - [#226](https://github.com/zendframework/zend-expressive-skeleton/pull/226)
-  updates factory class name from `App\Handler\HomePageFactory` to `App\Handler\HomePageHandlerFactory` to reflect the class handler.
+  renames the factory class `App\Handler\HomePageFactory` to
+  `App\Handler\HomePageHandlerFactory` to reflect the name of the class it
+  generates.
 
 ### Deprecated
 
