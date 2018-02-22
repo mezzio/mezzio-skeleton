@@ -260,7 +260,7 @@ class OptionalPackages
                 default:
                     // @codeCoverageIgnoreStart
                     $this->io->write('<error>Invalid answer</error>');
-                // @codeCoverageIgnoreEnd
+                    // @codeCoverageIgnoreEnd
             }
         }
     }
@@ -276,8 +276,8 @@ class OptionalPackages
                 self::INSTALL_MINIMAL,
                 self::INSTALL_MODULAR,
             ], true)
-                ? $installType
-                : self::INSTALL_FLAT;
+            ? $installType
+            : self::INSTALL_FLAT;
     }
 
     /**
