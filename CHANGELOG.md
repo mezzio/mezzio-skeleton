@@ -21,6 +21,11 @@ All notable changes to this project will be documented in this file, in reverse 
   and [zend-expressive 3.0.0alpha7](https://github.com/zendframework/zend-expressive/tree/3.0.0alpha6)
   changelogs.
 
+- [#226](https://github.com/zendframework/zend-expressive-skeleton/pull/226)
+  renames the factory class `App\Handler\HomePageFactory` to
+  `App\Handler\HomePageHandlerFactory` to reflect the name of the class it
+  generates.
+
 ### Deprecated
 
 - Nothing.

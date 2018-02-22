@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace AppTest\Handler;
 
-use App\Handler\HomePageFactory;
+use App\Handler\HomePageHandlerFactory;
 use App\Handler\HomePageHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageFactoryTest extends TestCase
+class HomePageHandlerFactoryTest extends TestCase
 {
     /** @var ContainerInterface */
     protected $container;
@@ -26,10 +26,10 @@ class HomePageFactoryTest extends TestCase
 
     public function testFactoryWithoutTemplate()
     {
-        $factory = new HomePageFactory();
+        $factory = new HomePageHandlerFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
 
-        $this->assertInstanceOf(HomePageFactory::class, $factory);
+        $this->assertInstanceOf(HomePageHandlerFactory::class, $factory);
 
         $homePage = $factory($this->container->reveal());
 
@@ -43,7 +43,7 @@ class HomePageFactoryTest extends TestCase
             ->get(TemplateRendererInterface::class)
             ->willReturn($this->prophesize(TemplateRendererInterface::class));
 
-        $factory = new HomePageFactory();
+        $factory = new HomePageHandlerFactory();
 
         $homePage = $factory($this->container->reveal());
 
