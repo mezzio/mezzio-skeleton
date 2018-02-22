@@ -26,6 +26,10 @@ All notable changes to this project will be documented in this file, in reverse 
   `App\Handler\HomePageHandlerFactory` to reflect the name of the class it
   generates.
 
+- [#228](https://github.com/zendframework/zend-expressive-skeleton/pull/228)
+  updates the skeleton to use zendframework/zend-expressive 3.0.0alpha9 as the
+  minimum supported version.
+
 ### Deprecated
 
 - Nothing.
