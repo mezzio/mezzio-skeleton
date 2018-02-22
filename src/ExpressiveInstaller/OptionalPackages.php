@@ -15,6 +15,7 @@ use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Composer\Package\BasePackage;
 use Composer\Package\Link;
+use Composer\Package\RootPackageInterface;
 use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
 use FilesystemIterator;
@@ -89,12 +90,12 @@ class OptionalPackages
     private $composerJson;
 
     /**
-     * @var string[]
+     * @var Link[]
      */
     private $composerRequires;
 
     /**
-     * @var string[]
+     * @var Link[]
      */
     private $composerDevRequires;
 
@@ -140,12 +141,12 @@ class OptionalPackages
     private $projectRoot;
 
     /**
-     * @var BasePackage
+     * @var RootPackageInterface
      */
     private $rootPackage;
 
     /**
-     * @var string[]
+     * @var int[]
      */
     private $stabilityFlags;
 
@@ -417,7 +418,7 @@ class OptionalPackages
     /**
      * Process the answer of a question
      *
-     * @param string|int $answer
+     * @param bool|int|string $answer
      */
     public function processAnswer(array $question, $answer) : bool
     {
@@ -617,7 +618,7 @@ class OptionalPackages
 
         while (true) {
             // Ask for user input
-            $answer = $this->io->ask($ask, $defaultOption);
+            $answer = $this->io->ask($ask, (string) $defaultOption);
 
             // Handle none of the options
             if ($answer === 'n' && $question['required'] !== true) {
