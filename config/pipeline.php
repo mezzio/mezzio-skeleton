@@ -35,8 +35,9 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     //
     // Middleware can be attached to specific paths, allowing you to mix and match
     // applications under a common domain.  The handlers in each middleware
-    // attached this way will see a URI with the MATCHED PATH SEGMENT REMOVED!!!
+    // attached this way will see a URI with the matched path segment removed.
     //
+    // i.e., path of "/api/member/profile" only passes "/member/profile" to $apiMiddleware
     // - $app->pipe('/api', $apiMiddleware);
     // - $app->pipe('/docs', $apiDocMiddleware);
     // - $app->pipe('/files', $filesMiddleware);
