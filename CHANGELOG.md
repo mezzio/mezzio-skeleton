@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.0.0alpha4 - TBD
+## 3.0.0rc1 - 2018-02-27
 
 ### Added
 
@@ -46,6 +46,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#224](https://github.com/zendframework/zend-expressive-skeleton/pull/224)
   fixed unwanted removal of whitelisted packages.
+
+- [#232](https://github.com/zendframework/zend-expressive-skeleton/pull/232)
+  updates dependency constraints to latest released versions, and ensures that
+  when alpha versions are specified, only that version forward will be installed
+  (previously, an earlier alpha could potentially be installed when using
+  `--prefer-lowest`).
 
 ## 3.0.0alpha3 - 2018-02-08
 
