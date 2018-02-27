@@ -27,6 +27,10 @@ All notable changes to this project will be documented in this file, in reverse 
   `App\Handler\HomePageHandlerFactory` to reflect the name of the class it
   generates.
 
+- [#231](https://github.com/zendframework/zend-expressive-skeleton/pull/231)
+  simplifies how zend-servicemanager instances are generated, dropping v2 syntax
+  in favor of a configuration-driven v3 syntax.
+
 ### Deprecated
 
 - Nothing.
