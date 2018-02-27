@@ -11,11 +11,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- The skeleton now requires zend-expressive 3.0.0alpha9. For detailed changes, see the
+- The skeleton now requires zend-expressive 3.0.0rc1. For detailed changes, see the
   [zend-expressive 3.0.0alpha6](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha6),
   [zend-expressive 3.0.0alpha7](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha7),
   [zend-expressive 3.0.0alpha8](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha8),
-  and [zend-expressive 3.0.0alpha9](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha9)
+  [zend-expressive 3.0.0alpha9](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha9),
+  and [zend-expressive 3.0.0rc1](https://github.com/zendframework/zend-expressive/releases/3.0.0rc1)
   changelogs.
 
 - [#219](https://github.com/zendframework/zend-expressive-skeleton/pull/219)
@@ -42,10 +43,10 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Fixed
 
 - [#221](https://github.com/zendframework/zend-expressive-skeleton/pull/221)
-  adds missing array return type to the ConfigProviders.
+  adds missing array return type to the shipped `ConfigProvider` classes.
 
 - [#224](https://github.com/zendframework/zend-expressive-skeleton/pull/224)
-  fixed unwanted removal of whitelisted packages.
+  fixes unwanted removal of whitelisted packages.
 
 - [#232](https://github.com/zendframework/zend-expressive-skeleton/pull/232)
   updates dependency constraints to latest released versions, and ensures that
