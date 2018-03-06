@@ -42,16 +42,19 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - $app->pipe('/docs', $apiDocMiddleware);
     // - $app->pipe('/files', $filesMiddleware);
 
-    // Register the routing middleware in the middleware pipeline
+    // Register the routing middleware in the middleware pipeline.
+    // This middleware registers the Zend\Expressive\Router\RouteResult request attribute.
     $app->pipe(PathBasedRoutingMiddleware::class);
 
     // The following handle routing failures for common conditions:
-    // - method not allowed
     // - HEAD request but no routes answer that method
     // - OPTIONS request but no routes answer that method
-    $app->pipe(MethodNotAllowedMiddleware::class);
+    // - method not allowed
+    // Order here matters; the MethodNotAllowedMiddleware should be placed
+    // after the Implicit*Middleware.
     $app->pipe(ImplicitHeadMiddleware::class);
     $app->pipe(ImplicitOptionsMiddleware::class);
+    $app->pipe(MethodNotAllowedMiddleware::class);
 
     // Seed the UrlHelper with the routing results:
     $app->pipe(UrlHelperMiddleware::class);
