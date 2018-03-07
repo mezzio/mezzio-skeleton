@@ -17,13 +17,13 @@ return [
             'version' => '^1.0.0rc1',
         ],
         'zendframework/zend-expressive-aurarouter' => [
-            'version'   => '^3.0.0alpha2',
+            'version'   => '^3.0.0rc3',
             'whitelist' => [
                 'zendframework/zend-expressive-aurarouter'
             ]
         ],
         'zendframework/zend-expressive-fastroute' => [
-            'version'   => '^3.0.0alpha1',
+            'version'   => '^3.0.0rc4',
             'whitelist' => [
                 'zendframework/zend-expressive-fastroute'
             ]
@@ -41,7 +41,7 @@ return [
             ]
         ],
         'zendframework/zend-expressive-zendrouter' => [
-            'version'   => '^3.0.0alpha2',
+            'version'   => '^3.0.0rc3',
             'whitelist' => [
                 'zendframework/zend-expressive-zendrouter'
             ]
