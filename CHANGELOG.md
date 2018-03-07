@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.0.0rc2 - 2018-03-07
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- [#235](https://github.com/zendframework/zend-expressive-skeleton/pull/235)
+  updates to zend-expressive 3.0.0rc3 and zend-expressive-router 3.0.0rc4, as
+  well as the latest release candidates for the various router adapters.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#235](https://github.com/zendframework/zend-expressive-skeleton/pull/235)
+  changes the order of pipeline middleware to place the entry for the
+  `MethodNotAllowedMiddleware` after both the `ImplicitHeadMiddleware` and
+  `ImplicitOptionsMiddleware` entries; this is done to ensure it does not
+  intercept HEAD and OPTIONS requests when it should not.
+
 ## 3.0.0rc1 - 2018-02-27
 
 ### Added
