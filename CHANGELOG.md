@@ -229,6 +229,37 @@ All notable changes to this project will be documented in this file, in reverse 
   fixes unwanted installation of every dependency when installing a dev version
   of the skeleton.
 
+## 2.2.0 - 2018-03-12
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- [#239](https://github.com/zendframework/zend-expressive-skeleton/pull/239)
+  updates the minimum required version of zend-expressive to 2.2.0.
+
+- [#239](https://github.com/zendframework/zend-expressive-skeleton/pull/239)
+  updates the minimum required version of the various zend-expressive-router
+  dependencies to 2.2.0.
+
+- [#239](https://github.com/zendframework/zend-expressive-skeleton/pull/239)
+  updates the configured middleware pipeline to match requirements of the
+  zend-expressive 2.2 release.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 2.1.0 - 2017-12-11
 
 ### Added
