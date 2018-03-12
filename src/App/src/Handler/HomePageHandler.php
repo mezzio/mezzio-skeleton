@@ -24,9 +24,9 @@ class HomePageHandler implements RequestHandlerInterface
     private $template;
 
     public function __construct(
-        string $containerName,
         Router\RouterInterface $router,
-        Template\TemplateRendererInterface $template = null
+        Template\TemplateRendererInterface $template = null,
+        string $containerName
     ) {
         $this->containerName = $containerName;
         $this->router        = $router;

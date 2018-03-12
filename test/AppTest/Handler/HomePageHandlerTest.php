@@ -30,7 +30,11 @@ class HomePageHandlerTest extends TestCase
 
     public function testReturnsJsonResponseWhenNoTemplateRendererProvided()
     {
-        $homePage = new HomePageHandler(get_class($this->container->reveal()), $this->router->reveal(), null);
+        $homePage = new HomePageHandler(
+            $this->router->reveal(),
+            null,
+            get_class($this->container->reveal())
+        );
         $response = $homePage->handle(
             $this->prophesize(ServerRequestInterface::class)->reveal()
         );
@@ -46,9 +50,9 @@ class HomePageHandlerTest extends TestCase
             ->willReturn('');
 
         $homePage = new HomePageHandler(
-            get_class($this->container->reveal()),
             $this->router->reveal(),
-            $renderer->reveal()
+            $renderer->reveal(),
+            get_class($this->container->reveal())
         );
 
         $response = $homePage->handle(
