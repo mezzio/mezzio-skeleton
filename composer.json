@@ -19,7 +19,7 @@
         "roave/security-advisories": "dev-master",
         "zendframework/zend-component-installer": "^1.0",
         "zendframework/zend-config-aggregator": "^1.0",
-        "zendframework/zend-expressive": "^2.0.5",
+        "zendframework/zend-expressive": "^2.2",
         "zendframework/zend-expressive-helpers": "^4.0",
         "zendframework/zend-stdlib": "^3.1"
     },
@@ -32,11 +32,11 @@
         "squizlabs/php_codesniffer": "^2.8.1",
         "xtreamwayz/pimple-container-interop": "^1.0",
         "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-expressive-aurarouter": "^2.0",
-        "zendframework/zend-expressive-fastroute": "^2.0",
+        "zendframework/zend-expressive-aurarouter": "^2.2",
+        "zendframework/zend-expressive-fastroute": "^2.2",
         "zendframework/zend-expressive-platesrenderer": "^1.3",
         "zendframework/zend-expressive-twigrenderer": "^1.4",
-        "zendframework/zend-expressive-zendrouter": "^2.0.1",
+        "zendframework/zend-expressive-zendrouter": "^2.2",
         "zendframework/zend-expressive-zendviewrenderer": "^1.4",
         "zendframework/zend-servicemanager": "^3.3",
         "zfcampus/zf-development-mode": "^3.1"
