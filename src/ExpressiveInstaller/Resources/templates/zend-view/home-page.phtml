@@ -65,6 +65,13 @@
             when writing your applications. Expressive supports multiple containers which typehints against
             <a href="https://github.com/container-interop/container-interop" target="_blank">container-interop</a>.
         </p>
+        <?php if (isset($this->containerName)) : ?>
+            <p>
+                <a href="<?=$this->containerDocs?>" target="_blank">
+                    Get started with <?=$this->containerName?>.
+                </a>
+            </p>
+        <?php endif; ?>
     </div>
 
     <div class="col-md-4">

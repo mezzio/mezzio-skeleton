@@ -17,14 +17,20 @@ use Zend\Expressive\ZendView\ZendViewRenderer;
 
 class HomePageHandler implements RequestHandlerInterface
 {
+    private $containerName;
+
     private $router;
 
     private $template;
 
-    public function __construct(Router\RouterInterface $router, Template\TemplateRendererInterface $template = null)
-    {
-        $this->router   = $router;
-        $this->template = $template;
+    public function __construct(
+        string $containerName,
+        Router\RouterInterface $router,
+        Template\TemplateRendererInterface $template = null
+    ){
+        $this->containerName = $containerName;
+        $this->router        = $router;
+        $this->template      = $template;
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
@@ -37,6 +43,23 @@ class HomePageHandler implements RequestHandlerInterface
         }
 
         $data = [];
+
+        if ('Aura\Di\Container' == $this->containerName) {
+            $data['containerName'] = 'Aura.Di';
+            $data['containerDocs'] = 'http://auraphp.com/packages/2.x/Di.html';
+        } elseif ('Pimple\Container' == $this->containerName) {
+            $data['containerName'] = 'Pimple';
+            $data['containerDocs'] = 'https://pimple.symfony.com/';
+        } elseif ('Zend\ServiceManager\ServiceManager' == $this->containerName) {
+            $data['containerName'] = 'Zend Servicemanager';
+            $data['containerDocs'] = 'https://docs.zendframework.com/zend-servicemanager/';
+        } elseif ('Auryn\Injector' == $this->containerName) {
+            $data['containerName'] = 'Auryn';
+            $data['containerDocs'] = 'https://github.com/rdlowrey/Auryn';
+        } elseif ('Symfony\Component\DependencyInjection\ContainerBuilder' == $this->containerName) {
+            $data['containerName'] = 'Symfony DI Container';
+            $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
+        }
 
         if ($this->router instanceof Router\AuraRouter) {
             $data['routerName'] = 'Aura.Router';
