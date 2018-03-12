@@ -1,9 +1,10 @@
 <?php
 
-namespace AppTest\Action;
+declare(strict_types=1);
 
-use App\Action\HomePageAction;
-use Interop\Http\ServerMiddleware\DelegateInterface;
+namespace AppTest\Handler;
+
+use App\Handler\HomePageHandler;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,7 +13,7 @@ use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageActionTest extends TestCase
+class HomePageHandlerTest extends TestCase
 {
     /** @var RouterInterface */
     protected $router;
@@ -24,10 +25,9 @@ class HomePageActionTest extends TestCase
 
     public function testReturnsJsonResponseWhenNoTemplateRendererProvided()
     {
-        $homePage = new HomePageAction($this->router->reveal(), null);
-        $response = $homePage->process(
-            $this->prophesize(ServerRequestInterface::class)->reveal(),
-            $this->prophesize(DelegateInterface::class)->reveal()
+        $homePage = new HomePageHandler($this->router->reveal(), null);
+        $response = $homePage->handle(
+            $this->prophesize(ServerRequestInterface::class)->reveal()
         );
 
         $this->assertInstanceOf(JsonResponse::class, $response);
@@ -40,11 +40,10 @@ class HomePageActionTest extends TestCase
             ->render('app::home-page', Argument::type('array'))
             ->willReturn('');
 
-        $homePage = new HomePageAction($this->router->reveal(), $renderer->reveal());
+        $homePage = new HomePageHandler($this->router->reveal(), $renderer->reveal());
 
-        $response = $homePage->process(
-            $this->prophesize(ServerRequestInterface::class)->reveal(),
-            $this->prophesize(DelegateInterface::class)->reveal()
+        $response = $homePage->handle(
+            $this->prophesize(ServerRequestInterface::class)->reveal()
         );
 
         $this->assertInstanceOf(HtmlResponse::class, $response);

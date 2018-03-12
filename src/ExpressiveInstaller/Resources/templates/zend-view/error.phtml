@@ -2,7 +2,7 @@
 
 <h1>Oops!</h1>
 <h2>This is awkward.</h2>
-<p>We encountered a <?php echo $this->escapeHtml(sprintf('%d %s', $this->status, $this->reason)); ?> error.</p>
+<p>We encountered a <?=$this->escapeHtml(sprintf('%d %s', $this->status, $this->reason))?> error.</p>
 <?php if ($this->status == 404) : ?>
     <p>
         You are looking for something that doesn't exist or may have moved. Check out one of the links on this page

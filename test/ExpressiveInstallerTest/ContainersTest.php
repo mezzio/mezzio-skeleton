@@ -5,12 +5,16 @@
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstallerTest;
 
 use Aura\Di\Container as AuraContainer;
 use ExpressiveInstaller\OptionalPackages;
+use Northwoods\Container\InjectorContainer as AurynContainer;
+use Pimple\Psr11\Container as PimpleContainer;
 use Psr\Container\ContainerInterface;
-use Xtreamwayz\Pimple\Container as PimpleContainer;
+use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
 use Zend\Expressive;
 use Zend\ServiceManager\ServiceManager as ZendServiceManagerContainer;
 
@@ -42,21 +46,14 @@ class ContainersTest extends OptionalPackagesTestCase
      * @runInSeparateProcess
      *
      * @dataProvider containerProvider
-     *
-     * @param string $installType
-     * @param int $containerOption
-     * @param int $routerOption
-     * @param string $copyFilesKey
-     * @param int $expectedResponseStatusCode
-     * @param string $expectedContainer
      */
     public function testContainer(
-        $installType,
-        $containerOption,
-        $routerOption,
-        $copyFilesKey,
-        $expectedResponseStatusCode,
-        $expectedContainer
+        string $installType,
+        int $containerOption,
+        int $routerOption,
+        string $copyFilesKey,
+        int $expectedResponseStatusCode,
+        string $expectedContainer
     ) {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
@@ -75,6 +72,15 @@ class ContainersTest extends OptionalPackagesTestCase
         );
         $this->assertTrue($routerResult);
 
+        $configFile = $this->projectRoot . DIRECTORY_SEPARATOR . '/config/config.php';
+        $configFileContents = file_get_contents($configFile);
+        $configFileContents = preg_replace(
+            '/(new ConfigAggregator\(\[)/s',
+            '$1' . "\n    \Zend\Expressive\\Router\\FastRouteRouter\ConfigProvider::class,\n",
+            $configFileContents
+        );
+        file_put_contents($configFile, $configFileContents);
+
         // Test container
         $container = $this->getContainer();
         $this->assertInstanceOf(ContainerInterface::class, $container);
@@ -90,7 +96,7 @@ class ContainersTest extends OptionalPackagesTestCase
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
-    public function containerProvider()
+    public function containerProvider() : array
     {
         // @codingStandardsIgnoreStart
         // $installType, $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
@@ -104,6 +110,12 @@ class ContainersTest extends OptionalPackagesTestCase
             'zend-sm-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, ZendServiceManagerContainer::class],
             'zend-sm-flat'    => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
             'zend-sm-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, ZendServiceManagerContainer::class],
+            'auryn-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, AurynContainer::class],
+            'auryn-flat'      => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, AurynContainer::class],
+            'auryn-modular'   => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, AurynContainer::class],
+            'sf-di-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 5, 2, 'minimal-files', 404, SfContainerBuilder::class],
+            'sf-di-flat'      => [OptionalPackages::INSTALL_FLAT,    5, 2, 'copy-files', 200, SfContainerBuilder::class],
+            'sf-di-modular'   => [OptionalPackages::INSTALL_MODULAR, 5, 2, 'copy-files', 200, SfContainerBuilder::class],
         ];
         // @codingStandardsIgnoreEnd
     }

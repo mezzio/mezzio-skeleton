@@ -1,28 +1,31 @@
 <?php
 /**
  * @see       https://github.com/zendframework/zend-expressive-installer for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2017-2018 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-expressive-installer/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstallerTest;
 
-use App\Action\HomePageAction;
-use App\Action\PingAction;
+use App\Handler\HomePageHandler;
+use App\Handler\PingHandler;
 use DirectoryIterator;
 use ExpressiveInstaller\OptionalPackages;
 use PHPUnit\Framework\Assert;
 use Psr\Container\ContainerInterface;
-use Zend\Diactoros\Response;
+use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Application;
+use Zend\Expressive\Handler\NotFoundHandler;
 use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
-use Zend\Expressive\Middleware\NotFoundHandler;
 use Zend\Expressive\Router\Middleware\DispatchMiddleware;
+use Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitOptionsMiddleware;
-use Zend\Expressive\Router\Middleware\RouteMiddleware;
+use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
 
 trait ProjectSandboxTrait
@@ -57,6 +60,7 @@ trait ProjectSandboxTrait
         $this->projectRoot = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('exp');
 
         mkdir($this->projectRoot . '/data', 0777, true);
+        mkdir($this->projectRoot . '/data/cache', 0777, true);
         foreach (['config', 'public', 'src', 'templates', 'test'] as $path) {
             $this->recursiveCopy(
                 $this->packageRoot . DIRECTORY_SEPARATOR . $path,
@@ -137,7 +141,7 @@ trait ProjectSandboxTrait
      * @param bool $stripNamespace Whether or not to strip the initial
      *     namespace when determining the path (ala PSR-4).
      */
-    protected function setUpAlternateAutoloader($appPath, $stripNamespace = false)
+    protected function setUpAlternateAutoloader(string $appPath, bool $stripNamespace = false)
     {
         $this->autoloader = function ($class) use ($appPath, $stripNamespace) {
             if (0 !== strpos($class, 'App\\')) {
@@ -200,9 +204,8 @@ trait ProjectSandboxTrait
      *
      * @param string $path Path to request within the application
      * @param bool $setupRoutes Whether or not to setup routes before dispatch
-     * @return Response
      */
-    protected function getAppResponse($path = '/', $setupRoutes = true)
+    protected function getAppResponse(string $path = '/', bool $setupRoutes = true) : ResponseInterface
     {
         $container = $this->getContainer();
 
@@ -212,35 +215,31 @@ trait ProjectSandboxTrait
         // Import programmatic/declarative middleware pipeline and routing configuration statements
         $app->pipe(ErrorHandler::class);
         $app->pipe(ServerUrlMiddleware::class);
-        $app->pipe(RouteMiddleware::class);
+        $app->pipe(PathBasedRoutingMiddleware::class);
+        $app->pipe(MethodNotAllowedMiddleware::class);
         $app->pipe(ImplicitHeadMiddleware::class);
         $app->pipe(ImplicitOptionsMiddleware::class);
         $app->pipe(UrlHelperMiddleware::class);
         $app->pipe(DispatchMiddleware::class);
         $app->pipe(NotFoundHandler::class);
 
-        if ($setupRoutes === true && $container->has(HomePageAction::class)) {
-            $app->get('/', HomePageAction::class, 'home');
+        if ($setupRoutes === true && $container->has(HomePageHandler::class)) {
+            $app->get('/', HomePageHandler::class, 'home');
         }
 
-        if ($setupRoutes === true && $container->has(PingAction::class)) {
-            $app->get('/api/ping', PingAction::class, 'api.ping');
+        if ($setupRoutes === true && $container->has(PingHandler::class)) {
+            $app->get('/api/ping', PingHandler::class, 'api.ping');
         }
 
-        return $app(
-            new ServerRequest([], [], 'https://example.com' . $path, 'GET'),
-            new Response(),
-            $app->getDefaultDelegate()
+        return $app->handle(
+            new ServerRequest([], [], 'https://example.com' . $path, 'GET')
         );
     }
 
     /**
      * Recursively copy the files from one tree to another.
-     *
-     * @param string $source Source tree to copy.
-     * @param string $target Target tree to copy into.
      */
-    protected function recursiveCopy($source, $target)
+    protected function recursiveCopy(string $source, string $target)
     {
         if (! is_dir($target)) {
             mkdir($target, 0777, true);
@@ -278,7 +277,7 @@ trait ProjectSandboxTrait
      *
      * @param string $target Tree to remove.
      */
-    protected function recursiveDelete($target)
+    protected function recursiveDelete(string $target)
     {
         if (! is_dir($target)) {
             return;

@@ -2,6 +2,233 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.0.0rc2 - 2018-03-07
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- [#235](https://github.com/zendframework/zend-expressive-skeleton/pull/235)
+  updates to zend-expressive 3.0.0rc3 and zend-expressive-router 3.0.0rc4, as
+  well as the latest release candidates for the various router adapters.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#235](https://github.com/zendframework/zend-expressive-skeleton/pull/235)
+  changes the order of pipeline middleware to place the entry for the
+  `MethodNotAllowedMiddleware` after both the `ImplicitHeadMiddleware` and
+  `ImplicitOptionsMiddleware` entries; this is done to ensure it does not
+  intercept HEAD and OPTIONS requests when it should not.
+
+## 3.0.0rc1 - 2018-02-27
+
+### Added
+
+- [#224](https://github.com/zendframework/zend-expressive-skeleton/pull/224)
+  adds notifications for whitelisted packages.
+
+### Changed
+
+- The skeleton now requires zend-expressive 3.0.0rc1. For detailed changes, see the
+  [zend-expressive 3.0.0alpha6](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha6),
+  [zend-expressive 3.0.0alpha7](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha7),
+  [zend-expressive 3.0.0alpha8](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha8),
+  [zend-expressive 3.0.0alpha9](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha9),
+  and [zend-expressive 3.0.0rc1](https://github.com/zendframework/zend-expressive/releases/3.0.0rc1)
+  changelogs.
+
+- [#219](https://github.com/zendframework/zend-expressive-skeleton/pull/219)
+  updates templates such that all example assets (css, images, and javascript)
+  are now loaded from remote urls.
+
+- [#226](https://github.com/zendframework/zend-expressive-skeleton/pull/226)
+  renames the factory class `App\Handler\HomePageFactory` to
+  `App\Handler\HomePageHandlerFactory` to reflect the name of the class it
+  generates.
+
+- [#231](https://github.com/zendframework/zend-expressive-skeleton/pull/231)
+  simplifies how zend-servicemanager instances are generated, dropping v2 syntax
+  in favor of a configuration-driven v3 syntax.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#221](https://github.com/zendframework/zend-expressive-skeleton/pull/221)
+  adds missing array return type to the shipped `ConfigProvider` classes.
+
+- [#224](https://github.com/zendframework/zend-expressive-skeleton/pull/224)
+  fixes unwanted removal of whitelisted packages.
+
+- [#232](https://github.com/zendframework/zend-expressive-skeleton/pull/232)
+  updates dependency constraints to latest released versions, and ensures that
+  when alpha versions are specified, only that version forward will be installed
+  (previously, an earlier alpha could potentially be installed when using
+  `--prefer-lowest`).
+
+## 3.0.0alpha3 - 2018-02-08
+
+### Added
+
+- [#215](https://github.com/zendframework/zend-expressive-skeleton/pull/215)
+  adds packages to the zend-component-installer whitelist to prevent prompts for
+  configuration provider injection.
+
+### Changed
+
+- [#199](https://github.com/zendframework/zend-expressive-skeleton/pull/199)
+  moves the location of the configuration cache from `data/config-cache.php` to
+  `data/cache/config-cache.php`. Since the shipped `composer clear-config-cache`
+  script and zf-development-mode both use the `$config['config_cache_path']`
+  setting to determine where the cache file lives, this should have no bearing
+  on normal, documented usage.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#216](https://github.com/zendframework/zend-expressive-skeleton/pull/216)
+  updates the `composer serve command to read `php -S 0.0.0.0:8080 -t public/`.
+  This command has been tested to work across a variety of platforms, including
+  Windows, macOS, and Linux. However, for Linux users, the command will fail on
+  PHP versions prior to 7.1.14 and 7.2.2, due to a language bug. If you are
+  using an affected PHP version, you will need to manually start the PHP
+  built-in server using the comand `php -S 0.0.0.0:8080 -t public/ public/index.php`.
+
+- [#217](https://github.com/zendframework/zend-expressive-skeleton/pull/217)
+  fixes a syntax error in the shipped `config/pipeline.php`.
+
+## 3.0.0alpha2 - 2018-02-07
+
+### Added
+
+- [#212](https://github.com/zendframework/zend-expressive-skeleton/pull/212)
+  adds the Composer script "expressive", which will invoke the "expressive"
+  command from the zend-expressive-tooling package:
+
+  ```bash
+  $ composer expressive help
+  ```
+
+### Changed
+
+- [#212](https://github.com/zendframework/zend-expressive-skeleton/pull/212)
+  makes the zend-expressive-tooling package an explicit development requirement;
+  it is no longer an optional package.
+
+- [#213](https://github.com/zendframework/zend-expressive-skeleton/pull/213)
+  updates how the `routes.php` and `pipeline.php` files are defined. They now
+  return anonymous functions with the following signature:
+
+  ```php
+  function (
+      Zend\Expressive\Application $app,
+      Zend\Expressive\MiddlewareFactory $factory,
+      Psr\Container\ContainerInterface $container
+  ) : void
+  ```
+
+  The `public/index.php` file now does the following:
+
+  ```php
+  $app = $container->get(\Zend\Expressive\Application::class);
+  $factory = $container->get(\Zend\Expressive\MiddlewareFactory::class);
+  (require 'config/pipeline.php')($app, $factory, $container);
+  (require 'config/routes.php')($app, $factory, $container);
+  ```
+
+  This approach allows users to pull other dependencies as needed, without
+  cluttering the global namespace, and to use the `MiddlewareFactory` features
+  along with features such as the `Zend\Stratigility\path()` and `host()`
+  utility methods.
+
+- [#214](https://github.com/zendframework/zend-expressive-skeleton/pull/214)
+  renames the shipped "Action" namespace and classes to use the verbiage
+  "Handler" (for consistency with PSR-15), and be implemented as PSR-15
+  `RequestHandlerInterface` implementations.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 3.0.0alpha1 - 2018-02-06
+
+### Added
+
+- [#161](https://github.com/zendframework/zend-expressive-skeleton/pull/161)
+  adds support for Auryn to be used as a container via a wrapper.
+
+- [#182](https://github.com/zendframework/zend-expressive-skeleton/pull/182)
+  adds Symfony DI container support.
+
+- [#185](https://github.com/zendframework/zend-expressive-skeleton/pull/185),
+  [#200](https://github.com/zendframework/zend-expressive-skeleton/pull/200)
+  adds PSR-15 support.
+
+### Changed
+
+- [#197](https://github.com/zendframework/zend-expressive-skeleton/pull/197)
+  updates `public/index.php` to remove `call_user_func()` in favor of direct
+  callable invocation (e.g., `(function () { /* ... */ })()`).
+
+- [#177](https://github.com/zendframework/zend-expressive-skeleton/pull/177)
+  moves Aura.Di and Pimple container configuration to separate repositories.
+
+- [#201](https://github.com/zendframework/zend-expressive-skeleton/pull/201)
+  updates the default assets to Bootstrap 4, jQuery 3.3.1 and Font-Awesome 5.
+
+- [#202](https://github.com/zendframework/zend-expressive-skeleton/pull/202),
+  [#205](https://github.com/zendframework/zend-expressive-skeleton/pull/205)
+  uses ConfigProviders to setup components. To make sure all ConfigProviders
+  are loaded you need to answer yes to all inject
+  `Zend\<component>\ConfigProvider` questions or do this once and select for
+  all other packages.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- [#183](https://github.com/zendframework/zend-expressive-skeleton/pull/183)
+  removes support for PHP versions prior to PHP 7.1.
+
+### Fixed
+
+- [#195](https://github.com/zendframework/zend-expressive-skeleton/pull/195)
+  fixes unwanted installation of every dependency when installing a dev version
+  of the skeleton.
+
 ## 2.2.0 - 2018-03-12
 
 ### Added
