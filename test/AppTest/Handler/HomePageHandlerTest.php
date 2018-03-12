@@ -45,7 +45,11 @@ class HomePageHandlerTest extends TestCase
             ->render('app::home-page', Argument::type('array'))
             ->willReturn('');
 
-        $homePage = new HomePageHandler(get_class($this->container->reveal()), $this->router->reveal(), $renderer->reveal());
+        $homePage = new HomePageHandler(
+            get_class($this->container->reveal()),
+            $this->router->reveal(),
+            $renderer->reveal()
+        );
 
         $response = $homePage->handle(
             $this->prophesize(ServerRequestInterface::class)->reveal()

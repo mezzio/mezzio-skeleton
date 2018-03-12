@@ -27,7 +27,7 @@ class HomePageHandler implements RequestHandlerInterface
         string $containerName,
         Router\RouterInterface $router,
         Template\TemplateRendererInterface $template = null
-    ){
+    ) {
         $this->containerName = $containerName;
         $this->router        = $router;
         $this->template      = $template;
