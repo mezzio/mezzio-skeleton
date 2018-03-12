@@ -9,8 +9,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1-dev",
-            "dev-develop": "2.2-dev"
+            "dev-master": "2.2.x-dev",
+            "dev-develop": "3.0.x-dev"
         }
     },
     "require": {
