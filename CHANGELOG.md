@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.1.1 - TBD
+## 2.2.0 - 2018-03-12
 
 ### Added
 
@@ -10,7 +10,16 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#239](https://github.com/zendframework/zend-expressive-skeleton/pull/239)
+  updates the minimum required version of zend-expressive to 2.2.0.
+
+- [#239](https://github.com/zendframework/zend-expressive-skeleton/pull/239)
+  updates the minimum required version of the various zend-expressive-router
+  dependencies to 2.2.0.
+
+- [#239](https://github.com/zendframework/zend-expressive-skeleton/pull/239)
+  updates the configured middleware pipeline to match requirements of the
+  zend-expressive 2.2 release.
 
 ### Deprecated
 
