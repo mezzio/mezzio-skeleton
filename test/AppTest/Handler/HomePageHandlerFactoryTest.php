@@ -50,4 +50,3 @@ class HomePageHandlerFactoryTest extends TestCase
         $this->assertInstanceOf(HomePageHandler::class, $homePage);
     }
 }
-
