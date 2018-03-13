@@ -13,11 +13,12 @@ class HomePageHandlerFactory
 {
     public function __invoke(ContainerInterface $container) : RequestHandlerInterface
     {
+        $containerName = get_class($container);
         $router   = $container->get(RouterInterface::class);
         $template = $container->has(TemplateRendererInterface::class)
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
-        return new HomePageHandler($router, $template);
+        return new HomePageHandler($router, $template, $containerName);
     }
 }

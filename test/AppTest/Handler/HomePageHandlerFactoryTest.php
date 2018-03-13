@@ -13,7 +13,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageHandlerFactoryTest extends TestCase
 {
-    /** @var ContainerInterface */
+    /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
     protected function setUp()
@@ -31,7 +31,7 @@ class HomePageHandlerFactoryTest extends TestCase
 
         $this->assertInstanceOf(HomePageHandlerFactory::class, $factory);
 
-        $homePage = $factory($this->container->reveal());
+        $homePage = $factory($this->container->reveal(), null, get_class($this->container->reveal()));
 
         $this->assertInstanceOf(HomePageHandler::class, $homePage);
     }
@@ -45,7 +45,7 @@ class HomePageHandlerFactoryTest extends TestCase
 
         $factory = new HomePageHandlerFactory();
 
-        $homePage = $factory($this->container->reveal());
+        $homePage = $factory($this->container->reveal(), null, get_class($this->container->reveal()));
 
         $this->assertInstanceOf(HomePageHandler::class, $homePage);
     }

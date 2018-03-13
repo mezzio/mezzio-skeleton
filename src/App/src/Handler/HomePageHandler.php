@@ -17,14 +17,20 @@ use Zend\Expressive\ZendView\ZendViewRenderer;
 
 class HomePageHandler implements RequestHandlerInterface
 {
+    private $containerName;
+
     private $router;
 
     private $template;
 
-    public function __construct(Router\RouterInterface $router, Template\TemplateRendererInterface $template = null)
-    {
-        $this->router   = $router;
-        $this->template = $template;
+    public function __construct(
+        Router\RouterInterface $router,
+        Template\TemplateRendererInterface $template = null,
+        string $containerName
+    ) {
+        $this->containerName = $containerName;
+        $this->router        = $router;
+        $this->template      = $template;
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
@@ -37,6 +43,29 @@ class HomePageHandler implements RequestHandlerInterface
         }
 
         $data = [];
+
+        switch ($this->containerName) {
+            case 'Aura\Di\Container':
+                $data['containerName'] = 'Aura.Di';
+                $data['containerDocs'] = 'http://auraphp.com/packages/2.x/Di.html';
+                break;
+            case 'Pimple\Container':
+                $data['containerName'] = 'Pimple';
+                $data['containerDocs'] = 'https://pimple.symfony.com/';
+                break;
+            case 'Zend\ServiceManager\ServiceManager':
+                $data['containerName'] = 'Zend Servicemanager';
+                $data['containerDocs'] = 'https://docs.zendframework.com/zend-servicemanager/';
+                break;
+            case 'Auryn\Injector':
+                $data['containerName'] = 'Auryn';
+                $data['containerDocs'] = 'https://github.com/rdlowrey/Auryn';
+                break;
+            case 'Symfony\Component\DependencyInjection\ContainerBuilder':
+                $data['containerName'] = 'Symfony DI Container';
+                $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
+                break;
+        }
 
         if ($this->router instanceof Router\AuraRouter) {
             $data['routerName'] = 'Aura.Router';

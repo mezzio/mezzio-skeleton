@@ -68,6 +68,13 @@
                 when writing your applications. Expressive supports multiple containers which typehints against
                 <a href="https://github.com/container-interop/container-interop" target="_blank">container-interop</a>.
             </p>
+            {% if containerName is defined %}
+                <p>
+                    <a href="{{ containerDocs }}" target="_blank">
+                        Get started with {{ containerName }}.
+                    </a>
+                </p>
+            {% endif %}
         </div>
 
         <div class="col-md-4">
