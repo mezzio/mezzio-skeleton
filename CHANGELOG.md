@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.0.0rc3 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#237](https://github.com/zendframework/zend-expressive-skeleton/pull/237)
+  adds an exclusion to `.gitignore` for the file `data/cache/.gitkeep`, ensuring
+  the directory is checked in to new projects.
+
 ## 3.0.0rc2 - 2018-03-07
 
 ### Added
