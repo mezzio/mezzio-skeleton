@@ -13,7 +13,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageHandlerFactoryTest extends TestCase
 {
-    /** @var ContainerInterface */
+    /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
     protected function setUp()

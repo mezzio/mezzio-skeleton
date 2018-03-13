@@ -16,10 +16,10 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageHandlerTest extends TestCase
 {
-    /** @var ContainerInterface */
+    /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
-    /** @var RouterInterface */
+    /** @var RouterInterface|ObjectProphecy */
     protected $router;
 
     protected function setUp()
