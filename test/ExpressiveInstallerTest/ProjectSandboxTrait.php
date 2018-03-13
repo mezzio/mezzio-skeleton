@@ -22,10 +22,10 @@ use Zend\Expressive\Handler\NotFoundHandler;
 use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
 use Zend\Expressive\Router\Middleware\DispatchMiddleware;
-use Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Router\Middleware\ImplicitOptionsMiddleware;
 use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
+use Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
 
 trait ProjectSandboxTrait
