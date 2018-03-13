@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.0.0rc3 - TBD
+## 3.0.0rc3 - 2018-03-13
 
 ### Added
 
@@ -12,7 +12,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- This release updates the minimum supported version of zend-expressive to
+  3.0.0rc4.
 
 ### Deprecated
 
