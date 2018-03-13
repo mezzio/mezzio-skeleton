@@ -65,6 +65,13 @@
             when writing your applications. Expressive supports multiple containers which typehints against
             <a href="https://github.com/container-interop/container-interop" target="_blank">container-interop</a>.
         </p>
+        <?php if (isset($this->containerName)) : ?>
+            <p>
+                <a href="<?= $this->containerDocs ?>" target="_blank">
+                    Get started with <?= $this->containerName ?>.
+                </a>
+            </p>
+        <?php endif; ?>
     </div>
 
     <div class="col-md-4">
@@ -79,8 +86,8 @@
         </p>
         <?php if (isset($this->routerName)) : ?>
             <p>
-                <a href="<?=$this->routerDocs?>" target="_blank">
-                    Get started with <?=$this->routerName?>.
+                <a href="<?= $this->routerDocs ?>" target="_blank">
+                    Get started with <?= $this->routerName ?>.
                 </a>
             </p>
         <?php endif; ?>
@@ -100,8 +107,8 @@
         </p>
         <?php if (isset($this->templateName)) : ?>
             <p>
-                <a href="<?=$this->templateDocs?>" target="_blank">
-                    Get started with <?=$this->templateName?>.
+                <a href="<?= $this->templateDocs ?>" target="_blank">
+                    Get started with <?= $this->templateName ?>.
                 </a>
             </p>
         <?php endif; ?>

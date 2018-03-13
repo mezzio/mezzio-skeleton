@@ -18,6 +18,6 @@ class HomePageHandlerFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
-        return new HomePageHandler($router, $template);
+        return new HomePageHandler($router, $template, get_class($container));
     }
 }

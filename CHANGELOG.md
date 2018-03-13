@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#238](https://github.com/zendframework/zend-expressive-skeleton/pull/238)
+  adds links to documentation for the specific container installed to the
+  shipped home page.
 
 ### Changed
 
