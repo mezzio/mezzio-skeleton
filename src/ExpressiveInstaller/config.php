@@ -35,7 +35,7 @@ return [
             ]
         ],
         'zendframework/zend-expressive-twigrenderer' => [
-            'version'   => '^2.0.0alpha1',
+            'version'   => '^2.0.0rc1',
             'whitelist' => [
                 'zendframework/zend-expressive-twigrenderer'
             ]
