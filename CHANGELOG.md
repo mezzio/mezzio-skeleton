@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.0.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- The `zend-expressive.programmatic_pipeline` configuration flag is removed from
+  `config/autoload/zend-expressive.global.php`, as it is no longer used anywhere.
+
+### Fixed
+
+- Nothing.
+
 ## 3.0.0rc4 - 2018-03-14
 
 ### Added
