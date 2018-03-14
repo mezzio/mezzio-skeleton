@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.0.0rc4 - 2018-03-14
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- [#241](https://github.com/zendframework/zend-expressive-skeleton/pull/241)
+  updates to zend-expressive 3.0.0rc5 and, by extension, zend-expresive-router
+  3.0.0rc5.
+
+  This requires one change to the `config/pipeline.php` file: instead of piping
+  `Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware`, it now pipes
+  `Zend\Expressive\Router\Middleware\RouteMiddleware`. This is necessary as the
+  former class no longer exists.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.0.0rc3 - 2018-03-13
 
 ### Added
