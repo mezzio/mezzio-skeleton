@@ -1,31 +1,39 @@
 <?php
 
-namespace App\Action;
+declare(strict_types=1);
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
+namespace App\Handler;
+
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
+use Zend\Expressive\Plates\PlatesRenderer;
 use Zend\Expressive\Router;
 use Zend\Expressive\Template;
-use Zend\Expressive\Plates\PlatesRenderer;
 use Zend\Expressive\Twig\TwigRenderer;
 use Zend\Expressive\ZendView\ZendViewRenderer;
 
-class HomePageAction implements ServerMiddlewareInterface
+class HomePageHandler implements RequestHandlerInterface
 {
+    private $containerName;
+
     private $router;
 
     private $template;
 
-    public function __construct(Router\RouterInterface $router, Template\TemplateRendererInterface $template = null)
-    {
-        $this->router   = $router;
-        $this->template = $template;
+    public function __construct(
+        Router\RouterInterface $router,
+        Template\TemplateRendererInterface $template = null,
+        string $containerName
+    ) {
+        $this->router        = $router;
+        $this->template      = $template;
+        $this->containerName = $containerName;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         if (! $this->template) {
             return new JsonResponse([
@@ -35,6 +43,29 @@ class HomePageAction implements ServerMiddlewareInterface
         }
 
         $data = [];
+
+        switch ($this->containerName) {
+            case 'Aura\Di\Container':
+                $data['containerName'] = 'Aura.Di';
+                $data['containerDocs'] = 'http://auraphp.com/packages/2.x/Di.html';
+                break;
+            case 'Pimple\Container':
+                $data['containerName'] = 'Pimple';
+                $data['containerDocs'] = 'https://pimple.symfony.com/';
+                break;
+            case 'Zend\ServiceManager\ServiceManager':
+                $data['containerName'] = 'Zend Servicemanager';
+                $data['containerDocs'] = 'https://docs.zendframework.com/zend-servicemanager/';
+                break;
+            case 'Auryn\Injector':
+                $data['containerName'] = 'Auryn';
+                $data['containerDocs'] = 'https://github.com/rdlowrey/Auryn';
+                break;
+            case 'Symfony\Component\DependencyInjection\ContainerBuilder':
+                $data['containerName'] = 'Symfony DI Container';
+                $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
+                break;
+        }
 
         if ($this->router instanceof Router\AuraRouter) {
             $data['routerName'] = 'Aura.Router';

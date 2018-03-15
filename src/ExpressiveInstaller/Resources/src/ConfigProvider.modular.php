@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 /**
@@ -15,9 +17,8 @@ class ConfigProvider
      * To add a bit of a structure, each section is defined in a separate
      * method which returns an array with its configuration.
      *
-     * @return array
      */
-    public function __invoke()
+    public function __invoke() : array
     {
         return [
             'dependencies' => $this->getDependencies(),
@@ -27,27 +28,23 @@ class ConfigProvider
 
     /**
      * Returns the container dependencies
-     *
-     * @return array
      */
-    public function getDependencies()
+    public function getDependencies() : array
     {
         return [
             'invokables' => [
-                Action\PingAction::class => Action\PingAction::class,
+                Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
-                Action\HomePageAction::class => Action\HomePageFactory::class,
+                Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
             ],
         ];
     }
 
     /**
      * Returns the templates configuration
-     *
-     * @return array
      */
-    public function getTemplates()
+    public function getTemplates() : array
     {
         return [
             'paths' => [

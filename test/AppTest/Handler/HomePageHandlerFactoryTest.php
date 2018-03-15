@@ -1,17 +1,19 @@
 <?php
 
-namespace AppTest\Action;
+declare(strict_types=1);
 
-use App\Action\HomePageAction;
-use App\Action\HomePageFactory;
+namespace AppTest\Handler;
+
+use App\Handler\HomePageHandler;
+use App\Handler\HomePageHandlerFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageFactoryTest extends TestCase
+class HomePageHandlerFactoryTest extends TestCase
 {
-    /** @var ContainerInterface */
+    /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
     protected function setUp()
@@ -24,28 +26,27 @@ class HomePageFactoryTest extends TestCase
 
     public function testFactoryWithoutTemplate()
     {
-        $factory = new HomePageFactory();
+        $factory = new HomePageHandlerFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
 
-        $this->assertInstanceOf(HomePageFactory::class, $factory);
+        $this->assertInstanceOf(HomePageHandlerFactory::class, $factory);
 
-        $homePage = $factory($this->container->reveal());
+        $homePage = $factory($this->container->reveal(), null, get_class($this->container->reveal()));
 
-        $this->assertInstanceOf(HomePageAction::class, $homePage);
+        $this->assertInstanceOf(HomePageHandler::class, $homePage);
     }
 
     public function testFactoryWithTemplate()
     {
-        $factory = new HomePageFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(true);
         $this->container
             ->get(TemplateRendererInterface::class)
             ->willReturn($this->prophesize(TemplateRendererInterface::class));
 
-        $this->assertInstanceOf(HomePageFactory::class, $factory);
+        $factory = new HomePageHandlerFactory();
 
-        $homePage = $factory($this->container->reveal());
+        $homePage = $factory($this->container->reveal(), null, get_class($this->container->reveal()));
 
-        $this->assertInstanceOf(HomePageAction::class, $homePage);
+        $this->assertInstanceOf(HomePageHandler::class, $homePage);
     }
 }

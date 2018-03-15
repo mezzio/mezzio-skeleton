@@ -1,0 +1,14 @@
+# zend-expressive-skeleton specific
+includes:
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+parameters:
+	fileExtensions:
+		# Standard php files and .dist config files
+		- php
+		- dist
+	excludes_analyse:
+		- src/ExpressiveInstaller/Resources/src/ConfigProvider.flat.php
+		- src/ExpressiveInstaller/Resources/src/ConfigProvider.modular.php
+	reportUnmatchedIgnoredErrors: true
+	ignoreErrors:
+		- '#Class App\\ConfigProvider not found#'

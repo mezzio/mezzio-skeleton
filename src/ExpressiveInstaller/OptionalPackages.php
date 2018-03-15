@@ -5,15 +5,17 @@
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstaller;
 
 use Composer\Composer;
 use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
-use Composer\Package\AliasPackage;
 use Composer\Package\BasePackage;
 use Composer\Package\Link;
+use Composer\Package\RootPackageInterface;
 use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
 use FilesystemIterator;
@@ -33,20 +35,20 @@ use RuntimeException;
  */
 class OptionalPackages
 {
-    const INSTALL_FLAT    = 'flat';
-    const INSTALL_MINIMAL = 'minimal';
-    const INSTALL_MODULAR = 'modular';
+    public const INSTALL_FLAT    = 'flat';
+    public const INSTALL_MINIMAL = 'minimal';
+    public const INSTALL_MODULAR = 'modular';
 
     /**
      * @const string Regular expression for matching package name and version
      */
-    const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
+    public const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
     /**
      * @const string Configuration file lines related to registering the default
      *     App module configuration.
      */
-    const APP_MODULE_CONFIG = '
+    public const APP_MODULE_CONFIG = '
     // Default App module config
     App\ConfigProvider::class,
 
@@ -64,6 +66,7 @@ class OptionalPackages
         'CONDUCT.md',
         'CONTRIBUTING.md',
         'phpcs.xml',
+        'phpstan.installer.neon',
         'src/App/templates/.gitkeep',
     ];
 
@@ -88,12 +91,12 @@ class OptionalPackages
     private $composerJson;
 
     /**
-     * @var string[]
+     * @var Link[]
      */
     private $composerRequires;
 
     /**
-     * @var string[]
+     * @var Link[]
      */
     private $composerDevRequires;
 
@@ -101,11 +104,14 @@ class OptionalPackages
      * @var string[] Dev dependencies to remove after install is complete
      */
     private $devDependencies = [
-        'aura/di',
         'composer/composer',
         'filp/whoops',
+        'jsoumelidis/zend-sf-di-config',
         'mikey179/vfsstream',
-        'xtreamwayz/pimple-container-interop',
+        'northwoods/container',
+        "phpstan/phpstan",
+        "phpstan/phpstan-strict-rules",
+        'zendframework/zend-auradi-config',
         'zendframework/zend-coding-standard',
         'zendframework/zend-expressive-aurarouter',
         'zendframework/zend-expressive-fastroute',
@@ -113,6 +119,7 @@ class OptionalPackages
         'zendframework/zend-expressive-twigrenderer',
         'zendframework/zend-expressive-zendrouter',
         'zendframework/zend-expressive-zendviewrenderer',
+        'zendframework/zend-pimple-config',
         'zendframework/zend-servicemanager',
     ];
 
@@ -137,12 +144,12 @@ class OptionalPackages
     private $projectRoot;
 
     /**
-     * @var BasePackage
+     * @var RootPackageInterface
      */
     private $rootPackage;
 
     /**
-     * @var string[]
+     * @var int[]
      */
     private $stabilityFlags;
 
@@ -155,11 +162,9 @@ class OptionalPackages
      * Updates the composer.json with the package selections, and removes the
      * install and update commands on completion.
      *
-     * @param Event $event
-     * @return void
      * @codeCoverageIgnore
      */
-    public static function install(Event $event)
+    public static function install(Event $event) : void
     {
         $installer = new self($event->getIO(), $event->getComposer());
 
@@ -175,12 +180,7 @@ class OptionalPackages
         $installer->finalizePackage();
     }
 
-    /**
-     * @param IOInterface $io
-     * @param Composer $composer
-     * @param null|string $projectRoot
-     */
-    public function __construct(IOInterface $io, Composer $composer, $projectRoot = null)
+    public function __construct(IOInterface $io, Composer $composer, string $projectRoot = null)
     {
         $this->io = $io;
         $this->composer = $composer;
@@ -206,10 +206,8 @@ class OptionalPackages
      * Create data and cache directories, if not present.
      *
      * Also sets up appropriate permissions.
-     *
-     * @return void
      */
-    public function setupDataAndCacheDir()
+    public function setupDataAndCacheDir() : void
     {
         $this->io->write('<info>Setup data and cache dir</info>');
         if (! is_dir($this->projectRoot . '/data/cache')) {
@@ -223,10 +221,8 @@ class OptionalPackages
      *
      * The dev dependencies should be removed from the stability flags,
      * require-dev and the composer file.
-     *
-     * @return void
      */
-    public function removeDevDependencies()
+    public function removeDevDependencies() : void
     {
         $this->io->write('<info>Removing installer development dependencies</info>');
         foreach ($this->devDependencies as $devDependency) {
@@ -241,7 +237,7 @@ class OptionalPackages
      *
      * @return string One of the INSTALL_ constants.
      */
-    public function requestInstallType()
+    public function requestInstallType() : string
     {
         $query = [
             sprintf(
@@ -274,13 +270,11 @@ class OptionalPackages
 
     /**
      * Set the install type.
-     *
-     * @param string $installType
-     * @return void
      */
-    public function setInstallType($installType)
+    public function setInstallType(string $installType) : void
     {
-        $this->installType = in_array($installType, [
+        $this->installType =
+            in_array($installType, [
                 self::INSTALL_FLAT,
                 self::INSTALL_MINIMAL,
                 self::INSTALL_MODULAR,
@@ -292,10 +286,9 @@ class OptionalPackages
     /**
      * Setup the default application structure.
      *
-     * @return void
      * @throws RuntimeException if $installType is unknown
      */
-    public function setupDefaultApp()
+    public function setupDefaultApp() : void
     {
         switch ($this->installType) {
             case self::INSTALL_MINIMAL:
@@ -306,7 +299,7 @@ class OptionalPackages
             case self::INSTALL_FLAT:
                 // Re-arrange files into a flat structure.
                 $this->recursiveRmdir($this->projectRoot . '/src/App/templates');
-                rename($this->projectRoot . '/src/App/src/Action', $this->projectRoot . '/src/App/Action');
+                rename($this->projectRoot . '/src/App/src/Handler', $this->projectRoot . '/src/App/Handler');
                 $this->recursiveRmdir($this->projectRoot . '/src/App/src');
 
                 // Re-define autoloading rules
@@ -336,10 +329,9 @@ class OptionalPackages
     /**
      * Prompt for each optional installation package.
      *
-     * @return void
      * @codeCoverageIgnore
      */
-    public function promptForOptionalPackages()
+    public function promptForOptionalPackages() : void
     {
         foreach ($this->config['questions'] as $questionName => $question) {
             $this->promptForOptionalPackage($questionName, $question);
@@ -351,11 +343,10 @@ class OptionalPackages
      *
      * @param string $questionName Name of question
      * @param array $question Question details from configuration
-     * @return void
      */
-    public function promptForOptionalPackage($questionName, array $question)
+    public function promptForOptionalPackage(string $questionName, array $question) : void
     {
-        $defaultOption = (isset($question['default'])) ? $question['default'] : 1;
+        $defaultOption = $question['default'] ?? 1;
         if (isset($this->composerDefinition['extra']['optional-packages'][$questionName])) {
             // Skip question, it's already answered
             return;
@@ -376,24 +367,21 @@ class OptionalPackages
 
     /**
      * Update the root package based on current state.
-     *
-     * @return void
      */
-    public function updateRootPackage()
+    public function updateRootPackage() : void
     {
         $this->rootPackage->setRequires($this->composerRequires);
         $this->rootPackage->setDevRequires($this->composerDevRequires);
         $this->rootPackage->setStabilityFlags($this->stabilityFlags);
         $this->rootPackage->setAutoload($this->composerDefinition['autoload']);
         $this->rootPackage->setDevAutoload($this->composerDefinition['autoload-dev']);
+        $this->rootPackage->setExtra($this->composerDefinition['extra'] ?? []);
     }
 
     /**
      * Remove the installer from the composer definition
-     *
-     * @return void
      */
-    public function removeInstallerFromDefinition()
+    public function removeInstallerFromDefinition() : void
     {
         $this->io->write('<info>Remove installer</info>');
 
@@ -407,11 +395,6 @@ class OptionalPackages
         // Remove installer data
         unset($this->composerDefinition['extra']['optional-packages']);
 
-        // Remove left over
-        if (empty($this->composerDefinition['extra'])) {
-            unset($this->composerDefinition['extra']);
-        }
-
         // Remove installer scripts
         unset($this->composerDefinition['scripts']['pre-update-cmd']);
         unset($this->composerDefinition['scripts']['pre-install-cmd']);
@@ -424,10 +407,9 @@ class OptionalPackages
      * composer.lock file, and cleans up all files specific to the
      * installer.
      *
-     * @return void
      * @codeCoverageIgnore
      */
-    public function finalizePackage()
+    public function finalizePackage() : void
     {
         // Update composer definition
         $this->composerJson->write($this->composerDefinition);
@@ -439,17 +421,16 @@ class OptionalPackages
     /**
      * Process the answer of a question
      *
-     * @param array $question
-     * @param string|int $answer
-     * @return bool
+     * @param bool|int|string $answer
      */
-    public function processAnswer(array $question, $answer)
+    public function processAnswer(array $question, $answer) : bool
     {
         if (is_numeric($answer) && isset($question['options'][$answer])) {
             // Add packages to install
             if (isset($question['options'][$answer]['packages'])) {
                 foreach ($question['options'][$answer]['packages'] as $packageName) {
-                    $this->addPackage($packageName, $this->config['packages'][$packageName]);
+                    $packageData = $this->config['packages'][$packageName];
+                    $this->addPackage($packageName, $packageData['version'], $packageData['whitelist'] ?? []);
                 }
             }
 
@@ -464,8 +445,8 @@ class OptionalPackages
             return true;
         }
 
-        if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
-            $this->addPackage($match['name'], $match['version']);
+        if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, (string) $answer, $match)) {
+            $this->addPackage($match['name'], $match['version'], []);
             if (isset($question['custom-package-warning'])) {
                 $this->io->write(sprintf('  <warning>%s</warning>', $question['custom-package-warning']));
             }
@@ -478,12 +459,8 @@ class OptionalPackages
 
     /**
      * Add a package
-     *
-     * @param string $packageName
-     * @param string $packageVersion
-     * @return void
      */
-    public function addPackage($packageName, $packageVersion)
+    public function addPackage(string $packageName, string $packageVersion, array $whitelist = []) : void
     {
         $this->io->write(sprintf(
             '  - Adding package <info>%s</info> (<comment>%s</comment>)',
@@ -499,7 +476,7 @@ class OptionalPackages
         $link = new Link('__root__', $packageName, $constraint, 'requires', $packageVersion);
 
         // Add package to the root package and composer.json requirements
-        if (in_array($packageName, $this->config['require-dev'])) {
+        if (in_array($packageName, $this->config['require-dev'], true)) {
             unset($this->composerDefinition['require'][$packageName]);
             unset($this->composerRequires[$packageName]);
 
@@ -528,6 +505,14 @@ class OptionalPackages
                 $this->stabilityFlags[$packageName] = BasePackage::STABILITY_RC;
                 break;
         }
+
+        // Whitelist packages for the component installer
+        foreach ($whitelist as $package) {
+            if (! in_array($package, $this->composerDefinition['extra']['zf']['component-whitelist'], true)) {
+                $this->composerDefinition['extra']['zf']['component-whitelist'][] = $package;
+                $this->io->write(sprintf('  - Whitelist package <info>%s</info>', $package));
+            }
+        }
     }
 
     /**
@@ -536,9 +521,8 @@ class OptionalPackages
      * @param string $resource Resource file.
      * @param string $target Destination.
      * @param bool $force Whether or not to copy over an existing file.
-     * @return void
      */
-    public function copyResource($resource, $target, $force = false)
+    public function copyResource(string $resource, string $target, bool $force = false) : void
     {
         // Copy file
         if ($force === false && is_file($this->projectRoot . $target)) {
@@ -556,12 +540,8 @@ class OptionalPackages
 
     /**
      * Remove lines from string content containing words in array.
-     *
-     * @param array  $entries Entries to remove.
-     * @param string $content String to remove entry from.
-     * @return string
      */
-    public function removeLinesContainingStrings(array $entries, $content)
+    public function removeLinesContainingStrings(array $entries, string $content) : string
     {
         $entries = implode('|', array_map(function ($word) {
             return preg_quote($word, '/');
@@ -576,10 +556,9 @@ class OptionalPackages
      * On completion of install/update, removes the installer classes (including
      * this one) and assets (including configuration and templates).
      *
-     * @return void
      * @codeCoverageIgnore
      */
-    private function cleanUp()
+    private function cleanUp() : void
     {
         $this->io->write('<info>Removing Expressive installer classes, configuration, tests and docs</info>');
         foreach ($this->assetsToRemove as $target) {
@@ -598,10 +577,9 @@ class OptionalPackages
     /**
      * Remove the ExpressiveInstaller exclusion from the phpunit configuration
      *
-     * @return void
      * @codeCoverageIgnore
      */
-    private function preparePhpunitConfig()
+    private function preparePhpunitConfig() : void
     {
         $phpunitConfigFile = $this->projectRoot . 'phpunit.xml.dist';
         $phpunitConfig     = file_get_contents($phpunitConfigFile);
@@ -612,12 +590,11 @@ class OptionalPackages
     /**
      * Prepare and ask questions and return the answer
      *
-     * @param string $question
-     * @param string $defaultOption
+     * @param int|string $defaultOption
      * @return bool|int|string
      * @codeCoverageIgnore
      */
-    private function askQuestion($question, $defaultOption)
+    private function askQuestion(array $question, $defaultOption)
     {
         // Construct question
         $ask = [
@@ -644,7 +621,7 @@ class OptionalPackages
 
         while (true) {
             // Ask for user input
-            $answer = $this->io->ask($ask, $defaultOption);
+            $answer = $this->io->ask($ask, (string) $defaultOption);
 
             // Handle none of the options
             if ($answer === 'n' && $question['required'] !== true) {
@@ -669,7 +646,7 @@ class OptionalPackages
                 $this->io->write(sprintf('  - Searching for <info>%s:%s</info>', $packageName, $packageVersion));
 
                 $optionalPackage = $this->composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
-                if (! $optionalPackage) {
+                if (null === $optionalPackage) {
                     $this->io->write(sprintf('<error>Package not found %s:%s</error>', $packageName, $packageVersion));
                     continue;
                 }
@@ -686,10 +663,9 @@ class OptionalPackages
     /**
      * If a minimal install was requested, remove the default middleware and assets.
      *
-     * @return void
      * @codeCoverageIgnore
      */
-    private function removeDefaultModule()
+    private function removeDefaultModule() : void
     {
         $this->io->write('<info>Removing default App module classes and factories</info>');
         $this->recursiveRmdir($this->projectRoot . '/src/App');
@@ -699,20 +675,14 @@ class OptionalPackages
 
         $this->io->write('<info>Removing App module registration from configuration</info>');
         $this->removeAppModuleConfig();
-
-        $this->io->write('<info>Removing assets</info>');
-        unlink($this->projectRoot . '/public/favicon.ico');
-        unlink($this->projectRoot . '/public/zf-logo.png');
     }
 
     /**
      * Recursively remove a directory.
      *
-     * @param string $directory
-     * @return void
      * @codeCoverageIgnore
      */
-    private function recursiveRmdir($directory)
+    private function recursiveRmdir(string $directory) : void
     {
         if (! is_dir($directory)) {
             return;
@@ -731,10 +701,11 @@ class OptionalPackages
     }
 
     /**
-     * @return void
+     * Removes composer.lock file from gitignore.
+     *
      * @codeCoverageIgnore
      */
-    private function clearComposerLockFile()
+    private function clearComposerLockFile() : void
     {
         $this->io->write('<info>Removing composer.lock from .gitignore</info>');
 
@@ -746,10 +717,8 @@ class OptionalPackages
 
     /**
      * Removes the App\ConfigProvider entry from the application config file.
-     *
-     * @return void
      */
-    private function removeAppModuleConfig()
+    private function removeAppModuleConfig() : void
     {
         $configFile = $this->projectRoot . '/config/config.php';
         $contents = file_get_contents($configFile);
@@ -758,20 +727,15 @@ class OptionalPackages
     }
 
     /**
-     * @param Composer $composer
-     * @param string $composerFile
-     * @return void
+     * Parses the composer file and populates internal data
      */
-    private function parseComposerDefinition(Composer $composer, $composerFile)
+    private function parseComposerDefinition(Composer $composer, string $composerFile) : void
     {
         $this->composerJson = new JsonFile($composerFile);
         $this->composerDefinition = $this->composerJson->read();
 
-        // Get root package
+        // Get root package or root alias package
         $this->rootPackage = $composer->getPackage();
-        while ($this->rootPackage instanceof AliasPackage) {
-            $this->rootPackage = $this->rootPackage->getAliasOf();
-        }
 
         // Get required packages
         $this->composerRequires    = $this->rootPackage->getRequires();

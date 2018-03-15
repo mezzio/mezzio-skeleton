@@ -1,4 +1,4 @@
-<?php $this->headTitle('Home'); ?>
+<?php $this->layout('layout::default', ['title' => 'Home']) ?>
 
 <div class="jumbotron">
     <h1>Welcome to <span class="zf-green">zend-expressive</span></h1>
@@ -15,20 +15,20 @@
 <div class="row">
     <div class="col-md-4">
         <h2>
-            <a href="https://docs.zendframework.com/zend-expressive/getting-started/features/" target="_blank">
-                <i class="fa fa-refresh"></i> Agile &amp; Lean
+            <a href="https://docs.zendframework.com/zend-expressive/getting-started/features" target="_blank">
+                <i class="fa fa-bolt"></i> Agile &amp; Lean
             </a>
         </h2>
         <p>
-            Expressive is fast, small and perfect for rapid application development, prototyping and api's. You decide how you
-            extend it and choose the best packages from major framework or standalone projects.
+            Expressive is fast, small and perfect for rapid application development, prototyping and api's.
+            You decide how you extend it and choose the best packages from major framework or standalone projects.
         </p>
     </div>
 
     <div class="col-md-4">
         <h2>
             <a href="https://github.com/zendframework/zend-diactoros" target="_blank">
-                <i class="fa fa-exchange"></i> HTTP Messages
+                <i class="fa fa-exchange-alt"></i> HTTP Messages
             </a>
         </h2>
         <p>
@@ -41,7 +41,7 @@
     <div class="col-md-4">
         <h2>
             <a href="https://github.com/zendframework/zend-stratigility" target="_blank">
-                <i class="fa fa-dot-circle-o"></i> Middleware
+                <i class="fa fa-dot-circle"></i> Middleware
             </a>
         </h2>
         <p>
@@ -56,7 +56,7 @@
 <div class="row">
     <div class="col-md-4">
         <h2>
-            <a href="https://docs.zendframework.com/zend-expressive/features/container/intro/" target="_blank">
+            <a href="https://docs.zendframework.com/zend-expressive/features/container/intro" target="_blank">
                 <i class="fa fa-cube"></i> Containers
             </a>
         </h2>
@@ -65,22 +65,10 @@
             when writing your applications. Expressive supports multiple containers which typehints against
             <a href="https://github.com/container-interop/container-interop" target="_blank">container-interop</a>.
         </p>
-    </div>
-
-    <div class="col-md-4">
-        <h2>
-            <a href="https://docs.zendframework.com/zend-expressive/features/router/intro/" target="_blank">
-                <i class="fa fa-plane"></i> Routers
-            </a>
-        </h2>
-        <p>
-            One fundamental feature of zend-expressive is that it provides mechanisms for implementing dynamic
-            routing, a feature required in most modern web applications. Expressive ships with multiple adapters.
-        </p>
-        <?php if (isset($this->routerName)) : ?>
+        <?php if (isset($containerName)) : ?>
             <p>
-                <a href="<?php echo $this->routerDocs ?>" target="_blank">
-                    Get started with <?php echo $this->routerName ?>.
+                <a href="<?= $this->e($containerDocs) ?>" target="_blank">
+                    Get started with <?= $this->e($containerName) ?>.
                 </a>
             </p>
         <?php endif; ?>
@@ -88,8 +76,27 @@
 
     <div class="col-md-4">
         <h2>
-            <a href="https://docs.zendframework.com/zend-expressive/features/template/zend-view/" target="_blank">
-                <i class="fa fa-files-o"></i> Templating
+            <a href="https://docs.zendframework.com/zend-expressive/features/router/intro" target="_blank">
+                <i class="fa fa-plane"></i> Routers
+            </a>
+        </h2>
+        <p>
+            One fundamental feature of zend-expressive is that it provides mechanisms for implementing dynamic
+            routing, a feature required in most modern web applications. Expressive ships with multiple adapters.
+        </p>
+        <?php if (isset($routerName)) : ?>
+            <p>
+                <a href="<?= $this->e($routerDocs) ?>" target="_blank">
+                    Get started with <?= $this->e($routerName) ?>.
+                </a>
+            </p>
+        <?php endif; ?>
+    </div>
+
+    <div class="col-md-4">
+        <h2>
+            <a href="https://docs.zendframework.com/zend-expressive/features/template/plates" target="_blank">
+                <i class="fa fa-edit"></i> Templating
             </a>
         </h2>
         <p>
@@ -98,10 +105,10 @@
             However, Expressive does provide abstraction for templating, which allows you to write middleware that
             is engine-agnostic.
         </p>
-        <?php if (isset($this->templateName)) : ?>
+        <?php if (isset($templateName)) : ?>
             <p>
-                <a href="<?php echo $this->templateDocs ?>" target="_blank">
-                    Get started with <?php echo $this->templateName ?>.
+                <a href="<?= $this->e($templateDocs) ?>" target="_blank">
+                    Get started with <?= $this->e($templateName) ?>.
                 </a>
             </p>
         <?php endif; ?>

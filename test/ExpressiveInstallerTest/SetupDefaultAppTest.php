@@ -5,6 +5,8 @@
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
@@ -40,16 +42,6 @@ class SetupDefaultAppTest extends OptionalPackagesTestCase
             'zendframework/zend-expressive-tooling',
             $this->installer,
             'zend-expressive-tooling package was not injected into composer.json'
-        );
-    }
-
-    public function testFlatInstallationDoesNotAddToolingSupport()
-    {
-        $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_FLAT, $this->installer);
-        $this->assertNotPackage(
-            'zendframework/zend-expressive-tooling',
-            $this->installer,
-            'zend-expressive-tooling package WAS injected into composer.json, but should not have been'
         );
     }
 }

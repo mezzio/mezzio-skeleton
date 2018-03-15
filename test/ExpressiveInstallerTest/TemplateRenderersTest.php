@@ -5,9 +5,12 @@
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
+use Generator;
 use Zend\Expressive;
 use Zend\Stratigility\Middleware;
 
@@ -19,6 +22,12 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
      * @var OptionalPackages
      */
     private $installer;
+
+    private $templateConfigProviders = [
+        Expressive\Plates\PlatesRenderer::class => Expressive\Plates\ConfigProvider::class,
+        Expressive\Twig\TwigRenderer::class => Expressive\Twig\ConfigProvider::class,
+        Expressive\ZendView\ZendViewRenderer::class => Expressive\ZendView\ConfigProvider::class,
+    ];
 
     protected function setUp()
     {
@@ -39,21 +48,14 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
      * @runInSeparateProcess
      *
      * @dataProvider templateRendererProvider
-     *
-     * @param string $installType
-     * @param int $containerOption
-     * @param int $routerOption
-     * @param int $templateRendererOption
-     * @param int $expectedResponseStatusCode
-     * @param string $expectedTemplateRenderer
      */
     public function testTemplateRenderer(
-        $installType,
-        $containerOption,
-        $routerOption,
-        $templateRendererOption,
-        $expectedResponseStatusCode,
-        $expectedTemplateRenderer
+        string $installType,
+        int $containerOption,
+        int $routerOption,
+        int $templateRendererOption,
+        int $expectedResponseStatusCode,
+        string $expectedTemplateRenderer
     ) {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
@@ -71,6 +73,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
             $routerOption
         );
         $this->assertTrue($routerResult);
+        $this->injectRouterConfigProvider();
 
         // Install template engine
         $templateEngineResult = $this->installer->processAnswer(
@@ -78,6 +81,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
             $templateRendererOption
         );
         $this->assertTrue($templateEngineResult);
+        $this->injectConfigProvider($expectedTemplateRenderer);
 
         // Test container
         $container = $this->getContainer();
@@ -105,7 +109,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         }
     }
 
-    public function templateRendererProvider()
+    public function templateRendererProvider() : Generator
     {
         // @codingStandardsIgnoreStart
         // Minimal framework installation test cases; no templates installed.
@@ -140,5 +144,29 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
                 yield $name => $arguments;
             }
         }
+    }
+
+    public function injectRouterConfigProvider()
+    {
+        $configFile = $this->projectRoot . '/config/config.php';
+        $contents = file_get_contents($configFile);
+        $contents = preg_replace(
+            '/(new ConfigAggregator\(\[)/s',
+            '$1' . "\n    " . Expressive\Router\FastRouteRouter\ConfigProvider::class . "::class,\n",
+            $contents
+        );
+        file_put_contents($configFile, $contents);
+    }
+
+    public function injectConfigProvider(string $rendererClass)
+    {
+        $configFile = $this->projectRoot . '/config/config.php';
+        $contents = file_get_contents($configFile);
+        $contents = preg_replace(
+            '/(new ConfigAggregator\(\[)/s',
+            '$1' . "\n    " . $this->templateConfigProviders[$rendererClass] . "::class,\n",
+            $contents
+        );
+        file_put_contents($configFile, $contents);
     }
 }

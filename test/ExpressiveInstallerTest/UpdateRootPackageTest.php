@@ -5,6 +5,8 @@
  * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace ExpressiveInstallerTest;
 
 use ExpressiveInstaller\OptionalPackages;
@@ -52,6 +54,7 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
         $this->rootPackage->setStabilityFlags($this->changes['stabilityFlags'])->shouldBeCalled();
         $this->rootPackage->setAutoload($this->changes['composerDefinition']['autoload'])->shouldBeCalled();
         $this->rootPackage->setDevAutoload($this->changes['composerDefinition']['autoload-dev'])->shouldBeCalled();
+        $this->rootPackage->setExtra([])->shouldBeCalled();
 
         $installer->updateRootPackage();
     }
