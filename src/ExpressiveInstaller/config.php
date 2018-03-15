@@ -14,46 +14,46 @@ return [
             'version' => '^1.2',
         ],
         'zendframework/zend-auradi-config' => [
-            'version' => '^1.0.0rc1',
+            'version' => '^1.0',
         ],
         'zendframework/zend-expressive-aurarouter' => [
-            'version'   => '^3.0.0rc3',
+            'version'   => '^3.0',
             'whitelist' => [
                 'zendframework/zend-expressive-aurarouter'
             ]
         ],
         'zendframework/zend-expressive-fastroute' => [
-            'version'   => '^3.0.0rc4',
+            'version'   => '^3.0',
             'whitelist' => [
                 'zendframework/zend-expressive-fastroute'
             ]
         ],
         'zendframework/zend-expressive-platesrenderer' => [
-            'version'   => '^2.0.0alpha1',
+            'version'   => '^2.0',
             'whitelist' => [
                 'zendframework/zend-expressive-platesrenderer'
             ]
         ],
         'zendframework/zend-expressive-twigrenderer' => [
-            'version'   => '^2.0.0rc1',
+            'version'   => '^2.0',
             'whitelist' => [
                 'zendframework/zend-expressive-twigrenderer'
             ]
         ],
         'zendframework/zend-expressive-zendrouter' => [
-            'version'   => '^3.0.0rc3',
+            'version'   => '^3.0',
             'whitelist' => [
                 'zendframework/zend-expressive-zendrouter'
             ]
         ],
         'zendframework/zend-expressive-zendviewrenderer' => [
-            'version'   => '^2.0.0alpha2',
+            'version'   => '^2.0',
             'whitelist' => [
                 'zendframework/zend-expressive-zendviewrenderer'
             ]
         ],
         'zendframework/zend-pimple-config' => [
-            'version' => '^1.0.0alpha1',
+            'version' => '^1.0',
         ],
         'zendframework/zend-servicemanager' => [
             'version' => '^3.3',

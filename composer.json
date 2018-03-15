@@ -1,6 +1,6 @@
 {
     "name": "zendframework/zend-expressive-skeleton",
-    "description": "Zend expressive skeleton. Begin developing PSR-7 middleware applications in seconds!",
+    "description": "Zend expressive skeleton. Begin developing PSR-15 middleware applications in seconds!",
     "type": "project",
     "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
     "license": "BSD-3-Clause",
@@ -10,6 +10,7 @@
         "psr",
         "psr-7",
         "psr-11",
+        "psr-15",
         "zf",
         "zendframework",
         "zend-expressive"
@@ -19,8 +20,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2.x-dev",
-            "dev-develop": "3.0.x-dev"
+            "dev-master": "3.0.x-dev",
+            "dev-develop": "3.1.x-dev"
         },
         "zf": {
             "component-whitelist": [
@@ -38,16 +39,14 @@
         "slack": "https://zendframework-slack.herokuapp.com",
         "forum": "https://discourse.zendframework.com/c/questions/expressive"
     },
-    "minimum-stability": "alpha",
-    "prefer-stable": true,
     "require": {
         "php": "^7.1",
         "roave/security-advisories": "dev-master",
         "zendframework/zend-component-installer": "^2.1",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-diactoros": "^1.7.1",
-        "zendframework/zend-expressive": "^3.0.0rc5",
-        "zendframework/zend-expressive-helpers": "^5.0.0alpha3",
+        "zendframework/zend-expressive": "^3.0",
+        "zendframework/zend-expressive-helpers": "^5.0",
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
@@ -60,16 +59,16 @@
         "phpstan/phpstan-strict-rules": "^0.9.0",
         "phpunit/phpunit": "^7.0.1",
         "squizlabs/php_codesniffer": "^2.9.1",
-        "zendframework/zend-auradi-config": "^1.0.0rc1",
+        "zendframework/zend-auradi-config": "^1.0",
         "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-expressive-aurarouter": "^3.0.0rc3",
-        "zendframework/zend-expressive-fastroute": "^3.0.0rc4",
-        "zendframework/zend-expressive-platesrenderer": "^2.0.0alpha1",
-        "zendframework/zend-expressive-tooling": "^1.0.0rc2",
-        "zendframework/zend-expressive-twigrenderer": "^2.0.0rc1",
-        "zendframework/zend-expressive-zendrouter": "^3.0.0rc3",
-        "zendframework/zend-expressive-zendviewrenderer": "^2.0.0alpha2",
-        "zendframework/zend-pimple-config": "^1.0.0alpha1",
+        "zendframework/zend-expressive-aurarouter": "^3.0",
+        "zendframework/zend-expressive-fastroute": "^3.0",
+        "zendframework/zend-expressive-platesrenderer": "^2.0",
+        "zendframework/zend-expressive-tooling": "^1.0",
+        "zendframework/zend-expressive-twigrenderer": "^2.0",
+        "zendframework/zend-expressive-zendrouter": "^3.0",
+        "zendframework/zend-expressive-zendviewrenderer": "^2.0",
+        "zendframework/zend-pimple-config": "^1.0",
         "zendframework/zend-servicemanager": "^3.3",
         "zfcampus/zf-development-mode": "^3.1"
     },
