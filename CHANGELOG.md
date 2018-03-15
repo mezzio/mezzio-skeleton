@@ -2,206 +2,19 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.0.0 - TBD
+## 3.0.0 - 2018-03-15
 
 ### Added
 
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- The `zend-expressive.programmatic_pipeline` configuration flag is removed from
-  `config/autoload/zend-expressive.global.php`, as it is no longer used anywhere.
-
-### Fixed
-
-- Nothing.
-
-## 3.0.0rc4 - 2018-03-14
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#241](https://github.com/zendframework/zend-expressive-skeleton/pull/241)
-  updates to zend-expressive 3.0.0rc5 and, by extension, zend-expresive-router
-  3.0.0rc5.
-
-  This requires one change to the `config/pipeline.php` file: instead of piping
-  `Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware`, it now pipes
-  `Zend\Expressive\Router\Middleware\RouteMiddleware`. This is necessary as the
-  former class no longer exists.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 3.0.0rc3 - 2018-03-13
-
-### Added
-
-- [#238](https://github.com/zendframework/zend-expressive-skeleton/pull/238)
-  adds links to documentation for the specific container installed to the
-  shipped home page.
-
-### Changed
-
-- This release updates the minimum supported version of zend-expressive to
-  3.0.0rc4.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- [#237](https://github.com/zendframework/zend-expressive-skeleton/pull/237)
-  adds an exclusion to `.gitignore` for the file `data/cache/.gitkeep`, ensuring
-  the directory is checked in to new projects.
-
-## 3.0.0rc2 - 2018-03-07
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#235](https://github.com/zendframework/zend-expressive-skeleton/pull/235)
-  updates to zend-expressive 3.0.0rc3 and zend-expressive-router 3.0.0rc4, as
-  well as the latest release candidates for the various router adapters.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- [#235](https://github.com/zendframework/zend-expressive-skeleton/pull/235)
-  changes the order of pipeline middleware to place the entry for the
-  `MethodNotAllowedMiddleware` after both the `ImplicitHeadMiddleware` and
-  `ImplicitOptionsMiddleware` entries; this is done to ensure it does not
-  intercept HEAD and OPTIONS requests when it should not.
-
-## 3.0.0rc1 - 2018-02-27
-
-### Added
-
-- [#224](https://github.com/zendframework/zend-expressive-skeleton/pull/224)
-  adds notifications for whitelisted packages.
-
-### Changed
-
-- The skeleton now requires zend-expressive 3.0.0rc1. For detailed changes, see the
-  [zend-expressive 3.0.0alpha6](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha6),
-  [zend-expressive 3.0.0alpha7](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha7),
-  [zend-expressive 3.0.0alpha8](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha8),
-  [zend-expressive 3.0.0alpha9](https://github.com/zendframework/zend-expressive/releases/3.0.0alpha9),
-  and [zend-expressive 3.0.0rc1](https://github.com/zendframework/zend-expressive/releases/3.0.0rc1)
-  changelogs.
-
-- [#219](https://github.com/zendframework/zend-expressive-skeleton/pull/219)
-  updates templates such that all example assets (css, images, and javascript)
-  are now loaded from remote urls.
-
-- [#226](https://github.com/zendframework/zend-expressive-skeleton/pull/226)
-  renames the factory class `App\Handler\HomePageFactory` to
-  `App\Handler\HomePageHandlerFactory` to reflect the name of the class it
-  generates.
-
-- [#231](https://github.com/zendframework/zend-expressive-skeleton/pull/231)
-  simplifies how zend-servicemanager instances are generated, dropping v2 syntax
-  in favor of a configuration-driven v3 syntax.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- [#221](https://github.com/zendframework/zend-expressive-skeleton/pull/221)
-  adds missing array return type to the shipped `ConfigProvider` classes.
-
-- [#224](https://github.com/zendframework/zend-expressive-skeleton/pull/224)
-  fixes unwanted removal of whitelisted packages.
-
-- [#232](https://github.com/zendframework/zend-expressive-skeleton/pull/232)
-  updates dependency constraints to latest released versions, and ensures that
-  when alpha versions are specified, only that version forward will be installed
-  (previously, an earlier alpha could potentially be installed when using
-  `--prefer-lowest`).
-
-## 3.0.0alpha3 - 2018-02-08
-
-### Added
-
-- [#215](https://github.com/zendframework/zend-expressive-skeleton/pull/215)
-  adds packages to the zend-component-installer whitelist to prevent prompts for
-  configuration provider injection.
-
-### Changed
-
-- [#199](https://github.com/zendframework/zend-expressive-skeleton/pull/199)
-  moves the location of the configuration cache from `data/config-cache.php` to
-  `data/cache/config-cache.php`. Since the shipped `composer clear-config-cache`
-  script and zf-development-mode both use the `$config['config_cache_path']`
-  setting to determine where the cache file lives, this should have no bearing
-  on normal, documented usage.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- [#216](https://github.com/zendframework/zend-expressive-skeleton/pull/216)
-  updates the `composer serve command to read `php -S 0.0.0.0:8080 -t public/`.
-  This command has been tested to work across a variety of platforms, including
-  Windows, macOS, and Linux. However, for Linux users, the command will fail on
-  PHP versions prior to 7.1.14 and 7.2.2, due to a language bug. If you are
-  using an affected PHP version, you will need to manually start the PHP
-  built-in server using the comand `php -S 0.0.0.0:8080 -t public/ public/index.php`.
-
-- [#217](https://github.com/zendframework/zend-expressive-skeleton/pull/217)
-  fixes a syntax error in the shipped `config/pipeline.php`.
-
-## 3.0.0alpha2 - 2018-02-07
-
-### Added
+- [#185](https://github.com/zendframework/zend-expressive-skeleton/pull/185),
+  [#200](https://github.com/zendframework/zend-expressive-skeleton/pull/200)
+  adds PSR-15 support.
+
+- [#161](https://github.com/zendframework/zend-expressive-skeleton/pull/161)
+  adds support for Auryn to be used as a container via a wrapper.
+
+- [#182](https://github.com/zendframework/zend-expressive-skeleton/pull/182)
+  adds Symfony DI container support.
 
 - [#212](https://github.com/zendframework/zend-expressive-skeleton/pull/212)
   adds the Composer script "expressive", which will invoke the "expressive"
@@ -211,7 +24,21 @@ All notable changes to this project will be documented in this file, in reverse 
   $ composer expressive help
   ```
 
+- [#215](https://github.com/zendframework/zend-expressive-skeleton/pull/215)
+  adds packages to the zend-component-installer whitelist to prevent prompts for
+  configuration provider injection.
+
+- [#224](https://github.com/zendframework/zend-expressive-skeleton/pull/224)
+  adds notifications for whitelisted packages.
+
+- [#238](https://github.com/zendframework/zend-expressive-skeleton/pull/238)
+  adds links to documentation for the specific container installed to the
+  shipped home page.
+
 ### Changed
+
+- The skeleton now requires zend-expressive 3.0; for detailed changes, see the
+  [zend-expressive 3.0.0 changelog](https://github.com/zendframework/zend-expressive/releaes/3.0.0).
 
 - [#212](https://github.com/zendframework/zend-expressive-skeleton/pull/212)
   makes the zend-expressive-tooling package an explicit development requirement;
@@ -248,34 +75,6 @@ All notable changes to this project will be documented in this file, in reverse 
   "Handler" (for consistency with PSR-15), and be implemented as PSR-15
   `RequestHandlerInterface` implementations.
 
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 3.0.0alpha1 - 2018-02-06
-
-### Added
-
-- [#161](https://github.com/zendframework/zend-expressive-skeleton/pull/161)
-  adds support for Auryn to be used as a container via a wrapper.
-
-- [#182](https://github.com/zendframework/zend-expressive-skeleton/pull/182)
-  adds Symfony DI container support.
-
-- [#185](https://github.com/zendframework/zend-expressive-skeleton/pull/185),
-  [#200](https://github.com/zendframework/zend-expressive-skeleton/pull/200)
-  adds PSR-15 support.
-
-### Changed
-
 - [#197](https://github.com/zendframework/zend-expressive-skeleton/pull/197)
   updates `public/index.php` to remove `call_user_func()` in favor of direct
   callable invocation (e.g., `(function () { /* ... */ })()`).
@@ -293,6 +92,26 @@ All notable changes to this project will be documented in this file, in reverse 
   `Zend\<component>\ConfigProvider` questions or do this once and select for
   all other packages.
 
+- [#199](https://github.com/zendframework/zend-expressive-skeleton/pull/199)
+  moves the location of the configuration cache from `data/config-cache.php` to
+  `data/cache/config-cache.php`. Since the shipped `composer clear-config-cache`
+  script and zf-development-mode both use the `$config['config_cache_path']`
+  setting to determine where the cache file lives, this should have no bearing
+  on normal, documented usage.
+
+- [#219](https://github.com/zendframework/zend-expressive-skeleton/pull/219)
+  updates templates such that all example assets (css, images, and javascript)
+  are now loaded from remote urls.
+
+- [#226](https://github.com/zendframework/zend-expressive-skeleton/pull/226)
+  renames the factory class `App\Handler\HomePageFactory` to
+  `App\Handler\HomePageHandlerFactory` to reflect the name of the class it
+  generates.
+
+- [#231](https://github.com/zendframework/zend-expressive-skeleton/pull/231)
+  simplifies how zend-servicemanager instances are generated, dropping v2 syntax
+  in favor of a configuration-driven v3 syntax.
+
 ### Deprecated
 
 - Nothing.
@@ -302,11 +121,32 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#183](https://github.com/zendframework/zend-expressive-skeleton/pull/183)
   removes support for PHP versions prior to PHP 7.1.
 
+- The `zend-expressive.programmatic_pipeline` configuration flag is removed from
+  `config/autoload/zend-expressive.global.php`, as it is no longer used anywhere.
+
 ### Fixed
+
+- [#216](https://github.com/zendframework/zend-expressive-skeleton/pull/216)
+  updates the `composer serve command to read `php -S 0.0.0.0:8080 -t public/`.
+  This command has been tested to work across a variety of platforms, including
+  Windows, macOS, and Linux. However, for Linux users, the command will fail on
+  PHP versions prior to 7.1.14 and 7.2.2, due to a language bug. If you are
+  using an affected PHP version, you will need to manually start the PHP
+  built-in server using the comand `php -S 0.0.0.0:8080 -t public/ public/index.php`.
 
 - [#195](https://github.com/zendframework/zend-expressive-skeleton/pull/195)
   fixes unwanted installation of every dependency when installing a dev version
   of the skeleton.
+
+- [#235](https://github.com/zendframework/zend-expressive-skeleton/pull/235)
+  changes the order of pipeline middleware to place the entry for the
+  `MethodNotAllowedMiddleware` after both the `ImplicitHeadMiddleware` and
+  `ImplicitOptionsMiddleware` entries; this is done to ensure it does not
+  intercept HEAD and OPTIONS requests when it should not.
+
+- [#237](https://github.com/zendframework/zend-expressive-skeleton/pull/237)
+  adds an exclusion to `.gitignore` for the file `data/cache/.gitkeep`, ensuring
+  the directory is checked in to new projects.
 
 ## 2.2.0 - 2018-03-12
 
