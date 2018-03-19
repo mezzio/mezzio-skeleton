@@ -22,7 +22,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#242](https://github.com/zendframework/zend-expressive-skeleton/pull/242)
+  updates the "container" links within the shipped home page templates to
+  reference PSR-11 instead of container-interop.
 
 ## 3.0.0 - 2018-03-15
 
