@@ -90,8 +90,16 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 
     public static function assertPromptText($expected, $argument)
     {
-        $argument = is_array($argument) ? array_shift($argument) : $argument;
-        $message = sprintf('Expected prompt not received: "%s"', $expected);
-        self::assertThat(false !== strpos($argument, $expected), self::isTrue(), $message);
+        self::assertInternalType(
+            'string',
+            $argument,
+            'Questions must be a string since symfony/console:4.0'
+        );
+
+        self::assertThat(
+            false !== strpos($argument, $expected),
+            self::isTrue(),
+            sprintf('Expected prompt not received: "%s"', $expected)
+        );
     }
 }

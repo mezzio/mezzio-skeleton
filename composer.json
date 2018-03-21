@@ -94,8 +94,10 @@
         "expressive": "expressive --ansi",
         "check": [
             "@cs-check",
-            "@test"
+            "@test",
+            "@analyze"
         ],
+        "analyze": "phpstan analyze -l max -c ./phpstan.installer.neon ./src ./config",
         "clear-config-cache": "php bin/clear-config-cache.php",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
