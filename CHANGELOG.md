@@ -44,7 +44,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#244](https://github.com/zendframework/zend-expressive-skeleton/pull/244)
+  fixes an issue with installer prompts when symfony/console v4 is installed
+  globally.
 
 ## 3.0.1 - 2018-03-19
 
