@@ -251,7 +251,7 @@ class OptionalPackages
         ];
 
         while (true) {
-            $answer = $this->io->ask($query, '2');
+            $answer = $this->io->ask(implode($query), '2');
 
             switch (true) {
                 case ($answer === '1'):
@@ -621,7 +621,7 @@ class OptionalPackages
 
         while (true) {
             // Ask for user input
-            $answer = $this->io->ask($ask, (string) $defaultOption);
+            $answer = $this->io->ask(implode($ask), (string) $defaultOption);
 
             // Handle none of the options
             if ($answer === 'n' && $question['required'] !== true) {

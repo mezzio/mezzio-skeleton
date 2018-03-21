@@ -78,7 +78,11 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
 
     public static function assertQueryPrompt($value)
     {
-        $value = is_array($value) ? array_shift($value) : $value;
+        self::assertInternalType(
+            'string',
+            $value,
+            'Questions must be a string since symfony/console:4.0'
+        );
 
         self::assertThat(
             false !== strpos($value, 'What type of installation would you like?'),
