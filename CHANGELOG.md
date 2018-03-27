@@ -32,7 +32,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#246](https://github.com/zendframework/zend-expressive-skeleton/pull/246)
+  moves contributing documentation into the `docs/` tree, and adds more
+  documentation for that context (support document, issue and pull request
+  templates). These changes also allow a simplified mechanism for removing these
+  from the tree after initial install, allowing users to define appropriate
+  versions for their own project.
 
 ### Deprecated
 
