@@ -39,6 +39,15 @@ All notable changes to this project will be documented in this file, in reverse 
   from the tree after initial install, allowing users to define appropriate
   versions for their own project.
 
+- [#247](https://github.com/zendframework/zend-expressive-skeleton/pull/247)
+  bumps the minimum supported version of jsoumelidis/zend-sf-di-config package
+  to `^0.2` (from `^0.1`). If you were using a previous version with a project
+  you have created, you can update manually using:
+
+  ```bash
+  $ composer require "jsoumelidis/zend-sf-di-config:^0.2"
+  ```
+
 ### Deprecated
 
 - Nothing.
