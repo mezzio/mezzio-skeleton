@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.0.4 - TBD
+## 3.0.4 - 2018-03-28
 
 ### Added
 
@@ -22,7 +22,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- Fixes a schema violation with the shipped `composer.json` that was preventing
+  Packagist from accepting the package.
 
 ## 3.0.3 - 2018-03-27
 
