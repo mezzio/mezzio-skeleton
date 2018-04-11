@@ -8,7 +8,7 @@ return [
             'version' => '^2.1.12',
         ],
         'jsoumelidis/zend-sf-di-config' => [
-            'version' => '^0.2',
+            'version' => '^0.3',
         ],
         'northwoods/container' => [
             'version' => '^1.2',
