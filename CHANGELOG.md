@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 3.0.5 - TBD
+## 3.0.5 - 2018-04-11
 
 ### Added
 
@@ -32,7 +32,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#250](https://github.com/zendframework/zend-expressive-skeleton/pull/250)
+  updates the minimum version of jsoumelidis/zend-sf-di-config to version 0.3.0,
+  as that version now passes all DI container configuration compatibility tests.
 
 ### Deprecated
 
