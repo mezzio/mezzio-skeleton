@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 return [
     'packages' => [
+        'elie29/zend-phpdi-config' => [
+            'version' => '^3.0',
+        ],
         'filp/whoops' => [
             'version' => '^2.1.12',
         ],
@@ -57,7 +60,7 @@ return [
         ],
         'zendframework/zend-servicemanager' => [
             'version' => '^3.3',
-        ],
+        ]
     ],
 
     'require-dev' => [
@@ -161,6 +164,21 @@ return [
                     ],
                     'minimal' => [
                         'Resources/config/container-sf-di.php' => 'config/container.php',
+                    ],
+                ],
+                6 => [
+                    'name'     => 'PHP-DI',
+                    'packages' => [
+                        'elie29/zend-phpdi-config',
+                    ],
+                    'flat' => [
+                        'Resources/config/container-php-di.php' => 'config/container.php',
+                    ],
+                    'modular' => [
+                        'Resources/config/container-php-di.php' => 'config/container.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/container-php-di.php' => 'config/container.php',
                     ],
                 ],
             ],
