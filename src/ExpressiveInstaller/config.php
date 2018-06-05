@@ -60,7 +60,7 @@ return [
         ],
         'zendframework/zend-servicemanager' => [
             'version' => '^3.3',
-        ]
+        ],
     ],
 
     'require-dev' => [
