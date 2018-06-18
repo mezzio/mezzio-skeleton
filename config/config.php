@@ -23,7 +23,7 @@ $aggregator = new ConfigAggregator([
     // Swoole config to overwrite some services (if installed)
     class_exists(\Zend\Expressive\Swoole\ConfigProvider::class)
         ? \Zend\Expressive\Swoole\ConfigProvider::class
-        : null,
+        : function(){ return[]; },
 
     // Default App module config
     App\ConfigProvider::class,
