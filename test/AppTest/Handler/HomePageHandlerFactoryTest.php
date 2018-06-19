@@ -7,6 +7,7 @@ namespace AppTest\Handler;
 use App\Handler\HomePageHandler;
 use App\Handler\HomePageHandlerFactory;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
