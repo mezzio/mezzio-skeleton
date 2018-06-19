@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#256](https://github.com/zendframework/zend-expressive-skeleton/pull/256) adds support for zend-expressive-swool
+  config out of the box.
 
 ### Changed
 
