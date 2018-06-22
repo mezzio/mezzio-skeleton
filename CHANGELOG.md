@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.1.0 - TBD
+## 3.1.0 - 2018-06-22
 
 ### Added
 
@@ -16,28 +16,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#258](https://github.com/zendframework/zend-expressive-skeleton/pull/258) moves
   security-advisories to require-dev section.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 3.0.7 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
 
 ### Deprecated
 
