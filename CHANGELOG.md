@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.1.0 - TBD
+
+### Added
+
+- [#255](https://github.com/zendframework/zend-expressive-skeleton/pull/255) adds
+  support for the PHP-DI container.
+
+- [#256](https://github.com/zendframework/zend-expressive-skeleton/pull/256) adds
+  support for zend-expressive-swool config out of the box.
+
+### Changed
+
+- [#258](https://github.com/zendframework/zend-expressive-skeleton/pull/258) moves
+  security-advisories to require-dev section.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.0.7 - TBD
 
 ### Added

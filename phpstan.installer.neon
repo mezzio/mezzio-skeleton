@@ -12,3 +12,4 @@ parameters:
 	reportUnmatchedIgnoredErrors: true
 	ignoreErrors:
 		- '#Class App\\ConfigProvider not found#'
+		- '#Class Zend\\Expressive\\Swoole\\ConfigProvider not found#'

@@ -41,7 +41,6 @@
     },
     "require": {
         "php": "^7.1",
-        "roave/security-advisories": "dev-master",
         "zendframework/zend-component-installer": "^2.1.1",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-diactoros": "^1.7.1",
@@ -51,6 +50,7 @@
     },
     "require-dev": {
         "composer/composer": "^1.5",
+        "elie29/zend-phpdi-config": "^3.0",
         "filp/whoops": "^2.1.12",
         "jsoumelidis/zend-sf-di-config": "^0.3",
         "mikey179/vfsstream": "^1.6.5",
@@ -58,6 +58,7 @@
         "phpstan/phpstan": "^0.9.2",
         "phpstan/phpstan-strict-rules": "^0.9.0",
         "phpunit/phpunit": "^7.0.1",
+        "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^2.9.1",
         "zendframework/zend-auradi-config": "^1.0",
         "zendframework/zend-coding-standard": "~1.0.0",
