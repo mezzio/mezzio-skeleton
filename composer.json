@@ -20,8 +20,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.1.x-dev",
-            "dev-develop": "3.2.x-dev"
+            "dev-master": "3.2.x-dev",
+            "dev-develop": "3.3.x-dev"
         },
         "zf": {
             "component-whitelist": [
@@ -43,7 +43,7 @@
         "php": "^7.1",
         "zendframework/zend-component-installer": "^2.1.1",
         "zendframework/zend-config-aggregator": "^1.0",
-        "zendframework/zend-diactoros": "^1.7.1",
+        "zendframework/zend-diactoros": "^1.7.1 || ^2.0",
         "zendframework/zend-expressive": "^3.0.1",
         "zendframework/zend-expressive-helpers": "^5.0",
         "zendframework/zend-stdlib": "^3.1"
