@@ -2,11 +2,13 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.1.1 - TBD
+## 3.2.0 - 2018-09-27
 
 ### Added
 
-- Nothing.
+- [#262](https://github.com/zendframework/zend-expressive-skeleton/pull/262) adds support for zendframework/zend-diactoros 2.0. Users may use either
+  the 1.Y or 2.Y series, but 2.0 will be installed by default in new
+  applications.
 
 ### Changed
 
