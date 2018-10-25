@@ -400,7 +400,8 @@ class OptionalPackages
 
         // Remove phpstan completely
         $this->composerDefinition['scripts']['check'] = array_diff(
-            $this->composerDefinition['scripts']['check'], ['@analyze']
+            $this->composerDefinition['scripts']['check'],
+            ['@analyze']
         );
         unset($this->composerDefinition['scripts']['analyze']);
     }
