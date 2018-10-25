@@ -49,5 +49,7 @@ class RemoveInstallerTest extends OptionalPackagesTestCase
         $this->assertFalse(isset($composer['extra']['optional-packages']));
         $this->assertFalse(isset($composer['scripts']['pre-install-cmd']));
         $this->assertFalse(isset($composer['scripts']['pre-update-cmd']));
+        $this->assertFalse(isset($composer['scripts']['check']['@analyze']));
+        $this->assertFalse(isset($composer['scripts']['analyze']));
     }
 }

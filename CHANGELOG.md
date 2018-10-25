@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.2.1 - TBD
+## 3.2.1 - 2018-10-25
 
 ### Added
 
@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#264](https://github.com/zendframework/zend-expressive-skeleton/pull/264) removes phpstan leftovers.
 
 ## 3.2.0 - 2018-09-27
 
