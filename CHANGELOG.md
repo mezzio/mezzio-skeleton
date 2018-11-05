@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#265](https://github.com/zendframework/zend-expressive-skeleton/pull/265) adds PHP-DI support to the welcome page.
 
 ## 3.2.1 - 2018-10-25
 
