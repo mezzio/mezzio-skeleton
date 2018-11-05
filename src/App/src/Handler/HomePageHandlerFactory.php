@@ -9,6 +9,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
+use function get_class;
+
 class HomePageHandlerFactory
 {
     public function __invoke(ContainerInterface $container) : RequestHandlerInterface
@@ -18,6 +20,6 @@ class HomePageHandlerFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
-        return new HomePageHandler($router, $template, get_class($container));
+        return new HomePageHandler(get_class($container), $router, $template);
     }
 }
