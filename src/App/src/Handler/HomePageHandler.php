@@ -65,6 +65,10 @@ class HomePageHandler implements RequestHandlerInterface
                 $data['containerName'] = 'Symfony DI Container';
                 $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
                 break;
+            case 'DI\Container':
+                $data['containerName'] = 'PHP-DI';
+                $data['containerDocs'] = 'http://php-di.org';
+                break;
         }
 
         if ($this->router instanceof Router\AuraRouter) {
