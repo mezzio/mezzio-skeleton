@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#266](https://github.com/zendframework/zend-expressive-skeleton/pull/266) adds check for PHP-DI ContainerWrapper to the homepage handler
 
 ## 3.2.2 - 2018-11-05
 
