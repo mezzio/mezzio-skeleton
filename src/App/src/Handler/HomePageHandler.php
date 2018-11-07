@@ -68,7 +68,7 @@ class HomePageHandler implements RequestHandlerInterface
                 $data['containerName'] = 'Symfony DI Container';
                 $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
                 break;
-            case 'Zend\PHPDI\Config\ContainerWrapper':
+            case 'Elie\PHPDI\Config\ContainerWrapper':
             case 'DI\Container':
                 $data['containerName'] = 'PHP-DI';
                 $data['containerDocs'] = 'http://php-di.org';
