@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#269](https://github.com/zendframework/zend-expressive-skeleton/pull/269) adds support for PHP 7.3.
 
 ### Changed
 
