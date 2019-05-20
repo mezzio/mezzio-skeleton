@@ -10,7 +10,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#268](https://github.com/zendframework/zend-expressive-skeleton/pull/268)
+  updates PHP-DI ContainerWrapper to version ^4.0
 
 ### Deprecated
 
