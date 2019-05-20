@@ -1,11 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+use Elie\PHPDI\Config\Config;
+use Elie\PHPDI\Config\ContainerFactory;
 
-use Zend\DI\Config\Config;
-use Zend\DI\Config\ContainerFactory;
+// Protect variables from global scope
+return (function () {
 
-$config  = require __DIR__ . '/config.php';
-$factory = new ContainerFactory();
+    $config = require __DIR__ . '/config.php';
 
-return $factory(new Config($config));
+    $factory = new ContainerFactory();
+
+    return $factory(new Config($config));
+})();
