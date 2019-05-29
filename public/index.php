@@ -11,7 +11,7 @@ chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
 /**
- * Self-called anonymous function that creates its own scope and keep the global namespace clean.
+ * Self-called anonymous function that creates its own scope and keeps the global namespace clean.
  */
 (function () {
     /** @var \Psr\Container\ContainerInterface $container */
