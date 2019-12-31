@@ -13,7 +13,7 @@
         <whitelist>
             <directory suffix=".php">./src</directory>
             <exclude>
-                <directory suffix=".php">./src/ExpressiveInstaller/Resources</directory>
+                <directory suffix=".php">./src/MezzioInstaller/Resources</directory>
             </exclude>
         </whitelist>
     </filter>

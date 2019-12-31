@@ -1,7 +1,7 @@
 <?php
-use Zend\Expressive\Application;
-use Zend\Expressive\Container\ApplicationFactory;
-use Zend\Expressive\Helper;
+use Mezzio\Application;
+use Mezzio\Container\ApplicationFactory;
+use Mezzio\Helper;
 
 return [
     // Provides application-wide services.

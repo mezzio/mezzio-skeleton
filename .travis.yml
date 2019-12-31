@@ -1,5 +1,3 @@
-sudo: false
-
 language: php
 
 cache:
@@ -12,10 +10,10 @@ env:
     - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs --no-scripts"
 
 notifications:
-  irc: "irc.freenode.org#zftalk.dev"
   email: false
 
 matrix:
+  fast_finish: true
   include:
     - php: 5.5
       env:
@@ -36,7 +34,7 @@ matrix:
     - php: 7
       env:
         - DEPS=latest
-        - CHECK_CS=true
+        - CS_CHECK=true
     - php: hhvm
   allow_failures:
     - php: hhvm
@@ -55,7 +53,7 @@ install:
 script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; fi
   - if [[ $TEST_COVERAGE != 'true' ]]; then composer test ; fi
-  - if [[ $CHECK_CS == 'true' ]]; then composer cs-check ; fi
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer upload-coverage ; fi
