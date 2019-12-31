@@ -3,11 +3,11 @@
 return [
     'dependencies' => [
         'invokables' => [
-            'Zend\Expressive\Whoops' => Whoops\Run::class,
-            'Zend\Expressive\WhoopsPageHandler' => Whoops\Handler\PrettyPageHandler::class,
+            'Mezzio\Whoops' => Whoops\Run::class,
+            'Mezzio\WhoopsPageHandler' => Whoops\Handler\PrettyPageHandler::class,
         ],
         'factories' => [
-            'Zend\Expressive\FinalHandler' => Zend\Expressive\Container\WhoopsErrorHandlerFactory::class,
+            'Mezzio\FinalHandler' => Mezzio\Container\WhoopsErrorHandlerFactory::class,
         ],
     ],
 

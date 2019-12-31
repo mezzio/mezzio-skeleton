@@ -1,14 +1,19 @@
 {
-    "name": "zendframework/zend-expressive-skeleton",
+    "name": "mezzio/mezzio-skeleton",
     "type": "project",
-    "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
-    "license": "BSD-3-CLAUSE",
-    "authors": [
-        {
-            "name": "Geert Eltink",
-            "homepage": "https://xtreamwayz.github.io/"
-        }
-    ],
+    "license": "BSD-3-Clause",
+    "homepage": "https://mezzio.dev",
+    "support": {
+        "docs": "https://docs.mezzio.dev/mezzio-skeleton/",
+        "issues": "https://github.com/mezzio/mezzio-skeleton/issues",
+        "source": "https://github.com/mezzio/mezzio-skeleton",
+        "rss": "https://github.com/mezzio/mezzio-skeleton/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev",
@@ -17,14 +22,16 @@
     },
     "require": {
         "php": "^5.5 || ^7.0",
-        "roave/security-advisories": "dev-master",
-        "zendframework/zend-expressive": "~1.0.0@rc || ^1.0",
-        "zendframework/zend-expressive-helpers": "^1.1",
-        "zendframework/zend-stdlib": "~2.7"
+        "laminas/laminas-stdlib": "~2.7",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "mezzio/mezzio": "~1.0.0@rc || ^1.0",
+        "mezzio/mezzio-helpers": "^1.1",
+        "roave/security-advisories": "dev-master"
     },
     "require-dev": {
         "composer/composer": ">=1.0.0-alpha10",
         "phpunit/phpunit": "^4.8",
+        "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^2.3"
     },
     "autoload": {
@@ -47,5 +54,8 @@
         "cs": "phpcs",
         "cs-fix": "phpcbf",
         "test": "phpunit"
+    },
+    "replace": {
+        "zendframework/zend-expressive-skeleton": "self.version"
     }
 }

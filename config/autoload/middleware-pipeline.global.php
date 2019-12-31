@@ -1,5 +1,5 @@
 <?php
-use Zend\Expressive\Helper;
+use Mezzio\Helper;
 
 return [
     'dependencies' => [
