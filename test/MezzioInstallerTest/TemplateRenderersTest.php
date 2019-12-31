@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-skeleton for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-skeleton/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-skeleton/blob/master/LICENSE.md New BSD License
  */
 
-namespace ExpressiveInstallerTest;
+namespace MezzioInstallerTest;
 
-use ExpressiveInstaller\OptionalPackages;
+use Mezzio;
+use MezzioInstaller\OptionalPackages;
 use ReflectionProperty;
-use Zend\Expressive;
 
 class TemplateRenderersTest extends InstallerTestCase
 {
@@ -60,19 +59,19 @@ class TemplateRenderersTest extends InstallerTestCase
 
         // Test container
         $container = $this->getContainer();
-        $this->assertTrue($container->has(Expressive\Application::class));
-        $this->assertTrue($container->has('Zend\Expressive\FinalHandler'));
+        $this->assertTrue($container->has(Mezzio\Application::class));
+        $this->assertTrue($container->has('Mezzio\FinalHandler'));
 
         // Test config
         $config = $container->get('config');
         $this->assertEquals(
-            Expressive\Container\TemplatedErrorHandlerFactory::class,
-            $config['dependencies']['factories']['Zend\Expressive\FinalHandler']
+            Mezzio\Container\TemplatedErrorHandlerFactory::class,
+            $config['dependencies']['factories']['Mezzio\FinalHandler']
         );
 
         // Test template renderer
-        $templateRenderer = $container->get(Expressive\Template\TemplateRendererInterface::class);
-        $this->assertInstanceOf(Expressive\Template\TemplateRendererInterface::class, $templateRenderer);
+        $templateRenderer = $container->get(Mezzio\Template\TemplateRendererInterface::class);
+        $this->assertInstanceOf(Mezzio\Template\TemplateRendererInterface::class, $templateRenderer);
         $this->assertInstanceOf($expectedTemplateRenderer, $templateRenderer);
 
         if ($copyFilesKey == 'copy-files') {
@@ -88,13 +87,13 @@ class TemplateRenderersTest extends InstallerTestCase
         // $expectedTemplateRenderer
         return [
             // Full tests first so all the template paths are created before the minimal tests start
-            'plates-full'       => [3, 2, 1, 'copy-files', 200, Expressive\Plates\PlatesRenderer::class],
-            'twig-full'         => [3, 2, 2, 'copy-files', 200, Expressive\Twig\TwigRenderer::class],
-            'zend-view-full'    => [3, 2, 3, 'copy-files', 200, Expressive\ZendView\ZendViewRenderer::class],
+            'plates-full'       => [3, 2, 1, 'copy-files', 200, Mezzio\Plates\PlatesRenderer::class],
+            'twig-full'         => [3, 2, 2, 'copy-files', 200, Mezzio\Twig\TwigRenderer::class],
+            'laminas-view-full'    => [3, 2, 3, 'copy-files', 200, Mezzio\LaminasView\LaminasViewRenderer::class],
             // Minimal tests must be after the full tests !!!
-            'plates-minimal'    => [3, 2, 1, 'minimal-files', 404, Expressive\Plates\PlatesRenderer::class],
-            'twig-minimal'      => [3, 2, 2, 'minimal-files', 404, Expressive\Twig\TwigRenderer::class],
-            'zend-view-minimal' => [3, 2, 3, 'minimal-files', 404, Expressive\ZendView\ZendViewRenderer::class],
+            'plates-minimal'    => [3, 2, 1, 'minimal-files', 404, Mezzio\Plates\PlatesRenderer::class],
+            'twig-minimal'      => [3, 2, 2, 'minimal-files', 404, Mezzio\Twig\TwigRenderer::class],
+            'laminas-view-minimal' => [3, 2, 3, 'minimal-files', 404, Mezzio\LaminasView\LaminasViewRenderer::class],
         ];
     }
 }
