@@ -1,17 +1,17 @@
 <?php
 
-use Zend\Expressive\Helper\ServerUrlMiddleware;
-use Zend\Expressive\Helper\UrlHelperMiddleware;
-use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
-use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
-use Zend\Expressive\Middleware\NotFoundHandler;
-use Zend\Stratigility\Middleware\ErrorHandler;
+use Laminas\Stratigility\Middleware\ErrorHandler;
+use Mezzio\Helper\ServerUrlMiddleware;
+use Mezzio\Helper\UrlHelperMiddleware;
+use Mezzio\Middleware\ImplicitHeadMiddleware;
+use Mezzio\Middleware\ImplicitOptionsMiddleware;
+use Mezzio\Middleware\NotFoundHandler;
 
 /**
  * Setup middleware pipeline:
  */
 
-/** @var \Zend\Expressive\Application $app */
+/** @var \Mezzio\Application $app */
 
 // The error handler should be the first (most outer) middleware to catch
 // all Exceptions.

@@ -15,8 +15,8 @@ call_user_func(function () {
     /** @var \Psr\Container\ContainerInterface $container */
     $container = require 'config/container.php';
 
-    /** @var \Zend\Expressive\Application $app */
-    $app = $container->get(\Zend\Expressive\Application::class);
+    /** @var \Mezzio\Application $app */
+    $app = $container->get(\Mezzio\Application::class);
 
     // Import programmatic/declarative middleware pipeline and routing
     // configuration statements
