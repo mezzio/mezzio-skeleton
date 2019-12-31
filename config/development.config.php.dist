@@ -3,7 +3,7 @@
 /**
  * File required to allow enablement of development mode.
  *
- * For use with the zf-development-mode tool.
+ * For use with the laminas-development-mode tool.
  *
  * Usage:
  *  $ composer development-disable
@@ -21,7 +21,7 @@
  * - Configuration caching is _disabled_.
  */
 
-use Zend\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\ConfigAggregator;
 
 return [
     'debug' => true,

@@ -1,12 +1,9 @@
 <?php
+
 /**
- * Script for clearing the configuration cache.
- *
- * Can also be invoked as `composer clear-config-cache`.
- *
- * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-skeleton for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-skeleton/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-skeleton/blob/master/LICENSE.md New BSD License
  */
 
 chdir(__DIR__ . '/../');
