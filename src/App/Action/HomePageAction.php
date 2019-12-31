@@ -2,15 +2,15 @@
 
 namespace App\Action;
 
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\JsonResponse;
+use Mezzio\LaminasView\LaminasViewRenderer;
+use Mezzio\Plates\PlatesRenderer;
+use Mezzio\Router;
+use Mezzio\Template;
+use Mezzio\Twig\TwigRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\JsonResponse;
-use Zend\Expressive\Router;
-use Zend\Expressive\Template;
-use Zend\Expressive\Plates\PlatesRenderer;
-use Zend\Expressive\Twig\TwigRenderer;
-use Zend\Expressive\ZendView\ZendViewRenderer;
 
 class HomePageAction
 {
@@ -34,9 +34,9 @@ class HomePageAction
         } elseif ($this->router instanceof Router\FastRouteRouter) {
             $data['routerName'] = 'FastRoute';
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
-        } elseif ($this->router instanceof Router\ZendRouter) {
-            $data['routerName'] = 'Zend Router';
-            $data['routerDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.mvc.routing.html';
+        } elseif ($this->router instanceof Router\LaminasRouter) {
+            $data['routerName'] = 'Laminas Router';
+            $data['routerDocs'] = 'https://docs.laminas.dev/laminas.mvc.routing.html';
         }
 
         if ($this->template instanceof PlatesRenderer) {
@@ -45,15 +45,15 @@ class HomePageAction
         } elseif ($this->template instanceof TwigRenderer) {
             $data['templateName'] = 'Twig';
             $data['templateDocs'] = 'http://twig.sensiolabs.org/documentation';
-        } elseif ($this->template instanceof ZendViewRenderer) {
-            $data['templateName'] = 'Zend View';
-            $data['templateDocs'] = 'http://framework.zend.com/manual/current/en/modules/zend.view.quick-start.html';
+        } elseif ($this->template instanceof LaminasViewRenderer) {
+            $data['templateName'] = 'Laminas View';
+            $data['templateDocs'] = 'https://docs.laminas.dev/laminas.view.quick-start.html';
         }
 
         if (!$this->template) {
             return new JsonResponse([
-                'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
-                'docsUrl' => 'zend-expressive.readthedocs.org',
+                'welcome' => 'Congratulations! You have installed the mezzio skeleton application.',
+                'docsUrl' => 'mezzio.readthedocs.org',
             ]);
         }
 
