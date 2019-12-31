@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Action;
 
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\JsonResponse;
+use Mezzio\LaminasView\LaminasViewRenderer;
+use Mezzio\Plates\PlatesRenderer;
+use Mezzio\Router;
+use Mezzio\Template;
+use Mezzio\Twig\TwigRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\JsonResponse;
-use Zend\Expressive\Plates\PlatesRenderer;
-use Zend\Expressive\Router;
-use Zend\Expressive\Template;
-use Zend\Expressive\Twig\TwigRenderer;
-use Zend\Expressive\ZendView\ZendViewRenderer;
 
 class HomePageAction implements MiddlewareInterface
 {
@@ -32,8 +32,8 @@ class HomePageAction implements MiddlewareInterface
     {
         if (! $this->template) {
             return new JsonResponse([
-                'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
-                'docsUrl' => 'https://docs.zendframework.com/zend-expressive/',
+                'welcome' => 'Congratulations! You have installed the mezzio skeleton application.',
+                'docsUrl' => 'https://docs.mezzio.dev/mezzio/',
             ]);
         }
 
@@ -45,9 +45,9 @@ class HomePageAction implements MiddlewareInterface
         } elseif ($this->router instanceof Router\FastRouteRouter) {
             $data['routerName'] = 'FastRoute';
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
-        } elseif ($this->router instanceof Router\ZendRouter) {
-            $data['routerName'] = 'Zend Router';
-            $data['routerDocs'] = 'https://docs.zendframework.com/zend-router/';
+        } elseif ($this->router instanceof Router\LaminasRouter) {
+            $data['routerName'] = 'Laminas Router';
+            $data['routerDocs'] = 'https://docs.laminas.dev/laminas-router/';
         }
 
         if ($this->template instanceof PlatesRenderer) {
@@ -56,9 +56,9 @@ class HomePageAction implements MiddlewareInterface
         } elseif ($this->template instanceof TwigRenderer) {
             $data['templateName'] = 'Twig';
             $data['templateDocs'] = 'http://twig.sensiolabs.org/documentation';
-        } elseif ($this->template instanceof ZendViewRenderer) {
-            $data['templateName'] = 'Zend View';
-            $data['templateDocs'] = 'https://docs.zendframework.com/zend-view/';
+        } elseif ($this->template instanceof LaminasViewRenderer) {
+            $data['templateName'] = 'Laminas View';
+            $data['templateDocs'] = 'https://docs.laminas.dev/laminas-view/';
         }
 
         return new HtmlResponse($this->template->render('app::home-page', $data));
