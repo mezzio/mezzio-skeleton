@@ -7,7 +7,7 @@ return [
         ],
         'factories' => [
             App\Action\HomePageAction::class => App\Action\HomePageFactory::class,
-            Zend\Expressive\Application::class => Zend\Expressive\Container\ApplicationFactory::class,
+            Mezzio\Application::class => Mezzio\Container\ApplicationFactory::class,
         ]
     ]
 ];

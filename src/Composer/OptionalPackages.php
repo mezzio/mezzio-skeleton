@@ -1,10 +1,9 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-skeleton for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-skeleton/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-skeleton/blob/master/LICENSE.md New BSD License
  */
 
 namespace App\Composer;
@@ -14,10 +13,10 @@ use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Composer\Package\AliasPackage;
+use Composer\Package\BasePackage;
 use Composer\Package\Link;
 use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
-use Composer\Package\BasePackage;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -28,8 +27,8 @@ use RecursiveIteratorIterator;
  * Add this script to composer.json:
  *
  *  "scripts": {
- *      "pre-update-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install",
- *      "pre-install-cmd": "Zend\\Expressive\\Composer\\OptionalPackages::install"
+ *      "pre-update-cmd": "Mezzio\\Composer\\OptionalPackages::install",
+ *      "pre-install-cmd": "Mezzio\\Composer\\OptionalPackages::install"
  *  },
  */
 class OptionalPackages
@@ -183,7 +182,7 @@ class OptionalPackages
      */
     private static function cleanUp(IOInterface $io)
     {
-        $io->write("<info>Removing Expressive installer classes and configuration</info>");
+        $io->write("<info>Removing Mezzio installer classes and configuration</info>");
 
         $rdi = new RecursiveDirectoryIterator(__DIR__, FilesystemIterator::SKIP_DOTS);
         $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST);
