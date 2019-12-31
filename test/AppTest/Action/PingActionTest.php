@@ -3,8 +3,8 @@
 namespace AppTest\Action;
 
 use App\Action\PingAction;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequest;
 
 class PingActionTest extends \PHPUnit_Framework_TestCase
 {

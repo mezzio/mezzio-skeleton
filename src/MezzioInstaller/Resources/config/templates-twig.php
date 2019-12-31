@@ -3,11 +3,11 @@
 return [
     'dependencies' => [
         'factories' => [
-            'Zend\Expressive\FinalHandler' =>
-                Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
+            'Mezzio\FinalHandler' =>
+                Mezzio\Container\TemplatedErrorHandlerFactory::class,
 
-            Zend\Expressive\Template\TemplateRendererInterface::class =>
-                Zend\Expressive\Twig\TwigRendererFactory::class,
+            Mezzio\Template\TemplateRendererInterface::class =>
+                Mezzio\Twig\TwigRendererFactory::class,
         ],
     ],
 

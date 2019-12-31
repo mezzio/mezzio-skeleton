@@ -1,15 +1,15 @@
-# Expressive Skeleton and Installer
+# Mezzio Skeleton and Installer
 
-[![Build Status](https://secure.travis-ci.org/zendframework/zend-expressive-skeleton.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-expressive-skeleton)
+[![Build Status](https://travis-ci.org/mezzio/mezzio-skeleton.svg?branch=master)](https://travis-ci.org/mezzio/mezzio-skeleton)
 
 *Begin developing PSR-7 middleware applications in seconds!*
 
-[zend-expressive](https://github.com/zendframework/zend-expressive) builds on
-[zend-stratigility](https://github.com/zendframework/zend-stratigility) to
+[mezzio](https://github.com/mezzio/mezzio) builds on
+[laminas-stratigility](https://github.com/laminas/laminas-stratigility) to
 provide a minimalist PSR-7 middleware framework for PHP with routing, DI
 container, optional templating, and optional error handling capabilities.
 
-This installer will setup a skeleton application based on zend-expressive by
+This installer will setup a skeleton application based on mezzio by
 choosing optional packages based on user input as demonstrated in the following
 screenshot:
 
@@ -23,10 +23,10 @@ removed.
 
 ## Getting Started
 
-Start your new Expressive project with composer:
+Start your new Mezzio project with composer:
 
 ```bash
-$ composer create-project --no-dev zendframework/zend-expressive-skeleton <project-path>
+$ composer create-project --no-dev mezzio/mezzio-skeleton <project-path>
 ```
 
 > ### Release Candidates
@@ -34,12 +34,12 @@ $ composer create-project --no-dev zendframework/zend-expressive-skeleton <proje
 > At this time, we are currently issuing release candidates. By default,
 > Composer only installs *stable* versions if no stability flag is provided,
 > which means that the above statement will pick up a 0.X version of the
-> skeleton and Expressive.
+> skeleton and Mezzio.
 >
 > To install a release candidate, use the following:
 >
 > ```bash
-> $ composer create-project --no-dev "zendframework/zend-expressive-skeleton:^1.0@rc" <project-path>
+> $ composer create-project --no-dev "mezzio/mezzio-skeleton:^1.0@rc" <project-path>
 > ```
 
 > ### Development requirements
@@ -74,7 +74,7 @@ You can then browse to http://localhost:8080.
 
 ## Skeleton Development
 
-This section applies only if you cloned this repo with `git clone`, not when you installed expressive with
+This section applies only if you cloned this repo with `git clone`, not when you installed mezzio with
 `composer create-project ...`.
 
 If you want to run tests against the installer, you need to clone this repo and setup all dependencies with composer.

@@ -1,25 +1,24 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-skeleton for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-skeleton/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-skeleton/blob/master/LICENSE.md New BSD License
  */
 
-namespace ExpressiveInstallerTest;
+namespace MezzioInstallerTest;
 
 use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
-use ExpressiveInstaller\OptionalPackages;
 use Interop\Container\ContainerInterface;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequest;
+use Mezzio\Application;
+use MezzioInstaller\OptionalPackages;
 use Prophecy\Argument;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
-use Zend\Expressive\Application;
 
 class InstallerTestCase extends \PHPUnit_Framework_TestCase
 {
@@ -59,7 +58,7 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
 
         $config = new ReflectionProperty(OptionalPackages::class, 'config');
         $config->setAccessible(true);
-        $config->setValue(require 'src/ExpressiveInstaller/config.php');
+        $config->setValue(require 'src/MezzioInstaller/config.php');
     }
 
     public function tearDown()
@@ -111,7 +110,7 @@ class InstallerTestCase extends \PHPUnit_Framework_TestCase
         $container = $this->getContainer();
 
         /** @var Application $app */
-        $app = $container->get('Zend\Expressive\Application');
+        $app = $container->get('Mezzio\Application');
         $request = new ServerRequest([], [], 'https://example.com'.$path, 'GET');
 
         /** @var ResponseInterface $response */
