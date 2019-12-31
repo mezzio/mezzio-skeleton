@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace AppTest\Handler;
 
 use App\Handler\PingHandler;
+use Laminas\Diactoros\Response\JsonResponse;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\JsonResponse;
 
 class PingHandlerTest extends TestCase
 {
