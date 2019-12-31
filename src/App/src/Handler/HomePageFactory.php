@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use Mezzio\Router\RouterInterface;
+use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageFactory
 {
@@ -16,7 +16,9 @@ class HomePageFactory
         $router   = $container->get(RouterInterface::class);
         $template = $container->has(TemplateRendererInterface::class)
             ? $container->get(TemplateRendererInterface::class)
-            : null;
+            : ($container->has(\Zend\Expressive\Template\TemplateRendererInterface::class)
+                ? $container->get(\Zend\Expressive\Template\TemplateRendererInterface::class)
+                : null);
 
         return new HomePageHandler($router, $template);
     }

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
+use Laminas\Stratigility\Middleware\ErrorHandler;
+use Mezzio\Application;
+use Mezzio\Helper\ServerUrlMiddleware;
+use Mezzio\Helper\UrlHelperMiddleware;
+use Mezzio\Middleware\DispatchMiddleware;
+use Mezzio\Middleware\ImplicitHeadMiddleware;
+use Mezzio\Middleware\ImplicitOptionsMiddleware;
+use Mezzio\Middleware\NotFoundMiddleware;
+use Mezzio\Middleware\RouteMiddleware;
+use Mezzio\MiddlewareFactory;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Application;
-use Zend\Expressive\Helper\ServerUrlMiddleware;
-use Zend\Expressive\Helper\UrlHelperMiddleware;
-use Zend\Expressive\MiddlewareFactory;
-use Zend\Expressive\Middleware\DispatchMiddleware;
-use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
-use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
-use Zend\Expressive\Middleware\NotFoundMiddleware;
-use Zend\Expressive\Middleware\RouteMiddleware;
-use Zend\Stratigility\Middleware\ErrorHandler;
 
 /**
  * Setup middleware pipeline:
