@@ -1,10 +1,10 @@
 <?php
 
-use Zend\Expressive\Application;
-use Zend\Expressive\Container;
-use Zend\Expressive\Delegate;
-use Zend\Expressive\Helper;
-use Zend\Expressive\Middleware;
+use Mezzio\Application;
+use Mezzio\Container;
+use Mezzio\Delegate;
+use Mezzio\Helper;
+use Mezzio\Middleware;
 
 return [
     // Provides application-wide services.
@@ -31,7 +31,7 @@ return [
             Helper\UrlHelper::class           => Helper\UrlHelperFactory::class,
             Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
 
-            Zend\Stratigility\Middleware\ErrorHandler::class => Container\ErrorHandlerFactory::class,
+            Laminas\Stratigility\Middleware\ErrorHandler::class => Container\ErrorHandlerFactory::class,
             Middleware\ErrorResponseGenerator::class         => Container\ErrorResponseGeneratorFactory::class,
             Middleware\NotFoundHandler::class                => Container\NotFoundHandlerFactory::class,
         ],

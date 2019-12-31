@@ -1,16 +1,16 @@
-# Expressive Skeleton and Installer
+# Mezzio Skeleton and Installer
 
-[![Build Status](https://secure.travis-ci.org/zendframework/zend-expressive-skeleton.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-expressive-skeleton)
-[![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-expressive-skeleton/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-expressive-skeleton?branch=master)
+[![Build Status](https://travis-ci.org/mezzio/mezzio-skeleton.svg?branch=master)](https://travis-ci.org/mezzio/mezzio-skeleton)
+[![Coverage Status](https://coveralls.io/repos/github/mezzio/mezzio-skeleton/badge.svg?branch=master)](https://coveralls.io/github/mezzio/mezzio-skeleton?branch=master)
 
 *Begin developing PSR-7 middleware applications in seconds!*
 
-[zend-expressive](https://github.com/zendframework/zend-expressive) builds on
-[zend-stratigility](https://github.com/zendframework/zend-stratigility) to
+[mezzio](https://github.com/mezzio/mezzio) builds on
+[laminas-stratigility](https://github.com/laminas/laminas-stratigility) to
 provide a minimalist PSR-7 middleware framework for PHP with routing, DI
 container, optional templating, and optional error handling capabilities.
 
-This installer will setup a skeleton application based on zend-expressive by
+This installer will setup a skeleton application based on mezzio by
 choosing optional packages based on user input as demonstrated in the following
 screenshot:
 
@@ -24,10 +24,10 @@ removed.
 
 ## Getting Started
 
-Start your new Expressive project with composer:
+Start your new Mezzio project with composer:
 
 ```bash
-$ composer create-project zendframework/zend-expressive-skeleton <project-path>
+$ composer create-project mezzio/mezzio-skeleton <project-path>
 ```
 
 After choosing and installing the packages you want, go to the
@@ -70,7 +70,7 @@ If neither of the above help, you might face more serious issues:
 
 ## Application Development Mode Tool
 
-This skeleton comes with [zf-development-mode](https://github.com/zfcampus/zf-development-mode). 
+This skeleton comes with [laminas-development-mode](https://github.com/laminas/laminas-development-mode). 
 It provides a composer script to allow you to enable and disable development mode.
 
 ### To enable development mode
@@ -118,7 +118,7 @@ local `$cacheConfig` variable.
 ## Skeleton Development
 
 This section applies only if you cloned this repo with `git clone`, not when you
-installed expressive with `composer create-project ...`.
+installed mezzio with `composer create-project ...`.
 
 If you want to run tests against the installer, you need to clone this repo and
 setup all dependencies with composer.  Make sure you **prevent composer running
