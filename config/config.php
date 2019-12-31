@@ -1,8 +1,8 @@
 <?php
 
-use Zend\ConfigAggregator\ArrayProvider;
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\PhpFileProvider;
+use Laminas\ConfigAggregator\ArrayProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
 // To enable or disable caching, set the `ConfigAggregator::ENABLE_CACHE` boolean in
 // `config/autoload/local.php`.
@@ -11,8 +11,8 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
-    Zend\Expressive\ConfigProvider::class,
-    Zend\Expressive\Router\ConfigProvider::class,
+    Mezzio\ConfigProvider::class,
+    Mezzio\Router\ConfigProvider::class,
     // Include cache configuration
     new ArrayProvider($cacheConfig),
 
