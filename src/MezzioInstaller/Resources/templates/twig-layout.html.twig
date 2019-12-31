@@ -1,28 +1,20 @@
-<?php
-$this->headLink()
-    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
-    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
-
-$this->inlineScript()
-    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
-    ->prependFile('https://code.jquery.com/jquery-2.1.4.min.js');
-?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <?php echo $this->headTitle('zend-expressive')->setSeparator(' - ')->setAutoEscape(false) ?>
+    <title>{% block title %}{% endblock %} - mezzio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <?php echo $this->headMeta(); ?>
-    <?php echo $this->headLink(); ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
     <style>
         body { padding-top: 60px; }
         .app { display: flex; min-height: 100vh; flex-direction: column; }
         .app-content { flex: 1; }
         .app-footer { padding-bottom: 1em; }
-        .zf-green, h2 a { color: #68b604; }
+        .api-tools-green, h2 a { color: #68b604; }
     </style>
+    {% block stylesheets %}{% endblock %}
 </head>
 <body class="app">
     <header class="app-header">
@@ -34,24 +26,24 @@ $this->inlineScript()
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>">
-                        <img src="/zf-logo.png" alt="Zend Expressive" />
+                    <a class="navbar-brand" href="{{ path('home') }}">
+                        <img src="{{ asset('api-tools-logo.png') }}" alt="Laminas Mezzio" />
                     </a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="https://zendframework.github.io/zend-expressive/" target="_blank">
+                            <a href="https://docs.mezzio.dev/mezzio/" target="_blank">
                                 <i class="fa fa-book"></i> Docs
                             </a>
                         </li>
                         <li>
-                            <a href="https://github.com/zendframework/zend-expressive" target="_blank">
+                            <a href="https://github.com/mezzio/mezzio" target="_blank">
                                 <i class="fa fa-wrench"></i> Contribute
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo $this->url('api.ping') ?>">
+                            <a href="{{ path('api.ping') }}">
                                 Ping Test
                             </a>
                         </li>
@@ -63,19 +55,23 @@ $this->inlineScript()
 
     <div class="app-content">
         <main class="container">
-            <?php echo $this->content ?>
+            {% block content %}{% endblock %}
         </main>
     </div>
 
     <footer class="app-footer">
         <div class="container">
             <hr />
-            <p>
-                &copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. All rights reserved.
-            </p>
+            {% block footer %}
+                <p>
+                    &copy; 2005 - {{ "now"|date("Y") }} by Laminas Technologies Ltd. All rights reserved.
+                </p>
+            {% endblock %}
         </div>
     </footer>
 
-    <?php echo $this->inlineScript(); ?>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    {% block javascript %}{% endblock %}
 </body>
 </html>

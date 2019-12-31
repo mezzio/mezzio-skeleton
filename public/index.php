@@ -13,6 +13,6 @@ require 'vendor/autoload.php';
 /** @var \Interop\Container\ContainerInterface $container */
 $container = require 'config/container.php';
 
-/** @var \Zend\Expressive\Application $app */
-$app = $container->get('Zend\Expressive\Application');
+/** @var \Mezzio\Application $app */
+$app = $container->get('Mezzio\Application');
 $app->run();
