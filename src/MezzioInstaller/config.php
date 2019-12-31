@@ -6,13 +6,13 @@ return [
         'filp/whoops'                                    => '^1.1 || ^2.0',
         'xtreamwayz/pimple-container-interop'            => '^1.0',
         'ocramius/proxy-manager'                         => '^1.0 || ^2.0',
-        'zendframework/zend-expressive-aurarouter'       => '^1.0',
-        'zendframework/zend-expressive-fastroute'        => '^1.0',
-        'zendframework/zend-expressive-platesrenderer'   => '^1.0',
-        'zendframework/zend-expressive-twigrenderer'     => '^1.0',
-        'zendframework/zend-expressive-zendrouter'       => '^1.0',
-        'zendframework/zend-expressive-zendviewrenderer' => '^1.0',
-        'zendframework/zend-servicemanager'              => '^2.7.3 || ^3.0',
+        'mezzio/mezzio-aurarouter'       => '^1.0',
+        'mezzio/mezzio-fastroute'        => '^1.0',
+        'mezzio/mezzio-platesrenderer'   => '^1.0',
+        'mezzio/mezzio-twigrenderer'     => '^1.0',
+        'mezzio/mezzio-laminasrouter'       => '^1.0',
+        'mezzio/mezzio-laminasviewrenderer' => '^1.0',
+        'laminas/laminas-servicemanager'              => '^2.7.3 || ^3.0',
     ],
 
     'require-dev' => [
@@ -33,7 +33,7 @@ return [
                 1 => [
                     'name'     => 'Aura.Router',
                     'packages' => [
-                        'zendframework/zend-expressive-aurarouter',
+                        'mezzio/mezzio-aurarouter',
                     ],
                     'copy-files' => [
                         // Copy source file to target: '<source>' => '<target>'
@@ -47,7 +47,7 @@ return [
                 2 => [
                     'name'     => 'FastRoute',
                     'packages' => [
-                        'zendframework/zend-expressive-fastroute',
+                        'mezzio/mezzio-fastroute',
                     ],
                     'copy-files' => [
                         '/Resources/config/routes-fast-route.php' => '/config/autoload/routes.global.php',
@@ -57,15 +57,15 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'Zend Router',
+                    'name'     => 'Laminas Router',
                     'packages' => [
-                        'zendframework/zend-expressive-zendrouter',
+                        'mezzio/mezzio-laminasrouter',
                     ],
                     'copy-files' => [
-                        '/Resources/config/routes-zf2-router.php' => '/config/autoload/routes.global.php',
+                        '/Resources/config/routes-laminas-router.php' => '/config/autoload/routes.global.php',
                     ],
                     'minimal-files' => [
-                        '/Resources/config/routes-minimal-zf2-router.php' => '/config/autoload/routes.global.php',
+                        '/Resources/config/routes-minimal-laminas-router.php' => '/config/autoload/routes.global.php',
                     ],
                 ],
             ],
@@ -103,16 +103,16 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'Zend ServiceManager',
+                    'name'     => 'Laminas ServiceManager',
                     'packages' => [
-                        'zendframework/zend-servicemanager',
+                        'laminas/laminas-servicemanager',
                         'ocramius/proxy-manager',
                     ],
                     'copy-files' => [
-                        '/Resources/config/container-zend-servicemanager.php' => '/config/container.php',
+                        '/Resources/config/container-laminas-servicemanager.php' => '/config/container.php',
                     ],
                     'minimal-files' => [
-                        '/Resources/config/container-zend-servicemanager.php' => '/config/container.php',
+                        '/Resources/config/container-laminas-servicemanager.php' => '/config/container.php',
                     ],
                 ],
             ],
@@ -127,7 +127,7 @@ return [
                 1 => [
                     'name'     => 'Plates',
                     'packages' => [
-                        'zendframework/zend-expressive-platesrenderer',
+                        'mezzio/mezzio-platesrenderer',
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-plates.php' => '/config/autoload/templates.global.php',
@@ -143,7 +143,7 @@ return [
                 2 => [
                     'name'     => 'Twig',
                     'packages' => [
-                        'zendframework/zend-expressive-twigrenderer',
+                        'mezzio/mezzio-twigrenderer',
                     ],
                     'copy-files' => [
                         '/Resources/config/templates-twig.php' => '/config/autoload/templates.global.php',
@@ -157,19 +157,19 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'Zend View <comment>installs Zend ServiceManager</comment>',
+                    'name'     => 'Laminas View <comment>installs Laminas ServiceManager</comment>',
                     'packages' => [
-                        'zendframework/zend-expressive-zendviewrenderer',
+                        'mezzio/mezzio-laminasviewrenderer',
                     ],
                     'copy-files' => [
-                        '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
-                        '/Resources/templates/zend-view-404.phtml' => '/templates/error/404.phtml',
-                        '/Resources/templates/zend-view-error.phtml' => '/templates/error/error.phtml',
-                        '/Resources/templates/zend-view-layout.phtml' => '/templates/layout/default.phtml',
-                        '/Resources/templates/zend-view-home-page.phtml' => '/templates/app/home-page.phtml',
+                        '/Resources/config/templates-laminas-view.php' => '/config/autoload/templates.global.php',
+                        '/Resources/templates/laminas-view-404.phtml' => '/templates/error/404.phtml',
+                        '/Resources/templates/laminas-view-error.phtml' => '/templates/error/error.phtml',
+                        '/Resources/templates/laminas-view-layout.phtml' => '/templates/layout/default.phtml',
+                        '/Resources/templates/laminas-view-home-page.phtml' => '/templates/app/home-page.phtml',
                     ],
                     'minimal-files' => [
-                        '/Resources/config/templates-zend-view.php' => '/config/autoload/templates.global.php',
+                        '/Resources/config/templates-laminas-view.php' => '/config/autoload/templates.global.php',
                     ],
                 ],
             ],

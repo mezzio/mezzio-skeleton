@@ -3,7 +3,7 @@
 return [
     'dependencies' => [
         'invokables' => [
-            Zend\Expressive\Router\RouterInterface::class => Zend\Expressive\Router\AuraRouter::class,
+            Mezzio\Router\RouterInterface::class => Mezzio\Router\LaminasRouter::class,
         ],
         // Map middleware -> factories here
         'factories' => [
