@@ -1,23 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-skeleton for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-skeleton/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-skeleton/blob/master/LICENSE.md New BSD License
  */
 
-namespace ExpressiveInstaller;
+namespace MezzioInstaller;
 
 use Composer\Composer;
 use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Composer\Package\AliasPackage;
+use Composer\Package\BasePackage;
 use Composer\Package\Link;
 use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
-use Composer\Package\BasePackage;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -28,8 +27,8 @@ use RecursiveIteratorIterator;
  * Add this script to composer.json:
  *
  *  "scripts": {
- *      "pre-update-cmd": "ExpressiveInstaller\\OptionalPackages::install",
- *      "pre-install-cmd": "ExpressiveInstaller\\OptionalPackages::install"
+ *      "pre-update-cmd": "MezzioInstaller\\OptionalPackages::install",
+ *      "pre-install-cmd": "MezzioInstaller\\OptionalPackages::install"
  *  },
  */
 class OptionalPackages
@@ -179,7 +178,7 @@ class OptionalPackages
         }
 
         // Remove installer script autoloading rules
-        unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
+        unset(self::$composerDefinition['autoload']['psr-4']['MezzioInstaller\\']);
 
         // Update composer definition
         $json->write(self::$composerDefinition);
@@ -202,7 +201,7 @@ class OptionalPackages
      */
     private static function cleanUp(IOInterface $io)
     {
-        $io->write("<info>Removing Expressive installer classes and configuration</info>");
+        $io->write("<info>Removing Mezzio installer classes and configuration</info>");
         self::recursiveRmdir(__DIR__);
     }
 
@@ -399,7 +398,7 @@ class OptionalPackages
 
         $io->write("<info>Removing assets</info>");
         unlink($projectRoot . '/public/favicon.ico');
-        unlink($projectRoot . '/public/zf-logo.png');
+        unlink($projectRoot . '/public/api-tools-logo.png');
     }
 
     /**
