@@ -1,23 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-skeleton for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-skeleton/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-skeleton/blob/master/LICENSE.md New BSD License
  */
 
-namespace ExpressiveInstaller;
+namespace MezzioInstaller;
 
 use Composer\Composer;
 use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Composer\Package\AliasPackage;
+use Composer\Package\BasePackage;
 use Composer\Package\Link;
 use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
-use Composer\Package\BasePackage;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -28,8 +27,8 @@ use RecursiveIteratorIterator;
  * Add this script to composer.json:
  *
  *  "scripts": {
- *      "pre-update-cmd": "ExpressiveInstaller\\OptionalPackages::install",
- *      "pre-install-cmd": "ExpressiveInstaller\\OptionalPackages::install"
+ *      "pre-update-cmd": "MezzioInstaller\\OptionalPackages::install",
+ *      "pre-install-cmd": "MezzioInstaller\\OptionalPackages::install"
  *  },
  */
 class OptionalPackages
@@ -164,17 +163,17 @@ class OptionalPackages
 
         // Remove test dependencies
         unset(self::$composerDefinition['require-dev']['composer/composer']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-aurarouter']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-fastroute']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-zendrouter']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-platesrenderer']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-twigrenderer']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-expressive-zendviewrenderer']);
-        unset(self::$composerDefinition['require-dev']['zendframework/zend-servicemanager']);
+        unset(self::$composerDefinition['require-dev']['mezzio/mezzio-aurarouter']);
+        unset(self::$composerDefinition['require-dev']['mezzio/mezzio-fastroute']);
+        unset(self::$composerDefinition['require-dev']['mezzio/mezzio-laminasrouter']);
+        unset(self::$composerDefinition['require-dev']['mezzio/mezzio-platesrenderer']);
+        unset(self::$composerDefinition['require-dev']['mezzio/mezzio-twigrenderer']);
+        unset(self::$composerDefinition['require-dev']['mezzio/mezzio-laminasviewrenderer']);
+        unset(self::$composerDefinition['require-dev']['laminas/laminas-servicemanager']);
         unset(self::$composerDefinition['require-dev']['ocramius/proxy-manager']);
         unset(self::$composerDefinition['require-dev']['aura/di']);
         unset(self::$composerDefinition['require-dev']['mouf/pimple-interop']);
-        unset(self::$composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
+        unset(self::$composerDefinition['autoload-dev']['psr-4']['MezzioInstallerTest\\']);
 
         // Remove installer data
         unset(self::$composerDefinition['extra']['optional-packages']);
@@ -190,7 +189,7 @@ class OptionalPackages
         }
 
         // Remove installer script autoloading rules
-        unset(self::$composerDefinition['autoload']['psr-4']['ExpressiveInstaller\\']);
+        unset(self::$composerDefinition['autoload']['psr-4']['MezzioInstaller\\']);
 
         // Update composer definition
         $json->write(self::$composerDefinition);
@@ -214,9 +213,9 @@ class OptionalPackages
      */
     private static function cleanUp(IOInterface $io, $projectRoot)
     {
-        $io->write("<info>Removing Expressive installer classes, configuration, and tests</info>");
+        $io->write("<info>Removing Mezzio installer classes, configuration, and tests</info>");
         self::recursiveRmdir(__DIR__);
-        self::recursiveRmdir($projectRoot . '/test/ExpressiveInstallerTest');
+        self::recursiveRmdir($projectRoot . '/test/MezzioInstallerTest');
     }
 
     /**
@@ -412,7 +411,7 @@ class OptionalPackages
 
         $io->write("<info>Removing assets</info>");
         unlink($projectRoot . '/public/favicon.ico');
-        unlink($projectRoot . '/public/zf-logo.png');
+        unlink($projectRoot . '/public/api-tools-logo.png');
     }
 
     /**

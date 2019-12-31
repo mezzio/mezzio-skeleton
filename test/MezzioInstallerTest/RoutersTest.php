@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       https://github.com/zendframework/zend-expressive-skeleton for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-skeleton/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-skeleton for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-skeleton/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-skeleton/blob/master/LICENSE.md New BSD License
  */
 
-namespace ExpressiveInstallerTest;
+namespace MezzioInstallerTest;
 
 use App\Action\HomePageAction;
 use App\Action\PingAction;
-use ExpressiveInstaller\OptionalPackages;
+use Mezzio\Router;
+use MezzioInstaller\OptionalPackages;
 use ReflectionProperty;
-use Zend\Expressive\Router;
 
 class RoutersTest extends InstallerTestCase
 {
@@ -87,8 +86,8 @@ class RoutersTest extends InstallerTestCase
             'aura-full'           => [3, 1, 'copy-files', 200, $this->expectedRoutes, Router\AuraRouter::class],
             'fastroute-minimal'   => [3, 2, 'minimal-files', 404, [], Router\FastRouteRouter::class],
             'fastroute-full'      => [3, 2, 'copy-files', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            'zend-router-minimal' => [3, 3, 'minimal-files', 404, [], Router\ZendRouter::class],
-            'zend-router-full'    => [3, 3, 'copy-files', 200, $this->expectedRoutes, Router\ZendRouter::class],
+            'laminas-router-minimal' => [3, 3, 'minimal-files', 404, [], Router\LaminasRouter::class],
+            'laminas-router-full'    => [3, 3, 'copy-files', 200, $this->expectedRoutes, Router\LaminasRouter::class],
         ];
     }
 }
