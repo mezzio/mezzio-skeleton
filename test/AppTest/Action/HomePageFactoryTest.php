@@ -5,9 +5,9 @@ namespace AppTest\Action;
 use App\Action\HomePageAction;
 use App\Action\HomePageFactory;
 use Interop\Container\ContainerInterface;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\TestCase;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageFactoryTest extends TestCase
 {
@@ -26,6 +26,7 @@ class HomePageFactoryTest extends TestCase
     {
         $factory = new HomePageFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
+        $this->container->has(\Zend\Expressive\Template\TemplateRendererInterface::class)->willReturn(false);
 
         $this->assertInstanceOf(HomePageFactory::class, $factory);
 

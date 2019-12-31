@@ -4,9 +4,9 @@ namespace AppTest\Action;
 
 use App\Action\PingAction;
 use Interop\Http\ServerMiddleware\DelegateInterface;
+use Laminas\Diactoros\Response\JsonResponse;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\JsonResponse;
 
 class PingActionTest extends TestCase
 {
