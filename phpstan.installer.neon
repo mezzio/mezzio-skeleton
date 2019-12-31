@@ -1,4 +1,4 @@
-# zend-expressive-skeleton specific
+# mezzio-skeleton specific
 includes:
 	- vendor/phpstan/phpstan-strict-rules/rules.neon
 parameters:
@@ -7,8 +7,8 @@ parameters:
 		- php
 		- dist
 	excludes_analyse:
-		- src/ExpressiveInstaller/Resources/src/ConfigProvider.flat.php
-		- src/ExpressiveInstaller/Resources/src/ConfigProvider.modular.php
+		- src/MezzioInstaller/Resources/src/ConfigProvider.flat.php
+		- src/MezzioInstaller/Resources/src/ConfigProvider.modular.php
 	reportUnmatchedIgnoredErrors: true
 	ignoreErrors:
 		- '#Class App\\ConfigProvider not found#'
