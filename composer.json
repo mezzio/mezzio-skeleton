@@ -1,15 +1,20 @@
 {
-    "name": "zendframework/zend-expressive-skeleton",
-    "description": "Zend expressive skeleton. Begin developing PSR-7 middleware applications in seconds",
+    "name": "mezzio/mezzio-skeleton",
+    "description": "Laminas mezzio skeleton. Begin developing PSR-7 middleware applications in seconds",
     "type": "project",
-    "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
     "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "Geert Eltink",
-            "homepage": "https://xtreamwayz.com/"
-        }
-    ],
+    "homepage": "https://mezzio.dev",
+    "support": {
+        "docs": "https://docs.mezzio.dev/mezzio-skeleton/",
+        "issues": "https://github.com/mezzio/mezzio-skeleton/issues",
+        "source": "https://github.com/mezzio/mezzio-skeleton",
+        "rss": "https://github.com/mezzio/mezzio-skeleton/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev",
@@ -18,41 +23,43 @@
     },
     "require": {
         "php": "^5.5 || ^7.0",
-        "roave/security-advisories": "dev-master",
-        "zendframework/zend-expressive": "^1.0",
-        "zendframework/zend-expressive-helpers": "^2.0",
-        "zendframework/zend-stdlib": "^2.7 || ^3.0"
+        "laminas/laminas-stdlib": "^2.7 || ^3.0",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "mezzio/mezzio": "^1.0",
+        "mezzio/mezzio-helpers": "^2.0",
+        "roave/security-advisories": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8",
-        "squizlabs/php_codesniffer": "^2.3",
-        "filp/whoops": "^1.1 || ^2.0",
-        "composer/composer": "^1.0",
-        "zendframework/zend-expressive-aurarouter": "^1.0",
-        "zendframework/zend-expressive-fastroute": "^1.0",
-        "zendframework/zend-expressive-zendrouter": "^1.0",
-        "zendframework/zend-expressive-platesrenderer": "^1.0",
-        "zendframework/zend-expressive-twigrenderer": "^1.0",
-        "zendframework/zend-expressive-zendviewrenderer": "^1.0",
-        "zendframework/zend-servicemanager": "^2.7.3 || ^3.0",
         "aura/di": "^3.0",
+        "composer/composer": "^1.0",
+        "filp/whoops": "^1.1 || ^2.0",
+        "laminas/laminas-servicemanager": "^2.7.3 || ^3.0",
+        "mezzio/mezzio-aurarouter": "^1.0",
+        "mezzio/mezzio-fastroute": "^1.0",
+        "mezzio/mezzio-laminasrouter": "^1.0",
+        "mezzio/mezzio-laminasviewrenderer": "^1.0",
+        "mezzio/mezzio-platesrenderer": "^1.0",
+        "mezzio/mezzio-twigrenderer": "^1.0",
+        "phpunit/phpunit": "^4.8",
+        "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "^2.3",
         "xtreamwayz/pimple-container-interop": "^1.0"
     },
     "autoload": {
         "psr-4": {
             "App\\": "src/App/",
-            "ExpressiveInstaller\\": "src/ExpressiveInstaller/"
+            "MezzioInstaller\\": "src/MezzioInstaller/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "AppTest\\": "test/AppTest/",
-            "ExpressiveInstallerTest\\": "test/ExpressiveInstallerTest/"
+            "MezzioInstallerTest\\": "test/MezzioInstallerTest/"
         }
     },
     "scripts": {
-        "pre-install-cmd": "ExpressiveInstaller\\OptionalPackages::install",
-        "pre-update-cmd": "ExpressiveInstaller\\OptionalPackages::install",
+        "pre-install-cmd": "MezzioInstaller\\OptionalPackages::install",
+        "pre-update-cmd": "MezzioInstaller\\OptionalPackages::install",
         "check": [
             "@cs",
             "@test"
@@ -63,5 +70,8 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "upload-coverage": "coveralls -v"
+    },
+    "replace": {
+        "zendframework/zend-expressive-skeleton": "self.version"
     }
 }
