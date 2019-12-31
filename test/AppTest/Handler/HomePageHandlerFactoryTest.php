@@ -6,10 +6,10 @@ namespace AppTest\Handler;
 
 use App\Handler\HomePageHandler;
 use App\Handler\HomePageHandlerFactory;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageHandlerFactoryTest extends TestCase
 {
@@ -28,6 +28,7 @@ class HomePageHandlerFactoryTest extends TestCase
     {
         $factory = new HomePageHandlerFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
+        $this->container->has(\Zend\Expressive\Template\TemplateRendererInterface::class)->willReturn(false);
 
         $this->assertInstanceOf(HomePageHandlerFactory::class, $factory);
 
