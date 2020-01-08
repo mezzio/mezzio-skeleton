@@ -1,6 +1,6 @@
 # Mezzio Skeleton and Installer
 
-[![Build Status](https://travis-ci.org/mezzio/mezzio-skeleton.svg?branch=master)](https://travis-ci.org/mezzio/mezzio-skeleton)
+[![Build Status](https://travis-ci.com/mezzio/mezzio-skeleton.svg?branch=master)](https://travis-ci.com/mezzio/mezzio-skeleton)
 [![Coverage Status](https://coveralls.io/repos/github/mezzio/mezzio-skeleton/badge.svg?branch=master)](https://coveralls.io/github/mezzio/mezzio-skeleton?branch=master)
 
 *Begin developing PSR-15 middleware applications in seconds!*
@@ -147,4 +147,4 @@ $ composer test
 Please note that the installer tests remove installed config files and templates
 before and after running the tests.
 
-Before contributing read [the contributing guide](docs/CONTRIBUTING.md).
+Before contributing read [the contributing guide](https://github.com/mezzio/.github/blob/master/CONTRIBUTING.md).
