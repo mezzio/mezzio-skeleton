@@ -15,7 +15,7 @@
     ],
     "homepage": "https://mezzio.dev",
     "support": {
-        "docs": "https://docs.mezzio.dev/mezzio-skeleton/",
+        "docs": "https://docs.mezzio.dev/mezzio/",
         "issues": "https://github.com/mezzio/mezzio-skeleton/issues",
         "source": "https://github.com/mezzio/mezzio-skeleton",
         "rss": "https://github.com/mezzio/mezzio-skeleton/releases.atom",
