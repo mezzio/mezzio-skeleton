@@ -45,7 +45,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#7](https://github.com/mezzio/mezzio-skeleton/pull/7) fixes path to favicon.
 
 ## 3.2.3 - 2018-11-05
 
