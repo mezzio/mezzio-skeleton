@@ -33,7 +33,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#10](https://github.com/mezzio/mezzio-skeleton/pull/10) updates assets:
+  - jQuery 3.4.1
+  - Bootstrap 4.4.1
+  - FontAwesome 5.12.1
 
 ### Deprecated
 
