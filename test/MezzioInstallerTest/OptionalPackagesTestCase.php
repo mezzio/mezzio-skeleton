@@ -139,13 +139,13 @@ abstract class OptionalPackagesTestCase extends TestCase
         self::assertThat($found, self::isTrue(), $message);
     }
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->packageRoot = realpath(__DIR__ . '/../../');
         putenv('COMPOSER=' . $this->packageRoot . '/composer.json');
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         putenv('COMPOSER=');
     }

@@ -22,7 +22,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
      */
     private $installer;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
 
@@ -36,7 +36,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         parent::tearDown();
         chdir($this->packageRoot);
@@ -91,8 +91,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 
     public static function assertPromptText($expected, $argument)
     {
-        self::assertInternalType(
-            'string',
+        self::assertIsString(
             $argument,
             'Questions must be a string since symfony/console:4.0'
         );
