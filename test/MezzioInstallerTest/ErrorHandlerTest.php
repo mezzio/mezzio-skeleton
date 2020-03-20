@@ -14,6 +14,8 @@ use Mezzio\Container\WhoopsErrorResponseGeneratorFactory;
 use Mezzio\Middleware\ErrorResponseGenerator;
 use MezzioInstaller\OptionalPackages;
 
+use function chdir;
+
 class ErrorHandlerTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;

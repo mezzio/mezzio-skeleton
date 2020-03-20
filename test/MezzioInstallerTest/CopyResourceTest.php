@@ -13,6 +13,8 @@ namespace MezzioInstallerTest;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 
+use function file_get_contents;
+
 class CopyResourceTest extends OptionalPackagesTestCase
 {
     /**
@@ -28,7 +30,7 @@ class CopyResourceTest extends OptionalPackagesTestCase
     protected function setUp() : void
     {
         parent::setUp();
-        $this->project = vfsStream::setup('project-root');
+        $this->project     = vfsStream::setup('project-root');
         $this->projectRoot = vfsStream::url('project-root');
     }
 

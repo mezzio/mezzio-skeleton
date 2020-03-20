@@ -22,38 +22,38 @@ return [
         'mezzio/mezzio-aurarouter' => [
             'version'   => '^3.0',
             'whitelist' => [
-                'mezzio/mezzio-aurarouter'
-            ]
+                'mezzio/mezzio-aurarouter',
+            ],
         ],
         'mezzio/mezzio-fastroute' => [
             'version'   => '^3.0',
             'whitelist' => [
-                'mezzio/mezzio-fastroute'
-            ]
+                'mezzio/mezzio-fastroute',
+            ],
         ],
         'mezzio/mezzio-platesrenderer' => [
             'version'   => '^2.0',
             'whitelist' => [
-                'mezzio/mezzio-platesrenderer'
-            ]
+                'mezzio/mezzio-platesrenderer',
+            ],
         ],
         'mezzio/mezzio-twigrenderer' => [
             'version'   => '^2.6',
             'whitelist' => [
-                'mezzio/mezzio-twigrenderer'
-            ]
+                'mezzio/mezzio-twigrenderer',
+            ],
         ],
         'mezzio/mezzio-laminasrouter' => [
             'version'   => '^3.0',
             'whitelist' => [
-                'mezzio/mezzio-laminasrouter'
-            ]
+                'mezzio/mezzio-laminasrouter',
+            ],
         ],
         'mezzio/mezzio-laminasviewrenderer' => [
             'version'   => '^2.0',
             'whitelist' => [
-                'mezzio/mezzio-laminasviewrenderer'
-            ]
+                'mezzio/mezzio-laminasviewrenderer',
+            ],
         ],
         'laminas/laminas-pimple-config' => [
             'version' => '^1.0',
@@ -69,14 +69,13 @@ return [
 
     'application' => [
         'flat' => [
-            'packages' => [],
+            'packages'  => [],
             'resources' => [
                 'Resources/src/ConfigProvider.flat.php' => 'src/App/ConfigProvider.php',
             ],
         ],
         'modular' => [
-            'packages' => [
-            ],
+            'packages'  => [],
             'resources' => [
                 'Resources/src/ConfigProvider.modular.php' => 'src/App/src/ConfigProvider.php',
             ],
@@ -265,8 +264,7 @@ return [
                         'Resources/templates/plates/layout.phtml'    => 'src/App/templates/layout/default.phtml',
                         'Resources/templates/plates/home-page.phtml' => 'src/App/templates/app/home-page.phtml',
                     ],
-                    'minimal' => [
-                    ],
+                    'minimal' => [],
                 ],
                 2 => [
                     'name'     => 'Twig',
@@ -285,8 +283,7 @@ return [
                         'Resources/templates/twig/layout.html.twig'    => 'src/App/templates/layout/default.html.twig',
                         'Resources/templates/twig/home-page.html.twig' => 'src/App/templates/app/home-page.html.twig',
                     ],
-                    'minimal' => [
-                    ],
+                    'minimal' => [],
                 ],
                 3 => [
                     'name'     => 'laminas-view <comment>installs laminas-servicemanager</comment>',
@@ -305,8 +302,7 @@ return [
                         'Resources/templates/laminas-view/layout.phtml'    => 'src/App/templates/layout/default.phtml',
                         'Resources/templates/laminas-view/home-page.phtml' => 'src/App/templates/app/home-page.phtml',
                     ],
-                    'minimal' => [
-                    ],
+                    'minimal' => [],
                 ],
             ],
         ],

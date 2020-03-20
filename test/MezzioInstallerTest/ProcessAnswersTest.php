@@ -13,6 +13,8 @@ namespace MezzioInstallerTest;
 use MezzioInstaller\OptionalPackages;
 use Prophecy\Argument;
 
+use function chdir;
+
 class ProcessAnswersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;

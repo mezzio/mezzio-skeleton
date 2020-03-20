@@ -13,6 +13,12 @@ namespace MezzioInstallerTest;
 use MezzioInstaller\OptionalPackages;
 use Prophecy\Argument;
 
+use function chdir;
+use function copy;
+use function putenv;
+use function sprintf;
+use function strpos;
+
 class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
@@ -65,7 +71,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     ) {
         $this->io
             ->ask(
-                Argument::that(function ($arg) use ($question) {
+                Argument::that(static function ($arg) use ($question) {
                     PromptForOptionalPackagesTest::assertPromptText($question['question'], $arg);
 
                     return true;
@@ -89,7 +95,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         $this->assertNull($this->installer->promptForOptionalPackage($questionName, $question));
     }
 
-    public static function assertPromptText($expected, $argument)
+    public static function assertPromptText($expected, $argument) : void
     {
         self::assertIsString(
             $argument,
@@ -97,7 +103,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         );
 
         self::assertThat(
-            false !== strpos($argument, $expected),
+            strpos($argument, $expected) !== false,
             self::isTrue(),
             sprintf('Expected prompt not received: "%s"', $expected)
         );
