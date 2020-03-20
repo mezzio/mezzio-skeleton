@@ -21,6 +21,15 @@ use Prophecy\Prophecy\ObjectProphecy;
 use ReflectionClass;
 use ReflectionProperty;
 
+use function array_fill_keys;
+use function array_key_exists;
+use function file_get_contents;
+use function in_array;
+use function json_decode;
+use function putenv;
+use function realpath;
+use function sprintf;
+
 abstract class OptionalPackagesTestCase extends TestCase
 {
     /**
@@ -53,8 +62,11 @@ abstract class OptionalPackagesTestCase extends TestCase
      *
      * @throws AssertionFailedError
      */
-    public static function assertPackage(string $package, OptionalPackages $installer, string $message = null)
-    {
+    public static function assertPackage(
+        string $package,
+        OptionalPackages $installer,
+        ?string $message = null
+    ) : void {
         $message = $message ?: sprintf('Failed asserting that package "%s" is present in the installer', $package);
         $found   = false;
 
@@ -75,8 +87,11 @@ abstract class OptionalPackagesTestCase extends TestCase
      *
      * @throws AssertionFailedError
      */
-    public static function assertNotPackage(string $package, OptionalPackages $installer, string $message = null)
-    {
+    public static function assertNotPackage(
+        string $package,
+        OptionalPackages $installer,
+        ?string $message = null
+    ) : void {
         $message = $message ?: sprintf('Failed asserting that package "%s" is absent from the installer', $package);
         $found   = false;
 
@@ -98,8 +113,11 @@ abstract class OptionalPackagesTestCase extends TestCase
      * @param string[] $packages
      * @throws AssertionFailedError
      */
-    public static function assertPackages(array $packages, OptionalPackages $installer, string $message = null)
-    {
+    public static function assertPackages(
+        array $packages,
+        OptionalPackages $installer,
+        ?string $message = null
+    ) : void {
         foreach ($packages as $package) {
             self::assertPackage($package, $installer, $message);
         }
@@ -111,8 +129,11 @@ abstract class OptionalPackagesTestCase extends TestCase
      * @param string[] $packages
      * @throws AssertionFailedError
      */
-    public static function assertNotPackages(array $packages, OptionalPackages $installer, string $message = null)
-    {
+    public static function assertNotPackages(
+        array $packages,
+        OptionalPackages $installer,
+        ?string $message = null
+    ) : void {
         foreach ($packages as $package) {
             self::assertNotPackage($package, $installer, $message);
         }
@@ -123,8 +144,11 @@ abstract class OptionalPackagesTestCase extends TestCase
      *
      * @throws AssertionFailedError
      */
-    public static function assertWhitelisted(string $package, OptionalPackages $installer, string $message = null)
-    {
+    public static function assertWhitelisted(
+        string $package,
+        OptionalPackages $installer,
+        ?string $message = null
+    ) : void {
         $message = $message ?: sprintf('Failed asserting that package "%s" is whitelisted in composer.json', $package);
         $found   = false;
 
@@ -156,7 +180,7 @@ abstract class OptionalPackagesTestCase extends TestCase
      * Creates the IOInterface and Composer mock instances when doing so,
      * and uses the provided $projectRoot, if specified.
      */
-    protected function createOptionalPackages(string $projectRoot = null) : OptionalPackages
+    protected function createOptionalPackages(?string $projectRoot = null) : OptionalPackages
     {
         $projectRoot = $projectRoot ?: $this->packageRoot;
 
@@ -168,30 +192,37 @@ abstract class OptionalPackagesTestCase extends TestCase
         );
     }
 
+    /**
+     * @return Composer|ObjectProphecy
+     */
     protected function createComposer()
     {
-        $this->composer = $composer = $this->prophesize(Composer::class);
-        $composer->getPackage()->will([$this->createRootPackage(), 'reveal']);
-        return $composer;
+        $this->composer = $this->prophesize(Composer::class);
+        $this->composer->getPackage()->will([$this->createRootPackage(), 'reveal']);
+
+        return $this->composer;
     }
 
+    /**
+     * @return RootPackage|ObjectProphecy
+     */
     protected function createRootPackage()
     {
-        $composerJson       = file_get_contents($this->packageRoot . '/composer.json');
-        $this->composerJson = $composer = json_decode($composerJson, true);
-        $this->rootPackage  = $package = $this->prophesize(RootPackage::class);
+        $composerJson      = json_decode(file_get_contents($this->packageRoot . '/composer.json'), true);
+        $this->rootPackage = $this->prophesize(RootPackage::class);
 
-        $package->getRequires()->willReturn($composer['require']);
-        $package->getDevRequires()->willReturn($composer['require-dev']);
-        $package->getStabilityFlags()->willReturn($this->getStabilityFlags());
+        $this->rootPackage->getRequires()->willReturn($composerJson['require']);
+        $this->rootPackage->getDevRequires()->willReturn($composerJson['require-dev']);
+        $this->rootPackage->getStabilityFlags()->willReturn($this->getStabilityFlags());
 
-        return $package;
+        return $this->rootPackage;
     }
 
-    protected function getStabilityFlags()
+    protected function getStabilityFlags() : array
     {
         $r = new ReflectionClass(OptionalPackages::class);
         $properties = $r->getDefaultProperties();
+
         return array_fill_keys($properties['devDependencies'], BasePackage::STABILITY_DEV);
     }
 
@@ -204,6 +235,7 @@ abstract class OptionalPackagesTestCase extends TestCase
     {
         $r = new ReflectionProperty($installer, $property);
         $r->setAccessible(true);
+
         return $r->getValue($installer);
     }
 

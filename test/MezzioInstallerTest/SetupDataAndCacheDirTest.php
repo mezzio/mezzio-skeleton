@@ -15,6 +15,10 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use Prophecy\Argument;
 
+use function fileperms;
+use function is_dir;
+use function sprintf;
+
 class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
 {
     /**
@@ -35,9 +39,9 @@ class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
     protected function setUp() : void
     {
         parent::setUp();
-        $this->project = vfsStream::setup('project-root');
+        $this->project     = vfsStream::setup('project-root');
         $this->projectRoot = vfsStream::url('project-root');
-        $this->installer = $this->createOptionalPackages($this->projectRoot);
+        $this->installer   = $this->createOptionalPackages($this->projectRoot);
     }
 
     public function testCreatesDataDirectoryWhenInvoked()

@@ -13,6 +13,9 @@ namespace MezzioInstallerTest;
 use MezzioInstaller\OptionalPackages;
 use Prophecy\Argument;
 
+use function random_int;
+use function strpos;
+
 class RequestInstallTypeTest extends OptionalPackagesTestCase
 {
     /**
@@ -49,12 +52,12 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
 
     public function testWillContinueToPromptUntilValidAnswerPresented()
     {
-        $io     = $this->io;
-        $tries  = mt_rand(1, 10);
+        $io    = $this->io;
+        $tries = random_int(1, 10);
 
         // Handle a call to ask() by looping $tries times
         $handle = function () use ($io, &$tries, &$handle) {
-            if (0 === $tries) {
+            if ($tries === 0) {
                 // Valid choice to complete the loop
                 return '1';
             }
@@ -77,7 +80,10 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         $this->assertEquals(0, $tries);
     }
 
-    public static function assertQueryPrompt($value)
+    /**
+     * @param mixed $value
+     */
+    public static function assertQueryPrompt($value) : bool
     {
         self::assertIsString(
             $value,
@@ -85,7 +91,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         );
 
         self::assertThat(
-            false !== strpos($value, 'What type of installation would you like?'),
+            strpos($value, 'What type of installation would you like?') !== false,
             self::isTrue(),
             'Unexpected prompt value'
         );

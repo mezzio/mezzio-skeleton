@@ -16,6 +16,14 @@ use Mezzio\Application;
 use Mezzio\Router;
 use MezzioInstaller\OptionalPackages;
 
+use function chdir;
+use function count;
+use function file_get_contents;
+use function file_put_contents;
+use function preg_replace;
+use function sprintf;
+use function strpos;
+
 class RoutersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
@@ -138,12 +146,12 @@ class RoutersTest extends OptionalPackagesTestCase
         // @codingStandardsIgnoreStart
         // $containerOption, $routerOption, $copyFilesKey, $dependencyKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter
         return [
-            'aura-minimal'        => [OptionalPackages::INSTALL_MINIMAL, 3, 1, 'minimal-files', 'aliases', 404, [], Router\AuraRouter::class],
-            'aura-flat'           => [OptionalPackages::INSTALL_FLAT, 3, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\AuraRouter::class],
-            'aura-modular'        => [OptionalPackages::INSTALL_MODULAR, 3, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\AuraRouter::class],
-            'fastroute-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 'aliases', 404, [], Router\FastRouteRouter::class],
-            'fastroute-flat'      => [OptionalPackages::INSTALL_FLAT, 3, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            'fastroute-modular'   => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
+            'aura-minimal'           => [OptionalPackages::INSTALL_MINIMAL, 3, 1, 'minimal-files', 'aliases', 404, [], Router\AuraRouter::class],
+            'aura-flat'              => [OptionalPackages::INSTALL_FLAT, 3, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\AuraRouter::class],
+            'aura-modular'           => [OptionalPackages::INSTALL_MODULAR, 3, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\AuraRouter::class],
+            'fastroute-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 'aliases', 404, [], Router\FastRouteRouter::class],
+            'fastroute-flat'         => [OptionalPackages::INSTALL_FLAT, 3, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
+            'fastroute-modular'      => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
             'laminas-router-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 3, 'minimal-files', 'aliases', 404, [], Router\LaminasRouter::class],
             'laminas-router-flat'    => [OptionalPackages::INSTALL_FLAT, 3, 3, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\LaminasRouter::class],
             'laminas-router-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 3, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\LaminasRouter::class],
@@ -151,12 +159,12 @@ class RoutersTest extends OptionalPackagesTestCase
         // @codingStandardsIgnoreEnd
     }
 
-    public function enableRouter(string $expectedRouter)
+    public function enableRouter(string $expectedRouter) : void
     {
         $configFile = $this->projectRoot . '/config/config.php';
         $contents = file_get_contents($configFile);
         $contents = preg_replace(
-            '/(new ConfigAggregator\(\[)/s',
+            '/(new ConfigAggregator\(\[)/',
             '$1' . "\n    " . $this->routerConfigProviders[$expectedRouter] . "::class,\n",
             $contents
         );

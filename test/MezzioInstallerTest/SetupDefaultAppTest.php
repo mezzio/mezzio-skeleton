@@ -12,6 +12,8 @@ namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
 
+use function chdir;
+
 class SetupDefaultAppTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;

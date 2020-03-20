@@ -15,6 +15,8 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+use function get_class;
+
 class HomePageHandlerTest extends TestCase
 {
     /** @var ContainerInterface|ObjectProphecy */

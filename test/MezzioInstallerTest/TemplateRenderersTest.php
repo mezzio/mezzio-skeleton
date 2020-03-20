@@ -15,18 +15,24 @@ use Laminas\Stratigility\Middleware;
 use Mezzio;
 use MezzioInstaller\OptionalPackages;
 
+use function array_unshift;
+use function chdir;
+use function file_get_contents;
+use function file_put_contents;
+use function preg_replace;
+use function sprintf;
+
 class TemplateRenderersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
+    /** @var string[] */
     private $templateConfigProviders = [
-        Mezzio\Plates\PlatesRenderer::class => Mezzio\Plates\ConfigProvider::class,
-        Mezzio\Twig\TwigRenderer::class => Mezzio\Twig\ConfigProvider::class,
+        Mezzio\Plates\PlatesRenderer::class           => Mezzio\Plates\ConfigProvider::class,
+        Mezzio\Twig\TwigRenderer::class               => Mezzio\Twig\ConfigProvider::class,
         Mezzio\LaminasView\LaminasViewRenderer::class => Mezzio\LaminasView\ConfigProvider::class,
     ];
 
@@ -147,24 +153,24 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         }
     }
 
-    public function injectRouterConfigProvider()
+    public function injectRouterConfigProvider() : void
     {
         $configFile = $this->projectRoot . '/config/config.php';
         $contents = file_get_contents($configFile);
         $contents = preg_replace(
-            '/(new ConfigAggregator\(\[)/s',
+            '/(new ConfigAggregator\(\[)/',
             '$1' . "\n    " . Mezzio\Router\FastRouteRouter\ConfigProvider::class . "::class,\n",
             $contents
         );
         file_put_contents($configFile, $contents);
     }
 
-    public function injectConfigProvider(string $rendererClass)
+    public function injectConfigProvider(string $rendererClass) : void
     {
         $configFile = $this->projectRoot . '/config/config.php';
         $contents = file_get_contents($configFile);
         $contents = preg_replace(
-            '/(new ConfigAggregator\(\[)/s',
+            '/(new ConfigAggregator\(\[)/',
             '$1' . "\n    " . $this->templateConfigProviders[$rendererClass] . "::class,\n",
             $contents
         );
