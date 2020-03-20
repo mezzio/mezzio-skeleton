@@ -29,7 +29,6 @@ class HomePageHandlerFactoryTest extends TestCase
     {
         $factory = new HomePageHandlerFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
-        $this->container->has(\Zend\Expressive\Template\TemplateRendererInterface::class)->willReturn(false);
 
         $this->assertInstanceOf(HomePageHandlerFactory::class, $factory);
 
