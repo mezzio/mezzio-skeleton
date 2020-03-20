@@ -24,6 +24,31 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
 
+use function array_diff;
+use function array_map;
+use function chmod;
+use function copy;
+use function dirname;
+use function file_exists;
+use function file_get_contents;
+use function file_put_contents;
+use function implode;
+use function in_array;
+use function is_dir;
+use function is_file;
+use function is_numeric;
+use function mkdir;
+use function preg_match;
+use function preg_quote;
+use function preg_replace;
+use function realpath;
+use function rename;
+use function rmdir;
+use function rtrim;
+use function sprintf;
+use function str_replace;
+use function unlink;
+
 /**
  * Composer installer script
  *
@@ -109,8 +134,8 @@ class OptionalPackages
         'jsoumelidis/zend-sf-di-config',
         'mikey179/vfsstream',
         'northwoods/container',
-        "phpstan/phpstan",
-        "phpstan/phpstan-strict-rules",
+        'phpstan/phpstan',
+        'phpstan/phpstan-strict-rules',
         'laminas/laminas-auradi-config',
         'laminas/laminas-coding-standard',
         'mezzio/mezzio-aurarouter',
@@ -180,7 +205,7 @@ class OptionalPackages
         $installer->finalizePackage();
     }
 
-    public function __construct(IOInterface $io, Composer $composer, string $projectRoot = null)
+    public function __construct(IOInterface $io, Composer $composer, ?string $projectRoot = null)
     {
         $this->io = $io;
         $this->composer = $composer;
@@ -253,12 +278,12 @@ class OptionalPackages
         while (true) {
             $answer = $this->io->ask(implode($query), '2');
 
-            switch (true) {
-                case ($answer === '1'):
+            switch ($answer) {
+                case '1':
                     return self::INSTALL_MINIMAL;
-                case ($answer === '2'):
+                case '2':
                     return self::INSTALL_FLAT;
-                case ($answer === '3'):
+                case '3':
                     return self::INSTALL_MODULAR;
                 default:
                     // @codeCoverageIgnoreStart
@@ -550,7 +575,7 @@ class OptionalPackages
      */
     public function removeLinesContainingStrings(array $entries, string $content) : string
     {
-        $entries = implode('|', array_map(function ($word) {
+        $entries = implode('|', array_map(static function ($word) : string {
             return preg_quote($word, '/');
         }, $entries));
 
@@ -612,7 +637,7 @@ class OptionalPackages
         $defaultText = $defaultOption;
 
         foreach ($question['options'] as $key => $option) {
-            $defaultText = ($key === $defaultOption) ? $option['name'] : $defaultText;
+            $defaultText = $key === $defaultOption ? $option['name'] : $defaultText;
             $ask[]       = sprintf("  [<comment>%d</comment>] %s\n", $key, $option['name']);
         }
 
@@ -620,7 +645,7 @@ class OptionalPackages
             $ask[] = "  [<comment>n</comment>] None of the above\n";
         }
 
-        $ask[] = ($question['custom-package'] === true)
+        $ask[] = $question['custom-package'] === true
             ? sprintf(
                 '  Make your selection or type a composer package name and version <comment>(%s)</comment>: ',
                 $defaultText
@@ -654,7 +679,7 @@ class OptionalPackages
                 $this->io->write(sprintf('  - Searching for <info>%s:%s</info>', $packageName, $packageVersion));
 
                 $optionalPackage = $this->composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
-                if (null === $optionalPackage) {
+                if ($optionalPackage === null) {
                     $this->io->write(sprintf('<error>Package not found %s:%s</error>', $packageName, $packageVersion));
                     continue;
                 }
@@ -729,8 +754,8 @@ class OptionalPackages
     private function removeAppModuleConfig() : void
     {
         $configFile = $this->projectRoot . '/config/config.php';
-        $contents = file_get_contents($configFile);
-        $contents = str_replace(self::APP_MODULE_CONFIG, '', $contents);
+        $contents   = file_get_contents($configFile);
+        $contents   = str_replace(self::APP_MODULE_CONFIG, '', $contents);
         file_put_contents($configFile, $contents);
     }
 
@@ -739,7 +764,7 @@ class OptionalPackages
      */
     private function parseComposerDefinition(Composer $composer, string $composerFile) : void
     {
-        $this->composerJson = new JsonFile($composerFile);
+        $this->composerJson       = new JsonFile($composerFile);
         $this->composerDefinition = $this->composerJson->read();
 
         // Get root package or root alias package

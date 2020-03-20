@@ -29,6 +29,26 @@ use PHPUnit\Framework\Assert;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 
+use function chdir;
+use function copy;
+use function file_exists;
+use function in_array;
+use function is_dir;
+use function ltrim;
+use function mkdir;
+use function rmdir;
+use function scandir;
+use function spl_autoload_register;
+use function spl_autoload_unregister;
+use function sprintf;
+use function str_replace;
+use function strpos;
+use function sys_get_temp_dir;
+use function uniqid;
+use function unlink;
+
+use const DIRECTORY_SEPARATOR;
+
 trait ProjectSandboxTrait
 {
     /**
@@ -56,7 +76,7 @@ trait ProjectSandboxTrait
      *
      * cleanup() recursively removes the created directory.
      */
-    protected function copyProjectFilesToTempFilesystem()
+    protected function copyProjectFilesToTempFilesystem() : string
     {
         $this->projectRoot = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('exp');
 
@@ -80,11 +100,8 @@ trait ProjectSandboxTrait
      *
      * If a non-minimal install type is selected, also sets up the alternate
      * autoloader to ensure the `App` namespace resolves correctly.
-     *
-     * @param string $installType
-     * @param OptionalPackages $installer
      */
-    protected function prepareSandboxForInstallType($installType, OptionalPackages $installer)
+    protected function prepareSandboxForInstallType(string $installType, OptionalPackages $installer) : void
     {
         $installer->setInstallType($installType);
         $installer->setupDefaultApp($installType);
@@ -102,7 +119,7 @@ trait ProjectSandboxTrait
     /**
      * Enable development-mode configuration within the sandbox.
      */
-    protected function enableDevelopmentMode()
+    protected function enableDevelopmentMode() : void
     {
         $target = sprintf(
             '%s%sconfig%sdevelopment.config.php',
@@ -142,10 +159,10 @@ trait ProjectSandboxTrait
      * @param bool $stripNamespace Whether or not to strip the initial
      *     namespace when determining the path (ala PSR-4).
      */
-    protected function setUpAlternateAutoloader(string $appPath, bool $stripNamespace = false)
+    protected function setUpAlternateAutoloader(string $appPath, bool $stripNamespace = false) : void
     {
         $this->autoloader = function ($class) use ($appPath, $stripNamespace) {
-            if (0 !== strpos($class, 'App\\')) {
+            if (strpos($class, 'App\\') !== 0) {
                 return false;
             }
 
@@ -171,7 +188,7 @@ trait ProjectSandboxTrait
     /**
      * Remove the alternate autolader, if present.
      */
-    protected function tearDownAlternateAutoloader()
+    protected function tearDownAlternateAutoloader() : void
     {
         if ($this->autoloader) {
             spl_autoload_unregister($this->autoloader);
@@ -181,10 +198,8 @@ trait ProjectSandboxTrait
 
     /**
      * Returns the configured container for the sandbox project.
-     *
-     * @return ContainerInterface;
      */
-    protected function getContainer()
+    protected function getContainer() : ContainerInterface
     {
         if ($this->container) {
             return $this->container;
@@ -240,7 +255,7 @@ trait ProjectSandboxTrait
     /**
      * Recursively copy the files from one tree to another.
      */
-    protected function recursiveCopy(string $source, string $target)
+    protected function recursiveCopy(string $source, string $target) : void
     {
         if (! is_dir($target)) {
             mkdir($target, 0777, true);
@@ -254,7 +269,7 @@ trait ProjectSandboxTrait
         foreach ($dir as $fileInfo) {
             if ($fileInfo->isFile()) {
                 $realPath = $fileInfo->getRealPath();
-                $path = ltrim(str_replace($source, '', $realPath), '/\\');
+                $path     = ltrim(str_replace($source, '', $realPath), '/\\');
                 copy($realPath, sprintf('%s/%s', $target, $path));
                 continue;
             }
@@ -278,7 +293,7 @@ trait ProjectSandboxTrait
      *
      * @param string $target Tree to remove.
      */
-    protected function recursiveDelete(string $target)
+    protected function recursiveDelete(string $target) : void
     {
         if (! is_dir($target)) {
             return;

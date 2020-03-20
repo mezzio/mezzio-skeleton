@@ -60,14 +60,14 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
         $installer->updateRootPackage();
     }
 
-    protected function setInstallerProperties(OptionalPackages $installer)
+    protected function setInstallerProperties(OptionalPackages $installer) : void
     {
         foreach ($this->changes as $property => $value) {
             $this->setInstallerProperty($installer, $property, $value);
         }
     }
 
-    protected function setInstallerProperty(OptionalPackages $installer, $property, $value)
+    protected function setInstallerProperty(OptionalPackages $installer, string $property, array $value) : void
     {
         $r = new ReflectionProperty($installer, $property);
         $r->setAccessible(true);
