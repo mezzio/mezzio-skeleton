@@ -18,9 +18,7 @@ class HomePageHandlerFactory
         $router   = $container->get(RouterInterface::class);
         $template = $container->has(TemplateRendererInterface::class)
             ? $container->get(TemplateRendererInterface::class)
-            : ($container->has(\Zend\Expressive\Template\TemplateRendererInterface::class)
-                ? $container->get(\Zend\Expressive\Template\TemplateRendererInterface::class)
-                : null);
+            : null;
 
         return new HomePageHandler(get_class($container), $router, $template);
     }
