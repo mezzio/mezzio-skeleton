@@ -8,31 +8,31 @@ return [
             'version' => '^6.0',
         ],
         'filp/whoops' => [
-            'version' => '^2.1.12',
+            'version' => '^2.7.1',
         ],
         'jsoumelidis/zend-sf-di-config' => [
-            'version' => '^0.3',
+            'version' => '^0.4',
         ],
         'northwoods/container' => [
-            'version' => '^3.0',
+            'version' => '^3.2',
         ],
         'laminas/laminas-auradi-config' => [
-            'version' => '^1.0',
+            'version' => '^1.0.2',
         ],
         'mezzio/mezzio-aurarouter' => [
-            'version'   => '^3.0',
+            'version'   => '^3.0.1',
             'whitelist' => [
                 'mezzio/mezzio-aurarouter',
             ],
         ],
         'mezzio/mezzio-fastroute' => [
-            'version'   => '^3.0',
+            'version'   => '^3.0.3',
             'whitelist' => [
                 'mezzio/mezzio-fastroute',
             ],
         ],
         'mezzio/mezzio-platesrenderer' => [
-            'version'   => '^2.0',
+            'version'   => '^2.2',
             'whitelist' => [
                 'mezzio/mezzio-platesrenderer',
             ],
@@ -44,22 +44,22 @@ return [
             ],
         ],
         'mezzio/mezzio-laminasrouter' => [
-            'version'   => '^3.0',
+            'version'   => '^3.0.1',
             'whitelist' => [
                 'mezzio/mezzio-laminasrouter',
             ],
         ],
         'mezzio/mezzio-laminasviewrenderer' => [
-            'version'   => '^2.0',
+            'version'   => '^2.2',
             'whitelist' => [
                 'mezzio/mezzio-laminasviewrenderer',
             ],
         ],
         'laminas/laminas-pimple-config' => [
-            'version' => '^1.0',
+            'version' => '^1.1.1',
         ],
         'laminas/laminas-servicemanager' => [
-            'version' => '^3.3',
+            'version' => '^3.4',
         ],
     ],
 

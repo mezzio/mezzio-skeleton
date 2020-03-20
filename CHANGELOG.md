@@ -20,7 +20,25 @@ All notable changes to this project will be documented in this file, in reverse 
   - Bootstrap 4.4.1
   - FontAwesome 5.12.1
 
-- [#11](https://github.com/mezzio/mezzio-skeleton/pull/11) updates mezzio-twigrenderer dependency to `^2.6`.
+- [#11](https://github.com/mezzio/mezzio-skeleton/pull/11) and [#13](https://github.com/mezzio/mezzio-skeleton/pull/13) updates the following dependencies:
+  - filp/whoops to `^2.7.1`
+  - jsoumelidis/zend-sf-di-config to `^0.4`
+  - laminas/laminas-auradi-config to `^1.0.2`
+  - laminas/laminas-component-installer to `^2.1.2`
+  - laminas/laminas-config-aggregator to `^1.2`
+  - laminas/laminas-diactoros to `^1.8.7 || ^2.2.2`
+  - laminas/laminas-pimple-config to `^1.1.1`
+  - laminas/laminas-servicemanager to `^3.4`
+  - mezzio/mezzio to `^3.2.1`
+  - mezzio/mezzio-aurarouter to `^3.0.1`
+  - mezzio/mezzio-fastroute to `^3.0.3`
+  - mezzio/mezzio-helpers to `^5.3`
+  - mezzio/mezzio-laminasrouter to `^3.0.1`
+  - mezzio/mezzio-laminasviewrenderer to `^2.2`
+  - mezzio/mezzio-platesrenderer to `^2.2`
+  - mezzio/mezzio-tooling to `^1.3`
+  - mezzio/mezzio-twigrenderer to `^2.6`
+  - northwoods/container to `^3.2`
 
 ### Deprecated
 
