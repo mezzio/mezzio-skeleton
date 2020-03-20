@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.3.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- [zendframework/zend-expressive-skeleton#268](https://github.com/zendframework/zend-expressive-skeleton/pull/268)
+  and [#12](https://github.com/mezzio/mezzio-skeleton/pull/12) updates PHP-DI ContainerWrapper to version `^6.0`.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.2.4 - TBD
 
 ### Added

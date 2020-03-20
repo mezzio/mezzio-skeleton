@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
     'packages' => [
         'elie29/zend-phpdi-config' => [
-            'version' => '^3.0',
+            'version' => '^6.0',
         ],
         'filp/whoops' => [
             'version' => '^2.1.12',

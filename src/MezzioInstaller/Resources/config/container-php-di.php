@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-use Zend\DI\Config\Config;
-use Zend\DI\Config\ContainerFactory;
+use Elie\PHPDI\Config\Config;
+use Elie\PHPDI\Config\ContainerFactory;
 
-$config  = require __DIR__ . '/config.php';
-$factory = new ContainerFactory();
+// Protect variables from global scope
+return (static function () {
+    $config  = require __DIR__ . '/config.php';
+    $factory = new ContainerFactory();
 
-return $factory(new Config($config));
+    return $factory(new Config($config));
+})();
