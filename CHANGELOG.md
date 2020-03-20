@@ -31,12 +31,16 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [zendframework/zend-expressive-skeleton#269](https://github.com/zendframework/zend-expressive-skeleton/pull/269) adds support for PHP 7.3.
 
+- [#11](https://github.com/mezzio/mezzio-skeleton/pull/11) adds support for PHP 7.4.
+
 ### Changed
 
 - [#10](https://github.com/mezzio/mezzio-skeleton/pull/10) updates assets:
   - jQuery 3.4.1
   - Bootstrap 4.4.1
   - FontAwesome 5.12.1
+
+- [#11](https://github.com/mezzio/mezzio-skeleton/pull/11) updates mezzio-twigrenderer dependency to `^2.6`.
 
 ### Deprecated
 

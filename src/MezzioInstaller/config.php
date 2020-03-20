@@ -38,7 +38,7 @@ return [
             ]
         ],
         'mezzio/mezzio-twigrenderer' => [
-            'version'   => '^2.0',
+            'version'   => '^2.6',
             'whitelist' => [
                 'mezzio/mezzio-twigrenderer'
             ]
