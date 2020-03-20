@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Changed
 
 - [zendframework/zend-expressive-skeleton#268](https://github.com/zendframework/zend-expressive-skeleton/pull/268)
-  updates PHP-DI ContainerWrapper to version ^4.0
+  and [#12](https://github.com/mezzio/mezzio-skeleton/pull/12) updates PHP-DI ContainerWrapper to version `^6.0`.
 
 ### Deprecated
 
