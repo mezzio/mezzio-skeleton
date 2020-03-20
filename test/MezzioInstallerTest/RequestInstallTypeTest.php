@@ -20,7 +20,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
      */
     private $installer;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
         $this->installer = $this->createOptionalPackages();
@@ -79,8 +79,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
 
     public static function assertQueryPrompt($value)
     {
-        self::assertInternalType(
-            'string',
+        self::assertIsString(
             $value,
             'Questions must be a string since symfony/console:4.0'
         );

@@ -32,7 +32,7 @@ class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
      */
     private $projectRoot;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
         $this->project = vfsStream::setup('project-root');
