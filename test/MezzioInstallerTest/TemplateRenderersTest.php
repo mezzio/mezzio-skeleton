@@ -30,14 +30,14 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         Mezzio\LaminasView\LaminasViewRenderer::class => Mezzio\LaminasView\ConfigProvider::class,
     ];
 
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
         $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
         $this->installer   = $this->createOptionalPackages($this->projectRoot);
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         parent::tearDown();
         chdir($this->packageRoot);

@@ -22,7 +22,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
      */
     private $installer;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
         $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
@@ -30,7 +30,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         parent::tearDown();
         chdir($this->packageRoot);
