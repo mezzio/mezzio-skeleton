@@ -65,7 +65,7 @@
         "mezzio/mezzio-laminasviewrenderer": "^2.0.2",
         "mezzio/mezzio-platesrenderer": "^2.0",
         "mezzio/mezzio-tooling": "^1.0",
-        "mezzio/mezzio-twigrenderer": "^2.0",
+        "mezzio/mezzio-twigrenderer": "^2.6",
         "mikey179/vfsstream": "^1.6.8",
         "northwoods/container": "^3.0",
         "phpspec/prophecy": "^1.10.3",
