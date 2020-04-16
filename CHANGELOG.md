@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#14](https://github.com/mezzio/mezzio-skeleton/pull/14) updates asset: [jQuery 3.5.0](https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/).
 
 ### Deprecated
 
