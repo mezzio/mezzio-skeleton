@@ -60,7 +60,7 @@ class HomePageHandler implements RequestHandlerInterface
                 $data['containerName'] = 'Laminas Servicemanager';
                 $data['containerDocs'] = 'https://docs.laminas.dev/laminas-servicemanager/';
                 break;
-            case 'Auryn\Injector':
+            case 'Northwoods\Container\InjectorContainer':
                 $data['containerName'] = 'Auryn';
                 $data['containerDocs'] = 'https://github.com/rdlowrey/Auryn';
                 break;
