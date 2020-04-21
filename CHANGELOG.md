@@ -6,11 +6,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#17](https://github.com/mezzio/mezzio-skeleton/pull/17) adds support for Aura.Di 4.0.
 
 ### Changed
 
-- Nothing.
+- [#17](https://github.com/mezzio/mezzio-skeleton/pull/17) updates `laminas/laminas-auradi-config` dependency to version 2.0 in order to support Aura.Di 4.0. It is still compatible with Aura.Di 3.4.
 
 ### Deprecated
 
