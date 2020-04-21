@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#15](https://github.com/mezzio/mezzio-skeleton/pull/15) fixes links to containers documentation.
 
 ## 3.3.1 - 2020-04-16
 
