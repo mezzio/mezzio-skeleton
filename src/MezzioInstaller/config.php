@@ -17,7 +17,7 @@ return [
             'version' => '^3.2',
         ],
         'laminas/laminas-auradi-config' => [
-            'version' => '^2.0',
+            'version' => '^2.0.1',
         ],
         'mezzio/mezzio-aurarouter' => [
             'version'   => '^3.0.1',
