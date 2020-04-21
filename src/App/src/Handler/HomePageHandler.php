@@ -50,9 +50,9 @@ class HomePageHandler implements RequestHandlerInterface
         switch ($this->containerName) {
             case 'Aura\Di\Container':
                 $data['containerName'] = 'Aura.Di';
-                $data['containerDocs'] = 'http://auraphp.com/packages/2.x/Di.html';
+                $data['containerDocs'] = 'http://auraphp.com/packages/3.x/Di/';
                 break;
-            case 'Pimple\Container':
+            case 'Pimple\Psr11\Container':
                 $data['containerName'] = 'Pimple';
                 $data['containerDocs'] = 'https://pimple.symfony.com/';
                 break;
@@ -60,7 +60,7 @@ class HomePageHandler implements RequestHandlerInterface
                 $data['containerName'] = 'Laminas Servicemanager';
                 $data['containerDocs'] = 'https://docs.laminas.dev/laminas-servicemanager/';
                 break;
-            case 'Auryn\Injector':
+            case 'Northwoods\Container\InjectorContainer':
                 $data['containerName'] = 'Auryn';
                 $data['containerDocs'] = 'https://github.com/rdlowrey/Auryn';
                 break;
