@@ -38,13 +38,6 @@ class HomePageHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        if ($this->template === null) {
-            return new JsonResponse([
-                'welcome' => 'Congratulations! You have installed the mezzio skeleton application.',
-                'docsUrl' => 'https://docs.mezzio.dev/mezzio/',
-            ]);
-        }
-
         $data = [];
 
         switch ($this->containerName) {
@@ -84,6 +77,13 @@ class HomePageHandler implements RequestHandlerInterface
         } elseif ($this->router instanceof Router\LaminasRouter) {
             $data['routerName'] = 'Laminas Router';
             $data['routerDocs'] = 'https://docs.laminas.dev/laminas-router/';
+        }
+
+        if ($this->template === null) {
+            return new JsonResponse([
+                'welcome' => 'Congratulations! You have installed the mezzio skeleton application.',
+                'docsUrl' => 'https://docs.mezzio.dev/mezzio/',
+            ] + $data);
         }
 
         if ($this->template instanceof PlatesRenderer) {
