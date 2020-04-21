@@ -69,7 +69,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     private $expectedContainerAttributes = [
         AuraDiContainer::class => [
             'containerName' => 'Aura.Di',
-            'containerDocs' => 'http://auraphp.com/packages/2.x/Di.html',
+            'containerDocs' => 'http://auraphp.com/packages/3.x/Di/',
         ],
         PimpleContainer::class => [
             'containerName' => 'Pimple',

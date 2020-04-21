@@ -50,7 +50,7 @@ class HomePageHandler implements RequestHandlerInterface
         switch ($this->containerName) {
             case 'Aura\Di\Container':
                 $data['containerName'] = 'Aura.Di';
-                $data['containerDocs'] = 'http://auraphp.com/packages/2.x/Di.html';
+                $data['containerDocs'] = 'http://auraphp.com/packages/3.x/Di/';
                 break;
             case 'Pimple\Psr11\Container':
                 $data['containerName'] = 'Pimple';
