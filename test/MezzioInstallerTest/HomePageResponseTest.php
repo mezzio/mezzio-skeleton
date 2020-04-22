@@ -34,7 +34,11 @@ use Mezzio\Twig\TwigRenderer;
 use Mezzio\LaminasView\ConfigProvider as LaminasViewRendererConfigProvider;
 use Mezzio\LaminasView\LaminasViewRenderer;
 
+use function file_get_contents;
+use function file_put_contents;
+use function implode;
 use function json_decode;
+use function preg_replace;
 
 class HomePageResponseTest extends OptionalPackagesTestCase
 {
