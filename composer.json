@@ -51,7 +51,6 @@
     },
     "require-dev": {
         "composer/composer": "^1.5 || ^2.0@dev",
-        "composer/semver": "^1.5.1 || ^2.0@dev",
         "elie29/zend-phpdi-config": "^6.0",
         "filp/whoops": "^2.7.1",
         "jsoumelidis/zend-sf-di-config": "^0.4",
