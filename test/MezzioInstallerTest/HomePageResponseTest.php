@@ -34,6 +34,8 @@ use Mezzio\Twig\TwigRenderer;
 use Mezzio\LaminasView\ConfigProvider as LaminasViewRendererConfigProvider;
 use Mezzio\LaminasView\LaminasViewRenderer;
 
+use function json_decode;
+
 class HomePageResponseTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
@@ -289,6 +291,8 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $this->assertArrayHasKey('containerDocs', $data);
         $this->assertEquals($containerName, $data['containerName']);
         $this->assertEquals($containerDocs, $data['containerDocs']);
+        $this->assertArrayHasKey('routerName', $data);
+        $this->assertArrayHasKey('routerDocs', $data);
         $this->assertEquals($routerName, $data['routerName']);
         $this->assertEquals($routerDocs, $data['routerDocs']);
     }
