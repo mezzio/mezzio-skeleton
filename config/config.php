@@ -20,6 +20,10 @@ $aggregator = new ConfigAggregator([
     \Mezzio\ConfigProvider::class,
     \Mezzio\Router\ConfigProvider::class,
 
+    class_exists(\Laminas\Diactoros\ConfigProvider::class)
+        ? \Laminas\Diactoros\ConfigProvider::class
+        : function(){ return[]; },
+
     // Swoole config to overwrite some services (if installed)
     class_exists(\Mezzio\Swoole\ConfigProvider::class)
         ? \Mezzio\Swoole\ConfigProvider::class
