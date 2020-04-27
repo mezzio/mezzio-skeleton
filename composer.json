@@ -43,7 +43,7 @@
         "php": "^7.1",
         "laminas/laminas-component-installer": "^2.1.2",
         "laminas/laminas-config-aggregator": "^1.2",
-        "laminas/laminas-diactoros": "^1.8.7 || ^2.3.0",
+        "laminas/laminas-diactoros": "^2.3.0",
         "laminas/laminas-stdlib": "^3.2.1",
         "laminas/laminas-zendframework-bridge": "^1.0",
         "mezzio/mezzio": "^3.2.1",
