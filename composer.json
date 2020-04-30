@@ -50,7 +50,7 @@
         "mezzio/mezzio-helpers": "^5.3"
     },
     "require-dev": {
-        "composer/composer": "^1.5 || ^2.0@dev",
+        "composer/composer": "^1.5 || ~2.0.0@dev || ^2.0",
         "elie29/zend-phpdi-config": "^6.0",
         "filp/whoops": "^2.7.1",
         "jsoumelidis/zend-sf-di-config": "^0.4",
