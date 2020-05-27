@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#19](https://github.com/mezzio/mezzio-skeleton/pull/19) adds support for Composer version 2 releases.
+
 - [#17](https://github.com/mezzio/mezzio-skeleton/pull/17) adds support for Aura.Di 4.0.
 
 ### Changed
