@@ -12,6 +12,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
+- [#20](https://github.com/mezzio/mezzio-skeleton/pull/20) modifies the data returned by the `HomePageHandler` when returning a JSON response; it now includes containerName and routerName, and links to documentation for each.
+
 - [#17](https://github.com/mezzio/mezzio-skeleton/pull/17) updates `laminas/laminas-auradi-config` dependency to version 2.0 in order to support Aura.Di 4.0. It is still compatible with Aura.Di 3.4.
 
 ### Deprecated
