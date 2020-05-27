@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 3.4.1 - TBD
+## 3.4.1 - 2020-05-27
 
 ### Added
 
@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#24](https://github.com/mezzio/mezzio-skeleton/pull/24) updates the minimum versions of the various asset used, including Bootstrap, jQuery, and FontAwesome.
 
 ### Deprecated
 
