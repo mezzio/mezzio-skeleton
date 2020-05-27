@@ -27,8 +27,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.3.x-dev",
-            "dev-develop": "3.4.x-dev"
+            "dev-master": "3.4.x-dev",
+            "dev-develop": "3.5.x-dev"
         },
         "laminas": {
             "component-whitelist": [
@@ -43,18 +43,18 @@
         "php": "^7.1",
         "laminas/laminas-component-installer": "^2.1.2",
         "laminas/laminas-config-aggregator": "^1.2",
-        "laminas/laminas-diactoros": "^1.8.7 || ^2.2.2",
+        "laminas/laminas-diactoros": "^2.3.0",
         "laminas/laminas-stdlib": "^3.2.1",
         "laminas/laminas-zendframework-bridge": "^1.0",
         "mezzio/mezzio": "^3.2.1",
         "mezzio/mezzio-helpers": "^5.3"
     },
     "require-dev": {
-        "composer/composer": "^1.5",
+        "composer/composer": "^1.5 || ~2.0.0@dev || ^2.0",
         "elie29/zend-phpdi-config": "^6.0",
         "filp/whoops": "^2.7.1",
         "jsoumelidis/zend-sf-di-config": "^0.4",
-        "laminas/laminas-auradi-config": "^1.0.2",
+        "laminas/laminas-auradi-config": "^2.0.1",
         "laminas/laminas-coding-standard": "~1.0.0",
         "laminas/laminas-development-mode": "^3.2",
         "laminas/laminas-pimple-config": "^1.1.1",

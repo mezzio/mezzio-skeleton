@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.4.0 - 2020-05-27
+
+### Added
+
+- [#19](https://github.com/mezzio/mezzio-skeleton/pull/19) adds support for Composer version 2 releases.
+
+- [#17](https://github.com/mezzio/mezzio-skeleton/pull/17) adds support for Aura.Di 4.0.
+
+### Changed
+
+- [#20](https://github.com/mezzio/mezzio-skeleton/pull/20) updates the minimum supported version of Diactoros to 2.3.0, and registers the ConfigProvider for that component to ensure PSR-17 HTTP Message Factory implementations are exposed to the DI container.
+
+- [#20](https://github.com/mezzio/mezzio-skeleton/pull/20) modifies the data returned by the `HomePageHandler` when returning a JSON response; it now includes containerName and routerName, and links to documentation for each.
+
+- [#17](https://github.com/mezzio/mezzio-skeleton/pull/17) updates `laminas/laminas-auradi-config` dependency to version 2.0 in order to support Aura.Di 4.0. It is still compatible with Aura.Di 3.4.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.3.2 - 2020-04-21
 
 ### Added
