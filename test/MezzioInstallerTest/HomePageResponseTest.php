@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use Generator;
-use Mezzio\Router\FastRouteRouter\ConfigProvider as FastRouteRouterConfigProvider;
 use MezzioInstaller\OptionalPackages;
 // Containers imports ordered by install-options sorting
 use Aura\Di\Container as AuraDiContainer;
@@ -20,6 +19,13 @@ use Laminas\ServiceManager\ServiceManager as LaminasServiceManagerContainer;
 use Northwoods\Container\InjectorContainer as AurynContainer;
 use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
 use DI\Container as PhpDIContainer;
+// Routers imports ordered by install-options sorting
+use Mezzio\Router\AuraRouter;
+use Mezzio\Router\AuraRouter\ConfigProvider as AuraRouterConfigProvider;
+use Mezzio\Router\FastRouteRouter;
+use Mezzio\Router\FastRouteRouter\ConfigProvider as FastRouteRouterConfigProvider;
+use Mezzio\Router\LaminasRouter;
+use Mezzio\Router\LaminasRouter\ConfigProvider as LaminasRouterConfigProvider;
 // Renderers imports ordered by install-options sorting
 use Mezzio\Plates\ConfigProvider as PlatesRendererConfigProvider;
 use Mezzio\Plates\PlatesRenderer;
@@ -27,6 +33,12 @@ use Mezzio\Twig\ConfigProvider as TwigRendererConfigProvider;
 use Mezzio\Twig\TwigRenderer;
 use Mezzio\LaminasView\ConfigProvider as LaminasViewRendererConfigProvider;
 use Mezzio\LaminasView\LaminasViewRenderer;
+
+use function file_get_contents;
+use function file_put_contents;
+use function implode;
+use function json_decode;
+use function preg_replace;
 
 class HomePageResponseTest extends OptionalPackagesTestCase
 {
@@ -36,6 +48,12 @@ class HomePageResponseTest extends OptionalPackagesTestCase
      * @var OptionalPackages
      */
     private $installer;
+
+    private $routerConfigProviders = [
+        AuraRouter::class      => AuraRouterConfigProvider::class,
+        FastRouteRouter::class => FastRouteRouterConfigProvider::class,
+        LaminasRouter::class   => LaminasRouterConfigProvider::class,
+    ];
 
     private $rendererConfigProviders = [
         PlatesRenderer::class   => PlatesRendererConfigProvider::class,
@@ -54,6 +72,43 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         'plates'       => [1, PlatesRenderer::class],
         'twig'         => [2, TwigRenderer::class],
         'laminas-view' => [3, LaminasViewRenderer::class],
+    ];
+
+    private $expectedRendererAttributes = [
+        PlatesRenderer::class => [
+            'templateName' => 'Plates',
+            'templateDocs' => 'http://platesphp.com/',
+        ],
+        TwigRenderer::class => [
+            'templateName' => 'Twig',
+            'templateDocs' => 'http://twig.sensiolabs.org/documentation',
+        ],
+        LaminasViewRenderer::class => [
+            'templateName' => 'Laminas View',
+            'templateDocs' => 'https://docs.laminas.dev/laminas-view/',
+        ],
+    ];
+
+    // $routerOption, $routerClass
+    private $routerTypes = [
+        'aura-router'    => [1, AuraRouter::class],
+        'fastroute'      => [2, FastRouteRouter::class],
+        'laminas-router' => [3, LaminasRouter::class],
+    ];
+
+    private $expectedRouterAttributes = [
+        AuraRouter::class => [
+            'routerName' => 'Aura.Router',
+            'routerDocs' => 'http://auraphp.com/packages/2.x/Router.html',
+        ],
+        FastRouteRouter::class => [
+            'routerName' => 'FastRoute',
+            'routerDocs' => 'https://github.com/nikic/FastRoute',
+        ],
+        LaminasRouter::class => [
+            'routerName' => 'Laminas Router',
+            'routerDocs' => 'https://docs.laminas.dev/laminas-router/',
+        ],
     ];
 
     // $containerOption, $containerClass
@@ -113,10 +168,9 @@ class HomePageResponseTest extends OptionalPackagesTestCase
      *
      * @dataProvider installCasesProvider
      */
-    public function testHomePageResponseContainsCorrectContainerInfo(
+    public function testHomePageHtmlResponseContainsExpectedInfo(
         string $installType,
         int $containerOption,
-        string $containerClass,
         int $rendererOption,
         string $rendererClass,
         string $containerName,
@@ -138,7 +192,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
             $routerOption = 2 // FastRoute, use assignment for clarity
         );
         $this->assertTrue($routerResult);
-        $this->injectRouterConfigProvider();
+        $this->injectRouterConfigProvider(FastRouteRouter::class);
 
         // Install template engine
         $templateEngineResult = $this->installer->processAnswer(
@@ -155,8 +209,8 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         // Test response content
         $html = (string) $response->getBody()->getContents();
 
-        $this->assertNotFalse(strpos($html, "Get started with {$containerName}"));
-        $this->assertNotFalse(strpos($html, "href=\"{$containerDocs}\""));
+        $this->assertStringContainsString("Get started with {$containerName}", $html);
+        $this->assertStringContainsString("href=\"{$containerDocs}\"", $html);
     }
 
     public function installCasesProvider() : Generator
@@ -183,7 +237,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
                     $args = [
                         $intallType,
                         $containerOption,
-                        $containerClass,
                         $rendererOption,
                         $rendererClass,
                         $containerName,
@@ -196,13 +249,105 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         }
     }
 
-    public function injectRouterConfigProvider()
+    /**
+     * @runInSeparateProcess
+     *
+     * @dataProvider rendererlessInstallCasesProvider
+     */
+    public function testHomePageJsonResponseContainsExpectedInfo(
+        string $installType,
+        int $containerOption,
+        string $containerName,
+        string $containerDocs,
+        int $routerOption,
+        string $routerClass,
+        string $routerName,
+        string $routerDocs
+    ) {
+        $this->prepareSandboxForInstallType($installType, $this->installer);
+
+        // Install container
+        $config = $this->getInstallerConfig($this->installer);
+        $containerResult = $this->installer->processAnswer(
+            $config['questions']['container'],
+            $containerOption
+        );
+        $this->assertTrue($containerResult);
+
+        // Install router
+        $routerResult = $this->installer->processAnswer(
+            $config['questions']['router'],
+            $routerOption
+        );
+        $this->assertTrue($routerResult);
+        $this->injectRouterConfigProvider($routerClass);
+
+        // Test home page response
+        $response = $this->getAppResponse('/', true);
+        $this->assertEquals(200, $response->getStatusCode());
+
+        // Test response content
+        $json = (string) $response->getBody()->getContents();
+        $data = json_decode($json, true);
+
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('containerName', $data);
+        $this->assertArrayHasKey('containerDocs', $data);
+        $this->assertEquals($containerName, $data['containerName']);
+        $this->assertEquals($containerDocs, $data['containerDocs']);
+        $this->assertArrayHasKey('routerName', $data);
+        $this->assertArrayHasKey('routerDocs', $data);
+        $this->assertEquals($routerName, $data['routerName']);
+        $this->assertEquals($routerDocs, $data['routerDocs']);
+    }
+
+    public function rendererlessInstallCasesProvider() : Generator
+    {
+        // Execute a test case for each install type and container, without any renderer
+        foreach ($this->containerTypes as $containerID => $containerType) {
+            // auryn psr-wrapper : issue with invokable services
+            if ($containerID === 'auryn') {
+                continue;
+            }
+
+            $containerOption = $containerType[0];
+            $containerClass  = $containerType[1];
+
+            $containerName = $this->expectedContainerAttributes[$containerClass]['containerName'];
+            $containerDocs = $this->expectedContainerAttributes[$containerClass]['containerDocs'];
+
+            foreach ($this->routerTypes as $routerID => $routerType) {
+                $routerOption = $routerType[0];
+                $routerClass  = $routerType[1];
+                $routerName   = $this->expectedRouterAttributes[$routerClass]['routerName'];
+                $routerDocs   = $this->expectedRouterAttributes[$routerClass]['routerDocs'];
+
+                foreach ($this->intallTypes as $intallType) {
+                    $name = implode('--', [$containerID, $routerID, $intallType]);
+                    $args = [
+                        $intallType,
+                        $containerOption,
+                        $containerName,
+                        $containerDocs,
+                        $routerOption,
+                        $routerClass,
+                        $routerName,
+                        $routerDocs,
+                    ];
+
+                    yield $name => $args;
+                }
+            }
+        }
+    }
+
+    public function injectRouterConfigProvider(string $routerClass)
     {
         $configFile = $this->projectRoot . '/config/config.php';
         $contents = file_get_contents($configFile);
         $contents = preg_replace(
             '/(new ConfigAggregator\(\[)/s',
-            '$1' . "\n    " . FastRouteRouterConfigProvider::class . "::class,\n",
+            '$1' . "\n    " . $this->routerConfigProviders[$routerClass] . "::class,\n",
             $contents
         );
         file_put_contents($configFile, $contents);
