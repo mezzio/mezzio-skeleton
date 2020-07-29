@@ -128,6 +128,7 @@ class OptionalPackages
      * @var string[] Dev dependencies to remove after install is complete
      */
     private $devDependencies = [
+        'chubbyphp/chubbyphp-laminas-config',
         'composer/composer',
         'elie29/zend-phpdi-config',
         'filp/whoops',
