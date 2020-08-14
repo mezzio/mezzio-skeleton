@@ -601,6 +601,7 @@ class OptionalPackages
         }
 
         $this->recursiveRmdir($this->installerSource);
+        $this->recursiveRmdir($this->projectRoot . '.github');
         $this->recursiveRmdir($this->projectRoot . 'test/MezzioInstallerTest');
         $this->recursiveRmdir($this->projectRoot . 'docs');
 
