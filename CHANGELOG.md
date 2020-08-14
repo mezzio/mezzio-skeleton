@@ -6,11 +6,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#25](https://github.com/mezzio/mezzio-skeleton/pull/25) adds support for chubbyphp/chubbyphp-container as a DI container option.
 
 ### Changed
 
-- Nothing.
+- [#26](https://github.com/mezzio/mezzio-skeleton/pull/26) replaces the dependency on ocramius/package-versions with composer/package-versions-deprecated, which will allow immediate usage with laminas/laminas-cli.
 
 ### Deprecated
 
