@@ -31,7 +31,6 @@ class RemoveInstallerTest extends OptionalPackagesTestCase
 
         $this->assertTrue(isset($composer['autoload']['psr-4']['MezzioInstaller\\']));
         $this->assertTrue(isset($composer['autoload-dev']['psr-4']['MezzioInstallerTest\\']));
-        $this->assertTrue(isset($composer['extra']['branch-alias']));
         $this->assertFalse(isset($composer['extra']['optional-packages']));
         $this->assertTrue(isset($composer['scripts']['pre-install-cmd']));
         $this->assertTrue(isset($composer['scripts']['pre-update-cmd']));
@@ -46,7 +45,6 @@ class RemoveInstallerTest extends OptionalPackagesTestCase
 
         $this->assertFalse(isset($composer['autoload']['psr-4']['MezzioInstaller\\']));
         $this->assertFalse(isset($composer['autoload-dev']['psr-4']['MezzioInstallerTest\\']));
-        $this->assertFalse(isset($composer['extra']['branch-alias']));
         $this->assertFalse(isset($composer['extra']['optional-packages']));
         $this->assertFalse(isset($composer['scripts']['pre-install-cmd']));
         $this->assertFalse(isset($composer['scripts']['pre-update-cmd']));
