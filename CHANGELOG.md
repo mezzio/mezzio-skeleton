@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#25](https://github.com/mezzio/mezzio-skeleton/pull/25) drops support for PHP 7.1.
 
 ### Fixed
 
