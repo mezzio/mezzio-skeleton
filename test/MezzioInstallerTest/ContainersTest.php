@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use Aura\Di\Container as AuraContainer;
+use Chubbyphp\Container\Container as ChubbyphpContainer;
 use DI\Container as PhpDIContainer;
 use Laminas\ServiceManager\ServiceManager as LaminasManagerContainer;
 use Mezzio;
@@ -111,24 +112,27 @@ class ContainersTest extends OptionalPackagesTestCase
         // @codingStandardsIgnoreStart
         // $installType, $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
         return [
-            'aura-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 1, 2, 'minimal-files', 404, AuraContainer::class],
-            'aura-flat'          => [OptionalPackages::INSTALL_FLAT,    1, 2, 'copy-files', 200, AuraContainer::class],
-            'aura-modular'       => [OptionalPackages::INSTALL_MODULAR, 1, 2, 'copy-files', 200, AuraContainer::class],
-            'pimple-minimal'     => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 'minimal-files', 404, PimpleContainer::class],
-            'pimple-flat'        => [OptionalPackages::INSTALL_FLAT,    2, 2, 'copy-files', 200, PimpleContainer::class],
-            'pimple-modular'     => [OptionalPackages::INSTALL_MODULAR, 2, 2, 'copy-files', 200, PimpleContainer::class],
-            'laminas-sm-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, LaminasManagerContainer::class],
-            'laminas-sm-flat'    => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, LaminasManagerContainer::class],
-            'laminas-sm-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, LaminasManagerContainer::class],
-            'auryn-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, AurynContainer::class],
-            'auryn-flat'         => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, AurynContainer::class],
-            'auryn-modular'      => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, AurynContainer::class],
-            'sf-di-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 5, 2, 'minimal-files', 404, SfContainerBuilder::class],
-            'sf-di-flat'         => [OptionalPackages::INSTALL_FLAT,    5, 2, 'copy-files', 200, SfContainerBuilder::class],
-            'sf-di-modular'      => [OptionalPackages::INSTALL_MODULAR, 5, 2, 'copy-files', 200, SfContainerBuilder::class],
-            'php-di-minimal'     => [OptionalPackages::INSTALL_MINIMAL, 6, 2, 'minimal-files', 404, PhpDIContainer::class],
-            'php-di-flat'        => [OptionalPackages::INSTALL_FLAT,    6, 2, 'copy-files', 200, PhpDIContainer::class],
-            'php-di-modular'     => [OptionalPackages::INSTALL_MODULAR, 6, 2, 'copy-files', 200, PhpDIContainer::class],
+            'aura-minimal'         => [OptionalPackages::INSTALL_MINIMAL, 1, 2, 'minimal-files', 404, AuraContainer::class],
+            'aura-flat'            => [OptionalPackages::INSTALL_FLAT,    1, 2, 'copy-files', 200, AuraContainer::class],
+            'aura-modular'         => [OptionalPackages::INSTALL_MODULAR, 1, 2, 'copy-files', 200, AuraContainer::class],
+            'pimple-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 'minimal-files', 404, PimpleContainer::class],
+            'pimple-flat'          => [OptionalPackages::INSTALL_FLAT,    2, 2, 'copy-files', 200, PimpleContainer::class],
+            'pimple-modular'       => [OptionalPackages::INSTALL_MODULAR, 2, 2, 'copy-files', 200, PimpleContainer::class],
+            'laminas-sm-minimal'   => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, LaminasManagerContainer::class],
+            'laminas-sm-flat'      => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, LaminasManagerContainer::class],
+            'laminas-sm-modular'   => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, LaminasManagerContainer::class],
+            'auryn-minimal'        => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, AurynContainer::class],
+            'auryn-flat'           => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, AurynContainer::class],
+            'auryn-modular'        => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, AurynContainer::class],
+            'sf-di-minimal'        => [OptionalPackages::INSTALL_MINIMAL, 5, 2, 'minimal-files', 404, SfContainerBuilder::class],
+            'sf-di-flat'           => [OptionalPackages::INSTALL_FLAT,    5, 2, 'copy-files', 200, SfContainerBuilder::class],
+            'sf-di-modular'        => [OptionalPackages::INSTALL_MODULAR, 5, 2, 'copy-files', 200, SfContainerBuilder::class],
+            'php-di-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 6, 2, 'minimal-files', 404, PhpDIContainer::class],
+            'php-di-flat'          => [OptionalPackages::INSTALL_FLAT,    6, 2, 'copy-files', 200, PhpDIContainer::class],
+            'php-di-modular'       => [OptionalPackages::INSTALL_MODULAR, 6, 2, 'copy-files', 200, PhpDIContainer::class],
+            'chubbyphp-c-minimal'  => [OptionalPackages::INSTALL_MINIMAL, 7, 2, 'minimal-files', 404, ChubbyphpContainer::class],
+            'chubbyphp-c-flat'     => [OptionalPackages::INSTALL_FLAT,    7, 2, 'copy-files', 200, ChubbyphpContainer::class],
+            'chubbyphp-c-modular'  => [OptionalPackages::INSTALL_MODULAR, 7, 2, 'copy-files', 200, ChubbyphpContainer::class],
         ];
         // @codingStandardsIgnoreEnd
     }

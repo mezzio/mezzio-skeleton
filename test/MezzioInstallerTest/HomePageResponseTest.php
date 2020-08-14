@@ -14,6 +14,7 @@ use Generator;
 use MezzioInstaller\OptionalPackages;
 // Containers imports ordered by install-options sorting
 use Aura\Di\Container as AuraDiContainer;
+use Chubbyphp\Container\Container as ChubbyphpContainer;
 use Pimple\Psr11\Container as PimpleContainer;
 use Laminas\ServiceManager\ServiceManager as LaminasServiceManagerContainer;
 use Northwoods\Container\InjectorContainer as AurynContainer;
@@ -113,12 +114,13 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     // $containerOption, $containerClass
     private $containerTypes = [
-        'aura-di' => [1, AuraDiContainer::class],
-        'pimple'  => [2, PimpleContainer::class],
+        'aura-di'                => [1, AuraDiContainer::class],
+        'pimple'                 => [2, PimpleContainer::class],
         'laminas-servicemanager' => [3, LaminasServiceManagerContainer::class],
-        'auryn'   => [4, AurynContainer::class],
-        'sf-di'   => [5, SfContainerBuilder::class],
-        'php-di'  => [6, PhpDIContainer::class],
+        'auryn'                  => [4, AurynContainer::class],
+        'sf-di'                  => [5, SfContainerBuilder::class],
+        'php-di'                 => [6, PhpDIContainer::class],
+        'chubbyphp-container'    => [7, ChubbyphpContainer::class],
     ];
 
     private $expectedContainerAttributes = [
@@ -145,6 +147,10 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         PhpDIContainer::class => [
             'containerName' => 'PHP-DI',
             'containerDocs' => 'http://php-di.org',
+        ],
+        ChubbyphpContainer::class => [
+            'containerName' => 'Chubbyphp Container',
+            'containerDocs' => 'https://github.com/chubbyphp/chubbyphp-container',
         ],
     ];
 

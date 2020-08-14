@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 return [
     'packages' => [
+        'chubbyphp/chubbyphp-laminas-config' => [
+            'version' => '^1.0',
+        ],
         'elie29/zend-phpdi-config' => [
             'version' => '^6.0',
         ],
@@ -178,6 +181,21 @@ return [
                     ],
                     'minimal' => [
                         'Resources/config/container-php-di.php' => 'config/container.php',
+                    ],
+                ],
+                7 => [
+                    'name'     => 'chubbyphp-container',
+                    'packages' => [
+                        'chubbyphp/chubbyphp-laminas-config',
+                    ],
+                    'flat' => [
+                        'Resources/config/container-chubbyphp.php' => 'config/container.php',
+                    ],
+                    'modular' => [
+                        'Resources/config/container-chubbyphp.php' => 'config/container.php',
+                    ],
+                    'minimal' => [
+                        'Resources/config/container-chubbyphp.php' => 'config/container.php',
                     ],
                 ],
             ],
