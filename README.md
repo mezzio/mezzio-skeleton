@@ -14,7 +14,7 @@ This installer will setup a skeleton application based on mezzio by
 choosing optional packages based on user input as demonstrated in the following
 screenshot:
 
-![screenshot-installer](https://user-images.githubusercontent.com/7423207/77163252-9a5aa000-6aa5-11ea-9e80-a5a9c91fcee0.png)
+![screenshot-installer](https://user-images.githubusercontent.com/1011217/90332191-55d32200-dfbb-11ea-80c0-27a07ef5691a.png)
 
 The user selected packages are saved into `composer.json` so that everyone else
 working on the project have the same packages installed. Configuration files and
