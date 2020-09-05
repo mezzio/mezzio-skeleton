@@ -69,6 +69,7 @@
         "phpspec/prophecy": "^1.10.3",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
+        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^8.5.8 || ^9.3.7",
         "roave/security-advisories": "dev-master"
     },
