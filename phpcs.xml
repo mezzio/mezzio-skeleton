@@ -10,5 +10,13 @@
         <exclude name="WebimpressCodingStandard.Arrays.DoubleArrow.SpacesBefore"/>
         <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
         <exclude name="WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps"/>
+        <exclude name="WebimpressCodingStandard.Files.DeclareStrictTypes.BelowComment"/>
+    </rule>
+
+    <rule ref="Squiz.Classes.ClassFileName.NoMatch">
+        <exclude-pattern>src</exclude-pattern>
+    </rule>
+    <rule ref="Generic.Classes.DuplicateClassName.Found">
+        <exclude-pattern>src</exclude-pattern>
     </rule>
 </ruleset>
