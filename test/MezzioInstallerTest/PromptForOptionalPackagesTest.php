@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace MezzioInstallerTest;
 
+use Generator;
 use MezzioInstaller\OptionalPackages;
 use Prophecy\Argument;
 
@@ -47,7 +48,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         $this->recursiveDelete($this->projectRoot);
     }
 
-    public function promptCombinations()
+    public function promptCombinations(): Generator
     {
         $config = require __DIR__ . '/../../src/MezzioInstaller/config.php';
         foreach ($config['questions'] as $questionName => $question) {
@@ -66,7 +67,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         array $question,
         int $selection,
         array $expectedPackage
-    ) {
+    ): void {
         $this->io
             ->ask(
                 Argument::that(static function ($arg) use ($question) {
@@ -93,7 +94,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         $this->assertNull($this->installer->promptForOptionalPackage($questionName, $question));
     }
 
-    public static function assertPromptText($expected, $argument): void
+    public static function assertPromptText(string $expected, string $argument): void
     {
         self::assertIsString(
             $argument,

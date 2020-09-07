@@ -46,7 +46,7 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
 
         // Install container
-        $config = $this->getInstallerConfig($this->installer);
+        $config          = $this->getInstallerConfig($this->installer);
         $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
             3

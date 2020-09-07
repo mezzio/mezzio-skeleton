@@ -53,8 +53,8 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     ];
 
     private $rendererConfigProviders = [
-        PlatesRenderer::class   => PlatesRendererConfigProvider::class,
-        TwigRenderer::class     => TwigRendererConfigProvider::class,
+        PlatesRenderer::class      => PlatesRendererConfigProvider::class,
+        TwigRenderer::class        => TwigRendererConfigProvider::class,
         LaminasViewRenderer::class => LaminasViewRendererConfigProvider::class,
     ];
 
@@ -71,21 +71,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         'laminas-view' => [3, LaminasViewRenderer::class],
     ];
 
-    private $expectedRendererAttributes = [
-        PlatesRenderer::class => [
-            'templateName' => 'Plates',
-            'templateDocs' => 'http://platesphp.com/',
-        ],
-        TwigRenderer::class => [
-            'templateName' => 'Twig',
-            'templateDocs' => 'http://twig.sensiolabs.org/documentation',
-        ],
-        LaminasViewRenderer::class => [
-            'templateName' => 'Laminas View',
-            'templateDocs' => 'https://docs.laminas.dev/laminas-view/',
-        ],
-    ];
-
     // $routerOption, $routerClass
     private $routerTypes = [
         'aura-router'    => [1, AuraRouter::class],
@@ -94,7 +79,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     ];
 
     private $expectedRouterAttributes = [
-        AuraRouter::class => [
+        AuraRouter::class      => [
             'routerName' => 'Aura.Router',
             'routerDocs' => 'http://auraphp.com/packages/2.x/Router.html',
         ],
@@ -102,7 +87,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
             'routerName' => 'FastRoute',
             'routerDocs' => 'https://github.com/nikic/FastRoute',
         ],
-        LaminasRouter::class => [
+        LaminasRouter::class   => [
             'routerName' => 'Laminas Router',
             'routerDocs' => 'https://docs.laminas.dev/laminas-router/',
         ],
@@ -120,11 +105,11 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     ];
 
     private $expectedContainerAttributes = [
-        AuraDiContainer::class => [
+        AuraDiContainer::class                => [
             'containerName' => 'Aura.Di',
             'containerDocs' => 'http://auraphp.com/packages/4.x/Di/',
         ],
-        PimpleContainer::class => [
+        PimpleContainer::class                => [
             'containerName' => 'Pimple',
             'containerDocs' => 'https://pimple.symfony.com/',
         ],
@@ -132,19 +117,19 @@ class HomePageResponseTest extends OptionalPackagesTestCase
             'containerName' => 'Laminas Servicemanager',
             'containerDocs' => 'https://docs.laminas.dev/laminas-servicemanager/',
         ],
-        AurynContainer::class => [
+        AurynContainer::class                 => [
             'containerName' => 'Auryn',
             'containerDocs' => 'https://github.com/rdlowrey/Auryn',
         ],
-        SfContainerBuilder::class => [
+        SfContainerBuilder::class             => [
             'containerName' => 'Symfony DI Container',
             'containerDocs' => 'https://symfony.com/doc/current/service_container.html',
         ],
-        PhpDIContainer::class => [
+        PhpDIContainer::class                 => [
             'containerName' => 'PHP-DI',
             'containerDocs' => 'http://php-di.org',
         ],
-        ChubbyphpContainer::class => [
+        ChubbyphpContainer::class             => [
             'containerName' => 'Chubbyphp Container',
             'containerDocs' => 'https://github.com/chubbyphp/chubbyphp-container',
         ],
@@ -180,7 +165,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $config = $this->getInstallerConfig($this->installer);
+        $config          = $this->getInstallerConfig($this->installer);
         $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
             $containerOption
@@ -188,7 +173,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $this->assertTrue($containerResult);
 
         // Install router
-        $routerResult = $this->installer->processAnswer(
+        $routerResult     = $this->installer->processAnswer(
             $config['questions']['router'],
             $routerOption = 2 // FastRoute, use assignment for clarity
         );
@@ -217,14 +202,14 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     public function installCasesProvider(): Generator
     {
         // Execute a test case for each container, renderer and non minimal install type
-        foreach ($this->containerTypes as $containerID => $containerType) {
+        foreach ($this->containerTypes as $containerId => $containerType) {
             $containerOption = $containerType[0];
             $containerClass  = $containerType[1];
 
             $containerName = $this->expectedContainerAttributes[$containerClass]['containerName'];
             $containerDocs = $this->expectedContainerAttributes[$containerClass]['containerDocs'];
 
-            foreach ($this->rendererTypes as $rendererID => $rendererType) {
+            foreach ($this->rendererTypes as $rendererId => $rendererType) {
                 $rendererOption = $rendererType[0];
                 $rendererClass  = $rendererType[1];
 
@@ -234,7 +219,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
                 }
 
                 foreach ($this->intallTypes as $intallType) {
-                    $name = implode('--', [$containerID, $rendererID, $intallType]);
+                    $name = implode('--', [$containerId, $rendererId, $intallType]);
                     $args = [
                         $intallType,
                         $containerOption,
@@ -267,7 +252,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $config = $this->getInstallerConfig($this->installer);
+        $config          = $this->getInstallerConfig($this->installer);
         $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
             $containerOption
@@ -304,9 +289,9 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     public function rendererlessInstallCasesProvider(): Generator
     {
         // Execute a test case for each install type and container, without any renderer
-        foreach ($this->containerTypes as $containerID => $containerType) {
+        foreach ($this->containerTypes as $containerId => $containerType) {
             // auryn psr-wrapper : issue with invokable services
-            if ($containerID === 'auryn') {
+            if ($containerId === 'auryn') {
                 continue;
             }
 
@@ -316,14 +301,14 @@ class HomePageResponseTest extends OptionalPackagesTestCase
             $containerName = $this->expectedContainerAttributes[$containerClass]['containerName'];
             $containerDocs = $this->expectedContainerAttributes[$containerClass]['containerDocs'];
 
-            foreach ($this->routerTypes as $routerID => $routerType) {
+            foreach ($this->routerTypes as $routerId => $routerType) {
                 $routerOption = $routerType[0];
                 $routerClass  = $routerType[1];
                 $routerName   = $this->expectedRouterAttributes[$routerClass]['routerName'];
                 $routerDocs   = $this->expectedRouterAttributes[$routerClass]['routerDocs'];
 
                 foreach ($this->intallTypes as $intallType) {
-                    $name = implode('--', [$containerID, $routerID, $intallType]);
+                    $name = implode('--', [$containerId, $routerId, $intallType]);
                     $args = [
                         $intallType,
                         $containerOption,
@@ -344,8 +329,8 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     public function injectRouterConfigProvider(string $routerClass)
     {
         $configFile = $this->projectRoot . '/config/config.php';
-        $contents = file_get_contents($configFile);
-        $contents = preg_replace(
+        $contents   = file_get_contents($configFile);
+        $contents   = preg_replace(
             '/(new ConfigAggregator\(\[)/s',
             '$1' . "\n    " . $this->routerConfigProviders[$routerClass] . "::class,\n",
             $contents
@@ -356,8 +341,8 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     public function injectRendererConfigProvider(string $rendererClass)
     {
         $configFile = $this->projectRoot . '/config/config.php';
-        $contents = file_get_contents($configFile);
-        $contents = preg_replace(
+        $contents   = file_get_contents($configFile);
+        $contents   = preg_replace(
             '/(new ConfigAggregator\(\[)/s',
             '$1' . "\n    " . $this->rendererConfigProviders[$rendererClass] . "::class,\n",
             $contents

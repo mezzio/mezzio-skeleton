@@ -3,65 +3,65 @@
 declare(strict_types=1);
 
 return [
-    'packages' => [
+    'packages'    => [
         'chubbyphp/chubbyphp-laminas-config' => [
             'version' => '^1.0',
         ],
-        'elie29/zend-phpdi-config' => [
+        'elie29/zend-phpdi-config'           => [
             'version' => '^6.0',
         ],
-        'filp/whoops' => [
+        'filp/whoops'                        => [
             'version' => '^2.7.1',
         ],
-        'jsoumelidis/zend-sf-di-config' => [
+        'jsoumelidis/zend-sf-di-config'      => [
             'version' => '^0.4',
         ],
-        'northwoods/container' => [
+        'northwoods/container'               => [
             'version' => '^3.2',
         ],
-        'laminas/laminas-auradi-config' => [
+        'laminas/laminas-auradi-config'      => [
             'version' => '^2.0.1',
         ],
-        'mezzio/mezzio-aurarouter' => [
+        'mezzio/mezzio-aurarouter'           => [
             'version'   => '^3.0.1',
             'whitelist' => [
                 'mezzio/mezzio-aurarouter',
             ],
         ],
-        'mezzio/mezzio-fastroute' => [
+        'mezzio/mezzio-fastroute'            => [
             'version'   => '^3.0.3',
             'whitelist' => [
                 'mezzio/mezzio-fastroute',
             ],
         ],
-        'mezzio/mezzio-platesrenderer' => [
+        'mezzio/mezzio-platesrenderer'       => [
             'version'   => '^2.2',
             'whitelist' => [
                 'mezzio/mezzio-platesrenderer',
             ],
         ],
-        'mezzio/mezzio-twigrenderer' => [
+        'mezzio/mezzio-twigrenderer'         => [
             'version'   => '^2.6',
             'whitelist' => [
                 'mezzio/mezzio-twigrenderer',
             ],
         ],
-        'mezzio/mezzio-laminasrouter' => [
+        'mezzio/mezzio-laminasrouter'        => [
             'version'   => '^3.0.1',
             'whitelist' => [
                 'mezzio/mezzio-laminasrouter',
             ],
         ],
-        'mezzio/mezzio-laminasviewrenderer' => [
+        'mezzio/mezzio-laminasviewrenderer'  => [
             'version'   => '^2.2',
             'whitelist' => [
                 'mezzio/mezzio-laminasviewrenderer',
             ],
         ],
-        'laminas/laminas-pimple-config' => [
+        'laminas/laminas-pimple-config'      => [
             'version' => '^1.1.1',
         ],
-        'laminas/laminas-servicemanager' => [
+        'laminas/laminas-servicemanager'     => [
             'version' => '^3.4',
         ],
     ],
@@ -69,7 +69,7 @@ return [
         'filp/whoops',
     ],
     'application' => [
-        'flat' => [
+        'flat'    => [
             'packages'  => [],
             'resources' => [
                 'Resources/src/ConfigProvider.flat.php' => 'src/App/ConfigProvider.php',
@@ -82,8 +82,8 @@ return [
             ],
         ],
     ],
-    'questions' => [
-        'container' => [
+    'questions'   => [
+        'container'       => [
             'question'               => 'Which container do you want to use for dependency injection?',
             'default'                => 3,
             'required'               => true,
@@ -95,13 +95,13 @@ return [
                     'packages' => [
                         'laminas/laminas-auradi-config',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/container-aura-di.php' => 'config/container.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/container-aura-di.php' => 'config/container.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/container-aura-di.php' => 'config/container.php',
                     ],
                 ],
@@ -110,13 +110,13 @@ return [
                     'packages' => [
                         'laminas/laminas-pimple-config',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/container-pimple.php' => 'config/container.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/container-pimple.php' => 'config/container.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/container-pimple.php' => 'config/container.php',
                     ],
                 ],
@@ -125,13 +125,13 @@ return [
                     'packages' => [
                         'laminas/laminas-servicemanager',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/container-laminas-servicemanager.php' => 'config/container.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/container-laminas-servicemanager.php' => 'config/container.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/container-laminas-servicemanager.php' => 'config/container.php',
                     ],
                 ],
@@ -140,13 +140,13 @@ return [
                     'packages' => [
                         'northwoods/container',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/container-auryn.php' => 'config/container.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/container-auryn.php' => 'config/container.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/container-auryn.php' => 'config/container.php',
                     ],
                 ],
@@ -155,13 +155,13 @@ return [
                     'packages' => [
                         'jsoumelidis/zend-sf-di-config',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/container-sf-di.php' => 'config/container.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/container-sf-di.php' => 'config/container.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/container-sf-di.php' => 'config/container.php',
                     ],
                 ],
@@ -170,13 +170,13 @@ return [
                     'packages' => [
                         'elie29/zend-phpdi-config',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/container-php-di.php' => 'config/container.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/container-php-di.php' => 'config/container.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/container-php-di.php' => 'config/container.php',
                     ],
                 ],
@@ -185,25 +185,25 @@ return [
                     'packages' => [
                         'chubbyphp/chubbyphp-laminas-config',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/container-chubbyphp.php' => 'config/container.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/container-chubbyphp.php' => 'config/container.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/container-chubbyphp.php' => 'config/container.php',
                     ],
                 ],
             ],
         ],
-        'router' => [
-            'question'               => 'Which router do you want to use?',
-            'default'                => 2,
+        'router'          => [
+            'question' => 'Which router do you want to use?',
+            'default'  => 2,
             // TRUE: Must choose one / FALSE: May choose one or none of the above
-            'required'               => true,
+            'required' => true,
             // Enable custom package input
-            'custom-package'         => true,
+            'custom-package' => true,
             // Display warning when choosing a custom package
             'custom-package-warning' => 'You need to write your own router adapter.',
             'options'                => [
@@ -212,13 +212,13 @@ return [
                     'packages' => [
                         'mezzio/mezzio-aurarouter',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/routes-minimal.php' => 'config/routes.php',
                     ],
                 ],
@@ -227,13 +227,13 @@ return [
                     'packages' => [
                         'mezzio/mezzio-fastroute',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/routes-minimal.php' => 'config/routes.php',
                     ],
                 ],
@@ -242,13 +242,13 @@ return [
                     'packages' => [
                         'mezzio/mezzio-laminasrouter',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/routes-full.php' => 'config/routes.php',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/routes-minimal.php' => 'config/routes.php',
                     ],
                 ],
@@ -265,61 +265,61 @@ return [
                     'packages' => [
                         'mezzio/mezzio-platesrenderer',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/templates/plates/404.phtml'       => 'templates/error/404.phtml',
                         'Resources/templates/plates/error.phtml'     => 'templates/error/error.phtml',
                         'Resources/templates/plates/layout.phtml'    => 'templates/layout/default.phtml',
                         'Resources/templates/plates/home-page.phtml' => 'templates/app/home-page.phtml',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/templates/plates/404.phtml'       => 'src/App/templates/error/404.phtml',
                         'Resources/templates/plates/error.phtml'     => 'src/App/templates/error/error.phtml',
                         'Resources/templates/plates/layout.phtml'    => 'src/App/templates/layout/default.phtml',
                         'Resources/templates/plates/home-page.phtml' => 'src/App/templates/app/home-page.phtml',
                     ],
-                    'minimal' => [],
+                    'minimal'  => [],
                 ],
                 2 => [
                     'name'     => 'Twig',
                     'packages' => [
                         'mezzio/mezzio-twigrenderer',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/templates/twig/404.html.twig'       => 'templates/error/404.html.twig',
                         'Resources/templates/twig/error.html.twig'     => 'templates/error/error.html.twig',
                         'Resources/templates/twig/layout.html.twig'    => 'templates/layout/default.html.twig',
                         'Resources/templates/twig/home-page.html.twig' => 'templates/app/home-page.html.twig',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/templates/twig/404.html.twig'       => 'src/App/templates/error/404.html.twig',
                         'Resources/templates/twig/error.html.twig'     => 'src/App/templates/error/error.html.twig',
                         'Resources/templates/twig/layout.html.twig'    => 'src/App/templates/layout/default.html.twig',
                         'Resources/templates/twig/home-page.html.twig' => 'src/App/templates/app/home-page.html.twig',
                     ],
-                    'minimal' => [],
+                    'minimal'  => [],
                 ],
                 3 => [
                     'name'     => 'laminas-view <comment>installs laminas-servicemanager</comment>',
                     'packages' => [
                         'mezzio/mezzio-laminasviewrenderer',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/templates/laminas-view/404.phtml'       => 'templates/error/404.phtml',
                         'Resources/templates/laminas-view/error.phtml'     => 'templates/error/error.phtml',
                         'Resources/templates/laminas-view/layout.phtml'    => 'templates/layout/default.phtml',
                         'Resources/templates/laminas-view/home-page.phtml' => 'templates/app/home-page.phtml',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/templates/laminas-view/404.phtml'       => 'src/App/templates/error/404.phtml',
                         'Resources/templates/laminas-view/error.phtml'     => 'src/App/templates/error/error.phtml',
                         'Resources/templates/laminas-view/layout.phtml'    => 'src/App/templates/layout/default.phtml',
                         'Resources/templates/laminas-view/home-page.phtml' => 'src/App/templates/app/home-page.phtml',
                     ],
-                    'minimal' => [],
+                    'minimal'  => [],
                 ],
             ],
         ],
-        'error-handler' => [
+        'error-handler'   => [
             'question'       => 'Which error handler do you want to use during development?',
             'default'        => 1,
             'required'       => false,
@@ -331,13 +331,13 @@ return [
                     'packages' => [
                         'filp/whoops',
                     ],
-                    'flat' => [
+                    'flat'     => [
                         'Resources/config/error-handler-whoops.php' => 'config/autoload/development.local.php.dist',
                     ],
-                    'modular' => [
+                    'modular'  => [
                         'Resources/config/error-handler-whoops.php' => 'config/autoload/development.local.php.dist',
                     ],
-                    'minimal' => [
+                    'minimal'  => [
                         'Resources/config/error-handler-whoops.php' => 'config/autoload/development.local.php.dist',
                     ],
                 ],

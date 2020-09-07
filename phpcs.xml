@@ -5,19 +5,32 @@
     <file>test</file>
 
     <rule ref="LaminasCodingStandard">
-        <exclude name="PSR12.Files.FileHeader.IncorrectOrder"/>
-        <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
-        <exclude name="WebimpressCodingStandard.Arrays.DoubleArrow.SpacesBefore"/>
-        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
-        <exclude name="WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps"/>
-        <exclude name="WebimpressCodingStandard.Formatting.StringClassReference.Found"/>
         <exclude name="WebimpressCodingStandard.Files.DeclareStrictTypes.BelowComment"/>
     </rule>
 
-    <rule ref="Squiz.Classes.ClassFileName.NoMatch">
+    <rule ref="PSR12.Files.FileHeader.IncorrectOrder">
+        <exclude-pattern>src</exclude-pattern>
+    </rule>
+    <rule ref="PSR12.Files.FileHeader.SpacingAfterBlock">
         <exclude-pattern>src</exclude-pattern>
     </rule>
     <rule ref="Generic.Classes.DuplicateClassName.Found">
         <exclude-pattern>src</exclude-pattern>
+    </rule>
+    <rule ref="Squiz.Classes.ClassFileName.NoMatch">
+        <exclude-pattern>src</exclude-pattern>
+    </rule>
+    <rule ref="WebimpressCodingStandard.Formatting.StringClassReference.Found">
+        <exclude-pattern>src/App/src/Handler/HomePageHandler</exclude-pattern>
+    </rule>
+
+    <rule ref="WebimpressCodingStandard.NamingConventions.AbstractClass.Prefix">
+        <exclude-pattern>test/MezzioInstallerTest/OptionalPackagesTestCase</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.NoAssignment">
+        <exclude-pattern>test/MezzioInstallerTest/ProjectSandboxTrait</exclude-pattern>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements.WriteOnlyProperty">
+        <exclude-pattern>test/MezzioInstallerTest/SetupDataAndCacheDirTest</exclude-pattern>
     </rule>
 </ruleset>

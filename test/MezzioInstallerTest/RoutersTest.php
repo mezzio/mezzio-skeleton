@@ -51,7 +51,7 @@ class RoutersTest extends OptionalPackagesTestCase
     private $routerConfigProviders = [
         Router\AuraRouter::class      => Router\AuraRouter\ConfigProvider::class,
         Router\FastRouteRouter::class => Router\FastRouteRouter\ConfigProvider::class,
-        Router\LaminasRouter::class      => Router\LaminasRouter\ConfigProvider::class,
+        Router\LaminasRouter::class   => Router\LaminasRouter\ConfigProvider::class,
     ];
 
     protected function setUp(): void
@@ -86,7 +86,7 @@ class RoutersTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $config = $this->getInstallerConfig($this->installer);
+        $config          = $this->getInstallerConfig($this->installer);
         $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
             $containerOption
@@ -114,7 +114,7 @@ class RoutersTest extends OptionalPackagesTestCase
 
         // Test home page
         $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
-        $response = $this->getAppResponse('/', $setupRoutes);
+        $response    = $this->getAppResponse('/', $setupRoutes);
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
 
         /** @var Application $app */
@@ -155,8 +155,8 @@ class RoutersTest extends OptionalPackagesTestCase
     public function enableRouter(string $expectedRouter): void
     {
         $configFile = $this->projectRoot . '/config/config.php';
-        $contents = file_get_contents($configFile);
-        $contents = preg_replace(
+        $contents   = file_get_contents($configFile);
+        $contents   = preg_replace(
             '/(new ConfigAggregator\(\[)/',
             '$1' . "\n    " . $this->routerConfigProviders[$expectedRouter] . "::class,\n",
             $contents

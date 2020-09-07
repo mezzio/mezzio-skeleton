@@ -23,7 +23,6 @@ class RemoveDevDependenciesTest extends OptionalPackagesTestCase
         'mezzio/mezzio-helpers',
         'laminas/laminas-stdlib',
         'phpunit/phpunit',
-        'squizlabs/php_codesniffer',
     ];
 
     /** @var string[] List of dev dependencies intended for removal. */
@@ -38,8 +37,8 @@ class RemoveDevDependenciesTest extends OptionalPackagesTestCase
 
         // Get list of dev dependencies expected to remove from
         // OptionalPackages class
-        $r = new ReflectionClass(OptionalPackages::class);
-        $props = $r->getDefaultProperties();
+        $r                     = new ReflectionClass(OptionalPackages::class);
+        $props                 = $r->getDefaultProperties();
         $this->devDependencies = $props['devDependencies'];
 
         $this->installer = $this->createOptionalPackages();

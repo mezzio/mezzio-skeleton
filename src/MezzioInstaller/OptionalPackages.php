@@ -182,7 +182,7 @@ class OptionalPackages
 
     public function __construct(IOInterface $io, Composer $composer, ?string $projectRoot = null)
     {
-        $this->io = $io;
+        $this->io       = $io;
         $this->composer = $composer;
 
         // Get composer.json location
@@ -408,7 +408,7 @@ class OptionalPackages
 
         // Reset phpcs commands
         $this->composerDefinition['scripts']['cs-check'] = 'phpcs';
-        $this->composerDefinition['scripts']['cs-fix'] = 'phpcbf';
+        $this->composerDefinition['scripts']['cs-fix']   = 'phpcbf';
     }
 
     /**

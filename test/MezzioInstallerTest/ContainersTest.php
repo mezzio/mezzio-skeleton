@@ -66,7 +66,7 @@ class ContainersTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $config = $this->getInstallerConfig($this->installer);
+        $config          = $this->getInstallerConfig($this->installer);
         $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
             $containerOption
@@ -80,7 +80,7 @@ class ContainersTest extends OptionalPackagesTestCase
         );
         $this->assertTrue($routerResult);
 
-        $configFile = $this->projectRoot . DIRECTORY_SEPARATOR . '/config/config.php';
+        $configFile         = $this->projectRoot . DIRECTORY_SEPARATOR . '/config/config.php';
         $configFileContents = file_get_contents($configFile);
         $configFileContents = preg_replace(
             '/(new ConfigAggregator\(\[)/s',

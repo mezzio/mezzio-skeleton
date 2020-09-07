@@ -210,7 +210,7 @@ abstract class OptionalPackagesTestCase extends TestCase
 
     protected function getStabilityFlags(): array
     {
-        $r = new ReflectionClass(OptionalPackages::class);
+        $r          = new ReflectionClass(OptionalPackages::class);
         $properties = $r->getDefaultProperties();
 
         return array_fill_keys($properties['devDependencies'], BasePackage::STABILITY_DEV);

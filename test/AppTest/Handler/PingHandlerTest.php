@@ -16,7 +16,7 @@ class PingHandlerTest extends TestCase
     public function testResponse()
     {
         $pingHandler = new PingHandler();
-        $response = $pingHandler->handle(
+        $response    = $pingHandler->handle(
             $this->prophesize(ServerRequestInterface::class)->reveal()
         );
 

@@ -66,7 +66,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $config = $this->getInstallerConfig($this->installer);
+        $config          = $this->getInstallerConfig($this->installer);
         $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
             $containerOption
@@ -155,8 +155,8 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
     public function injectRouterConfigProvider(): void
     {
         $configFile = $this->projectRoot . '/config/config.php';
-        $contents = file_get_contents($configFile);
-        $contents = preg_replace(
+        $contents   = file_get_contents($configFile);
+        $contents   = preg_replace(
             '/(new ConfigAggregator\(\[)/',
             '$1' . "\n    " . Mezzio\Router\FastRouteRouter\ConfigProvider::class . "::class,\n",
             $contents
@@ -167,8 +167,8 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
     public function injectConfigProvider(string $rendererClass): void
     {
         $configFile = $this->projectRoot . '/config/config.php';
-        $contents = file_get_contents($configFile);
-        $contents = preg_replace(
+        $contents   = file_get_contents($configFile);
+        $contents   = preg_replace(
             '/(new ConfigAggregator\(\[)/',
             '$1' . "\n    " . $this->templateConfigProviders[$rendererClass] . "::class,\n",
             $contents

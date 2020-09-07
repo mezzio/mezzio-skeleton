@@ -17,7 +17,7 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
 {
     /** @var array[] */
     protected $changes = [
-        'composerRequires' => [
+        'composerRequires'    => [
             'foo/bar',
             'baz/bat',
         ],
@@ -25,12 +25,12 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
             'rab/oof',
             'tab/zab',
         ],
-        'stabilityFlags' => [
+        'stabilityFlags'      => [
             'foo/bar' => 'stable',
             'baz/bat' => 'beta',
         ],
-        'composerDefinition' => [
-            'autoload' => [
+        'composerDefinition'  => [
+            'autoload'     => [
                 'psr-4' => [
                     'MezzioInstaller\\' => __DIR__,
                 ],
