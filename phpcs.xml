@@ -1,8 +1,14 @@
 <?xml version="1.0"?>
 <ruleset name="Laminas coding standard">
-    <rule ref="./vendor/laminas/laminas-coding-standard/ruleset.xml"/>
-
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>
+
+    <rule ref="LaminasCodingStandard">
+        <exclude name="PSR12.Files.FileHeader.IncorrectOrder"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
+        <exclude name="WebimpressCodingStandard.Arrays.DoubleArrow.SpacesBefore"/>
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
+        <exclude name="WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps"/>
+    </rule>
 </ruleset>

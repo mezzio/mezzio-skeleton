@@ -47,13 +47,13 @@
         "mezzio/mezzio-helpers": "^5.3"
     },
     "require-dev": {
-        "composer/composer": "^1.5 || ~2.0.0@dev || ^2.0",
+        "composer/composer": "^1.5 || ^2.0 || ^2.0.0-alpha3",
         "chubbyphp/chubbyphp-laminas-config": "^1.0",
         "elie29/zend-phpdi-config": "^6.0",
         "filp/whoops": "^2.7.1",
         "jsoumelidis/zend-sf-di-config": "^0.4",
         "laminas/laminas-auradi-config": "^2.0.1",
-        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-coding-standard": "^2.0.0",
         "laminas/laminas-development-mode": "^3.2",
         "laminas/laminas-pimple-config": "^1.1.1",
         "laminas/laminas-servicemanager": "^3.4",
@@ -67,11 +67,10 @@
         "mikey179/vfsstream": "^1.6.8",
         "northwoods/container": "^3.2",
         "phpspec/prophecy": "^1.10.3",
-        "phpstan/phpstan": "^0.9.3",
-        "phpstan/phpstan-strict-rules": "^0.9",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-strict-rules": "^0.12",
         "phpunit/phpunit": "^8.5.8 || ^9.3.7",
-        "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^2.9.2"
+        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -102,8 +101,14 @@
         ],
         "analyze": "phpstan analyze -l max -c ./phpstan.installer.neon ./src ./config",
         "clear-config-cache": "php bin/clear-config-cache.php",
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
+        "cs-check": [
+            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+            "phpcs -s"
+        ],
+        "cs-fix": [
+            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+            "phpcbf"
+        ],
         "serve": "php -S 0.0.0.0:8080 -t public/",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"

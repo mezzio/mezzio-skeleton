@@ -431,6 +431,10 @@ class OptionalPackages
             ['@analyze']
         );
         unset($this->composerDefinition['scripts']['analyze']);
+
+        // Reset phpcs commands
+        $this->composerDefinition['scripts']['cs-check'] = 'phpcs';
+        $this->composerDefinition['scripts']['cs-fix'] = 'phpcbf';
     }
 
     /**
