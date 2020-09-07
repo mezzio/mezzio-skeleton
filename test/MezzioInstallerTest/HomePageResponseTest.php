@@ -10,31 +10,29 @@ declare(strict_types=1);
 
 namespace MezzioInstallerTest;
 
-use Generator;
-use MezzioInstaller\OptionalPackages;
-// Containers imports ordered by install-options sorting
 use Aura\Di\Container as AuraDiContainer;
 use Chubbyphp\Container\Container as ChubbyphpContainer;
-use Pimple\Psr11\Container as PimpleContainer;
-use Laminas\ServiceManager\ServiceManager as LaminasServiceManagerContainer;
-use Northwoods\Container\InjectorContainer as AurynContainer;
-use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
 use DI\Container as PhpDIContainer;
-// Routers imports ordered by install-options sorting
+use Generator;
+use Laminas\ServiceManager\ServiceManager as LaminasServiceManagerContainer;
+use Mezzio\LaminasView\ConfigProvider as LaminasViewRendererConfigProvider;
+use Mezzio\LaminasView\LaminasViewRenderer;
+use Mezzio\Plates\ConfigProvider as PlatesRendererConfigProvider;
+use Mezzio\Plates\PlatesRenderer;
 use Mezzio\Router\AuraRouter;
 use Mezzio\Router\AuraRouter\ConfigProvider as AuraRouterConfigProvider;
 use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\FastRouteRouter\ConfigProvider as FastRouteRouterConfigProvider;
 use Mezzio\Router\LaminasRouter;
 use Mezzio\Router\LaminasRouter\ConfigProvider as LaminasRouterConfigProvider;
-// Renderers imports ordered by install-options sorting
-use Mezzio\Plates\ConfigProvider as PlatesRendererConfigProvider;
-use Mezzio\Plates\PlatesRenderer;
 use Mezzio\Twig\ConfigProvider as TwigRendererConfigProvider;
 use Mezzio\Twig\TwigRenderer;
-use Mezzio\LaminasView\ConfigProvider as LaminasViewRendererConfigProvider;
-use Mezzio\LaminasView\LaminasViewRenderer;
+use MezzioInstaller\OptionalPackages;
+use Northwoods\Container\InjectorContainer as AurynContainer;
+use Pimple\Psr11\Container as PimpleContainer;
+use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
 
+use function chdir;
 use function file_get_contents;
 use function file_put_contents;
 use function implode;
@@ -45,9 +43,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
     private $routerConfigProviders = [
@@ -154,14 +150,14 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         ],
     ];
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
         $this->installer   = $this->createOptionalPackages($this->projectRoot);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         parent::tearDown();
         chdir($this->packageRoot);
@@ -171,7 +167,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider installCasesProvider
      */
     public function testHomePageHtmlResponseContainsExpectedInfo(
@@ -219,7 +214,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $this->assertStringContainsString("href=\"{$containerDocs}\"", $html);
     }
 
-    public function installCasesProvider() : Generator
+    public function installCasesProvider(): Generator
     {
         // Execute a test case for each container, renderer and non minimal install type
         foreach ($this->containerTypes as $containerID => $containerType) {
@@ -257,7 +252,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider rendererlessInstallCasesProvider
      */
     public function testHomePageJsonResponseContainsExpectedInfo(
@@ -307,7 +301,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $this->assertEquals($routerDocs, $data['routerDocs']);
     }
 
-    public function rendererlessInstallCasesProvider() : Generator
+    public function rendererlessInstallCasesProvider(): Generator
     {
         // Execute a test case for each install type and container, without any renderer
         foreach ($this->containerTypes as $containerID => $containerType) {

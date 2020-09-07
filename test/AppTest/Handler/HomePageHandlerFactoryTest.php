@@ -17,7 +17,7 @@ class HomePageHandlerFactoryTest extends TestCase
     /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
         $router = $this->prophesize(RouterInterface::class);

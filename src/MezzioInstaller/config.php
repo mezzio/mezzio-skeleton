@@ -65,11 +65,9 @@ return [
             'version' => '^3.4',
         ],
     ],
-
     'require-dev' => [
         'filp/whoops',
     ],
-
     'application' => [
         'flat' => [
             'packages'  => [],
@@ -84,7 +82,6 @@ return [
             ],
         ],
     ],
-
     'questions' => [
         'container' => [
             'question'               => 'Which container do you want to use for dependency injection?',
@@ -200,7 +197,6 @@ return [
                 ],
             ],
         ],
-
         'router' => [
             'question'               => 'Which router do you want to use?',
             'default'                => 2,
@@ -258,7 +254,6 @@ return [
                 ],
             ],
         ],
-
         'template-engine' => [
             'question'       => 'Which template engine do you want to use?',
             'default'        => 'n',
@@ -324,7 +319,6 @@ return [
                 ],
             ],
         ],
-
         'error-handler' => [
             'question'       => 'Which error handler do you want to use during development?',
             'default'        => 1,

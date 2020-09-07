@@ -14,12 +14,10 @@ use MezzioInstaller\OptionalPackages;
 
 class RemoveInstallerTest extends OptionalPackagesTestCase
 {
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->installer = $this->createOptionalPackages();

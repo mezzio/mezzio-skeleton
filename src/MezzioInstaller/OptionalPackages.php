@@ -94,39 +94,25 @@ class OptionalPackages
         'src/App/templates/.gitkeep',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $config;
 
-    /**
-     * @var Composer
-     */
+    /** @var Composer */
     private $composer;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $composerDefinition;
 
-    /**
-     * @var JsonFile
-     */
+    /** @var JsonFile */
     private $composerJson;
 
-    /**
-     * @var Link[]
-     */
+    /** @var Link[] */
     private $composerRequires;
 
-    /**
-     * @var Link[]
-     */
+    /** @var Link[] */
     private $composerDevRequires;
 
-    /**
-     * @var string[] Dev dependencies to remove after install is complete
-     */
+    /** @var string[] Dev dependencies to remove after install is complete */
     private $devDependencies = [
         'chubbyphp/chubbyphp-laminas-config',
         'composer/composer',
@@ -149,34 +135,22 @@ class OptionalPackages
         'laminas/laminas-servicemanager',
     ];
 
-    /**
-     * @var string Path to this file.
-     */
+    /** @var string Path to this file. */
     private $installerSource;
 
-    /**
-     * @var string Installation type selected.
-     */
+    /** @var string Installation type selected. */
     private $installType = self::INSTALL_FLAT;
 
-    /**
-     * @var IOInterface
-     */
+    /** @var IOInterface */
     private $io;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $projectRoot;
 
-    /**
-     * @var RootPackageInterface
-     */
+    /** @var RootPackageInterface */
     private $rootPackage;
 
-    /**
-     * @var int[]
-     */
+    /** @var int[] */
     private $stabilityFlags;
 
     /**
@@ -190,7 +164,7 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    public static function install(Event $event) : void
+    public static function install(Event $event): void
     {
         $installer = new self($event->getIO(), $event->getComposer());
 
@@ -233,7 +207,7 @@ class OptionalPackages
      *
      * Also sets up appropriate permissions.
      */
-    public function setupDataAndCacheDir() : void
+    public function setupDataAndCacheDir(): void
     {
         $this->io->write('<info>Setup data and cache dir</info>');
         if (! is_dir($this->projectRoot . '/data/cache')) {
@@ -248,7 +222,7 @@ class OptionalPackages
      * The dev dependencies should be removed from the stability flags,
      * require-dev and the composer file.
      */
-    public function removeDevDependencies() : void
+    public function removeDevDependencies(): void
     {
         $this->io->write('<info>Removing installer development dependencies</info>');
         foreach ($this->devDependencies as $devDependency) {
@@ -263,7 +237,7 @@ class OptionalPackages
      *
      * @return string One of the INSTALL_ constants.
      */
-    public function requestInstallType() : string
+    public function requestInstallType(): string
     {
         $query = [
             sprintf(
@@ -297,7 +271,7 @@ class OptionalPackages
     /**
      * Set the install type.
      */
-    public function setInstallType(string $installType) : void
+    public function setInstallType(string $installType): void
     {
         $this->installType =
             in_array($installType, [
@@ -312,9 +286,9 @@ class OptionalPackages
     /**
      * Setup the default application structure.
      *
-     * @throws RuntimeException if $installType is unknown
+     * @throws RuntimeException If $installType is unknown.
      */
-    public function setupDefaultApp() : void
+    public function setupDefaultApp(): void
     {
         switch ($this->installType) {
             case self::INSTALL_MINIMAL:
@@ -357,7 +331,7 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    public function promptForOptionalPackages() : void
+    public function promptForOptionalPackages(): void
     {
         foreach ($this->config['questions'] as $questionName => $question) {
             $this->promptForOptionalPackage($questionName, $question);
@@ -368,9 +342,9 @@ class OptionalPackages
      * Prompt for a single optional installation package.
      *
      * @param string $questionName Name of question
-     * @param array $question Question details from configuration
+     * @param array  $question Question details from configuration
      */
-    public function promptForOptionalPackage(string $questionName, array $question) : void
+    public function promptForOptionalPackage(string $questionName, array $question): void
     {
         $defaultOption = $question['default'] ?? 1;
         if (isset($this->composerDefinition['extra']['optional-packages'][$questionName])) {
@@ -394,7 +368,7 @@ class OptionalPackages
     /**
      * Update the root package based on current state.
      */
-    public function updateRootPackage() : void
+    public function updateRootPackage(): void
     {
         $this->rootPackage->setRequires($this->composerRequires);
         $this->rootPackage->setDevRequires($this->composerDevRequires);
@@ -407,7 +381,7 @@ class OptionalPackages
     /**
      * Remove the installer from the composer definition
      */
-    public function removeInstallerFromDefinition() : void
+    public function removeInstallerFromDefinition(): void
     {
         $this->io->write('<info>Remove installer</info>');
 
@@ -446,7 +420,7 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    public function finalizePackage() : void
+    public function finalizePackage(): void
     {
         // Update composer definition
         $this->composerJson->write($this->composerDefinition);
@@ -460,7 +434,7 @@ class OptionalPackages
      *
      * @param bool|int|string $answer
      */
-    public function processAnswer(array $question, $answer) : bool
+    public function processAnswer(array $question, $answer): bool
     {
         if (is_numeric($answer) && isset($question['options'][$answer])) {
             // Add packages to install
@@ -497,7 +471,7 @@ class OptionalPackages
     /**
      * Add a package
      */
-    public function addPackage(string $packageName, string $packageVersion, array $whitelist = []) : void
+    public function addPackage(string $packageName, string $packageVersion, array $whitelist = []): void
     {
         $this->io->write(sprintf(
             '  - Adding package <info>%s</info> (<comment>%s</comment>)',
@@ -557,9 +531,9 @@ class OptionalPackages
      *
      * @param string $resource Resource file.
      * @param string $target Destination.
-     * @param bool $force Whether or not to copy over an existing file.
+     * @param bool   $force Whether or not to copy over an existing file.
      */
-    public function copyResource(string $resource, string $target, bool $force = false) : void
+    public function copyResource(string $resource, string $target, bool $force = false): void
     {
         // Copy file
         if ($force === false && is_file($this->projectRoot . $target)) {
@@ -578,9 +552,9 @@ class OptionalPackages
     /**
      * Remove lines from string content containing words in array.
      */
-    public function removeLinesContainingStrings(array $entries, string $content) : string
+    public function removeLinesContainingStrings(array $entries, string $content): string
     {
-        $entries = implode('|', array_map(static function ($word) : string {
+        $entries = implode('|', array_map(static function ($word): string {
             return preg_quote($word, '/');
         }, $entries));
 
@@ -595,7 +569,7 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    private function cleanUp() : void
+    private function cleanUp(): void
     {
         $this->io->write('<info>Removing Mezzio installer classes, configuration, tests and docs</info>');
         foreach ($this->assetsToRemove as $target) {
@@ -618,7 +592,7 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    private function preparePhpunitConfig() : void
+    private function preparePhpunitConfig(): void
     {
         $phpunitConfigFile = $this->projectRoot . 'phpunit.xml.dist';
         $phpunitConfig     = file_get_contents($phpunitConfigFile);
@@ -704,7 +678,7 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    private function removeDefaultModule() : void
+    private function removeDefaultModule(): void
     {
         $this->io->write('<info>Removing default App module classes and factories</info>');
         $this->recursiveRmdir($this->projectRoot . '/src/App');
@@ -721,7 +695,7 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    private function recursiveRmdir(string $directory) : void
+    private function recursiveRmdir(string $directory): void
     {
         if (! is_dir($directory)) {
             return;
@@ -744,7 +718,7 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    private function clearComposerLockFile() : void
+    private function clearComposerLockFile(): void
     {
         $this->io->write('<info>Removing composer.lock from .gitignore</info>');
 
@@ -757,7 +731,7 @@ class OptionalPackages
     /**
      * Removes the App\ConfigProvider entry from the application config file.
      */
-    private function removeAppModuleConfig() : void
+    private function removeAppModuleConfig(): void
     {
         $configFile = $this->projectRoot . '/config/config.php';
         $contents   = file_get_contents($configFile);
@@ -768,7 +742,7 @@ class OptionalPackages
     /**
      * Parses the composer file and populates internal data
      */
-    private function parseComposerDefinition(Composer $composer, string $composerFile) : void
+    private function parseComposerDefinition(Composer $composer, string $composerFile): void
     {
         $this->composerJson       = new JsonFile($composerFile);
         $this->composerDefinition = $this->composerJson->read();

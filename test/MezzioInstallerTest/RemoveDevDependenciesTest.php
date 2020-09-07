@@ -15,9 +15,7 @@ use ReflectionClass;
 
 class RemoveDevDependenciesTest extends OptionalPackagesTestCase
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $standardDependencies = [
         'php',
         'roave/security-advisories',
@@ -28,17 +26,13 @@ class RemoveDevDependenciesTest extends OptionalPackagesTestCase
         'squizlabs/php_codesniffer',
     ];
 
-    /**
-     * @var string[] List of dev dependencies intended for removal.
-     */
+    /** @var string[] List of dev dependencies intended for removal. */
     private $devDependencies;
 
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
 

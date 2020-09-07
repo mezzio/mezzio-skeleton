@@ -28,9 +28,7 @@ class RoutersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /**
-     * @var array[]
-     */
+    /** @var array[] */
     private $expectedRoutes = [
         [
             'name'            => 'home',
@@ -46,28 +44,24 @@ class RoutersTest extends OptionalPackagesTestCase
         ],
     ];
 
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $routerConfigProviders = [
         Router\AuraRouter::class      => Router\AuraRouter\ConfigProvider::class,
         Router\FastRouteRouter::class => Router\FastRouteRouter\ConfigProvider::class,
         Router\LaminasRouter::class      => Router\LaminasRouter\ConfigProvider::class,
     ];
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
         $this->installer   = $this->createOptionalPackages($this->projectRoot);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         parent::tearDown();
         chdir($this->packageRoot);
@@ -77,7 +71,6 @@ class RoutersTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider routerProvider
      */
     public function testRouter(
@@ -141,7 +134,7 @@ class RoutersTest extends OptionalPackagesTestCase
         }
     }
 
-    public function routerProvider() : array
+    public function routerProvider(): array
     {
         // @codingStandardsIgnoreStart
         // $containerOption, $routerOption, $copyFilesKey, $dependencyKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter
@@ -159,7 +152,7 @@ class RoutersTest extends OptionalPackagesTestCase
         // @codingStandardsIgnoreEnd
     }
 
-    public function enableRouter(string $expectedRouter) : void
+    public function enableRouter(string $expectedRouter): void
     {
         $configFile = $this->projectRoot . '/config/config.php';
         $contents = file_get_contents($configFile);

@@ -10,6 +10,7 @@
         <exclude name="WebimpressCodingStandard.Arrays.DoubleArrow.SpacesBefore"/>
         <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
         <exclude name="WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps"/>
+        <exclude name="WebimpressCodingStandard.Formatting.StringClassReference.Found"/>
         <exclude name="WebimpressCodingStandard.Files.DeclareStrictTypes.BelowComment"/>
     </rule>
 

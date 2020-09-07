@@ -23,12 +23,10 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -42,7 +40,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         parent::tearDown();
         chdir($this->packageRoot);
@@ -95,7 +93,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         $this->assertNull($this->installer->promptForOptionalPackage($questionName, $question));
     }
 
-    public static function assertPromptText($expected, $argument) : void
+    public static function assertPromptText($expected, $argument): void
     {
         self::assertIsString(
             $argument,

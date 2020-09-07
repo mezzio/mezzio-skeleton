@@ -25,7 +25,7 @@ class HomePageHandlerTest extends TestCase
     /** @var RouterInterface|ObjectProphecy */
     protected $router;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
         $this->router    = $this->prophesize(RouterInterface::class);

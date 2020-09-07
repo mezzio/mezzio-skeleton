@@ -19,12 +19,10 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
@@ -32,7 +30,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         parent::tearDown();
         chdir($this->packageRoot);

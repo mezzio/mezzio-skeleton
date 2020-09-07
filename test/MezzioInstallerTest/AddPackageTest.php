@@ -47,7 +47,7 @@ class AddPackageTest extends OptionalPackagesTestCase
         }
     }
 
-    public function packageProvider() : array
+    public function packageProvider(): array
     {
         // $packageName, $packageVersion, $expectedStability
         return [
