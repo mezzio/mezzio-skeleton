@@ -99,7 +99,7 @@
             "@test",
             "@analyze"
         ],
-        "analyze": "phpstan analyze -l max -c ./phpstan.installer.neon ./src ./config",
+        "analyze": "phpstan analyze -l 3 -c ./phpstan.installer.neon ./src ./config",
         "clear-config-cache": "php bin/clear-config-cache.php",
         "cs-check": [
             "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",

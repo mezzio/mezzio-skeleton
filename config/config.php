@@ -24,7 +24,7 @@ $aggregator = new ConfigAggregator([
     // Swoole config to overwrite some services (if installed)
     class_exists(\Mezzio\Swoole\ConfigProvider::class)
         ? \Mezzio\Swoole\ConfigProvider::class
-        : function(){ return[]; },
+        : function(): array { return[]; },
 
     // Default App module config
     App\ConfigProvider::class,

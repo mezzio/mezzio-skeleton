@@ -189,7 +189,7 @@ class OptionalPackages
         $composerFile = Factory::getComposerFile();
 
         // Calculate project root from composer.json, if necessary
-        $this->projectRoot = $projectRoot ?: realpath(dirname($composerFile));
+        $this->projectRoot = $projectRoot ?? realpath(dirname($composerFile));
         $this->projectRoot = rtrim($this->projectRoot, '/\\') . '/';
 
         // Parse the composer.json
@@ -447,7 +447,7 @@ class OptionalPackages
 
             // Copy files
             if (isset($question['options'][$answer][$this->installType])) {
-                $force = ! empty($question['force']);
+                $force = $question['force'] ?? false;
                 foreach ($question['options'][$answer][$this->installType] as $resource => $target) {
                     $this->copyResource($resource, $target, $force);
                 }
