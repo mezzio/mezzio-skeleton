@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+// @phpcs:disable Generic.Files.LineLength.TooLong
 return [
     'packages'    => [
         'chubbyphp/chubbyphp-laminas-config' => [
@@ -91,7 +92,7 @@ return [
             'custom-package-warning' => 'You need to edit public/index.php to start the custom container.',
             'options'                => [
                 1 => [
-                    'name'     => 'Aura.Di',
+                    'name'     => 'Aura.Di <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'laminas/laminas-auradi-config',
                     ],
@@ -106,7 +107,7 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => 'Pimple',
+                    'name'     => 'Pimple <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'laminas/laminas-pimple-config',
                     ],
@@ -121,7 +122,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'laminas-servicemanager',
+                    'name'     => 'laminas-servicemanager <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'laminas/laminas-servicemanager',
                     ],
@@ -208,7 +209,7 @@ return [
             'custom-package-warning' => 'You need to write your own router adapter.',
             'options'                => [
                 1 => [
-                    'name'     => 'Aura.Router',
+                    'name'     => 'Aura.Router <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'mezzio/mezzio-aurarouter',
                     ],
@@ -223,7 +224,7 @@ return [
                     ],
                 ],
                 2 => [
-                    'name'     => 'FastRoute',
+                    'name'     => 'FastRoute <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'mezzio/mezzio-fastroute',
                     ],
@@ -238,7 +239,7 @@ return [
                     ],
                 ],
                 3 => [
-                    'name'     => 'laminas-router',
+                    'name'     => 'laminas-router <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'mezzio/mezzio-laminasrouter',
                     ],
@@ -261,7 +262,7 @@ return [
             'custom-package' => true,
             'options'        => [
                 1 => [
-                    'name'     => 'Plates',
+                    'name'     => 'Plates <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'mezzio/mezzio-platesrenderer',
                     ],
@@ -280,7 +281,7 @@ return [
                     'minimal'  => [],
                 ],
                 2 => [
-                    'name'     => 'Twig',
+                    'name'     => 'Twig <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'mezzio/mezzio-twigrenderer',
                     ],
@@ -299,7 +300,7 @@ return [
                     'minimal'  => [],
                 ],
                 3 => [
-                    'name'     => 'laminas-view <comment>installs laminas-servicemanager</comment>',
+                    'name'     => 'laminas-view <comment>installs laminas-servicemanager (supported by laminas)</comment>',
                     'packages' => [
                         'mezzio/mezzio-laminasviewrenderer',
                     ],
@@ -327,7 +328,7 @@ return [
             'force'          => true,
             'options'        => [
                 1 => [
-                    'name'     => 'Whoops',
+                    'name'     => 'Whoops <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'filp/whoops',
                     ],
