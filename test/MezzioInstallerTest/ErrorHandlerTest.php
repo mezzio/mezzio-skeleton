@@ -20,19 +20,17 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
         $this->installer   = $this->createOptionalPackages($this->projectRoot);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         parent::tearDown();
         chdir($this->packageRoot);
@@ -48,7 +46,7 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
 
         // Install container
-        $config = $this->getInstallerConfig($this->installer);
+        $config          = $this->getInstallerConfig($this->installer);
         $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
             3
@@ -67,7 +65,6 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider errorHandlerProvider
      */
     public function testErrorHandler(
@@ -109,7 +106,7 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
         );
     }
 
-    public function errorHandlerProvider() : array
+    public function errorHandlerProvider(): array
     {
         // $installType, $containerOption, $errorHandlerOption, $expectedErrorHandler
         return [

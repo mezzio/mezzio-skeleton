@@ -12,4 +12,4 @@ parameters:
 	reportUnmatchedIgnoredErrors: true
 	ignoreErrors:
 		- '#Class App\\ConfigProvider not found#'
-		- '#Class Mezzio\\Swoole\\ConfigProvider not found#'
+		# - '#Class Mezzio\\Swoole\\ConfigProvider not found#'

@@ -15,11 +15,9 @@ use ReflectionProperty;
 
 class UpdateRootPackageTest extends OptionalPackagesTestCase
 {
-    /**
-     * @var array[]
-     */
+    /** @var array[] */
     protected $changes = [
-        'composerRequires' => [
+        'composerRequires'    => [
             'foo/bar',
             'baz/bat',
         ],
@@ -27,12 +25,12 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
             'rab/oof',
             'tab/zab',
         ],
-        'stabilityFlags' => [
+        'stabilityFlags'      => [
             'foo/bar' => 'stable',
             'baz/bat' => 'beta',
         ],
-        'composerDefinition' => [
-            'autoload' => [
+        'composerDefinition'  => [
+            'autoload'     => [
                 'psr-4' => [
                     'MezzioInstaller\\' => __DIR__,
                 ],
@@ -60,14 +58,14 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
         $installer->updateRootPackage();
     }
 
-    protected function setInstallerProperties(OptionalPackages $installer) : void
+    protected function setInstallerProperties(OptionalPackages $installer): void
     {
         foreach ($this->changes as $property => $value) {
             $this->setInstallerProperty($installer, $property, $value);
         }
     }
 
-    protected function setInstallerProperty(OptionalPackages $installer, string $property, array $value) : void
+    protected function setInstallerProperty(OptionalPackages $installer, string $property, array $value): void
     {
         $r = new ReflectionProperty($installer, $property);
         $r->setAccessible(true);

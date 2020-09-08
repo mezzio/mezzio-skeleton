@@ -15,9 +15,7 @@ use ReflectionClass;
 
 class RemoveDevDependenciesTest extends OptionalPackagesTestCase
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $standardDependencies = [
         'php',
         'roave/security-advisories',
@@ -25,27 +23,22 @@ class RemoveDevDependenciesTest extends OptionalPackagesTestCase
         'mezzio/mezzio-helpers',
         'laminas/laminas-stdlib',
         'phpunit/phpunit',
-        'squizlabs/php_codesniffer',
     ];
 
-    /**
-     * @var string[] List of dev dependencies intended for removal.
-     */
+    /** @var string[] List of dev dependencies intended for removal. */
     private $devDependencies;
 
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
 
         // Get list of dev dependencies expected to remove from
         // OptionalPackages class
-        $r = new ReflectionClass(OptionalPackages::class);
-        $props = $r->getDefaultProperties();
+        $r                     = new ReflectionClass(OptionalPackages::class);
+        $props                 = $r->getDefaultProperties();
         $this->devDependencies = $props['devDependencies'];
 
         $this->installer = $this->createOptionalPackages();

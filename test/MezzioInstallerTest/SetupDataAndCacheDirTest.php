@@ -21,22 +21,16 @@ use function sprintf;
 
 class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
 {
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    /**
-     * @var vfsStreamDirectory
-     */
+    /** @var vfsStreamDirectory */
     private $project;
 
-    /**
-     * @var string URL of project root
-     */
+    /** @var string URL of project root */
     private $projectRoot;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->project     = vfsStream::setup('project-root');

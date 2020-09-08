@@ -18,18 +18,16 @@ use function strpos;
 
 class RequestInstallTypeTest extends OptionalPackagesTestCase
 {
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->installer = $this->createOptionalPackages();
     }
 
-    public function installSelections() : array
+    public function installSelections(): array
     {
         return [
             OptionalPackages::INSTALL_MINIMAL => ['1', OptionalPackages::INSTALL_MINIMAL],
@@ -44,7 +42,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
     public function testRequestInstallTypeReturnsExpectedConstantValue(string $selection, string $expected)
     {
         $this->io
-            ->ask(Argument::that([__CLASS__, 'assertQueryPrompt']), '2')
+            ->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')
             ->willReturn($selection);
 
         $this->assertSame($expected, $this->installer->requestInstallType());
@@ -64,12 +62,12 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
 
             // Otherwise, ask again.
             $tries -= 1;
-            $io->ask(Argument::that([__CLASS__, 'assertQueryPrompt']), '2')->will($handle);
+            $io->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')->will($handle);
             return 'n';
         };
 
         $this->io
-            ->ask(Argument::that([__CLASS__, 'assertQueryPrompt']), '2')
+            ->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')
             ->will($handle);
 
         $this->io
@@ -83,7 +81,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
     /**
      * @param mixed $value
      */
-    public static function assertQueryPrompt($value) : bool
+    public static function assertQueryPrompt($value): bool
     {
         self::assertIsString(
             $value,

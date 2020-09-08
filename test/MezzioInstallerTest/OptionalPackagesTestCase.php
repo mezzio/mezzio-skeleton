@@ -32,29 +32,19 @@ use function sprintf;
 
 abstract class OptionalPackagesTestCase extends TestCase
 {
-    /**
-     * @var Composer|ObjectProphecy
-     */
+    /** @var Composer|ObjectProphecy */
     protected $composer;
 
-    /**
-     * @var array Array version of composer.json
-     */
+    /** @var array Array version of composer.json */
     protected $composerData;
 
-    /**
-     * @var IOInterface|ObjectProphecy
-     */
+    /** @var IOInterface|ObjectProphecy */
     protected $io;
 
-    /**
-     * @var string Root of this package.
-     */
+    /** @var string Root of this package. */
     protected $packageRoot;
 
-    /**
-     * @var RootPackage|ObjectProphecy
-     */
+    /** @var RootPackage|ObjectProphecy */
     protected $rootPackage;
 
     /**
@@ -66,7 +56,7 @@ abstract class OptionalPackagesTestCase extends TestCase
         string $package,
         OptionalPackages $installer,
         ?string $message = null
-    ) : void {
+    ): void {
         $message = $message ?: sprintf('Failed asserting that package "%s" is present in the installer', $package);
         $found   = false;
 
@@ -91,7 +81,7 @@ abstract class OptionalPackagesTestCase extends TestCase
         string $package,
         OptionalPackages $installer,
         ?string $message = null
-    ) : void {
+    ): void {
         $message = $message ?: sprintf('Failed asserting that package "%s" is absent from the installer', $package);
         $found   = false;
 
@@ -117,7 +107,7 @@ abstract class OptionalPackagesTestCase extends TestCase
         array $packages,
         OptionalPackages $installer,
         ?string $message = null
-    ) : void {
+    ): void {
         foreach ($packages as $package) {
             self::assertPackage($package, $installer, $message);
         }
@@ -133,7 +123,7 @@ abstract class OptionalPackagesTestCase extends TestCase
         array $packages,
         OptionalPackages $installer,
         ?string $message = null
-    ) : void {
+    ): void {
         foreach ($packages as $package) {
             self::assertNotPackage($package, $installer, $message);
         }
@@ -148,7 +138,7 @@ abstract class OptionalPackagesTestCase extends TestCase
         string $package,
         OptionalPackages $installer,
         ?string $message = null
-    ) : void {
+    ): void {
         $message = $message ?: sprintf('Failed asserting that package "%s" is whitelisted in composer.json', $package);
         $found   = false;
 
@@ -163,13 +153,13 @@ abstract class OptionalPackagesTestCase extends TestCase
         self::assertThat($found, self::isTrue(), $message);
     }
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->packageRoot = realpath(__DIR__ . '/../../');
         putenv('COMPOSER=' . $this->packageRoot . '/composer.json');
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         putenv('COMPOSER=');
     }
@@ -180,7 +170,7 @@ abstract class OptionalPackagesTestCase extends TestCase
      * Creates the IOInterface and Composer mock instances when doing so,
      * and uses the provided $projectRoot, if specified.
      */
-    protected function createOptionalPackages(?string $projectRoot = null) : OptionalPackages
+    protected function createOptionalPackages(?string $projectRoot = null): OptionalPackages
     {
         $projectRoot = $projectRoot ?: $this->packageRoot;
 
@@ -218,9 +208,9 @@ abstract class OptionalPackagesTestCase extends TestCase
         return $this->rootPackage;
     }
 
-    protected function getStabilityFlags() : array
+    protected function getStabilityFlags(): array
     {
-        $r = new ReflectionClass(OptionalPackages::class);
+        $r          = new ReflectionClass(OptionalPackages::class);
         $properties = $r->getDefaultProperties();
 
         return array_fill_keys($properties['devDependencies'], BasePackage::STABILITY_DEV);
@@ -242,7 +232,7 @@ abstract class OptionalPackagesTestCase extends TestCase
     /**
      * Retrieve the stored composer data structure from an installer instance.
      */
-    protected function getComposerDataFromInstaller(OptionalPackages $installer) : array
+    protected function getComposerDataFromInstaller(OptionalPackages $installer): array
     {
         return $this->getInstallerProperty($installer, 'composerDefinition');
     }
@@ -250,7 +240,7 @@ abstract class OptionalPackagesTestCase extends TestCase
     /**
      * Retrieve the stored resource configuration from an installer instance.
      */
-    protected function getInstallerConfig(OptionalPackages $installer) : array
+    protected function getInstallerConfig(OptionalPackages $installer): array
     {
         return $this->getInstallerProperty($installer, 'config');
     }

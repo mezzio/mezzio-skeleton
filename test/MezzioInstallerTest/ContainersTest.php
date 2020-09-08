@@ -33,19 +33,17 @@ class ContainersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /**
-     * @var OptionalPackages
-     */
+    /** @var OptionalPackages */
     private $installer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->projectRoot = $this->copyProjectFilesToTempFilesystem();
         $this->installer   = $this->createOptionalPackages($this->projectRoot);
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         parent::tearDown();
         chdir($this->packageRoot);
@@ -55,7 +53,6 @@ class ContainersTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider containerProvider
      */
     public function testContainer(
@@ -69,7 +66,7 @@ class ContainersTest extends OptionalPackagesTestCase
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
-        $config = $this->getInstallerConfig($this->installer);
+        $config          = $this->getInstallerConfig($this->installer);
         $containerResult = $this->installer->processAnswer(
             $config['questions']['container'],
             $containerOption
@@ -83,7 +80,7 @@ class ContainersTest extends OptionalPackagesTestCase
         );
         $this->assertTrue($routerResult);
 
-        $configFile = $this->projectRoot . DIRECTORY_SEPARATOR . '/config/config.php';
+        $configFile         = $this->projectRoot . DIRECTORY_SEPARATOR . '/config/config.php';
         $configFileContents = file_get_contents($configFile);
         $configFileContents = preg_replace(
             '/(new ConfigAggregator\(\[)/s',
@@ -107,7 +104,7 @@ class ContainersTest extends OptionalPackagesTestCase
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
-    public function containerProvider() : array
+    public function containerProvider(): array
     {
         // @codingStandardsIgnoreStart
         // $installType, $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer

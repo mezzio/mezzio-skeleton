@@ -23,7 +23,7 @@ return [
             'Mezzio\WhoopsPageHandler'    => Container\WhoopsPageHandlerFactory::class,
         ],
     ],
-    'whoops' => [
+    'whoops'       => [
         'json_exceptions' => [
             'display'    => true,
             'show_trace' => true,

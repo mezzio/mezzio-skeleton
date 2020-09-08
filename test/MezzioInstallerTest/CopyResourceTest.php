@@ -17,17 +17,13 @@ use function file_get_contents;
 
 class CopyResourceTest extends OptionalPackagesTestCase
 {
-    /**
-     * @var vfsStreamDirectory
-     */
+    /** @var vfsStreamDirectory */
     private $project;
 
-    /**
-     * @var string URL of project root
-     */
+    /** @var string URL of project root */
     private $projectRoot;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->project     = vfsStream::setup('project-root');
