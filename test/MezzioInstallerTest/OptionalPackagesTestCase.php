@@ -17,6 +17,7 @@ use Composer\Package\RootPackage;
 use MezzioInstaller\OptionalPackages;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use ReflectionClass;
 use ReflectionProperty;
@@ -32,6 +33,8 @@ use function sprintf;
 
 abstract class OptionalPackagesTestCase extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var Composer|ObjectProphecy */
     protected $composer;
 
