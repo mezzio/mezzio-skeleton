@@ -53,7 +53,7 @@
         "filp/whoops": "^2.7.1",
         "jsoumelidis/zend-sf-di-config": "^0.4",
         "laminas/laminas-auradi-config": "^2.0.1",
-        "laminas/laminas-coding-standard": "^2.0.0",
+        "laminas/laminas-coding-standard": "^2.1",
         "laminas/laminas-development-mode": "^3.2",
         "laminas/laminas-pimple-config": "^1.1.1",
         "laminas/laminas-servicemanager": "^3.4",

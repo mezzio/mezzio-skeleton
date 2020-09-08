@@ -4,9 +4,7 @@
     <file>src</file>
     <file>test</file>
 
-    <rule ref="LaminasCodingStandard">
-        <exclude name="WebimpressCodingStandard.Files.DeclareStrictTypes.BelowComment"/>
-    </rule>
+    <rule ref="LaminasCodingStandard"/>
 
     <rule ref="PSR12.Files.FileHeader.IncorrectOrder">
         <exclude-pattern>src</exclude-pattern>
