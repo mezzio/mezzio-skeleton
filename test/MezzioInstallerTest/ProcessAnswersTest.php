@@ -47,7 +47,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $result   = $this->installer->processAnswer($question, $answer);
 
         $this->assertFalse($result);
-        $this->assertFileNotExists($this->projectRoot . '/config/container.php');
+        $this->assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
     public function testAnsweredWithN()
@@ -60,7 +60,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $result   = $this->installer->processAnswer($question, $answer);
 
         $this->assertFalse($result);
-        $this->assertFileNotExists($this->projectRoot . '/config/container.php');
+        $this->assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
     public function testAnsweredWithInvalidOption()
@@ -73,7 +73,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $result   = $this->installer->processAnswer($question, $answer);
 
         $this->assertFalse($result);
-        $this->assertFileNotExists($this->projectRoot . '/config/container.php');
+        $this->assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
     public function testAnsweredWithValidOption()
@@ -110,7 +110,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $result   = $this->installer->processAnswer($question, $answer);
 
         $this->assertTrue($result);
-        $this->assertFileNotExists($this->projectRoot . '/config/container.php');
+        $this->assertFileDoesNotExist($this->projectRoot . '/config/container.php');
         $this->assertPackage('league/container', $this->installer);
     }
 
