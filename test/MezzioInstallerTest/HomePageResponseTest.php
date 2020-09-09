@@ -81,7 +81,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     private $expectedRouterAttributes = [
         AuraRouter::class      => [
             'routerName' => 'Aura.Router',
-            'routerDocs' => 'http://auraphp.com/packages/2.x/Router.html',
+            'routerDocs' => 'http://auraphp.com/packages/3.x/Router/',
         ],
         FastRouteRouter::class => [
             'routerName' => 'FastRoute',
