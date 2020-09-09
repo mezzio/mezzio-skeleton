@@ -74,7 +74,7 @@ class HomePageHandler implements RequestHandlerInterface
 
         if ($this->router instanceof Router\AuraRouter) {
             $data['routerName'] = 'Aura.Router';
-            $data['routerDocs'] = 'http://auraphp.com/packages/2.x/Router.html';
+            $data['routerDocs'] = 'http://auraphp.com/packages/3.x/Router/';
         } elseif ($this->router instanceof Router\FastRouteRouter) {
             $data['routerName'] = 'FastRoute';
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
