@@ -68,6 +68,29 @@ You can then browse to http://localhost:8080.
 > $ composer run --timeout=86400 serve
 > ```
 
+## Installing alternative packages
+
+There is a feature to install alternative packages: Instead of entering one of
+the selection **you can actually type the package name and version**.
+
+> ```
+>   Which template engine do you want to use?
+>   [1] Plates
+>   [2] Twig
+>   [3] zend-view installs zend-servicemanager
+>   [n] None of the above
+>   Make your selection or type a composer package name and version (n): infw/pug:0.1
+>   - Searching for infw/pug:0.1
+>   - Adding package infw/pug (0.1)
+> ```
+
+That feature allows you to install any alternative package you want. It has its limitations though:
+
+* The alternative package must follow this format `namespace/package:1.0`. It needs the correct version.
+* Templates are not copied, but the ConfigProvider can be configured in such way that it uses the
+  default templates directly from the package itself.
+* This doesn't work for containers as the container.php file needs to be copied.
+
 ## Troubleshooting
 
 If the installer fails during the ``composer create-project`` phase, please go
@@ -84,7 +107,7 @@ If neither of the above help, you might face more serious issues:
 
 ## Application Development Mode Tool
 
-This skeleton comes with [laminas-development-mode](https://github.com/laminas/laminas-development-mode). 
+This skeleton comes with [laminas-development-mode](https://github.com/laminas/laminas-development-mode).
 It provides a composer script to allow you to enable and disable development mode.
 
 ### To enable development mode
@@ -95,8 +118,8 @@ It provides a composer script to allow you to enable and disable development mod
 $ composer development-enable
 ```
 
-**Note:** Enabling development mode will also clear your configuration cache, to 
-allow safely updating dependencies and ensuring any new configuration is picked 
+**Note:** Enabling development mode will also clear your configuration cache, to
+allow safely updating dependencies and ensuring any new configuration is picked
 up by your application.
 
 ### To disable development mode
