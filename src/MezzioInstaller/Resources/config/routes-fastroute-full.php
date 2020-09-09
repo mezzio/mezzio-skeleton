@@ -7,13 +7,17 @@ use Mezzio\MiddlewareFactory;
 use Psr\Container\ContainerInterface;
 
 /**
+ * FastRoute route configuration
+ *
+ * @see https://github.com/nikic/FastRoute
+ *
  * Setup routes with a single request method:
  *
  * $app->get('/', App\Handler\HomePageHandler::class, 'home');
  * $app->post('/album', App\Handler\AlbumCreateHandler::class, 'album.create');
- * $app->put('/album/:id', App\Handler\AlbumUpdateHandler::class, 'album.put');
- * $app->patch('/album/:id', App\Handler\AlbumUpdateHandler::class, 'album.patch');
- * $app->delete('/album/:id', App\Handler\AlbumDeleteHandler::class, 'album.delete');
+ * $app->put('/album/{id:\d+}', App\Handler\AlbumUpdateHandler::class, 'album.put');
+ * $app->patch('/album/{id:\d+}', App\Handler\AlbumUpdateHandler::class, 'album.patch');
+ * $app->delete('/album/{id:\d+}', App\Handler\AlbumDeleteHandler::class, 'album.delete');
  *
  * Or with multiple request methods:
  *

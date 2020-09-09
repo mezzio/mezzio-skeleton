@@ -214,13 +214,13 @@ return [
                         'mezzio/mezzio-aurarouter',
                     ],
                     'flat'     => [
-                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-aura-router-full.php' => 'config/routes.php',
                     ],
                     'modular'  => [
-                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-aura-router-full.php' => 'config/routes.php',
                     ],
                     'minimal'  => [
-                        'Resources/config/routes-minimal.php' => 'config/routes.php',
+                        'Resources/config/routes-aura-router-minimal.php' => 'config/routes.php',
                     ],
                 ],
                 2 => [
@@ -229,13 +229,13 @@ return [
                         'mezzio/mezzio-fastroute',
                     ],
                     'flat'     => [
-                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-fastroute-full.php' => 'config/routes.php',
                     ],
                     'modular'  => [
-                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-fastroute-full.php' => 'config/routes.php',
                     ],
                     'minimal'  => [
-                        'Resources/config/routes-minimal.php' => 'config/routes.php',
+                        'Resources/config/routes-fastroute-minimal.php' => 'config/routes.php',
                     ],
                 ],
                 3 => [
@@ -244,13 +244,13 @@ return [
                         'mezzio/mezzio-laminasrouter',
                     ],
                     'flat'     => [
-                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-laminas-router-full.php' => 'config/routes.php',
                     ],
                     'modular'  => [
-                        'Resources/config/routes-full.php' => 'config/routes.php',
+                        'Resources/config/routes-laminas-router-full.php' => 'config/routes.php',
                     ],
                     'minimal'  => [
-                        'Resources/config/routes-minimal.php' => 'config/routes.php',
+                        'Resources/config/routes-laminas-router-minimal.php' => 'config/routes.php',
                     ],
                 ],
             ],
