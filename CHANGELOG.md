@@ -2,27 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.6.0 - TBD
+## 3.6.0 - 2020-09-09
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.6.0](https://github.com/mezzio/mezzio-skeleton/milestone/6)
 
-- Nothing.
 
-### Deprecated
 
-- Nothing.
+### 3.6.0
 
-### Removed
+- Total issues resolved: **2**
+- Total pull requests resolved: **3**
+- Total contributors: **3**
 
-- Nothing.
+#### Enhancement
 
-### Fixed
+ - [33: Mark supported options in the installer](https://github.com/mezzio/mezzio-skeleton/pull/33) thanks to @geerteltink and @weierophinney
+ - [32: Feat: Laminas coding style 2.1](https://github.com/mezzio/mezzio-skeleton/pull/32) thanks to @geerteltink
 
-- Nothing.
+#### Bug
+
+ - [31: Fix tests errors and drop PHP 7.2 support](https://github.com/mezzio/mezzio-skeleton/pull/31) thanks to @charlienux
 
 ## 3.5.0 - 2020-08-14
 
