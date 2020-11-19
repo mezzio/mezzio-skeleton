@@ -38,15 +38,15 @@ class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
         $this->installer->setupDataAndCacheDir();
 
         // '40755' is the octal representation of the file permissions
-        $this->assertTrue(is_dir($this->projectRoot . '/data'), 'Data directory was not created?');
-        $this->assertSame(
+        self::assertTrue(is_dir($this->projectRoot . '/data'), 'Data directory was not created?');
+        self::assertSame(
             '40775',
             sprintf('%o', fileperms($this->projectRoot . '/data')),
             'Data directory permissions incorrect'
         );
 
-        $this->assertTrue(is_dir($this->projectRoot . '/data/cache'), 'Cache directory was not created?');
-        $this->assertSame(
+        self::assertTrue(is_dir($this->projectRoot . '/data/cache'), 'Cache directory was not created?');
+        self::assertSame(
             '40775',
             sprintf('%o', fileperms($this->projectRoot . '/data/cache')),
             'Cache directory permissions incorrect'

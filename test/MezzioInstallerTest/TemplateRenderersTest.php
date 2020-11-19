@@ -65,14 +65,14 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
             $config['questions']['container'],
             $containerOption
         );
-        $this->assertTrue($containerResult);
+        self::assertTrue($containerResult);
 
         // Install router
         $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
             $routerOption
         );
-        $this->assertTrue($routerResult);
+        self::assertTrue($routerResult);
         $this->injectRouterConfigProvider();
 
         // Install template engine
@@ -80,32 +80,32 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
             $config['questions']['template-engine'],
             $templateRendererOption
         );
-        $this->assertTrue($templateEngineResult);
+        self::assertTrue($templateEngineResult);
         $this->injectConfigProvider($expectedTemplateRenderer);
 
         // Test container
         $container = $this->getContainer();
-        $this->assertTrue($container->has(Mezzio\Application::class));
-        $this->assertTrue($container->has(Middleware\ErrorHandler::class));
-        $this->assertTrue($container->has(Mezzio\Template\TemplateRendererInterface::class));
+        self::assertTrue($container->has(Mezzio\Application::class));
+        self::assertTrue($container->has(Middleware\ErrorHandler::class));
+        self::assertTrue($container->has(Mezzio\Template\TemplateRendererInterface::class));
 
         // Test config
         $config = $container->get('config');
-        $this->assertEquals(
+        self::assertEquals(
             Mezzio\Container\ErrorHandlerFactory::class,
             $config['dependencies']['factories'][Middleware\ErrorHandler::class]
         );
 
         // Test template renderer
         $templateRenderer = $container->get(Mezzio\Template\TemplateRendererInterface::class);
-        $this->assertInstanceOf(Mezzio\Template\TemplateRendererInterface::class, $templateRenderer);
-        $this->assertInstanceOf($expectedTemplateRenderer, $templateRenderer);
+        self::assertInstanceOf(Mezzio\Template\TemplateRendererInterface::class, $templateRenderer);
+        self::assertInstanceOf($expectedTemplateRenderer, $templateRenderer);
 
         if ($installType !== OptionalPackages::INSTALL_MINIMAL) {
             // Test home page for non-minimal installs only, otherwise you get
             // invalid template name errors
             $response = $this->getAppResponse();
-            $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
+            self::assertEquals($expectedResponseStatusCode, $response->getStatusCode());
         }
     }
 

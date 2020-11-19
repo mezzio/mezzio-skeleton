@@ -40,8 +40,8 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $answer   = 'foobar';
         $result   = $this->installer->processAnswer($question, $answer);
 
-        $this->assertFalse($result);
-        $this->assertFileDoesNotExist($this->projectRoot . '/config/container.php');
+        self::assertFalse($result);
+        self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
     public function testAnsweredWithN()
@@ -53,8 +53,8 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $answer   = 'n';
         $result   = $this->installer->processAnswer($question, $answer);
 
-        $this->assertFalse($result);
-        $this->assertFileDoesNotExist($this->projectRoot . '/config/container.php');
+        self::assertFalse($result);
+        self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
     public function testAnsweredWithInvalidOption()
@@ -66,8 +66,8 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $answer   = 10;
         $result   = $this->installer->processAnswer($question, $answer);
 
-        $this->assertFalse($result);
-        $this->assertFileDoesNotExist($this->projectRoot . '/config/container.php');
+        self::assertFalse($result);
+        self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
     public function testAnsweredWithValidOption()
@@ -85,9 +85,9 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $answer   = 1;
         $result   = $this->installer->processAnswer($question, $answer);
 
-        $this->assertTrue($result);
-        $this->assertFileExists($this->projectRoot . '/config/container.php');
-        $this->assertPackage('laminas/laminas-auradi-config', $this->installer);
+        self::assertTrue($result);
+        self::assertFileExists($this->projectRoot . '/config/container.php');
+        self::assertPackage('laminas/laminas-auradi-config', $this->installer);
     }
 
     public function testAnsweredWithPackage()
@@ -103,9 +103,9 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $answer   = 'league/container:2.2.0';
         $result   = $this->installer->processAnswer($question, $answer);
 
-        $this->assertTrue($result);
-        $this->assertFileDoesNotExist($this->projectRoot . '/config/container.php');
-        $this->assertPackage('league/container', $this->installer);
+        self::assertTrue($result);
+        self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
+        self::assertPackage('league/container', $this->installer);
     }
 
     public function testPackagesAreAddedToWhitelist()
@@ -129,8 +129,8 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $answer   = 3;
         $result   = $this->installer->processAnswer($question, $answer);
 
-        $this->assertTrue($result);
-        $this->assertPackage('mezzio/mezzio-laminasviewrenderer', $this->installer);
-        $this->assertWhitelisted('mezzio/mezzio-laminasviewrenderer', $this->installer);
+        self::assertTrue($result);
+        self::assertPackage('mezzio/mezzio-laminasviewrenderer', $this->installer);
+        self::assertWhitelisted('mezzio/mezzio-laminasviewrenderer', $this->installer);
     }
 }

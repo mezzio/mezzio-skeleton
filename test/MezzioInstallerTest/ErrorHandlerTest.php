@@ -45,16 +45,16 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
             $config['questions']['container'],
             3
         );
-        $this->assertTrue($containerResult);
+        self::assertTrue($containerResult);
 
         // Enable development mode
         $this->enableDevelopmentMode();
 
         // Test container
         $container = $this->getContainer();
-        $this->assertTrue($container->has(ErrorResponseGenerator::class));
-        $this->assertFalse($container->has('Mezzio\Whoops'));
-        $this->assertFalse($container->has('Mezzio\WhoopsPageHandler'));
+        self::assertTrue($container->has(ErrorResponseGenerator::class));
+        self::assertFalse($container->has('Mezzio\Whoops'));
+        self::assertFalse($container->has('Mezzio\WhoopsPageHandler'));
     }
 
     /**
@@ -75,26 +75,26 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
             $config['questions']['container'],
             $containerOption
         );
-        $this->assertTrue($containerResult);
+        self::assertTrue($containerResult);
 
         // Install error handler
         $containerResult = $this->installer->processAnswer(
             $config['questions']['error-handler'],
             $errorHandlerOption
         );
-        $this->assertTrue($containerResult);
+        self::assertTrue($containerResult);
 
         // Enable development mode
         $this->enableDevelopmentMode();
 
         // Test container
         $container = $this->getContainer();
-        $this->assertTrue($container->has(ErrorResponseGenerator::class));
-        $this->assertTrue($container->has('Mezzio\Whoops'));
-        $this->assertTrue($container->has('Mezzio\WhoopsPageHandler'));
+        self::assertTrue($container->has(ErrorResponseGenerator::class));
+        self::assertTrue($container->has('Mezzio\Whoops'));
+        self::assertTrue($container->has('Mezzio\WhoopsPageHandler'));
 
         $config = $container->get('config');
-        $this->assertEquals(
+        self::assertEquals(
             $expectedErrorHandler,
             $config['dependencies']['factories'][ErrorResponseGenerator::class]
         );

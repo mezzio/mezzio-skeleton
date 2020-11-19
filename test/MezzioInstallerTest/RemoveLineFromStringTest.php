@@ -24,7 +24,7 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         $actual   = $this->installer->removeLinesContainingStrings(['foo'], $string);
         $expected = "bar\nbaz\nqux\nquux";
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testRemoveSingleLine()
@@ -34,7 +34,7 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         $actual   = $this->installer->removeLinesContainingStrings(['bar'], $string);
         $expected = "foo\nbaz\nqux\nquux";
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testRemoveMultipleLines()
@@ -44,7 +44,7 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         $actual   = $this->installer->removeLinesContainingStrings(['bar', 'baz'], $string);
         $expected = "foo\nqux\nquux";
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testRemoveLinesWithSpaces()
@@ -54,7 +54,7 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         $actual   = $this->installer->removeLinesContainingStrings(['bar', 'baz'], $string);
         $expected = "foo\n  qux\nquux";
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testRemoveLastLine()
@@ -64,6 +64,6 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         $actual   = $this->installer->removeLinesContainingStrings(['quux'], $string);
         $expected = "foo\nbar\nbaz\nqux\n";
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 }

@@ -65,14 +65,14 @@ class ContainersTest extends OptionalPackagesTestCase
             $config['questions']['container'],
             $containerOption
         );
-        $this->assertTrue($containerResult);
+        self::assertTrue($containerResult);
 
         // Install router
         $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
             $routerOption
         );
-        $this->assertTrue($routerResult);
+        self::assertTrue($routerResult);
 
         $configFile         = $this->projectRoot . DIRECTORY_SEPARATOR . '/config/config.php';
         $configFileContents = file_get_contents($configFile);
@@ -85,17 +85,17 @@ class ContainersTest extends OptionalPackagesTestCase
 
         // Test container
         $container = $this->getContainer();
-        $this->assertInstanceOf(ContainerInterface::class, $container);
-        $this->assertInstanceOf($expectedContainer, $container);
-        $this->assertTrue($container->has(Mezzio\Helper\UrlHelper::class));
-        $this->assertTrue($container->has(Mezzio\Helper\ServerUrlHelper::class));
-        $this->assertTrue($container->has(Mezzio\Application::class));
-        $this->assertTrue($container->has(Mezzio\Router\RouterInterface::class));
+        self::assertInstanceOf(ContainerInterface::class, $container);
+        self::assertInstanceOf($expectedContainer, $container);
+        self::assertTrue($container->has(Mezzio\Helper\UrlHelper::class));
+        self::assertTrue($container->has(Mezzio\Helper\ServerUrlHelper::class));
+        self::assertTrue($container->has(Mezzio\Application::class));
+        self::assertTrue($container->has(Mezzio\Router\RouterInterface::class));
 
         // Test home page
         $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
         $response    = $this->getAppResponse('/', $setupRoutes);
-        $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
+        self::assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
     public function containerProvider(): array

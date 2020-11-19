@@ -33,11 +33,11 @@ class HomePageHandlerFactoryTest extends TestCase
         $factory = new HomePageHandlerFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
 
-        $this->assertInstanceOf(HomePageHandlerFactory::class, $factory);
+        self::assertInstanceOf(HomePageHandlerFactory::class, $factory);
 
         $homePage = $factory($this->container->reveal());
 
-        $this->assertInstanceOf(HomePageHandler::class, $homePage);
+        self::assertInstanceOf(HomePageHandler::class, $homePage);
     }
 
     public function testFactoryWithTemplate()
@@ -51,6 +51,6 @@ class HomePageHandlerFactoryTest extends TestCase
 
         $homePage = $factory($this->container->reveal());
 
-        $this->assertInstanceOf(HomePageHandler::class, $homePage);
+        self::assertInstanceOf(HomePageHandler::class, $homePage);
     }
 }

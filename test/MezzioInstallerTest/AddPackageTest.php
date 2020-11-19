@@ -28,7 +28,7 @@ class AddPackageTest extends OptionalPackagesTestCase
 
         $installer->addPackage($packageName, $packageVersion);
 
-        $this->assertPackage('laminas/laminas-stdlib', $installer);
+        self::assertPackage('laminas/laminas-stdlib', $installer);
 
         $r = new ReflectionProperty($installer, 'stabilityFlags');
         $r->setAccessible(true);
@@ -36,8 +36,8 @@ class AddPackageTest extends OptionalPackagesTestCase
 
         // Stability flags are only set for non-stable packages
         if ($expectedStability) {
-            $this->assertArrayHasKey($packageName, $stabilityFlags);
-            $this->assertEquals($expectedStability, $stabilityFlags[$packageName]);
+            self::assertArrayHasKey($packageName, $stabilityFlags);
+            self::assertEquals($expectedStability, $stabilityFlags[$packageName]);
         }
     }
 
