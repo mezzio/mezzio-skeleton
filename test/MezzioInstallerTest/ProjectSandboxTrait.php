@@ -94,7 +94,7 @@ trait ProjectSandboxTrait
     protected function prepareSandboxForInstallType(string $installType, OptionalPackages $installer): void
     {
         $installer->setInstallType($installType);
-        $installer->setupDefaultApp($installType);
+        $installer->setupDefaultApp();
 
         switch ($installType) {
             case OptionalPackages::INSTALL_FLAT:
