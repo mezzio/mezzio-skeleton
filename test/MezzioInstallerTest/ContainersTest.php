@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use Aura\Di\Container as AuraContainer;
-use Chubbyphp\Container\Container as ChubbyphpContainer;
+use Chubbyphp\Container\MinimalContainer as ChubbyphpMinimalContainer;
 use DI\Container as PhpDIContainer;
 use Laminas\ServiceManager\ServiceManager as LaminasManagerContainer;
 use Mezzio;
@@ -121,9 +121,9 @@ class ContainersTest extends OptionalPackagesTestCase
             'php-di-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 6, 2, 'minimal-files', 404, PhpDIContainer::class],
             'php-di-flat'          => [OptionalPackages::INSTALL_FLAT,    6, 2, 'copy-files', 200, PhpDIContainer::class],
             'php-di-modular'       => [OptionalPackages::INSTALL_MODULAR, 6, 2, 'copy-files', 200, PhpDIContainer::class],
-            'chubbyphp-c-minimal'  => [OptionalPackages::INSTALL_MINIMAL, 7, 2, 'minimal-files', 404, ChubbyphpContainer::class],
-            'chubbyphp-c-flat'     => [OptionalPackages::INSTALL_FLAT,    7, 2, 'copy-files', 200, ChubbyphpContainer::class],
-            'chubbyphp-c-modular'  => [OptionalPackages::INSTALL_MODULAR, 7, 2, 'copy-files', 200, ChubbyphpContainer::class],
+            'chubbyphp-c-minimal'  => [OptionalPackages::INSTALL_MINIMAL, 7, 2, 'minimal-files', 404, ChubbyphpMinimalContainer::class],
+            'chubbyphp-c-flat'     => [OptionalPackages::INSTALL_FLAT,    7, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
+            'chubbyphp-c-modular'  => [OptionalPackages::INSTALL_MODULAR, 7, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
         ];
         // @codingStandardsIgnoreEnd
     }

@@ -48,7 +48,7 @@
     },
     "require-dev": {
         "composer/composer": "^1.5 || ^2.0 || ^2.0.0-alpha3",
-        "chubbyphp/chubbyphp-laminas-config": "^1.0",
+        "chubbyphp/chubbyphp-laminas-config": "^1.1",
         "elie29/zend-phpdi-config": "^6.0",
         "filp/whoops": "^2.7.1",
         "jsoumelidis/zend-sf-di-config": "^0.4",
