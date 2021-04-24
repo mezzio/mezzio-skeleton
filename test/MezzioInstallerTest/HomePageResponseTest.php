@@ -25,11 +25,14 @@ use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\FastRouteRouter\ConfigProvider as FastRouteRouterConfigProvider;
 use Mezzio\Router\LaminasRouter;
 use Mezzio\Router\LaminasRouter\ConfigProvider as LaminasRouterConfigProvider;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\ConfigProvider as TwigRendererConfigProvider;
 use Mezzio\Twig\TwigRenderer;
 use MezzioInstaller\OptionalPackages;
 use Northwoods\Container\InjectorContainer as AurynContainer;
 use Pimple\Psr11\Container as PimpleContainer;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
 
 use function chdir;
@@ -46,25 +49,29 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     /** @var OptionalPackages */
     private $installer;
 
+    /** @var array<class-string<RouterInterface>, class-string> */
     private $routerConfigProviders = [
         AuraRouter::class      => AuraRouterConfigProvider::class,
         FastRouteRouter::class => FastRouteRouterConfigProvider::class,
         LaminasRouter::class   => LaminasRouterConfigProvider::class,
     ];
 
+    /** @var array<class-string<TemplateRendererInterface>, class-string> */
     private $rendererConfigProviders = [
         PlatesRenderer::class      => PlatesRendererConfigProvider::class,
         TwigRenderer::class        => TwigRendererConfigProvider::class,
         LaminasViewRenderer::class => LaminasViewRendererConfigProvider::class,
     ];
 
-    // $intallType, $intallType
-    private $intallTypes = [
+    // $installType, $installType
+    /** @var array<string, string> */
+    private $installTypes = [
         OptionalPackages::INSTALL_FLAT    => OptionalPackages::INSTALL_FLAT,
         OptionalPackages::INSTALL_MODULAR => OptionalPackages::INSTALL_MODULAR,
     ];
 
     // $rendererOption, $rendererClass
+    /** @var array<string, array<int|class-string<TemplateRendererInterface>>> */
     private $rendererTypes = [
         'plates'       => [1, PlatesRenderer::class],
         'twig'         => [2, TwigRenderer::class],
@@ -72,12 +79,14 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     ];
 
     // $routerOption, $routerClass
+    /** @var array<string, array<int|class-string<RouterInterface>>> */
     private $routerTypes = [
         'aura-router'    => [1, AuraRouter::class],
         'fastroute'      => [2, FastRouteRouter::class],
         'laminas-router' => [3, LaminasRouter::class],
     ];
 
+    /** @var array<class-string<RouterInterface>, array<string, string>> */
     private $expectedRouterAttributes = [
         AuraRouter::class      => [
             'routerName' => 'Aura.Router',
@@ -94,6 +103,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     ];
 
     // $containerOption, $containerClass
+    /** @var array<string, array<int|class-string<ContainerInterface>>> */
     private $containerTypes = [
         'aura-di'                => [1, AuraDiContainer::class],
         'pimple'                 => [2, PimpleContainer::class],
@@ -104,6 +114,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         'chubbyphp-container'    => [7, ChubbyphpContainer::class],
     ];
 
+    /** @var array<class-string<ContainerInterface>, array<string, string>> */
     private $expectedContainerAttributes = [
         AuraDiContainer::class                => [
             'containerName' => 'Aura.Di',
@@ -218,7 +229,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
                     continue;
                 }
 
-                foreach ($this->intallTypes as $intallType) {
+                foreach ($this->installTypes as $intallType) {
                     $name = implode('--', [$containerId, $rendererId, $intallType]);
                     $args = [
                         $intallType,
@@ -307,7 +318,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
                 $routerName   = $this->expectedRouterAttributes[$routerClass]['routerName'];
                 $routerDocs   = $this->expectedRouterAttributes[$routerClass]['routerDocs'];
 
-                foreach ($this->intallTypes as $intallType) {
+                foreach ($this->installTypes as $intallType) {
                     $name = implode('--', [$containerId, $routerId, $intallType]);
                     $args = [
                         $intallType,
