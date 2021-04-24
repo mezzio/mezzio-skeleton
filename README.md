@@ -1,6 +1,6 @@
 # Mezzio Skeleton and Installer
 
-[![Build Status](https://github.com/mezzio/mezzio-skeleton/workflows/continuous-integration.yml/badge.svg)](https://github.com/mezzio/mezzio-skeleton/actions/workflows/continuous-integration.yml)
+[![Build Status](https://github.com/mezzio/mezzio-skeleton/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/mezzio/mezzio-skeleton/actions/workflows/continuous-integration.yml)
 
 *Begin developing PSR-15 middleware applications in seconds!*
 
