@@ -229,10 +229,10 @@ class HomePageResponseTest extends OptionalPackagesTestCase
                     continue;
                 }
 
-                foreach ($this->installTypes as $intallType) {
-                    $name = implode('--', [$containerId, $rendererId, $intallType]);
+                foreach ($this->installTypes as $installType) {
+                    $name = implode('--', [$containerId, $rendererId, $installType]);
                     $args = [
-                        $intallType,
+                        $installType,
                         $containerOption,
                         $rendererOption,
                         $rendererClass,
@@ -318,10 +318,10 @@ class HomePageResponseTest extends OptionalPackagesTestCase
                 $routerName   = $this->expectedRouterAttributes[$routerClass]['routerName'];
                 $routerDocs   = $this->expectedRouterAttributes[$routerClass]['routerDocs'];
 
-                foreach ($this->installTypes as $intallType) {
-                    $name = implode('--', [$containerId, $routerId, $intallType]);
+                foreach ($this->installTypes as $installType) {
+                    $name = implode('--', [$containerId, $routerId, $installType]);
                     $args = [
-                        $intallType,
+                        $installType,
                         $containerOption,
                         $containerName,
                         $containerDocs,
