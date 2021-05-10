@@ -85,7 +85,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
                 ->shouldBeCalled();
         }
 
-        $this->assertNull($this->installer->promptForOptionalPackage($questionName, $question));
+        self::assertNull($this->installer->promptForOptionalPackage($questionName, $question));
     }
 
     public static function assertPromptText(string $expected, string $argument): void

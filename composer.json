@@ -36,7 +36,7 @@
         }
     },
     "require": {
-        "php": "^7.3",
+        "php": "^7.3 || ~8.0.0",
         "composer/package-versions-deprecated": "^1.10.99",
         "laminas/laminas-component-installer": "^2.1.2",
         "laminas/laminas-config-aggregator": "^1.2",
@@ -48,8 +48,8 @@
     },
     "require-dev": {
         "composer/composer": "^1.5 || ^2.0 || ^2.0.0-alpha3",
-        "chubbyphp/chubbyphp-laminas-config": "^1.0",
-        "elie29/zend-phpdi-config": "^6.0",
+        "chubbyphp/chubbyphp-laminas-config": "^1.1",
+        "elie29/zend-phpdi-config": "^6.0 || ^8.0",
         "filp/whoops": "^2.7.1",
         "jsoumelidis/zend-sf-di-config": "^0.4",
         "laminas/laminas-auradi-config": "^2.0.1",
@@ -70,7 +70,7 @@
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.3.7",
+        "phpunit/phpunit": "^9.4.1",
         "roave/security-advisories": "dev-master"
     },
     "autoload": {

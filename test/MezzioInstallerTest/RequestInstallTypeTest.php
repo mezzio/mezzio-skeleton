@@ -39,7 +39,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
             ->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')
             ->willReturn($selection);
 
-        $this->assertSame($expected, $this->installer->requestInstallType());
+        self::assertSame($expected, $this->installer->requestInstallType());
     }
 
     public function testWillContinueToPromptUntilValidAnswerPresented()
@@ -68,8 +68,8 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
             ->write(Argument::containingString('Invalid answer'))
             ->shouldBeCalledTimes($tries);
 
-        $this->assertSame(OptionalPackages::INSTALL_MINIMAL, $this->installer->requestInstallType());
-        $this->assertEquals(0, $tries);
+        self::assertSame(OptionalPackages::INSTALL_MINIMAL, $this->installer->requestInstallType());
+        self::assertEquals(0, $tries);
     }
 
     /**

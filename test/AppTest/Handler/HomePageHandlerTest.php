@@ -45,7 +45,7 @@ class HomePageHandlerTest extends TestCase
             $this->prophesize(ServerRequestInterface::class)->reveal()
         );
 
-        $this->assertInstanceOf(JsonResponse::class, $response);
+        self::assertInstanceOf(JsonResponse::class, $response);
     }
 
     public function testReturnsHtmlResponseWhenTemplateRendererProvided()
@@ -65,6 +65,6 @@ class HomePageHandlerTest extends TestCase
             $this->prophesize(ServerRequestInterface::class)->reveal()
         );
 
-        $this->assertInstanceOf(HtmlResponse::class, $response);
+        self::assertInstanceOf(HtmlResponse::class, $response);
     }
 }

@@ -85,23 +85,23 @@ class RoutersTest extends OptionalPackagesTestCase
             $config['questions']['container'],
             $containerOption
         );
-        $this->assertTrue($containerResult);
+        self::assertTrue($containerResult);
 
         // Install router
         $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
             $routerOption
         );
-        $this->assertTrue($routerResult);
+        self::assertTrue($routerResult);
         $this->enableRouter($expectedRouter);
 
         // Test container
         $container = $this->getContainer();
-        $this->assertTrue($container->has(Router\RouterInterface::class));
+        self::assertTrue($container->has(Router\RouterInterface::class));
 
         // Test config
         $config = $container->get('config');
-        $this->assertEquals(
+        self::assertEquals(
             $expectedRouter,
             $config['dependencies'][$dependencyKey][Router\RouterInterface::class]
         );
@@ -109,22 +109,22 @@ class RoutersTest extends OptionalPackagesTestCase
         // Test home page
         $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
         $response    = $this->getAppResponse('/', $setupRoutes);
-        $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
+        self::assertEquals($expectedResponseStatusCode, $response->getStatusCode());
 
         /** @var Application $app */
         $app = $container->get(Application::class);
-        $this->assertCount(count($expectedRoutes), $app->getRoutes());
+        self::assertCount(count($expectedRoutes), $app->getRoutes());
         foreach ($app->getRoutes() as $route) {
             foreach ($expectedRoutes as $expectedRoute) {
                 if ($expectedRoute['name'] === $route->getName()) {
-                    $this->assertEquals($expectedRoute['path'], $route->getPath());
-                    $this->assertEquals($expectedRoute['allowed_methods'], $route->getAllowedMethods());
+                    self::assertEquals($expectedRoute['path'], $route->getPath());
+                    self::assertEquals($expectedRoute['allowed_methods'], $route->getAllowedMethods());
 
                     continue 2;
                 }
             }
 
-            $this->fail(sprintf('Route with name "%s" has not been found', $route->getName()));
+            self::fail(sprintf('Route with name "%s" has not been found', $route->getName()));
         }
     }
 

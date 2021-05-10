@@ -175,14 +175,14 @@ class HomePageResponseTest extends OptionalPackagesTestCase
             $config['questions']['container'],
             $containerOption
         );
-        $this->assertTrue($containerResult);
+        self::assertTrue($containerResult);
 
         // Install router
         $routerResult     = $this->installer->processAnswer(
             $config['questions']['router'],
             $routerOption = 2 // FastRoute, use assignment for clarity
         );
-        $this->assertTrue($routerResult);
+        self::assertTrue($routerResult);
         $this->injectRouterConfigProvider(FastRouteRouter::class);
 
         // Install template engine
@@ -190,18 +190,18 @@ class HomePageResponseTest extends OptionalPackagesTestCase
             $config['questions']['template-engine'],
             $rendererOption
         );
-        $this->assertTrue($templateEngineResult);
+        self::assertTrue($templateEngineResult);
         $this->injectRendererConfigProvider($rendererClass);
 
         // Test home page response
         $response = $this->getAppResponse('/', true);
-        $this->assertEquals(200, $response->getStatusCode());
+        self::assertEquals(200, $response->getStatusCode());
 
         // Test response content
         $html = (string) $response->getBody()->getContents();
 
-        $this->assertStringContainsString("Get started with {$containerName}", $html);
-        $this->assertStringContainsString("href=\"{$containerDocs}\"", $html);
+        self::assertStringContainsString("Get started with {$containerName}", $html);
+        self::assertStringContainsString("href=\"{$containerDocs}\"", $html);
     }
 
     public function installCasesProvider(): Generator
@@ -262,33 +262,33 @@ class HomePageResponseTest extends OptionalPackagesTestCase
             $config['questions']['container'],
             $containerOption
         );
-        $this->assertTrue($containerResult);
+        self::assertTrue($containerResult);
 
         // Install router
         $routerResult = $this->installer->processAnswer(
             $config['questions']['router'],
             $routerOption
         );
-        $this->assertTrue($routerResult);
+        self::assertTrue($routerResult);
         $this->injectRouterConfigProvider($routerClass);
 
         // Test home page response
         $response = $this->getAppResponse('/', true);
-        $this->assertEquals(200, $response->getStatusCode());
+        self::assertEquals(200, $response->getStatusCode());
 
         // Test response content
         $json = (string) $response->getBody()->getContents();
         $data = json_decode($json, true);
 
-        $this->assertIsArray($data);
-        $this->assertArrayHasKey('containerName', $data);
-        $this->assertArrayHasKey('containerDocs', $data);
-        $this->assertEquals($containerName, $data['containerName']);
-        $this->assertEquals($containerDocs, $data['containerDocs']);
-        $this->assertArrayHasKey('routerName', $data);
-        $this->assertArrayHasKey('routerDocs', $data);
-        $this->assertEquals($routerName, $data['routerName']);
-        $this->assertEquals($routerDocs, $data['routerDocs']);
+        self::assertIsArray($data);
+        self::assertArrayHasKey('containerName', $data);
+        self::assertArrayHasKey('containerDocs', $data);
+        self::assertEquals($containerName, $data['containerName']);
+        self::assertEquals($containerDocs, $data['containerDocs']);
+        self::assertArrayHasKey('routerName', $data);
+        self::assertArrayHasKey('routerDocs', $data);
+        self::assertEquals($routerName, $data['routerName']);
+        self::assertEquals($routerDocs, $data['routerDocs']);
     }
 
     public function rendererlessInstallCasesProvider(): Generator

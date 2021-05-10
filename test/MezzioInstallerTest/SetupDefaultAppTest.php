@@ -33,7 +33,7 @@ class SetupDefaultAppTest extends OptionalPackagesTestCase
     public function testModularInstallationAddsToolingSupportAsDevRequirement()
     {
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MODULAR, $this->installer);
-        $this->assertPackage(
+        self::assertPackage(
             'mezzio/mezzio-tooling',
             $this->installer,
             'mezzio-tooling package was not injected into composer.json'
