@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use Aura\Di\Container;
+use Chubbyphp\Container\MinimalContainer;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\ServiceManager;
@@ -70,7 +71,7 @@ class HomePageHandler implements RequestHandlerInterface
                 $data['containerName'] = 'PHP-DI';
                 $data['containerDocs'] = 'http://php-di.org';
                 break;
-            case 'Chubbyphp\Container\MinimalContainer':
+            case MinimalContainer::class:
                 $data['containerName'] = 'Chubbyphp Container';
                 $data['containerDocs'] = 'https://github.com/chubbyphp/chubbyphp-container';
                 break;
