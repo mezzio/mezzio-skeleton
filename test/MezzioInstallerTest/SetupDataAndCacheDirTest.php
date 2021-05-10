@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:disable SlevomatCodingStandard.Classes.UnusedPrivateElements.WriteOnlyProperty
 
 /**
  * @see       https://github.com/mezzio/mezzio-skeleton for the canonical source repository

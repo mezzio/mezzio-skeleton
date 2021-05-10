@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use Aura\Di\Container;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
+use Laminas\ServiceManager\ServiceManager;
 use Mezzio\LaminasView\LaminasViewRenderer;
 use Mezzio\Plates\PlatesRenderer;
 use Mezzio\Router;
 use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\TwigRenderer;
+use Northwoods\Container\InjectorContainer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class HomePageHandler implements RequestHandlerInterface
 {
@@ -41,32 +45,32 @@ class HomePageHandler implements RequestHandlerInterface
         $data = [];
 
         switch ($this->containerName) {
-            case 'Aura\Di\Container':
+            case Container::class:
                 $data['containerName'] = 'Aura.Di';
                 $data['containerDocs'] = 'http://auraphp.com/packages/4.x/Di/';
                 break;
-            case 'Pimple\Psr11\Container':
+            case \Pimple\Psr11\Container::class:
                 $data['containerName'] = 'Pimple';
                 $data['containerDocs'] = 'https://pimple.symfony.com/';
                 break;
-            case 'Laminas\ServiceManager\ServiceManager':
+            case ServiceManager::class:
                 $data['containerName'] = 'Laminas Servicemanager';
                 $data['containerDocs'] = 'https://docs.laminas.dev/laminas-servicemanager/';
                 break;
-            case 'Northwoods\Container\InjectorContainer':
+            case InjectorContainer::class:
                 $data['containerName'] = 'Auryn';
                 $data['containerDocs'] = 'https://github.com/rdlowrey/Auryn';
                 break;
-            case 'Symfony\Component\DependencyInjection\ContainerBuilder':
+            case ContainerBuilder::class:
                 $data['containerName'] = 'Symfony DI Container';
                 $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
                 break;
             case 'Elie\PHPDI\Config\ContainerWrapper':
-            case 'DI\Container':
+            case \DI\Container::class:
                 $data['containerName'] = 'PHP-DI';
                 $data['containerDocs'] = 'http://php-di.org';
                 break;
-            case 'Chubbyphp\Container\Container':
+            case \Chubbyphp\Container\Container::class:
                 $data['containerName'] = 'Chubbyphp Container';
                 $data['containerDocs'] = 'https://github.com/chubbyphp/chubbyphp-container';
                 break;

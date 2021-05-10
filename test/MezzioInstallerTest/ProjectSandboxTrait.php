@@ -205,7 +205,6 @@ trait ProjectSandboxTrait
             ? $this->projectRoot . '/config/container.php'
             : 'config/container.php';
 
-        /** @var ContainerInterface $container */
         $this->container = require $path;
 
         return $this->container;

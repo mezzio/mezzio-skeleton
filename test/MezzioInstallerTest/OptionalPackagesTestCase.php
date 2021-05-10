@@ -31,6 +31,7 @@ use function putenv;
 use function realpath;
 use function sprintf;
 
+// phpcs:ignore WebimpressCodingStandard.NamingConventions.AbstractClass.Prefix
 abstract class OptionalPackagesTestCase extends TestCase
 {
     use ProphecyTrait;
