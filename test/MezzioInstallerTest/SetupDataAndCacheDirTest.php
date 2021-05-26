@@ -1,6 +1,8 @@
-<?php // phpcs:disable SlevomatCodingStandard.Classes.UnusedPrivateElements.WriteOnlyProperty
+<?php
 
 declare(strict_types=1);
+
+// phpcs:disable SlevomatCodingStandard.Classes.UnusedPrivateElements.WriteOnlyProperty
 
 namespace MezzioInstallerTest;
 

@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+// phpcs:disable PSR12.Files.FileHeader.IncorrectOrder
+
 /**
  * Development-only configuration.
  *
@@ -9,8 +13,6 @@
  * Developers on your team will then automatically enable them by calling on
  * `composer development-enable`.
  */
-
-declare(strict_types=1);
 
 use Mezzio\Container;
 use Mezzio\Middleware\ErrorResponseGenerator;
