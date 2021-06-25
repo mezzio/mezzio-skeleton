@@ -47,8 +47,8 @@
         "mezzio/mezzio-helpers": "^5.3"
     },
     "require-dev": {
-        "composer/composer": "^1.5 || ^2.0",
         "chubbyphp/chubbyphp-laminas-config": "^1.1",
+        "composer/composer": "^1.5 || ^2.0",
         "elie29/zend-phpdi-config": "^6.0 || ^8.0",
         "filp/whoops": "^2.7.1",
         "jsoumelidis/zend-sf-di-config": "^0.4",
@@ -67,11 +67,13 @@
         "mikey179/vfsstream": "^1.6.8",
         "northwoods/container": "^3.2",
         "phpspec/prophecy": "^1.10.3",
+        "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
-        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.4.1",
-        "roave/security-advisories": "dev-master"
+        "psalm/plugin-phpunit": "^0.16.1",
+        "roave/security-advisories": "dev-master",
+        "vimeo/psalm": "^4.8"
     },
     "autoload": {
         "psr-4": {
