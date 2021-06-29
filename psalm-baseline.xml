@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.8.1@f73f2299dbc59a3e6c4d66cff4605176e728ee69">
+  <file src="bin/clear-config-cache.php">
+    <MixedArgument occurrences="5">
+      <code>$config['config_cache_path']</code>
+      <code>$config['config_cache_path']</code>
+      <code>$config['config_cache_path']</code>
+      <code>$config['config_cache_path']</code>
+      <code>$config['config_cache_path']</code>
+    </MixedArgument>
+  </file>
+  <file src="src/App/src/Handler/HomePageHandler.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>ResponseInterface</code>
+    </MixedInferredReturnType>
+    <UndefinedClass occurrences="7">
+      <code>Container</code>
+      <code>ContainerBuilder</code>
+      <code>InjectorContainer</code>
+      <code>MinimalContainer</code>
+      <code>Router\AuraRouter</code>
+      <code>\DI\Container</code>
+      <code>\Pimple\Psr11\Container</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/App/src/Handler/HomePageHandlerFactory.php">
+    <MixedArgument occurrences="2">
+      <code>$router</code>
+      <code>$template</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$router</code>
+      <code>$template</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/MezzioInstaller/OptionalPackages.php">
+    <InvalidReturnType occurrences="1">
+      <code>string</code>
+    </InvalidReturnType>
+    <MixedArgument occurrences="27">
+      <code>$answer</code>
+      <code>$constraint</code>
+      <code>$defaultOption</code>
+      <code>$defaultText</code>
+      <code>$defaultText</code>
+      <code>$filename</code>
+      <code>$filename</code>
+      <code>$force</code>
+      <code>$key</code>
+      <code>$option['name']</code>
+      <code>$package</code>
+      <code>$package</code>
+      <code>$packageData['version']</code>
+      <code>$packageData['whitelist'] ?? []</code>
+      <code>$packageName</code>
+      <code>$question</code>
+      <code>$questionName</code>
+      <code>$question['custom-package-warning']</code>
+      <code>$question['question']</code>
+      <code>$resource</code>
+      <code>$resource</code>
+      <code>$target</code>
+      <code>$target</code>
+      <code>$this-&gt;composerDefinition['extra']['laminas']['component-whitelist']</code>
+      <code>$this-&gt;composerDefinition['scripts']['check']</code>
+      <code>$this-&gt;config['require-dev']</code>
+      <code>$word</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="21">
+      <code>$option['name']</code>
+      <code>$option['name']</code>
+      <code>$packageData['version']</code>
+      <code>$packageData['whitelist']</code>
+      <code>$question['options'][$answer][$this-&gt;installType]</code>
+      <code>$question['options'][$answer]['packages']</code>
+      <code>$this-&gt;composerDefinition['autoload']['psr-4']</code>
+      <code>$this-&gt;composerDefinition['autoload-dev']['psr-4']</code>
+      <code>$this-&gt;composerDefinition['extra']['branch-alias']</code>
+      <code>$this-&gt;composerDefinition['extra']['laminas']</code>
+      <code>$this-&gt;composerDefinition['extra']['optional-packages']</code>
+      <code>$this-&gt;composerDefinition['require'][$packageName]</code>
+      <code>$this-&gt;composerDefinition['require-dev'][$devDependency]</code>
+      <code>$this-&gt;composerDefinition['require-dev'][$packageName]</code>
+      <code>$this-&gt;composerDefinition['scripts']['analyze']</code>
+      <code>$this-&gt;composerDefinition['scripts']['check']</code>
+      <code>$this-&gt;composerDefinition['scripts']['pre-install-cmd']</code>
+      <code>$this-&gt;composerDefinition['scripts']['pre-update-cmd']</code>
+      <code>$this-&gt;config['application'][$this-&gt;installType]</code>
+      <code>$this-&gt;config['application'][$this-&gt;installType]</code>
+      <code>$this-&gt;config['packages'][$packageName]</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="8">
+      <code>$this-&gt;composerDefinition['autoload']['psr-4']</code>
+      <code>$this-&gt;composerDefinition['extra']['laminas']</code>
+      <code>$this-&gt;composerDefinition['extra']['optional-packages']</code>
+      <code>$this-&gt;composerDefinition['require'][$packageName]</code>
+      <code>$this-&gt;composerDefinition['require-dev'][$packageName]</code>
+      <code>$this-&gt;composerDefinition['scripts']['check']</code>
+      <code>$this-&gt;composerDefinition['scripts']['cs-check']</code>
+      <code>$this-&gt;composerDefinition['scripts']['cs-fix']</code>
+    </MixedArrayAssignment>
+    <MixedArrayOffset occurrences="1">
+      <code>$this-&gt;config['packages'][$packageName]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="24">
+      <code>$answer</code>
+      <code>$answer</code>
+      <code>$constraint</code>
+      <code>$constraint</code>
+      <code>$defaultOption</code>
+      <code>$defaultText</code>
+      <code>$fileInfo</code>
+      <code>$filename</code>
+      <code>$force</code>
+      <code>$key</code>
+      <code>$link</code>
+      <code>$option</code>
+      <code>$optionalPackage</code>
+      <code>$package</code>
+      <code>$package</code>
+      <code>$packageData</code>
+      <code>$packageName</code>
+      <code>$question</code>
+      <code>$questionName</code>
+      <code>$resource</code>
+      <code>$resource</code>
+      <code>$target</code>
+      <code>$target</code>
+      <code>$versionParser</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="3">
+      <code>findPackage</code>
+      <code>isDir</code>
+      <code>parseConstraints</code>
+    </MixedMethodCall>
+    <MixedPropertyTypeCoercion occurrences="2">
+      <code>$this-&gt;composerDevRequires</code>
+      <code>$this-&gt;composerRequires</code>
+    </MixedPropertyTypeCoercion>
+    <PropertyNotSetInConstructor occurrences="11">
+      <code>$composer</code>
+      <code>$composerDefinition</code>
+      <code>$composerDevRequires</code>
+      <code>$composerJson</code>
+      <code>$composerRequires</code>
+      <code>$config</code>
+      <code>$installerSource</code>
+      <code>$io</code>
+      <code>$projectRoot</code>
+      <code>$rootPackage</code>
+      <code>$stabilityFlags</code>
+    </PropertyNotSetInConstructor>
+    <UndefinedClass occurrences="7">
+      <code>Composer</code>
+      <code>Composer</code>
+      <code>Event</code>
+      <code>IOInterface</code>
+      <code>Link</code>
+      <code>VersionParser</code>
+      <code>VersionParser</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="34">
+      <code>$this-&gt;composer</code>
+      <code>$this-&gt;composerJson</code>
+      <code>$this-&gt;composerJson</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;rootPackage</code>
+      <code>$this-&gt;rootPackage</code>
+      <code>$this-&gt;rootPackage</code>
+      <code>$this-&gt;rootPackage</code>
+      <code>$this-&gt;rootPackage</code>
+      <code>$this-&gt;rootPackage</code>
+      <code>Composer</code>
+      <code>IOInterface</code>
+      <code>JsonFile</code>
+      <code>Link[]</code>
+      <code>Link[]</code>
+      <code>RootPackageInterface</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/container-aura-di.php">
+    <MissingFile occurrences="1">
+      <code>require __DIR__ . '/config.php'</code>
+    </MissingFile>
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$factory</code>
+    </MixedAssignment>
+    <MixedFunctionCall occurrences="1">
+      <code>$factory(new Config($config))</code>
+    </MixedFunctionCall>
+    <UndefinedClass occurrences="2">
+      <code>Config</code>
+      <code>ContainerFactory</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/container-auryn.php">
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$factory</code>
+    </MixedAssignment>
+    <MixedFunctionCall occurrences="1">
+      <code>$factory($config)</code>
+    </MixedFunctionCall>
+    <UndefinedClass occurrences="2">
+      <code>Config</code>
+      <code>ContainerFactory</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/container-chubbyphp.php">
+    <MissingFile occurrences="1">
+      <code>require __DIR__ . '/config.php'</code>
+    </MissingFile>
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$factory</code>
+    </MixedAssignment>
+    <MixedFunctionCall occurrences="1">
+      <code>$factory(new Config($config))</code>
+    </MixedFunctionCall>
+    <UndefinedClass occurrences="2">
+      <code>Config</code>
+      <code>ContainerFactory</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/container-laminas-servicemanager.php">
+    <MissingFile occurrences="1">
+      <code>require __DIR__ . '/config.php'</code>
+    </MissingFile>
+    <MixedArgument occurrences="1">
+      <code>$dependencies</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$config['dependencies']</code>
+      <code>$dependencies['services']</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="1">
+      <code>$dependencies['services']</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="3">
+      <code>$config</code>
+      <code>$dependencies</code>
+      <code>$dependencies['services']['config']</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/container-php-di.php">
+    <MissingFile occurrences="1">
+      <code>require __DIR__ . '/config.php'</code>
+    </MissingFile>
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$factory</code>
+    </MixedAssignment>
+    <MixedFunctionCall occurrences="1">
+      <code>$factory(new Config($config))</code>
+    </MixedFunctionCall>
+    <MixedInferredReturnType occurrences="1">
+      <code>ContainerInterface</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$factory(new Config($config))</code>
+    </MixedReturnStatement>
+    <UndefinedClass occurrences="2">
+      <code>Config</code>
+      <code>ContainerFactory</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/container-pimple.php">
+    <MissingFile occurrences="1">
+      <code>require __DIR__ . '/config.php'</code>
+    </MissingFile>
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$factory</code>
+    </MixedAssignment>
+    <MixedFunctionCall occurrences="1">
+      <code>$factory(new Config($config))</code>
+    </MixedFunctionCall>
+    <UndefinedClass occurrences="2">
+      <code>Config</code>
+      <code>ContainerFactory</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/container-sf-di.php">
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$factory</code>
+    </MixedAssignment>
+    <MixedFunctionCall occurrences="1">
+      <code>$factory(new Config($config))</code>
+    </MixedFunctionCall>
+    <UndefinedClass occurrences="2">
+      <code>Config</code>
+      <code>ContainerFactory</code>
+    </UndefinedClass>
+    <UnresolvableInclude occurrences="1">
+      <code>require realpath(__DIR__) . '/config.php'</code>
+    </UnresolvableInclude>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/routes-aura-router-full.php">
+    <UnusedClosureParam occurrences="2">
+      <code>$container</code>
+      <code>$factory</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/routes-aura-router-minimal.php">
+    <UnusedClosureParam occurrences="3">
+      <code>$app</code>
+      <code>$container</code>
+      <code>$factory</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/routes-fastroute-full.php">
+    <UnusedClosureParam occurrences="2">
+      <code>$container</code>
+      <code>$factory</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/routes-fastroute-minimal.php">
+    <UnusedClosureParam occurrences="3">
+      <code>$app</code>
+      <code>$container</code>
+      <code>$factory</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/routes-laminas-router-full.php">
+    <UnusedClosureParam occurrences="2">
+      <code>$container</code>
+      <code>$factory</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="src/MezzioInstaller/Resources/config/routes-laminas-router-minimal.php">
+    <UnusedClosureParam occurrences="3">
+      <code>$app</code>
+      <code>$container</code>
+      <code>$factory</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="src/MezzioInstaller/Resources/src/ConfigProvider.modular.php">
+    <DuplicateClass occurrences="1">
+      <code>ConfigProvider</code>
+    </DuplicateClass>
+  </file>
+  <file src="test/AppTest/Handler/HomePageHandlerFactoryTest.php">
+    <MissingReturnType occurrences="2">
+      <code>testFactoryWithTemplate</code>
+      <code>testFactoryWithoutTemplate</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+    </MixedArgument>
+    <MixedMethodCall occurrences="1">
+      <code>willReturn</code>
+    </MixedMethodCall>
+    <PossiblyInvalidMethodCall occurrences="2">
+      <code>willReturn</code>
+      <code>willReturn</code>
+    </PossiblyInvalidMethodCall>
+    <PossiblyUndefinedMethod occurrences="2">
+      <code>reveal</code>
+      <code>reveal</code>
+    </PossiblyUndefinedMethod>
+  </file>
+  <file src="test/AppTest/Handler/HomePageHandlerTest.php">
+    <MissingReturnType occurrences="2">
+      <code>testReturnsHtmlResponseWhenTemplateRendererProvided</code>
+      <code>testReturnsJsonResponseWhenNoTemplateRendererProvided</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="4">
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;router-&gt;reveal()</code>
+      <code>$this-&gt;router-&gt;reveal()</code>
+    </MixedArgument>
+    <PossiblyUndefinedMethod occurrences="4">
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+    </PossiblyUndefinedMethod>
+  </file>
+  <file src="test/AppTest/Handler/PingHandlerTest.php">
+    <MissingReturnType occurrences="1">
+      <code>testResponse</code>
+    </MissingReturnType>
+    <MixedAssignment occurrences="1">
+      <code>$json</code>
+    </MixedAssignment>
+    <MixedPropertyFetch occurrences="1">
+      <code>$json-&gt;ack</code>
+    </MixedPropertyFetch>
+  </file>
+  <file src="test/MezzioInstallerTest/AddPackageTest.php">
+    <MissingReturnType occurrences="1">
+      <code>testAddPackage</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$stabilityFlags</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$stabilityFlags[$packageName]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$stabilityFlags</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <UndefinedClass occurrences="5">
+      <code>$this-&gt;io</code>
+      <code>BasePackage</code>
+      <code>BasePackage</code>
+      <code>BasePackage</code>
+      <code>BasePackage</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="1">
+      <code>$this-&gt;io</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="test/MezzioInstallerTest/ContainersTest.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$expectedContainer</code>
+    </ArgumentTypeCoercion>
+    <MissingReturnType occurrences="1">
+      <code>testContainer</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+    </MixedArrayAccess>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <UndefinedClass occurrences="18">
+      <code>AuraContainer</code>
+      <code>AuraContainer</code>
+      <code>AuraContainer</code>
+      <code>AurynContainer</code>
+      <code>AurynContainer</code>
+      <code>AurynContainer</code>
+      <code>ChubbyphpMinimalContainer</code>
+      <code>ChubbyphpMinimalContainer</code>
+      <code>ChubbyphpMinimalContainer</code>
+      <code>PhpDIContainer</code>
+      <code>PhpDIContainer</code>
+      <code>PhpDIContainer</code>
+      <code>PimpleContainer</code>
+      <code>PimpleContainer</code>
+      <code>PimpleContainer</code>
+      <code>SfContainerBuilder</code>
+      <code>SfContainerBuilder</code>
+      <code>SfContainerBuilder</code>
+    </UndefinedClass>
+  </file>
+  <file src="test/MezzioInstallerTest/CopyResourceTest.php">
+    <MissingReturnType occurrences="3">
+      <code>testResourceIsCopiedIfItDoesNotExist</code>
+      <code>testResourceIsNotCopiedIfItExists</code>
+      <code>testTargetFileDoesNotExist</code>
+    </MissingReturnType>
+    <UndefinedClass occurrences="3">
+      <code>vfsStream</code>
+      <code>vfsStream</code>
+      <code>vfsStream</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="5">
+      <code>$this-&gt;project</code>
+      <code>$this-&gt;project</code>
+      <code>$this-&gt;project</code>
+      <code>$this-&gt;project</code>
+      <code>vfsStreamDirectory</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="test/MezzioInstallerTest/ErrorHandlerTest.php">
+    <MissingReturnType occurrences="2">
+      <code>testErrorHandler</code>
+      <code>testErrorHandlerIsNotInstalled</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="3">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['error-handler']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="4">
+      <code>$config['dependencies']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['error-handler']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$config</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/MezzioInstallerTest/HomePageResponseTest.php">
+    <MissingReturnType occurrences="4">
+      <code>injectRendererConfigProvider</code>
+      <code>injectRouterConfigProvider</code>
+      <code>testHomePageHtmlResponseContainsExpectedInfo</code>
+      <code>testHomePageJsonResponseContainsExpectedInfo</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="5">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="5">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArrayAccess>
+    <MixedInferredReturnType occurrences="2">
+      <code>Generator</code>
+      <code>Generator</code>
+    </MixedInferredReturnType>
+    <MixedPropertyTypeCoercion occurrences="5"/>
+    <PossiblyInvalidArrayOffset occurrences="5">
+      <code>$this-&gt;expectedContainerAttributes[$containerClass]</code>
+      <code>$this-&gt;expectedContainerAttributes[$containerClass]</code>
+      <code>$this-&gt;expectedRouterAttributes[$routerClass]</code>
+      <code>$this-&gt;rendererConfigProviders[$rendererClass]</code>
+      <code>$this-&gt;routerConfigProviders[$routerClass]</code>
+    </PossiblyInvalidArrayOffset>
+    <RedundantCastGivenDocblockType occurrences="2">
+      <code>(string) $response-&gt;getBody()-&gt;getContents()</code>
+      <code>(string) $response-&gt;getBody()-&gt;getContents()</code>
+    </RedundantCastGivenDocblockType>
+    <UndefinedClass occurrences="29">
+      <code>AuraDiContainer</code>
+      <code>AuraDiContainer</code>
+      <code>AuraRouter</code>
+      <code>AuraRouter</code>
+      <code>AuraRouter</code>
+      <code>AuraRouterConfigProvider</code>
+      <code>AurynContainer</code>
+      <code>AurynContainer</code>
+      <code>ChubbyphpContainer</code>
+      <code>ChubbyphpContainer</code>
+      <code>LaminasRouter</code>
+      <code>LaminasRouter</code>
+      <code>LaminasRouter</code>
+      <code>LaminasRouterConfigProvider</code>
+      <code>LaminasViewRenderer</code>
+      <code>LaminasViewRenderer</code>
+      <code>LaminasViewRendererConfigProvider</code>
+      <code>PhpDIContainer</code>
+      <code>PhpDIContainer</code>
+      <code>PimpleContainer</code>
+      <code>PimpleContainer</code>
+      <code>PlatesRenderer</code>
+      <code>PlatesRenderer</code>
+      <code>PlatesRendererConfigProvider</code>
+      <code>SfContainerBuilder</code>
+      <code>SfContainerBuilder</code>
+      <code>TwigRenderer</code>
+      <code>TwigRenderer</code>
+      <code>TwigRendererConfigProvider</code>
+    </UndefinedClass>
+  </file>
+  <file src="test/MezzioInstallerTest/OptionalPackagesTestCase.php">
+    <MixedArgument occurrences="9">
+      <code>$properties['devDependencies']</code>
+      <code>$r-&gt;getValue($installer)</code>
+      <code>$r-&gt;getValue($installer)</code>
+      <code>$this-&gt;createComposer()-&gt;reveal()</code>
+      <code>$whitelist</code>
+      <code>BasePackage::STABILITY_DEV</code>
+      <code>Composer::class</code>
+      <code>IOInterface::class</code>
+      <code>RootPackage::class</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="3">
+      <code>$composerJson['require']</code>
+      <code>$composerJson['require-dev']</code>
+      <code>$r-&gt;getValue($installer)['extra']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="2">
+      <code>$composerJson</code>
+      <code>$whitelist</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="2">
+      <code>array</code>
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;getInstallerProperty($installer, 'composerDefinition')</code>
+      <code>$this-&gt;getInstallerProperty($installer, 'config')</code>
+    </MixedReturnStatement>
+    <UndefinedClass occurrences="5">
+      <code>BasePackage</code>
+      <code>Composer</code>
+      <code>IOInterface</code>
+      <code>RootPackage</code>
+      <code>[$this-&gt;createRootPackage(), 'reveal']</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="6">
+      <code>$this-&gt;createComposer()</code>
+      <code>Composer|ObjectProphecy</code>
+      <code>Composer|ObjectProphecy</code>
+      <code>IOInterface|ObjectProphecy</code>
+      <code>RootPackage|ObjectProphecy</code>
+      <code>RootPackage|ObjectProphecy</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="test/MezzioInstallerTest/ProcessAnswersTest.php">
+    <MissingReturnType occurrences="6">
+      <code>testAnsweredWithInvalidOption</code>
+      <code>testAnsweredWithN</code>
+      <code>testAnsweredWithPackage</code>
+      <code>testAnsweredWithValidOption</code>
+      <code>testInvalidAnswer</code>
+      <code>testPackagesAreAddedToWhitelist</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="6">
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="6">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="6">
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+    </MixedAssignment>
+    <UndefinedClass occurrences="3">
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="6">
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="test/MezzioInstallerTest/ProjectSandboxTrait.php">
+    <MissingClosureParamType occurrences="1">
+      <code>$class</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="1">
+      <code>function ($class) use ($appPath, $stripNamespace) {</code>
+    </MissingClosureReturnType>
+    <MixedArgument occurrences="3">
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$this-&gt;autoloader</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="2">
+      <code>$class</code>
+      <code>$this-&gt;container</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>ContainerInterface</code>
+    </MixedInferredReturnType>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>$this-&gt;container</code>
+    </RedundantConditionGivenDocblockType>
+    <UnresolvableInclude occurrences="1">
+      <code>require $path</code>
+    </UnresolvableInclude>
+  </file>
+  <file src="test/MezzioInstallerTest/PromptForOptionalPackagesTest.php">
+    <MissingClosureParamType occurrences="1">
+      <code>$arg</code>
+    </MissingClosureParamType>
+    <MixedArgument occurrences="4">
+      <code>$arg</code>
+      <code>$package</code>
+      <code>$question['question']</code>
+      <code>$target</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$package</code>
+      <code>$target</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>Generator</code>
+    </MixedInferredReturnType>
+    <RedundantCondition occurrences="1">
+      <code>assertIsString</code>
+    </RedundantCondition>
+    <UndefinedClass occurrences="2">
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="1">
+      <code>$this-&gt;io</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="test/MezzioInstallerTest/RemoveDevDependenciesTest.php">
+    <MissingReturnType occurrences="2">
+      <code>testComposerHasAllDependencies</code>
+      <code>testDevDependenciesAreRemoved</code>
+    </MissingReturnType>
+    <MixedAssignment occurrences="1">
+      <code>$this-&gt;devDependencies</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/MezzioInstallerTest/RemoveInstallerTest.php">
+    <MissingReturnType occurrences="2">
+      <code>testComposerHasInstaller</code>
+      <code>testInstallerIsRemoved</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/MezzioInstallerTest/RemoveLineFromStringTest.php">
+    <MissingReturnType occurrences="5">
+      <code>testRemoveFirstLine</code>
+      <code>testRemoveLastLine</code>
+      <code>testRemoveLinesWithSpaces</code>
+      <code>testRemoveMultipleLines</code>
+      <code>testRemoveSingleLine</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/MezzioInstallerTest/RequestInstallTypeTest.php">
+    <MissingClosureReturnType occurrences="1">
+      <code>function () use ($io, &amp;$tries, &amp;$handle) {</code>
+    </MissingClosureReturnType>
+    <MissingReturnType occurrences="2">
+      <code>testRequestInstallTypeReturnsExpectedConstantValue</code>
+      <code>testWillContinueToPromptUntilValidAnswerPresented</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$handle</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$tries</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedOperand occurrences="1">
+      <code>$tries</code>
+    </MixedOperand>
+    <UndefinedClass occurrences="1">
+      <code>$this-&gt;io</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="3">
+      <code>$io</code>
+      <code>$this-&gt;io</code>
+      <code>$this-&gt;io</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="test/MezzioInstallerTest/RoutersTest.php">
+    <MissingReturnType occurrences="1">
+      <code>testRouter</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="6">
+      <code>$config['dependencies']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$expectedRoute['allowed_methods']</code>
+      <code>$expectedRoute['name']</code>
+      <code>$expectedRoute['path']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$expectedRoute</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedPropertyTypeCoercion occurrences="1"/>
+    <UndefinedClass occurrences="10">
+      <code>Router\AuraRouter</code>
+      <code>Router\AuraRouter</code>
+      <code>Router\AuraRouter</code>
+      <code>Router\AuraRouter</code>
+      <code>Router\AuraRouter\ConfigProvider</code>
+      <code>Router\LaminasRouter</code>
+      <code>Router\LaminasRouter</code>
+      <code>Router\LaminasRouter</code>
+      <code>Router\LaminasRouter</code>
+      <code>Router\LaminasRouter\ConfigProvider</code>
+    </UndefinedClass>
+  </file>
+  <file src="test/MezzioInstallerTest/SetupDataAndCacheDirTest.php">
+    <MissingReturnType occurrences="1">
+      <code>testCreatesDataDirectoryWhenInvoked</code>
+    </MissingReturnType>
+    <UndefinedClass occurrences="1">
+      <code>vfsStream</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="2">
+      <code>$this-&gt;io</code>
+      <code>vfsStreamDirectory</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="test/MezzioInstallerTest/SetupDefaultAppTest.php">
+    <MissingReturnType occurrences="1">
+      <code>testModularInstallationAddsToolingSupportAsDevRequirement</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/MezzioInstallerTest/TemplateRenderersTest.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$expectedTemplateRenderer</code>
+    </ArgumentTypeCoercion>
+    <MissingReturnType occurrences="1">
+      <code>testTemplateRenderer</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="3">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="4">
+      <code>$config['dependencies']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$config</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>Generator</code>
+    </MixedInferredReturnType>
+    <MixedPropertyTypeCoercion occurrences="1"/>
+    <UndefinedClass occurrences="12">
+      <code>Mezzio\LaminasView\ConfigProvider</code>
+      <code>Mezzio\LaminasView\LaminasViewRenderer</code>
+      <code>Mezzio\LaminasView\LaminasViewRenderer</code>
+      <code>Mezzio\LaminasView\LaminasViewRenderer</code>
+      <code>Mezzio\Plates\ConfigProvider</code>
+      <code>Mezzio\Plates\PlatesRenderer</code>
+      <code>Mezzio\Plates\PlatesRenderer</code>
+      <code>Mezzio\Plates\PlatesRenderer</code>
+      <code>Mezzio\Twig\ConfigProvider</code>
+      <code>Mezzio\Twig\TwigRenderer</code>
+      <code>Mezzio\Twig\TwigRenderer</code>
+      <code>Mezzio\Twig\TwigRenderer</code>
+    </UndefinedClass>
+  </file>
+  <file src="test/MezzioInstallerTest/UpdateRootPackageTest.php">
+    <MissingReturnType occurrences="1">
+      <code>testUpdateRootPackageWillUpdateComposedPackage</code>
+    </MissingReturnType>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$property</code>
+    </MixedArgumentTypeCoercion>
+    <UndefinedClass occurrences="5">
+      <code>$this-&gt;rootPackage</code>
+      <code>$this-&gt;rootPackage</code>
+      <code>$this-&gt;rootPackage</code>
+      <code>$this-&gt;rootPackage</code>
+      <code>$this-&gt;rootPackage</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="1">
+      <code>$this-&gt;rootPackage</code>
+    </UndefinedDocblockClass>
+  </file>
+</files>
