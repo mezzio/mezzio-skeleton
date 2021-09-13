@@ -1,5 +1,10 @@
 {
     "exclude": [
-        {"name": "PHPUnit on PHP 7.3 with locked dependencies"}
-    ]
+        {
+            "name": "PHPUnit on PHP 7.3 with locked dependencies"
+        }
+    ],
+    "ignore_php_platform_requirements": {
+        "8.1": true
+    }
 }
