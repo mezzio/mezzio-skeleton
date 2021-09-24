@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MezzioInstaller;
 
 use Composer\Composer;
+use Composer\Console\Application;
 use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
@@ -17,8 +18,13 @@ use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
 
 use function array_map;
+use function array_merge;
+use function assert;
 use function chmod;
 use function copy;
 use function dirname;
@@ -72,6 +78,11 @@ class OptionalPackages
     App\ConfigProvider::class,
 
 ';
+
+    private const COMPOSER_LOCK_UPDATE_OPTIONS = [
+        'ignore-platform-reqs',
+        'ignore-platform-req',
+    ];
 
     /**
      * Assets to remove during cleanup.
@@ -409,7 +420,7 @@ class OptionalPackages
         // Update composer definition
         $this->composerJson->write($this->composerDefinition);
 
-        $this->removeComposerLockFile();
+        $this->refreshComposerLockFile();
         $this->cleanUp();
     }
 
@@ -702,13 +713,14 @@ class OptionalPackages
      *
      * @codeCoverageIgnore
      */
-    private function removeComposerLockFile(): void
+    private function refreshComposerLockFile(): void
     {
         $this->io->write('<info>Removing composer.lock</info>');
 
         $composerLockFile = sprintf('%s/composer.lock', $this->projectRoot);
-
         unlink($composerLockFile);
+
+        $this->updateLockFile();
     }
 
     /**
@@ -739,5 +751,48 @@ class OptionalPackages
 
         // Get stability flags
         $this->stabilityFlags = $this->rootPackage->getStabilityFlags();
+    }
+
+    /**
+     * @psalm-param list<non-empty-string> $options
+     * @psalm-return array<non-empty-string,mixed>
+     */
+    private function extractAdditionalInputOptionsFromInput(InputInterface $input, array $options): array
+    {
+        $additionalInputOptions = [];
+        foreach ($options as $optionName) {
+            $option = sprintf('--%s', $optionName);
+            assert(! empty($option));
+            if (! $input->hasParameterOption($option, true)) {
+                continue;
+            }
+            /** @psalm-suppress MixedAssignment */
+            $additionalInputOptions[$option] = $input->getParameterOption($option, false, true);
+        }
+
+        return $additionalInputOptions;
+    }
+
+    private function updateLockFile(): void
+    {
+        $this->io->write('<info>Updating `composer.lock`</info>');
+        $application = new Application();
+        $application->setAutoExit(false);
+
+        $input = [
+            'command'       => 'update',
+            '--lock'        => true,
+            '--no-scripts'  => true,
+            '--working-dir' => dirname($this->projectRoot),
+            // Install will be handled by either the initial `create-project` or `install` command
+            '--no-install' => true,
+        ];
+
+        $input = array_merge($input, $this->extractAdditionalInputOptionsFromInput(
+            new ArgvInput(),
+            self::COMPOSER_LOCK_UPDATE_OPTIONS
+        ));
+
+        $application->run(new ArrayInput($input));
     }
 }
