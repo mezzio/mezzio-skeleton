@@ -153,7 +153,7 @@ abstract class OptionalPackagesTestCase extends TestCase
 
     protected function setUp(): void
     {
-        $this->packageRoot = realpath(__DIR__ . '/../../');
+        $this->packageRoot = realpath(__DIR__ . '/../mezzio-skeleton/');
         putenv('COMPOSER=' . $this->packageRoot . '/composer.json');
     }
 

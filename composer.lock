@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35c4d66d3b59d195ad6dca460c1aec4a",
+    "content-hash": "531d24c2f0973386df0f580cb5fb5029",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -1723,36 +1723,37 @@
         },
         {
             "name": "chubbyphp/chubbyphp-container",
-            "version": "2.0.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chubbyphp/chubbyphp-container.git",
-                "reference": "d10b7e46954df587cc3c8e643280779bff79cbf9"
+                "reference": "1431a5b3eda75e207e3e386a946d7081713eb0a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chubbyphp/chubbyphp-container/zipball/d10b7e46954df587cc3c8e643280779bff79cbf9",
-                "reference": "d10b7e46954df587cc3c8e643280779bff79cbf9",
+                "url": "https://api.github.com/repos/chubbyphp/chubbyphp-container/zipball/1431a5b3eda75e207e3e386a946d7081713eb0a4",
+                "reference": "1431a5b3eda75e207e3e386a946d7081713eb0a4",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4|^8.0",
-                "psr/container": "^1.1|^2.0"
+                "php": "^7.2",
+                "psr/container": "^1.0"
             },
             "require-dev": {
                 "chubbyphp/chubbyphp-dev-helper": "dev-master",
-                "chubbyphp/chubbyphp-mock": "^1.6",
-                "infection/infection": "^0.20.2",
-                "php-coveralls/php-coveralls": "^2.4.3",
-                "phploc/phploc": "^7.0.2",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^0.12.64",
-                "phpunit/phpunit": "^9.5"
+                "chubbyphp/chubbyphp-mock": "^1.4.5",
+                "infection/infection": "^0.15.3|^0.16.4",
+                "mavimo/phpstan-junit": "^0.3",
+                "php-coveralls/php-coveralls": "^2.2",
+                "phploc/phploc": "^5.0|^6.0.2",
+                "phpstan/extension-installer": "^1.0.4",
+                "phpstan/phpstan": "^0.12.33",
+                "phpunit/phpunit": "^8.5.8|^9.2.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -1778,43 +1779,44 @@
             ],
             "support": {
                 "issues": "https://github.com/chubbyphp/chubbyphp-container/issues",
-                "source": "https://github.com/chubbyphp/chubbyphp-container/tree/2.0.0"
+                "source": "https://github.com/chubbyphp/chubbyphp-container/tree/1.3.0"
             },
-            "time": "2021-03-07T09:28:49+00:00"
+            "time": "2020-09-18T15:32:43+00:00"
         },
         {
             "name": "chubbyphp/chubbyphp-laminas-config",
-            "version": "1.2.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chubbyphp/chubbyphp-laminas-config.git",
-                "reference": "4fff80ffc638c42181df275e01df98add7973768"
+                "reference": "59b5f05e5199cd695616675ab348e8c492888a7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chubbyphp/chubbyphp-laminas-config/zipball/4fff80ffc638c42181df275e01df98add7973768",
-                "reference": "4fff80ffc638c42181df275e01df98add7973768",
+                "url": "https://api.github.com/repos/chubbyphp/chubbyphp-laminas-config/zipball/59b5f05e5199cd695616675ab348e8c492888a7b",
+                "reference": "59b5f05e5199cd695616675ab348e8c492888a7b",
                 "shasum": ""
             },
             "require": {
-                "chubbyphp/chubbyphp-container": "^1.3|^2.0",
-                "php": "^7.4|^8.0"
+                "chubbyphp/chubbyphp-container": "^1.3",
+                "php": "^7.2"
             },
             "require-dev": {
                 "chubbyphp/chubbyphp-dev-helper": "dev-master",
-                "chubbyphp/chubbyphp-mock": "^1.6",
-                "infection/infection": "^0.20.2",
+                "chubbyphp/chubbyphp-mock": "^1.4.5",
+                "infection/infection": "^0.15.3|^0.16.4",
                 "laminas/laminas-container-config-test": "^0.2 || ^1.0",
-                "php-coveralls/php-coveralls": "^2.4.3",
-                "phploc/phploc": "^7.0.2",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^0.12.64",
-                "phpunit/phpunit": "^9.5"
+                "mavimo/phpstan-junit": "^0.3",
+                "php-coveralls/php-coveralls": "^2.2",
+                "phploc/phploc": "^5.0|^6.0.2",
+                "phpstan/extension-installer": "^1.0.4",
+                "phpstan/phpstan": "^0.12.33",
+                "phpunit/phpunit": "^8.5.8|^9.2.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -1842,9 +1844,9 @@
             ],
             "support": {
                 "issues": "https://github.com/chubbyphp/chubbyphp-laminas-config/issues",
-                "source": "https://github.com/chubbyphp/chubbyphp-laminas-config/tree/1.2.1"
+                "source": "https://github.com/chubbyphp/chubbyphp-laminas-config/tree/1.1.0"
             },
-            "time": "2021-03-07T09:45:04+00:00"
+            "time": "2020-09-18T15:46:28+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -8840,8 +8842,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3"
+        "php": "^7.3 || ~8.0.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

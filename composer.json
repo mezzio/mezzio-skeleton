@@ -82,7 +82,7 @@
     "autoload-dev": {
         "psr-4": {
             "AppTest\\": "test/AppTest/",
-            "MezzioInstallerTest\\": "test/MezzioInstallerTest/"
+            "MezzioInstallerTest\\": "integration/MezzioInstallerTest/"
         }
     },
     "scripts": {
