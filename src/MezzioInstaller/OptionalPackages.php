@@ -409,7 +409,7 @@ class OptionalPackages
         // Update composer definition
         $this->composerJson->write($this->composerDefinition);
 
-        $this->clearComposerLockFile();
+        $this->removeComposerLockFile();
         $this->cleanUp();
     }
 
@@ -698,18 +698,17 @@ class OptionalPackages
     }
 
     /**
-     * Removes composer.lock file from gitignore.
+     * Removes composer.lock file.
      *
      * @codeCoverageIgnore
      */
-    private function clearComposerLockFile(): void
+    private function removeComposerLockFile(): void
     {
-        $this->io->write('<info>Removing composer.lock from .gitignore</info>');
+        $this->io->write('<info>Removing composer.lock</info>');
 
-        $ignoreFile = sprintf('%s/.gitignore', $this->projectRoot);
+        $composerLockFile = sprintf('%s/composer.lock', $this->projectRoot);
 
-        $content = $this->removeLinesContainingStrings(['composer.lock'], file_get_contents($ignoreFile));
-        file_put_contents($ignoreFile, $content);
+        unlink($composerLockFile);
     }
 
     /**
