@@ -3,6 +3,7 @@
         "8.1": true
     },
     "additional_composer_arguments": [
-        "--no-scripts"
+        "--no-scripts",
+        "--no-plugins"
     ]
 }

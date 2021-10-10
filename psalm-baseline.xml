@@ -77,10 +77,10 @@
       <code>$this-&gt;composerDefinition['require'][$packageName]</code>
       <code>$this-&gt;composerDefinition['require-dev'][$devDependency]</code>
       <code>$this-&gt;composerDefinition['require-dev'][$packageName]</code>
-      <code>$this-&gt;composerDefinition['scripts']['analyze']</code>
       <code>$this-&gt;composerDefinition['scripts']['check']</code>
       <code>$this-&gt;composerDefinition['scripts']['pre-install-cmd']</code>
       <code>$this-&gt;composerDefinition['scripts']['pre-update-cmd']</code>
+      <code>$this-&gt;composerDefinition['scripts']['static-analysis']</code>
       <code>$this-&gt;config['application'][$this-&gt;installType]</code>
       <code>$this-&gt;config['application'][$this-&gt;installType]</code>
       <code>$this-&gt;config['packages'][$packageName]</code>
