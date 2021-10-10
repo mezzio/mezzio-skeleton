@@ -17,7 +17,7 @@ class RemoveInstallerTest extends OptionalPackagesTestCase
         $this->installer = $this->createOptionalPackages();
     }
 
-    public function testComposerHasInstaller()
+    public function testComposerHasInstaller(): void
     {
         $composer = $this->getComposerDataFromInstaller($this->installer);
 
@@ -28,7 +28,7 @@ class RemoveInstallerTest extends OptionalPackagesTestCase
         self::assertTrue(isset($composer['scripts']['pre-update-cmd']));
     }
 
-    public function testInstallerIsRemoved()
+    public function testInstallerIsRemoved(): void
     {
         // Remove the installer
         $this->installer->removeInstallerFromDefinition();
@@ -40,7 +40,7 @@ class RemoveInstallerTest extends OptionalPackagesTestCase
         self::assertFalse(isset($composer['extra']['optional-packages']));
         self::assertFalse(isset($composer['scripts']['pre-install-cmd']));
         self::assertFalse(isset($composer['scripts']['pre-update-cmd']));
-        self::assertFalse(isset($composer['scripts']['check']['@analyze']));
-        self::assertFalse(isset($composer['scripts']['analyze']));
+        self::assertFalse(isset($composer['scripts']['check']['@static-analysis']));
+        self::assertFalse(isset($composer['scripts']['static-analysis']));
     }
 }

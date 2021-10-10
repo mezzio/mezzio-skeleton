@@ -38,13 +38,13 @@ class RemoveDevDependenciesTest extends OptionalPackagesTestCase
         $this->installer = $this->createOptionalPackages();
     }
 
-    public function testComposerHasAllDependencies()
+    public function testComposerHasAllDependencies(): void
     {
         self::assertPackages($this->standardDependencies, $this->installer);
         self::assertPackages($this->devDependencies, $this->installer);
     }
 
-    public function testDevDependenciesAreRemoved()
+    public function testDevDependenciesAreRemoved(): void
     {
         // Remove development dependencies
         $this->installer->removeDevDependencies();

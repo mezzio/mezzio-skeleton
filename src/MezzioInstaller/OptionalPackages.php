@@ -81,10 +81,10 @@ class OptionalPackages
      */
     private $assetsToRemove = [
         '.coveralls.yml',
-        '.travis.yml',
-        'CHANGELOG.md',
         'phpcs.xml',
-        'phpstan.installer.neon',
+        'psalm.xml.dist',
+        'psalm-baseline.xml',
+        'composer.lock',
         'src/App/templates/.gitkeep',
     ];
 
@@ -114,8 +114,8 @@ class OptionalPackages
         'filp/whoops',
         'jsoumelidis/zend-sf-di-config',
         'mikey179/vfsstream',
-        'phpstan/phpstan',
-        'phpstan/phpstan-strict-rules',
+        'psalm/plugin-phpunit',
+        'vimeo/psalm',
         'laminas/laminas-coding-standard',
         'mezzio/mezzio-fastroute',
         'mezzio/mezzio-platesrenderer',
@@ -393,9 +393,9 @@ class OptionalPackages
         // Remove phpstan completely
         $this->composerDefinition['scripts']['check'] = array_diff(
             $this->composerDefinition['scripts']['check'],
-            ['@analyze']
+            ['@static-analysis']
         );
-        unset($this->composerDefinition['scripts']['analyze']);
+        unset($this->composerDefinition['scripts']['static-analysis']);
 
         // Reset phpcs commands
         $this->composerDefinition['scripts']['cs-check'] = 'phpcs';

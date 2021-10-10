@@ -9,7 +9,7 @@ use ReflectionProperty;
 
 class UpdateRootPackageTest extends OptionalPackagesTestCase
 {
-    /** @var array[] */
+    /** @var array<string,array<mixed>> */
     protected $changes = [
         'composerRequires'    => [
             'foo/bar',
@@ -37,17 +37,40 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
         ],
     ];
 
-    public function testUpdateRootPackageWillUpdateComposedPackage()
+    public function testUpdateRootPackageWillUpdateComposedPackage(): void
     {
         $installer = $this->createOptionalPackages();
         $this->setInstallerProperties($installer);
 
-        $this->rootPackage->setRequires($this->changes['composerRequires'])->shouldBeCalled();
-        $this->rootPackage->setDevRequires($this->changes['composerDevRequires'])->shouldBeCalled();
-        $this->rootPackage->setStabilityFlags($this->changes['stabilityFlags'])->shouldBeCalled();
-        $this->rootPackage->setAutoload($this->changes['composerDefinition']['autoload'])->shouldBeCalled();
-        $this->rootPackage->setDevAutoload($this->changes['composerDefinition']['autoload-dev'])->shouldBeCalled();
-        $this->rootPackage->setExtra([])->shouldBeCalled();
+        $this->rootPackage
+            ->expects(self::once())
+            ->method('setRequires')
+            ->with($this->changes['composerRequires']);
+
+        $this->rootPackage
+            ->expects(self::once())
+            ->method('setDevRequires')
+            ->with($this->changes['composerDevRequires']);
+
+        $this->rootPackage
+            ->expects(self::once())
+            ->method('setStabilityFlags')
+            ->with($this->changes['stabilityFlags']);
+
+        $this->rootPackage
+            ->expects(self::once())
+            ->method('setAutoload')
+            ->with($this->changes['composerDefinition']['autoload']);
+
+        $this->rootPackage
+            ->expects(self::once())
+            ->method('setDevAutoload')
+            ->with($this->changes['composerDefinition']['autoload-dev']);
+
+        $this->rootPackage
+            ->expects(self::once())
+            ->method('setExtra')
+            ->with([]);
 
         $installer->updateRootPackage();
     }

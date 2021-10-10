@@ -47,6 +47,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
+     * @psalm-param class-string $expectedTemplateRenderer
      * @dataProvider templateRendererProvider
      */
     public function testTemplateRenderer(

@@ -178,7 +178,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         self::assertEquals(200, $response->getStatusCode());
 
         // Test response content
-        $html = (string) $response->getBody()->getContents();
+        $html = (string) $response->getBody();
 
         self::assertStringContainsString("Get started with {$containerName}", $html);
         self::assertStringContainsString("href=\"{$containerDocs}\"", $html);
@@ -257,7 +257,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         self::assertEquals(200, $response->getStatusCode());
 
         // Test response content
-        $json = (string) $response->getBody()->getContents();
+        $json = (string) $response->getBody();
         $data = json_decode($json, true);
 
         self::assertIsArray($data);

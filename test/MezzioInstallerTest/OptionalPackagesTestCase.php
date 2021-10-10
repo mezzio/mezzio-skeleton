@@ -10,9 +10,8 @@ use Composer\Package\BasePackage;
 use Composer\Package\RootPackage;
 use MezzioInstaller\OptionalPackages;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use ReflectionClass;
 use ReflectionProperty;
 
@@ -28,21 +27,19 @@ use function sprintf;
 // phpcs:ignore WebimpressCodingStandard.NamingConventions.AbstractClass.Prefix
 abstract class OptionalPackagesTestCase extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var Composer|ObjectProphecy */
+    /** @var Composer&MockObject */
     protected $composer;
 
     /** @var array Array version of composer.json */
-    protected $composerData;
+    protected $composerData = [];
 
-    /** @var IOInterface|ObjectProphecy */
+    /** @var IOInterface&MockObject */
     protected $io;
 
     /** @var string Root of this package. */
-    protected $packageRoot;
+    protected $packageRoot = './';
 
-    /** @var RootPackage|ObjectProphecy */
+    /** @var RootPackage&MockObject */
     protected $rootPackage;
 
     /**
@@ -172,36 +169,45 @@ abstract class OptionalPackagesTestCase extends TestCase
     {
         $projectRoot = $projectRoot ?: $this->packageRoot;
 
-        $this->io = $this->prophesize(IOInterface::class);
+        $this->io = $this->createMock(IOInterface::class);
         return new OptionalPackages(
-            $this->io->reveal(),
-            $this->createComposer()->reveal(),
+            $this->io,
+            $this->createComposer(),
             $projectRoot
         );
     }
 
     /**
-     * @return Composer|ObjectProphecy
+     * @return Composer&MockObject
      */
-    protected function createComposer()
+    protected function createComposer(): Composer
     {
-        $this->composer = $this->prophesize(Composer::class);
-        $this->composer->getPackage()->will([$this->createRootPackage(), 'reveal']);
+        $this->composer = $this->createMock(Composer::class);
+        $this->composer
+            ->method('getPackage')
+            ->willReturn($this->createRootPackage());
 
         return $this->composer;
     }
 
     /**
-     * @return RootPackage|ObjectProphecy
+     * @return RootPackage&MockObject
      */
-    protected function createRootPackage()
+    protected function createRootPackage(): RootPackage
     {
         $composerJson      = json_decode(file_get_contents($this->packageRoot . '/composer.json'), true);
-        $this->rootPackage = $this->prophesize(RootPackage::class);
+        $this->rootPackage = $this->createMock(RootPackage::class);
 
-        $this->rootPackage->getRequires()->willReturn($composerJson['require']);
-        $this->rootPackage->getDevRequires()->willReturn($composerJson['require-dev']);
-        $this->rootPackage->getStabilityFlags()->willReturn($this->getStabilityFlags());
+        $this->rootPackage
+            ->method('getRequires')
+            ->willReturn($composerJson['require']);
+        $this->rootPackage
+            ->method('getDevRequires')
+            ->willReturn($composerJson['require-dev']);
+
+        $this->rootPackage
+            ->method('getStabilityFlags')
+            ->willReturn($this->getStabilityFlags());
 
         return $this->rootPackage;
     }

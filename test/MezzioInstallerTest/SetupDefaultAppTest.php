@@ -30,7 +30,7 @@ class SetupDefaultAppTest extends OptionalPackagesTestCase
         $this->tearDownAlternateAutoloader();
     }
 
-    public function testModularInstallationAddsToolingSupportAsDevRequirement()
+    public function testModularInstallationAddsToolingSupportAsDevRequirement(): void
     {
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MODULAR, $this->installer);
         self::assertPackage(

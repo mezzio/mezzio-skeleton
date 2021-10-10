@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
-use Prophecy\Argument;
 
 use function chdir;
 
@@ -31,9 +30,11 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $this->recursiveDelete($this->projectRoot);
     }
 
-    public function testInvalidAnswer()
+    public function testInvalidAnswer(): void
     {
-        $this->io->write()->shouldNotBeCalled();
+        $this->io
+            ->expects(self::never())
+            ->method('write');
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -44,9 +45,11 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
-    public function testAnsweredWithN()
+    public function testAnsweredWithN(): void
     {
-        $this->io->write()->shouldNotBeCalled();
+        $this->io
+            ->expects(self::never())
+            ->method('write');
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -57,9 +60,11 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
-    public function testAnsweredWithInvalidOption()
+    public function testAnsweredWithInvalidOption(): void
     {
-        $this->io->write()->shouldNotBeCalled();
+        $this->io
+            ->expects(self::never())
+            ->method('write');
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -70,15 +75,18 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
-    public function testAnsweredWithValidOption()
+    public function testAnsweredWithValidOption(): void
     {
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
-        // @codingStandardsIgnoreStart
-        $this->io->write(Argument::containingString('Adding package <info>laminas/laminas-pimple-config</info>'))->shouldBeCalled();
-        $this->io->write(Argument::containingString('Copying <info>config/container.php</info>'))->shouldBeCalled();
-        // @codingStandardsIgnoreEnd
+        $this->io
+            ->expects(self::atLeast(2))
+            ->method('write')
+            ->withConsecutive(
+                [self::stringContains('Adding package <info>laminas/laminas-auradi-config</info>')],
+                [self::stringContains('Copying <info>config/container.php</info>')],
+            );
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -90,13 +98,18 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertPackage('laminas/laminas-pimple-config', $this->installer);
     }
 
-    public function testAnsweredWithPackage()
+    public function testAnsweredWithPackage(): void
     {
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
-        $this->io->write(Argument::containingString('Adding package <info>league/container</info>'))->shouldBeCalled();
-        $this->io->write(Argument::containingString('<warning>You need to edit public/index.php'))->shouldBeCalled();
+        $this->io
+            ->expects(self::atLeast(2))
+            ->method('write')
+            ->withConsecutive(
+                [self::stringContains('Adding package <info>league/container</info>')],
+                [self::stringContains('<warning>You need to edit public/index.php')],
+            );
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -108,21 +121,18 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertPackage('league/container', $this->installer);
     }
 
-    public function testPackagesAreAddedToWhitelist()
+    public function testPackagesAreAddedToWhitelist(): void
     {
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
         $this->io
-            ->write(Argument::containingString(
-                'Adding package <info>mezzio/mezzio-laminasviewrenderer</info>'
-            ))
-            ->shouldBeCalled();
-        $this->io
-            ->write(Argument::containingString(
-                'Whitelist package <info>mezzio/mezzio-laminasviewrenderer</info>'
-            ))
-            ->shouldBeCalled();
+            ->expects(self::atLeast(2))
+            ->method('write')
+            ->withConsecutive(
+                [self::stringContains('Adding package <info>mezzio/mezzio-laminasviewrenderer</info>')],
+                [self::stringContains('Whitelist package <info>mezzio/mezzio-laminasviewrenderer</info>')]
+            );
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['template-engine'];

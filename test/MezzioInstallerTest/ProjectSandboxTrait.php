@@ -51,7 +51,7 @@ trait ProjectSandboxTrait
      */
     protected $autoloader;
 
-    /** @var ContainerInterface */
+    /** @var ContainerInterface|null */
     protected $container;
 
     /** @var string Root of the sandbox system */

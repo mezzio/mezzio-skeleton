@@ -35,7 +35,7 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
     /**
      * @runInSeparateProcess
      */
-    public function testErrorHandlerIsNotInstalled()
+    public function testErrorHandlerIsNotInstalled(): void
     {
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
 

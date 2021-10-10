@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
-use Prophecy\Argument;
 
 use function random_int;
 use function strpos;
@@ -33,22 +32,35 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
     /**
      * @dataProvider installSelections
      */
-    public function testRequestInstallTypeReturnsExpectedConstantValue(string $selection, string $expected)
+    public function testRequestInstallTypeReturnsExpectedConstantValue(string $selection, string $expected): void
     {
         $this->io
-            ->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')
+            ->method('ask')
+            ->with(self::callback([self::class, 'assertQueryPrompt']), '2')
             ->willReturn($selection);
 
         self::assertSame($expected, $this->installer->requestInstallType());
     }
 
-    public function testWillContinueToPromptUntilValidAnswerPresented()
+    public function testWillContinueToPromptUntilValidAnswerPresented(): void
     {
-        $io    = $this->io;
         $tries = random_int(1, 10);
 
+        $questionAssertions = [
+            self::stringContains('What type of installation would you like?'),
+            [self::class, 'assertQueryPrompt'],
+        ];
+
+        for ($i = 1; $i <= $tries; $i++) {
+            $questionAssertions[] = [self::class, 'assertQueryPrompt'];
+        }
+
         // Handle a call to ask() by looping $tries times
-        $handle = function () use ($io, &$tries, &$handle) {
+        $handle = function (string $question) use (&$tries) {
+            // phpcs:disable WebimpressCodingStandard.Formatting.RedundantParentheses.SingleExpression
+            [self::class, 'assertQueryPrompt']($question);
+            // phpcs:enable WebimpressCodingStandard.Formatting.RedundantParentheses.SingleExpression
+
             if ($tries === 0) {
                 // Valid choice to complete the loop
                 return '1';
@@ -56,17 +68,17 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
 
             // Otherwise, ask again.
             $tries -= 1;
-            $io->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')->will($handle);
             return 'n';
         };
 
         $this->io
-            ->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')
-            ->will($handle);
+            ->method('ask')
+            ->willReturnCallback($handle);
 
         $this->io
-            ->write(Argument::containingString('Invalid answer'))
-            ->shouldBeCalledTimes($tries);
+            ->expects(self::exactly($tries))
+            ->method('write')
+            ->with(self::stringContains('Invalid answer'));
 
         self::assertSame(OptionalPackages::INSTALL_MINIMAL, $this->installer->requestInstallType());
         self::assertEquals(0, $tries);

@@ -67,12 +67,10 @@
         "mezzio/mezzio-tooling": "^2.0",
         "mezzio/mezzio-twigrenderer": "^2.7.0",
         "mikey179/vfsstream": "^1.6.8",
-        "phpspec/prophecy": "^1.10.3",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/phpstan": "^0.12",
-        "phpstan/phpstan-strict-rules": "^0.12",
         "phpunit/phpunit": "^9.5.5",
-        "roave/security-advisories": "dev-master"
+        "psalm/plugin-phpunit": "^0.16.1",
+        "roave/security-advisories": "dev-master",
+        "vimeo/psalm": "^4.10"
     },
     "autoload": {
         "psr-4": {
@@ -99,9 +97,9 @@
         "check": [
             "@cs-check",
             "@test",
-            "@analyze"
+            "@static-analysis"
         ],
-        "analyze": "phpstan analyze -l 3 -c ./phpstan.installer.neon ./src ./config",
+        "static-analysis": "psalm --shepherd --stats",
         "clear-config-cache": "php bin/clear-config-cache.php",
         "cs-check": "phpcs -s",
         "cs-fix": "phpcbf",

@@ -6,10 +6,10 @@ namespace MezzioInstallerTest;
 
 use Generator;
 use MezzioInstaller\OptionalPackages;
-use Prophecy\Argument;
 
 use function chdir;
 use function copy;
+use function count;
 use function putenv;
 use function sprintf;
 use function strpos;
@@ -63,8 +63,9 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         array $expectedPackage
     ): void {
         $this->io
-            ->ask(
-                Argument::that(static function ($arg) use ($question) {
+            ->method('ask')
+            ->with(
+                self::callback(static function ($arg) use ($question) {
                     PromptForOptionalPackagesTest::assertPromptText($question['question'], $arg);
 
                     return true;
@@ -73,28 +74,38 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
             )
             ->willReturn($selection);
 
+        $messageAssertionsToCheck = [];
         foreach ($expectedPackage['packages'] as $package) {
-            $this->io
-                ->write(Argument::containingString($package))
-                ->shouldBeCalled();
+            $messageAssertionsToCheck[] = $this->stringContains($package);
         }
 
         foreach ($expectedPackage[OptionalPackages::INSTALL_MINIMAL] as $target) {
-            $this->io
-                ->write(Argument::containingString($target))
-                ->shouldBeCalled();
+            $messageAssertionsToCheck[] = $this->stringContains($target);
         }
 
-        self::assertNull($this->installer->promptForOptionalPackage($questionName, $question));
+        $this->io
+            ->expects(self::atLeast(count($messageAssertionsToCheck)))
+            ->method('write')
+            ->with(self::callback(
+                static function (string $message) use (&$messageAssertionsToCheck): bool {
+                    foreach ($messageAssertionsToCheck as $index => $assertion) {
+                        if (! $assertion->evaluate($message, '', true)) {
+                            continue;
+                        }
+
+                        unset($messageAssertionsToCheck[$index]);
+                    }
+
+                    return true;
+                }
+            ));
+
+        $this->installer->promptForOptionalPackage($questionName, $question);
+        self::assertCount(0, $messageAssertionsToCheck, 'Some messages were not written to IO!');
     }
 
     public static function assertPromptText(string $expected, string $argument): void
     {
-        self::assertIsString(
-            $argument,
-            'Questions must be a string since symfony/console:4.0'
-        );
-
         self::assertThat(
             strpos($argument, $expected) !== false,
             self::isTrue(),

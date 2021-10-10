@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use Composer\Package\BasePackage;
-use Prophecy\Argument;
 use ReflectionProperty;
 
 class AddPackageTest extends OptionalPackagesTestCase
@@ -13,18 +12,19 @@ class AddPackageTest extends OptionalPackagesTestCase
     /**
      * @dataProvider packageProvider
      */
-    public function testAddPackage(string $packageName, string $packageVersion, ?int $expectedStability)
+    public function testAddPackage(string $packageName, string $packageVersion, ?int $expectedStability): void
     {
         $installer = $this->createOptionalPackages();
 
         $this->io
-            ->write(Argument::containingString('Removing installer development dependencies'))
-            ->shouldBeCalled();
-        $installer->removeDevDependencies();
+            ->expects(self::exactly(2))
+            ->method('write')
+            ->withConsecutive(
+                [$this->stringContains('Removing installer development dependencies')],
+                [$this->stringContains('Adding package')]
+            );
 
-        $this->io
-            ->write(Argument::containingString('Adding package'))
-            ->shouldBeCalled();
+        $installer->removeDevDependencies();
 
         $installer->addPackage($packageName, $packageVersion);
 
