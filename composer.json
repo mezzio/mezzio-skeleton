@@ -23,7 +23,12 @@
         "forum": "https://discourse.laminas.dev"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/package-versions-deprecated": true,
+            "laminas/laminas-component-installer": true
+        }
     },
     "extra": {
         "laminas": {
@@ -51,7 +56,7 @@
         "elie29/zend-phpdi-config": "^6.0 || ^8.0",
         "filp/whoops": "^2.12.1",
         "jsoumelidis/zend-sf-di-config": "^0.5",
-        "laminas/laminas-coding-standard": "^2.3",
+        "laminas/laminas-coding-standard": "~2.3.0",
         "laminas/laminas-development-mode": "^3.3.0",
         "laminas/laminas-pimple-config": "^1.1.1",
         "laminas/laminas-servicemanager": "^3.6.4",
