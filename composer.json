@@ -38,7 +38,7 @@
     "require": {
         "php": "^7.4 || ~8.0.0 || ~8.1.0",
         "composer/package-versions-deprecated": "^1.10.99",
-        "laminas/laminas-component-installer": "^2.5.0",
+        "laminas/laminas-component-installer": "^2.6",
         "laminas/laminas-config-aggregator": "^1.5.0",
         "laminas/laminas-diactoros": "^2.6.0",
         "laminas/laminas-stdlib": "^3.3.1",
