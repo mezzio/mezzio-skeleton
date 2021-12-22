@@ -91,7 +91,7 @@
         "development-disable": "laminas-development-mode disable",
         "development-enable": "laminas-development-mode enable",
         "development-status": "laminas-development-mode status",
-        "mezzio": "mezzio --ansi",
+        "mezzio": "laminas --ansi",
         "check": [
             "@cs-check",
             "@test",
