@@ -43,7 +43,7 @@
         "laminas/laminas-diactoros": "^2.7",
         "laminas/laminas-stdlib": "^3.6",
         "mezzio/mezzio": "^3.7",
-        "mezzio/mezzio-helpers": "^5.6.0"
+        "mezzio/mezzio-helpers": "^5.7"
     },
     "require-dev": {
         "chubbyphp/chubbyphp-laminas-config": "^1.1",
