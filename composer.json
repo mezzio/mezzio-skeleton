@@ -40,7 +40,7 @@
         "composer/package-versions-deprecated": "^1.10.99",
         "laminas/laminas-component-installer": "^2.6",
         "laminas/laminas-config-aggregator": "^1.6",
-        "laminas/laminas-diactoros": "^2.6.0",
+        "laminas/laminas-diactoros": "^2.7",
         "laminas/laminas-stdlib": "^3.3.1",
         "laminas/laminas-zendframework-bridge": "^1.2.0",
         "mezzio/mezzio": "^3.5.0",
