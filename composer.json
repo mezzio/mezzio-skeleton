@@ -23,7 +23,12 @@
         "forum": "https://discourse.laminas.dev"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/package-versions-deprecated": true,
+            "laminas/laminas-component-installer": true
+        }
     },
     "extra": {
         "laminas": {
@@ -36,41 +41,37 @@
         }
     },
     "require": {
-        "php": "^7.3 || ~8.0.0 || ~8.1.0",
+        "php": "^7.4 || ~8.0.0 || ~8.1.0",
         "composer/package-versions-deprecated": "^1.10.99",
-        "laminas/laminas-component-installer": "^2.5.0",
-        "laminas/laminas-config-aggregator": "^1.5.0",
-        "laminas/laminas-diactoros": "^2.6.0",
-        "laminas/laminas-stdlib": "^3.3.1",
-        "laminas/laminas-zendframework-bridge": "^1.2.0",
-        "mezzio/mezzio": "^3.5.0",
-        "mezzio/mezzio-helpers": "^5.6.0"
+        "laminas/laminas-component-installer": "^2.6",
+        "laminas/laminas-config-aggregator": "^1.6",
+        "laminas/laminas-diactoros": "^2.7",
+        "laminas/laminas-stdlib": "^3.6",
+        "mezzio/mezzio": "^3.7",
+        "mezzio/mezzio-helpers": "^5.7"
     },
     "require-dev": {
-        "composer/composer": "^1.5 || ^2.0",
         "chubbyphp/chubbyphp-laminas-config": "^1.1",
+        "composer/composer": "^1.5 || ^2.0",
         "elie29/zend-phpdi-config": "^6.0 || ^8.0",
         "filp/whoops": "^2.12.1",
-        "jsoumelidis/zend-sf-di-config": "^0.4",
-        "laminas/laminas-auradi-config": "^2.1.0",
-        "laminas/laminas-coding-standard": "^2.2",
+        "jsoumelidis/zend-sf-di-config": "^0.5",
+        "laminas/laminas-coding-standard": "~2.3.0",
         "laminas/laminas-development-mode": "^3.3.0",
         "laminas/laminas-pimple-config": "^1.1.1",
         "laminas/laminas-servicemanager": "^3.6.4",
-        "mezzio/mezzio-aurarouter": "^3.1.0",
         "mezzio/mezzio-fastroute": "^3.2.0",
         "mezzio/mezzio-laminasrouter": "^3.1.0",
         "mezzio/mezzio-laminasviewrenderer": "^2.3.0",
         "mezzio/mezzio-platesrenderer": "^2.3.0",
-        "mezzio/mezzio-tooling": "^1.4.0",
+        "mezzio/mezzio-tooling": "^2.0",
         "mezzio/mezzio-twigrenderer": "^2.7.0",
         "mikey179/vfsstream": "^1.6.8",
-        "northwoods/container": "^3.2",
         "phpspec/prophecy": "^1.10.3",
+        "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.4.1",
+        "phpunit/phpunit": "^9.5.5",
         "roave/security-advisories": "dev-master"
     },
     "autoload": {
@@ -94,7 +95,7 @@
         "development-disable": "laminas-development-mode disable",
         "development-enable": "laminas-development-mode enable",
         "development-status": "laminas-development-mode status",
-        "mezzio": "mezzio --ansi",
+        "mezzio": "laminas --ansi",
         "check": [
             "@cs-check",
             "@test",
@@ -102,14 +103,8 @@
         ],
         "analyze": "phpstan analyze -l 3 -c ./phpstan.installer.neon ./src ./config",
         "clear-config-cache": "php bin/clear-config-cache.php",
-        "cs-check": [
-            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
-            "phpcs -s"
-        ],
-        "cs-fix": [
-            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
-            "phpcbf"
-        ],
+        "cs-check": "phpcs -s",
+        "cs-fix": "phpcbf",
         "serve": "php -S 0.0.0.0:8080 -t public/",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"

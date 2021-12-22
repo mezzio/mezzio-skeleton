@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use Aura\Di\Container;
 use Chubbyphp\Container\MinimalContainer;
+use DI\Container as PHPDIContainer;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\ServiceManager;
@@ -14,7 +14,7 @@ use Mezzio\Plates\PlatesRenderer;
 use Mezzio\Router;
 use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\TwigRenderer;
-use Northwoods\Container\InjectorContainer;
+use Pimple\Psr11\Container as PimpleContainer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -46,11 +46,7 @@ class HomePageHandler implements RequestHandlerInterface
         $data = [];
 
         switch ($this->containerName) {
-            case Container::class:
-                $data['containerName'] = 'Aura.Di';
-                $data['containerDocs'] = 'http://auraphp.com/packages/4.x/Di/';
-                break;
-            case \Pimple\Psr11\Container::class:
+            case PimpleContainer::class:
                 $data['containerName'] = 'Pimple';
                 $data['containerDocs'] = 'https://pimple.symfony.com/';
                 break;
@@ -58,16 +54,12 @@ class HomePageHandler implements RequestHandlerInterface
                 $data['containerName'] = 'Laminas Servicemanager';
                 $data['containerDocs'] = 'https://docs.laminas.dev/laminas-servicemanager/';
                 break;
-            case InjectorContainer::class:
-                $data['containerName'] = 'Auryn';
-                $data['containerDocs'] = 'https://github.com/rdlowrey/Auryn';
-                break;
             case ContainerBuilder::class:
                 $data['containerName'] = 'Symfony DI Container';
                 $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
                 break;
             case 'Elie\PHPDI\Config\ContainerWrapper':
-            case \DI\Container::class:
+            case PHPDIContainer::class:
                 $data['containerName'] = 'PHP-DI';
                 $data['containerDocs'] = 'http://php-di.org';
                 break;
@@ -77,10 +69,7 @@ class HomePageHandler implements RequestHandlerInterface
                 break;
         }
 
-        if ($this->router instanceof Router\AuraRouter) {
-            $data['routerName'] = 'Aura.Router';
-            $data['routerDocs'] = 'http://auraphp.com/packages/3.x/Router/';
-        } elseif ($this->router instanceof Router\FastRouteRouter) {
+        if ($this->router instanceof Router\FastRouteRouter) {
             $data['routerName'] = 'FastRoute';
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
         } elseif ($this->router instanceof Router\LaminasRouter) {
