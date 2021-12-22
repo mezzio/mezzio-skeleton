@@ -20,6 +20,8 @@ class HomePageHandlerFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
+        // @codingStandardsIgnoreStart
         return new HomePageHandler(get_class($container), $router, $template);
+        // @codingStandardsIgnoreEnd
     }
 }

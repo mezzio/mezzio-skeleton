@@ -17,18 +17,6 @@ return [
         'jsoumelidis/zend-sf-di-config'      => [
             'version' => '^0.4',
         ],
-        'northwoods/container'               => [
-            'version' => '^3.2',
-        ],
-        'laminas/laminas-auradi-config'      => [
-            'version' => '^2.0.1',
-        ],
-        'mezzio/mezzio-aurarouter'           => [
-            'version'   => '^3.0.1',
-            'whitelist' => [
-                'mezzio/mezzio-aurarouter',
-            ],
-        ],
         'mezzio/mezzio-fastroute'            => [
             'version'   => '^3.0.3',
             'whitelist' => [
@@ -86,27 +74,12 @@ return [
     'questions'   => [
         'container'       => [
             'question'               => 'Which container do you want to use for dependency injection?',
-            'default'                => 3,
+            'default'                => 2,
             'required'               => true,
             'custom-package'         => true,
             'custom-package-warning' => 'You need to edit public/index.php to start the custom container.',
             'options'                => [
                 1 => [
-                    'name'     => 'Aura.Di <comment>(supported by laminas)</comment>',
-                    'packages' => [
-                        'laminas/laminas-auradi-config',
-                    ],
-                    'flat'     => [
-                        'Resources/config/container-aura-di.php' => 'config/container.php',
-                    ],
-                    'modular'  => [
-                        'Resources/config/container-aura-di.php' => 'config/container.php',
-                    ],
-                    'minimal'  => [
-                        'Resources/config/container-aura-di.php' => 'config/container.php',
-                    ],
-                ],
-                2 => [
                     'name'     => 'Pimple <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'laminas/laminas-pimple-config',
@@ -121,7 +94,7 @@ return [
                         'Resources/config/container-pimple.php' => 'config/container.php',
                     ],
                 ],
-                3 => [
+                2 => [
                     'name'     => 'laminas-servicemanager <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'laminas/laminas-servicemanager',
@@ -136,22 +109,7 @@ return [
                         'Resources/config/container-laminas-servicemanager.php' => 'config/container.php',
                     ],
                 ],
-                4 => [
-                    'name'     => 'Auryn',
-                    'packages' => [
-                        'northwoods/container',
-                    ],
-                    'flat'     => [
-                        'Resources/config/container-auryn.php' => 'config/container.php',
-                    ],
-                    'modular'  => [
-                        'Resources/config/container-auryn.php' => 'config/container.php',
-                    ],
-                    'minimal'  => [
-                        'Resources/config/container-auryn.php' => 'config/container.php',
-                    ],
-                ],
-                5 => [
+                3 => [
                     'name'     => 'Symfony DI Container',
                     'packages' => [
                         'jsoumelidis/zend-sf-di-config',
@@ -166,7 +124,7 @@ return [
                         'Resources/config/container-sf-di.php' => 'config/container.php',
                     ],
                 ],
-                6 => [
+                4 => [
                     'name'     => 'PHP-DI',
                     'packages' => [
                         'elie29/zend-phpdi-config',
@@ -181,7 +139,7 @@ return [
                         'Resources/config/container-php-di.php' => 'config/container.php',
                     ],
                 ],
-                7 => [
+                5 => [
                     'name'     => 'chubbyphp-container',
                     'packages' => [
                         'chubbyphp/chubbyphp-laminas-config',
@@ -200,7 +158,7 @@ return [
         ],
         'router'          => [
             'question' => 'Which router do you want to use?',
-            'default'  => 2,
+            'default'  => 1,
             // TRUE: Must choose one / FALSE: May choose one or none of the above
             'required' => true,
             // Enable custom package input
@@ -209,21 +167,6 @@ return [
             'custom-package-warning' => 'You need to write your own router adapter.',
             'options'                => [
                 1 => [
-                    'name'     => 'Aura.Router <comment>(supported by laminas)</comment>',
-                    'packages' => [
-                        'mezzio/mezzio-aurarouter',
-                    ],
-                    'flat'     => [
-                        'Resources/config/routes-aura-router-full.php' => 'config/routes.php',
-                    ],
-                    'modular'  => [
-                        'Resources/config/routes-aura-router-full.php' => 'config/routes.php',
-                    ],
-                    'minimal'  => [
-                        'Resources/config/routes-aura-router-minimal.php' => 'config/routes.php',
-                    ],
-                ],
-                2 => [
                     'name'     => 'FastRoute <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'mezzio/mezzio-fastroute',
@@ -238,7 +181,7 @@ return [
                         'Resources/config/routes-fastroute-minimal.php' => 'config/routes.php',
                     ],
                 ],
-                3 => [
+                2 => [
                     'name'     => 'laminas-router <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'mezzio/mezzio-laminasrouter',

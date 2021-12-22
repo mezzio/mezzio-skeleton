@@ -43,7 +43,6 @@ class RoutersTest extends OptionalPackagesTestCase
 
     /** @var string[] */
     private $routerConfigProviders = [
-        Router\AuraRouter::class      => Router\AuraRouter\ConfigProvider::class,
         Router\FastRouteRouter::class => Router\FastRouteRouter\ConfigProvider::class,
         Router\LaminasRouter::class   => Router\LaminasRouter\ConfigProvider::class,
     ];
@@ -131,17 +130,14 @@ class RoutersTest extends OptionalPackagesTestCase
     public function routerProvider(): array
     {
         // @codingStandardsIgnoreStart
-        // $containerOption, $routerOption, $copyFilesKey, $dependencyKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter
+        // $installType, $containerOption, $routerOption, $copyFilesKey, $dependencyKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter
         return [
-            'aura-minimal'           => [OptionalPackages::INSTALL_MINIMAL, 3, 1, 'minimal-files', 'aliases', 404, [], Router\AuraRouter::class],
-            'aura-flat'              => [OptionalPackages::INSTALL_FLAT, 3, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\AuraRouter::class],
-            'aura-modular'           => [OptionalPackages::INSTALL_MODULAR, 3, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\AuraRouter::class],
-            'fastroute-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 'aliases', 404, [], Router\FastRouteRouter::class],
-            'fastroute-flat'         => [OptionalPackages::INSTALL_FLAT, 3, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            'fastroute-modular'      => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            'laminas-router-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 3, 'minimal-files', 'aliases', 404, [], Router\LaminasRouter::class],
-            'laminas-router-flat'    => [OptionalPackages::INSTALL_FLAT, 3, 3, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\LaminasRouter::class],
-            'laminas-router-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 3, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\LaminasRouter::class],
+            'fastroute-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 2, 1, 'minimal-files', 'aliases', 404, [], Router\FastRouteRouter::class],
+            'fastroute-flat'         => [OptionalPackages::INSTALL_FLAT, 2, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
+            'fastroute-modular'      => [OptionalPackages::INSTALL_MODULAR, 2, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
+            'laminas-router-minimal' => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 'minimal-files', 'aliases', 404, [], Router\LaminasRouter::class],
+            'laminas-router-flat'    => [OptionalPackages::INSTALL_FLAT, 2, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\LaminasRouter::class],
+            'laminas-router-modular' => [OptionalPackages::INSTALL_MODULAR, 2, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\LaminasRouter::class],
         ];
         // @codingStandardsIgnoreEnd
     }

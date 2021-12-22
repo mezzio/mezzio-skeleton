@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MezzioInstallerTest;
 
-use Aura\Di\Container as AuraDiContainer;
 use Chubbyphp\Container\Container as ChubbyphpContainer;
 use DI\Container as PhpDIContainer;
 use Generator;
@@ -13,8 +12,6 @@ use Mezzio\LaminasView\ConfigProvider as LaminasViewRendererConfigProvider;
 use Mezzio\LaminasView\LaminasViewRenderer;
 use Mezzio\Plates\ConfigProvider as PlatesRendererConfigProvider;
 use Mezzio\Plates\PlatesRenderer;
-use Mezzio\Router\AuraRouter;
-use Mezzio\Router\AuraRouter\ConfigProvider as AuraRouterConfigProvider;
 use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\FastRouteRouter\ConfigProvider as FastRouteRouterConfigProvider;
 use Mezzio\Router\LaminasRouter;
@@ -24,7 +21,6 @@ use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\ConfigProvider as TwigRendererConfigProvider;
 use Mezzio\Twig\TwigRenderer;
 use MezzioInstaller\OptionalPackages;
-use Northwoods\Container\InjectorContainer as AurynContainer;
 use Pimple\Psr11\Container as PimpleContainer;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
@@ -45,7 +41,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     /** @var array<class-string<RouterInterface>, class-string> */
     private $routerConfigProviders = [
-        AuraRouter::class      => AuraRouterConfigProvider::class,
         FastRouteRouter::class => FastRouteRouterConfigProvider::class,
         LaminasRouter::class   => LaminasRouterConfigProvider::class,
     ];
@@ -75,17 +70,12 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     // $routerOption, $routerClass
     /** @var array<string, array<int|class-string<RouterInterface>>> */
     private $routerTypes = [
-        'aura-router'    => [1, AuraRouter::class],
-        'fastroute'      => [2, FastRouteRouter::class],
-        'laminas-router' => [3, LaminasRouter::class],
+        'fastroute'      => [1, FastRouteRouter::class],
+        'laminas-router' => [2, LaminasRouter::class],
     ];
 
     /** @var array<class-string<RouterInterface>, array<string, string>> */
     private $expectedRouterAttributes = [
-        AuraRouter::class      => [
-            'routerName' => 'Aura.Router',
-            'routerDocs' => 'http://auraphp.com/packages/3.x/Router/',
-        ],
         FastRouteRouter::class => [
             'routerName' => 'FastRoute',
             'routerDocs' => 'https://github.com/nikic/FastRoute',
@@ -99,21 +89,15 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     // $containerOption, $containerClass
     /** @var array<string, array<int|class-string<ContainerInterface>>> */
     private $containerTypes = [
-        'aura-di'                => [1, AuraDiContainer::class],
-        'pimple'                 => [2, PimpleContainer::class],
-        'laminas-servicemanager' => [3, LaminasServiceManagerContainer::class],
-        'auryn'                  => [4, AurynContainer::class],
-        'sf-di'                  => [5, SfContainerBuilder::class],
-        'php-di'                 => [6, PhpDIContainer::class],
-        'chubbyphp-container'    => [7, ChubbyphpContainer::class],
+        'pimple'                 => [1, PimpleContainer::class],
+        'laminas-servicemanager' => [2, LaminasServiceManagerContainer::class],
+        'sf-di'                  => [3, SfContainerBuilder::class],
+        'php-di'                 => [4, PhpDIContainer::class],
+        'chubbyphp-container'    => [5, ChubbyphpContainer::class],
     ];
 
     /** @var array<class-string<ContainerInterface>, array<string, string>> */
     private $expectedContainerAttributes = [
-        AuraDiContainer::class                => [
-            'containerName' => 'Aura.Di',
-            'containerDocs' => 'http://auraphp.com/packages/4.x/Di/',
-        ],
         PimpleContainer::class                => [
             'containerName' => 'Pimple',
             'containerDocs' => 'https://pimple.symfony.com/',
@@ -121,10 +105,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         LaminasServiceManagerContainer::class => [
             'containerName' => 'Laminas Servicemanager',
             'containerDocs' => 'https://docs.laminas.dev/laminas-servicemanager/',
-        ],
-        AurynContainer::class                 => [
-            'containerName' => 'Auryn',
-            'containerDocs' => 'https://github.com/rdlowrey/Auryn',
         ],
         SfContainerBuilder::class             => [
             'containerName' => 'Symfony DI Container',
@@ -295,11 +275,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     {
         // Execute a test case for each install type and container, without any renderer
         foreach ($this->containerTypes as $containerId => $containerType) {
-            // auryn psr-wrapper : issue with invokable services
-            if ($containerId === 'auryn') {
-                continue;
-            }
-
             $containerOption = $containerType[0];
             $containerClass  = $containerType[1];
 

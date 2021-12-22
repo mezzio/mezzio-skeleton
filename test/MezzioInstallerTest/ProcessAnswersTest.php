@@ -76,7 +76,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $this->installer->removeDevDependencies();
 
         // @codingStandardsIgnoreStart
-        $this->io->write(Argument::containingString('Adding package <info>laminas/laminas-auradi-config</info>'))->shouldBeCalled();
+        $this->io->write(Argument::containingString('Adding package <info>laminas/laminas-pimple-config</info>'))->shouldBeCalled();
         $this->io->write(Argument::containingString('Copying <info>config/container.php</info>'))->shouldBeCalled();
         // @codingStandardsIgnoreEnd
 
@@ -87,7 +87,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
 
         self::assertTrue($result);
         self::assertFileExists($this->projectRoot . '/config/container.php');
-        self::assertPackage('laminas/laminas-auradi-config', $this->installer);
+        self::assertPackage('laminas/laminas-pimple-config', $this->installer);
     }
 
     public function testAnsweredWithPackage()
