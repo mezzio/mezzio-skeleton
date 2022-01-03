@@ -67,7 +67,7 @@
         "mezzio/mezzio-tooling": "^2.1",
         "mezzio/mezzio-twigrenderer": "^2.7.0",
         "mikey179/vfsstream": "^1.6.8",
-        "phpunit/phpunit": "^9.5.5",
+        "phpunit/phpunit": "^9.5.11",
         "psalm/plugin-phpunit": "^0.16.1",
         "roave/security-advisories": "dev-master",
         "vimeo/psalm": "^4.17"
