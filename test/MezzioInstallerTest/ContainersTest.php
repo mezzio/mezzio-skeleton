@@ -45,7 +45,11 @@ class ContainersTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @dataProvider containerProvider
+     * @psalm-param OptionalPackages::INSTALL_* $installType
+     * @psalm-param class-string<ContainerInterface> $expectedContainer
+     * @psalm-param 'minimal-files'|'copy-files' $copyFilesKey
      */
     public function testContainer(
         string $installType,
@@ -54,7 +58,7 @@ class ContainersTest extends OptionalPackagesTestCase
         string $copyFilesKey,
         int $expectedResponseStatusCode,
         string $expectedContainer
-    ) {
+    ): void {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
@@ -96,9 +100,19 @@ class ContainersTest extends OptionalPackagesTestCase
         self::assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
+    /**
+     * @psalm-return array<string, array{
+     *     0: OptionalPackages::INSTALL_*,
+     *     1: int,
+     *     2: int,
+     *     3: 'minimal-files'|'copy-files',
+     *     4: int,
+     *     5: class-string<ContainerInterface>
+     * }>
+     */
     public function containerProvider(): array
     {
-        // @codingStandardsIgnoreStart
+        // phpcs:disable Generic.Files.LineLength.TooLong
         // $installType, $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
         return [
             'pimple-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 1, 2, 'minimal-files', 404, PimpleContainer::class],
@@ -117,6 +131,6 @@ class ContainersTest extends OptionalPackagesTestCase
             'chubbyphp-c-flat'     => [OptionalPackages::INSTALL_FLAT,    5, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
             'chubbyphp-c-modular'  => [OptionalPackages::INSTALL_MODULAR, 5, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
         ];
-        // @codingStandardsIgnoreEnd
+        // phpcs:enable Generic.Files.LineLength.TooLong
     }
 }

@@ -17,7 +17,7 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         $this->installer = $this->createOptionalPackages();
     }
 
-    public function testRemoveFirstLine()
+    public function testRemoveFirstLine(): void
     {
         $string = "foo\nbar\nbaz\nqux\nquux";
 
@@ -27,7 +27,7 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         self::assertEquals($expected, $actual);
     }
 
-    public function testRemoveSingleLine()
+    public function testRemoveSingleLine(): void
     {
         $string = "foo\nbar\nbaz\nqux\nquux";
 
@@ -37,7 +37,7 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         self::assertEquals($expected, $actual);
     }
 
-    public function testRemoveMultipleLines()
+    public function testRemoveMultipleLines(): void
     {
         $string = "foo\nbar\nbaz\nqux\nquux";
 
@@ -47,7 +47,7 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         self::assertEquals($expected, $actual);
     }
 
-    public function testRemoveLinesWithSpaces()
+    public function testRemoveLinesWithSpaces(): void
     {
         $string = "foo\n  bar\n  baz  \n  qux\nquux";
 
@@ -57,7 +57,7 @@ class RemoveLineFromStringTest extends OptionalPackagesTestCase
         self::assertEquals($expected, $actual);
     }
 
-    public function testRemoveLastLine()
+    public function testRemoveLastLine(): void
     {
         $string = "foo\nbar\nbaz\nqux\nquux";
 

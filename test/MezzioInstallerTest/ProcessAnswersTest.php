@@ -30,7 +30,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $this->recursiveDelete($this->projectRoot);
     }
 
-    public function testInvalidAnswer()
+    public function testInvalidAnswer(): void
     {
         $this->io->expects($this->never())->method('write');
 
@@ -43,7 +43,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
-    public function testAnsweredWithN()
+    public function testAnsweredWithN(): void
     {
         $this->io->expects($this->never())->method('write');
 
@@ -56,7 +56,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
-    public function testAnsweredWithInvalidOption()
+    public function testAnsweredWithInvalidOption(): void
     {
         $this->io->expects($this->never())->method('write');
 
@@ -69,7 +69,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertFileDoesNotExist($this->projectRoot . '/config/container.php');
     }
 
-    public function testAnsweredWithValidOption()
+    public function testAnsweredWithValidOption(): void
     {
         // Prepare the installer
         $this->installer->removeDevDependencies();
@@ -92,7 +92,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertPackage('laminas/laminas-pimple-config', $this->installer);
     }
 
-    public function testAnsweredWithPackage()
+    public function testAnsweredWithPackage(): void
     {
         // Prepare the installer
         $this->installer->removeDevDependencies();
@@ -115,7 +115,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         self::assertPackage('league/container', $this->installer);
     }
 
-    public function testPackagesAreAddedToWhitelist()
+    public function testPackagesAreAddedToWhitelist(): void
     {
         // Prepare the installer
         $this->installer->removeDevDependencies();

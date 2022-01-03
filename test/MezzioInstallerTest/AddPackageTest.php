@@ -12,7 +12,7 @@ class AddPackageTest extends OptionalPackagesTestCase
     /**
      * @dataProvider packageProvider
      */
-    public function testAddPackage(string $packageName, string $packageVersion, ?int $expectedStability)
+    public function testAddPackage(string $packageName, string $packageVersion, ?int $expectedStability): void
     {
         $installer = $this->createOptionalPackages();
 

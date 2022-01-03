@@ -51,7 +51,7 @@ trait ProjectSandboxTrait
      */
     protected $autoloader;
 
-    /** @var ContainerInterface */
+    /** @var null|ContainerInterface */
     protected $container;
 
     /** @var string Root of the sandbox system */
@@ -152,7 +152,7 @@ trait ProjectSandboxTrait
      */
     protected function setUpAlternateAutoloader(string $appPath, bool $stripNamespace = false): void
     {
-        $this->autoloader = function ($class) use ($appPath, $stripNamespace) {
+        $this->autoloader = function ($class) use ($appPath, $stripNamespace): bool {
             if (strpos($class, 'App\\') !== 0) {
                 return false;
             }
@@ -171,6 +171,7 @@ trait ProjectSandboxTrait
             }
 
             include $path;
+            return true;
         };
 
         spl_autoload_register($this->autoloader, true, true);

@@ -137,6 +137,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @dataProvider installCasesProvider
      */
     public function testHomePageHtmlResponseContainsExpectedInfo(
@@ -146,7 +147,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         string $rendererClass,
         string $containerName,
         string $containerDocs
-    ) {
+    ): void {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
@@ -184,6 +185,16 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         self::assertStringContainsString("href=\"{$containerDocs}\"", $html);
     }
 
+    /**
+     * @psalm-return Generator<string, array{
+     *     0: OptionalPackages::INSTALL_*,
+     *     1: int,
+     *     2: int,
+     *     3: class-string<TemplateRendererInterface>,
+     *     4: string,
+     *     5: string
+     * }>
+     */
     public function installCasesProvider(): Generator
     {
         // Execute a test case for each container, renderer and non minimal install type
@@ -222,6 +233,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @dataProvider rendererlessInstallCasesProvider
      */
     public function testHomePageJsonResponseContainsExpectedInfo(
@@ -233,7 +245,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         string $routerClass,
         string $routerName,
         string $routerDocs
-    ) {
+    ): void {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
@@ -257,7 +269,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         self::assertEquals(200, $response->getStatusCode());
 
         // Test response content
-        $json = (string) $response->getBody()->getContents();
+        $json = $response->getBody()->getContents();
         $data = json_decode($json, true);
 
         self::assertIsArray($data);
@@ -271,6 +283,18 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         self::assertEquals($routerDocs, $data['routerDocs']);
     }
 
+    /**
+     * @psalm-return Generator<string, array{
+     *     0: OptionalPackages::INSTALL_*,
+     *     1: int,
+     *     2: string,
+     *     3: string,
+     *     4: int,
+     *     5: class-string<RouterInterface>,
+     *     6: string,
+     *     7: string
+     * }>
+     */
     public function rendererlessInstallCasesProvider(): Generator
     {
         // Execute a test case for each install type and container, without any renderer
@@ -306,7 +330,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         }
     }
 
-    public function injectRouterConfigProvider(string $routerClass)
+    public function injectRouterConfigProvider(string $routerClass): void
     {
         $configFile = $this->projectRoot . '/config/config.php';
         $contents   = file_get_contents($configFile);
@@ -318,7 +342,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         file_put_contents($configFile, $contents);
     }
 
-    public function injectRendererConfigProvider(string $rendererClass)
+    public function injectRendererConfigProvider(string $rendererClass): void
     {
         $configFile = $this->projectRoot . '/config/config.php';
         $contents   = file_get_contents($configFile);

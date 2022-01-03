@@ -33,7 +33,7 @@ class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
         $this->installer   = $this->createOptionalPackages($this->projectRoot);
     }
 
-    public function testCreatesDataDirectoryWhenInvoked()
+    public function testCreatesDataDirectoryWhenInvoked(): void
     {
         $this->io
             ->expects($this->once())

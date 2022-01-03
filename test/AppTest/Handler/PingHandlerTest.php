@@ -13,7 +13,7 @@ use function json_decode;
 
 class PingHandlerTest extends TestCase
 {
-    public function testResponse()
+    public function testResponse(): void
     {
         $pingHandler = new PingHandler();
         $response    = $pingHandler->handle(

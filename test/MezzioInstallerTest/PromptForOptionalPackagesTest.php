@@ -42,6 +42,14 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         $this->recursiveDelete($this->projectRoot);
     }
 
+    /**
+     * @psalm-return Generator<string, array{
+     *     0: string,
+     *     1: string,
+     *     2: int,
+     *     3: string
+     * }>
+     */
     public function promptCombinations(): Generator
     {
         $config = require __DIR__ . '/../../src/MezzioInstaller/config.php';
@@ -95,7 +103,8 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
                             continue;
                         }
 
-                        if (false !== strpos($message, 'Adding package')
+                        if (
+                            false !== strpos($message, 'Adding package')
                             || false !== strpos($message, '- Copying ')
                         ) {
                             $written[] = $package;
@@ -112,7 +121,10 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         self::assertSame(count($written), count($toWrite));
     }
 
-    public static function assertPromptText(string $expected, string $argument): void
+    /**
+     * @param mixed $argument
+     */
+    public static function assertPromptText(string $expected, $argument): void
     {
         self::assertIsString(
             $argument,

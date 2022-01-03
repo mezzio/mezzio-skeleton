@@ -64,6 +64,7 @@ class RoutersTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @dataProvider routerProvider
      */
     public function testRouter(
@@ -75,7 +76,7 @@ class RoutersTest extends OptionalPackagesTestCase
         int $expectedResponseStatusCode,
         array $expectedRoutes,
         string $expectedRouter
-    ) {
+    ): void {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container

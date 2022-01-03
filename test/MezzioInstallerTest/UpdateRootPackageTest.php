@@ -37,7 +37,7 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
         ],
     ];
 
-    public function testUpdateRootPackageWillUpdateComposedPackage()
+    public function testUpdateRootPackageWillUpdateComposedPackage(): void
     {
         $installer = $this->createOptionalPackages();
         $this->setInstallerProperties($installer);

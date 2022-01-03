@@ -32,7 +32,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
     /**
      * @dataProvider installSelections
      */
-    public function testRequestInstallTypeReturnsExpectedConstantValue(string $selection, string $expected)
+    public function testRequestInstallTypeReturnsExpectedConstantValue(string $selection, string $expected): void
     {
         $this->io
             ->expects($this->once())
@@ -43,7 +43,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         self::assertSame($expected, $this->installer->requestInstallType());
     }
 
-    public function testWillContinueToPromptUntilValidAnswerPresented()
+    public function testWillContinueToPromptUntilValidAnswerPresented(): void
     {
         $tries = random_int(1, 10);
 

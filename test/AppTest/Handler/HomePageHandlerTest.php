@@ -30,7 +30,7 @@ class HomePageHandlerTest extends TestCase
         $this->router    = $this->createMock(RouterInterface::class);
     }
 
-    public function testReturnsJsonResponseWhenNoTemplateRendererProvided()
+    public function testReturnsJsonResponseWhenNoTemplateRendererProvided(): void
     {
         $homePage = new HomePageHandler(
             get_class($this->container),
@@ -44,7 +44,7 @@ class HomePageHandlerTest extends TestCase
         self::assertInstanceOf(JsonResponse::class, $response);
     }
 
-    public function testReturnsHtmlResponseWhenTemplateRendererProvided()
+    public function testReturnsHtmlResponseWhenTemplateRendererProvided(): void
     {
         $renderer = $this->createMock(TemplateRendererInterface::class);
         $renderer
