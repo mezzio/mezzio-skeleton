@@ -72,6 +72,7 @@ trait ProjectSandboxTrait
 
         mkdir($this->projectRoot . '/data', 0777, true);
         mkdir($this->projectRoot . '/data/cache', 0777, true);
+        copy($this->packageRoot . '/composer.json', $this->projectRoot . '/composer.json');
         foreach (['config', 'public', 'src', 'templates', 'test'] as $path) {
             $this->recursiveCopy(
                 $this->packageRoot . DIRECTORY_SEPARATOR . $path,

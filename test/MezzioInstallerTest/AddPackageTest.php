@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use Composer\Package\BasePackage;
-use Prophecy\Argument;
 use ReflectionProperty;
 
 class AddPackageTest extends OptionalPackagesTestCase
@@ -18,14 +17,14 @@ class AddPackageTest extends OptionalPackagesTestCase
         $installer = $this->createOptionalPackages();
 
         $this->io
-            ->write(Argument::containingString('Removing installer development dependencies'))
-            ->shouldBeCalled();
+            ->expects($this->atLeast(2))
+            ->method('write')
+            ->withConsecutive(
+                [$this->stringContains('Removing installer development dependencies')],
+                [$this->stringContains('Adding package')],
+            );
+
         $installer->removeDevDependencies();
-
-        $this->io
-            ->write(Argument::containingString('Adding package'))
-            ->shouldBeCalled();
-
         $installer->addPackage($packageName, $packageVersion);
 
         self::assertPackage('laminas/laminas-stdlib', $installer);

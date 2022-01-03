@@ -42,12 +42,14 @@ class UpdateRootPackageTest extends OptionalPackagesTestCase
         $installer = $this->createOptionalPackages();
         $this->setInstallerProperties($installer);
 
-        $this->rootPackage->setRequires($this->changes['composerRequires'])->shouldBeCalled();
-        $this->rootPackage->setDevRequires($this->changes['composerDevRequires'])->shouldBeCalled();
-        $this->rootPackage->setStabilityFlags($this->changes['stabilityFlags'])->shouldBeCalled();
-        $this->rootPackage->setAutoload($this->changes['composerDefinition']['autoload'])->shouldBeCalled();
-        $this->rootPackage->setDevAutoload($this->changes['composerDefinition']['autoload-dev'])->shouldBeCalled();
-        $this->rootPackage->setExtra([])->shouldBeCalled();
+        // phpcs:disable Generic.Files.LineLength.TooLong
+        $this->rootPackage->expects($this->atLeastOnce())->method('setRequires')->with($this->changes['composerRequires']);
+        $this->rootPackage->expects($this->atLeastOnce())->method('setDevRequires')->with($this->changes['composerDevRequires']);
+        $this->rootPackage->expects($this->atLeastOnce())->method('setStabilityFlags')->with($this->changes['stabilityFlags']);
+        $this->rootPackage->expects($this->atLeastOnce())->method('setAutoload')->with($this->changes['composerDefinition']['autoload']);
+        $this->rootPackage->expects($this->atLeastOnce())->method('setDevAutoload')->with($this->changes['composerDefinition']['autoload-dev']);
+        $this->rootPackage->expects($this->atLeastOnce())->method('setExtra')->with([]);
+        // phpcs:enable Generic.Files.LineLength.TooLong
 
         $installer->updateRootPackage();
     }

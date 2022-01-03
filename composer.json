@@ -67,8 +67,6 @@
         "mezzio/mezzio-tooling": "^2.0",
         "mezzio/mezzio-twigrenderer": "^2.7.0",
         "mikey179/vfsstream": "^1.6.8",
-        "phpspec/prophecy": "^1.10.3",
-        "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpunit/phpunit": "^9.5.5",

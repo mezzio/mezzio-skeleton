@@ -6,10 +6,10 @@ namespace MezzioInstallerTest;
 
 use Generator;
 use MezzioInstaller\OptionalPackages;
-use Prophecy\Argument;
 
 use function chdir;
 use function copy;
+use function count;
 use function putenv;
 use function sprintf;
 use function strpos;
@@ -63,8 +63,10 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         array $expectedPackage
     ): void {
         $this->io
-            ->ask(
-                Argument::that(static function ($arg) use ($question) {
+            ->expects($this->once())
+            ->method('ask')
+            ->with(
+                $this->callback(static function ($arg) use ($question) {
                     PromptForOptionalPackagesTest::assertPromptText($question['question'], $arg);
 
                     return true;
@@ -73,19 +75,41 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
             )
             ->willReturn($selection);
 
+        $toWrite = [];
+        $written = [];
+
         foreach ($expectedPackage['packages'] as $package) {
-            $this->io
-                ->write(Argument::containingString($package))
-                ->shouldBeCalled();
+            $toWrite[] = $package;
         }
 
         foreach ($expectedPackage[OptionalPackages::INSTALL_MINIMAL] as $target) {
+            $toWrite[] = $target;
+        }
+
+        if (count($toWrite) > 0) {
             $this->io
-                ->write(Argument::containingString($target))
-                ->shouldBeCalled();
+                ->method('write')
+                ->with($this->callback(function (string $message) use ($toWrite, &$written): bool {
+                    foreach ($toWrite as $package) {
+                        if (false === strpos($message, $package)) {
+                            continue;
+                        }
+
+                        if (false !== strpos($message, 'Adding package')
+                            || false !== strpos($message, '- Copying ')
+                        ) {
+                            $written[] = $package;
+                        }
+
+                        return true;
+                    }
+
+                    return false;
+                }));
         }
 
         self::assertNull($this->installer->promptForOptionalPackage($questionName, $question));
+        self::assertSame(count($written), count($toWrite));
     }
 
     public static function assertPromptText(string $expected, string $argument): void

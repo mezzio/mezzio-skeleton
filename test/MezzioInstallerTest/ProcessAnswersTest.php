@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
-use Prophecy\Argument;
 
 use function chdir;
 
@@ -33,7 +32,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
 
     public function testInvalidAnswer()
     {
-        $this->io->write()->shouldNotBeCalled();
+        $this->io->expects($this->never())->method('write');
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -46,7 +45,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
 
     public function testAnsweredWithN()
     {
-        $this->io->write()->shouldNotBeCalled();
+        $this->io->expects($this->never())->method('write');
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -59,7 +58,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
 
     public function testAnsweredWithInvalidOption()
     {
-        $this->io->write()->shouldNotBeCalled();
+        $this->io->expects($this->never())->method('write');
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -75,10 +74,13 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
-        // @codingStandardsIgnoreStart
-        $this->io->write(Argument::containingString('Adding package <info>laminas/laminas-pimple-config</info>'))->shouldBeCalled();
-        $this->io->write(Argument::containingString('Copying <info>config/container.php</info>'))->shouldBeCalled();
-        // @codingStandardsIgnoreEnd
+        $this->io
+            ->expects($this->exactly(2))
+            ->method('write')
+            ->withConsecutive(
+                [$this->stringContains('Adding package <info>laminas/laminas-pimple-config</info>')],
+                [$this->stringContains('Copying <info>config/container.php</info>')],
+            );
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -95,8 +97,13 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
-        $this->io->write(Argument::containingString('Adding package <info>league/container</info>'))->shouldBeCalled();
-        $this->io->write(Argument::containingString('<warning>You need to edit public/index.php'))->shouldBeCalled();
+        $this->io
+            ->expects($this->exactly(2))
+            ->method('write')
+            ->withConsecutive(
+                [$this->stringContains('Adding package <info>league/container</info>')],
+                [$this->stringContains('<warning>You need to edit public/index.php')],
+            );
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -114,15 +121,12 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         $this->installer->removeDevDependencies();
 
         $this->io
-            ->write(Argument::containingString(
-                'Adding package <info>mezzio/mezzio-laminasviewrenderer</info>'
-            ))
-            ->shouldBeCalled();
-        $this->io
-            ->write(Argument::containingString(
-                'Whitelist package <info>mezzio/mezzio-laminasviewrenderer</info>'
-            ))
-            ->shouldBeCalled();
+            ->expects($this->exactly(2))
+            ->method('write')
+            ->withConsecutive(
+                [$this->stringContains('Adding package <info>mezzio/mezzio-laminasviewrenderer</info>')],
+                [$this->stringContains('Whitelist package <info>mezzio/mezzio-laminasviewrenderer</info>')],
+            );
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['template-engine'];

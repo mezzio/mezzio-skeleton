@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
-use Prophecy\Argument;
 
 use function random_int;
 use function strpos;
@@ -36,7 +35,9 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
     public function testRequestInstallTypeReturnsExpectedConstantValue(string $selection, string $expected)
     {
         $this->io
-            ->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')
+            ->expects($this->once())
+            ->method('ask')
+            ->with($this->callback(fn ($value) => $this->assertQueryPrompt($value)), '2')
             ->willReturn($selection);
 
         self::assertSame($expected, $this->installer->requestInstallType());
@@ -44,32 +45,30 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
 
     public function testWillContinueToPromptUntilValidAnswerPresented()
     {
-        $io    = $this->io;
         $tries = random_int(1, 10);
 
-        // Handle a call to ask() by looping $tries times
-        $handle = function () use ($io, &$tries, &$handle) {
-            if ($tries === 0) {
-                // Valid choice to complete the loop
-                return '1';
-            }
+        $argumentLists = [];
+        $results       = [];
 
-            // Otherwise, ask again.
+        do {
+            $argumentLists[] = [$this->callback(fn ($value) => $this->assertQueryPrompt($value)), '2'];
+            $results[]       = $tries > 0 ? 'n' : '1';
+
             $tries -= 1;
-            $io->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')->will($handle);
-            return 'n';
-        };
+        } while ($tries > -1);
 
         $this->io
-            ->ask(Argument::that([self::class, 'assertQueryPrompt']), '2')
-            ->will($handle);
+            ->expects($this->exactly(count($results)))
+            ->method('ask')
+            ->withConsecutive(...$argumentLists)
+            ->willReturnOnConsecutiveCalls(...$results);
 
         $this->io
-            ->write(Argument::containingString('Invalid answer'))
-            ->shouldBeCalledTimes($tries);
+            ->expects($this->exactly(count($results) - 1))
+            ->method('write')
+            ->with($this->stringContains('Invalid answer'));
 
         self::assertSame(OptionalPackages::INSTALL_MINIMAL, $this->installer->requestInstallType());
-        self::assertEquals(0, $tries);
     }
 
     /**

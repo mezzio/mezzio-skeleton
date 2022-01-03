@@ -9,7 +9,6 @@ namespace MezzioInstallerTest;
 use MezzioInstaller\OptionalPackages;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
-use Prophecy\Argument;
 
 use function fileperms;
 use function is_dir;
@@ -36,7 +35,10 @@ class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
 
     public function testCreatesDataDirectoryWhenInvoked()
     {
-        $this->io->write(Argument::containingString('Setup data and cache dir'))->shouldBeCalled();
+        $this->io
+            ->expects($this->once())
+            ->method('write')
+            ->with($this->stringContains('Setup data and cache dir'));
         $this->installer->setupDataAndCacheDir();
 
         // '40755' is the octal representation of the file permissions
