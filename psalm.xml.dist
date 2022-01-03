@@ -10,9 +10,9 @@
     <projectFiles>
         <directory name="src"/>
         <directory name="test"/>
-        <directory name="config"/>
         <directory name="public"/>
         <ignoreFiles>
+            <directory name="src/MezzioInstaller/Resources"/>
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
