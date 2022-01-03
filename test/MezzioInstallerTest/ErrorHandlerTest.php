@@ -59,7 +59,6 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider errorHandlerProvider
      */
     public function testErrorHandler(

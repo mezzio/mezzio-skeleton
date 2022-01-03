@@ -6,6 +6,7 @@ namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
 
+use function count;
 use function random_int;
 use function strpos;
 

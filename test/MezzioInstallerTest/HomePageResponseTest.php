@@ -137,7 +137,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider installCasesProvider
      */
     public function testHomePageHtmlResponseContainsExpectedInfo(
@@ -233,7 +232,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider rendererlessInstallCasesProvider
      */
     public function testHomePageJsonResponseContainsExpectedInfo(

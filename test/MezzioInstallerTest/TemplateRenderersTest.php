@@ -47,7 +47,6 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider templateRendererProvider
      */
     public function testTemplateRenderer(
@@ -133,8 +132,8 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         // Full framework installation test cases; installation options that install templates.
         $testCases = [
             // $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
-            'plates-full'    => [3, 2, 1, 200, Mezzio\Plates\PlatesRenderer::class],
-            'twig-full'      => [3, 2, 2, 200, Mezzio\Twig\TwigRenderer::class],
+            'plates-full'       => [3, 2, 1, 200, Mezzio\Plates\PlatesRenderer::class],
+            'twig-full'         => [3, 2, 2, 200, Mezzio\Twig\TwigRenderer::class],
             'laminas-view-full' => [3, 2, 3, 200, Mezzio\LaminasView\LaminasViewRenderer::class],
         ];
         // phpcs:enable Generic.Files.LineLength.TooLong

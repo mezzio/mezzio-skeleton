@@ -64,7 +64,6 @@ class RoutersTest extends OptionalPackagesTestCase
 
     /**
      * @runInSeparateProcess
-     *
      * @dataProvider routerProvider
      */
     public function testRouter(

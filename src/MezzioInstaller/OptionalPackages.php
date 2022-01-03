@@ -18,7 +18,6 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
 
-use function array_diff;
 use function array_map;
 use function chmod;
 use function copy;
