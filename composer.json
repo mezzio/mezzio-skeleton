@@ -102,7 +102,7 @@
         "enable-codestandard": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
         "cs-check": [
             "@enable-codestandard",
-			"phpcs -s"
+            "phpcs -s"
         ],
         "cs-fix": [
             "@enable-codestandard",
