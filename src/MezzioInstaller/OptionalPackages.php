@@ -84,6 +84,7 @@ class OptionalPackages
         'CHANGELOG.md',
         'phpcs.xml',
         'psalm.xml.dist',
+        'psalm-baseline.xml',
         'src/App/templates/.gitkeep',
     ];
 
