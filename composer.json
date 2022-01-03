@@ -64,7 +64,7 @@
         "mezzio/mezzio-laminasrouter": "^3.1.0",
         "mezzio/mezzio-laminasviewrenderer": "^2.3.0",
         "mezzio/mezzio-platesrenderer": "^2.3.0",
-        "mezzio/mezzio-tooling": "^2.0",
+        "mezzio/mezzio-tooling": "^2.1",
         "mezzio/mezzio-twigrenderer": "^2.7.0",
         "mikey179/vfsstream": "^1.6.8",
         "phpunit/phpunit": "^9.5.5",
