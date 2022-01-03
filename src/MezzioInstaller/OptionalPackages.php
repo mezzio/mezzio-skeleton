@@ -84,6 +84,7 @@ class OptionalPackages
         '.travis.yml',
         'CHANGELOG.md',
         'phpcs.xml',
+        'psalm.xml.dist',
         'src/App/templates/.gitkeep',
     ];
 
@@ -114,6 +115,8 @@ class OptionalPackages
         'jsoumelidis/zend-sf-di-config',
         'mikey179/vfsstream',
         'laminas/laminas-coding-standard',
+        'vimeo/psalm',
+        'psalm/plugin-phpunit',
         'mezzio/mezzio-fastroute',
         'mezzio/mezzio-platesrenderer',
         'mezzio/mezzio-twigrenderer',
