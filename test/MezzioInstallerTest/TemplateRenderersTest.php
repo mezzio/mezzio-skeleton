@@ -56,7 +56,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         int $templateRendererOption,
         int $expectedResponseStatusCode,
         string $expectedTemplateRenderer
-    ) {
+    ): void {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container
@@ -109,26 +109,34 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         }
     }
 
+    /**
+     * @psalm-return Generator<string, array{
+     *     0: OptionalPackages::INSTALL_*,
+     *     1: int,
+     *     2, int,
+     *     3, int,
+     *     4, int,
+     *     5: class-string<Mezzio\Template\TemplateRendererInterface>
+     * }>
+     */
     public function templateRendererProvider(): Generator
     {
-        // @codingStandardsIgnoreStart
+        // phpcs:disable Generic.Files.LineLength.TooLong
         // Minimal framework installation test cases; no templates installed.
         // Must be run before those that install templates and test the output.
         // $installType, $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
-        yield 'plates-minimal'    => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 1, 404, Mezzio\Plates\PlatesRenderer::class];
-        yield 'twig-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 2, 404, Mezzio\Twig\TwigRenderer::class];
+        yield 'plates-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 1, 404, Mezzio\Plates\PlatesRenderer::class];
+        yield 'twig-minimal'         => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 2, 404, Mezzio\Twig\TwigRenderer::class];
         yield 'laminas-view-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 3, 404, Mezzio\LaminasView\LaminasViewRenderer::class];
-        // @codingStandardsIgnoreEnd
 
-        // @codingStandardsIgnoreStart
         // Full framework installation test cases; installation options that install templates.
         $testCases = [
             // $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
-            'plates-full'    => [3, 2, 1, 200, Mezzio\Plates\PlatesRenderer::class],
-            'twig-full'      => [3, 2, 2, 200, Mezzio\Twig\TwigRenderer::class],
+            'plates-full'       => [3, 2, 1, 200, Mezzio\Plates\PlatesRenderer::class],
+            'twig-full'         => [3, 2, 2, 200, Mezzio\Twig\TwigRenderer::class],
             'laminas-view-full' => [3, 2, 3, 200, Mezzio\LaminasView\LaminasViewRenderer::class],
         ];
-        // @codingStandardsIgnoreEnd
+        // phpcs:enable Generic.Files.LineLength.TooLong
 
         // Non-minimal installation types
         $types = [

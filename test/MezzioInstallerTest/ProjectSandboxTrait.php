@@ -51,7 +51,7 @@ trait ProjectSandboxTrait
      */
     protected $autoloader;
 
-    /** @var ContainerInterface */
+    /** @var null|ContainerInterface */
     protected $container;
 
     /** @var string Root of the sandbox system */
@@ -72,6 +72,7 @@ trait ProjectSandboxTrait
 
         mkdir($this->projectRoot . '/data', 0777, true);
         mkdir($this->projectRoot . '/data/cache', 0777, true);
+        copy($this->packageRoot . '/composer.json', $this->projectRoot . '/composer.json');
         foreach (['config', 'public', 'src', 'templates', 'test'] as $path) {
             $this->recursiveCopy(
                 $this->packageRoot . DIRECTORY_SEPARATOR . $path,
@@ -151,7 +152,7 @@ trait ProjectSandboxTrait
      */
     protected function setUpAlternateAutoloader(string $appPath, bool $stripNamespace = false): void
     {
-        $this->autoloader = function ($class) use ($appPath, $stripNamespace) {
+        $this->autoloader = function ($class) use ($appPath, $stripNamespace): bool {
             if (strpos($class, 'App\\') !== 0) {
                 return false;
             }
@@ -170,6 +171,7 @@ trait ProjectSandboxTrait
             }
 
             include $path;
+            return true;
         };
 
         spl_autoload_register($this->autoloader, true, true);

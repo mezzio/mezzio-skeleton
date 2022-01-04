@@ -58,21 +58,19 @@
         "jsoumelidis/zend-sf-di-config": "^0.5",
         "laminas/laminas-coding-standard": "~2.3.0",
         "laminas/laminas-development-mode": "^3.3.0",
-        "laminas/laminas-pimple-config": "^1.1.1",
+        "laminas/laminas-pimple-config": "^1.4",
         "laminas/laminas-servicemanager": "^3.6.4",
         "mezzio/mezzio-fastroute": "^3.2.0",
         "mezzio/mezzio-laminasrouter": "^3.1.0",
         "mezzio/mezzio-laminasviewrenderer": "^2.3.0",
         "mezzio/mezzio-platesrenderer": "^2.3.0",
-        "mezzio/mezzio-tooling": "^2.0",
+        "mezzio/mezzio-tooling": "^2.1",
         "mezzio/mezzio-twigrenderer": "^2.7.0",
-        "mikey179/vfsstream": "^1.6.8",
-        "phpspec/prophecy": "^1.10.3",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/phpstan": "^0.12",
-        "phpstan/phpstan-strict-rules": "^0.12",
-        "phpunit/phpunit": "^9.5.5",
-        "roave/security-advisories": "dev-master"
+        "mikey179/vfsstream": "^1.6.10",
+        "phpunit/phpunit": "^9.5.11",
+        "psalm/plugin-phpunit": "^0.16.1",
+        "roave/security-advisories": "dev-master",
+        "vimeo/psalm": "^4.17"
     },
     "autoload": {
         "psr-4": {
@@ -98,13 +96,18 @@
         "mezzio": "laminas --ansi",
         "check": [
             "@cs-check",
-            "@test",
-            "@analyze"
+            "@test"
         ],
-        "analyze": "phpstan analyze -l 3 -c ./phpstan.installer.neon ./src ./config",
         "clear-config-cache": "php bin/clear-config-cache.php",
-        "cs-check": "phpcs -s",
-        "cs-fix": "phpcbf",
+        "enable-codestandard": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+        "cs-check": [
+            "@enable-codestandard",
+            "phpcs -s"
+        ],
+        "cs-fix": [
+            "@enable-codestandard",
+            "phpcbf"
+        ],
         "serve": "php -S 0.0.0.0:8080 -t public/",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"

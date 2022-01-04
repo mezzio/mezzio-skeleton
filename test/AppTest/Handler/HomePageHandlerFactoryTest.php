@@ -8,48 +8,65 @@ use App\Handler\HomePageHandler;
 use App\Handler\HomePageHandlerFactory;
 use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 
 class HomePageHandlerFactoryTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ContainerInterface|ObjectProphecy */
+    /** @var ContainerInterface&MockObject */
     protected $container;
+
+    /** @var RouterInterface&MockObject */
+    protected $router;
 
     protected function setUp(): void
     {
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $router          = $this->prophesize(RouterInterface::class);
-
-        $this->container->get(RouterInterface::class)->willReturn($router);
+        $this->container = $this->createMock(ContainerInterface::class);
+        $this->router    = $this->createMock(RouterInterface::class);
     }
 
-    public function testFactoryWithoutTemplate()
+    public function testFactoryWithoutTemplate(): void
     {
-        $factory = new HomePageHandlerFactory();
-        $this->container->has(TemplateRendererInterface::class)->willReturn(false);
+        $this->container
+            ->expects($this->once())
+            ->method('has')
+            ->with(TemplateRendererInterface::class)
+            ->willReturn(false);
+        $this->container
+            ->expects($this->once())
+            ->method('get')
+            ->with(RouterInterface::class)
+            ->willReturn($this->router);
 
-        self::assertInstanceOf(HomePageHandlerFactory::class, $factory);
-
-        $homePage = $factory($this->container->reveal());
+        $factory  = new HomePageHandlerFactory();
+        $homePage = $factory($this->container);
 
         self::assertInstanceOf(HomePageHandler::class, $homePage);
     }
 
-    public function testFactoryWithTemplate()
+    public function testFactoryWithTemplate(): void
     {
-        $this->container->has(TemplateRendererInterface::class)->willReturn(true);
+        $renderer = $this->createMock(TemplateRendererInterface::class);
         $this->container
-            ->get(TemplateRendererInterface::class)
-            ->willReturn($this->prophesize(TemplateRendererInterface::class));
+            ->expects($this->once())
+            ->method('has')
+            ->with(TemplateRendererInterface::class)
+            ->willReturn(true);
+        $this->container
+            ->expects($this->exactly(2))
+            ->method('get')
+            ->withConsecutive(
+                [RouterInterface::class],
+                [TemplateRendererInterface::class],
+            )
+            ->willReturnOnConsecutiveCalls(
+                $this->router,
+                $renderer
+            );
 
-        $factory = new HomePageHandlerFactory();
-
-        $homePage = $factory($this->container->reveal());
+        $factory  = new HomePageHandlerFactory();
+        $homePage = $factory($this->container);
 
         self::assertInstanceOf(HomePageHandler::class, $homePage);
     }

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.17.0@6f4707aa41c9174353a6434bba3fc8840f981d9c">
+  <file src="config/pipeline.php">
+    <UnusedClosureParam occurrences="2">
+      <code>$container</code>
+      <code>$factory</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="public/index.php">
+    <MissingFile occurrences="2">
+      <code>require 'config/container.php'</code>
+      <code>require 'config/routes.php'</code>
+    </MissingFile>
+    <MixedArgument occurrences="1">
+      <code>$factory</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$factory</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/MezzioInstaller/OptionalPackages.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$this-&gt;stabilityFlags</code>
+    </ArgumentTypeCoercion>
+    <MixedArgument occurrences="28">
+      <code>$constraint</code>
+      <code>$defaultOption</code>
+      <code>$defaultText</code>
+      <code>$defaultText</code>
+      <code>$filename</code>
+      <code>$filename</code>
+      <code>$force</code>
+      <code>$key</code>
+      <code>$option['name']</code>
+      <code>$package</code>
+      <code>$package</code>
+      <code>$packageData['version']</code>
+      <code>$packageData['whitelist'] ?? []</code>
+      <code>$packageName</code>
+      <code>$question</code>
+      <code>$questionName</code>
+      <code>$question['custom-package-warning']</code>
+      <code>$question['question']</code>
+      <code>$resource</code>
+      <code>$resource</code>
+      <code>$target</code>
+      <code>$target</code>
+      <code>$this-&gt;composerDefinition['autoload']</code>
+      <code>$this-&gt;composerDefinition['autoload-dev']</code>
+      <code>$this-&gt;composerDefinition['extra'] ?? []</code>
+      <code>$this-&gt;composerDefinition['extra']['laminas']['component-whitelist']</code>
+      <code>$this-&gt;config['require-dev']</code>
+      <code>$word</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="19">
+      <code>$option['name']</code>
+      <code>$option['name']</code>
+      <code>$packageData['version']</code>
+      <code>$packageData['whitelist']</code>
+      <code>$question['options'][$answer][$this-&gt;installType]</code>
+      <code>$question['options'][$answer]['packages']</code>
+      <code>$this-&gt;composerDefinition['autoload']['psr-4']</code>
+      <code>$this-&gt;composerDefinition['autoload-dev']['psr-4']</code>
+      <code>$this-&gt;composerDefinition['extra']['branch-alias']</code>
+      <code>$this-&gt;composerDefinition['extra']['laminas']</code>
+      <code>$this-&gt;composerDefinition['extra']['optional-packages']</code>
+      <code>$this-&gt;composerDefinition['require'][$packageName]</code>
+      <code>$this-&gt;composerDefinition['require-dev'][$devDependency]</code>
+      <code>$this-&gt;composerDefinition['require-dev'][$packageName]</code>
+      <code>$this-&gt;composerDefinition['scripts']['pre-install-cmd']</code>
+      <code>$this-&gt;composerDefinition['scripts']['pre-update-cmd']</code>
+      <code>$this-&gt;config['application'][$this-&gt;installType]</code>
+      <code>$this-&gt;config['application'][$this-&gt;installType]</code>
+      <code>$this-&gt;config['packages'][$packageName]</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="7">
+      <code>$this-&gt;composerDefinition['autoload']['psr-4']</code>
+      <code>$this-&gt;composerDefinition['extra']['laminas']</code>
+      <code>$this-&gt;composerDefinition['extra']['optional-packages']</code>
+      <code>$this-&gt;composerDefinition['require'][$packageName]</code>
+      <code>$this-&gt;composerDefinition['require-dev'][$packageName]</code>
+      <code>$this-&gt;composerDefinition['scripts']['cs-check']</code>
+      <code>$this-&gt;composerDefinition['scripts']['cs-fix']</code>
+    </MixedArrayAssignment>
+    <MixedArrayOffset occurrences="1">
+      <code>$this-&gt;config['packages'][$packageName]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="19">
+      <code>$constraint</code>
+      <code>$defaultOption</code>
+      <code>$defaultText</code>
+      <code>$fileInfo</code>
+      <code>$filename</code>
+      <code>$force</code>
+      <code>$key</code>
+      <code>$option</code>
+      <code>$package</code>
+      <code>$package</code>
+      <code>$packageData</code>
+      <code>$packageName</code>
+      <code>$question</code>
+      <code>$questionName</code>
+      <code>$resource</code>
+      <code>$resource</code>
+      <code>$target</code>
+      <code>$target</code>
+      <code>$this-&gt;composerDefinition</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="1">
+      <code>isDir</code>
+    </MixedMethodCall>
+    <PossiblyNullArgument occurrences="1">
+      <code>$answer</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="test/AppTest/Handler/PingHandlerTest.php">
+    <MixedAssignment occurrences="1">
+      <code>$json</code>
+    </MixedAssignment>
+    <MixedPropertyFetch occurrences="1">
+      <code>$json-&gt;ack</code>
+    </MixedPropertyFetch>
+  </file>
+  <file src="test/MezzioInstallerTest/AddPackageTest.php">
+    <MixedArgument occurrences="1">
+      <code>$stabilityFlags</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$stabilityFlags[$packageName]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$stabilityFlags</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/MezzioInstallerTest/ContainersTest.php">
+    <MixedArgument occurrences="2">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+    </MixedArrayAccess>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>testContainer</code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="test/MezzioInstallerTest/ErrorHandlerTest.php">
+    <MixedArgument occurrences="3">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['error-handler']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="4">
+      <code>$config['dependencies']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['error-handler']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$config</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/MezzioInstallerTest/HomePageResponseTest.php">
+    <MixedArgument occurrences="5">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="5">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArrayAccess>
+    <MoreSpecificReturnType occurrences="2"/>
+    <PossiblyInvalidArrayOffset occurrences="5">
+      <code>$this-&gt;expectedContainerAttributes[$containerClass]</code>
+      <code>$this-&gt;expectedContainerAttributes[$containerClass]</code>
+      <code>$this-&gt;expectedRouterAttributes[$routerClass]</code>
+      <code>$this-&gt;rendererConfigProviders[$rendererClass]</code>
+      <code>$this-&gt;routerConfigProviders[$routerClass]</code>
+    </PossiblyInvalidArrayOffset>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(string) $response-&gt;getBody()-&gt;getContents()</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="test/MezzioInstallerTest/OptionalPackagesTestCase.php">
+    <MixedArgument occurrences="4">
+      <code>$properties['devDependencies']</code>
+      <code>$r-&gt;getValue($installer)</code>
+      <code>$r-&gt;getValue($installer)</code>
+      <code>$whitelist</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="3">
+      <code>$composerJson['require']</code>
+      <code>$composerJson['require-dev']</code>
+      <code>$r-&gt;getValue($installer)['extra']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="2">
+      <code>$composerJson</code>
+      <code>$whitelist</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="2">
+      <code>array</code>
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;getInstallerProperty($installer, 'composerDefinition')</code>
+      <code>$this-&gt;getInstallerProperty($installer, 'config')</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="test/MezzioInstallerTest/ProcessAnswersTest.php">
+    <MixedArgument occurrences="6">
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="6">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="6">
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+      <code>$question</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/MezzioInstallerTest/ProjectSandboxTrait.php">
+    <MissingClosureParamType occurrences="1">
+      <code>$class</code>
+    </MissingClosureParamType>
+    <MixedArgument occurrences="3">
+      <code>$class</code>
+      <code>$class</code>
+      <code>$class</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$this-&gt;autoloader</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="2">
+      <code>$class</code>
+      <code>$this-&gt;container</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>ContainerInterface</code>
+    </MixedInferredReturnType>
+    <UnresolvableInclude occurrences="1">
+      <code>require $path</code>
+    </UnresolvableInclude>
+  </file>
+  <file src="test/MezzioInstallerTest/PromptForOptionalPackagesTest.php">
+    <InvalidArgument occurrences="1">
+      <code>testPromptForOptionalPackage</code>
+    </InvalidArgument>
+    <InvalidReturnType occurrences="1"/>
+    <MixedArgument occurrences="2">
+      <code>$question['question']</code>
+      <code>$written</code>
+    </MixedArgument>
+    <MixedArrayAssignment occurrences="1">
+      <code>$written[]</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="6">
+      <code>$package</code>
+      <code>$package</code>
+      <code>$target</code>
+      <code>$toWrite[]</code>
+      <code>$toWrite[]</code>
+      <code>$written[]</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/MezzioInstallerTest/RemoveDevDependenciesTest.php">
+    <MixedAssignment occurrences="1">
+      <code>$this-&gt;devDependencies</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/MezzioInstallerTest/RequestInstallTypeTest.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/MezzioInstallerTest/RoutersTest.php">
+    <MixedArgument occurrences="2">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="6">
+      <code>$config['dependencies']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$expectedRoute['allowed_methods']</code>
+      <code>$expectedRoute['name']</code>
+      <code>$expectedRoute['path']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$expectedRoute</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/MezzioInstallerTest/TemplateRenderersTest.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$expectedTemplateRenderer</code>
+    </ArgumentTypeCoercion>
+    <InvalidReturnType occurrences="1"/>
+    <MixedArgument occurrences="3">
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="4">
+      <code>$config['dependencies']</code>
+      <code>$config['questions']['container']</code>
+      <code>$config['questions']['router']</code>
+      <code>$config['questions']['template-engine']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$config</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/MezzioInstallerTest/UpdateRootPackageTest.php">
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$property</code>
+    </MixedArgumentTypeCoercion>
+  </file>
+</files>

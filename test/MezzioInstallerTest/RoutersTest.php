@@ -75,7 +75,7 @@ class RoutersTest extends OptionalPackagesTestCase
         int $expectedResponseStatusCode,
         array $expectedRoutes,
         string $expectedRouter
-    ) {
+    ): void {
         $this->prepareSandboxForInstallType($installType, $this->installer);
 
         // Install container

@@ -24,13 +24,13 @@ class CopyResourceTest extends OptionalPackagesTestCase
         $this->projectRoot = vfsStream::url('project-root');
     }
 
-    public function testTargetFileDoesNotExist()
+    public function testTargetFileDoesNotExist(): void
     {
         self::assertFalse($this->project->hasChild('data'));
         self::assertFalse($this->project->hasChild('data/target.php'));
     }
 
-    public function testResourceIsCopiedIfItDoesNotExist()
+    public function testResourceIsCopiedIfItDoesNotExist(): void
     {
         $installer = $this->createOptionalPackages($this->projectRoot);
 
@@ -44,7 +44,7 @@ class CopyResourceTest extends OptionalPackagesTestCase
         );
     }
 
-    public function testResourceIsNotCopiedIfItExists()
+    public function testResourceIsNotCopiedIfItExists(): void
     {
         // Create default test file
         vfsStream::newFile('data/target.php')

@@ -18,7 +18,6 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
 
-use function array_diff;
 use function array_map;
 use function chmod;
 use function copy;
@@ -84,7 +83,8 @@ class OptionalPackages
         '.travis.yml',
         'CHANGELOG.md',
         'phpcs.xml',
-        'phpstan.installer.neon',
+        'psalm.xml.dist',
+        'psalm-baseline.xml',
         'src/App/templates/.gitkeep',
     ];
 
@@ -114,9 +114,9 @@ class OptionalPackages
         'filp/whoops',
         'jsoumelidis/zend-sf-di-config',
         'mikey179/vfsstream',
-        'phpstan/phpstan',
-        'phpstan/phpstan-strict-rules',
         'laminas/laminas-coding-standard',
+        'vimeo/psalm',
+        'psalm/plugin-phpunit',
         'mezzio/mezzio-fastroute',
         'mezzio/mezzio-platesrenderer',
         'mezzio/mezzio-twigrenderer',
@@ -389,13 +389,6 @@ class OptionalPackages
         // Remove installer scripts
         unset($this->composerDefinition['scripts']['pre-update-cmd']);
         unset($this->composerDefinition['scripts']['pre-install-cmd']);
-
-        // Remove phpstan completely
-        $this->composerDefinition['scripts']['check'] = array_diff(
-            $this->composerDefinition['scripts']['check'],
-            ['@analyze']
-        );
-        unset($this->composerDefinition['scripts']['analyze']);
 
         // Reset phpcs commands
         $this->composerDefinition['scripts']['cs-check'] = 'phpcs';
