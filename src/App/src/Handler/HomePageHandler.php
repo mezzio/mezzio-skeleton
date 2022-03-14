@@ -89,7 +89,7 @@ class HomePageHandler implements RequestHandlerInterface
             $data['templateDocs'] = 'http://platesphp.com/';
         } elseif ($this->template instanceof TwigRenderer) {
             $data['templateName'] = 'Twig';
-            $data['templateDocs'] = 'http://twig.sensiolabs.org/documentation';
+            $data['templateDocs'] = 'https://twig.symfony.com';
         } elseif ($this->template instanceof LaminasViewRenderer) {
             $data['templateName'] = 'Laminas View';
             $data['templateDocs'] = 'https://docs.laminas.dev/laminas-view/';
