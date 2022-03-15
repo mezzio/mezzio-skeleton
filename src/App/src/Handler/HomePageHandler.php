@@ -61,7 +61,7 @@ class HomePageHandler implements RequestHandlerInterface
             case 'Elie\PHPDI\Config\ContainerWrapper':
             case PHPDIContainer::class:
                 $data['containerName'] = 'PHP-DI';
-                $data['containerDocs'] = 'http://php-di.org';
+                $data['containerDocs'] = 'https://php-di.org';
                 break;
             case MinimalContainer::class:
                 $data['containerName'] = 'Chubbyphp Container';
@@ -86,10 +86,10 @@ class HomePageHandler implements RequestHandlerInterface
 
         if ($this->template instanceof PlatesRenderer) {
             $data['templateName'] = 'Plates';
-            $data['templateDocs'] = 'http://platesphp.com/';
+            $data['templateDocs'] = 'https://platesphp.com/';
         } elseif ($this->template instanceof TwigRenderer) {
             $data['templateName'] = 'Twig';
-            $data['templateDocs'] = 'http://twig.sensiolabs.org/documentation';
+            $data['templateDocs'] = 'https://twig.symfony.com';
         } elseif ($this->template instanceof LaminasViewRenderer) {
             $data['templateName'] = 'Laminas View';
             $data['templateDocs'] = 'https://docs.laminas.dev/laminas-view/';
