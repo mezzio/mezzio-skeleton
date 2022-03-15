@@ -112,7 +112,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         ],
         PhpDIContainer::class                 => [
             'containerName' => 'PHP-DI',
-            'containerDocs' => 'http://php-di.org',
+            'containerDocs' => 'https://php-di.org',
         ],
         ChubbyphpContainer::class             => [
             'containerName' => 'Chubbyphp Container',
