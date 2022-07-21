@@ -122,9 +122,9 @@ class ContainersTest extends OptionalPackagesTestCase
             'sf-di-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, SfContainerBuilder::class],
             'sf-di-flat'          => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, SfContainerBuilder::class],
             'sf-di-modular'       => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, SfContainerBuilder::class],
-            'chubbyphp-c-minimal' => [OptionalPackages::INSTALL_MINIMAL, 5, 2, 'minimal-files', 404, ChubbyphpMinimalContainer::class],
-            'chubbyphp-c-flat'    => [OptionalPackages::INSTALL_FLAT,    5, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
-            'chubbyphp-c-modular' => [OptionalPackages::INSTALL_MODULAR, 5, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
+            'chubbyphp-c-minimal' => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, ChubbyphpMinimalContainer::class],
+            'chubbyphp-c-flat'    => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
+            'chubbyphp-c-modular' => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
         ];
         // phpcs:enable Generic.Files.LineLength.TooLong
     }
