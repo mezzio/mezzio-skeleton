@@ -53,7 +53,6 @@
     "require-dev": {
         "chubbyphp/chubbyphp-laminas-config": "^1.1",
         "composer/composer": "^1.5 || ^2.0",
-        "elie29/zend-phpdi-config": "^6.0 || ^8.0",
         "filp/whoops": "^2.12.1",
         "jsoumelidis/zend-sf-di-config": "^0.5",
         "laminas/laminas-coding-standard": "~2.3.0",

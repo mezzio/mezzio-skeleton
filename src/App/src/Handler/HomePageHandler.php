@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use Chubbyphp\Container\MinimalContainer;
-use DI\Container as PHPDIContainer;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\ServiceManager;
@@ -57,11 +56,6 @@ class HomePageHandler implements RequestHandlerInterface
             case ContainerBuilder::class:
                 $data['containerName'] = 'Symfony DI Container';
                 $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
-                break;
-            case 'Elie\PHPDI\Config\ContainerWrapper':
-            case PHPDIContainer::class:
-                $data['containerName'] = 'PHP-DI';
-                $data['containerDocs'] = 'https://php-di.org';
                 break;
             case MinimalContainer::class:
                 $data['containerName'] = 'Chubbyphp Container';

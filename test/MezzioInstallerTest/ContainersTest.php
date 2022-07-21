@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use Chubbyphp\Container\MinimalContainer as ChubbyphpMinimalContainer;
-use DI\Container as PhpDIContainer;
 use Laminas\ServiceManager\ServiceManager as LaminasManagerContainer;
 use Mezzio;
 use MezzioInstaller\OptionalPackages;
@@ -123,9 +122,6 @@ class ContainersTest extends OptionalPackagesTestCase
             'sf-di-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, SfContainerBuilder::class],
             'sf-di-flat'          => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, SfContainerBuilder::class],
             'sf-di-modular'       => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, SfContainerBuilder::class],
-            'php-di-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, PhpDIContainer::class],
-            'php-di-flat'         => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, PhpDIContainer::class],
-            'php-di-modular'      => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, PhpDIContainer::class],
             'chubbyphp-c-minimal' => [OptionalPackages::INSTALL_MINIMAL, 5, 2, 'minimal-files', 404, ChubbyphpMinimalContainer::class],
             'chubbyphp-c-flat'    => [OptionalPackages::INSTALL_FLAT,    5, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
             'chubbyphp-c-modular' => [OptionalPackages::INSTALL_MODULAR, 5, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],

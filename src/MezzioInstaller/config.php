@@ -8,9 +8,6 @@ return [
         'chubbyphp/chubbyphp-laminas-config' => [
             'version' => '^1.0',
         ],
-        'elie29/zend-phpdi-config'           => [
-            'version' => '^6.0',
-        ],
         'filp/whoops'                        => [
             'version' => '^2.7.1',
         ],
@@ -125,21 +122,6 @@ return [
                     ],
                 ],
                 4 => [
-                    'name'     => 'PHP-DI',
-                    'packages' => [
-                        'elie29/zend-phpdi-config',
-                    ],
-                    'flat'     => [
-                        'Resources/config/container-php-di.php' => 'config/container.php',
-                    ],
-                    'modular'  => [
-                        'Resources/config/container-php-di.php' => 'config/container.php',
-                    ],
-                    'minimal'  => [
-                        'Resources/config/container-php-di.php' => 'config/container.php',
-                    ],
-                ],
-                5 => [
                     'name'     => 'chubbyphp-container',
                     'packages' => [
                         'chubbyphp/chubbyphp-laminas-config',

@@ -110,7 +110,6 @@ class OptionalPackages
     private $devDependencies = [
         'chubbyphp/chubbyphp-laminas-config',
         'composer/composer',
-        'elie29/zend-phpdi-config',
         'filp/whoops',
         'jsoumelidis/zend-sf-di-config',
         'mikey179/vfsstream',

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use Chubbyphp\Container\Container as ChubbyphpContainer;
-use DI\Container as PhpDIContainer;
 use Generator;
 use Laminas\ServiceManager\ServiceManager as LaminasServiceManagerContainer;
 use Mezzio\LaminasView\ConfigProvider as LaminasViewRendererConfigProvider;
@@ -92,8 +91,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         'pimple'                 => [1, PimpleContainer::class],
         'laminas-servicemanager' => [2, LaminasServiceManagerContainer::class],
         'sf-di'                  => [3, SfContainerBuilder::class],
-        'php-di'                 => [4, PhpDIContainer::class],
-        'chubbyphp-container'    => [5, ChubbyphpContainer::class],
+        'chubbyphp-container'    => [4, ChubbyphpContainer::class],
     ];
 
     /** @var array<class-string<ContainerInterface>, array<string, string>> */
@@ -109,10 +107,6 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         SfContainerBuilder::class             => [
             'containerName' => 'Symfony DI Container',
             'containerDocs' => 'https://symfony.com/doc/current/service_container.html',
-        ],
-        PhpDIContainer::class                 => [
-            'containerName' => 'PHP-DI',
-            'containerDocs' => 'https://php-di.org',
         ],
         ChubbyphpContainer::class             => [
             'containerName' => 'Chubbyphp Container',
