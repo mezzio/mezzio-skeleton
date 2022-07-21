@@ -85,7 +85,7 @@
     <MixedArrayOffset occurrences="1">
       <code>$this-&gt;config['packages'][$packageName]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="19">
+    <MixedAssignment occurrences="22">
       <code>$constraint</code>
       <code>$defaultOption</code>
       <code>$defaultText</code>
@@ -105,6 +105,8 @@
       <code>$target</code>
       <code>$target</code>
       <code>$this-&gt;composerDefinition</code>
+      <code>$answer</code>
+      <code>$question</code>
     </MixedAssignment>
     <MixedMethodCall occurrences="1">
       <code>isDir</code>
