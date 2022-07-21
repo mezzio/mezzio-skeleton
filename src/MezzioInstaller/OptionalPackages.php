@@ -630,7 +630,7 @@ class OptionalPackages
             }
 
             // Search for package
-            if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
+            if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, (string) $answer, $match)) {
                 $packageName    = $match['name'];
                 $packageVersion = $match['version'];
 
