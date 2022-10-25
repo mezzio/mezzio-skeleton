@@ -4,6 +4,7 @@
         "local>mezzio/.github:renovate-config"
     ],
     "constraints": {
+        "composer": "^2.2",
         "php": "^7.4"
     }
 }
