@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.29.0@7ec5ffbd5f68ae03782d7fd33fff0c45a69f95b3">
+<files psalm-version="4.30.0@d0bc6e25d89f649e4f36a534f330f8bb4643dd69">
   <file src="config/pipeline.php">
     <UnusedClosureParam occurrences="2">
       <code>$container</code>
@@ -25,6 +25,9 @@
     <ArgumentTypeCoercion occurrences="1">
       <code>$this-&gt;stabilityFlags</code>
     </ArgumentTypeCoercion>
+    <InvalidScalarArgument occurrences="1">
+      <code>$this-&gt;projectRoot</code>
+    </InvalidScalarArgument>
     <MixedArgument occurrences="29">
       <code>$answer</code>
       <code>$constraint</code>
@@ -115,8 +118,15 @@
     <MixedMethodCall occurrences="1">
       <code>isDir</code>
     </MixedMethodCall>
+    <PossiblyNullArgument occurrences="2">
+      <code>$content</code>
+      <code>$phpunitConfig</code>
+    </PossiblyNullArgument>
   </file>
   <file src="test/AppTest/Handler/PingHandlerTest.php">
+    <MixedArgument occurrences="1">
+      <code>$json</code>
+    </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$json</code>
     </MixedAssignment>
@@ -273,7 +283,8 @@
       <code>testPromptForOptionalPackage</code>
     </InvalidArgument>
     <InvalidReturnType occurrences="1"/>
-    <MixedArgument occurrences="2">
+    <MixedArgument occurrences="3">
+      <code>$package</code>
       <code>$question['question']</code>
       <code>$written</code>
     </MixedArgument>
