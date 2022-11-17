@@ -11,7 +11,9 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\ServiceManager;
 use Mezzio\LaminasView\LaminasViewRenderer;
 use Mezzio\Plates\PlatesRenderer;
-use Mezzio\Router;
+use Mezzio\Router\FastRouteRouter;
+use Mezzio\Router\LaminasRouter;
+use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\TwigRenderer;
 use Pimple\Psr11\Container as PimpleContainer;
@@ -22,23 +24,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class HomePageHandler implements RequestHandlerInterface
 {
-    /** @var string */
-    private $containerName;
-
-    /** @var Router\RouterInterface */
-    private $router;
-
-    /** @var null|TemplateRendererInterface */
-    private $template;
-
     public function __construct(
-        string $containerName,
-        Router\RouterInterface $router,
-        ?TemplateRendererInterface $template = null
+        private string $containerName,
+        private RouterInterface $router,
+        private ?TemplateRendererInterface $template = null
     ) {
-        $this->containerName = $containerName;
-        $this->router        = $router;
-        $this->template      = $template;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -69,10 +59,10 @@ class HomePageHandler implements RequestHandlerInterface
                 break;
         }
 
-        if ($this->router instanceof Router\FastRouteRouter) {
+        if ($this->router instanceof FastRouteRouter) {
             $data['routerName'] = 'FastRoute';
             $data['routerDocs'] = 'https://github.com/nikic/FastRoute';
-        } elseif ($this->router instanceof Router\LaminasRouter) {
+        } elseif ($this->router instanceof LaminasRouter) {
             $data['routerName'] = 'Laminas Router';
             $data['routerDocs'] = 'https://docs.laminas.dev/laminas-router/';
         }

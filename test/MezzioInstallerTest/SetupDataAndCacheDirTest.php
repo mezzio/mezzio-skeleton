@@ -16,14 +16,12 @@ use function sprintf;
 
 class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
 {
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
-    /** @var vfsStreamDirectory */
-    private $project;
+    private vfsStreamDirectory $project;
 
     /** @var string URL of project root */
-    private $projectRoot;
+    private string $projectRoot;
 
     protected function setUp(): void
     {

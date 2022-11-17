@@ -31,6 +31,7 @@ class AddPackageTest extends OptionalPackagesTestCase
 
         $r = new ReflectionProperty($installer, 'stabilityFlags');
         $r->setAccessible(true);
+
         $stabilityFlags = $r->getValue($installer);
 
         // Stability flags are only set for non-stable packages

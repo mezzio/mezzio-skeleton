@@ -12,14 +12,13 @@ use function copy;
 use function count;
 use function putenv;
 use function sprintf;
-use function strpos;
+use function str_contains;
 
 class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
     protected function setUp(): void
     {
@@ -74,7 +73,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
             ->expects($this->once())
             ->method('ask')
             ->with(
-                $this->callback(static function ($arg) use ($question) {
+                $this->callback(static function ($arg) use ($question): bool {
                     PromptForOptionalPackagesTest::assertPromptText($question['question'], $arg);
 
                     return true;
@@ -94,25 +93,24 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
             $toWrite[] = $target;
         }
 
-        if (count($toWrite) > 0) {
+        if ($toWrite !== []) {
             $this->io
                 ->method('write')
-                ->with($this->callback(function (string $message) use ($toWrite, &$written): bool {
+                ->with($this->callback(static function (string $message) use ($toWrite, &$written): bool {
                     foreach ($toWrite as $package) {
-                        if (false === strpos($message, $package)) {
+                        if (! str_contains($message, $package)) {
                             continue;
                         }
 
                         if (
-                            false !== strpos($message, 'Adding package')
-                            || false !== strpos($message, '- Copying ')
+                            str_contains($message, 'Adding package')
+                            || str_contains($message, '- Copying ')
                         ) {
                             $written[] = $package;
                         }
 
                         return true;
                     }
-
                     return false;
                 }));
         }
@@ -121,10 +119,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         self::assertSame(count($written), count($toWrite));
     }
 
-    /**
-     * @param mixed $argument
-     */
-    public static function assertPromptText(string $expected, $argument): void
+    public static function assertPromptText(string $expected, mixed $argument): void
     {
         self::assertIsString(
             $argument,
@@ -132,7 +127,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         );
 
         self::assertThat(
-            strpos($argument, $expected) !== false,
+            str_contains($argument, $expected),
             self::isTrue(),
             sprintf('Expected prompt not received: "%s"', $expected)
         );

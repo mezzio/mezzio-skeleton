@@ -31,22 +31,24 @@ use function file_put_contents;
 use function implode;
 use function json_decode;
 use function preg_replace;
+use function sprintf;
+
+use const JSON_THROW_ON_ERROR;
 
 class HomePageResponseTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
     /** @var array<class-string<RouterInterface>, class-string> */
-    private $routerConfigProviders = [
+    private array $routerConfigProviders = [
         FastRouteRouter::class => FastRouteRouterConfigProvider::class,
         LaminasRouter::class   => LaminasRouterConfigProvider::class,
     ];
 
     /** @var array<class-string<TemplateRendererInterface>, class-string> */
-    private $rendererConfigProviders = [
+    private array $rendererConfigProviders = [
         PlatesRenderer::class      => PlatesRendererConfigProvider::class,
         TwigRenderer::class        => TwigRendererConfigProvider::class,
         LaminasViewRenderer::class => LaminasViewRendererConfigProvider::class,
@@ -54,14 +56,14 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     // $installType, $installType
     /** @var array<string, string> */
-    private $installTypes = [
+    private array $installTypes = [
         OptionalPackages::INSTALL_FLAT    => OptionalPackages::INSTALL_FLAT,
         OptionalPackages::INSTALL_MODULAR => OptionalPackages::INSTALL_MODULAR,
     ];
 
     // $rendererOption, $rendererClass
     /** @var array<string, array<int|class-string<TemplateRendererInterface>>> */
-    private $rendererTypes = [
+    private array $rendererTypes = [
         'plates'       => [1, PlatesRenderer::class],
         'twig'         => [2, TwigRenderer::class],
         'laminas-view' => [3, LaminasViewRenderer::class],
@@ -69,13 +71,13 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     // $routerOption, $routerClass
     /** @var array<string, array<int|class-string<RouterInterface>>> */
-    private $routerTypes = [
+    private array $routerTypes = [
         'fastroute'      => [1, FastRouteRouter::class],
         'laminas-router' => [2, LaminasRouter::class],
     ];
 
     /** @var array<class-string<RouterInterface>, array<string, string>> */
-    private $expectedRouterAttributes = [
+    private array $expectedRouterAttributes = [
         FastRouteRouter::class => [
             'routerName' => 'FastRoute',
             'routerDocs' => 'https://github.com/nikic/FastRoute',
@@ -88,7 +90,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     // $containerOption, $containerClass
     /** @var array<string, array<int|class-string<ContainerInterface>>> */
-    private $containerTypes = [
+    private array $containerTypes = [
         'pimple'                 => [1, PimpleContainer::class],
         'laminas-servicemanager' => [2, LaminasServiceManagerContainer::class],
         'sf-di'                  => [3, SfContainerBuilder::class],
@@ -97,7 +99,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     ];
 
     /** @var array<class-string<ContainerInterface>, array<string, string>> */
-    private $expectedContainerAttributes = [
+    private array $expectedContainerAttributes = [
         PimpleContainer::class                => [
             'containerName' => 'Pimple',
             'containerDocs' => 'https://pimple.symfony.com/',
@@ -180,8 +182,8 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         // Test response content
         $html = (string) $response->getBody()->getContents();
 
-        self::assertStringContainsString("Get started with {$containerName}", $html);
-        self::assertStringContainsString("href=\"{$containerDocs}\"", $html);
+        self::assertStringContainsString(sprintf('Get started with %s', $containerName), $html);
+        self::assertStringContainsString(sprintf('href="%s"', $containerDocs), $html);
     }
 
     /**
@@ -268,7 +270,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
         // Test response content
         $json = $response->getBody()->getContents();
-        $data = json_decode($json, true);
+        $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
         self::assertIsArray($data);
         self::assertArrayHasKey('containerName', $data);
@@ -333,7 +335,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $configFile = $this->projectRoot . '/config/config.php';
         $contents   = file_get_contents($configFile);
         $contents   = preg_replace(
-            '/(new ConfigAggregator\(\[)/s',
+            '#(new ConfigAggregator\(\[)#s',
             '$1' . "\n    " . $this->routerConfigProviders[$routerClass] . "::class,\n",
             $contents
         );
@@ -345,7 +347,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $configFile = $this->projectRoot . '/config/config.php';
         $contents   = file_get_contents($configFile);
         $contents   = preg_replace(
-            '/(new ConfigAggregator\(\[)/s',
+            '#(new ConfigAggregator\(\[)#s',
             '$1' . "\n    " . $this->rendererConfigProviders[$rendererClass] . "::class,\n",
             $contents
         );

@@ -10,7 +10,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 use function assert;
-use function get_class;
 
 class HomePageHandlerFactory
 {
@@ -24,6 +23,6 @@ class HomePageHandlerFactory
             : null;
         assert($template instanceof TemplateRendererInterface || null === $template);
 
-        return new HomePageHandler(get_class($container), $router, $template);
+        return new HomePageHandler($container::class, $router, $template);
     }
 }

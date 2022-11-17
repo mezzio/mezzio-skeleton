@@ -36,7 +36,7 @@ use function spl_autoload_register;
 use function spl_autoload_unregister;
 use function sprintf;
 use function str_replace;
-use function strpos;
+use function str_starts_with;
 use function sys_get_temp_dir;
 use function uniqid;
 use function unlink;
@@ -97,13 +97,10 @@ trait ProjectSandboxTrait
         $installer->setInstallType($installType);
         $installer->setupDefaultApp();
 
-        switch ($installType) {
-            case OptionalPackages::INSTALL_FLAT:
-                $this->setUpAlternateAutoloader('/src/');
-                break;
-            case OptionalPackages::INSTALL_MODULAR:
-                $this->setUpAlternateAutoloader('/src/App/src/', true);
-                break;
+        if ($installType === OptionalPackages::INSTALL_FLAT) {
+            $this->setUpAlternateAutoloader('/src/');
+        } elseif ($installType === OptionalPackages::INSTALL_MODULAR) {
+            $this->setUpAlternateAutoloader('/src/App/src/', true);
         }
     }
 
@@ -153,7 +150,7 @@ trait ProjectSandboxTrait
     protected function setUpAlternateAutoloader(string $appPath, bool $stripNamespace = false): void
     {
         $this->autoloader = function ($class) use ($appPath, $stripNamespace): bool {
-            if (strpos($class, 'App\\') !== 0) {
+            if (! str_starts_with($class, 'App\\')) {
                 return false;
             }
 
@@ -230,11 +227,11 @@ trait ProjectSandboxTrait
         $app->pipe(DispatchMiddleware::class);
         $app->pipe(NotFoundHandler::class);
 
-        if ($setupRoutes === true && $container->has(HomePageHandler::class)) {
+        if ($setupRoutes && $container->has(HomePageHandler::class)) {
             $app->get('/', HomePageHandler::class, 'home');
         }
 
-        if ($setupRoutes === true && $container->has(PingHandler::class)) {
+        if ($setupRoutes && $container->has(PingHandler::class)) {
             $app->get('/api/ping', PingHandler::class, 'api.ping');
         }
 

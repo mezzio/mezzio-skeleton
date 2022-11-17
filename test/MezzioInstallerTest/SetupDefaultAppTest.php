@@ -12,8 +12,7 @@ class SetupDefaultAppTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
     protected function setUp(): void
     {

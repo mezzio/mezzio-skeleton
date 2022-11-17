@@ -10,6 +10,7 @@ use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Composer\Package\BasePackage;
 use Composer\Package\Link;
+use Composer\Package\PackageInterface;
 use Composer\Package\RootPackageInterface;
 use Composer\Package\Version\VersionParser;
 use Composer\Script\Event;
@@ -54,18 +55,31 @@ use function unlink;
  */
 class OptionalPackages
 {
-    public const INSTALL_FLAT    = 'flat';
+    /**
+     * @var string
+     */
+    public const INSTALL_FLAT = 'flat';
+
+    /**
+     * @var string
+     */
     public const INSTALL_MINIMAL = 'minimal';
+
+    /**
+     * @var string
+     */
     public const INSTALL_MODULAR = 'modular';
 
     /**
      * @const string Regular expression for matching package name and version
+     * @var string
      */
     public const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
     /**
      * @const string Configuration file lines related to registering the default
      *     App module configuration.
+     * @var string
      */
     public const APP_MODULE_CONFIG = '
     // Default App module config
@@ -78,7 +92,7 @@ class OptionalPackages
      *
      * @var string[]
      */
-    private $assetsToRemove = [
+    private array $assetsToRemove = [
         '.coveralls.yml',
         '.travis.yml',
         'CHANGELOG.md',
@@ -89,25 +103,21 @@ class OptionalPackages
     ];
 
     /** @var array */
-    private $config;
-
-    /** @var Composer */
-    private $composer;
+    private $config = [];
 
     /** @var array */
-    private $composerDefinition;
+    private $composerDefinition = [];
 
-    /** @var JsonFile */
-    private $composerJson;
-
-    /** @var Link[] */
-    private $composerRequires;
+    private JsonFile $composerJson;
 
     /** @var Link[] */
-    private $composerDevRequires;
+    private array $composerRequires = [];
+
+    /** @var Link[] */
+    private array $composerDevRequires = [];
 
     /** @var string[] Dev dependencies to remove after install is complete */
-    private $devDependencies = [
+    private array $devDependencies = [
         'chubbyphp/chubbyphp-laminas-config',
         'composer/composer',
         'elie29/zend-phpdi-config',
@@ -127,22 +137,17 @@ class OptionalPackages
     ];
 
     /** @var string Path to this file. */
-    private $installerSource;
+    private string $installerSource;
 
     /** @var string Installation type selected. */
-    private $installType = self::INSTALL_FLAT;
+    private string $installType = self::INSTALL_FLAT;
 
-    /** @var IOInterface */
-    private $io;
+    private string|bool $projectRoot;
 
-    /** @var string */
-    private $projectRoot;
-
-    /** @var RootPackageInterface */
-    private $rootPackage;
+    private RootPackageInterface $rootPackage;
 
     /** @var int[] */
-    private $stabilityFlags;
+    private array $stabilityFlags = [];
 
     /**
      * Install command: choose packages and provide configuration.
@@ -171,11 +176,8 @@ class OptionalPackages
         $installer->finalizePackage();
     }
 
-    public function __construct(IOInterface $io, Composer $composer, ?string $projectRoot = null)
+    public function __construct(private IOInterface $io, private Composer $composer, ?string $projectRoot = null)
     {
-        $this->io       = $io;
-        $this->composer = $composer;
-
         // Get composer.json location
         $composerFile = Factory::getComposerFile();
 
@@ -242,7 +244,7 @@ class OptionalPackages
         ];
 
         while (true) {
-            $answer = $this->io->ask(implode($query), '2');
+            $answer = $this->io->ask(implode('', $query), '2');
 
             switch ($answer) {
                 case '1':
@@ -415,10 +417,8 @@ class OptionalPackages
 
     /**
      * Process the answer of a question
-     *
-     * @param bool|int|string $answer
      */
-    public function processAnswer(array $question, $answer): bool
+    public function processAnswer(array $question, bool|int|string $answer): bool
     {
         if (is_numeric($answer) && isset($question['options'][$answer])) {
             // Add packages to install
@@ -536,11 +536,9 @@ class OptionalPackages
     /**
      * Remove lines from string content containing words in array.
      */
-    public function removeLinesContainingStrings(array $entries, string $content): string
+    public function removeLinesContainingStrings(array $entries, string $content): ?string
     {
-        $entries = implode('|', array_map(static function ($word): string {
-            return preg_quote($word, '/');
-        }, $entries));
+        $entries = implode('|', array_map(static fn($word): string => preg_quote($word, '/'), $entries));
 
         return preg_replace('/^.*(?:' . $entries . ").*$(?:\r?\n)?/m", '', $content);
     }
@@ -587,11 +585,9 @@ class OptionalPackages
     /**
      * Prepare and ask questions and return the answer
      *
-     * @param int|string $defaultOption
-     * @return bool|int|string
      * @codeCoverageIgnore
      */
-    private function askQuestion(array $question, $defaultOption)
+    private function askQuestion(array $question, int|string $defaultOption): string|int|bool
     {
         // Construct question
         $ask = [
@@ -618,7 +614,7 @@ class OptionalPackages
 
         while (true) {
             // Ask for user input
-            $answer = $this->io->ask(implode($ask), (string) $defaultOption);
+            $answer = $this->io->ask(implode('', $ask), (string) $defaultOption);
 
             // Handle none of the options
             if ($answer === 'n' && $question['required'] !== true) {
@@ -635,7 +631,7 @@ class OptionalPackages
                 $packageName    = $match['name'];
                 $packageVersion = $match['version'];
 
-                if (! $packageVersion) {
+                if ($packageVersion === '' || $packageVersion === '0') {
                     $this->io->write('<error>No package version specified</error>');
                     continue;
                 }
@@ -643,7 +639,7 @@ class OptionalPackages
                 $this->io->write(sprintf('  - Searching for <info>%s:%s</info>', $packageName, $packageVersion));
 
                 $optionalPackage = $this->composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
-                if ($optionalPackage === null) {
+                if (! $optionalPackage instanceof PackageInterface) {
                     $this->io->write(sprintf('<error>Package not found %s:%s</error>', $packageName, $packageVersion));
                     continue;
                 }
@@ -692,8 +688,10 @@ class OptionalPackages
                 rmdir($filename);
                 continue;
             }
+
             unlink($filename);
         }
+
         rmdir($directory);
     }
 
