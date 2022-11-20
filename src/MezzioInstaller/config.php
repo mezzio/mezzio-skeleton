@@ -9,7 +9,7 @@ return [
             'version' => '^1.0',
         ],
         'elie29/zend-phpdi-config'           => [
-            'version' => '^6.0',
+            'version' => '^6.0 || ^8.0 || ^9.0',
         ],
         'filp/whoops'                        => [
             'version' => '^2.7.1',
