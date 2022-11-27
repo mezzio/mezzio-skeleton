@@ -6016,12 +6016,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "a1e30f9773206c2740bdb26d564857fe8ee897ae"
+                "reference": "0399700d159e09b16645945758b65b921d3491fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a1e30f9773206c2740bdb26d564857fe8ee897ae",
-                "reference": "a1e30f9773206c2740bdb26d564857fe8ee897ae",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0399700d159e09b16645945758b65b921d3491fe",
+                "reference": "0399700d159e09b16645945758b65b921d3491fe",
                 "shasum": ""
             },
             "conflict": {
@@ -6253,7 +6253,7 @@
                 "modx/revolution": "<= 2.8.3-pl|<2.8",
                 "mojo42/jirafeau": "<4.4",
                 "monolog/monolog": ">=1.8,<1.12",
-                "moodle/moodle": "<4.0.1",
+                "moodle/moodle": "<4.0.5",
                 "mustache/mustache": ">=2,<2.14.1",
                 "namshi/jose": "<2.2",
                 "neoan3-apps/template": "<1.1.1",
@@ -6548,7 +6548,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-22T19:04:21+00:00"
+            "time": "2022-11-23T23:04:03+00:00"
         },
         {
             "name": "sebastian/cli-parser",
