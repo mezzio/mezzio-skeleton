@@ -334,10 +334,6 @@
     </MixedInferredReturnType>
   </file>
   <file src="test/MezzioInstallerTest/TemplateRenderersTest.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$expectedTemplateRenderer</code>
-    </ArgumentTypeCoercion>
-    <InvalidReturnType occurrences="1"/>
     <MixedArgument occurrences="3">
       <code>$config['questions']['container']</code>
       <code>$config['questions']['router']</code>
