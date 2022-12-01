@@ -23,8 +23,8 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
     /** @var OptionalPackages */
     private $installer;
 
-    /** @var string[] */
-    private $templateConfigProviders = [
+    /** @var array<class-string, class-string> */
+    private array $templateConfigProviders = [
         Mezzio\Plates\PlatesRenderer::class           => Mezzio\Plates\ConfigProvider::class,
         Mezzio\Twig\TwigRenderer::class               => Mezzio\Twig\ConfigProvider::class,
         Mezzio\LaminasView\LaminasViewRenderer::class => Mezzio\LaminasView\ConfigProvider::class,
@@ -48,6 +48,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
     /**
      * @runInSeparateProcess
      * @dataProvider templateRendererProvider
+     * @param class-string $expectedTemplateRenderer
      */
     public function testTemplateRenderer(
         string $installType,
@@ -113,13 +114,13 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
      * @psalm-return Generator<string, array{
      *     0: OptionalPackages::INSTALL_*,
      *     1: int,
-     *     2, int,
-     *     3, int,
-     *     4, int,
+     *     2: int,
+     *     3: int,
+     *     4: int,
      *     5: class-string<Mezzio\Template\TemplateRendererInterface>
      * }>
      */
-    public function templateRendererProvider(): Generator
+    public static function templateRendererProvider(): Generator
     {
         // phpcs:disable Generic.Files.LineLength.TooLong
         // Minimal framework installation test cases; no templates installed.
@@ -166,8 +167,10 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         file_put_contents($configFile, $contents);
     }
 
+    /** @param class-string $rendererClass */
     public function injectConfigProvider(string $rendererClass): void
     {
+        self::assertArrayHasKey($rendererClass, $this->templateConfigProviders);
         $configFile = $this->projectRoot . '/config/config.php';
         $contents   = file_get_contents($configFile);
         $contents   = preg_replace(
