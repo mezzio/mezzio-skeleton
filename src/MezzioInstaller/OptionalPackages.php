@@ -145,7 +145,7 @@ class OptionalPackages
     /** @var string Installation type selected. */
     private string $installType = self::INSTALL_FLAT;
 
-    private string|bool $projectRoot;
+    private string $projectRoot;
 
     private RootPackageInterface $rootPackage;
 
