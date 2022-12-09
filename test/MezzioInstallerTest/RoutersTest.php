@@ -26,7 +26,7 @@ class RoutersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /** @var array[] */
+    /** @var array<array-key,array<string,string|array<array-key,string>>> */
     private array $expectedRoutes = [
         [
             'name'            => 'home',
@@ -44,7 +44,7 @@ class RoutersTest extends OptionalPackagesTestCase
 
     private OptionalPackages $installer;
 
-    /** @var string[] */
+    /** @var array<string,string> */
     private array $routerConfigProviders = [
         FastRouteRouter::class => ConfigProvider::class,
         LaminasRouter::class   => Router\LaminasRouter\ConfigProvider::class,
@@ -68,7 +68,7 @@ class RoutersTest extends OptionalPackagesTestCase
     /**
      * @runInSeparateProcess
      * @dataProvider routerProvider
-     * @param mixed[]|mixed[][] $expectedRoutes
+     * @param array<array-key,array<string,string|array<array-key,string>>> $expectedRoutes
      */
     public function testRouter(
         string $installType,
