@@ -24,6 +24,8 @@ use function putenv;
 use function realpath;
 use function sprintf;
 
+use const JSON_THROW_ON_ERROR;
+
 // phpcs:ignore WebimpressCodingStandard.NamingConventions.AbstractClass.Prefix
 abstract class OptionalPackagesTestCase extends TestCase
 {
@@ -31,7 +33,7 @@ abstract class OptionalPackagesTestCase extends TestCase
     protected $composer;
 
     /** @var array Array version of composer.json */
-    protected $composerData;
+    protected $composerData = [];
 
     /** @var IOInterface&MockObject */
     protected $io;
@@ -139,6 +141,7 @@ abstract class OptionalPackagesTestCase extends TestCase
 
         $r = new ReflectionProperty($installer, 'composerDefinition');
         $r->setAccessible(true);
+
         $whitelist = $r->getValue($installer)['extra']['laminas']['component-whitelist'];
 
         if (in_array($package, $whitelist)) {
@@ -182,9 +185,9 @@ abstract class OptionalPackagesTestCase extends TestCase
     protected function createComposer()
     {
         $this->composer = $this->createMock(Composer::class);
-        $this->composer->method('getPackage')->will($this->returnCallback(function () {
-            return $this->createRootPackage();
-        }));
+        $this->composer->method('getPackage')->will(
+            $this->returnCallback(fn (): MockObject => $this->createRootPackage())
+        );
 
         return $this->composer;
     }
@@ -194,7 +197,12 @@ abstract class OptionalPackagesTestCase extends TestCase
      */
     protected function createRootPackage()
     {
-        $composerJson      = json_decode(file_get_contents($this->packageRoot . '/composer.json'), true);
+        $composerJson      = json_decode(
+            file_get_contents($this->packageRoot . '/composer.json'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
         $this->rootPackage = $this->createMock(RootPackage::class);
 
         $this->rootPackage->method('getRequires')->willReturn($composerJson['require']);

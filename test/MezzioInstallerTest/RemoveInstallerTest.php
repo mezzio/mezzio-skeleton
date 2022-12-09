@@ -8,8 +8,7 @@ use MezzioInstaller\OptionalPackages;
 
 class RemoveInstallerTest extends OptionalPackagesTestCase
 {
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
     protected function setUp(): void
     {

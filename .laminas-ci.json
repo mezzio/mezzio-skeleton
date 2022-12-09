@@ -4,7 +4,5 @@
         "--no-plugins"
     ],
     "ignore_php_platform_requirements": {
-        "8.0": false,
-        "8.1": false
     }
 }

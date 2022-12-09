@@ -8,6 +8,10 @@ use App\Handler\HomePageHandler;
 use App\Handler\PingHandler;
 use Mezzio\Application;
 use Mezzio\Router;
+use Mezzio\Router\FastRouteRouter;
+use Mezzio\Router\FastRouteRouter\ConfigProvider;
+use Mezzio\Router\LaminasRouter;
+use Mezzio\Router\RouterInterface;
 use MezzioInstaller\OptionalPackages;
 
 use function chdir;
@@ -16,14 +20,14 @@ use function file_get_contents;
 use function file_put_contents;
 use function preg_replace;
 use function sprintf;
-use function strpos;
+use function str_starts_with;
 
 class RoutersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /** @var array[] */
-    private $expectedRoutes = [
+    /** @var array<array-key,array<string,string|array<array-key,string>>> */
+    private array $expectedRoutes = [
         [
             'name'            => 'home',
             'path'            => '/',
@@ -38,13 +42,12 @@ class RoutersTest extends OptionalPackagesTestCase
         ],
     ];
 
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
-    /** @var string[] */
-    private $routerConfigProviders = [
-        Router\FastRouteRouter::class => Router\FastRouteRouter\ConfigProvider::class,
-        Router\LaminasRouter::class   => Router\LaminasRouter\ConfigProvider::class,
+    /** @var array<string,string> */
+    private array $routerConfigProviders = [
+        FastRouteRouter::class => ConfigProvider::class,
+        LaminasRouter::class   => Router\LaminasRouter\ConfigProvider::class,
     ];
 
     protected function setUp(): void
@@ -65,6 +68,7 @@ class RoutersTest extends OptionalPackagesTestCase
     /**
      * @runInSeparateProcess
      * @dataProvider routerProvider
+     * @param array<array-key,array<string,string|array<array-key,string>>> $expectedRoutes
      */
     public function testRouter(
         string $installType,
@@ -96,17 +100,17 @@ class RoutersTest extends OptionalPackagesTestCase
 
         // Test container
         $container = $this->getContainer();
-        self::assertTrue($container->has(Router\RouterInterface::class));
+        self::assertTrue($container->has(RouterInterface::class));
 
         // Test config
         $config = $container->get('config');
         self::assertEquals(
             $expectedRouter,
-            $config['dependencies'][$dependencyKey][Router\RouterInterface::class]
+            $config['dependencies'][$dependencyKey][RouterInterface::class]
         );
 
         // Test home page
-        $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
+        $setupRoutes = ! str_starts_with($copyFilesKey, 'minimal');
         $response    = $this->getAppResponse('/', $setupRoutes);
         self::assertEquals($expectedResponseStatusCode, $response->getStatusCode());
 
@@ -132,12 +136,12 @@ class RoutersTest extends OptionalPackagesTestCase
         // @codingStandardsIgnoreStart
         // $installType, $containerOption, $routerOption, $copyFilesKey, $dependencyKey, $expectedResponseStatusCode, $expectedRoutes, $expectedRouter
         return [
-            'fastroute-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 2, 1, 'minimal-files', 'aliases', 404, [], Router\FastRouteRouter::class],
-            'fastroute-flat'         => [OptionalPackages::INSTALL_FLAT, 2, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            'fastroute-modular'      => [OptionalPackages::INSTALL_MODULAR, 2, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\FastRouteRouter::class],
-            'laminas-router-minimal' => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 'minimal-files', 'aliases', 404, [], Router\LaminasRouter::class],
-            'laminas-router-flat'    => [OptionalPackages::INSTALL_FLAT, 2, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\LaminasRouter::class],
-            'laminas-router-modular' => [OptionalPackages::INSTALL_MODULAR, 2, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, Router\LaminasRouter::class],
+            'fastroute-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 2, 1, 'minimal-files', 'aliases', 404, [], FastRouteRouter::class],
+            'fastroute-flat'         => [OptionalPackages::INSTALL_FLAT, 2, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, FastRouteRouter::class],
+            'fastroute-modular'      => [OptionalPackages::INSTALL_MODULAR, 2, 1, 'copy-files', 'aliases', 200, $this->expectedRoutes, FastRouteRouter::class],
+            'laminas-router-minimal' => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 'minimal-files', 'aliases', 404, [], LaminasRouter::class],
+            'laminas-router-flat'    => [OptionalPackages::INSTALL_FLAT, 2, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, LaminasRouter::class],
+            'laminas-router-modular' => [OptionalPackages::INSTALL_MODULAR, 2, 2, 'copy-files', 'aliases', 200, $this->expectedRoutes, LaminasRouter::class],
         ];
         // @codingStandardsIgnoreEnd
     }
@@ -147,7 +151,7 @@ class RoutersTest extends OptionalPackagesTestCase
         $configFile = $this->projectRoot . '/config/config.php';
         $contents   = file_get_contents($configFile);
         $contents   = preg_replace(
-            '/(new ConfigAggregator\(\[)/',
+            '#(new ConfigAggregator\(\[)#',
             '$1' . "\n    " . $this->routerConfigProviders[$expectedRouter] . "::class,\n",
             $contents
         );

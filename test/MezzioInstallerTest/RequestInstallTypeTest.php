@@ -8,12 +8,11 @@ use MezzioInstaller\OptionalPackages;
 
 use function count;
 use function random_int;
-use function strpos;
+use function str_contains;
 
 class RequestInstallTypeTest extends OptionalPackagesTestCase
 {
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
     protected function setUp(): void
     {
@@ -38,7 +37,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         $this->io
             ->expects($this->once())
             ->method('ask')
-            ->with($this->callback(fn ($value) => $this->assertQueryPrompt($value)), '2')
+            ->with($this->callback(fn ($value): bool => $this->assertQueryPrompt($value)), '2')
             ->willReturn($selection);
 
         self::assertSame($expected, $this->installer->requestInstallType());
@@ -52,10 +51,10 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         $results       = [];
 
         do {
-            $argumentLists[] = [$this->callback(fn ($value) => $this->assertQueryPrompt($value)), '2'];
+            $argumentLists[] = [$this->callback(fn ($value): bool => $this->assertQueryPrompt($value)), '2'];
             $results[]       = $tries > 0 ? 'n' : '1';
 
-            $tries -= 1;
+            --$tries;
         } while ($tries > -1);
 
         $this->io
@@ -72,10 +71,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         self::assertSame(OptionalPackages::INSTALL_MINIMAL, $this->installer->requestInstallType());
     }
 
-    /**
-     * @param mixed $value
-     */
-    public static function assertQueryPrompt($value): bool
+    public static function assertQueryPrompt(mixed $value): bool
     {
         self::assertIsString(
             $value,
@@ -83,7 +79,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         );
 
         self::assertThat(
-            strpos($value, 'What type of installation would you like?') !== false,
+            str_contains($value, 'What type of installation would you like?'),
             self::isTrue(),
             'Unexpected prompt value'
         );

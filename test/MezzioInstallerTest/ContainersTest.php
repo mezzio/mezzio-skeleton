@@ -7,7 +7,10 @@ namespace MezzioInstallerTest;
 use Chubbyphp\Container\MinimalContainer as ChubbyphpMinimalContainer;
 use DI\Container as PhpDIContainer;
 use Laminas\ServiceManager\ServiceManager as LaminasManagerContainer;
-use Mezzio;
+use Mezzio\Application;
+use Mezzio\Helper\ServerUrlHelper;
+use Mezzio\Helper\UrlHelper;
+use Mezzio\Router\RouterInterface;
 use MezzioInstaller\OptionalPackages;
 use Pimple\Psr11\Container as PimpleContainer;
 use Psr\Container\ContainerInterface;
@@ -17,7 +20,7 @@ use function chdir;
 use function file_get_contents;
 use function file_put_contents;
 use function preg_replace;
-use function strpos;
+use function str_starts_with;
 
 use const DIRECTORY_SEPARATOR;
 
@@ -25,8 +28,7 @@ class ContainersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
     protected function setUp(): void
     {
@@ -78,8 +80,10 @@ class ContainersTest extends OptionalPackagesTestCase
         $configFile         = $this->projectRoot . DIRECTORY_SEPARATOR . '/config/config.php';
         $configFileContents = file_get_contents($configFile);
         $configFileContents = preg_replace(
-            '/(new ConfigAggregator\(\[)/s',
-            '$1' . "\n    \Mezzio\\Router\\FastRouteRouter\ConfigProvider::class,\n",
+            '#(new ConfigAggregator\(\[)#s',
+            '$1
+    \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
+',
             $configFileContents
         );
         file_put_contents($configFile, $configFileContents);
@@ -88,13 +92,13 @@ class ContainersTest extends OptionalPackagesTestCase
         $container = $this->getContainer();
         self::assertInstanceOf(ContainerInterface::class, $container);
         self::assertInstanceOf($expectedContainer, $container);
-        self::assertTrue($container->has(Mezzio\Helper\UrlHelper::class));
-        self::assertTrue($container->has(Mezzio\Helper\ServerUrlHelper::class));
-        self::assertTrue($container->has(Mezzio\Application::class));
-        self::assertTrue($container->has(Mezzio\Router\RouterInterface::class));
+        self::assertTrue($container->has(UrlHelper::class));
+        self::assertTrue($container->has(ServerUrlHelper::class));
+        self::assertTrue($container->has(Application::class));
+        self::assertTrue($container->has(RouterInterface::class));
 
         // Test home page
-        $setupRoutes = strpos($copyFilesKey, 'minimal') !== 0;
+        $setupRoutes = ! str_starts_with($copyFilesKey, 'minimal');
         $response    = $this->getAppResponse('/', $setupRoutes);
         self::assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }

@@ -5,8 +5,14 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use Generator;
-use Laminas\Stratigility\Middleware;
+use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio;
+use Mezzio\Application;
+use Mezzio\Container\ErrorHandlerFactory;
+use Mezzio\LaminasView\LaminasViewRenderer;
+use Mezzio\Plates\PlatesRenderer;
+use Mezzio\Template\TemplateRendererInterface;
+use Mezzio\Twig\TwigRenderer;
 use MezzioInstaller\OptionalPackages;
 
 use function array_unshift;
@@ -20,8 +26,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
     /** @var array<class-string, class-string> */
     private array $templateConfigProviders = [
@@ -86,20 +91,20 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
 
         // Test container
         $container = $this->getContainer();
-        self::assertTrue($container->has(Mezzio\Application::class));
-        self::assertTrue($container->has(Middleware\ErrorHandler::class));
-        self::assertTrue($container->has(Mezzio\Template\TemplateRendererInterface::class));
+        self::assertTrue($container->has(Application::class));
+        self::assertTrue($container->has(ErrorHandler::class));
+        self::assertTrue($container->has(TemplateRendererInterface::class));
 
         // Test config
         $config = $container->get('config');
         self::assertEquals(
-            Mezzio\Container\ErrorHandlerFactory::class,
-            $config['dependencies']['factories'][Middleware\ErrorHandler::class]
+            ErrorHandlerFactory::class,
+            $config['dependencies']['factories'][ErrorHandler::class]
         );
 
         // Test template renderer
-        $templateRenderer = $container->get(Mezzio\Template\TemplateRendererInterface::class);
-        self::assertInstanceOf(Mezzio\Template\TemplateRendererInterface::class, $templateRenderer);
+        $templateRenderer = $container->get(TemplateRendererInterface::class);
+        self::assertInstanceOf(TemplateRendererInterface::class, $templateRenderer);
         self::assertInstanceOf($expectedTemplateRenderer, $templateRenderer);
 
         if ($installType !== OptionalPackages::INSTALL_MINIMAL) {
@@ -126,16 +131,16 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         // Minimal framework installation test cases; no templates installed.
         // Must be run before those that install templates and test the output.
         // $installType, $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
-        yield 'plates-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 1, 404, Mezzio\Plates\PlatesRenderer::class];
-        yield 'twig-minimal'         => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 2, 404, Mezzio\Twig\TwigRenderer::class];
-        yield 'laminas-view-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 3, 404, Mezzio\LaminasView\LaminasViewRenderer::class];
+        yield 'plates-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 1, 404, PlatesRenderer::class];
+        yield 'twig-minimal'         => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 2, 404, TwigRenderer::class];
+        yield 'laminas-view-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 3, 404, LaminasViewRenderer::class];
 
         // Full framework installation test cases; installation options that install templates.
         $testCases = [
             // $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
-            'plates-full'       => [3, 2, 1, 200, Mezzio\Plates\PlatesRenderer::class],
-            'twig-full'         => [3, 2, 2, 200, Mezzio\Twig\TwigRenderer::class],
-            'laminas-view-full' => [3, 2, 3, 200, Mezzio\LaminasView\LaminasViewRenderer::class],
+            'plates-full'       => [3, 2, 1, 200, PlatesRenderer::class],
+            'twig-full'         => [3, 2, 2, 200, TwigRenderer::class],
+            'laminas-view-full' => [3, 2, 3, 200, LaminasViewRenderer::class],
         ];
         // phpcs:enable Generic.Files.LineLength.TooLong
 
@@ -160,7 +165,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         $configFile = $this->projectRoot . '/config/config.php';
         $contents   = file_get_contents($configFile);
         $contents   = preg_replace(
-            '/(new ConfigAggregator\(\[)/',
+            '#(new ConfigAggregator\(\[)#',
             '$1' . "\n    " . Mezzio\Router\FastRouteRouter\ConfigProvider::class . "::class,\n",
             $contents
         );
@@ -174,7 +179,7 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         $configFile = $this->projectRoot . '/config/config.php';
         $contents   = file_get_contents($configFile);
         $contents   = preg_replace(
-            '/(new ConfigAggregator\(\[)/',
+            '#(new ConfigAggregator\(\[)#',
             '$1' . "\n    " . $this->templateConfigProviders[$rendererClass] . "::class,\n",
             $contents
         );

@@ -10,7 +10,7 @@ use ReflectionClass;
 class RemoveDevDependenciesTest extends OptionalPackagesTestCase
 {
     /** @var string[] */
-    private $standardDependencies = [
+    private array $standardDependencies = [
         'php',
         'roave/security-advisories',
         'mezzio/mezzio',
@@ -20,10 +20,9 @@ class RemoveDevDependenciesTest extends OptionalPackagesTestCase
     ];
 
     /** @var string[] List of dev dependencies intended for removal. */
-    private $devDependencies;
+    private mixed $devDependencies = [];
 
-    /** @var OptionalPackages */
-    private $installer;
+    private OptionalPackages $installer;
 
     protected function setUp(): void
     {
