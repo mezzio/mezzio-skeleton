@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.0.0@4e177bf0c9f03c17d2fbfd83b7cc9c47605274d8">
+<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
   <file src="config/pipeline.php">
     <UnusedClosureParam occurrences="2">
       <code>$container</code>
@@ -25,9 +25,6 @@
     <ArgumentTypeCoercion occurrences="1">
       <code>$this-&gt;stabilityFlags</code>
     </ArgumentTypeCoercion>
-    <InvalidScalarArgument occurrences="1">
-      <code>$this-&gt;projectRoot</code>
-    </InvalidScalarArgument>
     <MixedArgument occurrences="29">
       <code>$answer</code>
       <code>$constraint</code>
@@ -326,19 +323,14 @@
       <code>$config['questions']['container']</code>
       <code>$config['questions']['router']</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="8">
+    <MixedArrayAccess occurrences="5">
       <code>$config['dependencies']</code>
       <code>$config['dependencies'][$dependencyKey]</code>
-      <code>$config['dependencies'][$dependencyKey][Router\RouterInterface::class]</code>
       <code>$config['questions']['container']</code>
       <code>$config['questions']['router']</code>
-      <code>$expectedRoute['allowed_methods']</code>
-      <code>$expectedRoute['name']</code>
-      <code>$expectedRoute['path']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="2">
+    <MixedAssignment occurrences="1">
       <code>$config</code>
-      <code>$expectedRoute</code>
     </MixedAssignment>
     <MixedInferredReturnType occurrences="1">
       <code>array</code>
@@ -353,7 +345,6 @@
     <MixedArrayAccess occurrences="6">
       <code>$config['dependencies']</code>
       <code>$config['dependencies']['factories']</code>
-      <code>$config['dependencies']['factories'][Middleware\ErrorHandler::class]</code>
       <code>$config['questions']['container']</code>
       <code>$config['questions']['router']</code>
       <code>$config['questions']['template-engine']</code>
