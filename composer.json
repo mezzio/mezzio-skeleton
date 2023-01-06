@@ -68,7 +68,7 @@
         "mezzio/mezzio-laminasviewrenderer": "^2.3.0",
         "mezzio/mezzio-platesrenderer": "^2.3.0",
         "mezzio/mezzio-twigrenderer": "^2.7.0",
-        "mikey179/vfsstream": "^1.6.10",
+        "mikey179/vfsstream": "^1.6.11",
         "phpunit/phpunit": "^9.5.11",
         "psalm/plugin-phpunit": "^0.18.0",
         "mezzio/mezzio-tooling": "^2.8",
