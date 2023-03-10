@@ -15,8 +15,10 @@
  * Provide your own development-mode settings by editing the file
  * `config/autoload/development.local.php.dist`.
  *
- * Because this file is aggregated last, it simply ensures:
+ * Because this file is aggregated last, it ensures:
  *
+ * - ConfigProviders for `--dev` dependencies are loaded when in development mode
+ * - Development-only overrides are applied
  * - The `debug` flag is _enabled_.
  * - Configuration caching is _disabled_.
  */
@@ -24,8 +26,16 @@
 declare(strict_types=1);
 
 use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
-return [
-    'debug'                        => true,
-    ConfigAggregator::ENABLE_CACHE => false,
-];
+$aggregator = new ConfigAggregator([
+    new PhpFileProvider(realpath(__DIR__) . '/autoload/{,*.}{global,local}-development.php'),
+    function() {
+        return [
+            'debug'                        => true,
+            ConfigAggregator::ENABLE_CACHE => false,
+        ];
+    },
+]);
+
+return $aggregator->getMergedConfig();
