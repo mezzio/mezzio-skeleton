@@ -25,17 +25,16 @@
 
 declare(strict_types=1);
 
+use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\PhpFileProvider;
 
 $aggregator = new ConfigAggregator([
     new PhpFileProvider(realpath(__DIR__) . '/autoload/{,*.}{global,local}-development.php'),
-    function() {
-        return [
-            'debug'                        => true,
-            ConfigAggregator::ENABLE_CACHE => false,
-        ];
-    },
+    new ArrayProvider([
+        'debug'                        => true,
+        ConfigAggregator::ENABLE_CACHE => false,
+    ]),
 ]);
 
 return $aggregator->getMergedConfig();
