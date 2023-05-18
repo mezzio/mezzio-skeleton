@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
+<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
   <file src="config/pipeline.php">
     <UnusedClosureParam occurrences="2">
       <code>$container</code>
@@ -25,108 +25,70 @@
     <ArgumentTypeCoercion occurrences="1">
       <code>$this-&gt;stabilityFlags</code>
     </ArgumentTypeCoercion>
-    <MixedArgument occurrences="29">
+    <InvalidPropertyAssignmentValue occurrences="1">
+      <code>require __DIR__ . '/config.php'</code>
+    </InvalidPropertyAssignmentValue>
+    <MixedArgument occurrences="9">
       <code>$answer</code>
       <code>$constraint</code>
-      <code>$defaultOption</code>
-      <code>$defaultText</code>
-      <code>$defaultText</code>
       <code>$filename</code>
       <code>$filename</code>
-      <code>$force</code>
-      <code>$key</code>
-      <code>$option['name']</code>
       <code>$package</code>
-      <code>$package</code>
-      <code>$packageData['version']</code>
-      <code>$packageData['whitelist'] ?? []</code>
-      <code>$packageName</code>
-      <code>$question</code>
-      <code>$questionName</code>
-      <code>$question['custom-package-warning']</code>
-      <code>$question['question']</code>
-      <code>$resource</code>
-      <code>$resource</code>
-      <code>$target</code>
       <code>$target</code>
       <code>$this-&gt;composerDefinition['autoload']</code>
       <code>$this-&gt;composerDefinition['autoload-dev']</code>
-      <code>$this-&gt;composerDefinition['extra'] ?? []</code>
-      <code>$this-&gt;composerDefinition['extra']['laminas']['component-whitelist']</code>
-      <code>$this-&gt;config['require-dev']</code>
       <code>$word</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="24">
-      <code>$option['name']</code>
-      <code>$option['name']</code>
-      <code>$packageData['version']</code>
-      <code>$packageData['whitelist']</code>
-      <code>$question['options'][$answer][$this-&gt;installType]</code>
-      <code>$question['options'][$answer]['packages']</code>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$package</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="6">
       <code>$this-&gt;composerDefinition['autoload']['psr-4']</code>
       <code>$this-&gt;composerDefinition['autoload']['psr-4']['MezzioInstaller\\']</code>
       <code>$this-&gt;composerDefinition['autoload-dev']['psr-4']</code>
       <code>$this-&gt;composerDefinition['autoload-dev']['psr-4']['MezzioInstallerTest\\']</code>
-      <code>$this-&gt;composerDefinition['extra']['branch-alias']</code>
-      <code>$this-&gt;composerDefinition['extra']['laminas']</code>
-      <code>$this-&gt;composerDefinition['extra']['laminas']['component-whitelist']</code>
-      <code>$this-&gt;composerDefinition['extra']['optional-packages']</code>
-      <code>$this-&gt;composerDefinition['require'][$packageName]</code>
-      <code>$this-&gt;composerDefinition['require-dev'][$devDependency]</code>
-      <code>$this-&gt;composerDefinition['require-dev'][$packageName]</code>
       <code>$this-&gt;composerDefinition['scripts']['pre-install-cmd']</code>
       <code>$this-&gt;composerDefinition['scripts']['pre-update-cmd']</code>
-      <code>$this-&gt;config['application'][$this-&gt;installType]</code>
-      <code>$this-&gt;config['application'][$this-&gt;installType]</code>
-      <code>$this-&gt;config['application'][$this-&gt;installType]['packages']</code>
-      <code>$this-&gt;config['application'][$this-&gt;installType]['resources']</code>
-      <code>$this-&gt;config['packages'][$packageName]</code>
     </MixedArrayAccess>
-    <MixedArrayAssignment occurrences="10">
+    <MixedArrayAssignment occurrences="6">
       <code>$this-&gt;composerDefinition['autoload']['psr-4']</code>
       <code>$this-&gt;composerDefinition['autoload']['psr-4']['App\\']</code>
-      <code>$this-&gt;composerDefinition['extra']['laminas']</code>
-      <code>$this-&gt;composerDefinition['extra']['laminas']['component-whitelist']</code>
-      <code>$this-&gt;composerDefinition['extra']['optional-packages']</code>
-      <code>$this-&gt;composerDefinition['extra']['optional-packages'][$questionName]</code>
       <code>$this-&gt;composerDefinition['require'][$packageName]</code>
       <code>$this-&gt;composerDefinition['require-dev'][$packageName]</code>
       <code>$this-&gt;composerDefinition['scripts']['cs-check']</code>
       <code>$this-&gt;composerDefinition['scripts']['cs-fix']</code>
     </MixedArrayAssignment>
-    <MixedArrayOffset occurrences="1">
-      <code>$this-&gt;config['packages'][$packageName]</code>
-    </MixedArrayOffset>
-    <MixedAssignment occurrences="21">
+    <MixedAssignment occurrences="8">
       <code>$answer</code>
       <code>$answer</code>
       <code>$constraint</code>
-      <code>$defaultOption</code>
-      <code>$defaultText</code>
       <code>$fileInfo</code>
       <code>$filename</code>
-      <code>$force</code>
-      <code>$key</code>
-      <code>$option</code>
       <code>$package</code>
-      <code>$package</code>
-      <code>$packageData</code>
-      <code>$packageName</code>
-      <code>$question</code>
-      <code>$questionName</code>
-      <code>$resource</code>
-      <code>$resource</code>
-      <code>$target</code>
       <code>$target</code>
       <code>$this-&gt;composerDefinition</code>
     </MixedAssignment>
     <MixedMethodCall occurrences="1">
       <code>isDir</code>
     </MixedMethodCall>
+    <NoValue occurrences="1">
+      <code>$this-&gt;installType</code>
+    </NoValue>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$resource</code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidIterator occurrences="1">
+      <code>$question['options'][$answer][$this-&gt;installType]</code>
+    </PossiblyInvalidIterator>
     <PossiblyNullArgument occurrences="2">
       <code>$content</code>
       <code>$phpunitConfig</code>
     </PossiblyNullArgument>
+    <PropertyTypeCoercion occurrences="3">
+      <code>$this-&gt;composerDefinition</code>
+      <code>$this-&gt;composerDefinition</code>
+      <code>$this-&gt;composerDefinition</code>
+    </PropertyTypeCoercion>
   </file>
   <file src="test/AppTest/Handler/PingHandlerTest.php">
     <MixedArgument occurrences="1">
@@ -286,27 +248,13 @@
     </UnresolvableInclude>
   </file>
   <file src="test/MezzioInstallerTest/PromptForOptionalPackagesTest.php">
-    <InvalidArgument occurrences="2">
-      <code>testPromptForOptionalPackage</code>
-      <code>testPromptForOptionalPackage</code>
-    </InvalidArgument>
     <InvalidReturnType occurrences="1"/>
-    <MixedArgument occurrences="3">
-      <code>$package</code>
-      <code>$question['question']</code>
+    <MixedArgument occurrences="1">
       <code>$written</code>
     </MixedArgument>
     <MixedArrayAssignment occurrences="1">
       <code>$written[]</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="6">
-      <code>$package</code>
-      <code>$package</code>
-      <code>$target</code>
-      <code>$toWrite[]</code>
-      <code>$toWrite[]</code>
-      <code>$written[]</code>
-    </MixedAssignment>
   </file>
   <file src="test/MezzioInstallerTest/RemoveDevDependenciesTest.php">
     <MixedAssignment occurrences="1">
@@ -326,6 +274,7 @@
     <MixedArrayAccess occurrences="5">
       <code>$config['dependencies']</code>
       <code>$config['dependencies'][$dependencyKey]</code>
+      <code>$config['dependencies'][$dependencyKey][RouterInterface::class]</code>
       <code>$config['questions']['container']</code>
       <code>$config['questions']['router']</code>
     </MixedArrayAccess>
@@ -345,6 +294,7 @@
     <MixedArrayAccess occurrences="6">
       <code>$config['dependencies']</code>
       <code>$config['dependencies']['factories']</code>
+      <code>$config['dependencies']['factories'][ErrorHandler::class]</code>
       <code>$config['questions']['container']</code>
       <code>$config['questions']['router']</code>
       <code>$config['questions']['template-engine']</code>

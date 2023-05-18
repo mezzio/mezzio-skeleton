@@ -14,6 +14,10 @@ use function putenv;
 use function sprintf;
 use function str_contains;
 
+/**
+ * @psalm-import-type QuestionSpec from OptionalPackages
+ * @psalm-import-type OptionalPackageSpec from OptionalPackages
+ */
 class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
@@ -44,9 +48,9 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     /**
      * @psalm-return Generator<string, array{
      *     0: string,
-     *     1: string,
+     *     1: QuestionSpec,
      *     2: int,
-     *     3: string
+     *     3: OptionalPackageSpec
      * }>
      */
     public function promptCombinations(): Generator
@@ -62,6 +66,8 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 
     /**
      * @dataProvider promptCombinations
+     * @param QuestionSpec $question
+     * @param OptionalPackageSpec $expectedPackage
      */
     public function testPromptForOptionalPackage(
         string $questionName,
