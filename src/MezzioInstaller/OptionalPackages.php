@@ -52,6 +52,23 @@ use function unlink;
  *      "pre-update-cmd": "MezzioInstaller\\OptionalPackages::install",
  *      "pre-install-cmd": "MezzioInstaller\\OptionalPackages::install"
  *  },
+ *
+ * @psalm-type OptionalPackageSpec = array{
+ *     name: string,
+ *     packages: list<string>,
+ *     flat: array<string, string>,
+ *     modular: array<string, string>,
+ *     minimal: array<string, string>,
+ * }
+ * @psalm-type QuestionSpec = array{
+ *     question: string,
+ *     default: int,
+ *     required: bool,
+ *     force?: bool,
+ *     custom-package: bool,
+ *     custom-package-warning?: string,
+ *     options: array<int, OptionalPackageSpec>,
+ * }
  */
 class OptionalPackages
 {
@@ -90,7 +107,7 @@ class OptionalPackages
     /**
      * Assets to remove during cleanup.
      *
-     * @var string[]
+     * @var list<string>
      */
     private array $assetsToRemove = [
         '.coveralls.yml',
@@ -105,11 +122,36 @@ class OptionalPackages
         'src/App/templates/.gitkeep',
     ];
 
-    /** @var array */
-    private $config = [];
-
-    /** @var array */
-    private $composerDefinition = [];
+    /**
+     * @var array{
+     *     packages: array<string, array{
+     *         version: string,
+     *         whitelist?: list<string>,
+     *     }>,
+     *     questions: array<string, QuestionSpec>,
+     *     require-dev: list<string>,
+     *     application: array<string, array{
+     *         packages: array,
+     *         resources: array<string, string>,
+     *     }>,
+     * }
+     */
+    private array $config;
+    /**
+     * @var array{
+     *     require: array<string, string>,
+     *     require-dev: array<string, string>,
+     *     extra: array{
+     *         optional-packages: array,
+     *         branch-alias?: mixed,
+     *         laminas: array{
+     *             component-whitelist: list<string>,
+     *         }
+     *     },
+     *     ...
+     * }
+     */
+    private array $composerDefinition;
 
     private JsonFile $composerJson;
 
@@ -142,7 +184,7 @@ class OptionalPackages
     /** @var string Path to this file. */
     private string $installerSource;
 
-    /** @var string Installation type selected. */
+    /** @var self::INSTALL_* Installation type selected. */
     private string $installType = self::INSTALL_FLAT;
 
     private string $projectRoot;
@@ -231,7 +273,7 @@ class OptionalPackages
     /**
      * Prompt for the installation type.
      *
-     * @return string One of the INSTALL_ constants.
+     * @return self::INSTALL_* One of the INSTALL_ constants.
      */
     public function requestInstallType(): string
     {
@@ -338,7 +380,7 @@ class OptionalPackages
      * Prompt for a single optional installation package.
      *
      * @param string $questionName Name of question
-     * @param array  $question Question details from configuration
+     * @param QuestionSpec $question Question details from configuration
      */
     public function promptForOptionalPackage(string $questionName, array $question): void
     {
@@ -420,6 +462,8 @@ class OptionalPackages
 
     /**
      * Process the answer of a question
+     *
+     * @param QuestionSpec $question
      */
     public function processAnswer(array $question, bool|int|string $answer): bool
     {
@@ -588,6 +632,7 @@ class OptionalPackages
     /**
      * Prepare and ask questions and return the answer
      *
+     * @param QuestionSpec $question
      * @codeCoverageIgnore
      */
     private function askQuestion(array $question, int|string $defaultOption): string|int|bool
