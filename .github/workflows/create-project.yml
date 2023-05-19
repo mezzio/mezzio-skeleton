@@ -1,0 +1,36 @@
+name: "Create Project"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - '[0-9]+.[0-9]+.x'
+      - 'refs/pull/*'
+    tags:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        php_version:
+          - '@latest'
+          - '@lowest'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout CI environment
+        uses: laminas/laminas-continuous-integration-action@v1
+        with:
+          php: ${{ matrix.php_version }}
+      - name: Checkout sourcecode
+        uses: actions/checkout@v3
+      - name: Test create-project
+        run: |
+          cd ..
+          yes 1 | composer create-project mezzio/mezzio-skeleton test-new-project \
+              --repository='{"type": "path", "url": "./mezzio-skeleton"}' --stability=dev
+          ls -la test-new-project
+          cd test-new-project
+          test -f config/container.php
+          test -f config/routes.php
+          echo "Successfully created project"
