@@ -23,7 +23,7 @@ jobs:
         with:
           php: ${{ matrix.php_version }}
       - name: Checkout sourcecode
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Test create-project
         run: |
           cd ..
