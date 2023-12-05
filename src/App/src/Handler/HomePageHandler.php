@@ -16,7 +16,6 @@ use Mezzio\Router\LaminasRouter;
 use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\TwigRenderer;
-use Pimple\Psr11\Container as PimpleContainer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -36,10 +35,6 @@ class HomePageHandler implements RequestHandlerInterface
         $data = [];
 
         switch ($this->containerName) {
-            case PimpleContainer::class:
-                $data['containerName'] = 'Pimple';
-                $data['containerDocs'] = 'https://pimple.symfony.com/';
-                break;
             case ServiceManager::class:
                 $data['containerName'] = 'Laminas Servicemanager';
                 $data['containerDocs'] = 'https://docs.laminas.dev/laminas-servicemanager/';

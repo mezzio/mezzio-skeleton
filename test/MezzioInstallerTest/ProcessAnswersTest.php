@@ -77,7 +77,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
             ->expects($this->exactly(2))
             ->method('write')
             ->withConsecutive(
-                [$this->stringContains('Adding package <info>laminas/laminas-pimple-config</info>')],
+                [$this->stringContains('Adding package <info>laminas/laminas-servicemanager</info>')],
                 [$this->stringContains('Copying <info>config/container.php</info>')],
             );
 
@@ -88,7 +88,7 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
 
         self::assertTrue($result);
         self::assertFileExists($this->projectRoot . '/config/container.php');
-        self::assertPackage('laminas/laminas-pimple-config', $this->installer);
+        self::assertPackage('laminas/laminas-servicemanager', $this->installer);
     }
 
     public function testAnsweredWithPackage(): void

@@ -131,16 +131,16 @@ class TemplateRenderersTest extends OptionalPackagesTestCase
         // Minimal framework installation test cases; no templates installed.
         // Must be run before those that install templates and test the output.
         // $installType, $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
-        yield 'plates-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 1, 404, PlatesRenderer::class];
-        yield 'twig-minimal'         => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 2, 404, TwigRenderer::class];
-        yield 'laminas-view-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 3, 404, LaminasViewRenderer::class];
+        yield 'plates-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 1, 404, PlatesRenderer::class];
+        yield 'twig-minimal'         => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 2, 404, TwigRenderer::class];
+        yield 'laminas-view-minimal' => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 3, 404, LaminasViewRenderer::class];
 
         // Full framework installation test cases; installation options that install templates.
         $testCases = [
             // $containerOption, $routerOption, $templateRendererOption, $expectedResponseStatusCode, $expectedTemplateRenderer
-            'plates-full'       => [3, 2, 1, 200, PlatesRenderer::class],
-            'twig-full'         => [3, 2, 2, 200, TwigRenderer::class],
-            'laminas-view-full' => [3, 2, 3, 200, LaminasViewRenderer::class],
+            'plates-full'       => [2, 2, 1, 200, PlatesRenderer::class],
+            'twig-full'         => [2, 2, 2, 200, TwigRenderer::class],
+            'laminas-view-full' => [2, 2, 3, 200, LaminasViewRenderer::class],
         ];
         // phpcs:enable Generic.Files.LineLength.TooLong
 

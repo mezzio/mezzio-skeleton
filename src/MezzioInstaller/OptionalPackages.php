@@ -177,7 +177,6 @@ class OptionalPackages
         'mezzio/mezzio-twigrenderer',
         'mezzio/mezzio-laminasrouter',
         'mezzio/mezzio-laminasviewrenderer',
-        'laminas/laminas-pimple-config',
         'laminas/laminas-servicemanager',
     ];
 

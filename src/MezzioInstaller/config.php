@@ -47,9 +47,6 @@ return [
                 'mezzio/mezzio-laminasviewrenderer',
             ],
         ],
-        'laminas/laminas-pimple-config'      => [
-            'version' => '^1.1.1',
-        ],
         'laminas/laminas-servicemanager'     => [
             'version' => '^3.4',
         ],
@@ -74,27 +71,12 @@ return [
     'questions'   => [
         'container'       => [
             'question'               => 'Which container do you want to use for dependency injection?',
-            'default'                => 2,
+            'default'                => 1,
             'required'               => true,
             'custom-package'         => true,
             'custom-package-warning' => 'You need to edit public/index.php to start the custom container.',
             'options'                => [
                 1 => [
-                    'name'     => 'Pimple <comment>(supported by laminas)</comment>',
-                    'packages' => [
-                        'laminas/laminas-pimple-config',
-                    ],
-                    'flat'     => [
-                        'Resources/config/container-pimple.php' => 'config/container.php',
-                    ],
-                    'modular'  => [
-                        'Resources/config/container-pimple.php' => 'config/container.php',
-                    ],
-                    'minimal'  => [
-                        'Resources/config/container-pimple.php' => 'config/container.php',
-                    ],
-                ],
-                2 => [
                     'name'     => 'laminas-servicemanager <comment>(supported by laminas)</comment>',
                     'packages' => [
                         'laminas/laminas-servicemanager',
@@ -109,7 +91,7 @@ return [
                         'Resources/config/container-laminas-servicemanager.php' => 'config/container.php',
                     ],
                 ],
-                3 => [
+                2 => [
                     'name'     => 'Symfony DI Container',
                     'packages' => [
                         'jsoumelidis/zend-sf-di-config',
@@ -124,7 +106,7 @@ return [
                         'Resources/config/container-sf-di.php' => 'config/container.php',
                     ],
                 ],
-                4 => [
+                3 => [
                     'name'     => 'PHP-DI',
                     'packages' => [
                         'elie29/zend-phpdi-config',
@@ -139,7 +121,7 @@ return [
                         'Resources/config/container-php-di.php' => 'config/container.php',
                     ],
                 ],
-                5 => [
+                4 => [
                     'name'     => 'chubbyphp-container',
                     'packages' => [
                         'chubbyphp/chubbyphp-laminas-config',
