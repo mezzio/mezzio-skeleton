@@ -174,7 +174,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         self::assertEquals(200, $response->getStatusCode());
 
         // Test response content
-        $html = (string) $response->getBody()->getContents();
+        $html = $response->getBody()->getContents();
 
         self::assertStringContainsString(sprintf('Get started with %s', $containerName), $html);
         self::assertStringContainsString(sprintf('href="%s"', $containerDocs), $html);
