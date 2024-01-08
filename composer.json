@@ -66,11 +66,11 @@
         "mezzio/mezzio-laminasrouter": "^3.9.0",
         "mezzio/mezzio-laminasviewrenderer": "^2.15.0",
         "mezzio/mezzio-platesrenderer": "^2.10.0",
+        "mezzio/mezzio-tooling": "^2.8",
         "mezzio/mezzio-twigrenderer": "^2.15.0",
         "mikey179/vfsstream": "^1.6.11",
-        "phpunit/phpunit": "^9.6.15",
+        "phpunit/phpunit": "^10.5",
         "psalm/plugin-phpunit": "^0.18.4",
-        "mezzio/mezzio-tooling": "^2.8",
         "roave/security-advisories": "dev-master",
         "vimeo/psalm": "^5.18"
     },
