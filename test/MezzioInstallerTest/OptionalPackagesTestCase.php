@@ -59,7 +59,6 @@ abstract class OptionalPackagesTestCase extends TestCase
 
         foreach (['composerRequires', 'composerDevRequires'] as $property) {
             $r = new ReflectionProperty($installer, $property);
-            $r->setAccessible(true);
             if (array_key_exists($package, $r->getValue($installer))) {
                 $found = true;
                 break;
@@ -84,7 +83,6 @@ abstract class OptionalPackagesTestCase extends TestCase
 
         foreach (['composerRequires', 'composerDevRequires'] as $property) {
             $r = new ReflectionProperty($installer, $property);
-            $r->setAccessible(true);
             if (array_key_exists($package, $r->getValue($installer))) {
                 $found = true;
                 break;
@@ -140,7 +138,6 @@ abstract class OptionalPackagesTestCase extends TestCase
         $found   = false;
 
         $r = new ReflectionProperty($installer, 'composerDefinition');
-        $r->setAccessible(true);
 
         $whitelist = $r->getValue($installer)['extra']['laminas']['component-whitelist'];
 
@@ -228,7 +225,6 @@ abstract class OptionalPackagesTestCase extends TestCase
     protected function getInstallerProperty(OptionalPackages $installer, string $property)
     {
         $r = new ReflectionProperty($installer, $property);
-        $r->setAccessible(true);
 
         return $r->getValue($installer);
     }

@@ -40,7 +40,6 @@ class AddPackageTest extends OptionalPackagesTestCase
         self::assertPackage('laminas/laminas-stdlib', $installer);
 
         $r = new ReflectionProperty($installer, 'stabilityFlags');
-        $r->setAccessible(true);
 
         $stabilityFlags = $r->getValue($installer);
 
