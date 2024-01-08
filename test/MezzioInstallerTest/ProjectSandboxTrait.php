@@ -149,7 +149,7 @@ trait ProjectSandboxTrait
      */
     protected function setUpAlternateAutoloader(string $appPath, bool $stripNamespace = false): void
     {
-        $this->autoloader = function ($class) use ($appPath, $stripNamespace): bool {
+        $this->autoloader = function (string $class) use ($appPath, $stripNamespace): bool {
             if (! str_starts_with($class, 'App\\')) {
                 return false;
             }

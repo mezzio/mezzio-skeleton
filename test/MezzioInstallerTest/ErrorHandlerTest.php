@@ -103,9 +103,9 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
     {
         // $installType, $containerOption, $errorHandlerOption, $expectedErrorHandler
         return [
-            'whoops-minimal' => [OptionalPackages::INSTALL_MINIMAL, 3, 1, WhoopsErrorResponseGeneratorFactory::class],
-            'whoops-full'    => [OptionalPackages::INSTALL_FLAT,    3, 1, WhoopsErrorResponseGeneratorFactory::class],
-            'whoops-modular' => [OptionalPackages::INSTALL_MODULAR, 3, 1, WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-minimal' => [OptionalPackages::INSTALL_MINIMAL, 2, 1, WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-full'    => [OptionalPackages::INSTALL_FLAT,    2, 1, WhoopsErrorResponseGeneratorFactory::class],
+            'whoops-modular' => [OptionalPackages::INSTALL_MODULAR, 2, 1, WhoopsErrorResponseGeneratorFactory::class],
         ];
     }
 }

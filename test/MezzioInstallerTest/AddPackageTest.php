@@ -7,6 +7,8 @@ namespace MezzioInstallerTest;
 use Composer\Package\BasePackage;
 use ReflectionProperty;
 
+use function assert;
+
 class AddPackageTest extends OptionalPackagesTestCase
 {
     /**
@@ -16,13 +18,21 @@ class AddPackageTest extends OptionalPackagesTestCase
     {
         $installer = $this->createOptionalPackages();
 
+        $invocationCount = 0;
+
         $this->io
             ->expects($this->atLeast(2))
             ->method('write')
-            ->withConsecutive(
-                [$this->stringContains('Removing installer development dependencies')],
-                [$this->stringContains('Adding package')],
-            );
+            ->with(self::callback(static function (string $value) use (&$invocationCount): bool {
+                assert($invocationCount === 0 || $invocationCount === 1);
+                $expect = [
+                    0 => 'Removing installer development dependencies',
+                    1 => 'Adding package',
+                ];
+                self::assertStringContainsString($expect[$invocationCount], $value);
+                $invocationCount++;
+                return true;
+            }));
 
         $installer->removeDevDependencies();
         $installer->addPackage($packageName, $packageVersion);

@@ -12,7 +12,6 @@ use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Router\RouterInterface;
 use MezzioInstaller\OptionalPackages;
-use Pimple\Psr11\Container as PimpleContainer;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
 
@@ -118,21 +117,18 @@ class ContainersTest extends OptionalPackagesTestCase
         // phpcs:disable Generic.Files.LineLength.TooLong
         // $installType, $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer
         return [
-            'pimple-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 1, 2, 'minimal-files', 404, PimpleContainer::class],
-            'pimple-flat'         => [OptionalPackages::INSTALL_FLAT,    1, 2, 'copy-files', 200, PimpleContainer::class],
-            'pimple-modular'      => [OptionalPackages::INSTALL_MODULAR, 1, 2, 'copy-files', 200, PimpleContainer::class],
-            'laminas-sm-minimal'  => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 'minimal-files', 404, LaminasManagerContainer::class],
-            'laminas-sm-flat'     => [OptionalPackages::INSTALL_FLAT,    2, 2, 'copy-files', 200, LaminasManagerContainer::class],
-            'laminas-sm-modular'  => [OptionalPackages::INSTALL_MODULAR, 2, 2, 'copy-files', 200, LaminasManagerContainer::class],
-            'sf-di-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, SfContainerBuilder::class],
-            'sf-di-flat'          => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, SfContainerBuilder::class],
-            'sf-di-modular'       => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, SfContainerBuilder::class],
-            'php-di-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, PhpDIContainer::class],
-            'php-di-flat'         => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, PhpDIContainer::class],
-            'php-di-modular'      => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, PhpDIContainer::class],
-            'chubbyphp-c-minimal' => [OptionalPackages::INSTALL_MINIMAL, 5, 2, 'minimal-files', 404, ChubbyphpMinimalContainer::class],
-            'chubbyphp-c-flat'    => [OptionalPackages::INSTALL_FLAT,    5, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
-            'chubbyphp-c-modular' => [OptionalPackages::INSTALL_MODULAR, 5, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
+            'laminas-sm-minimal'  => [OptionalPackages::INSTALL_MINIMAL, 1, 2, 'minimal-files', 404, LaminasManagerContainer::class],
+            'laminas-sm-flat'     => [OptionalPackages::INSTALL_FLAT,    1, 2, 'copy-files', 200, LaminasManagerContainer::class],
+            'laminas-sm-modular'  => [OptionalPackages::INSTALL_MODULAR, 1, 2, 'copy-files', 200, LaminasManagerContainer::class],
+            'sf-di-minimal'       => [OptionalPackages::INSTALL_MINIMAL, 2, 2, 'minimal-files', 404, SfContainerBuilder::class],
+            'sf-di-flat'          => [OptionalPackages::INSTALL_FLAT,    2, 2, 'copy-files', 200, SfContainerBuilder::class],
+            'sf-di-modular'       => [OptionalPackages::INSTALL_MODULAR, 2, 2, 'copy-files', 200, SfContainerBuilder::class],
+            'php-di-minimal'      => [OptionalPackages::INSTALL_MINIMAL, 3, 2, 'minimal-files', 404, PhpDIContainer::class],
+            'php-di-flat'         => [OptionalPackages::INSTALL_FLAT,    3, 2, 'copy-files', 200, PhpDIContainer::class],
+            'php-di-modular'      => [OptionalPackages::INSTALL_MODULAR, 3, 2, 'copy-files', 200, PhpDIContainer::class],
+            'chubbyphp-c-minimal' => [OptionalPackages::INSTALL_MINIMAL, 4, 2, 'minimal-files', 404, ChubbyphpMinimalContainer::class],
+            'chubbyphp-c-flat'    => [OptionalPackages::INSTALL_FLAT,    4, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
+            'chubbyphp-c-modular' => [OptionalPackages::INSTALL_MODULAR, 4, 2, 'copy-files', 200, ChubbyphpMinimalContainer::class],
         ];
         // phpcs:enable Generic.Files.LineLength.TooLong
     }

@@ -26,6 +26,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Test create-project
         run: |
+          rm composer.lock
           cd ..
           yes 1 | composer create-project mezzio/mezzio-skeleton test-new-project \
               --repository='{"type": "path", "url": "./mezzio-skeleton"}' --stability=dev

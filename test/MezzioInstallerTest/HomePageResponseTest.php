@@ -21,7 +21,6 @@ use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\ConfigProvider as TwigRendererConfigProvider;
 use Mezzio\Twig\TwigRenderer;
 use MezzioInstaller\OptionalPackages;
-use Pimple\Psr11\Container as PimpleContainer;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
 
@@ -91,19 +90,14 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     // $containerOption, $containerClass
     /** @var array<string, array<int|class-string<ContainerInterface>>> */
     private array $containerTypes = [
-        'pimple'                 => [1, PimpleContainer::class],
-        'laminas-servicemanager' => [2, LaminasServiceManagerContainer::class],
-        'sf-di'                  => [3, SfContainerBuilder::class],
-        'php-di'                 => [4, PhpDIContainer::class],
-        'chubbyphp-container'    => [5, ChubbyphpContainer::class],
+        'laminas-servicemanager' => [1, LaminasServiceManagerContainer::class],
+        'sf-di'                  => [2, SfContainerBuilder::class],
+        'php-di'                 => [3, PhpDIContainer::class],
+        'chubbyphp-container'    => [4, ChubbyphpContainer::class],
     ];
 
     /** @var array<class-string<ContainerInterface>, array<string, string>> */
     private array $expectedContainerAttributes = [
-        PimpleContainer::class                => [
-            'containerName' => 'Pimple',
-            'containerDocs' => 'https://pimple.symfony.com/',
-        ],
         LaminasServiceManagerContainer::class => [
             'containerName' => 'Laminas Servicemanager',
             'containerDocs' => 'https://docs.laminas.dev/laminas-servicemanager/',

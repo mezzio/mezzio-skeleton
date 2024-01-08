@@ -45,28 +45,29 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
 
     public function testWillContinueToPromptUntilValidAnswerPresented(): void
     {
-        $tries = random_int(1, 10);
-
-        $argumentLists = [];
-        $results       = [];
+        $tries   = random_int(1, 10);
+        $results = [];
 
         do {
-            $argumentLists[] = [$this->callback(fn ($value): bool => $this->assertQueryPrompt($value)), '2'];
-            $results[]       = $tries > 0 ? 'n' : '1';
+            $results[] = $tries > 0 ? 'n' : '1';
 
             --$tries;
         } while ($tries > -1);
 
         $this->io
-            ->expects($this->exactly(count($results)))
+            ->expects(self::exactly(count($results)))
             ->method('ask')
-            ->withConsecutive(...$argumentLists)
+            ->with(self::callback(static function (mixed $prompt): bool {
+                self::assertQueryPrompt($prompt);
+
+                return true;
+            }), self::identicalTo('2'))
             ->willReturnOnConsecutiveCalls(...$results);
 
         $this->io
-            ->expects($this->exactly(count($results) - 1))
+            ->expects(self::exactly(count($results) - 1))
             ->method('write')
-            ->with($this->stringContains('Invalid answer'));
+            ->with(self::stringContains('Invalid answer'));
 
         self::assertSame(OptionalPackages::INSTALL_MINIMAL, $this->installer->requestInstallType());
     }
