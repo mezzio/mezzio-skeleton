@@ -72,7 +72,7 @@
         "psalm/plugin-phpunit": "^0.18.0",
         "mezzio/mezzio-tooling": "^2.8",
         "roave/security-advisories": "dev-master",
-        "vimeo/psalm": "^5.0"
+        "vimeo/psalm": "^5.18"
     },
     "autoload": {
         "psr-4": {
@@ -116,10 +116,14 @@
           "Composer\\Config::disableProcessTimeout",
           "php -S 0.0.0.0:8080 -t public/"
         ],
+        "static-analysis": "psalm --stats",
+        "static-analysis-update-baseline": "psalm --stats --update-baseline",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "scripts-descriptions": {
-        "clear-config-cache": "Clears merged config cache. Required for config changes to be applied."
+        "clear-config-cache": "Clears merged config cache. Required for config changes to be applied.",
+        "static-analysis": "Run static analysis tool Psalm.",
+        "static-analysis-update-baseline": "Run static analysis tool Psalm and update baseline."
     }
 }
