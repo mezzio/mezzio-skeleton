@@ -48,7 +48,7 @@
         "composer/package-versions-deprecated": "^1.10.99",
         "laminas/laminas-component-installer": "^2.6 || ^3.0",
         "laminas/laminas-config-aggregator": "^1.6",
-        "laminas/laminas-diactoros": "^2.24.2",
+        "laminas/laminas-diactoros": "^2.24.2 || ^3.0.0",
         "laminas/laminas-stdlib": "^3.6",
         "mezzio/mezzio": "^3.7",
         "mezzio/mezzio-helpers": "^5.7"
