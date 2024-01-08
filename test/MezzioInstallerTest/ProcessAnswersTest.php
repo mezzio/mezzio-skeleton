@@ -6,6 +6,7 @@ namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
 
+use function assert;
 use function chdir;
 
 class ProcessAnswersTest extends OptionalPackagesTestCase
@@ -73,13 +74,21 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
+        $count = 0;
+
         $this->io
             ->expects($this->exactly(2))
             ->method('write')
-            ->withConsecutive(
-                [$this->stringContains('Adding package <info>laminas/laminas-servicemanager</info>')],
-                [$this->stringContains('Copying <info>config/container.php</info>')],
-            );
+            ->with(self::callback(static function (string $value) use (&$count): bool {
+                $expect = [
+                    0 => 'Adding package <info>laminas/laminas-servicemanager</info>',
+                    1 => 'Copying <info>config/container.php</info>',
+                ];
+                assert(isset($expect[$count]));
+                self::assertStringContainsString($expect[$count], $value);
+                $count++;
+                return true;
+            }));
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -96,13 +105,23 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
+        $count = 0;
+
         $this->io
             ->expects($this->exactly(2))
             ->method('write')
-            ->withConsecutive(
-                [$this->stringContains('Adding package <info>league/container</info>')],
-                [$this->stringContains('<warning>You need to edit public/index.php')],
-            );
+            ->with(self::callback(static function (string $value) use (&$count): bool {
+                $expect = [
+                    0 => 'Adding package <info>league/container</info>',
+                    1 => '<warning>You need to edit public/index.php',
+                ];
+
+                assert(isset($expect[$count]));
+                self::assertStringContainsString($expect[$count], $value);
+                $count++;
+
+                return true;
+            }));
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['container'];
@@ -119,13 +138,23 @@ class ProcessAnswersTest extends OptionalPackagesTestCase
         // Prepare the installer
         $this->installer->removeDevDependencies();
 
+        $count = 0;
+
         $this->io
             ->expects($this->exactly(2))
             ->method('write')
-            ->withConsecutive(
-                [$this->stringContains('Adding package <info>mezzio/mezzio-laminasviewrenderer</info>')],
-                [$this->stringContains('Whitelist package <info>mezzio/mezzio-laminasviewrenderer</info>')],
-            );
+            ->with(self::callback(static function (string $value) use (&$count): bool {
+                $expect = [
+                    0 => 'Adding package <info>mezzio/mezzio-laminasviewrenderer</info>',
+                    1 => 'Whitelist package <info>mezzio/mezzio-laminasviewrenderer</info>',
+                ];
+
+                assert(isset($expect[$count]));
+                self::assertStringContainsString($expect[$count], $value);
+                $count++;
+
+                return true;
+            }));
 
         $config   = $this->getInstallerConfig($this->installer);
         $question = $config['questions']['template-engine'];

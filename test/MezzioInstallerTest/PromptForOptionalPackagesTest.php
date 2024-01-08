@@ -56,7 +56,9 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     public function promptCombinations(): Generator
     {
         $config = require __DIR__ . '/../../src/MezzioInstaller/config.php';
-        foreach ($config['questions'] as $questionName => $question) {
+        /** @psalm-var array<string, QuestionSpec> $questions */
+        $questions = $config['questions'] ?? [];
+        foreach ($questions as $questionName => $question) {
             foreach ($question['options'] as $selection => $package) {
                 $name = sprintf('%s-%s', $questionName, $package['name']);
                 yield $name => [$questionName, $question, $selection, $package];
@@ -73,7 +75,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
         string $questionName,
         array $question,
         int $selection,
-        array $expectedPackage
+        array $expectedPackage,
     ): void {
         $this->io
             ->expects($this->once())
@@ -84,7 +86,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 
                     return true;
                 }),
-                $question['default']
+                $question['default'],
             )
             ->willReturn($selection);
 
@@ -129,13 +131,13 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     {
         self::assertIsString(
             $argument,
-            'Questions must be a string since symfony/console:4.0'
+            'Questions must be a string since symfony/console:4.0',
         );
 
         self::assertThat(
             str_contains($argument, $expected),
             self::isTrue(),
-            sprintf('Expected prompt not received: "%s"', $expected)
+            sprintf('Expected prompt not received: "%s"', $expected),
         );
     }
 }

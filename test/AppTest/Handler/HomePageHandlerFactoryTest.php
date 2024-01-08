@@ -12,6 +12,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
+use function in_array;
+
 class HomePageHandlerFactoryTest extends TestCase
 {
     /** @var ContainerInterface&MockObject */
@@ -56,10 +58,14 @@ class HomePageHandlerFactoryTest extends TestCase
         $this->container
             ->expects($this->exactly(2))
             ->method('get')
-            ->withConsecutive(
-                [RouterInterface::class],
-                [TemplateRendererInterface::class],
-            )
+            ->with(self::callback(static function (string $name): bool {
+                self::assertTrue(in_array($name, [
+                    RouterInterface::class,
+                    TemplateRendererInterface::class,
+                ]));
+
+                return true;
+            }))
             ->willReturnOnConsecutiveCalls(
                 $this->router,
                 $renderer
