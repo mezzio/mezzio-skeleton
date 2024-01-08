@@ -191,9 +191,6 @@
       <code><![CDATA[$this->rendererConfigProviders[$rendererClass]]]></code>
       <code><![CDATA[$this->routerConfigProviders[$routerClass]]]></code>
     </PossiblyInvalidArrayOffset>
-    <RedundantCastGivenDocblockType>
-      <code><![CDATA[(string) $response->getBody()->getContents()]]></code>
-    </RedundantCastGivenDocblockType>
   </file>
   <file src="test/MezzioInstallerTest/OptionalPackagesTestCase.php">
     <MixedArgument>
