@@ -53,7 +53,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
      *     3: OptionalPackageSpec
      * }>
      */
-    public function promptCombinations(): Generator
+    public static function promptCombinations(): Generator
     {
         $config = require __DIR__ . '/../../src/MezzioInstaller/config.php';
         /** @psalm-var array<string, QuestionSpec> $questions */

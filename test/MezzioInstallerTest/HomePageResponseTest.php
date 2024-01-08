@@ -41,13 +41,13 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     private OptionalPackages $installer;
 
     /** @var array<class-string<RouterInterface>, class-string> */
-    private array $routerConfigProviders = [
+    private static array $routerConfigProviders = [
         FastRouteRouter::class => FastRouteRouterConfigProvider::class,
         LaminasRouter::class   => LaminasRouterConfigProvider::class,
     ];
 
     /** @var array<class-string<TemplateRendererInterface>, class-string> */
-    private array $rendererConfigProviders = [
+    private static array $rendererConfigProviders = [
         PlatesRenderer::class      => PlatesRendererConfigProvider::class,
         TwigRenderer::class        => TwigRendererConfigProvider::class,
         LaminasViewRenderer::class => LaminasViewRendererConfigProvider::class,
@@ -55,14 +55,14 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     // $installType, $installType
     /** @var array<string, string> */
-    private array $installTypes = [
+    private static array $installTypes = [
         OptionalPackages::INSTALL_FLAT    => OptionalPackages::INSTALL_FLAT,
         OptionalPackages::INSTALL_MODULAR => OptionalPackages::INSTALL_MODULAR,
     ];
 
     // $rendererOption, $rendererClass
     /** @var array<string, array<int|class-string<TemplateRendererInterface>>> */
-    private array $rendererTypes = [
+    private static array $rendererTypes = [
         'plates'       => [1, PlatesRenderer::class],
         'twig'         => [2, TwigRenderer::class],
         'laminas-view' => [3, LaminasViewRenderer::class],
@@ -70,13 +70,13 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     // $routerOption, $routerClass
     /** @var array<string, array<int|class-string<RouterInterface>>> */
-    private array $routerTypes = [
+    private static array $routerTypes = [
         'fastroute'      => [1, FastRouteRouter::class],
         'laminas-router' => [2, LaminasRouter::class],
     ];
 
     /** @var array<class-string<RouterInterface>, array<string, string>> */
-    private array $expectedRouterAttributes = [
+    private static array $expectedRouterAttributes = [
         FastRouteRouter::class => [
             'routerName' => 'FastRoute',
             'routerDocs' => 'https://github.com/nikic/FastRoute',
@@ -89,7 +89,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
 
     // $containerOption, $containerClass
     /** @var array<string, array<int|class-string<ContainerInterface>>> */
-    private array $containerTypes = [
+    private static array $containerTypes = [
         'laminas-servicemanager' => [1, LaminasServiceManagerContainer::class],
         'sf-di'                  => [2, SfContainerBuilder::class],
         'php-di'                 => [3, PhpDIContainer::class],
@@ -97,7 +97,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
     ];
 
     /** @var array<class-string<ContainerInterface>, array<string, string>> */
-    private array $expectedContainerAttributes = [
+    private static array $expectedContainerAttributes = [
         LaminasServiceManagerContainer::class => [
             'containerName' => 'Laminas Servicemanager',
             'containerDocs' => 'https://docs.laminas.dev/laminas-servicemanager/',
@@ -190,17 +190,17 @@ class HomePageResponseTest extends OptionalPackagesTestCase
      *     5: string
      * }>
      */
-    public function installCasesProvider(): Generator
+    public static function installCasesProvider(): Generator
     {
         // Execute a test case for each container, renderer and non minimal install type
-        foreach ($this->containerTypes as $containerId => $containerType) {
+        foreach (self::$containerTypes as $containerId => $containerType) {
             $containerOption = $containerType[0];
             $containerClass  = $containerType[1];
 
-            $containerName = $this->expectedContainerAttributes[$containerClass]['containerName'];
-            $containerDocs = $this->expectedContainerAttributes[$containerClass]['containerDocs'];
+            $containerName = self::$expectedContainerAttributes[$containerClass]['containerName'];
+            $containerDocs = self::$expectedContainerAttributes[$containerClass]['containerDocs'];
 
-            foreach ($this->rendererTypes as $rendererId => $rendererType) {
+            foreach (self::$rendererTypes as $rendererId => $rendererType) {
                 $rendererOption = $rendererType[0];
                 $rendererClass  = $rendererType[1];
 
@@ -209,7 +209,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
                     continue;
                 }
 
-                foreach ($this->installTypes as $installType) {
+                foreach (self::$installTypes as $installType) {
                     $name = implode('--', [$containerId, $rendererId, $installType]);
                     $args = [
                         $installType,
@@ -289,23 +289,23 @@ class HomePageResponseTest extends OptionalPackagesTestCase
      *     7: string
      * }>
      */
-    public function rendererlessInstallCasesProvider(): Generator
+    public static function rendererlessInstallCasesProvider(): Generator
     {
         // Execute a test case for each install type and container, without any renderer
-        foreach ($this->containerTypes as $containerId => $containerType) {
+        foreach (self::$containerTypes as $containerId => $containerType) {
             $containerOption = $containerType[0];
             $containerClass  = $containerType[1];
 
-            $containerName = $this->expectedContainerAttributes[$containerClass]['containerName'];
-            $containerDocs = $this->expectedContainerAttributes[$containerClass]['containerDocs'];
+            $containerName = self::$expectedContainerAttributes[$containerClass]['containerName'];
+            $containerDocs = self::$expectedContainerAttributes[$containerClass]['containerDocs'];
 
-            foreach ($this->routerTypes as $routerId => $routerType) {
+            foreach (self::$routerTypes as $routerId => $routerType) {
                 $routerOption = $routerType[0];
                 $routerClass  = $routerType[1];
-                $routerName   = $this->expectedRouterAttributes[$routerClass]['routerName'];
-                $routerDocs   = $this->expectedRouterAttributes[$routerClass]['routerDocs'];
+                $routerName   = self::$expectedRouterAttributes[$routerClass]['routerName'];
+                $routerDocs   = self::$expectedRouterAttributes[$routerClass]['routerDocs'];
 
-                foreach ($this->installTypes as $installType) {
+                foreach (self::$installTypes as $installType) {
                     $name = implode('--', [$containerId, $routerId, $installType]);
                     $args = [
                         $installType,
@@ -330,7 +330,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $contents   = file_get_contents($configFile);
         $contents   = preg_replace(
             '#(new ConfigAggregator\(\[)#s',
-            '$1' . "\n    " . $this->routerConfigProviders[$routerClass] . "::class,\n",
+            '$1' . "\n    " . self::$routerConfigProviders[$routerClass] . "::class,\n",
             $contents
         );
         file_put_contents($configFile, $contents);
@@ -342,7 +342,7 @@ class HomePageResponseTest extends OptionalPackagesTestCase
         $contents   = file_get_contents($configFile);
         $contents   = preg_replace(
             '#(new ConfigAggregator\(\[)#s',
-            '$1' . "\n    " . $this->rendererConfigProviders[$rendererClass] . "::class,\n",
+            '$1' . "\n    " . self::$rendererConfigProviders[$rendererClass] . "::class,\n",
             $contents
         );
         file_put_contents($configFile, $contents);

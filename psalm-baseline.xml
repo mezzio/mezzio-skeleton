@@ -108,9 +108,6 @@
     <MixedArgument>
       <code>$stabilityFlags</code>
     </MixedArgument>
-    <MixedArrayAccess>
-      <code>$stabilityFlags[$packageName]</code>
-    </MixedArrayAccess>
     <MixedAssignment>
       <code>$stabilityFlags</code>
     </MixedAssignment>
@@ -185,11 +182,11 @@
      * }>]]></code>
     </MoreSpecificReturnType>
     <PossiblyInvalidArrayOffset>
-      <code><![CDATA[$this->expectedContainerAttributes[$containerClass]]]></code>
-      <code><![CDATA[$this->expectedContainerAttributes[$containerClass]]]></code>
-      <code><![CDATA[$this->expectedRouterAttributes[$routerClass]]]></code>
-      <code><![CDATA[$this->rendererConfigProviders[$rendererClass]]]></code>
-      <code><![CDATA[$this->routerConfigProviders[$routerClass]]]></code>
+      <code>self::$expectedContainerAttributes[$containerClass]</code>
+      <code>self::$expectedContainerAttributes[$containerClass]</code>
+      <code>self::$expectedRouterAttributes[$routerClass]</code>
+      <code>self::$rendererConfigProviders[$rendererClass]</code>
+      <code>self::$routerConfigProviders[$routerClass]</code>
     </PossiblyInvalidArrayOffset>
   </file>
   <file src="test/MezzioInstallerTest/OptionalPackagesTestCase.php">

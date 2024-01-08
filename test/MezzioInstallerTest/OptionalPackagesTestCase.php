@@ -176,23 +176,17 @@ abstract class OptionalPackagesTestCase extends TestCase
         );
     }
 
-    /**
-     * @return Composer&MockObject
-     */
-    protected function createComposer()
+    protected function createComposer(): Composer&MockObject
     {
         $this->composer = $this->createMock(Composer::class);
-        $this->composer->method('getPackage')->will(
-            $this->returnCallback(fn (): MockObject => $this->createRootPackage())
+        $this->composer->method('getPackage')->willReturn(
+            $this->createRootPackage(),
         );
 
         return $this->composer;
     }
 
-    /**
-     * @return RootPackage&MockObject
-     */
-    protected function createRootPackage()
+    protected function createRootPackage(): RootPackage&MockObject
     {
         $composerJson      = json_decode(
             file_get_contents($this->packageRoot . '/composer.json'),

@@ -112,7 +112,7 @@ class ContainersTest extends OptionalPackagesTestCase
      *     5: class-string<ContainerInterface>
      * }>
      */
-    public function containerProvider(): array
+    public static function containerProvider(): array
     {
         // phpcs:disable Generic.Files.LineLength.TooLong
         // $installType, $containerOption, $routerOption, $copyFilesKey, $expectedResponseStatusCode, $expectedContainer

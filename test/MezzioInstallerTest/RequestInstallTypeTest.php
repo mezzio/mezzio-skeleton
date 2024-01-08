@@ -20,7 +20,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         $this->installer = $this->createOptionalPackages();
     }
 
-    public function installSelections(): array
+    public static function installSelections(): array
     {
         return [
             OptionalPackages::INSTALL_MINIMAL => ['1', OptionalPackages::INSTALL_MINIMAL],
@@ -35,9 +35,9 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
     public function testRequestInstallTypeReturnsExpectedConstantValue(string $selection, string $expected): void
     {
         $this->io
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('ask')
-            ->with($this->callback(fn ($value): bool => $this->assertQueryPrompt($value)), '2')
+            ->with(self::callback(fn ($value): bool => self::assertQueryPrompt($value)), '2')
             ->willReturn($selection);
 
         self::assertSame($expected, $this->installer->requestInstallType());
