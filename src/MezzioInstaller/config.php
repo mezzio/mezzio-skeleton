@@ -6,49 +6,49 @@ declare(strict_types=1);
 return [
     'packages'    => [
         'chubbyphp/chubbyphp-laminas-config' => [
-            'version' => '^1.0',
+            'version' => '^1.3',
         ],
         'elie29/zend-phpdi-config'           => [
-            'version' => '^6.0 || ^8.0 || ^9.0',
+            'version' => '^9.0',
         ],
         'filp/whoops'                        => [
-            'version' => '^2.7.1',
+            'version' => '^2.15.4',
         ],
         'jsoumelidis/zend-sf-di-config'      => [
-            'version' => '^0.4',
+            'version' => '^0.5',
         ],
         'mezzio/mezzio-fastroute'            => [
-            'version'   => '^3.0.3',
+            'version'   => '^3.11.0',
             'whitelist' => [
                 'mezzio/mezzio-fastroute',
             ],
         ],
         'mezzio/mezzio-platesrenderer'       => [
-            'version'   => '^2.2',
+            'version'   => '^2.10',
             'whitelist' => [
                 'mezzio/mezzio-platesrenderer',
             ],
         ],
         'mezzio/mezzio-twigrenderer'         => [
-            'version'   => '^2.6',
+            'version'   => '^2.15',
             'whitelist' => [
                 'mezzio/mezzio-twigrenderer',
             ],
         ],
         'mezzio/mezzio-laminasrouter'        => [
-            'version'   => '^3.0.1',
+            'version'   => '^3.9.0',
             'whitelist' => [
                 'mezzio/mezzio-laminasrouter',
             ],
         ],
         'mezzio/mezzio-laminasviewrenderer'  => [
-            'version'   => '^2.2',
+            'version'   => '^2.15',
             'whitelist' => [
                 'mezzio/mezzio-laminasviewrenderer',
             ],
         ],
         'laminas/laminas-servicemanager'     => [
-            'version' => '^3.4',
+            'version' => '^3.22',
         ],
     ],
     'require-dev' => [
