@@ -607,6 +607,7 @@ class OptionalPackages
         $this->recursiveRmdir($this->projectRoot . 'docs');
 
         $this->preparePhpunitConfig();
+        $this->preparePsalmConfig();
     }
 
     /**
@@ -620,6 +621,19 @@ class OptionalPackages
         $phpunitConfig     = file_get_contents($phpunitConfigFile);
         $phpunitConfig     = $this->removeLinesContainingStrings(['exclude', 'MezzioInstaller'], $phpunitConfig);
         file_put_contents($phpunitConfigFile, $phpunitConfig);
+    }
+
+    /**
+     * Remove the MezzioInstaller exclusion from the psalm configuration
+     *
+     * @codeCoverageIgnore
+     */
+    private function preparePsalmConfig(): void
+    {
+        $psalmConfigFile = $this->projectRoot . 'psalm.xml.dist';
+        $psalmConfig     = file_get_contents($psalmConfigFile);
+        $psalmConfig     = $this->removeLinesContainingStrings(['MezzioInstaller'], $psalmConfig);
+        file_put_contents($psalmConfigFile, $psalmConfig);
     }
 
     /**
