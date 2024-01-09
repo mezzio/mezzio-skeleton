@@ -115,9 +115,6 @@ class OptionalPackages
         '.laminas-ci.json',
         'CHANGELOG.md',
         'phpcs.xml',
-        'phpcs.xml.dist',
-        'psalm.xml.dist',
-        'psalm-baseline.xml',
         'renovate.json',
         'src/App/templates/.gitkeep',
     ];
