@@ -99,7 +99,7 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
         );
     }
 
-    public function errorHandlerProvider(): array
+    public static function errorHandlerProvider(): array
     {
         // $installType, $containerOption, $errorHandlerOption, $expectedErrorHandler
         return [
