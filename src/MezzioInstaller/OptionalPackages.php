@@ -620,6 +620,9 @@ class OptionalPackages
         $phpunitConfigFile = $this->projectRoot . 'phpunit.xml.dist';
         $phpunitConfig     = file_get_contents($phpunitConfigFile);
         $phpunitConfig     = $this->removeLinesContainingStrings(['exclude', 'MezzioInstaller'], $phpunitConfig);
+        if ($phpunitConfig === null) {
+            return;
+        }
         file_put_contents($phpunitConfigFile, $phpunitConfig);
     }
 
@@ -633,6 +636,9 @@ class OptionalPackages
         $psalmConfigFile = $this->projectRoot . 'psalm.xml.dist';
         $psalmConfig     = file_get_contents($psalmConfigFile);
         $psalmConfig     = $this->removeLinesContainingStrings(['MezzioInstaller'], $psalmConfig);
+        if ($psalmConfig === null) {
+            return;
+        }
         file_put_contents($psalmConfigFile, $psalmConfig);
     }
 
