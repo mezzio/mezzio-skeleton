@@ -115,9 +115,6 @@ class OptionalPackages
         '.laminas-ci.json',
         'CHANGELOG.md',
         'phpcs.xml',
-        'phpcs.xml.dist',
-        'psalm.xml.dist',
-        'psalm-baseline.xml',
         'renovate.json',
         'src/App/templates/.gitkeep',
     ];
@@ -169,9 +166,6 @@ class OptionalPackages
         'filp/whoops',
         'jsoumelidis/zend-sf-di-config',
         'mikey179/vfsstream',
-        'laminas/laminas-coding-standard',
-        'vimeo/psalm',
-        'psalm/plugin-phpunit',
         'mezzio/mezzio-fastroute',
         'mezzio/mezzio-platesrenderer',
         'mezzio/mezzio-twigrenderer',
@@ -613,6 +607,7 @@ class OptionalPackages
         $this->recursiveRmdir($this->projectRoot . 'docs');
 
         $this->preparePhpunitConfig();
+        $this->preparePsalmConfig();
     }
 
     /**
@@ -625,7 +620,26 @@ class OptionalPackages
         $phpunitConfigFile = $this->projectRoot . 'phpunit.xml.dist';
         $phpunitConfig     = file_get_contents($phpunitConfigFile);
         $phpunitConfig     = $this->removeLinesContainingStrings(['exclude', 'MezzioInstaller'], $phpunitConfig);
+        if ($phpunitConfig === null) {
+            return;
+        }
         file_put_contents($phpunitConfigFile, $phpunitConfig);
+    }
+
+    /**
+     * Remove the MezzioInstaller exclusion from the psalm configuration
+     *
+     * @codeCoverageIgnore
+     */
+    private function preparePsalmConfig(): void
+    {
+        $psalmConfigFile = $this->projectRoot . 'psalm.xml.dist';
+        $psalmConfig     = file_get_contents($psalmConfigFile);
+        $psalmConfig     = $this->removeLinesContainingStrings(['MezzioInstaller'], $psalmConfig);
+        if ($psalmConfig === null) {
+            return;
+        }
+        file_put_contents($psalmConfigFile, $psalmConfig);
     }
 
     /**
