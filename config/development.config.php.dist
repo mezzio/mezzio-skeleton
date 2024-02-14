@@ -13,7 +13,7 @@
  * DO NOT MODIFY THIS FILE.
  *
  * Provide your own development-mode settings by editing the file
- * `config/autoload/development.local.php.dist`.
+ * `config/autoload/global.dev.php.dist`.
  *
  * Because this file is aggregated last, it ensures:
  *
@@ -30,7 +30,7 @@ use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\PhpFileProvider;
 
 $aggregator = new ConfigAggregator([
-    new PhpFileProvider(realpath(__DIR__) . '/autoload/{,*.}{global,local}-development.php'),
+    new PhpFileProvider(realpath(__DIR__) . '/autoload/{,*.}{global,local}.dev.php'),
     new ArrayProvider([
         'debug'                        => true,
         ConfigAggregator::ENABLE_CACHE => false,
