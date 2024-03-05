@@ -61,7 +61,7 @@
         "jsoumelidis/zend-sf-di-config": "^0.5.1",
         "laminas/laminas-coding-standard": "~2.5.0",
         "laminas/laminas-development-mode": "^3.12.0",
-        "laminas/laminas-servicemanager": "^3.22.1",
+        "laminas/laminas-servicemanager": "^4.0.0",
         "mezzio/mezzio-fastroute": "^3.11.0",
         "mezzio/mezzio-laminasrouter": "^3.9.0",
         "mezzio/mezzio-laminasviewrenderer": "^2.15.0",
