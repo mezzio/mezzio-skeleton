@@ -20,6 +20,7 @@ class RequestInstallTypeTest extends OptionalPackagesTestCase
         $this->installer = $this->createOptionalPackages();
     }
 
+    /** @return array<OptionalPackages::INSTALL_*, array{0: numeric-string, 1: OptionalPackages::INSTALL_*}> */
     public static function installSelections(): array
     {
         return [

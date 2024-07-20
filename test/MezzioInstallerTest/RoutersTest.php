@@ -131,6 +131,18 @@ class RoutersTest extends OptionalPackagesTestCase
         }
     }
 
+    /**
+     * @return array<string, array{
+     *     0: OptionalPackages::INSTALL_*,
+     *     1: int,
+     *     2: int,
+     *     3: string,
+     *     4: string,
+     *     5: int,
+     *     6: array<array-key,array<string,string|array<array-key,string>>>,
+     *     7: class-string,
+     * }>
+     */
     public static function routerProvider(): array
     {
         // @codingStandardsIgnoreStart

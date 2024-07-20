@@ -27,6 +27,7 @@ use function chdir;
 use function copy;
 use function file_exists;
 use function in_array;
+use function is_callable;
 use function is_dir;
 use function ltrim;
 use function mkdir;
@@ -179,7 +180,7 @@ trait ProjectSandboxTrait
      */
     protected function tearDownAlternateAutoloader(): void
     {
-        if ($this->autoloader) {
+        if (is_callable($this->autoloader)) {
             spl_autoload_unregister($this->autoloader);
             unset($this->autoloader);
         }
