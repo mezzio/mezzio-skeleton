@@ -44,12 +44,19 @@ class AddPackageTest extends OptionalPackagesTestCase
         $stabilityFlags = $r->getValue($installer);
 
         // Stability flags are only set for non-stable packages
-        if ($expectedStability) {
+        if ($expectedStability !== null) {
             self::assertArrayHasKey($packageName, $stabilityFlags);
             self::assertEquals($expectedStability, $stabilityFlags[$packageName]);
         }
     }
 
+    /**
+     * @return array<string, array{
+     *     0: string,
+     *     1: string,
+     *     2: BasePackage::STABILITY_*|null,
+     * }>
+     */
     public static function packageProvider(): array
     {
         // $packageName, $packageVersion, $expectedStability

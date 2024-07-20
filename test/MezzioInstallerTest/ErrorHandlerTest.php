@@ -99,6 +99,14 @@ class ErrorHandlerTest extends OptionalPackagesTestCase
         );
     }
 
+    /**
+     * @return array<string, array{
+     *     0: OptionalPackages::INSTALL_*,
+     *     1: int,
+     *     2: int,
+     *     3: class-string,
+     * }>
+     */
     public static function errorHandlerProvider(): array
     {
         // $installType, $containerOption, $errorHandlerOption, $expectedErrorHandler
