@@ -24,9 +24,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class HomePageHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private string $containerName,
-        private RouterInterface $router,
-        private ?TemplateRendererInterface $template = null
+        private readonly string $containerName,
+        private readonly RouterInterface $router,
+        private readonly ?TemplateRendererInterface $template = null
     ) {
     }
 

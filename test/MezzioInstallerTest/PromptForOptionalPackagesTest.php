@@ -110,8 +110,7 @@ class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
                             continue;
                         }
 
-                        if (
-                            str_contains($message, 'Adding package')
+                        if (str_contains($message, 'Adding package')
                             || str_contains($message, '- Copying ')
                         ) {
                             $written[] = $package;

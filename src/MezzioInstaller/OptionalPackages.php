@@ -175,7 +175,7 @@ class OptionalPackages
     ];
 
     /** @var string Path to this file. */
-    private string $installerSource;
+    private readonly string $installerSource;
 
     /** @var self::INSTALL_* Installation type selected. */
     private string $installType = self::INSTALL_FLAT;
@@ -214,8 +214,11 @@ class OptionalPackages
         $installer->finalizePackage();
     }
 
-    public function __construct(private IOInterface $io, private Composer $composer, ?string $projectRoot = null)
-    {
+    public function __construct(
+        private readonly IOInterface $io,
+        private readonly Composer $composer,
+        ?string $projectRoot = null
+    ) {
         // Get composer.json location
         $composerFile = Factory::getComposerFile();
 
