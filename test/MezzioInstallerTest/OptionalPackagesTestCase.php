@@ -55,7 +55,7 @@ abstract class OptionalPackagesTestCase extends TestCase
         ?string $message = null
     ): void {
         $message ??= sprintf('Failed asserting that package "%s" is present in the installer', $package);
-        $found   = false;
+        $found     = false;
 
         foreach (['composerRequires', 'composerDevRequires'] as $property) {
             $r = new ReflectionProperty($installer, $property);
@@ -79,7 +79,7 @@ abstract class OptionalPackagesTestCase extends TestCase
         ?string $message = null
     ): void {
         $message ??= sprintf('Failed asserting that package "%s" is absent from the installer', $package);
-        $found   = false;
+        $found     = false;
 
         foreach (['composerRequires', 'composerDevRequires'] as $property) {
             $r = new ReflectionProperty($installer, $property);
@@ -135,7 +135,7 @@ abstract class OptionalPackagesTestCase extends TestCase
         ?string $message = null
     ): void {
         $message ??= sprintf('Failed asserting that package "%s" is whitelisted in composer.json', $package);
-        $found   = false;
+        $found     = false;
 
         $r = new ReflectionProperty($installer, 'composerDefinition');
 
@@ -168,7 +168,7 @@ abstract class OptionalPackagesTestCase extends TestCase
     protected function createOptionalPackages(?string $projectRoot = null): OptionalPackages
     {
         $projectRoot ??= $this->packageRoot;
-        $this->io    = $this->createMock(IOInterface::class);
+        $this->io      = $this->createMock(IOInterface::class);
         return new OptionalPackages(
             $this->io,
             $this->createComposer(),
