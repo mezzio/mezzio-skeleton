@@ -1,0 +1,29 @@
+events {
+    worker_connections 1024;
+}
+
+http {
+    server {
+        listen 80;
+        server_name localhost;
+
+        root /var/www/html;
+        index public/index.php index.html index.htm;
+
+        location / {
+            try_files $uri $uri/ /public/index.php?$query_string;
+            autoindex on;
+        }
+
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_pass php:9000;
+            fastcgi_index public/index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+
+        location ~ /\.ht {
+            deny all;
+        }
+    }
+}
