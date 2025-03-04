@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "040a997772f39ee74ca88b9e2e801e01",
+    "content-hash": "c595d0284dc13eb7c82d883e3cabce4e",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -4292,16 +4292,16 @@
         },
         {
             "name": "mezzio/mezzio-tooling",
-            "version": "2.9.0",
+            "version": "2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-tooling.git",
-                "reference": "6108df988eb6f7d977d870a2ab7af035cbe8a0ae"
+                "reference": "375ea79ded5816f55147dacc785d5625a898cc5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-tooling/zipball/6108df988eb6f7d977d870a2ab7af035cbe8a0ae",
-                "reference": "6108df988eb6f7d977d870a2ab7af035cbe8a0ae",
+                "url": "https://api.github.com/repos/mezzio/mezzio-tooling/zipball/375ea79ded5816f55147dacc785d5625a898cc5d",
+                "reference": "375ea79ded5816f55147dacc785d5625a898cc5d",
                 "shasum": ""
             },
             "require": {
@@ -4312,17 +4312,22 @@
                 "laminas/laminas-stratigility": "^3.9.0",
                 "mezzio/mezzio": "^3.13.0",
                 "mezzio/mezzio-router": "^3.9.0",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.1",
                 "symfony/process": "^6.0.11"
+            },
+            "conflict": {
+                "amphp/amp": "<2.6.4",
+                "symfony/console": "<5.4.45",
+                "symfony/string": "<5.4.45"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~2.5.0",
                 "laminas/laminas-diactoros": "^3.3",
-                "mikey179/vfsstream": "^1.6.11",
-                "mockery/mockery": "^1.6.7",
+                "mikey179/vfsstream": "^1.6.12",
+                "mockery/mockery": "^1.6.10",
                 "php-mock/php-mock-phpunit": "^2.9.0",
                 "phpdocumentor/reflection-docblock": "^5.3.0",
-                "phpunit/phpunit": "^9.6.15",
+                "phpunit/phpunit": "^10.5.35",
                 "psalm/plugin-mockery": "^0.11.0",
                 "psalm/plugin-phpunit": "^0.18.4",
                 "vimeo/psalm": "^5.17.0"
@@ -4366,7 +4371,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-12-12T16:13:23+00:00"
+            "time": "2025-03-03T03:28:55+00:00"
         },
         {
             "name": "mezzio/mezzio-twigrenderer",
@@ -9561,7 +9566,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.1"
     },
     "platform-dev": {},
     "platform-overrides": {
