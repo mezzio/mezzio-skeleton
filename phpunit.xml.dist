@@ -10,7 +10,6 @@
     displayDetailsOnTestsThatTriggerErrors="true"
     displayDetailsOnTestsThatTriggerNotices="true"
     displayDetailsOnTestsThatTriggerWarnings="true"
-    restrictDeprecations="false"
     colors="true"
 >
     <testsuites>
@@ -19,7 +18,7 @@
         </testsuite>
     </testsuites>
 
-    <source>
+    <source restrictDeprecations="false">
         <include>
             <directory suffix=".php">src</directory>
         </include>
