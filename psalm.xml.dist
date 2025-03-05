@@ -10,6 +10,15 @@
     findUnusedBaselineEntry="true"
     errorBaseline="psalm-baseline.xml"
 >
+    <issueHandlers>
+        <MissingOverrideAttribute>
+            <errorLevel type="suppress">
+                <directory name="src" />
+                <directory name="test" />
+            </errorLevel>
+        </MissingOverrideAttribute>
+    </issueHandlers>
+
     <projectFiles>
         <directory name="src"/>
         <directory name="test"/>

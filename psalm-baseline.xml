@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.8.8@1361cd33008feb3ae2b4a93f1860e14e538ec8c2">
-  <file src="src/App/src/Handler/HomePageHandler.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function handle(ServerRequestInterface $request): ResponseInterface]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/App/src/Handler/PingHandler.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function handle(ServerRequestInterface $request): ResponseInterface]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="src/MezzioInstaller/OptionalPackages.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->stabilityFlags]]></code>
@@ -94,11 +84,6 @@
       <code><![CDATA[require __DIR__ . '/config.php']]></code>
     </PropertyTypeCoercion>
   </file>
-  <file src="test/AppTest/Handler/HomePageHandlerTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="test/AppTest/Handler/PingHandlerTest.php">
     <MixedArgument>
       <code><![CDATA[$json]]></code>
@@ -110,12 +95,6 @@
       <code><![CDATA[$json->ack]]></code>
     </MixedPropertyFetch>
   </file>
-  <file src="test/AppTest/InMemoryContainer.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function get($id)]]></code>
-      <code><![CDATA[public function has($id)]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="test/MezzioInstallerTest/AddPackageTest.php">
     <MixedArgument>
       <code><![CDATA[$stabilityFlags]]></code>
@@ -125,10 +104,6 @@
     </MixedAssignment>
   </file>
   <file src="test/MezzioInstallerTest/ContainersTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$config['questions']['container']]]></code>
       <code><![CDATA[$config['questions']['router']]]></code>
@@ -144,16 +119,7 @@
       <code><![CDATA[$configFileContents]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="test/MezzioInstallerTest/CopyResourceTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="test/MezzioInstallerTest/ErrorHandlerTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$config['questions']['container']]]></code>
       <code><![CDATA[$config['questions']['container']]]></code>
@@ -172,10 +138,6 @@
     </MixedAssignment>
   </file>
   <file src="test/MezzioInstallerTest/HomePageResponseTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$config['questions']['container']]]></code>
       <code><![CDATA[$config['questions']['container']]]></code>
@@ -227,10 +189,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="test/MezzioInstallerTest/OptionalPackagesTestCase.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$properties['devDependencies']]]></code>
       <code><![CDATA[$r->getValue($installer)]]></code>
@@ -264,10 +222,6 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="test/MezzioInstallerTest/ProcessAnswersTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$question]]></code>
       <code><![CDATA[$question]]></code>
@@ -311,40 +265,12 @@
       <code><![CDATA[require $path]]></code>
     </UnresolvableInclude>
   </file>
-  <file src="test/MezzioInstallerTest/PromptForOptionalPackagesTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="test/MezzioInstallerTest/RemoveDevDependenciesTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
     <MixedAssignment>
       <code><![CDATA[$this->devDependencies]]></code>
     </MixedAssignment>
   </file>
-  <file src="test/MezzioInstallerTest/RemoveInstallerTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="test/MezzioInstallerTest/RemoveLineFromStringTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="test/MezzioInstallerTest/RequestInstallTypeTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="test/MezzioInstallerTest/RoutersTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$config['questions']['container']]]></code>
       <code><![CDATA[$config['questions']['router']]]></code>
@@ -367,9 +293,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="test/MezzioInstallerTest/SetupDataAndCacheDirTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
     <PossiblyFalseArgument>
       <code><![CDATA[fileperms($this->projectRoot . '/data')]]></code>
       <code><![CDATA[fileperms($this->projectRoot . '/data/cache')]]></code>
@@ -378,17 +301,7 @@
       <code><![CDATA[$project]]></code>
     </UnusedProperty>
   </file>
-  <file src="test/MezzioInstallerTest/SetupDefaultAppTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="test/MezzioInstallerTest/TemplateRenderersTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$config['questions']['container']]]></code>
       <code><![CDATA[$config['questions']['router']]]></code>
