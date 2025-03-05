@@ -7,7 +7,7 @@ namespace MezzioInstallerTest;
 use MezzioInstaller\OptionalPackages;
 use ReflectionClass;
 
-class RemoveDevDependenciesTest extends OptionalPackagesTestCase
+final class RemoveDevDependenciesTest extends OptionalPackagesTestCase
 {
     /** @var string[] */
     private array $standardDependencies = [

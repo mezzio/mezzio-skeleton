@@ -10,7 +10,7 @@ use MezzioInstaller\OptionalPackages;
 
 use function chdir;
 
-class ErrorHandlerTest extends OptionalPackagesTestCase
+final class ErrorHandlerTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 

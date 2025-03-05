@@ -6,7 +6,7 @@ namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
 
-class RemoveInstallerTest extends OptionalPackagesTestCase
+final class RemoveInstallerTest extends OptionalPackagesTestCase
 {
     private OptionalPackages $installer;
 

@@ -9,7 +9,7 @@ use MezzioInstaller\OptionalPackages;
 use function assert;
 use function chdir;
 
-class ProcessAnswersTest extends OptionalPackagesTestCase
+final class ProcessAnswersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 

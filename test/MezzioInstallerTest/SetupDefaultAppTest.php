@@ -8,7 +8,7 @@ use MezzioInstaller\OptionalPackages;
 
 use function chdir;
 
-class SetupDefaultAppTest extends OptionalPackagesTestCase
+final class SetupDefaultAppTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 

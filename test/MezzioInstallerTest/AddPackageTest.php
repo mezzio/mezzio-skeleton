@@ -9,7 +9,7 @@ use ReflectionProperty;
 
 use function assert;
 
-class AddPackageTest extends OptionalPackagesTestCase
+final class AddPackageTest extends OptionalPackagesTestCase
 {
     /**
      * @dataProvider packageProvider

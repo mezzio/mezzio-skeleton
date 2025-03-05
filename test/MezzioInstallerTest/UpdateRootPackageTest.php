@@ -7,7 +7,7 @@ namespace MezzioInstallerTest;
 use MezzioInstaller\OptionalPackages;
 use ReflectionProperty;
 
-class UpdateRootPackageTest extends OptionalPackagesTestCase
+final class UpdateRootPackageTest extends OptionalPackagesTestCase
 {
     /** @var array[] */
     protected $changes = [

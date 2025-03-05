@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 use function assert;
 
-class HomePageHandlerFactory
+final class HomePageHandlerFactory
 {
     public function __invoke(ContainerInterface $container): RequestHandlerInterface
     {

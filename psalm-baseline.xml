@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.25.0@01a8eb06b9e9cc6cfb6a320bf9fb14331919d505">
+<files psalm-version="6.8.8@1361cd33008feb3ae2b4a93f1860e14e538ec8c2">
   <file src="src/MezzioInstaller/OptionalPackages.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->stabilityFlags]]></code>
@@ -55,6 +55,19 @@
     <NoValue>
       <code><![CDATA[$this->installType]]></code>
     </NoValue>
+    <PossiblyFalseArgument>
+      <code><![CDATA[$contents]]></code>
+      <code><![CDATA[$phpunitConfig]]></code>
+      <code><![CDATA[$psalmConfig]]></code>
+      <code><![CDATA[$this->projectRoot]]></code>
+      <code><![CDATA[file_get_contents($ignoreFile)]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand>
+      <code><![CDATA[realpath(__DIR__)]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyFalsePropertyAssignmentValue>
+      <code><![CDATA[$projectRoot ?? realpath(dirname($composerFile))]]></code>
+    </PossiblyFalsePropertyAssignmentValue>
     <PossiblyInvalidArgument>
       <code><![CDATA[$resource]]></code>
     </PossiblyInvalidArgument>
@@ -99,6 +112,12 @@
       <code><![CDATA[$config['questions']['container']]]></code>
       <code><![CDATA[$config['questions']['router']]]></code>
     </MixedArrayAccess>
+    <PossiblyFalseArgument>
+      <code><![CDATA[$configFileContents]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyNullArgument>
+      <code><![CDATA[$configFileContents]]></code>
+    </PossiblyNullArgument>
   </file>
   <file src="test/MezzioInstallerTest/ErrorHandlerTest.php">
     <MixedArgument>
@@ -153,6 +172,10 @@
      *     7: string
      * }>]]></code>
     </MoreSpecificReturnType>
+    <PossiblyFalseArgument>
+      <code><![CDATA[$contents]]></code>
+      <code><![CDATA[$contents]]></code>
+    </PossiblyFalseArgument>
     <PossiblyInvalidArrayOffset>
       <code><![CDATA[self::$expectedContainerAttributes[$containerClass]]]></code>
       <code><![CDATA[self::$expectedContainerAttributes[$containerClass]]]></code>
@@ -160,6 +183,10 @@
       <code><![CDATA[self::$rendererConfigProviders[$rendererClass]]]></code>
       <code><![CDATA[self::$routerConfigProviders[$routerClass]]]></code>
     </PossiblyInvalidArrayOffset>
+    <PossiblyNullArgument>
+      <code><![CDATA[$contents]]></code>
+      <code><![CDATA[$contents]]></code>
+    </PossiblyNullArgument>
   </file>
   <file src="test/MezzioInstallerTest/OptionalPackagesTestCase.php">
     <MixedArgument>
@@ -177,14 +204,19 @@
       <code><![CDATA[$composerJson]]></code>
       <code><![CDATA[$whitelist]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[array]]></code>
-      <code><![CDATA[array]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->getInstallerProperty($installer, 'composerDefinition')]]></code>
       <code><![CDATA[$this->getInstallerProperty($installer, 'config')]]></code>
     </MixedReturnStatement>
+    <PossiblyFalseArgument>
+      <code><![CDATA[file_get_contents($this->packageRoot . '/composer.json')]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand>
+      <code><![CDATA[$this->packageRoot]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyFalsePropertyAssignmentValue>
+      <code><![CDATA[realpath(__DIR__ . '/../../')]]></code>
+    </PossiblyFalsePropertyAssignmentValue>
     <PossiblyUnusedProperty>
       <code><![CDATA[$composerData]]></code>
     </PossiblyUnusedProperty>
@@ -216,15 +248,19 @@
     </MixedAssignment>
   </file>
   <file src="test/MezzioInstallerTest/ProjectSandboxTrait.php">
+    <MixedArgument>
+      <code><![CDATA[$node]]></code>
+    </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$this->autoloader]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
+      <code><![CDATA[$node]]></code>
       <code><![CDATA[$this->container]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[ContainerInterface]]></code>
-    </MixedInferredReturnType>
+    <PossiblyFalseIterator>
+      <code><![CDATA[scandir($target)]]></code>
+    </PossiblyFalseIterator>
     <UnresolvableInclude>
       <code><![CDATA[require $path]]></code>
     </UnresolvableInclude>
@@ -249,8 +285,18 @@
     <MixedAssignment>
       <code><![CDATA[$config]]></code>
     </MixedAssignment>
+    <PossiblyFalseArgument>
+      <code><![CDATA[$contents]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyNullArgument>
+      <code><![CDATA[$contents]]></code>
+    </PossiblyNullArgument>
   </file>
   <file src="test/MezzioInstallerTest/SetupDataAndCacheDirTest.php">
+    <PossiblyFalseArgument>
+      <code><![CDATA[fileperms($this->projectRoot . '/data')]]></code>
+      <code><![CDATA[fileperms($this->projectRoot . '/data/cache')]]></code>
+    </PossiblyFalseArgument>
     <UnusedProperty>
       <code><![CDATA[$project]]></code>
     </UnusedProperty>
@@ -272,6 +318,14 @@
     <MixedAssignment>
       <code><![CDATA[$config]]></code>
     </MixedAssignment>
+    <PossiblyFalseArgument>
+      <code><![CDATA[$contents]]></code>
+      <code><![CDATA[$contents]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyNullArgument>
+      <code><![CDATA[$contents]]></code>
+      <code><![CDATA[$contents]]></code>
+    </PossiblyNullArgument>
   </file>
   <file src="test/MezzioInstallerTest/UpdateRootPackageTest.php">
     <MixedArgumentTypeCoercion>

@@ -22,7 +22,7 @@ use function file_put_contents;
 use function preg_replace;
 use function sprintf;
 
-class TemplateRenderersTest extends OptionalPackagesTestCase
+final class TemplateRenderersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 

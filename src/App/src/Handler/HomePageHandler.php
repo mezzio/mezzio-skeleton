@@ -21,7 +21,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class HomePageHandler implements RequestHandlerInterface
+final class HomePageHandler implements RequestHandlerInterface
 {
     public function __construct(
         private readonly string $containerName,

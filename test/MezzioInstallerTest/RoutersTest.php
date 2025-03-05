@@ -22,7 +22,7 @@ use function preg_replace;
 use function sprintf;
 use function str_starts_with;
 
-class RoutersTest extends OptionalPackagesTestCase
+final class RoutersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
