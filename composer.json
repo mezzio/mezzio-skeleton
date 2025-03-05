@@ -73,7 +73,8 @@
         "psalm/plugin-phpunit": "^0.19.2",
         "roave/security-advisories": "dev-master",
         "vimeo/psalm": "^6.8.8",
-        "amphp/dns": "^2.4.0"
+        "amphp/dns": "^2.4.0",
+        "amphp/socket": "^2.3.1"
     },
     "autoload": {
         "psr-4": {
