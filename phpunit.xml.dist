@@ -10,6 +10,7 @@
     displayDetailsOnTestsThatTriggerErrors="true"
     displayDetailsOnTestsThatTriggerNotices="true"
     displayDetailsOnTestsThatTriggerWarnings="true"
+    restrictDeprecations="false"
     colors="true"
 >
     <testsuites>
