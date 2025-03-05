@@ -6,7 +6,7 @@ namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
 
-class RemoveLineFromStringTest extends OptionalPackagesTestCase
+final class RemoveLineFromStringTest extends OptionalPackagesTestCase
 {
     private OptionalPackages $installer;
 

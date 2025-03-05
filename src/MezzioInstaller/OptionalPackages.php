@@ -70,7 +70,7 @@ use function unlink;
  *     options: array<int, OptionalPackageSpec>,
  * }
  */
-class OptionalPackages
+final class OptionalPackages
 {
     /**
      * @var string

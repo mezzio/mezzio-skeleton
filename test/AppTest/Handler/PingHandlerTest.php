@@ -14,7 +14,7 @@ use function property_exists;
 
 use const JSON_THROW_ON_ERROR;
 
-class PingHandlerTest extends TestCase
+final class PingHandlerTest extends TestCase
 {
     public function testResponse(): void
     {

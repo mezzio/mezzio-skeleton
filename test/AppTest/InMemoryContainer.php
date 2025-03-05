@@ -13,7 +13,7 @@ use function sprintf;
 /**
  * A PSR Container stub. Useful for testing factories without excessive mocking
  */
-class InMemoryContainer implements ContainerInterface
+final class InMemoryContainer implements ContainerInterface
 {
     /** @var array<string, mixed> */
     public array $services = [];

@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.8.8@1361cd33008feb3ae2b4a93f1860e14e538ec8c2">
   <file src="src/App/src/Handler/HomePageHandler.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[HomePageHandler]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[public function handle(ServerRequestInterface $request): ResponseInterface]]></code>
     </MissingOverrideAttribute>
   </file>
-  <file src="src/App/src/Handler/HomePageHandlerFactory.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[HomePageHandlerFactory]]></code>
-    </ClassMustBeFinal>
-  </file>
   <file src="src/App/src/Handler/PingHandler.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[PingHandler]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[public function handle(ServerRequestInterface $request): ResponseInterface]]></code>
     </MissingOverrideAttribute>
@@ -25,9 +14,6 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->stabilityFlags]]></code>
     </ArgumentTypeCoercion>
-    <ClassMustBeFinal>
-      <code><![CDATA[OptionalPackages]]></code>
-    </ClassMustBeFinal>
     <MixedArgument>
       <code><![CDATA[$answer]]></code>
       <code><![CDATA[$constraint]]></code>
@@ -108,23 +94,12 @@
       <code><![CDATA[require __DIR__ . '/config.php']]></code>
     </PropertyTypeCoercion>
   </file>
-  <file src="test/AppTest/Handler/HomePageHandlerFactoryTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[HomePageHandlerFactoryTest]]></code>
-    </ClassMustBeFinal>
-  </file>
   <file src="test/AppTest/Handler/HomePageHandlerTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[HomePageHandlerTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
     </MissingOverrideAttribute>
   </file>
   <file src="test/AppTest/Handler/PingHandlerTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[PingHandlerTest]]></code>
-    </ClassMustBeFinal>
     <MixedArgument>
       <code><![CDATA[$json]]></code>
     </MixedArgument>
@@ -136,18 +111,12 @@
     </MixedPropertyFetch>
   </file>
   <file src="test/AppTest/InMemoryContainer.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[InMemoryContainer]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[public function get($id)]]></code>
       <code><![CDATA[public function has($id)]]></code>
     </MissingOverrideAttribute>
   </file>
   <file src="test/MezzioInstallerTest/AddPackageTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[AddPackageTest]]></code>
-    </ClassMustBeFinal>
     <MixedArgument>
       <code><![CDATA[$stabilityFlags]]></code>
     </MixedArgument>
@@ -156,9 +125,6 @@
     </MixedAssignment>
   </file>
   <file src="test/MezzioInstallerTest/ContainersTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[ContainersTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
       <code><![CDATA[protected function tearDown(): void]]></code>
@@ -179,17 +145,11 @@
     </PossiblyNullArgument>
   </file>
   <file src="test/MezzioInstallerTest/CopyResourceTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[CopyResourceTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
     </MissingOverrideAttribute>
   </file>
   <file src="test/MezzioInstallerTest/ErrorHandlerTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[ErrorHandlerTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
       <code><![CDATA[protected function tearDown(): void]]></code>
@@ -212,9 +172,6 @@
     </MixedAssignment>
   </file>
   <file src="test/MezzioInstallerTest/HomePageResponseTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[HomePageResponseTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
       <code><![CDATA[protected function tearDown(): void]]></code>
@@ -307,9 +264,6 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="test/MezzioInstallerTest/ProcessAnswersTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[ProcessAnswersTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
       <code><![CDATA[protected function tearDown(): void]]></code>
@@ -358,18 +312,12 @@
     </UnresolvableInclude>
   </file>
   <file src="test/MezzioInstallerTest/PromptForOptionalPackagesTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[PromptForOptionalPackagesTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
       <code><![CDATA[protected function tearDown(): void]]></code>
     </MissingOverrideAttribute>
   </file>
   <file src="test/MezzioInstallerTest/RemoveDevDependenciesTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[RemoveDevDependenciesTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
     </MissingOverrideAttribute>
@@ -378,33 +326,21 @@
     </MixedAssignment>
   </file>
   <file src="test/MezzioInstallerTest/RemoveInstallerTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[RemoveInstallerTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
     </MissingOverrideAttribute>
   </file>
   <file src="test/MezzioInstallerTest/RemoveLineFromStringTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[RemoveLineFromStringTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
     </MissingOverrideAttribute>
   </file>
   <file src="test/MezzioInstallerTest/RequestInstallTypeTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[RequestInstallTypeTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
     </MissingOverrideAttribute>
   </file>
   <file src="test/MezzioInstallerTest/RoutersTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[RoutersTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
       <code><![CDATA[protected function tearDown(): void]]></code>
@@ -431,9 +367,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="test/MezzioInstallerTest/SetupDataAndCacheDirTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[SetupDataAndCacheDirTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
     </MissingOverrideAttribute>
@@ -446,18 +379,12 @@
     </UnusedProperty>
   </file>
   <file src="test/MezzioInstallerTest/SetupDefaultAppTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[SetupDefaultAppTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
       <code><![CDATA[protected function tearDown(): void]]></code>
     </MissingOverrideAttribute>
   </file>
   <file src="test/MezzioInstallerTest/TemplateRenderersTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[TemplateRenderersTest]]></code>
-    </ClassMustBeFinal>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function setUp(): void]]></code>
       <code><![CDATA[protected function tearDown(): void]]></code>
@@ -488,9 +415,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="test/MezzioInstallerTest/UpdateRootPackageTest.php">
-    <ClassMustBeFinal>
-      <code><![CDATA[UpdateRootPackageTest]]></code>
-    </ClassMustBeFinal>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$property]]></code>
     </MixedArgumentTypeCoercion>

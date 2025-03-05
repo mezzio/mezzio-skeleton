@@ -18,7 +18,7 @@ use function str_contains;
  * @psalm-import-type QuestionSpec from OptionalPackages
  * @psalm-import-type OptionalPackageSpec from OptionalPackages
  */
-class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
+final class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 

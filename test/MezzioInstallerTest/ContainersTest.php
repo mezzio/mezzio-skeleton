@@ -23,7 +23,7 @@ use function str_starts_with;
 
 use const DIRECTORY_SEPARATOR;
 
-class ContainersTest extends OptionalPackagesTestCase
+final class ContainersTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 

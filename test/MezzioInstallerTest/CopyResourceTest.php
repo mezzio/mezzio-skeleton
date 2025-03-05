@@ -9,7 +9,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
 
 use function file_get_contents;
 
-class CopyResourceTest extends OptionalPackagesTestCase
+final class CopyResourceTest extends OptionalPackagesTestCase
 {
     /** @var vfsStreamDirectory */
     private $project;

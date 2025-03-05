@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class HomePageHandlerTest extends TestCase
+final class HomePageHandlerTest extends TestCase
 {
     /** @var ContainerInterface&MockObject */
     protected $container;

@@ -10,7 +10,7 @@ use function count;
 use function random_int;
 use function str_contains;
 
-class RequestInstallTypeTest extends OptionalPackagesTestCase
+final class RequestInstallTypeTest extends OptionalPackagesTestCase
 {
     private OptionalPackages $installer;
 

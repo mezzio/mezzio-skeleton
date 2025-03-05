@@ -11,7 +11,7 @@ use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\TestCase;
 
-class HomePageHandlerFactoryTest extends TestCase
+final class HomePageHandlerFactoryTest extends TestCase
 {
     public function testFactoryWithoutTemplate(): void
     {

@@ -14,7 +14,7 @@ use function fileperms;
 use function is_dir;
 use function sprintf;
 
-class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
+final class SetupDataAndCacheDirTest extends OptionalPackagesTestCase
 {
     private OptionalPackages $installer;
 

@@ -34,7 +34,7 @@ use function sprintf;
 
 use const JSON_THROW_ON_ERROR;
 
-class HomePageResponseTest extends OptionalPackagesTestCase
+final class HomePageResponseTest extends OptionalPackagesTestCase
 {
     use ProjectSandboxTrait;
 
