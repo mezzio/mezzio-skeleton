@@ -121,7 +121,7 @@ trait ProjectSandboxTrait
         Assert::assertFileExists($target);
 
         $target = sprintf(
-            '%s%sconfig%sautoload%sdevelopment.local.php',
+            '%s%sconfig%sautoload%sglobal.dev.php',
             $this->projectRoot,
             DIRECTORY_SEPARATOR,
             DIRECTORY_SEPARATOR,

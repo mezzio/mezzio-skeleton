@@ -258,13 +258,13 @@ return [
                         'filp/whoops',
                     ],
                     'flat'     => [
-                        'Resources/config/error-handler-whoops.php' => 'config/autoload/development.local.php.dist',
+                        'Resources/config/error-handler-whoops.php' => 'config/autoload/global.dev.php.dist',
                     ],
                     'modular'  => [
-                        'Resources/config/error-handler-whoops.php' => 'config/autoload/development.local.php.dist',
+                        'Resources/config/error-handler-whoops.php' => 'config/autoload/global.dev.php.dist',
                     ],
                     'minimal'  => [
-                        'Resources/config/error-handler-whoops.php' => 'config/autoload/development.local.php.dist',
+                        'Resources/config/error-handler-whoops.php' => 'config/autoload/global.dev.php.dist',
                     ],
                 ],
             ],

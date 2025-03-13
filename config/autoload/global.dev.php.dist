@@ -8,6 +8,8 @@
  *
  * Developers on your team will then automatically enable them by calling on
  * `composer development-enable`.
+ *
+ * You may also create files matching the glob pattern `{,*.}{global,local}.dev.php`.
  */
 
 declare(strict_types=1);
