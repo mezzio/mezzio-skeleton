@@ -52,6 +52,13 @@ After choosing and installing the packages you want, go to the
 $ composer serve
 ```
 
+Or use Docker Compose to run the app:
+
+```bash
+$ cp nginx.conf.dist nginx.conf
+$ docker compose up -d
+```
+
 You can then browse to http://localhost:8080.
 
 ## Installing alternative packages
