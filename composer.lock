@@ -3413,16 +3413,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.18.1",
+            "version": "2.18.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "8fcc6a862f2e7b94eb4221fd0819ddba3d30ab26"
+                "reference": "59a123a3d459c5a23055802237cb317f609867e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/8fcc6a862f2e7b94eb4221fd0819ddba3d30ab26",
-                "reference": "8fcc6a862f2e7b94eb4221fd0819ddba3d30ab26",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/59a123a3d459c5a23055802237cb317f609867e5",
+                "reference": "59a123a3d459c5a23055802237cb317f609867e5",
                 "shasum": ""
             },
             "require": {
@@ -3472,7 +3472,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.18.1"
+                "source": "https://github.com/filp/whoops/tree/2.18.3"
             },
             "funding": [
                 {
@@ -3480,7 +3480,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-03T18:56:14+00:00"
+            "time": "2025-06-16T00:02:10+00:00"
         },
         {
             "name": "jsoumelidis/zend-sf-di-config",
@@ -4451,16 +4451,16 @@
         },
         {
             "name": "laminas/laminas-validator",
-            "version": "2.64.2",
+            "version": "2.64.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-validator.git",
-                "reference": "771e504760448ac7af660710237ceb93be602e08"
+                "reference": "b3ec5865e7aa60a0fbce211500f4a5c6a6e11a30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/771e504760448ac7af660710237ceb93be602e08",
-                "reference": "771e504760448ac7af660710237ceb93be602e08",
+                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/b3ec5865e7aa60a0fbce211500f4a5c6a6e11a30",
+                "reference": "b3ec5865e7aa60a0fbce211500f4a5c6a6e11a30",
                 "shasum": ""
             },
             "require": {
@@ -4531,7 +4531,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2024-11-26T21:29:17+00:00"
+            "time": "2025-06-11T10:23:09+00:00"
         },
         {
             "name": "laminas/laminas-view",
@@ -6874,12 +6874,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "d1d1619048a615bd2836f095f8dd3dd33e4ba457"
+                "reference": "0a95bcf39c5b55601cb073bc307d567a16e31dc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/d1d1619048a615bd2836f095f8dd3dd33e4ba457",
-                "reference": "d1d1619048a615bd2836f095f8dd3dd33e4ba457",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0a95bcf39c5b55601cb073bc307d567a16e31dc0",
+                "reference": "0a95bcf39c5b55601cb073bc307d567a16e31dc0",
                 "shasum": ""
             },
             "conflict": {
@@ -6939,7 +6939,7 @@
                 "bagisto/bagisto": "<2.1",
                 "barrelstrength/sprout-base-email": "<1.2.7",
                 "barrelstrength/sprout-forms": "<3.9",
-                "barryvdh/laravel-translation-manager": "<0.6.2",
+                "barryvdh/laravel-translation-manager": "<0.6.8",
                 "barzahlen/barzahlen-php": "<2.0.1",
                 "baserproject/basercms": "<=5.1.1",
                 "bassjobsen/bootstrap-3-typeahead": ">4.0.2",
@@ -7042,9 +7042,12 @@
                 "dolibarr/dolibarr": "<19.0.2|==21.0.0.0-beta",
                 "dompdf/dompdf": "<2.0.4",
                 "doublethreedigital/guest-entries": "<3.1.2",
+                "drupal/admin_audit_trail": "<1.0.5",
                 "drupal/ai": "<1.0.5",
                 "drupal/alogin": "<2.0.6",
                 "drupal/cache_utility": "<1.2.1",
+                "drupal/commerce_alphabank_redirect": "<1.0.3",
+                "drupal/commerce_eurobank_redirect": "<2.1.1",
                 "drupal/config_split": "<1.10|>=2,<2.0.2",
                 "drupal/core": ">=6,<6.38|>=7,<7.102|>=8,<10.3.14|>=10.4,<10.4.5|>=11,<11.0.13|>=11.1,<11.1.5",
                 "drupal/core-recommended": ">=7,<7.102|>=8,<10.2.11|>=10.3,<10.3.9|>=11,<11.0.8",
@@ -7053,11 +7056,13 @@
                 "drupal/gdpr": "<3.0.1|>=3.1,<3.1.2",
                 "drupal/google_tag": "<1.8|>=2,<2.0.8",
                 "drupal/ignition": "<1.0.4",
+                "drupal/lightgallery": "<1.6",
                 "drupal/link_field_display_mode_formatter": "<1.6",
                 "drupal/matomo": "<1.24",
                 "drupal/oauth2_client": "<4.1.3",
                 "drupal/oauth2_server": "<2.1",
                 "drupal/obfuscate": "<2.0.1",
+                "drupal/quick_node_block": "<2",
                 "drupal/rapidoc_elements_field_formatter": "<1.0.1",
                 "drupal/spamspan": "<3.2.1",
                 "drupal/tfa": "<1.10",
@@ -7070,6 +7075,7 @@
                 "elefant/cms": "<2.0.7",
                 "elgg/elgg": "<3.3.24|>=4,<4.0.5",
                 "elijaa/phpmemcacheadmin": "<=1.3",
+                "elmsln/haxcms": "<11",
                 "encore/laravel-admin": "<=1.8.19",
                 "endroid/qr-code-bundle": "<3.4.2",
                 "enhavo/enhavo-app": "<=0.13.1",
@@ -7084,8 +7090,8 @@
                 "ezsystems/ezdemo-ls-extension": ">=5.4,<5.4.2.1-dev",
                 "ezsystems/ezfind-ls": ">=5.3,<5.3.6.1-dev|>=5.4,<5.4.11.1-dev|>=2017.12,<2017.12.0.1-dev",
                 "ezsystems/ezplatform": "<=1.13.6|>=2,<=2.5.24",
-                "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6|>=1.5,<1.5.29|>=2.3,<2.3.26|>=3.3,<3.3.39",
-                "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2.1|>=5,<5.0.1|>=5.1,<5.1.1",
+                "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6|>=1.5,<1.5.29|>=2.3,<2.3.38|>=3.3,<3.3.39",
+                "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2.1|>=5,<5.0.1|>=5.1,<5.1.1|>=5.3.0.0-beta1,<5.3.5",
                 "ezsystems/ezplatform-graphql": ">=1.0.0.0-RC1-dev,<1.0.13|>=2.0.0.0-beta1,<2.3.12",
                 "ezsystems/ezplatform-http-cache": "<2.3.16",
                 "ezsystems/ezplatform-kernel": "<1.2.5.1-dev|>=1.3,<1.3.35",
@@ -7167,6 +7173,7 @@
                 "guzzlehttp/oauth-subscriber": "<0.8.1",
                 "guzzlehttp/psr7": "<1.9.1|>=2,<2.4.5",
                 "haffner/jh_captcha": "<=2.1.3|>=3,<=3.0.2",
+                "handcraftedinthealps/goodby-csv": "<1.4.3",
                 "harvesthq/chosen": "<1.8.7",
                 "helloxz/imgurl": "<=2.31",
                 "hhxsv5/laravel-s": "<3.7.36",
@@ -7176,9 +7183,10 @@
                 "hov/jobfair": "<1.0.13|>=2,<2.0.2",
                 "httpsoft/http-message": "<1.0.12",
                 "hyn/multi-tenant": ">=5.6,<5.7.2",
-                "ibexa/admin-ui": ">=4.2,<4.2.3|>=4.6,<4.6.14",
+                "ibexa/admin-ui": ">=4.2,<4.2.3|>=4.6,<4.6.21",
+                "ibexa/admin-ui-assets": ">=4.6.0.0-alpha1,<4.6.21",
                 "ibexa/core": ">=4,<4.0.7|>=4.1,<4.1.4|>=4.2,<4.2.3|>=4.5,<4.5.6|>=4.6,<4.6.2",
-                "ibexa/fieldtype-richtext": ">=4.6,<4.6.19",
+                "ibexa/fieldtype-richtext": ">=4.6,<4.6.21",
                 "ibexa/graphql": ">=2.5,<2.5.31|>=3.3,<3.3.28|>=4.2,<4.2.3",
                 "ibexa/http-cache": ">=4.6,<4.6.14",
                 "ibexa/post-install": "<1.0.16|>=4.6,<4.6.14",
@@ -7549,7 +7557,7 @@
                 "spoonity/tcpdf": "<6.2.22",
                 "squizlabs/php_codesniffer": ">=1,<2.8.1|>=3,<3.0.1",
                 "ssddanbrown/bookstack": "<24.05.1",
-                "starcitizentools/citizen-skin": ">=2.6.3,<2.31",
+                "starcitizentools/citizen-skin": ">=2.4.2,<3.3.1",
                 "starcitizentools/tabber-neue": ">=1.9.1,<2.7.2",
                 "statamic/cms": "<=5.16",
                 "stormpath/sdk": "<9.9.99",
@@ -7811,7 +7819,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-06T23:05:15+00:00"
+            "time": "2025-06-13T22:05:09+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -9033,16 +9041,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.13.0",
+            "version": "3.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "65ff2489553b83b4597e89c3b8b721487011d186"
+                "reference": "1b71b4dd7e7ef651ac749cea67e513c0c832f4bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/65ff2489553b83b4597e89c3b8b721487011d186",
-                "reference": "65ff2489553b83b4597e89c3b8b721487011d186",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/1b71b4dd7e7ef651ac749cea67e513c0c832f4bd",
+                "reference": "1b71b4dd7e7ef651ac749cea67e513c0c832f4bd",
                 "shasum": ""
             },
             "require": {
@@ -9113,7 +9121,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-05-11T03:36:00+00:00"
+            "time": "2025-06-12T15:04:34+00:00"
         },
         {
             "name": "symfony/console",
