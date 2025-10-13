@@ -48,7 +48,7 @@ jobs:
         with:
           php-version: ${{ env.default_php }}
           tools: composer
-      - uses: ramsey/composer-install@v3
+      - uses: ramsey/composer-install@3.1.1
         with:
           composer-options: "--no-scripts"
       - run: vendor/bin/phpcs
