@@ -27,7 +27,7 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "composer/package-versions-deprecated": true,
-            "laminas/laminas-component-installer": false
+            "laminas/laminas-component-installer": true
         },
         "platform": {
             "php": "8.2.99"
