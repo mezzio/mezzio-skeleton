@@ -50,7 +50,7 @@
         "laminas/laminas-config-aggregator": "^1.18",
         "laminas/laminas-diactoros": "^3.8.0",
         "laminas/laminas-stdlib": "^3.21",
-        "mezzio/mezzio": "^3.23.0",
+        "mezzio/mezzio": "^3.23.1",
         "mezzio/mezzio-helpers": "^5.20"
     },
     "require-dev": {

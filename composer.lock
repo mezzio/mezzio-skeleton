@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd65feda5d6ab976b125f46e344658c4",
+    "content-hash": "8705513ea7648db2d7e6c035f9e0ed6d",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -675,16 +675,16 @@
         },
         {
             "name": "mezzio/mezzio",
-            "version": "3.23.0",
+            "version": "3.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio.git",
-                "reference": "7117314cff49a09b97e8de99156061d52a1c7626"
+                "reference": "cdea1c65153a6c817a3bf548d6e63fc3b8d4f246"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio/zipball/7117314cff49a09b97e8de99156061d52a1c7626",
-                "reference": "7117314cff49a09b97e8de99156061d52a1c7626",
+                "url": "https://api.github.com/repos/mezzio/mezzio/zipball/cdea1c65153a6c817a3bf548d6e63fc3b8d4f246",
+                "reference": "cdea1c65153a6c817a3bf548d6e63fc3b8d4f246",
                 "shasum": ""
             },
             "require": {
@@ -715,7 +715,7 @@
                 "laminas/laminas-diactoros": "^3.8.0",
                 "laminas/laminas-servicemanager": "^3.23.1",
                 "mezzio/mezzio-fastroute": "^3.14",
-                "mezzio/mezzio-laminasrouter": "^3.11",
+                "mezzio/mezzio-laminasrouter": "^3.12",
                 "phpunit/phpunit": "^11.5.42",
                 "psalm/plugin-phpunit": "^0.19.5",
                 "vimeo/psalm": "^6.13.1"
@@ -777,7 +777,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2025-10-12T22:32:36+00:00"
+            "time": "2025-10-13T13:21:13+00:00"
         },
         {
             "name": "mezzio/mezzio-helpers",
@@ -4585,16 +4585,16 @@
         },
         {
             "name": "laminas/laminas-view",
-            "version": "2.42.0",
+            "version": "2.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-view.git",
-                "reference": "535128105bd0e703fba6f60800bbac0252819730"
+                "reference": "5f60f0f781e6888eb1fa131bf123c401013225a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/535128105bd0e703fba6f60800bbac0252819730",
-                "reference": "535128105bd0e703fba6f60800bbac0252819730",
+                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/5f60f0f781e6888eb1fa131bf123c401013225a0",
+                "reference": "5f60f0f781e6888eb1fa131bf123c401013225a0",
                 "shasum": ""
             },
             "require": {
@@ -4606,7 +4606,7 @@
                 "laminas/laminas-json": "^3.3",
                 "laminas/laminas-servicemanager": "^3.21.0",
                 "laminas/laminas-stdlib": "^3.10.1",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
                 "psr/container": "^1 || ^2"
             },
             "conflict": {
@@ -4633,7 +4633,7 @@
                 "laminas/laminas-permissions-acl": "^2.17",
                 "laminas/laminas-router": "^3.14.0",
                 "laminas/laminas-uri": "^2.13",
-                "phpunit/phpunit": "^10.5.53",
+                "phpunit/phpunit": "^10.5.58",
                 "psalm/plugin-phpunit": "^0.19.5",
                 "vimeo/psalm": "^6.13.1"
             },
@@ -4683,7 +4683,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2025-09-23T11:38:01+00:00"
+            "time": "2025-10-13T13:07:56+00:00"
         },
         {
             "name": "laravel/serializable-closure",
