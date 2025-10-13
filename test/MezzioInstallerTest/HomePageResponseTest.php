@@ -21,6 +21,8 @@ use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\ConfigProvider as TwigRendererConfigProvider;
 use Mezzio\Twig\TwigRenderer;
 use MezzioInstaller\OptionalPackages;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
 
@@ -131,10 +133,8 @@ final class HomePageResponseTest extends OptionalPackagesTestCase
         $this->tearDownAlternateAutoloader();
     }
 
-    /**
-     * @runInSeparateProcess
-     * @dataProvider installCasesProvider
-     */
+    #[RunInSeparateProcess]
+    #[DataProvider('installCasesProvider')]
     public function testHomePageHtmlResponseContainsExpectedInfo(
         string $installType,
         int $containerOption,
@@ -226,10 +226,8 @@ final class HomePageResponseTest extends OptionalPackagesTestCase
         }
     }
 
-    /**
-     * @runInSeparateProcess
-     * @dataProvider rendererlessInstallCasesProvider
-     */
+    #[RunInSeparateProcess]
+    #[DataProvider('rendererlessInstallCasesProvider')]
     public function testHomePageJsonResponseContainsExpectedInfo(
         string $installType,
         int $containerOption,

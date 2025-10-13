@@ -4,12 +4,8 @@
     xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
     bootstrap="vendor/autoload.php"
     cacheDirectory=".phpunit.cache"
-    displayDetailsOnIncompleteTests="true"
-    displayDetailsOnSkippedTests="true"
-    displayDetailsOnTestsThatTriggerDeprecations="true"
-    displayDetailsOnTestsThatTriggerErrors="true"
-    displayDetailsOnTestsThatTriggerNotices="true"
-    displayDetailsOnTestsThatTriggerWarnings="true"
+    displayDetailsOnAllIssues="true"
+    failOnAllIssues="true"
     colors="true"
 >
     <testsuites>
@@ -18,7 +14,7 @@
         </testsuite>
     </testsuites>
 
-    <source>
+    <source ignoreIndirectDeprecations="true">
         <include>
             <directory suffix=".php">src</directory>
         </include>

@@ -16,11 +16,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class HomePageHandlerTest extends TestCase
 {
-    /** @var ContainerInterface&MockObject */
-    protected $container;
-
-    /** @var RouterInterface&MockObject */
-    protected $router;
+    private ContainerInterface&MockObject $container;
+    private RouterInterface&MockObject $router;
 
     protected function setUp(): void
     {
@@ -48,7 +45,7 @@ final class HomePageHandlerTest extends TestCase
         $renderer
             ->expects($this->once())
             ->method('render')
-            ->with('app::home-page', $this->isType('array'))
+            ->with('app::home-page', $this->isArray())
             ->willReturn('');
 
         $homePage = new HomePageHandler(

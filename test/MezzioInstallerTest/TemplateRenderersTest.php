@@ -14,6 +14,8 @@ use Mezzio\Plates\PlatesRenderer;
 use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Twig\TwigRenderer;
 use MezzioInstaller\OptionalPackages;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 
 use function array_unshift;
 use function chdir;
@@ -51,10 +53,10 @@ final class TemplateRenderersTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @runInSeparateProcess
-     * @dataProvider templateRendererProvider
      * @param class-string $expectedTemplateRenderer
      */
+    #[RunInSeparateProcess]
+    #[DataProvider('templateRendererProvider')]
     public function testTemplateRenderer(
         string $installType,
         int $containerOption,

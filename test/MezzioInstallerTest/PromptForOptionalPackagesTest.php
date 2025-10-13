@@ -6,6 +6,7 @@ namespace MezzioInstallerTest;
 
 use Generator;
 use MezzioInstaller\OptionalPackages;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function chdir;
 use function copy;
@@ -67,10 +68,10 @@ final class PromptForOptionalPackagesTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @dataProvider promptCombinations
      * @param QuestionSpec $question
      * @param OptionalPackageSpec $expectedPackage
      */
+    #[DataProvider('promptCombinations')]
     public function testPromptForOptionalPackage(
         string $questionName,
         array $question,
