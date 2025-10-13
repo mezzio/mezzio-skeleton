@@ -8,6 +8,9 @@ on:
       - 'refs/pull/*'
     tags:
 
+env:
+  default_php: 8.2
+
 jobs:
   matrix:
     name: Generate job matrix
@@ -31,3 +34,21 @@ jobs:
         uses: laminas/laminas-continuous-integration-action@v1
         with:
           job: ${{ matrix.job }}
+
+  #
+  # Runs CS in a separate job because composer plugins need to run here, but must be disabled
+  # everywhere else in the matrix.
+  #
+  coding-standards:
+    name: Coding Standards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5.0.0
+      - uses: shivammathur/setup-php@2.34.1
+        with:
+          php-version: ${{ env.default_php }}
+          tools: composer
+      - uses: ramsey/composer-install@v3
+        with:
+          composer-options: "--no-scripts"
+      - run: vendor/bin/phpcs
