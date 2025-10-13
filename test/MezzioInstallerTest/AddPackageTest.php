@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use Composer\Package\BasePackage;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionProperty;
 
 use function assert;
 
 final class AddPackageTest extends OptionalPackagesTestCase
 {
-    /**
-     * @dataProvider packageProvider
-     */
+    #[DataProvider('packageProvider')]
     public function testAddPackage(string $packageName, string $packageVersion, ?int $expectedStability): void
     {
         $installer = $this->createOptionalPackages();

@@ -13,6 +13,8 @@ use Mezzio\Router\FastRouteRouter\ConfigProvider;
 use Mezzio\Router\LaminasRouter;
 use Mezzio\Router\RouterInterface;
 use MezzioInstaller\OptionalPackages;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 
 use function chdir;
 use function count;
@@ -66,10 +68,10 @@ final class RoutersTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @runInSeparateProcess
-     * @dataProvider routerProvider
      * @param array<array-key,array<string,string|array<array-key,string>>> $expectedRoutes
      */
+    #[RunInSeparateProcess]
+    #[DataProvider('routerProvider')]
     public function testRouter(
         string $installType,
         int $containerOption,

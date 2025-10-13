@@ -7,6 +7,8 @@ namespace MezzioInstallerTest;
 use Mezzio\Container\WhoopsErrorResponseGeneratorFactory;
 use Mezzio\Middleware\ErrorResponseGenerator;
 use MezzioInstaller\OptionalPackages;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 
 use function chdir;
 
@@ -31,9 +33,7 @@ final class ErrorHandlerTest extends OptionalPackagesTestCase
         $this->tearDownAlternateAutoloader();
     }
 
-    /**
-     * @runInSeparateProcess
-     */
+    #[RunInSeparateProcess]
     public function testErrorHandlerIsNotInstalled(): void
     {
         $this->prepareSandboxForInstallType(OptionalPackages::INSTALL_MINIMAL, $this->installer);
@@ -56,10 +56,8 @@ final class ErrorHandlerTest extends OptionalPackagesTestCase
         self::assertFalse($container->has('Mezzio\WhoopsPageHandler'));
     }
 
-    /**
-     * @runInSeparateProcess
-     * @dataProvider errorHandlerProvider
-     */
+    #[DataProvider('errorHandlerProvider')]
+    #[RunInSeparateProcess]
     public function testErrorHandler(
         string $installType,
         int $containerOption,

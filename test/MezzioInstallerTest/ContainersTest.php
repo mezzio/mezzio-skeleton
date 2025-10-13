@@ -12,6 +12,8 @@ use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Router\RouterInterface;
 use MezzioInstaller\OptionalPackages;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder as SfContainerBuilder;
 
@@ -45,12 +47,12 @@ final class ContainersTest extends OptionalPackagesTestCase
     }
 
     /**
-     * @runInSeparateProcess
-     * @dataProvider containerProvider
      * @psalm-param OptionalPackages::INSTALL_* $installType
      * @psalm-param class-string<ContainerInterface> $expectedContainer
      * @psalm-param 'minimal-files'|'copy-files' $copyFilesKey
      */
+    #[RunInSeparateProcess]
+    #[DataProvider('containerProvider')]
     public function testContainer(
         string $installType,
         int $containerOption,

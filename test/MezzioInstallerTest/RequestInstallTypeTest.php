@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MezzioInstallerTest;
 
 use MezzioInstaller\OptionalPackages;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function count;
 use function random_int;
@@ -30,9 +31,7 @@ final class RequestInstallTypeTest extends OptionalPackagesTestCase
         ];
     }
 
-    /**
-     * @dataProvider installSelections
-     */
+    #[DataProvider('installSelections')]
     public function testRequestInstallTypeReturnsExpectedConstantValue(string $selection, string $expected): void
     {
         $this->io
