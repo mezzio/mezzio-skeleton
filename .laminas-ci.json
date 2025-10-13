@@ -1,7 +1,6 @@
 {
     "additional_composer_arguments": [
-        "--no-scripts",
-        "--no-plugins"
+        "--no-scripts"
     ],
     "ignore_php_platform_requirements": {
         "8.5": true
