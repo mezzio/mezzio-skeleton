@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8705513ea7648db2d7e6c035f9e0ed6d",
+    "content-hash": "5bf9dcc90e85b8bd69dd41311fe52c45",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -3287,31 +3287,27 @@
         },
         {
             "name": "elie29/zend-phpdi-config",
-            "version": "v9.0.3",
+            "version": "v10.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elie29/zend-di-config.git",
-                "reference": "569e953a6ef85f02b0016d9ec54083d5d0985ef9"
+                "reference": "c58df38e6f865508b5b8cb02e31c3a8ae4ab13ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elie29/zend-di-config/zipball/569e953a6ef85f02b0016d9ec54083d5d0985ef9",
-                "reference": "569e953a6ef85f02b0016d9ec54083d5d0985ef9",
+                "url": "https://api.github.com/repos/elie29/zend-di-config/zipball/c58df38e6f865508b5b8cb02e31c3a8ae4ab13ef",
+                "reference": "c58df38e6f865508b5b8cb02e31c3a8ae4ab13ef",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-stdlib": "^3.2",
-                "php": "^8.1",
-                "php-di/php-di": "^6.3 || ^7.0"
+                "laminas/laminas-stdlib": "^3.12",
+                "php": "^8.2",
+                "php-di/php-di": "^7.0"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "^2.1.4",
-                "mikey179/vfsstream": "^1.6.11",
-                "mockery/mockery": "^1.0",
-                "phpspec/prophecy-phpunit": "^2.0",
-                "phpunit/phpunit": "^9.0",
-                "psalm/plugin-phpunit": "^0.19.0",
-                "vimeo/psalm": "^5.13"
+                "mikey179/vfsstream": "^1.6",
+                "phpro/grumphp": "^2.0",
+                "phpunit/phpunit": "^11.0"
             },
             "bin": [
                 "bin/add-autowires-entry"
@@ -3348,7 +3344,7 @@
                 "issues": "https://github.com/elie29/zend-di-config/issues",
                 "source": "https://github.com/elie29/zend-di-config"
             },
-            "time": "2025-12-05T15:25:39+00:00"
+            "time": "2026-02-09T08:32:28+00:00"
         },
         {
             "name": "felixfbecker/language-server-protocol",
