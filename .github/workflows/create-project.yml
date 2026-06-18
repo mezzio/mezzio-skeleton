@@ -23,7 +23,7 @@ jobs:
         with:
           php: ${{ matrix.php_version }}
       - name: Checkout sourcecode
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Test create-project
         run: |
           rm composer.lock
