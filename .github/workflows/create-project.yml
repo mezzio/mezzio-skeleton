@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 3
     steps:
       - name: Checkout CI environment
-        uses: laminas/laminas-continuous-integration-action@757a62736b25b11240101d3c616fff4cbc707cfd # v1
+        uses: laminas/laminas-continuous-integration-action@cf90abc1ac0c035287580d7d6c3464e8999fc986 # v1
         with:
           php: ${{ matrix.php_version }}
       - name: Checkout sourcecode
