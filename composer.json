@@ -72,7 +72,7 @@
         "phpunit/phpunit": "^11.5.42",
         "psalm/plugin-phpunit": "^0.22.0",
         "roave/security-advisories": "dev-master",
-        "vimeo/psalm": "^6.13.1"
+        "vimeo/psalm": "^7.0.0"
     },
     "conflict": {
         "amphp/dns": "<2.4.0",
