@@ -72,33 +72,22 @@ use function unlink;
  */
 final class OptionalPackages
 {
-    /**
-     * @var string
-     */
-    public const INSTALL_FLAT = 'flat';
+    public const string INSTALL_FLAT = 'flat';
 
-    /**
-     * @var string
-     */
-    public const INSTALL_MINIMAL = 'minimal';
+    public const string INSTALL_MINIMAL = 'minimal';
 
-    /**
-     * @var string
-     */
-    public const INSTALL_MODULAR = 'modular';
+    public const string INSTALL_MODULAR = 'modular';
 
     /**
      * @const string Regular expression for matching package name and version
-     * @var string
      */
-    public const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
+    public const string PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
     /**
      * @const string Configuration file lines related to registering the default
      *     App module configuration.
-     * @var string
      */
-    public const APP_MODULE_CONFIG = '
+    public const string APP_MODULE_CONFIG = '
     // Default App module config
     App\ConfigProvider::class,
 
