@@ -4,11 +4,12 @@
         "--no-plugins"
     ],
     "ignore_php_platform_requirements": {
-        "8.5": true
+        "8.6": true
     },
     "exclude": [
         {
             "name": "PHPCodeSniffer"
         }
-    ]
+    ],
+    "backwardCompatibilityCheck": true
 }
