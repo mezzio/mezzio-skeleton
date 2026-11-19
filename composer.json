@@ -65,7 +65,7 @@
         "laminas/laminas-servicemanager": "^3.25.0",
         "mezzio/mezzio-fastroute": "^3.15.0",
         "mezzio/mezzio-laminasrouter": "^3.13.0",
-        "mezzio/mezzio-laminasviewrenderer": "^2.19.0",
+        "mezzio/mezzio-laminasviewrenderer": "^3.0.0",
         "mezzio/mezzio-platesrenderer": "^2.14.0",
         "mezzio/mezzio-tooling": "^2.15.0",
         "mezzio/mezzio-twigrenderer": "^2.20.0",
